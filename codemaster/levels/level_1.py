@@ -1,0 +1,106 @@
+"""Module level 1."""
+__author__ = 'Joan A. Pinol  (japinol)'
+
+import pygame as pg
+
+from codemaster.config.constants import (
+    SCREEN_HEIGHT,
+    SCREEN_NEAR_EARTH,
+    DOOR_DEST_NL,
+    )
+from codemaster.models.actors.items import platforms
+from codemaster.models.actors.npcs import (
+    GhostGreen,
+    SkullBlue,
+    SkullYellow,
+    )
+from codemaster.models.actors.items import (
+    BatteryA,
+    DoorRightYellow,
+    MineCyan,
+    )
+from codemaster.models.actors.decorations import Water
+from codemaster.levels.level_base import Level
+
+
+class Level1(Level):
+
+    def __init__(self, game):
+        super().__init__(game)
+        self.id = 0
+        self.name = '01'
+        self.next_level_left = False
+        self.next_level_right = 2
+        self.next_level_top = False
+        self.next_level_bottom = False
+        self.background = pg.image.load(self.file_name_im_get(1)).convert()
+        self.level_limit = -1800
+        self.level_limit_top = -1000
+        self.player_start_pos_left = (80, 480)
+        self.player_start_pos_right = (600, 480)
+        self.player_start_pos_rtop = (300, 100)
+        self.player_start_pos_ltop = (80, 100)
+        self.player_start_pos_bottom = (300, 800)
+        self.world_start_pos_left = (0, -758)
+        self.world_start_pos_right = (self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758)
+        self.world_start_pos_rtop = (self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900)
+        self.world_start_pos_ltop = (0, -900)
+
+        self._add_actors()
+        self._sprites_all_add()
+
+    def _add_actors(self):
+        # Add platforms (blocs, x, y, type)
+        level_plats = [[5, 100, 360, platforms.PLAT_TYPE_01],
+                       [3, 200, 190, platforms.PLAT_TYPE_01],
+                       [4, 500, 380, platforms.PLAT_TYPE_01],
+                       [7, 800, 90, platforms.PLAT_TYPE_01],
+                       [4, 1360, 560, platforms.PLAT_TYPE_01],
+                       [3, 1250, 420, platforms.PLAT_TYPE_01],
+                       [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
+                       [15, 800, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
+                       [24, 1950, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
+                       [15, 400, SCREEN_HEIGHT + 190, platforms.PLAT_TYPE_01],  # earth
+                       ]
+        plats = []
+        for platform in level_plats:
+            plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2], platform[3])
+        for platform in plats:
+            block = platforms.Platform(platform[0], platform[1], platform[2], self.game)
+            self.platforms.add(block)
+
+        # Add water blocks
+        Water.create_water(0, SCREEN_NEAR_EARTH + 206, self.game, qty=16, qty_depth=3, add_to_list=self.decors)
+
+        # Add moving platforms (type, x, y, ...)
+        self.platforms.add(platforms.MovingPlatform(
+            platforms.PLAT_TYPE_02_STONE_MIDDLE, 1700, 610, self.game,
+            border_left=1660, border_right=2200, change_x=2, level=self))
+        self.platforms.add(platforms.MovingPlatform(
+            platforms.PLAT_TYPE_02_STONE_MIDDLE, 500, 260, self.game,
+            border_left=500, border_right=2100, change_x=8, level=self))
+
+        # Add batteries
+        self.batteries.add([
+            BatteryA(100, 324, self.game),
+            BatteryA(300, 324, self.game),
+            BatteryA(1200, 54, self.game),
+            ])
+
+        # Add mines
+        self.mines.add([
+            MineCyan(400, 330, self.game),
+            MineCyan(425, 330, self.game),
+            ])
+
+        # Add NPCs
+        self.npcs.add([
+            GhostGreen(500, 318, self.game, border_left=480, border_right=750, change_x=3),
+            SkullBlue(410, 314, self.game, border_left=410, border_right=800, change_x=2),
+            SkullYellow(600, 314, self.game, border_left=410, border_right=800, change_x=2),
+            ])
+
+        # Add doors
+        self.doors.add([
+            DoorRightYellow(2570, 550, self.game, level_dest=1, door_dest_pos=DOOR_DEST_NL),
+            ])

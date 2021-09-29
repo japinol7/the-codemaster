@@ -1,0 +1,172 @@
+"""Module base level."""
+__author__ = 'Joan A. Pinol  (japinol)'
+
+import pygame as pg
+from os import path
+
+from codemaster.config.constants import (
+    FILE_NAMES, BM_BACKGROUNDS_FOLDER,
+    DOOR_POSITION_L,
+    )
+from codemaster.config.settings import logger
+from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryType
+from codemaster.models.actors.actors import MovingActor
+
+
+class Level:
+    """Represents a base level.
+    It is not intended to be instantiated.
+    """
+    SCROLL_LV_NEAR_RIGHT_SIDE = 150
+    world_shift = 0
+    world_shift_top = -500
+
+    def __init__(self, game):
+        self.id = None
+        self.game = game
+        self.player = game.player
+        self.completed = False
+        self.start_time = None
+        self.door_previous_position = DOOR_POSITION_L
+        self.door_previous_pos_player = (80, 480)
+        self.door_previous_pos_world = (0, -758)
+        self.all_sprites = pg.sprite.Group()
+        self.platforms = pg.sprite.Group()
+        self.decors = pg.sprite.Group()
+        self.batteries = pg.sprite.Group()
+        self.files_disks = pg.sprite.Group()
+        self.computers = pg.sprite.Group()
+        self.npcs = pg.sprite.Group()
+        self.apples = pg.sprite.Group()
+        self.bullets = pg.sprite.Group()
+        self.cartridges = pg.sprite.Group()
+        self.potions = pg.sprite.Group()
+        self.mines = pg.sprite.Group()
+        self.life_recs = pg.sprite.Group()
+        self.door_keys = pg.sprite.Group()
+        self.doors = pg.sprite.Group()
+        self.normal_items = pg.sprite.Group()
+        self.explosions = pg.sprite.Group()
+        self.snakes = pg.sprite.Group()
+        self.snakes_body_pieces = pg.sprite.Group()
+
+        self.game.level = self
+
+    def start_up(self):
+        self.start_time = self.game.current_time
+
+    def _sprites_all_add(self):
+        for sprite in self.platforms:
+            self.all_sprites.add(sprite)
+            self.normal_items.add(sprite)
+        for sprite in self.decors:
+            self.all_sprites.add(sprite)
+        for sprite in self.batteries:
+            self.all_sprites.add(sprite)
+        for sprite in self.files_disks:
+            self.all_sprites.add(sprite)
+        for sprite in self.computers:
+            self.all_sprites.add(sprite)
+            self.normal_items.add(sprite)
+        for sprite in self.cartridges:
+            self.all_sprites.add(sprite)
+        for sprite in self.potions:
+            self.all_sprites.add(sprite)
+        for sprite in self.life_recs:
+            self.all_sprites.add(sprite)
+        for sprite in self.door_keys:
+            self.all_sprites.add(sprite)
+        for sprite in self.doors:
+            self.all_sprites.add(sprite)
+        for sprite in self.bullets:
+            self.all_sprites.add(sprite)
+        for sprite in self.npcs:
+            self.all_sprites.add(sprite)
+        for sprite in self.apples:
+            self.all_sprites.add(sprite)
+        for sprite in self.mines:
+            self.all_sprites.add(sprite)
+        for sprite in self.explosions:
+            self.all_sprites.add(sprite)
+        for sprite in self.snakes:
+            self.npcs.add(sprite)
+            self.all_sprites.add(sprite)
+            for snake_piece in sprite.body_pieces:
+                self.snakes_body_pieces.add(snake_piece)
+                self.all_sprites.add(snake_piece)
+
+    def update(self):
+        self.all_sprites.update()
+        
+    def draw(self):
+        self.game.screen.blit(self.background, (self.world_shift // 3, self.world_shift_top))
+        self.all_sprites.draw(self.game.screen)
+        for actor in self.npcs:
+            base_type = getattr(actor, 'base_type', None)
+            if base_type and base_type.name == ActorBaseType.NPC.name:
+                actor.draw_health()
+
+    def shift_world(self, shift_x):
+        self.world_shift += shift_x
+        for sprite in self.all_sprites:
+            sprite.rect.x += shift_x
+
+    def shift_world_top(self, shift_y):
+        self.world_shift_top += shift_y
+        for sprite in self.all_sprites:
+            sprite.rect.y += shift_y
+
+    def add_actors(self, actors):
+        snake_pieces = []
+        for actor in actors:
+            if isinstance(actor, MovingActor):
+                if actor.border_left:
+                    actor.border_left -= self.world_shift
+                if actor.border_right:
+                    actor.border_right -= self.world_shift
+
+            logger.debug(f"Add actor {actor.category_type} to level {self}")
+            if actor.category_type == ActorCategoryType.NPC:
+                self.npcs.add(actor)
+            elif actor.category_type == ActorCategoryType.BATTERY:
+                self.batteries.add(actor)
+            elif actor.category_type == ActorCategoryType.FILES_DISK:
+                self.files_disks.add(actor)
+            elif actor.category_type == ActorCategoryType.COMPUTER:
+                self.computers.add(actor)
+                self.normal_items.add(actor)
+            elif actor.category_type == ActorCategoryType.APPLE:
+                self.apples.add(actor)
+            elif actor.category_type == ActorCategoryType.CARTRIDGE:
+                self.cartridges.add(actor)
+            elif actor.category_type == ActorCategoryType.POTION:
+                self.potions.add(actor)
+            elif actor.category_type == ActorCategoryType.MINE:
+                self.mines.add(actor)
+            elif actor.category_type == ActorCategoryType.LIFE_RECOVERY:
+                self.life_recs.add(actor)
+            elif actor.category_type == ActorCategoryType.DOOR_KEY:
+                self.door_keys.add(actor)
+            elif actor.category_type == ActorCategoryType.DOOR:
+                self.doors.add(actor)
+            elif actor.category_type == ActorCategoryType.EXPLOSION:
+                self.explosions.add(actor)
+            elif actor.category_type == ActorCategoryType.SNAKE:
+                self.npcs.add(actor)
+                self.snakes.add(actor)
+                for snake_piece in actor.body_pieces:
+                    self.snakes_body_pieces.add(snake_piece)
+                    snake_pieces.append(snake_piece)
+
+        self.all_sprites.add(actors)
+        snake_pieces and self.all_sprites.add(snake_pieces)
+
+    @staticmethod
+    def file_name_im_get(id_):
+        return path.join(BM_BACKGROUNDS_FOLDER,
+                         f"{FILE_NAMES['im_backgrounds'][0]}_{id_:02d}."
+                         f"{FILE_NAMES['im_backgrounds'][1]}")
+
+    @staticmethod
+    def levels_completed(game):
+        return [(x.id, x.name) for x in game.levels if x.completed]
