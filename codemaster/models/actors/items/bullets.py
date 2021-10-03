@@ -2,6 +2,7 @@
 __author__ = 'Joan A. Pinol  (japinol)'
 
 import math
+from collections import Counter
 from enum import Enum
 from random import randint
 
@@ -13,6 +14,8 @@ from codemaster.config import constants as consts
 from codemaster.utils import utils
 from codemaster import resources
 from codemaster.config.settings import Settings
+from codemaster.config.constants import DIRECTION_RIP
+from codemaster.config.settings import logger
 
 
 BULLET_STD_WIDTH = 12
@@ -63,6 +66,7 @@ class Bullet(pg.sprite.Sprite):
                          BulletType.T3_PHOTONIC.name: 3,
                          BulletType.T4_NEUTRONIC.name: 7,
                          }
+    type_id_count = Counter()
 
     def __init__(self, x, y, bullet_type, game, owner, change_x=0, change_y=0):
         super().__init__()
@@ -70,9 +74,14 @@ class Bullet(pg.sprite.Sprite):
         self.images_sprite_no = 1
         self.frame = randint(0, self.images_sprite_no - 1)
         self.rect = None
-        self.bullet_type = bullet_type
         self.game = game
         self.owner = owner
+        self.bullet_type = bullet_type
+        self.id_key = f"{self.bullet_type}_f_{self.owner.id}"
+        Bullet.type_id_count[self.id_key] += 1
+        if Bullet.type_id_count[self.id_key] > 999999:
+            Bullet.type_id_count[self.id_key] = 1
+        self.id = f"{self.bullet_type.name}_{Bullet.type_id_count[self.id_key]:07d}_from_{self.owner.id}"
         self.is_a_player_shot = False
         self.bullet_type_txt = None
         self.health_total = 100
@@ -154,9 +163,11 @@ class Bullet(pg.sprite.Sprite):
             self.direction = consts.DIRECTION_LEFT
             self.change_x *= -1
             self.rect.x -= owner.rect.w // 5
+            self.rect.x -= owner.bullet_start_position_delta_x
         else:
             self.direction = consts.DIRECTION_RIGHT
             self.rect.x += (owner.rect.w + 1)
+            self.rect.x += owner.bullet_start_position_delta_x
 
         self.rect.y += owner.rect.w // 1.5 + (
                 not change_x and ((owner.rect.h + 1) * int(change_y / math.fabs(change_y))) or 0)
@@ -197,6 +208,19 @@ class Bullet(pg.sprite.Sprite):
                 self.game.sound_effects and resources.Resource.bullet_hit_sound.play()
                 self.kill()
                 bullet.kill()
+
+        # Check if we hit any player
+        players_hit_list = pg.sprite.spritecollide(self, self.game.players, False)
+        for pc in players_hit_list:
+            if pc.direction == DIRECTION_RIP or pc.invulnerable:
+                continue
+            logger.debug(f"{pc.id} hit by {self.id}, "
+                         f"pc_health: {str(round(pc.stats['health'], 2))}, "
+                         f"bullet_power: {str(self.attack_power)}")
+            pc.stats['health'] -= self.attack_power
+            if pc.stats['health'] <= 0:
+                logger.debug(f"{pc.id}, !!! Dead by bullet {self.id} !!!")
+                pc.die_hard()
 
     @classmethod
     def init(cls):

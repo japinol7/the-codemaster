@@ -17,6 +17,8 @@ from codemaster.config.constants import (
     )
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryType, ActorType
+from codemaster.models.actors.items import bullets
+from codemaster.models.actors.items.bullets import Bullet, BulletType
 
 NPC_STD_WIDTH = 61
 NPC_STD_HEIGHT = 61
@@ -52,6 +54,8 @@ class Actor(pg.sprite.Sprite):
         self.id = f"{self.type.name}_{Actor.type_id_count[self.type]:05d}"
         self.game = game
         self.player = game.player
+        self.last_shot_time = 0
+        self.time_between_shots_base = 1200
 
         if not getattr(self, 'base_type', None):
             self.base_type = ActorBaseType.NONE
@@ -78,6 +82,7 @@ class Actor(pg.sprite.Sprite):
 
         if not getattr(self, 'is_pc', None):
             self.is_pc = False
+            self.is_a_player = False
         if not getattr(self, 'is_npc', None):
             self.is_npc = False
         if not getattr(self, 'can_move', None):
@@ -99,6 +104,15 @@ class Actor(pg.sprite.Sprite):
         self.items_to_drop = items_to_drop or []
         if not getattr(self, 'can_drop_items', None):
             self.can_drop_items = True if self.items_to_drop else False
+
+        if not getattr(self, 'can_shot', None):
+            self.can_shot = False
+
+        if not getattr(self, 'shot_x_delta_max', None):
+            self.shot_x_delta_max = 500
+
+        if not getattr(self, 'shot_y_delta', None):
+            self.shot_y_delta = 100
 
         self.name = name or 'unnamed'
         self.change_x = change_x
@@ -165,6 +179,20 @@ class Actor(pg.sprite.Sprite):
         self.update_after_inc_index_hook()
         if self.frame_index >= self.images_sprite_no:
             self.frame_index = 0
+
+        if self.can_shot:
+            is_between_y_boundaries = (self.player.rect.y - self.shot_y_delta < self.rect.y
+                                       < self.player.rect.y + self.shot_y_delta)
+            shot_x_delta = abs(self.rect.x - self.player.rect.x)
+            if (self.direction == DIRECTION_LEFT and shot_x_delta < self.shot_x_delta_max
+                    and self.player.rect.x <= self.rect.x
+                    and is_between_y_boundaries):
+                self.update_shot_bullet()
+            elif (self.direction == DIRECTION_RIGHT and shot_x_delta < self.shot_x_delta_max
+                    and self.player.rect.x >= self.rect.x
+                    and is_between_y_boundaries):
+                self.update_shot_bullet()
+
         self.update_sprite_image()
         self.update_when_hit()
 
@@ -181,12 +209,12 @@ class Actor(pg.sprite.Sprite):
 
         self.player.sound_effects and self.player.enemy_hit_sound.play()
         for bullet in bullet_hit_list:
-            logger.debug(f"{self.id}, npc_health: {str(self.stats.health)}, "
+            logger.debug(f"{self.id} hit by {bullet.id}, npc_health: {str(round(self.stats.health, 2))}, "
                          f"bullet_power: {str(bullet.attack_power)}")
             self.stats.health -= bullet.attack_power
             bullet.kill()
         if self.stats.health <= 0:
-            logger.debug(f"{self.id}, !!! Dead !!!")
+            logger.debug(f"{self.id}, !!! Dead by bullet {bullet.id} !!!")
             self.player.sound_effects and self.player.npc_killed_sound.play()
             if bullet.is_a_player_shot:
                 self.player.stats['score'] += ExperiencePoints.xp_points[self.type.name]
@@ -196,6 +224,18 @@ class Actor(pg.sprite.Sprite):
 
     def before_kill_hook(self):
         self.kill()
+
+    def update_shot_bullet(self):
+        time_delta = self.game.current_time - self.last_shot_time
+        if time_delta > self.stats.time_between_shots:
+            self.last_shot_time = self.game.current_time
+            self.update_shot_bullet_fire_shots()
+
+    def update_shot_bullet_fire_shots(self):
+        if randint(1, 100) + 60 >= 100:
+            self.shot_bullet(BulletType.T1_LASER1)
+        else:
+            self.shot_bullet(BulletType.T2_LASER2)
 
     def draw_health(self):
         if self.stats.health < self.stats.health_total - 1:
@@ -208,6 +248,10 @@ class Actor(pg.sprite.Sprite):
                 bar_height=Settings.sprite_health_bar_size.h,
                 bar_outline=False, bar_up_line=True)
 
+    def shot_bullet(self, bullet_type):
+        Bullet.shot(bullet_type=bullet_type, change_x=bullets.BULLET_STD_VELOCITY,
+                    change_y=0, owner=self, game=self.game)
+
     def explosion(self):
         pass
 
@@ -218,7 +262,7 @@ class Actor(pg.sprite.Sprite):
         for item in self.items_to_drop:
             lucky_drop = randint(1, 100)
             logger.debug(f"{self.id}, lucky_drop_dice: {str(lucky_drop)}, "
-                         f"probability_to_drop: {item.probability_to_drop:03d}, "
+                         f"probability_to_drop: {item.probability_to_drop:3d}, "
                          f"item type: {item.type}")
             if lucky_drop + item.probability_to_drop >= 100:
                 logger.debug("Create item to drop")
@@ -281,6 +325,7 @@ class MovingActor(Actor):
         if self.change_x and (cur_pos_x < self.border_left or cur_pos_x > self.border_right):
             self.change_x *= -1
             self.direction = DIRECTION_LEFT if self.direction == DIRECTION_RIGHT else DIRECTION_RIGHT
+            self.last_shot_time = self.game.current_time
 
 
 class NPC(MovingActor):

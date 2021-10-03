@@ -81,6 +81,7 @@ class Player(pg.sprite.Sprite):
         self.frame = 0
         self.rip_seconds = 0
         self.invulnerable = False
+        self.bullet_start_position_delta_x = 0
         self.stats = {
             'score': 0,
             'lives': PL_LIVES_DEFAULT,

@@ -3,6 +3,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 import pygame as pg
 
+from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
@@ -14,20 +15,24 @@ from codemaster.models.actors.npcs import (
     BatLilac,
     BatRed,
     BatBlack,
+    TerminatorEyeBlue,
+    TerminatorEyeYellow,
     )
 from codemaster.models.actors.items import (
     AppleGreen,
     AppleYellow,
     AppleRed,
     BatteryA,
+    CartridgeGreen,
+    CartridgeBlue,
     DoorLeftYellow,
     DoorRightRed,
     DoorKeyRed,
     FilesDiskB,
+    LifeRecoveryA,
     MineCyan,
     PotionPower,
     )
-
 from codemaster.levels.level_base import Level
 
 
@@ -65,6 +70,7 @@ class Level5(Level):
                        [3, 800, 440, platforms.PLAT_TYPE_01],
                        [5, 1105, 260, platforms.PLAT_TYPE_01],
                        [9, 1900, 185, platforms.PLAT_TYPE_01],
+                       [6, 2900, 185, platforms.PLAT_TYPE_01],
                        [8, 2580, 440, platforms.PLAT_TYPE_01],
                        [22, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        [30, 1700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
@@ -91,6 +97,7 @@ class Level5(Level):
         # Add files_disks
         self.files_disks.add([
             FilesDiskB(532, 184, self.game),
+            FilesDiskB(3250, 149, self.game),
             ])
 
         # Add potions
@@ -125,6 +132,34 @@ class Level5(Level):
                 border_left=94 + border_l_delta * 2, border_right=1340, change_x=3))
             x += 100
             y -= 70
+
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 58, 'random_max': 72}),
+            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=25, add_to_list=self.life_recs,
+                     x_delta=120),
+            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
+                     x_delta=170),
+            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=80, add_to_list=self.cartridges,
+                     x_delta=195),
+            DropItem(BatLilac, ActorType.BAT_LILAC, probability_to_drop=100, add_to_list=self.npcs,
+                     **{'border_left': 2890, 'border_right': 3300, 'change_x': 3}),
+            ]
+        self.npcs.add([
+            TerminatorEyeYellow(2900, 92, self.game, border_left=2890, border_right=3300, change_x=3,
+                                items_to_drop=items_to_drop),
+            ])
+
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 40, 'random_max': 64}),
+            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=90, add_to_list=self.cartridges,
+                     x_delta=195),
+            ]
+        self.npcs.add([
+            TerminatorEyeBlue(1760, 644, self.game, border_left=1700, border_right=2150, change_x=2,
+                              items_to_drop=items_to_drop),
+            ])
 
         # Add mines
         x = 616

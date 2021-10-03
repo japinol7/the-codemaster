@@ -27,6 +27,12 @@ from codemaster.models.actors.npcs.demons import (
 from codemaster.models.actors.npcs.wolfmen import (
     WolfManMale,
     )
+from codemaster.models.actors.npcs.terminator_eyes import (
+    TerminatorEyeGreen,
+    TerminatorEyeBlue,
+    TerminatorEyeYellow,
+    TerminatorEyeRed,
+    )
 from codemaster.models.actors.npcs.snakes import (
     SnakeGreen,
     SnakeBlue,

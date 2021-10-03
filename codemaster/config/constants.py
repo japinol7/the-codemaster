@@ -105,6 +105,7 @@ BM_POTION_POWER_FOLDER = os.path.join(BM_POTIONS_FOLDER, 'power')
 BM_PCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'PCs')
 BM_PC_PAC_FOLDER = os.path.join(BM_PCS_FOLDER, 'Pac')
 BM_NPCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'NPCs')
+BM_TERMINATOR_EYES_FOLDER = os.path.join(BM_NPCS_FOLDER, 'terminator_eyes')
 BM_SNAKES_FOLDER = os.path.join(BM_NPCS_FOLDER, 'snakes')
 BM_BATS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'bats')
 BM_SKULLS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'skulls')
@@ -141,6 +142,7 @@ FILE_NAMES = {
     'im_en_wolfmen': ('wolfman', 'png'),
     'im_en_vampires': ('vampire', 'png'),
     'im_en_demons': ('demon', 'png'),
+    'im_terminator_eyes': ('terminator_eye', 'png'),
     'im_files_disks': ('files_disk', 'png'),
     'im_computer': ('computer', 'png'),
     'im_apples': ('im_apple', 'png'),

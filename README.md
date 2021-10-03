@@ -210,6 +210,7 @@
 	    > Male vampires.
 	    > Female vampires.
 	    > Demons.
+	    > Terminator Eyes. Beware, they shot bullets.
 
 
 ## Keyboard keys

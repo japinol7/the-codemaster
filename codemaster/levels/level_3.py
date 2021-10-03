@@ -18,6 +18,7 @@ from codemaster.models.actors.npcs import (
     SkullBlue,
     SkullGreen,
     SkullYellow,
+    TerminatorEyeGreen,
     VampireMale,
     )
 from codemaster.models.actors.items import (
@@ -174,6 +175,10 @@ class Level3(Level):
         self.npcs.add(SkullBlue(
             320 + randint(15, 200), 145, self.game,
             border_left=310, border_right=600, change_x=randint(3, 7)))
+
+        self.npcs.add([
+            TerminatorEyeGreen(3000, 355, self.game, border_left=2660, border_right=3200, change_x=2),
+            ])
 
         # Add doors
         self.doors.add([

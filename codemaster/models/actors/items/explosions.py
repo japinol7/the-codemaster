@@ -38,11 +38,11 @@ class Explosion(ActorItem):
             for npc in npcs_hit_list:
                 if not npc.can_be_killed_normally:
                     continue
-                logger.debug(f"{npc.id} hit by {self.id}, npc_health: {str(npc.stats.health)}, "
+                logger.debug(f"{npc.id} hit by {self.id}, npc_health: {str(round(npc.stats.health, 2))}, "
                              f"explosion_power: {str(self.stats.power)}")
                 npc.stats.health -= self.stats.power
                 if npc.stats.health <= 0:
-                    logger.debug(f"{npc.id}, !!! Dead !!!")
+                    logger.debug(f"{npc.id}, !!! Dead by {self.id} !!!")
                     if self.is_a_player_shot:
                         self.player.stats['score'] += ExperiencePoints.xp_points[npc.type.name]
                     npc.drop_items()
@@ -62,11 +62,11 @@ class Explosion(ActorItem):
             for pc in players_hit_list:
                 if pc.direction == DIRECTION_RIP or pc.invulnerable:
                     continue
-                logger.debug(f"{pc.id} hit by {self.id}, npc_health: {str(pc.stats['health'])}, "
+                logger.debug(f"{pc.id} hit by {self.id}, npc_health: {str(round(pc.stats['health'], 2))}, "
                              f"explosion_power: {str(self.stats.power)}")
                 pc.stats['health'] -= self.stats.power
                 if pc.stats['health'] <= 0:
-                    logger.debug(f"{pc.id}, !!! Dead !!!")
+                    logger.debug(f"{pc.id}, !!! Dead by {self.id} !!!")
                     pc.die_hard()
 
         if self.frame_index >= self.images_sprite_no:

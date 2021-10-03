@@ -23,6 +23,7 @@ class Stats:
         self.strength_total = None
         self.speed = None
         self.breath_elements = []  # List of elements
+        self.time_between_shots = None
         # Defence
         self.defense_melee = None
         self.defense_missile = None
