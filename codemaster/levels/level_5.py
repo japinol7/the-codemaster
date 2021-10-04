@@ -136,7 +136,7 @@ class Level5(Level):
         items_to_drop = [
             DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
                      x_delta=16, **{'random_min': 58, 'random_max': 72}),
-            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=25, add_to_list=self.life_recs,
+            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=70, add_to_list=self.life_recs,
                      x_delta=120),
             DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
                      x_delta=170),

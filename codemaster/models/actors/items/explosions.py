@@ -12,7 +12,7 @@ from codemaster.models.stats import Stats
 
 
 class Explosion(ActorItem):
-    """Represents a explosion.
+    """Represents an explosion.
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None, is_from_player_shot=None, owner=None):

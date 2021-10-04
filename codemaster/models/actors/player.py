@@ -63,6 +63,7 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.is_a_player = True
         self.id = "player"
+        self.type = ActorType.PLAYER
         self.health_total = PL_HEALTH_DEFAULT
         self.power_total = PL_POWER_DEFAULT
         self.sprite_sheet_data_id = PC_PAC_ID

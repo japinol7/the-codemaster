@@ -8,7 +8,7 @@ from codemaster.models.stats import Stats
 
 
 class Battery(ActorItem):
-    """Represents a vampire.
+    """Represents a battery.
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None):
@@ -28,7 +28,7 @@ class Battery(ActorItem):
 
 
 class BatteryA(Battery):
-    """Represents a basic battery."""
+    """Represents a battery of type A."""
 
     def __init__(self, x, y, game, name=None):
         self.file_mid_prefix = '01'

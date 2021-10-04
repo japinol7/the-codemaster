@@ -11,7 +11,7 @@ from codemaster.models.stats import Stats
 
 
 class TerminatorEye(NPC):
-    """Represents a Terminator Eye.
+    """Represents a terminator eye.
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
@@ -31,7 +31,7 @@ class TerminatorEye(NPC):
 
 
 class TerminatorEyeGreen(TerminatorEye):
-    """Represents a green Terminator Eye."""
+    """Represents a green terminator eye."""
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
                  border_left=0, border_right=0,
@@ -54,23 +54,12 @@ class TerminatorEyeGreen(TerminatorEye):
         self.stats.time_between_shots = self.time_between_shots_base / 2.6
         self.shot_x_delta_max = self.shot_x_delta_max + 150
 
-    def update_shot_bullet(self):
-        time_delta = self.game.current_time - self.last_shot_time
-        if time_delta > self.stats.time_between_shots:
-            self.last_shot_time = self.game.current_time
-            if randint(1, 100) + 60 >= 100:
-                self.shot_bullet(BulletType.T1_LASER1)
-            else:
-                self.shot_bullet(BulletType.T2_LASER2)
-
-        super().update_shot_bullet()
-
     def update_shot_bullet_fire_shots(self):
         self.shot_bullet(BulletType.T1_LASER1)
 
 
 class TerminatorEyeBlue(TerminatorEye):
-    """Represents a blue Terminator Eye."""
+    """Represents a blue terminator eye."""
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
                  border_left=0, border_right=0,
@@ -101,7 +90,7 @@ class TerminatorEyeBlue(TerminatorEye):
 
 
 class TerminatorEyeYellow(TerminatorEye):
-    """Represents a yellow Terminator Eye."""
+    """Represents a yellow terminator eye."""
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
                  border_left=0, border_right=0,
@@ -133,7 +122,7 @@ class TerminatorEyeYellow(TerminatorEye):
 
 
 class TerminatorEyeRed(TerminatorEye):
-    """Represents a red Terminator Eye."""
+    """Represents a red terminator eye."""
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
                  border_left=0, border_right=0,

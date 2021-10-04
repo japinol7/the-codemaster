@@ -201,13 +201,15 @@ class Bullet(pg.sprite.Sprite):
         if self.change_x >= 0 and cur_pos > self.border_right:
             self.kill()
 
-        # Check if it hit any other bullet, not considering bullets from the same player
-        bullet_hit_list = pg.sprite.spritecollide(self, self.level.bullets, False)
-        for bullet in bullet_hit_list:
-            if bullet is not self and bullet.owner != self.owner:
-                self.game.sound_effects and resources.Resource.bullet_hit_sound.play()
-                self.kill()
-                bullet.kill()
+        if Settings.are_bullets_allowed_to_collide:
+            # Check if it hit any other bullet, not considering bullets from the same player
+            # or bullets from the same type of actor
+            bullet_hit_list = pg.sprite.spritecollide(self, self.level.bullets, False)
+            for bullet in bullet_hit_list:
+                if bullet is not self and bullet.owner.type.name != self.owner.type.name:
+                    self.game.sound_effects and resources.Resource.bullet_hit_sound.play()
+                    self.kill()
+                    bullet.kill()
 
         # Check if we hit any player
         players_hit_list = pg.sprite.spritecollide(self, self.game.players, False)

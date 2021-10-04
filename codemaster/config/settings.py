@@ -47,6 +47,7 @@ class Settings:
     grid_height = None
     screen_bar_near_top = None
     player_position_ini = None
+    are_bullets_allowed_to_collide = None
     sprite_health_bar_pos_rel = None   # Relative position for sprite health bar
     sprite_health_bar_size = None
     font_size1 = None
@@ -110,6 +111,7 @@ class Settings:
         cls.grid_height = None
         cls.screen_bar_near_top = None
         cls.player_position_ini = None
+        cls.are_bullets_allowed_to_collide = False
         cls.font_size1 = None
         cls.font_size2 = None
         cls.font_spc_btn_chars1 = None

@@ -162,7 +162,7 @@ class Level3(Level):
                 border_left=1550, border_right=2240, change_x=randint(3, 7)))
 
         self.npcs.add([
-            GhostBlue(1700, 677, self.game, border_left=1680, border_right=2280, change_x=4),
+            GhostBlue(1700, 668, self.game, border_left=1680, border_right=2280, change_x=4),
             BatBlack(1900, 560, self.game, border_left=1780, border_right=2600, change_x=4),
             BatBlack(2120, 620, self.game, border_left=1780, border_right=2600, change_x=5),
             ])

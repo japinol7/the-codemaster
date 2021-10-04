@@ -95,7 +95,7 @@ class Level1(Level):
 
         # Add NPCs
         self.npcs.add([
-            GhostGreen(500, 318, self.game, border_left=480, border_right=750, change_x=3),
+            GhostGreen(500, 312, self.game, border_left=480, border_right=750, change_x=3),
             SkullBlue(410, 314, self.game, border_left=410, border_right=800, change_x=2),
             SkullYellow(600, 314, self.game, border_left=410, border_right=800, change_x=2),
             ])

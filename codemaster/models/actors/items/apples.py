@@ -8,7 +8,7 @@ from codemaster.models.stats import Stats
 
 
 class Apple(ActorItem):
-    """Represents a apple.
+    """Represents an apple.
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None):

@@ -64,7 +64,7 @@
               dictatorship at the hands of a tyrant who calls himself Great Emperor Tetsuo.
               Tetsuo's motivation seems to be acquiring power and money to attract cute young women.
               The fact that she receives him sitting on a throne that is actually a toilet makes 
-              Pac suspects that he has to deal with a madman.
+              Pac suspect that he has to deal with a madman.
               Someway, Pac has to come back to de UFEP headquarters with the batteries he has recovered, 
               and prove what is happening in the Negasus Imperial Planet.
               Finally, Pac beats Tetsuo escaping from Negasus and completing his mission.
@@ -91,9 +91,8 @@
 	    > This is an early demo version of the game.
            In fact, currently, this is the only version.
 	    > This demo does not have a story to accompany the action of the game.
-    
 	> We live in an open world:
-        > 'The Codemaster' is an open-world platformer game. 
+        > 'The Codemaster' is an open-world RPG platformer game. 
           You can move around all levels whenever it makes sense to the story.
 	> To beat the game:
 	    > In this demo, you just have to get all the batteries and files disks from the 6 levels.
@@ -209,8 +208,8 @@
 	    > Wolf-men.
 	    > Male vampires.
 	    > Female vampires.
-	    > Demons.
-	    > Terminator Eyes. Beware, they shot bullets.
+	    > Demons. Beware, they have wepons.
+	    > Terminator Eyes. Beware, they have wepons.
 
 
 ## Keyboard keys
@@ -275,7 +274,7 @@
 **To make The CodeMaster work**
 
 	Do this:
-	    1. Clone this repository.
+	    1. Clone this repository in your local system.
 	    2. Go to its folder in your system.
 	    3. $ python -m codemaster
 

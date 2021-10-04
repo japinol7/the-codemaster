@@ -39,7 +39,7 @@ class DropItem:
 
 
 class Actor(pg.sprite.Sprite):
-    """Represents an Actor.
+    """Represents an actor.
     It is not intended to be instantiated.
     """
     type_id_count = Counter()
@@ -112,7 +112,7 @@ class Actor(pg.sprite.Sprite):
             self.shot_x_delta_max = 500
 
         if not getattr(self, 'shot_y_delta', None):
-            self.shot_y_delta = 100
+            self.shot_y_delta = 75
 
         self.name = name or 'unnamed'
         self.change_x = change_x
@@ -209,6 +209,8 @@ class Actor(pg.sprite.Sprite):
 
         self.player.sound_effects and self.player.enemy_hit_sound.play()
         for bullet in bullet_hit_list:
+            if self.type.name == bullet.owner.type.name:
+                continue
             logger.debug(f"{self.id} hit by {bullet.id}, npc_health: {str(round(self.stats.health, 2))}, "
                          f"bullet_power: {str(bullet.attack_power)}")
             self.stats.health -= bullet.attack_power
@@ -282,7 +284,7 @@ class Actor(pg.sprite.Sprite):
 
 
 class ActorItem(Actor):
-    """Represents an object actor.
+    """Represents an item actor.
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None):
@@ -294,7 +296,7 @@ class ActorItem(Actor):
 
 
 class MovingActor(Actor):
-    """Represents a moving Actor.
+    """Represents a moving actor.
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
@@ -309,6 +311,7 @@ class MovingActor(Actor):
         self.border_right = border_right
         self.border_top = border_top
         self.border_down = border_down
+        self.frame_index = randint(0, self.images_sprite_no)
 
     def update(self):
         self.rect.x += self.change_x

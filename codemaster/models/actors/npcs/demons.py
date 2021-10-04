@@ -1,8 +1,11 @@
 """Module demons."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+from random import randint
+
 from codemaster.config.constants import BM_NPCS_FOLDER
 from codemaster.models.actors.actor_types import ActorType
+from codemaster.models.actors.items.bullets import BulletType
 from codemaster.models.actors.actors import NPC, NPC_STRENGTH_BASE
 from codemaster.models.stats import Stats
 
@@ -18,6 +21,8 @@ class Demon(NPC):
         self.file_folder = BM_NPCS_FOLDER
         self.file_name_key = 'im_en_demons'
         self.images_sprite_no = 1
+        self.can_shot = True
+        self.bullet_start_position_delta_x = 14
         super().__init__(x, y, game, name=name,
                          change_x=change_x, change_y=change_y,
                          border_left=border_left, border_right=border_right,
@@ -45,3 +50,15 @@ class DemonMale(Demon):
                          border_left=border_left, border_right=border_right,
                          border_top=border_top, border_down=border_down,
                          items_to_drop=items_to_drop)
+
+        self.stats.time_between_shots = self.time_between_shots_base / 2.6
+        self.shot_x_delta_max = self.shot_x_delta_max + 150
+
+    def update_shot_bullet_fire_shots(self):
+        dice = randint(1, 100)
+        if dice + 7 >= 100:
+            self.shot_bullet(BulletType.T4_NEUTRONIC)
+        elif dice + 25 >= 100:
+            self.shot_bullet(BulletType.T3_PHOTONIC)
+        else:
+            self.shot_bullet(BulletType.T2_LASER2)

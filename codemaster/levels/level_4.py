@@ -112,8 +112,8 @@ class Level4(Level):
             DropItem(CartridgeYellow, ActorType.CARTRIDGE_YELLOW, probability_to_drop=100, add_to_list=self.cartridges),
             ]
         self.npcs.add(VampireFemale(
-            1200, 146, self.game,
-            border_left=1070, border_right=1280, change_x=2, items_to_drop=items_to_drop))
+            1400, 46, self.game,
+            border_left=1310, border_right=1680, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
             DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
