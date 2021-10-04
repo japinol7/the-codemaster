@@ -61,13 +61,15 @@ class Level:
             self.normal_items.add(sprite)
         for sprite in self.decors:
             self.all_sprites.add(sprite)
+        for sprite in self.computers:
+            self.all_sprites.add(sprite)
+            self.normal_items.add(sprite)
+        for sprite in self.doors:
+            self.all_sprites.add(sprite)
         for sprite in self.batteries:
             self.all_sprites.add(sprite)
         for sprite in self.files_disks:
             self.all_sprites.add(sprite)
-        for sprite in self.computers:
-            self.all_sprites.add(sprite)
-            self.normal_items.add(sprite)
         for sprite in self.cartridges:
             self.all_sprites.add(sprite)
         for sprite in self.potions:
@@ -76,17 +78,11 @@ class Level:
             self.all_sprites.add(sprite)
         for sprite in self.door_keys:
             self.all_sprites.add(sprite)
-        for sprite in self.doors:
-            self.all_sprites.add(sprite)
-        for sprite in self.bullets:
-            self.all_sprites.add(sprite)
-        for sprite in self.npcs:
-            self.all_sprites.add(sprite)
         for sprite in self.apples:
             self.all_sprites.add(sprite)
         for sprite in self.mines:
             self.all_sprites.add(sprite)
-        for sprite in self.explosions:
+        for sprite in self.npcs:
             self.all_sprites.add(sprite)
         for sprite in self.snakes:
             self.npcs.add(sprite)
@@ -94,6 +90,10 @@ class Level:
             for snake_piece in sprite.body_pieces:
                 self.snakes_body_pieces.add(snake_piece)
                 self.all_sprites.add(snake_piece)
+        for sprite in self.explosions:
+            self.all_sprites.add(sprite)
+        for sprite in self.bullets:
+            self.all_sprites.add(sprite)
 
     def update(self):
         self.all_sprites.update()
