@@ -207,14 +207,18 @@ class Actor(pg.sprite.Sprite):
         if not bullet_hit_list:
             return
 
-        self.player.sound_effects and self.player.enemy_hit_sound.play()
+        has_been_hit = False
         for bullet in bullet_hit_list:
-            if self.type.name == bullet.owner.type.name:
+            if self.base_type.name == bullet.owner.base_type.name:
+                # Actors of the same base type do not shoot each other
                 continue
             logger.debug(f"{self.id} hit by {bullet.id}, npc_health: {str(round(self.stats.health, 2))}, "
                          f"bullet_power: {str(bullet.attack_power)}")
             self.stats.health -= bullet.attack_power
+            has_been_hit = True
             bullet.kill()
+
+        has_been_hit and self.player.sound_effects and self.player.enemy_hit_sound.play()
         if self.stats.health <= 0:
             logger.debug(f"{self.id}, !!! Dead by bullet {bullet.id} !!!")
             self.player.sound_effects and self.player.npc_killed_sound.play()

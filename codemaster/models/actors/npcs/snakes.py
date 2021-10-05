@@ -7,7 +7,7 @@ from codemaster.config.constants import (
     BM_SNAKES_FOLDER,
     )
 import codemaster.config.constants as consts
-from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
+from codemaster.models.actors.actor_types import ActorCategoryType, ActorBaseType, ActorType
 from codemaster.models.actors.actors import NPC, Actor, NPC_STRENGTH_BASE
 from codemaster.models.stats import Stats
 from codemaster.utils.colors import Color
@@ -25,6 +25,8 @@ class SnakeBodyPiece(pg.sprite.Sprite):
         self.direction = consts.DIRECTION_RIGHT
         self.rect = False
         self.rect_old = False
+        self.base_type = ActorBaseType.SNAKE_BODY_PART
+        self.type = ActorType.SNAKE_BODY_PART_A
 
         # Snake's body piece
         if not SnakeBodyPiece.sprite_images.get(self.snake.color):

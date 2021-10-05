@@ -7,6 +7,7 @@ from os import path
 from codemaster.config.constants import BITMAPS_FOLDER, FILE_NAMES
 from codemaster.config.constants import VELOCITY_DEFAULT
 from codemaster.utils.utils_graphics import SpriteSheet
+from codemaster.models.actors.actor_types import ActorType, ActorBaseType
 
 PLAT_STD_WIDTH = 70
 PLAT_STD_HEIGHT = 60
@@ -45,6 +46,8 @@ class Platform(pg.sprite.Sprite):
         super().__init__()
         self.game = game
         self.player = game.player
+        self.base_type = ActorBaseType.PLATFORM
+        self.type = ActorType.PLATFORM_A
 
         sprite_sheet_data_id = sprite_sheet_data[4]
         if not Platform.sprite_images.get(sprite_sheet_data_id):
@@ -105,6 +108,7 @@ class MovingPlatform(Platform):
     def __init__(self, sprite_sheet_data, x, y, game, border_left=0, border_right=0,
                  border_top=0, border_down=0, change_x=0, change_y=0, level=None):
         super().__init__(sprite_sheet_data, x, y, game)
+        self.type = ActorType.PLAT_MOVING
         self.border_left = border_left
         self.border_right = border_right
         self.border_top = border_top - level.world_shift_top - self.rect.height
@@ -143,6 +147,7 @@ class SlidingBands(Platform):
 
     def __init__(self, sprite_sheet_data, x, y, game, velocity=None, level=None):
         super().__init__(sprite_sheet_data, x, y, game)
+        self.type = ActorType.PLAT_SLIDING
         self.level = level
         self.velocity = velocity
 

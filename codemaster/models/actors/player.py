@@ -25,7 +25,7 @@ from codemaster import resources
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.items.platforms import MovingPlatform, SlidingBands
 from codemaster.models.actors.items.bullets import BULLET_MAX_QTY
-from codemaster.models.actors.actor_types import ActorType
+from codemaster.models.actors.actor_types import ActorType, ActorBaseType
 
 PL_X_SPEED = 6
 PL_JUMP_SPEED = 11
@@ -63,6 +63,7 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.is_a_player = True
         self.id = "player"
+        self.base_type = ActorBaseType.PC
         self.type = ActorType.PLAYER
         self.health_total = PL_HEALTH_DEFAULT
         self.power_total = PL_POWER_DEFAULT

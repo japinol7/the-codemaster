@@ -11,9 +11,11 @@ NPC_STRENGTH_BASE = 35
 class ActorBaseType(Enum):
     """Actor base types."""
     NONE = 0
-    PC = 1
-    NPC = 2
-    ITEM = 3
+    PLATFORM = 1
+    PC = 11
+    NPC = 21
+    ITEM = 51
+    SNAKE_BODY_PART = 101
 
 
 class ActorCategoryType(Enum):
@@ -31,8 +33,9 @@ class ActorCategoryType(Enum):
     MINE = 10
     EXPLOSION = 11
     PC = 51
-    NPC = 52
-    SNAKE = 53
+    NPC = 61
+    SNAKE = 65
+    SNAKE_BODY_PART = 67
 
 
 class ActorType(Enum):
@@ -41,17 +44,17 @@ class ActorType(Enum):
     PLAYER = 1
     BULLET = 121
     # Objects
-    BATTERY_A = 401
+    BATTERY_A = 301
     # Life recoveries
-    LIFE_RECOVERY = 301
+    LIFE_RECOVERY = 321
     # Potions
-    POTION_HEALTH = 311
-    POTION_POWER = 312
+    POTION_HEALTH = 331
+    POTION_POWER = 332
     # Cartridges
-    CARTRIDGE_GREEN = 432
-    CARTRIDGE_BLUE = 433
-    CARTRIDGE_YELLOW = 434
-    CARTRIDGE_RED = 435
+    CARTRIDGE_GREEN = 452
+    CARTRIDGE_BLUE = 453
+    CARTRIDGE_YELLOW = 454
+    CARTRIDGE_RED = 455
     # Computers
     COMPUTER_01 = 501
     FILES_DISK_A = 521
@@ -84,20 +87,24 @@ class ActorType(Enum):
     # Water
     PLAT_WATER_A = 851
     PLAT_WATER_A_DEEP = 852
+    # Platforms
+    PLATFORM_A = 4001
+    PLAT_MOVING = 4002
+    PLAT_SLIDING = 4003
     # Apples
-    APPLE_GREEN = 2031
-    APPLE_YELLOW = 2032
-    APPLE_RED = 2033
+    APPLE_GREEN = 5031
+    APPLE_YELLOW = 5032
+    APPLE_RED = 5033
     # Mines
-    MINE_CYAN = 2041
-    MINE_LILAC = 2042
+    MINE_CYAN = 5041
+    MINE_LILAC = 5042
     # Explosions
-    EXPLOSION_A = 2051
-    EXPLOSION_B = 2052
+    EXPLOSION_A = 5051
+    EXPLOSION_B = 5052
     # Skulls
-    SKULL_GREEN = 1203
-    SKULL_BLUE = 1201
-    SKULL_YELLOW = 1202
+    SKULL_GREEN = 1201
+    SKULL_BLUE = 1202
+    SKULL_YELLOW = 1203
     SKULL_RED = 1204
     # Ghosts
     GHOST_GREEN = 1221
@@ -117,6 +124,7 @@ class ActorType(Enum):
     # Demons
     DEMON_MALE = 1391
     # Snakes
+    SNAKE_BODY_PART_A = 1400
     SNAKE_GREEN = 1401
     SNAKE_BLUE = 1402
     SNAKE_YELLOW = 1403
