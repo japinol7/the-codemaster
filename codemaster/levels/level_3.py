@@ -10,15 +10,17 @@ from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
     )
+from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
     BatBlack,
-    GhostBlue,
+    BatLilac,
+    DemonMale,
     SkullBlue,
-    SkullGreen,
     SkullYellow,
     TerminatorEyeGreen,
+    TerminatorEyeYellow,
     VampireMale,
     )
 from codemaster.models.actors.items import (
@@ -34,6 +36,8 @@ from codemaster.models.actors.items import (
     DoorLeftGreen,
     DoorRightYellow,
     FilesDiskD,
+    PotionPower,
+    PotionHealth,
     )
 from codemaster.levels.level_base import Level
 
@@ -156,15 +160,34 @@ class Level3(Level):
             VampireMale(1880, 14, self.game, border_left=1865, border_right=2245, change_x=2),
             ])
 
-        for _ in range(1, 3):
-            self.npcs.add(SkullGreen(
-                1560 + randint(15, 200), 670, self.game,
-                border_left=1550, border_right=2240, change_x=randint(3, 7)))
-
         self.npcs.add([
-            GhostBlue(1700, 668, self.game, border_left=1680, border_right=2280, change_x=4),
-            BatBlack(1900, 560, self.game, border_left=1780, border_right=2600, change_x=4),
+            BatBlack(1900, 550, self.game, border_left=1780, border_right=2600, change_x=4),
             BatBlack(2120, 620, self.game, border_left=1780, border_right=2600, change_x=5),
+            BatLilac(2250, 570, self.game, border_left=1780, border_right=2600, change_x=4),
+            ])
+
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 58, 'random_max': 72}),
+            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=75, add_to_list=self.cartridges,
+                     x_delta=170),
+            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100, add_to_list=self.cartridges,
+                     x_delta=195),
+            ]
+        self.npcs.add([
+            TerminatorEyeYellow(1700, 650, self.game, border_left=1680, border_right=2370,
+                                change_x=3, items_to_drop=items_to_drop),
+            ])
+
+        items_to_drop = [
+            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 58, 'random_max': 72}),
+            DropItem(CartridgeYellow, ActorType.CARTRIDGE_GREEN, probability_to_drop=75, add_to_list=self.cartridges,
+                     x_delta=170),
+            ]
+        self.npcs.add([
+            DemonMale(2280, 662, self.game, border_left=1680, border_right=2370,
+                      change_x = 3, items_to_drop = items_to_drop),
             ])
 
         for _ in range(2):
