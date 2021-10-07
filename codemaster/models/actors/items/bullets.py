@@ -223,6 +223,7 @@ class Bullet(pg.sprite.Sprite):
             if pc.stats['health'] <= 0:
                 logger.debug(f"{pc.id}, !!! Dead by bullet {self.id} !!!")
                 pc.die_hard()
+            self.kill()
 
     @classmethod
     def init(cls):
