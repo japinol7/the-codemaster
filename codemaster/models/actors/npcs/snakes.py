@@ -167,6 +167,20 @@ class Snake(NPC):
         if self.direction_old == self.direction and self.game.current_time % self.direction_stability == 0:
             self.change_y *= -1
 
+        # When a snake hit a player energy shield it changes its x direction
+        if self.player.is_energy_shield_activated and self.direction_old == self.direction:
+            energy_shield_hit_list = pg.sprite.spritecollide(
+                self,
+                self.player.stats['energy_shields_stock'] or [],
+                False)
+            for shield in energy_shield_hit_list:
+                if shield.direction == consts.DIRECTION_RIGHT and shield.is_actor_on_the_left(self):
+                    self.change_x *= -1
+                    shield.stats.health -= 2
+                elif shield.direction == consts.DIRECTION_LEFT and shield.is_actor_on_the_right(self):
+                    self.change_x *= -1
+                    shield.stats.health -= 2
+
         super().update()
 
     def update_sprite_image(self):
@@ -187,10 +201,10 @@ class Snake(NPC):
         else:
             self.image = Actor.sprite_images[self.type.name][self.direction][int(self.frame_index)]
 
-    def before_kill_hook(self):
+    def kill_hook(self):
         for item in self.body_pieces:
             item.kill()
-        super().before_kill_hook()
+        super().kill_hook()
 
     def add_body_piece(self):
         snake_body_piece = SnakeBodyPiece(

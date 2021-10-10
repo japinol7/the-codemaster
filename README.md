@@ -102,7 +102,7 @@
 	    > Use them to go to other levels.
         > To unlock a locked door you need to use the right door key.
 	> Colors: 
-	    > Some objects in the game represent their difficulty, utility, power, 
+	    > Some objects and NPCs in the game represent their difficulty, utility, power, 
           or effectiveness by using colors.
           These are such colors ordered from lower to higher:
 			> Green:  Low level items or NPCs.
@@ -111,6 +111,12 @@
 			> Red:  High level items or NPCs.
 	> Player movement: 
 	    > You just can move left, right or jump.
+	> Player level up: 
+	    > You can level up by gaining experience points.
+	    > When you level up you improve your skills:
+            > Currently, you just get the energize shield capability
+              when you level up to level 2.
+            > In the future, your stats will be level-up-friendly and we will add more skills.
 	> Player actions:
 	    > Eat an apple from your stock.
 	    > Drink a health potion from your stock.
@@ -118,6 +124,8 @@
 	    > Get items automatically just by colliding with them.
         > Enter in unlocked doors just by approaching them.
         > Use the right keys on locked doors to unlock them.
+        > Activate/deactivate an energy shield. 
+          Only if the player has reach a certain level.
         > Kill its current life by pressing the <b> key for a time.
 	> Player's ways of dying:
 	    > A player dies if all his lives are killed.
@@ -174,6 +182,16 @@
                 > Pretty good range and very high power. 
                 > It consumes a lot of your power attribute.
                 > Very difficult to find.
+	> Energy shields:
+        > Right now there is only one kind of them.
+            > A neutronic energy shield o type A:
+                > To be able to use it, you need a skill that will be activated
+                  when you level up to level 2.
+                > It blocks all the bullets headed in its direction.
+                > Snakes change their direction when they hit one.
+                > It consumes a little bit of your power while is on.
+                > When destroyed, it costs you some power. Then, it is created again.
+                > Its color changes from light blue to yellow and dark pink depending on his health stat.
 	> Files disks: 
 	    > There are four types of files disks:
 	        > Type D: They contain low interesting data.
@@ -225,6 +243,7 @@
                delete:        drink a power potion
                home:          eat a health apple
                t:             try unlocking door using each key in your inventory
+               h:             Switch energy shield (if you have level up enough)
                b:             hold b for a time to kill your current life
 			   p:    pause
 			 ESC: exit game

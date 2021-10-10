@@ -20,6 +20,7 @@ class HelpInfo:
               '     \t drink power potion,  delete\n'
               '     \t eat health apple,  home\n'
               '   t: \t try unlocking door using each key in your inventory\n'
+              '   h: \t switch energy field if available\n'
               '     \t left,   a, (or arrow)\n'
               '     \t right,  d, (or arrow)\n'
               '     \t jump,   w, (or arrow)\n'

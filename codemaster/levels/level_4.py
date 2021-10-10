@@ -149,7 +149,7 @@ class Level4(Level):
                      x_delta=170),
             ]
         self.snakes.add(SnakeBlue(2250, 220, self.game, border_left=1800, border_right=2750,
-                                  border_top=120, border_down=850, change_x=3, change_y=3,
+                                  border_top=120, border_down=850, change_x=1, change_y=1,
                                   items_to_drop=items_to_drop))
 
         # Add doors

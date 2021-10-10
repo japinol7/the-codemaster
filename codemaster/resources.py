@@ -260,6 +260,9 @@ class Resource:
         libg_jp.render_text('#', Settings.score_pos_level[0], Settings.screen_bar_near_top,
                             cls.txt_surfaces, 'sb_level_title', color=Color.CYAN)
 
+        libg_jp.render_text('L:', Settings.score_pos_pc_level[0], Settings.screen_bar_near_top,
+                            cls.txt_surfaces, 'sb_pc_level_title', color=Color.CYAN)
+
     @staticmethod
     def load_music_song(current_song):
         pg.mixer.music.load(os.path.join(consts.MUSIC_FOLDER, consts.MUSIC_BOX[current_song]))

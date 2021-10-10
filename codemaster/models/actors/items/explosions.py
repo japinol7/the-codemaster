@@ -46,7 +46,7 @@ class Explosion(ActorItem):
                     if self.is_a_player_shot:
                         self.player.stats['score'] += ExperiencePoints.xp_points[npc.type.name]
                     npc.drop_items()
-                    npc.before_kill_hook()
+                    npc.kill_hook()
                     self.player.sound_effects and self.player.enemy_hit_sound.play()
 
             # Check if we hit any mine

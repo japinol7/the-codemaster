@@ -80,6 +80,9 @@ class Actor(pg.sprite.Sprite):
         if not getattr(self, 'frame_index', None):
             self.frame_index = 0
 
+        if not getattr(self, 'owner', None):
+            self.owner = None
+
         if not getattr(self, 'is_pc', None):
             self.is_pc = False
             self.is_a_player = False
@@ -114,6 +117,7 @@ class Actor(pg.sprite.Sprite):
         if not getattr(self, 'shot_y_delta', None):
             self.shot_y_delta = 75
 
+        self.can_be_shot_by_its_owner = True
         self.name = name or 'unnamed'
         self.change_x = change_x
         self.change_y = change_y
@@ -212,7 +216,9 @@ class Actor(pg.sprite.Sprite):
             if self.base_type.name == bullet.owner.base_type.name:
                 # Actors of the same base type do not shoot each other
                 continue
-            logger.debug(f"{self.id} hit by {bullet.id}, npc_health: {str(round(self.stats.health, 2))}, "
+            if not self.can_be_shot_by_its_owner and self.owner == bullet.owner:
+                continue
+            logger.debug(f"{self.id} hit by {bullet.id}, health: {str(round(self.stats.health, 2))}, "
                          f"bullet_power: {str(bullet.attack_power)}")
             self.stats.health -= bullet.attack_power
             has_been_hit = True
@@ -226,9 +232,9 @@ class Actor(pg.sprite.Sprite):
                 self.player.stats['score'] += ExperiencePoints.xp_points[self.type.name]
             self.explosion()
             self.drop_items()
-            self.before_kill_hook()
+            self.kill_hook()
 
-    def before_kill_hook(self):
+    def kill_hook(self):
         self.kill()
 
     def update_shot_bullet(self):
@@ -278,6 +284,16 @@ class Actor(pg.sprite.Sprite):
                 item.add_to_list.add(new_item)
                 self.game.level.all_sprites.add(new_item)
                 logger.debug(f"Dropped: {new_item.id}")
+
+    def is_actor_on_the_left(self, actor):
+        if actor.rect.x < self.rect.x:
+            return True
+        return False
+
+    def is_actor_on_the_right(self, actor):
+        if actor.rect.x > self.rect.x:
+            return True
+        return False
 
     @staticmethod
     def file_name_im_get(folder, file_name_key, mid_prefix, suffix_index):

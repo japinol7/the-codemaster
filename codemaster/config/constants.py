@@ -102,6 +102,7 @@ BM_APPLES_FOLDER = os.path.join(BITMAPS_FOLDER, 'apples')
 BM_POTIONS_FOLDER = os.path.join(BITMAPS_FOLDER, 'potions')
 BM_POTION_HEALTH_FOLDER = os.path.join(BM_POTIONS_FOLDER, 'health')
 BM_POTION_POWER_FOLDER = os.path.join(BM_POTIONS_FOLDER, 'power')
+BM_ENERGY_SHIELD_FOLDER = os.path.join(BITMAPS_FOLDER, 'energy_shields')
 BM_PCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'PCs')
 BM_PC_PAC_FOLDER = os.path.join(BM_PCS_FOLDER, 'Pac')
 BM_NPCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'NPCs')
@@ -157,6 +158,7 @@ FILE_NAMES = {
     'im_water': ('im_water', 'png'),
     'im_potion_health': ('health_rec', 'png'),
     'im_potion_power': ('power_rec', 'png'),
+    'im_energy_shields': ('energy_shield', 'png'),
     'im_bg_start_game': ('bg_start_game', 'png'),
     'im_bg_start_game_vertical': ('bg_start_game_vert', 'png'),
     'im_background': ('background', 'png'),

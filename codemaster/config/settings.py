@@ -62,6 +62,7 @@ class Settings:
     score_pos_apples1 = None
     score_pos_door_keys = None
     score_pos_score1 = None
+    score_pos_pc_level = None
     score_pos_level = None
     score_pos_lives2 = None
     score_pos_apples2 = None
@@ -125,6 +126,7 @@ class Settings:
         cls.score_pos_potions_health = [860, 820]
         cls.score_pos_potions_power = [973, 922]
         cls.score_pos_score1 = [322, 405]
+        cls.score_pos_pc_level = [1075, 1110]
         cls.score_pos_level = [580, 613]
         cls.score_pos_health_size = [100, 15]
         cls.score_pos_power_size = cls.score_pos_health_size

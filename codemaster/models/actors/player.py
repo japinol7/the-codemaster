@@ -1,6 +1,7 @@
 """Module player."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+import logging
 from datetime import datetime
 from os import path
 from random import randint
@@ -26,6 +27,7 @@ from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.items.platforms import MovingPlatform, SlidingBands
 from codemaster.models.actors.items.bullets import BULLET_MAX_QTY
 from codemaster.models.actors.actor_types import ActorType, ActorBaseType
+from codemaster.models.actors.items import EnergyShieldA
 
 PL_X_SPEED = 6
 PL_JUMP_SPEED = 11
@@ -84,7 +86,9 @@ class Player(pg.sprite.Sprite):
         self.rip_seconds = 0
         self.invulnerable = False
         self.bullet_start_position_delta_x = 0
+        self.is_energy_shield_activated = False
         self.stats = {
+            'level': 1,
             'score': 0,
             'lives': PL_LIVES_DEFAULT,
             'power': PL_POWER_DEFAULT,
@@ -123,6 +127,7 @@ class Player(pg.sprite.Sprite):
             ActorType.DOOR_KEY_AQUA.name: 0,
             ActorType.DOOR_KEY_YELLOW.name: 0,
             ActorType.DOOR_KEY_RED.name: 0,
+            'energy_shields_stock': [],
             'mines': 0,
             'mines_t01': 0,
             'mines_t02': 0,
@@ -132,6 +137,7 @@ class Player(pg.sprite.Sprite):
             'bats_t03': 0,
         }
         self.stats_old = {
+            'level': 1,
             'score': None,
             'lives': None,
             'power': None,
@@ -155,6 +161,7 @@ class Player(pg.sprite.Sprite):
             'mines': None,
         }
         self.stats_render = {
+            'level': None,
             'score': None,
             'lives': None,
             'power': None,
@@ -245,6 +252,9 @@ class Player(pg.sprite.Sprite):
                 if self.image != self.rip_frames[0]:
                     self.image = self.rip_frames[0]
             return
+
+        if self.is_ready_to_level_up():
+            self.level_up()
 
         # Move left/right
         self.rect.x += self.change_x
@@ -369,9 +379,17 @@ class Player(pg.sprite.Sprite):
         # Check if we hit any enemy
         if not self.invulnerable:
             enemy_hit_list = pg.sprite.spritecollide(self, self.level.npcs, False)
+            has_been_hit = False
             for enemy in enemy_hit_list:
+                if (self.is_energy_shield_activated and self.direction == DIRECTION_RIGHT
+                        and enemy.is_actor_on_the_left(self)):
+                    continue
+                if (self.is_energy_shield_activated and self.direction == DIRECTION_LEFT
+                        and enemy.is_actor_on_the_right(self)):
+                    continue
+                has_been_hit = True
                 self.stats['health'] -= enemy.stats.power
-            if enemy_hit_list:
+            if has_been_hit:
                 if self.stats['health'] < 1:
                     self.die_hard()
                 else:
@@ -451,6 +469,8 @@ class Player(pg.sprite.Sprite):
         self.direction = DIRECTION_RIP
         t = datetime.now().time()
         self.rip_seconds = (t.hour * 60 + t.minute) * 60 + t.second
+        if self.stats['energy_shields_stock']:
+            self.stats['energy_shields_stock'][0].deactivate()
 
     def self_destruction(self):
         if self.direction == DIRECTION_RIP:
@@ -478,6 +498,8 @@ class Player(pg.sprite.Sprite):
                     change_y=0, owner=self, game=self.game)
 
     def drink_potion_health(self):
+        if self.direction == DIRECTION_RIP:
+            return
         if self.stats['health'] > 99:
             return
         if len(self.stats['potions_health']) > 0:
@@ -485,6 +507,8 @@ class Player(pg.sprite.Sprite):
             self.stats['potions_health'].pop().drink()
 
     def drink_potion_power(self):
+        if self.direction == DIRECTION_RIP:
+            return
         if self.stats['power'] > 99:
             return
         if len(self.stats['potions_power']) > 0:
@@ -492,13 +516,49 @@ class Player(pg.sprite.Sprite):
             self.stats['potions_power'].pop().drink()
 
     def eat_apple(self):
+        if self.direction == DIRECTION_RIP:
+            return
         if self.stats['health'] > 99:
             return
         if len(self.stats['apples_stock']) > 0:
             self.stats['apples'] -= 1
             self.stats['apples_stock'].pop().eat()
 
+    def is_ready_to_level_up(self):
+        if self.stats['score'] > 4000 and self.stats['level'] < 2:
+            return True
+        if self.stats['score'] > 8500 and self.stats['level'] < 3:
+            return True
+        if self.stats['score'] > 11000 and self.stats['level'] < 4:
+            return True
+        return False
+
+    def level_up(self):
+        self.stats['level'] += 1
+        if self.stats['level'] > 1:
+            if not self.stats['energy_shields_stock']:
+                logging.debug("Create energy shield")
+                energy_shield = EnergyShieldA(self.rect.x, self.rect.y, self.game)
+                energy_shield.owner = self
+                self.stats['energy_shields_stock'].append(energy_shield)
+
+    def switch_energy_shield(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        if self.stats['power'] <= 0:
+            return
+        if not self.stats['energy_shields_stock']:
+            return
+
+        energy_shield = self.stats['energy_shields_stock'][0]
+        if energy_shield.is_activated:
+            energy_shield.deactivate()
+            return
+        energy_shield.activate()
+
     def use_door_key(self):
+        if self.direction == DIRECTION_RIP:
+            return
         if not self.stats['door_keys']:
             return
         door_hit_list = pg.sprite.spritecollide(self, self.level.doors, False)

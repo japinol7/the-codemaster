@@ -59,6 +59,7 @@ class DebugInfo:
                 ('change position (x, y)', (self.player.change_x, "%.3f" % self.player.change_y)),
                 ('invulnerable', self.player.invulnerable),
                 ('stats', OrderedDict([
+                    ('PC_level', self.player.stats['level']),
                     ('lives', self.player.stats['lives']),
                     ('health', self.player.stats['health']),
                     ('power', round(self.player.stats['power'],4)),
@@ -94,6 +95,7 @@ class DebugInfo:
             print(debug_info)
 
     def super_cheat_superhero(self):
+        self.player.stats['score'] = 3600 if self.player.stats['score'] < 3600 else self.player.stats['score']
         self.player.stats['lives'] = 20
         self.player.stats['health'] = 100
         self.player.stats['power'] = 100

@@ -390,6 +390,8 @@ class Game:
                             self.help_info.print_help_keys()
                             self.is_debug and self.debug_info.print_help_keys()
                             self.super_cheat and self.debug_info.print_supercheat_keys()
+                        else:
+                            self.player.switch_energy_shield()
                     elif event.key == pg.K_l:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.debug_info.print_debug_info(to_log_file=True)

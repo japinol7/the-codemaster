@@ -7,6 +7,7 @@ class Stats:
     def __init__(self):
         # Base stats
         self.name = 'stats'
+        self.level = 1
         self.health = None
         self.health_total = None
         self.health_pot = None
@@ -24,6 +25,7 @@ class Stats:
         self.speed = None
         self.breath_elements = []  # List of elements
         self.time_between_shots = None
+        self.energy_shield = None
         # Defence
         self.defense_melee = None
         self.defense_missile = None

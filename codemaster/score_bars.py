@@ -43,11 +43,6 @@ class ScoreBar:
                          (Settings.score_pos_potions_health[0], Settings.score_pos_potions_health_y - 2))
         self.screen.blit(Resource.images['sb_potions_power_title'],
                          (Settings.score_pos_potions_power[0], Settings.score_pos_potions_power_y - 2))
-
-        if self.game.level.completed:
-            self.screen.blit(Resource.images['sb_level_completed'],
-                             (Settings.score_pos_apples1[0] - 130, Settings.score_pos_apples_y - 6))
-
         self.screen.blit(Resource.images['sb_door_keys_title'],
                          (Settings.score_pos_apples1[0] + 301, Settings.score_pos_apples_y - 5))
 
@@ -68,11 +63,19 @@ class ScoreBar:
                               Settings.score_pos_f_disks_y))
             f_disk_pos_x += 112
 
+
+        if self.game.level.completed:
+            self.screen.blit(Resource.images['sb_level_completed'],
+                             (Settings.score_pos_apples1[0] - 130, Settings.score_pos_apples_y - 6))
+
+        self.screen.blit(*Resource.txt_surfaces['sb_pc_level_title'])
+
         # Draw score stats and render them if needed
         self.render_stats_if_necessary(Settings.score_pos_lives1[1],
                                        Settings.screen_bar_near_top, 'lives')
         self.render_stats_if_necessary(Settings.score_pos_batteries1[1],
                                        Settings.screen_bar_near_top, 'batteries')
+
         self.render_stats_if_necessary(Settings.score_pos_score1[1],
                                        Settings.screen_bar_near_top, 'score')
         self.render_stats_if_necessary(Settings.score_pos_apples1[1],
@@ -87,6 +90,12 @@ class ScoreBar:
 
         self.render_stats_if_necessary(Settings.score_pos_door_keys[1],
                                        (Settings.score_pos_apples_y - 2) * Settings.font_pos_factor, 'door_keys')
+
+        self.render_stats_if_necessary(Settings.score_pos_door_keys[1],
+                                       (Settings.score_pos_apples_y - 2) * Settings.font_pos_factor, 'door_keys')
+
+        self.render_stats_if_necessary(Settings.score_pos_pc_level[1],
+                                       Settings.screen_bar_near_top, 'level')
 
         bullet_pos_x = 179
         bullets_stats = ['bullets_t01', 'bullets_t02', 'bullets_t03', 'bullets_t04']

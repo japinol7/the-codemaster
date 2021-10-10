@@ -32,6 +32,7 @@ class ActorCategoryType(Enum):
     APPLE = 9
     MINE = 10
     EXPLOSION = 11
+    ENERGY_SHIELD = 15
     PC = 51
     NPC = 61
     SNAKE = 65
@@ -101,6 +102,8 @@ class ActorType(Enum):
     # Explosions
     EXPLOSION_A = 5051
     EXPLOSION_B = 5052
+    # Energy shields
+    ENERGY_SHIELD_A = 5211
     # Skulls
     SKULL_GREEN = 1201
     SKULL_BLUE = 1202

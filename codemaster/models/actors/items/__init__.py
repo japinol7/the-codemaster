@@ -56,3 +56,6 @@ from codemaster.models.actors.items.mines import (
 from codemaster.models.actors.items.explosions import (
     ExplosionA,
     )
+from codemaster.models.actors.items.energy_shields import (
+    EnergyShieldA,
+    )
