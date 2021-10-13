@@ -359,6 +359,7 @@ class Game:
                     elif event.key == pg.K_s:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.sound_effects = not self.sound_effects
+                            self.player.sound_effects = self.sound_effects
                     elif event.key == pg.K_u:
                         self.player.shot_bullet(bullet_type=BulletType.T1_LASER1)
                     elif event.key == pg.K_i:
