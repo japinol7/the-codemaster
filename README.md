@@ -141,6 +141,7 @@
 			> XP: 	  Experience points. They also represent your score.
 			> #: Current level.
 			> Files Disks D, C, B, A: # files disks of each type that you have recovered.
+			> L: Player level  (level up by collecting XP).
 		> Second line:
 			> ====:  Power bar.
 			> Remaining bullets for each of the four weapons.
@@ -226,8 +227,8 @@
 	    > Wolf-men.
 	    > Male vampires.
 	    > Female vampires.
-	    > Demons. Beware, they have wepons.
-	    > Terminator Eyes. Beware, they have wepons.
+	    > Demons. Beware, they have weapons.
+	    > Terminator Eyes. Beware, they have weapons.
 
 
 ## Keyboard keys
