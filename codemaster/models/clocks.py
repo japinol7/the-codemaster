@@ -1,6 +1,7 @@
 """Module clocks."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+from collections import Counter
 from enum import Enum
 
 from codemaster.config.settings import Settings
@@ -17,7 +18,11 @@ class ClockBase:
     """Represents a base clock.
     It is not intended to be instantiated.
     """
+    type_id_count = Counter()
+
     def __init__(self, game, time_in_secs):
+        ClockBase.type_id_count[self.type] += 1
+        self.id = f"{self.type.name}_{ClockBase.type_id_count[self.type]:05d}"
         self.fps = Settings.fps
         self.game = game
         self.initial_time_in_secs = time_in_secs
@@ -85,7 +90,7 @@ class ClockTimer(ClockBase):
             self.triggered_event = False
 
     def _tick(self):
-        if self.time < 0:
+        if self.time <= 0:
             self.set_off()
             if not self.triggered_event:
                 self.trigger_method()

@@ -74,5 +74,5 @@ class ClockTimerA(Clock):
             screen=self.game.screen, color=Color.GREEN)
 
     def die_hard(self):
-        logger.debug(f"Clock {self.type.name} killed when {self.clock.type.name} reached 0")
+        logger.debug(f"{self.id} killed when {self.clock.id} reached 0")
         self.kill()
