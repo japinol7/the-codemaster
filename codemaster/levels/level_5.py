@@ -32,6 +32,7 @@ from codemaster.models.actors.items import (
     LifeRecoveryA,
     MineCyan,
     PotionPower,
+    ClockA,
     )
 from codemaster.levels.level_base import Level
 
@@ -86,6 +87,11 @@ class Level5(Level):
         self.platforms.add(platforms.MovingPlatform(
             platforms.PLAT_TYPE_02_STONE_MIDDLE, 1640, 360, self.game,
             border_left=1510, border_right=2650, change_x=4, level=self))
+
+        # Add clocks
+        self.clocks.add([
+            ClockA(800, 174, self.game, time_in_secs=30),
+            ])
 
         # Add batteries
         self.batteries.add([

@@ -223,6 +223,7 @@ class Player(pg.sprite.Sprite):
 
         # sounds
         self.death_sound = pg.mixer.Sound(self.file_name_sound_get('snd_death_pl'))
+        self.item_found_sound = pg.mixer.Sound(self.file_name_sound_get('snd_pl_battery_found'))
         self.battery_found_sound = pg.mixer.Sound(self.file_name_sound_get('snd_pl_battery_found'))
         self.files_disk_found_sound = pg.mixer.Sound(self.file_name_sound_get('snd_pl_battery_found'))
         self.cartridge_found_sound = pg.mixer.Sound(self.file_name_sound_get('snd_pl_battery_found'))
@@ -426,6 +427,12 @@ class Player(pg.sprite.Sprite):
             self.stats['door_keys_stock'].append(door_key)
             self.stats[door_key.type.name] += 1
 
+        # Check if we hit any clock
+        clocks_hit_list = pg.sprite.spritecollide(self, self.level.clocks, False)
+        for clock in clocks_hit_list:
+            self.sound_effects and self.item_found_sound.play()
+            clock.set_on()
+
     def calc_gravity(self):
         if self.change_y == 0:
             self.change_y = 1
@@ -471,6 +478,8 @@ class Player(pg.sprite.Sprite):
         self.rip_seconds = (t.hour * 60 + t.minute) * 60 + t.second
         if self.stats['energy_shields_stock']:
             self.stats['energy_shields_stock'][0].deactivate()
+        for clock in self.game.clock_sprites:
+            clock.die_hard()
 
     def self_destruction(self):
         if self.direction == DIRECTION_RIP:

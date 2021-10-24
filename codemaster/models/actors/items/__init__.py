@@ -59,3 +59,7 @@ from codemaster.models.actors.items.explosions import (
 from codemaster.models.actors.items.energy_shields import (
     EnergyShieldA,
     )
+from codemaster.models.actors.items.clocks import (
+    ClockA,
+    ClockTimerA,
+    )

@@ -33,6 +33,29 @@ class SpriteSheet:
         return image
 
 
+def image_change_scale_smooth(image):
+    return pg.transform.smoothscale(
+        image,
+        (int(image.get_rect().width * Settings.screen_scale),
+         int(image.get_rect().height * Settings.screen_scale)))
+
+
+def image_change_scale(image):
+    return pg.transform.scale(
+        image,
+        (int(image.get_rect().width * Settings.screen_scale),
+         int(image.get_rect().height * Settings.screen_scale)))
+
+
+def screen_change_scale(game):
+    game.screen.blit(pg.transform.scale(
+        game.screen,
+        (int(Settings.screen_width * Settings.screen_scale),
+         int(Settings.screen_height * Settings.screen_scale))
+         ),
+        (0, 0))
+
+
 def full_screen_switch(game):
     Settings.is_full_screen = not Settings.is_full_screen
     game.screen = pg.display.set_mode(game.size,

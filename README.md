@@ -208,6 +208,9 @@
 	    > There are two types of mines:
 	        > Aqua mines: They deal a good deal of damage.
 	        > Lilac mines: They deal great damage
+	> Clocks: 
+	    > Currently, clock timers do not have a real effect in the game.
+          In the future, they will trigger some cool stuff.
 	> Bats:
 	    > They bite your head/neck whenever you are too close to them.
 	    > There are four types of bats:

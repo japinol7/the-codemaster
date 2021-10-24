@@ -33,6 +33,7 @@ class Level:
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.decors = pg.sprite.Group()
+        self.clocks = pg.sprite.Group()
         self.batteries = pg.sprite.Group()
         self.files_disks = pg.sprite.Group()
         self.computers = pg.sprite.Group()
@@ -65,6 +66,8 @@ class Level:
             self.all_sprites.add(sprite)
             self.normal_items.add(sprite)
         for sprite in self.doors:
+            self.all_sprites.add(sprite)
+        for sprite in self.clocks:
             self.all_sprites.add(sprite)
         for sprite in self.batteries:
             self.all_sprites.add(sprite)

@@ -4,8 +4,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 import logging
 
 from codemaster.utils import utils
-from codemaster.config.constants import SCREEN_WIDTH
-from codemaster.config.constants import SCREEN_HEIGHT
+from codemaster.config.constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_SCALE
 
 LOGGER_LEVEL = logging.INFO
 LOGGER_FORMAT = '%(levelname)s: %(message)s'
@@ -25,6 +24,7 @@ class Settings:
     """Settings of the game."""
     screen_width = None
     screen_height = None
+    screen_scale = None
     screen_aspect_ratio = None
     screen_height_adjusted = None
     screen_width_adjusted = None
@@ -90,8 +90,9 @@ class Settings:
 
     @classmethod
     def clean(cls):
-        cls.screen_width = SCREEN_WIDTH
-        cls.screen_height = SCREEN_HEIGHT
+        cls.screen_scale = SCREEN_SCALE
+        cls.screen_width = int(SCREEN_WIDTH * cls.screen_scale)
+        cls.screen_height = int(SCREEN_HEIGHT * cls.screen_scale)
         cls.screen_aspect_ratio = cls.screen_width / cls.screen_height
         cls.screen_height_adjusted = None
         cls.screen_width_adjusted = None

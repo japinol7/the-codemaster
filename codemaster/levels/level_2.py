@@ -28,6 +28,7 @@ from codemaster.models.actors.items import (
     MineCyan,
     PotionHealth,
     PotionPower,
+    ClockA,
     )
 from codemaster.levels.level_base import Level
 
@@ -105,6 +106,11 @@ class Level2(Level):
                 platform[0], platform[1], platform[2],
                 self.game, velocity=platform[3], level=self)
             self.platforms.add(block)
+
+        # Add clocks
+        self.clocks.add([
+            ClockA(540, 174, self.game, time_in_secs=30),
+            ])
 
         # Add batteries
         self.batteries.add([

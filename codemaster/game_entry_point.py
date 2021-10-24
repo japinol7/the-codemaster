@@ -45,7 +45,6 @@ class Game:
     is_first_game = True
     current_game = 0
     current_time = None
-    active_sprites = None
     K_b_keydown_seconds = False
     size = None
     screen = None
@@ -78,6 +77,8 @@ class Game:
         self.show_grid = False
         self.current_position = False
         self.clock = False
+        self.active_sprites = None
+        self.clock_sprites = None
         self.level_cheat = False
         self.level_cheat_to_no = False
         self.score_bars = None
@@ -156,6 +157,7 @@ class Game:
         self.players = pg.sprite.Group()
         self.players.add(self.player)
         self.active_sprites = pg.sprite.Group()
+        self.clock_sprites = pg.sprite.Group()
 
         # Initialize levels
         self.levels = []
@@ -298,6 +300,8 @@ class Game:
             if not Game.is_over:
                 # Draw active sprites
                 self.active_sprites.draw(Game.screen)
+                for clock in self.clock_sprites:
+                    clock.draw_text()
 
         self.show_fps and pg.display.set_caption(f"{self.clock.get_fps():.2f}")
 
@@ -478,5 +482,7 @@ class Game:
             if self.winner or Game.is_over:
                 Game.is_over = True
             self.update_screen()
+            if Settings.screen_scale != 1:
+                libg_jp.screen_change_scale(self)
             self.is_paused and self.clock.tick(Settings.fps_paused) or self.clock.tick(Settings.fps)
             pg.display.flip()

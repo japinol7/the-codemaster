@@ -33,6 +33,7 @@ class ActorCategoryType(Enum):
     MINE = 10
     EXPLOSION = 11
     ENERGY_SHIELD = 15
+    CLOCK = 16
     PC = 51
     NPC = 61
     SNAKE = 65
@@ -104,6 +105,8 @@ class ActorType(Enum):
     EXPLOSION_B = 5052
     # Energy shields
     ENERGY_SHIELD_A = 5211
+    CLOCK_A = 5261
+    CLOCK_TIMER_A = 5262
     # Skulls
     SKULL_GREEN = 1201
     SKULL_BLUE = 1202

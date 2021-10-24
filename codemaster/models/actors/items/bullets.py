@@ -194,7 +194,7 @@ class Bullet(pg.sprite.Sprite):
         self.rect.y += self.change_y
         self.image = Bullet.sprite_images[(self.bullet_type, self.direction)]
 
-        # # Check boundaries and see if we need to kill the bullet
+        # Check boundaries and see if we need to kill the bullet
         cur_pos = self.rect.x - self.level.world_shift
         if self.change_x < 0 and cur_pos < self.border_left:
             self.kill()
@@ -220,6 +220,7 @@ class Bullet(pg.sprite.Sprite):
                          f"pc_health: {str(round(pc.stats['health'], 2))}, "
                          f"bullet_power: {str(self.attack_power)}")
             pc.stats['health'] -= self.attack_power
+            self.kill()
             if pc.stats['health'] <= 0:
                 logger.debug(f"{pc.id}, !!! Dead by bullet {self.id} !!!")
                 pc.die_hard()

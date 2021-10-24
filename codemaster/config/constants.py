@@ -4,8 +4,11 @@ __author__ = 'Joan A. Pinol  (japinol)'
 import os
 import sys
 
-SCREEN_WIDTH = 1160     # new: 1400  old: 1160
-SCREEN_HEIGHT = 778     # new: 1003  old:  778
+SCREEN_WIDTH = 1160
+SCREEN_HEIGHT = 778
+# Screen Scale. Strongly recommended 1.  Other values: 1.1, 1.15, 1.2, 1.25
+# It does not scale sprites on loading time, but the entire screen on each frame
+SCREEN_SCALE = 1
 
 SCROLL_NEAR_LEFT_SIDE = 380
 SCROLL_NEAR_RIGHT_SIDE = SCREEN_WIDTH - SCROLL_NEAR_LEFT_SIDE
@@ -84,6 +87,7 @@ else:
     FONT_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'sans.ttf')
 
 BM_BACKGROUNDS_FOLDER = os.path.join(BITMAPS_FOLDER, 'backgrounds')
+BM_CLOCKS_FOLDER = os.path.join(BITMAPS_FOLDER, 'clocks')
 BM_BATTERIES_FOLDER = os.path.join(BITMAPS_FOLDER, 'batteries')
 BM_BULLETS_FOLDER = os.path.join(BITMAPS_FOLDER, 'bullets')
 BM_CARTRIDGES_FOLDER = os.path.join(BITMAPS_FOLDER, 'cartridges')
@@ -158,6 +162,7 @@ FILE_NAMES = {
     'im_water': ('im_water', 'png'),
     'im_potion_health': ('health_rec', 'png'),
     'im_potion_power': ('power_rec', 'png'),
+    'im_clocks': ('clock', 'png'),
     'im_energy_shields': ('energy_shield', 'png'),
     'im_bg_start_game': ('bg_start_game', 'png'),
     'im_bg_start_game_vertical': ('bg_start_game_vert', 'png'),
