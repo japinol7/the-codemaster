@@ -10,6 +10,7 @@ from codemaster.config.constants import (
     )
 from codemaster.config.settings import logger
 from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryType
+from codemaster.clean_new_game import clean_entity_ids
 from codemaster.models.actors.actors import MovingActor
 
 
@@ -173,3 +174,7 @@ class Level:
     @staticmethod
     def levels_completed(game):
         return [(x.id, x.name) for x in game.levels if x.completed]
+
+    @staticmethod
+    def clean_entity_ids():
+        clean_entity_ids()

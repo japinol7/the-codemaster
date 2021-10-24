@@ -127,6 +127,9 @@ class Game:
             pg.mixer.music.play(loops=-1)
             if self.is_music_paused:
                 pg.mixer.music.pause()
+        else:
+            # Clear entity ids
+            levels.Level.clean_entity_ids()
 
         # Initialize screens
         self.screen_exit_current_game = screens.ExitCurrentGame(self)

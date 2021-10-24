@@ -1,8 +1,10 @@
 """Module platforms."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-import pygame as pg
+from collections import Counter
 from os import path
+
+import pygame as pg
 
 from codemaster.config.constants import BITMAPS_FOLDER, FILE_NAMES
 from codemaster.config.constants import VELOCITY_DEFAULT
@@ -35,6 +37,7 @@ PLAT_TYPE_05_EARTH_MIDDLE_2Z = (216, 248, 140, 124, 12)
 
 
 class Platform(pg.sprite.Sprite):
+    type_id_count = Counter()
     sprite_images = {}
 
     def file_name_im_get(self, id_):
@@ -47,7 +50,10 @@ class Platform(pg.sprite.Sprite):
         self.game = game
         self.player = game.player
         self.base_type = ActorBaseType.PLATFORM
-        self.type = ActorType.PLATFORM_A
+        if not getattr(self, 'type', None):
+            self.type = ActorType.PLATFORM_A
+        Platform.type_id_count[self.type] += 1
+        self.id = f"{self.type.name}_{Platform.type_id_count[self.type]:07d}"
 
         sprite_sheet_data_id = sprite_sheet_data[4]
         if not Platform.sprite_images.get(sprite_sheet_data_id):
@@ -107,8 +113,8 @@ class MovingPlatform(Platform):
 
     def __init__(self, sprite_sheet_data, x, y, game, border_left=0, border_right=0,
                  border_top=0, border_down=0, change_x=0, change_y=0, level=None):
-        super().__init__(sprite_sheet_data, x, y, game)
         self.type = ActorType.PLAT_MOVING
+        super().__init__(sprite_sheet_data, x, y, game)
         self.border_left = border_left
         self.border_right = border_right
         self.border_top = border_top - level.world_shift_top - self.rect.height
@@ -146,8 +152,8 @@ class MovingPlatform(Platform):
 class SlidingBands(Platform):
 
     def __init__(self, sprite_sheet_data, x, y, game, velocity=None, level=None):
-        super().__init__(sprite_sheet_data, x, y, game)
         self.type = ActorType.PLAT_SLIDING
+        super().__init__(sprite_sheet_data, x, y, game)
         self.level = level
         self.velocity = velocity
 

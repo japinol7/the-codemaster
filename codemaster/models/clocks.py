@@ -90,7 +90,7 @@ class ClockTimer(ClockBase):
             self.triggered_event = False
 
     def _tick(self):
-        if self.time <= 0:
+        if self.get_time() <= 0:
             self.set_off()
             if not self.triggered_event:
                 self.trigger_method()
