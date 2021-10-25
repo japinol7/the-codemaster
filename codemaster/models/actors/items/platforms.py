@@ -9,7 +9,7 @@ import pygame as pg
 from codemaster.config.constants import BITMAPS_FOLDER, FILE_NAMES
 from codemaster.config.constants import VELOCITY_DEFAULT
 from codemaster.utils.utils_graphics import SpriteSheet
-from codemaster.models.actors.actor_types import ActorType, ActorBaseType
+from codemaster.models.actors.actor_types import ActorType, ActorBaseType, ActorCategoryType
 
 PLAT_STD_WIDTH = 70
 PLAT_STD_HEIGHT = 60
@@ -53,7 +53,11 @@ class Platform(pg.sprite.Sprite):
         if not getattr(self, 'type', None):
             self.type = ActorType.PLATFORM_A
         Platform.type_id_count[self.type] += 1
-        self.id = f"{self.type.name}_{Platform.type_id_count[self.type]:07d}"
+        if self.type == ActorType.PLATFORM_A:
+            self.id = f"{self.type.name}_{Platform.type_id_count[self.type]:07d}"
+        else:
+            self.id = f"{self.type.name}_{Platform.type_id_count[self.type]:05d}"
+        self.category_type = ActorCategoryType.PLATFORM
 
         sprite_sheet_data_id = sprite_sheet_data[4]
         if not Platform.sprite_images.get(sprite_sheet_data_id):

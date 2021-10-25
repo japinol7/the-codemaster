@@ -34,6 +34,9 @@ class ActorCategoryType(Enum):
     EXPLOSION = 11
     ENERGY_SHIELD = 15
     CLOCK = 16
+    PLATFORM = 17
+    BULLET = 18
+    DECORATION = 19
     PC = 51
     NPC = 61
     SNAKE = 65
@@ -130,11 +133,14 @@ class ActorType(Enum):
     # Demons
     DEMON_MALE = 1391
     # Snakes
-    SNAKE_BODY_PART_A = 1400
     SNAKE_GREEN = 1401
     SNAKE_BLUE = 1402
     SNAKE_YELLOW = 1403
     SNAKE_RED = 1404
+    SNAKE_BODY_PART_G = 1415
+    SNAKE_BODY_PART_B = 1416
+    SNAKE_BODY_PART_Y = 1417
+    SNAKE_BODY_PART_R = 1418
     # Terminator Eyes
     TERMINATOR_EYE_GREEN = 1601
     TERMINATOR_EYE_BLUE = 1602

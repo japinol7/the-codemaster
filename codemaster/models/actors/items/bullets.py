@@ -8,7 +8,7 @@ from random import randint
 
 import pygame as pg
 
-from codemaster.models.actors.actor_types import ActorType
+from codemaster.models.actors.actor_types import ActorType, ActorCategoryType
 from codemaster.utils.colors import Color
 from codemaster.config import constants as consts
 from codemaster.utils import utils
@@ -76,12 +76,13 @@ class Bullet(pg.sprite.Sprite):
         self.rect = None
         self.game = game
         self.owner = owner
-        self.bullet_type = bullet_type
+        self.category_type = ActorCategoryType.BULLET
+        self.type = self.bullet_type = bullet_type
         self.id_key = f"{self.bullet_type}_f_{self.owner.id}"
         Bullet.type_id_count[self.id_key] += 1
         if Bullet.type_id_count[self.id_key] > 999999:
             Bullet.type_id_count[self.id_key] = 1
-        self.id = f"{self.bullet_type.name}_{Bullet.type_id_count[self.id_key]:07d}_from_{self.owner.id}"
+        self.id = f"{self.type.name}_{Bullet.type_id_count[self.id_key]:07d}_from_{self.owner.id}"
         self.is_a_player_shot = False
         self.bullet_type_txt = None
         self.health_total = 100

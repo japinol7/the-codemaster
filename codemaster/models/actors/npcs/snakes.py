@@ -1,6 +1,8 @@
 """Module snakes."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+from collections import Counter
+
 import pygame as pg
 
 from codemaster.config.constants import (
@@ -13,9 +15,17 @@ from codemaster.models.stats import Stats
 from codemaster.utils.colors import Color
 from codemaster import resources
 
+SNAKE_BODY_MAPPING = {
+    ActorType.SNAKE_GREEN: ActorType.SNAKE_BODY_PART_G,
+    ActorType.SNAKE_BLUE: ActorType.SNAKE_BODY_PART_B,
+    ActorType.SNAKE_YELLOW: ActorType.SNAKE_BODY_PART_Y,
+    ActorType.SNAKE_RED: ActorType.SNAKE_BODY_PART_R,
+}
+
 
 class SnakeBodyPiece(pg.sprite.Sprite):
     """Represents a body piece of a snake."""
+    type_id_count = Counter()
     sprite_images = {}
 
     def __init__(self, snake, previous_body_piece, x, y):
@@ -26,7 +36,10 @@ class SnakeBodyPiece(pg.sprite.Sprite):
         self.rect = False
         self.rect_old = False
         self.base_type = ActorBaseType.SNAKE_BODY_PART
-        self.type = ActorType.SNAKE_BODY_PART_A
+        self.category_type = ActorCategoryType.SNAKE_BODY_PART
+        self.type = SNAKE_BODY_MAPPING[snake.type]
+        SnakeBodyPiece.type_id_count[self.type] += 1
+        self.id = f"{self.type.name}_{SnakeBodyPiece.type_id_count[self.type]:05d}"
 
         # Snake's body piece
         if not SnakeBodyPiece.sprite_images.get(self.snake.color):

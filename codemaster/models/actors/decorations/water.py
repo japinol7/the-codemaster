@@ -2,7 +2,7 @@
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from codemaster.config.constants import BM_PLAT_WATER
-from codemaster.models.actors.actor_types import ActorType
+from codemaster.models.actors.actor_types import ActorType, ActorCategoryType
 from codemaster.models.actors.actors import ActorItem
 from codemaster.models.stats import Stats
 
@@ -22,6 +22,7 @@ class Water(ActorItem):
         self.stats.health = self.stats.health_total = 1
         self.stats.power = self.stats.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
+        self.category_type = ActorCategoryType.DECORATION
         super().__init__(x, y, game, name=name)
 
     def update_when_hit(self):
