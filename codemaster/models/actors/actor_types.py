@@ -15,6 +15,7 @@ class ActorBaseType(Enum):
     PC = 11
     NPC = 21
     ITEM = 51
+    TEXT_MSG = 52
     SNAKE_BODY_PART = 101
 
 
@@ -37,6 +38,7 @@ class ActorCategoryType(Enum):
     PLATFORM = 17
     BULLET = 18
     DECORATION = 19
+    TEXT_MSG = 20
     PC = 51
     NPC = 61
     SNAKE = 65
@@ -108,8 +110,12 @@ class ActorType(Enum):
     EXPLOSION_B = 5052
     # Energy shields
     ENERGY_SHIELD_A = 5211
+    # Clocks
     CLOCK_A = 5261
     CLOCK_TIMER_A = 5262
+    # Text Messages
+    TEXT_MSG_ABS = 5301
+    TEXT_MSG_PLAYER = 5302
     # Skulls
     SKULL_GREEN = 1201
     SKULL_BLUE = 1202

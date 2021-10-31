@@ -63,3 +63,8 @@ from codemaster.models.actors.items.clocks import (
     ClockA,
     ClockTimerA,
     )
+from codemaster.models.actors.items.text_msgs import (
+    TextMsg,
+    TextMsgAbsolute,
+    TextMsgPlayer,
+    )

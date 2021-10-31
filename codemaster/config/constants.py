@@ -42,6 +42,8 @@ DIRECTION_DOWN_RIGHT = 8
 FACE_DIRECTION = DIRECTION_RIGHT
 DIRECTION_RIP = 5    # Special direction to use when a player character is dead
 
+MSG_PC_DURATION = 3  # in secs
+
 DOOR_STD_WIDTH = 130
 DOOR_STD_HEIGHT = 188
 DOOR_POSITION_L = 0
@@ -78,6 +80,7 @@ if getattr(sys, 'frozen', False):
     MUSIC_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'music')
     FONT_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'data')
     FONT_DEFAULT_NAME = os.path.join(FONT_FOLDER, 'sans.ttf')
+    FONT_FIXED_DEFAULT_NAME = os.path.join(FONT_FOLDER, 'fixed.ttf')
 else:
     CURRENT_PATH = '.'
     # CURRENT_PATH = os.path.join(CURRENT_PATH, '..')
@@ -85,9 +88,11 @@ else:
     SOUNDS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'snd', SOUND_FORMAT)
     MUSIC_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'music')
     FONT_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'sans.ttf')
+    FONT_FIXED_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'fixed.ttf')
 
 BM_BACKGROUNDS_FOLDER = os.path.join(BITMAPS_FOLDER, 'backgrounds')
 BM_CLOCKS_FOLDER = os.path.join(BITMAPS_FOLDER, 'clocks')
+BM_TEXT_MSGS_FOLDER = os.path.join(BITMAPS_FOLDER, 'text_msgs')
 BM_BATTERIES_FOLDER = os.path.join(BITMAPS_FOLDER, 'batteries')
 BM_BULLETS_FOLDER = os.path.join(BITMAPS_FOLDER, 'bullets')
 BM_CARTRIDGES_FOLDER = os.path.join(BITMAPS_FOLDER, 'cartridges')
@@ -163,6 +168,7 @@ FILE_NAMES = {
     'im_potion_health': ('health_rec', 'png'),
     'im_potion_power': ('power_rec', 'png'),
     'im_clocks': ('clock', 'png'),
+    'text_msgs': ('text_msg', 'png'),
     'im_energy_shields': ('energy_shield', 'png'),
     'im_bg_start_game': ('bg_start_game', 'png'),
     'im_bg_start_game_vertical': ('bg_start_game_vert', 'png'),

@@ -21,13 +21,14 @@ from codemaster.config.constants import (
     DIRECTION_RIGHT,
     DIRECTION_RIP,
     NEAR_BOTTOM,
+    MSG_PC_DURATION,
     )
 from codemaster import resources
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.items.platforms import MovingPlatform, SlidingBands
 from codemaster.models.actors.items.bullets import BULLET_MAX_QTY
 from codemaster.models.actors.actor_types import ActorType, ActorBaseType
-from codemaster.models.actors.items import EnergyShieldA
+from codemaster.models.actors.items import EnergyShieldA, TextMsg
 
 PL_X_SPEED = 6
 PL_JUMP_SPEED = 11
@@ -89,6 +90,7 @@ class Player(pg.sprite.Sprite):
         self.is_energy_shield_activated = False
         self.stats = {
             'level': 1,
+            'levels_visited': set(),
             'score': 0,
             'lives': PL_LIVES_DEFAULT,
             'power': PL_POWER_DEFAULT,
@@ -354,6 +356,14 @@ class Player(pg.sprite.Sprite):
             self.stats['files_disks_type'][files_disk.disk_type] += 1
             self.stats[files_disk.type.name] += 1
             self.stats['score'] += ExperiencePoints.xp_points[files_disk.type.name]
+        len(files_disk_hit_list) and TextMsg.create("Yeah! I've found another disk!", self.game, time_in_secs=MSG_PC_DURATION)
+
+        # Check if we hit any computer
+        computers_hit_list = pg.sprite.spritecollide(self, self.level.computers, False)
+        for computer in computers_hit_list:
+            if not computer.visited:
+                TextMsg.create("Hey! This computer is a beauty!", self.game, time_in_secs=MSG_PC_DURATION)
+                computer.visited = True
 
         # Check if we hit any cartridge
         cartridge_hit_list = pg.sprite.spritecollide(self, self.level.cartridges, False)
@@ -480,6 +490,8 @@ class Player(pg.sprite.Sprite):
             self.stats['energy_shields_stock'][0].deactivate()
         for clock in self.game.clock_sprites:
             clock.die_hard()
+        for text_msg in self.game.text_msg_sprites:
+            text_msg.die_hard()
 
     def self_destruction(self):
         if self.direction == DIRECTION_RIP:

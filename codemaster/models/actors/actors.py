@@ -34,8 +34,8 @@ class DropItem:
         self.add_to_list = add_to_list
         self.x_delta = x_delta
         self.y_delta = y_delta
-        self.args = args
         self.probability_to_drop = probability_to_drop
+        self.args = args
 
 
 class Actor(pg.sprite.Sprite):
@@ -310,6 +310,18 @@ class ActorItem(Actor):
     def __init__(self, x, y, game, name=None):
         super().__init__(x, y, game, name=name)
         self.base_type = ActorBaseType.ITEM
+
+    def draw_health(self):
+        pass
+
+
+class ActorMsg(Actor):
+    """Represents a message actor.
+    It is not intended to be instantiated.
+    """
+    def __init__(self, x, y, game, name=None):
+        super().__init__(x, y, game, name=name)
+        self.base_type = ActorBaseType.TEXT_MSG
 
     def draw_health(self):
         pass

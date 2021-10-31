@@ -6,7 +6,7 @@ from os import path
 
 import pygame as pg
 
-from codemaster.config.constants import BITMAPS_FOLDER, FILE_NAMES
+from codemaster.config.constants import BITMAPS_FOLDER, FILE_NAMES, DIRECTION_RIP
 from codemaster.config.constants import VELOCITY_DEFAULT
 from codemaster.utils.utils_graphics import SpriteSheet
 from codemaster.models.actors.actor_types import ActorType, ActorBaseType, ActorCategoryType
@@ -72,7 +72,6 @@ class Platform(pg.sprite.Sprite):
             self.image = Platform.sprite_images[sprite_sheet_data_id]
         self.rect = self.image.get_rect()
         self.rect.x = x
-        # TODO: Add modifier constant to change the screen resolution easily
         self.rect.y = y
 
     @staticmethod
@@ -162,6 +161,8 @@ class SlidingBands(Platform):
         self.velocity = velocity
 
     def update(self):
+        if self.player.direction == DIRECTION_RIP:
+            return
         hit = pg.sprite.collide_rect(self, self.player)
         if hit:
             if self.velocity > 0:

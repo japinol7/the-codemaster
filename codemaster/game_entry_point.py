@@ -30,8 +30,10 @@ from codemaster.config.constants import (
     NEAR_LEFT_SIDE,
     DIRECTION_RIP,
     DOOR_DEST_NL, DOOR_DEST_TL, DOOR_DEST_TR, DOOR_POSITION_L, DOOR_POSITION_R,
+    FONT_DEFAULT_NAME, FONT_FIXED_DEFAULT_NAME
     )
 from codemaster.models.actors.player import Player, PL_SELF_DESTRUCTION_COUNT_DEF
+from codemaster.models.actors.items import TextMsg
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.actors import NPC
 
@@ -79,6 +81,8 @@ class Game:
         self.clock = False
         self.active_sprites = None
         self.clock_sprites = None
+        self.text_msg_sprites = None
+        self.text_msg_pc_sprites = None
         self.level_cheat = False
         self.level_cheat_to_no = False
         self.score_bars = None
@@ -120,7 +124,8 @@ class Game:
             Resource.load_music_song(self.current_song)
 
             # Render characters in some colors to use it as a cache
-            libg_jp.chars_render_text_tuple()
+            libg_jp.chars_render_text_tuple(font_name=FONT_DEFAULT_NAME)
+            libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)
 
             # Initialize music
             pg.mixer.music.set_volume(0.7)
@@ -161,6 +166,8 @@ class Game:
         self.players.add(self.player)
         self.active_sprites = pg.sprite.Group()
         self.clock_sprites = pg.sprite.Group()
+        self.text_msg_sprites = pg.sprite.Group()
+        self.text_msg_pc_sprites = pg.sprite.Group()
 
         # Initialize levels
         self.levels = []
@@ -192,6 +199,7 @@ class Game:
         # Start first level
         self.level.start_up()
         self.player.start_time = self.start_time
+        self.player.stats['levels_visited'].add(self.level.id)
 
     def scroll_shift_control(self):
         # If the player gets near the right side, shift the world left (-x)
@@ -272,6 +280,9 @@ class Game:
         self.player.rect.y = self.level.door_previous_pos_player[1]
         self.player.change_y = 0
 
+        if self.level_no not in self.player.stats['levels_visited']:
+            self.level.update_pc_enter_level()
+
     def update_screen(self):
         # Handle game screens
         if self.is_paused or self.is_full_screen_switch:
@@ -303,6 +314,8 @@ class Game:
             if not Game.is_over:
                 # Draw active sprites
                 self.active_sprites.draw(Game.screen)
+                for text_msg in self.text_msg_sprites:
+                    text_msg.draw_text()
                 for clock in self.clock_sprites:
                     clock.draw_text()
 
@@ -327,6 +340,10 @@ class Game:
 
         self.help_info = HelpInfo()
         self.debug_info = DebugInfo(self.player, self)
+
+        TextMsg.create("Ok. Let's go.\n"
+                       "- Are you ready?\n- I'm not ready!\n- Are you ready?\n- I'm not ready!",
+                       self, time_in_secs=4)
 
         # Current game loop
         self.done = False
@@ -484,6 +501,7 @@ class Game:
                     self.winner = self.player
             if self.winner or Game.is_over:
                 Game.is_over = True
+
             self.update_screen()
             if Settings.screen_scale != 1:
                 libg_jp.screen_change_scale(self)

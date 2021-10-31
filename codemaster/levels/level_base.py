@@ -115,10 +115,19 @@ class Level:
         for sprite in self.all_sprites:
             sprite.rect.x += shift_x
 
+        for sprite in self.game.text_msg_sprites:
+            sprite.rect.x += shift_x
+
     def shift_world_top(self, shift_y):
         self.world_shift_top += shift_y
         for sprite in self.all_sprites:
             sprite.rect.y += shift_y
+
+        for sprite in self.game.text_msg_sprites:
+            sprite.rect.y += shift_y
+
+    def update_pc_enter_level(self):
+        self.player.stats['levels_visited'].add(self.id)
 
     def add_actors(self, actors):
         snake_pieces = []

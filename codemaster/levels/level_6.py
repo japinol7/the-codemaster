@@ -36,6 +36,7 @@ from codemaster.models.actors.items import (
     MineLilac,
     PotionHealth,
     PotionPower,
+    TextMsg,
     )
 from codemaster.levels.level_base import Level
 
@@ -65,6 +66,10 @@ class Level6(Level):
 
         self._add_actors()
         self._sprites_all_add()
+
+    def update_pc_enter_level(self):
+        self.player.stats['levels_visited'].add(self.id)
+        TextMsg.create("Aargh! These snakes are crazy!", self.game, time_in_secs=4)
 
     def _add_actors(self):
         # Add platforms (n_blocs, x, y, type)
