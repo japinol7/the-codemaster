@@ -126,6 +126,8 @@
         > Use the right keys on locked doors to unlock them.
         > Activate/deactivate an energy shield. 
           Only if the player has reach a certain level.
+        > Activate/deactivate magic NPC selector.
+        > Create lighning strikes that target an NPC.
         > Kill its current life by pressing the <b> key for a time.
 	> Player's ways of dying:
 	    > A player dies if all his lives are killed.
@@ -158,6 +160,12 @@
 	    > Recovery potion: power.
 	> Cartridges: 
 	    > They contain bullets. There is one cartridge type for each kind of bullet.
+	> Magic: 
+        > To be able to use it, you need a skill that will be activated
+          when you level up to level 2.
+	    > You can activate a magic selector to use magic on an NPC.
+	    > Magic spells:
+    	    > Lighning normal: A lightning strike targets the selected NPC.
 	> Apples: 
 	    > Eat them to recover a bit of health.
           There are three types of apples:
@@ -248,6 +256,7 @@
                home:          eat a health apple
                t:             try unlocking door using each key in your inventory
                h:             Switch energy shield (if you have level up enough)
+               m:             switch magic and magic NPC selector (via mouse clicks) 
                b:             hold b for a time to kill your current life
 			   p:    pause
 			 ESC: exit game

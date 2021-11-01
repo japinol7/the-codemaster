@@ -68,6 +68,10 @@ class ScoreBar:
             self.screen.blit(Resource.images['sb_level_completed'],
                              (Settings.score_pos_apples1[0] - 130, Settings.score_pos_apples_y - 6))
 
+        if self.game.is_magic_on:
+            self.screen.blit(Resource.images['sb_magic_activated'],
+                             (Settings.score_pos_apples1[0] + 410, Settings.score_pos_apples_y - 6))
+
         self.screen.blit(*Resource.txt_surfaces['sb_pc_level_title'])
 
         # Draw score stats and render them if needed

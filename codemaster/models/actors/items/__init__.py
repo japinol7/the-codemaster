@@ -55,6 +55,8 @@ from codemaster.models.actors.items.mines import (
     )
 from codemaster.models.actors.items.explosions import (
     ExplosionA,
+    ExplosionB,
+    ExplosionC,
     )
 from codemaster.models.actors.items.energy_shields import (
     EnergyShieldA,
@@ -63,8 +65,6 @@ from codemaster.models.actors.items.clocks import (
     ClockA,
     ClockTimerA,
     )
-from codemaster.models.actors.items.text_msgs import (
-    TextMsg,
-    TextMsgAbsolute,
-    TextMsgPlayer,
+from codemaster.models.actors.items.lighning import (
+    LightningA,
     )

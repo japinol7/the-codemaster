@@ -185,3 +185,27 @@ def draw_bar_graphic(surf, amount_pct, x, y, color_max=Color.GREEN,
                      (int(x), int(y)),
                      (int(x + bar_width), int(y)),
                      int(bar_up_line_height))
+
+
+def point_to_str(point):
+    return f"{point[0]};{point[1]}"
+
+
+def str_to_point(string):
+    return [int(v) for v in string.split(";")[:2]]
+
+
+def set_mask_alpha(surface, alpha_color):
+    return multiply_color_on_surface(surface, alpha_color)
+
+
+def multiply_color_on_surface(surface, color):
+    base_surface = surface.copy()
+    base_surface.fill(color)
+    new_surface = surface.copy()
+    new_surface.blit(base_surface, (0, 0), special_flags=pg.BLEND_RGBA_MULT)
+    return new_surface
+
+
+def get_chunk(point, chunk_size):
+    return [point[0] // chunk_size, point[1] // chunk_size]

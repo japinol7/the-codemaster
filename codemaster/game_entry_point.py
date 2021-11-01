@@ -33,9 +33,11 @@ from codemaster.config.constants import (
     FONT_DEFAULT_NAME, FONT_FIXED_DEFAULT_NAME
     )
 from codemaster.models.actors.player import Player, PL_SELF_DESTRUCTION_COUNT_DEF
-from codemaster.models.actors.items import TextMsg
+from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.actors import NPC
+from codemaster.models.actors.selectors import SelectorA
+
 
 START_LEVEL = 0   # First level: 0
 
@@ -63,6 +65,7 @@ class Game:
         self.start_time = None
         self.done = None
         self.player = None
+        self.players = None
         self.winner = None
         self.is_debug = is_debug
         self.level = None
@@ -83,6 +86,8 @@ class Game:
         self.clock_sprites = None
         self.text_msg_sprites = None
         self.text_msg_pc_sprites = None
+        self.magic_sprites = None
+        self.selector_sprites = None
         self.level_cheat = False
         self.level_cheat_to_no = False
         self.score_bars = None
@@ -97,6 +102,8 @@ class Game:
         self.screen_pause = None
         self.super_cheat = False
         self.screen_help = None
+        self.mouse_pos = (0, 0)
+        self.is_magic_on = False
 
         Game.is_exit_game = False
         if Game.current_game > 0:
@@ -168,6 +175,8 @@ class Game:
         self.clock_sprites = pg.sprite.Group()
         self.text_msg_sprites = pg.sprite.Group()
         self.text_msg_pc_sprites = pg.sprite.Group()
+        self.selector_sprites = pg.sprite.Group()
+        self.magic_sprites = pg.sprite.Group()
 
         # Initialize levels
         self.levels = []
@@ -195,6 +204,10 @@ class Game:
         self.player.rect.x = self.level.player_start_pos_left[0]
         self.player.rect.y = self.level.player_start_pos_left[1]
         self.active_sprites.add(self.player)
+
+        self.selector_sprites.add(
+            SelectorA(0, 0, self),
+            )
 
         # Start first level
         self.level.start_up()
@@ -318,6 +331,10 @@ class Game:
                     text_msg.draw_text()
                 for clock in self.clock_sprites:
                     clock.draw_text()
+                if self.is_magic_on:
+                    for selector in self.selector_sprites:
+                        selector.update()
+                    self.selector_sprites.draw(Game.screen)
 
         self.show_fps and pg.display.set_caption(f"{self.clock.get_fps():.2f}")
 
@@ -403,6 +420,8 @@ class Game:
                                 pg.mixer.music.pause()
                             else:
                                 pg.mixer.music.unpause()
+                        else:
+                            self.is_magic_on = not self.is_magic_on
                     elif event.key == pg.K_n:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
                             logger.info("NPCs health from all levels, ordered by NPC name:")
@@ -471,6 +490,12 @@ class Game:
                             self.K_b_keydown_seconds = 0
                     if event.key == pg.K_F5:
                         self.show_fps = not self.show_fps
+                elif event.type == pg.MOUSEBUTTONDOWN:
+                    if self.is_magic_on:
+                        self.mouse_pos = pg.mouse.get_pos()
+                        for selector in self.selector_sprites:
+                            selector.get_pointed_sprites()
+                self.mouse_pos = pg.mouse.get_pos()
 
             self.scroll_shift_control()
 

@@ -77,6 +77,18 @@ class Explosion(ActorItem):
         pass
 
 
+class ExplosionC(Explosion):
+    """Represents an explosion of type C."""
+
+    def __init__(self, x, y, game, name=None, is_from_player_shot=None, owner=None):
+        self.file_mid_prefix = 't1'
+        self.type = ActorType.EXPLOSION_C
+        super().__init__(x, y, game, name=name,
+                         is_from_player_shot=is_from_player_shot,
+                         owner=owner)
+        self.stats.power = self.stats.power_total = 220
+
+
 class ExplosionB(Explosion):
     """Represents an explosion of type B."""
 

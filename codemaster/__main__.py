@@ -26,6 +26,7 @@ def main():
     args = parser.parse_args()
 
     pg.init()
+    pg.mouse.set_visible(False)
     is_music_paused = False
     # Multiple games loop
     while not Game.is_exit_game:

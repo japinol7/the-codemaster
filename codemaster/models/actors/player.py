@@ -1,7 +1,6 @@
 """Module player."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-import logging
 from datetime import datetime
 from os import path
 from random import randint
@@ -11,7 +10,7 @@ import pygame as pg
 from codemaster.utils.colors import Color
 from codemaster.models.actors.items import bullets
 from codemaster.models.actors.items.bullets import Bullet
-from codemaster.config.settings import Settings
+from codemaster.config.settings import logger, Settings
 from codemaster.config.constants import (
     BITMAPS_FOLDER,
     BM_PC_PAC_FOLDER,
@@ -28,7 +27,8 @@ from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.items.platforms import MovingPlatform, SlidingBands
 from codemaster.models.actors.items.bullets import BULLET_MAX_QTY
 from codemaster.models.actors.actor_types import ActorType, ActorBaseType
-from codemaster.models.actors.items import EnergyShieldA, TextMsg
+from codemaster.models.actors.items import EnergyShieldA
+from codemaster.models.actors.text_msgs import TextMsg
 
 PL_X_SPEED = 6
 PL_JUMP_SPEED = 11
@@ -558,7 +558,7 @@ class Player(pg.sprite.Sprite):
         self.stats['level'] += 1
         if self.stats['level'] > 1:
             if not self.stats['energy_shields_stock']:
-                logging.debug("Create energy shield")
+                logger.debug("Create energy shield")
                 energy_shield = EnergyShieldA(self.rect.x, self.rect.y, self.game)
                 energy_shield.owner = self
                 self.stats['energy_shields_stock'].append(energy_shield)

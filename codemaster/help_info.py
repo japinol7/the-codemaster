@@ -21,6 +21,7 @@ class HelpInfo:
               '     \t eat health apple,  home\n'
               '   t: \t try unlocking door using each key in your inventory\n'
               '   h: \t switch energy field if available\n'
+              '   m: \t switch magic and magic NPC selector  (via mouse clicks)\n'
               '     \t left,   a, (or arrow)\n'
               '     \t right,  d, (or arrow)\n'
               '     \t jump,   w, (or arrow)\n'

@@ -36,8 +36,8 @@ from codemaster.models.actors.items import (
     MineLilac,
     PotionHealth,
     PotionPower,
-    TextMsg,
     )
+from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.levels.level_base import Level
 
 

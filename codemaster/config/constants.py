@@ -112,6 +112,9 @@ BM_POTIONS_FOLDER = os.path.join(BITMAPS_FOLDER, 'potions')
 BM_POTION_HEALTH_FOLDER = os.path.join(BM_POTIONS_FOLDER, 'health')
 BM_POTION_POWER_FOLDER = os.path.join(BM_POTIONS_FOLDER, 'power')
 BM_ENERGY_SHIELD_FOLDER = os.path.join(BITMAPS_FOLDER, 'energy_shields')
+BM_SELECTORS_FOLDER = os.path.join(BITMAPS_FOLDER, 'selectors')
+BM_SPECIAL_EFFECTS_FOLDER = os.path.join(BITMAPS_FOLDER, 'special_effects')
+BM_LIGHTS_FOLDER = os.path.join(BM_SPECIAL_EFFECTS_FOLDER, 'lights')
 BM_PCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'PCs')
 BM_PC_PAC_FOLDER = os.path.join(BM_PCS_FOLDER, 'Pac')
 BM_NPCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'NPCs')
@@ -121,6 +124,8 @@ BM_BATS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'bats')
 BM_SKULLS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'skulls')
 BM_GHOSTS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'ghosts')
 BM_LEVELS_FOLDER = os.path.join(BITMAPS_FOLDER, 'levels')
+BM_MAGIC_FOLDER = os.path.join(BITMAPS_FOLDER, 'magic')
+BM_MISC_FOLDER = os.path.join(BITMAPS_FOLDER, 'misc')
 
 INIT_OPTIONS_FOLDER = os.path.join(CURRENT_PATH, 'extra')
 INIT_OPTIONS_FILE = os.path.join(INIT_OPTIONS_FOLDER, 'init_options.cfg')
@@ -170,6 +175,9 @@ FILE_NAMES = {
     'im_clocks': ('clock', 'png'),
     'text_msgs': ('text_msg', 'png'),
     'im_energy_shields': ('energy_shield', 'png'),
+    'im_lightS': ('im_light', 'png'),
+    'im_selectors': ('im_selector', 'png'),
+    'im_lights': ('im_light', 'png'),
     'im_bg_start_game': ('bg_start_game', 'png'),
     'im_bg_start_game_vertical': ('bg_start_game_vert', 'png'),
     'im_background': ('background', 'png'),
@@ -184,6 +192,8 @@ FILE_NAMES = {
     'im_bg_blue_t2': ('bg_blue_t2', 'png'),
     'im_bg_black_t1': ('bg_black_t1', 'png'),
     'im_level_completed':  ('level_completed', 'png'),
+    'im_magic_activated':  ('magic_activated', 'png'),
+    'im_lightning':  ('lightning', 'png'),
     'snd_death_pl': ('death_pl_02',  SOUND_FORMAT),
     'snd_apple_hit': ('apple_found', SOUND_FORMAT),
     'snd_pl_battery_found': ('battery_found_j01', SOUND_FORMAT),

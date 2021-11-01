@@ -229,7 +229,12 @@ class Resource:
         img = pg.transform.smoothscale(img, Settings.score_pos_apples_size)
         img.set_colorkey(Color.BLACK)
         cls.images['sb_level_completed'] = img
-
+        img = pg.image.load(file_name_get(folder=consts.BM_MISC_FOLDER,
+                                          name='im_magic_activated',
+                                          quality='')).convert()
+        img = pg.transform.smoothscale(img, Settings.score_pos_apples_size)
+        img.set_colorkey(Color.BLACK)
+        cls.images['sb_magic_activated'] = img
         img = pg.image.load(file_name_get(folder=consts.BM_DOOR_KEYS_FOLDER,
                                           name='im_door_keys',
                                           num=2, subnum=1)).convert()
