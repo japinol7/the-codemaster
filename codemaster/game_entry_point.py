@@ -56,7 +56,7 @@ class Game:
     normal_screen_flags = None
     full_screen_flags = None
 
-    def __init__(self, is_debug=None, speed_pct=None):
+    def __init__(self, is_debug=None, speed_pct=None, has_selector_no_light=False):
         self.name = "The CodeMaster v 0.01"
         self.name_short = "The CodeMaster"
         self.name_long = "The CodeMaster. Nightmare on Bots' Island."
@@ -114,7 +114,7 @@ class Game:
             pg_display_info = pg.display.Info()
             Settings.display_start_width = pg_display_info.current_w
             Settings.display_start_height = pg_display_info.current_h
-            Settings.calculate_settings(speed_pct=speed_pct)
+            Settings.calculate_settings(speed_pct=speed_pct, has_selector_no_light=has_selector_no_light)
             # Set screen to the settings configuration
             Game.size = [Settings.screen_width, Settings.screen_height]
             Game.full_screen_flags = pg.FULLSCREEN | pg.DOUBLEBUF | pg.HWSURFACE
@@ -398,7 +398,14 @@ class Game:
                     elif event.key == pg.K_w:
                         self.player.jump()
                     elif event.key == pg.K_s:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
+                        if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
+                            if Settings.has_selector_no_light:
+                                logger.info("Activate light surrounding magic selector. This affects performance.")
+                                Settings.has_selector_no_light = False
+                            else:
+                                logger.info("Deactivate light surrounding magic selector. Improve performance.")
+                                Settings.has_selector_no_light = True
+                        elif pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.sound_effects = not self.sound_effects
                             self.player.sound_effects = self.sound_effects
                     elif event.key == pg.K_u:
@@ -446,7 +453,7 @@ class Game:
                         if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_RALT:
                             self.show_grid = not self.show_grid
                     elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
-                        if pg.key.get_mods() & pg.KMOD_ALT:
+                        if pg.key.get_mods() & pg.KMOD_LALT and pg.key.get_mods() & pg.KMOD_RALT:
                             self.is_paused = True
                             self.is_full_screen_switch = True
                     elif event.key == pg.K_KP_DIVIDE:

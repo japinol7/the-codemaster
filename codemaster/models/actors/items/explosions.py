@@ -86,7 +86,7 @@ class ExplosionC(Explosion):
         super().__init__(x, y, game, name=name,
                          is_from_player_shot=is_from_player_shot,
                          owner=owner)
-        self.stats.power = self.stats.power_total = 220
+        self.stats.power = self.stats.power_total = 190
 
 
 class ExplosionB(Explosion):
@@ -111,3 +111,39 @@ class ExplosionA(Explosion):
                          is_from_player_shot=is_from_player_shot,
                          owner=owner)
         self.stats.power = self.stats.power_total = 500
+
+
+class ExplosionMagicC2(Explosion):
+    """Represents an explosion of type C2."""
+
+    def __init__(self, x, y, game, name=None, is_from_player_shot=None, owner=None):
+        self.file_mid_prefix = 't4'
+        self.type = ActorType.EXPLOSION_MAGIC_C2
+        super().__init__(x, y, game, name=name,
+                         is_from_player_shot=is_from_player_shot,
+                         owner=owner)
+        self.stats.power = self.stats.power_total = 200
+
+
+class ExplosionMagicC3(Explosion):
+    """Represents an explosion of type C3."""
+
+    def __init__(self, x, y, game, name=None, is_from_player_shot=None, owner=None):
+        self.file_mid_prefix = 't3'
+        self.type = ActorType.EXPLOSION_MAGIC_C3
+        super().__init__(x, y, game, name=name,
+                         is_from_player_shot=is_from_player_shot,
+                         owner=owner)
+        self.stats.power = self.stats.power_total = 215
+
+
+class ExplosionMagicC4(Explosion):
+    """Represents an explosion of type C4."""
+
+    def __init__(self, x, y, game, name=None, is_from_player_shot=None, owner=None):
+        self.file_mid_prefix = 't2'
+        self.type = ActorType.EXPLOSION_MAGIC_C4
+        super().__init__(x, y, game, name=name,
+                         is_from_player_shot=is_from_player_shot,
+                         owner=owner)
+        self.stats.power = self.stats.power_total = 230

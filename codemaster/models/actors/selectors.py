@@ -13,8 +13,9 @@ from codemaster.models.stats import Stats
 from codemaster.utils.colors import Color
 from codemaster.models.special_effects.light import Light, LightGrid
 from codemaster.config.settings import logger
-from codemaster.models.actors.items import LightningA
+from codemaster.models.actors.items import LightningBoltA
 from codemaster import resources
+from codemaster.config.settings import Settings
 
 
 class Selector(ActorItem):
@@ -31,22 +32,25 @@ class Selector(ActorItem):
         self.stats.power = self.stats.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
         self.light_grid = None
-        self.light_color = None
+        self.light_color = Color.GREEN
 
         super().__init__(x, y, game, name=name)
 
         self._create_light()
 
     def _create_light(self):
-        self.light_color = Color.GREEN
         self.light_grid = LightGrid(self.game.screen.get_size())
         self.light_grid.add_light(
-            Light((0, 0), radius=30, color=self.light_color, alpha=255),
+            Light((0, 0), radius=18, color=self.light_color, alpha=255),
             )
 
     def update_after_inc_index_hook(self):
         mx, my = self.game.mouse_pos
         self.rect.centerx, self.rect.centery = mx, my
+
+        if Settings.has_selector_no_light:
+            return
+
         for light in self.light_grid.lights.values():
             light.set_color(self.light_color, override_alpha=True)
             light.position = (mx, my)
@@ -70,15 +74,15 @@ class Selector(ActorItem):
         if self.game.player.stats['level'] < 2:
             return hit_list
 
-        if self.game.player.stats['power'] < LightningA.power_min_to_use[ActorType.LIGHTNING_A.name]:
+        if self.game.player.stats['power'] < LightningBoltA.power_min_to_use[ActorType.LIGHTNING_BOLT_A.name]:
             self.game.sound_effects and resources.Resource.weapon_empty_sound.play()
             return hit_list
 
         snake_body_hit_list = pg.sprite.spritecollide(self, self.game.level.snakes_body_pieces, False)
         for sprite in snake_body_hit_list:
-            self.game.player.stats['power'] -= LightningA.power_consumption[ActorType.LIGHTNING_A.name]
-            lightning = LightningA(sprite.rect.centerx, sprite.rect.y, self.game,
-                                   is_from_player_shot=True, owner=self.game.player, target=sprite.snake)
+            self.game.player.stats['power'] -= LightningBoltA.power_consumption[ActorType.LIGHTNING_BOLT_A.name]
+            lightning = LightningBoltA(sprite.rect.centerx, sprite.rect.y, self.game,
+                                       is_from_player_shot=True, owner=self.game.player, target=sprite.snake)
             hit_list.append(lightning)
             self.game.magic_sprites.add(lightning)
             self.game.active_sprites.add(lightning)
@@ -89,9 +93,9 @@ class Selector(ActorItem):
 
         hit_list = pg.sprite.spritecollide(self, self.game.level.npcs, False)
         for sprite in hit_list:
-            self.game.player.stats['power'] -= LightningA.power_consumption[ActorType.LIGHTNING_A.name]
-            lightning = LightningA(sprite.rect.centerx, sprite.rect.y, self.game,
-                                   is_from_player_shot=True, owner=self.game.player, target=sprite)
+            self.game.player.stats['power'] -= LightningBoltA.power_consumption[ActorType.LIGHTNING_BOLT_A.name]
+            lightning = LightningBoltA(sprite.rect.centerx, sprite.rect.y, self.game,
+                                       is_from_player_shot=True, owner=self.game.player, target=sprite)
             self.game.magic_sprites.add(lightning)
             self.game.active_sprites.add(lightning)
             break

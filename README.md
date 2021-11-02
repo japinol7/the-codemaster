@@ -152,6 +152,8 @@
 			> Health potions: Stock of health potions in your inventory.
 			> Power potions: Stock of power potions in your inventory.
 			> Door keys: Stock of door keys in your inventory.
+			> A green hat indicates that the magic mode is on.
+              		  You can select a target when you level up to level 2.
 	> Batteries: 
 	    > They represent radioactive waste due to cheap nuclear industrialization an weaponry.
           Radioactive batteries are the main thing that connects this game to the original Pac's Revenge game.
@@ -262,7 +264,8 @@
 			 ESC: exit game
 			  ^m:    pause/resume music
 			  ^s:    sound effects on/off
-			  Alt + Enter: change full screen / normal screen mode
+              Ctrl + Shift + s: Switch light surrounding magic selector for performance reasons
+              L_Alt + R_Alt + Enter: change full screen / windowed screen mode
 			  L_Ctrl + R_Alt + g: grid on/off
 			  ^h:    shows this help to the console
 
@@ -285,6 +288,8 @@
 	
 	optional arguments:
 	  -h, --help            show this help message and exit
+	  -s, 			--selectornolight
+                            Deactivate light surrounding magic selector for performance reasons
 	  -d, 			--debug
 	                        debug actions, information and traces
 	  -t, 			--debugtraces
@@ -293,8 +298,9 @@
 
 **Default optional arguments**
 
-		debug   		False
-		debugtraces		False
+	selectornolight 	False
+	debug   		    False
+	debugtraces		    False
 
 
 **Examples of usage**
@@ -302,6 +308,9 @@
 	If The Codemaster has not been installed as an app:
 		$ python -m codemaster
 
+
+    If for performance reasons, you want to start the game without light surrounding the magic selector: 
+		$ python -m codemaster -s
 
 **To make The CodeMaster work**
 

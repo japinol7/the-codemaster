@@ -1,4 +1,4 @@
-"""Module lightning."""
+"""Module lightning bolts."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 import pygame as pg
@@ -6,18 +6,18 @@ import pygame as pg
 from codemaster.config.constants import BM_MAGIC_FOLDER
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorItem
-from codemaster.models.actors.items.explosions import ExplosionC
+from codemaster.models.actors.items.explosions import ExplosionMagicC2
 from codemaster.models.stats import Stats
 from codemaster.config.settings import Settings
 
 
-class Lightning(ActorItem):
-    """Represents a lightning.
+class LightningBolt(ActorItem):
+    """Represents a lightning bolt.
     It is not intended to be instantiated.
     """
-    power_min_to_use = {ActorType.LIGHTNING_A.name: 30,
+    power_min_to_use = {ActorType.LIGHTNING_BOLT_A.name: 30,
                         }
-    power_consumption = {ActorType.LIGHTNING_A.name: 20,
+    power_consumption = {ActorType.LIGHTNING_BOLT_A.name: 20,
                          }
 
     def __init__(self, x, y, game, name=None, is_from_player_shot=None, owner=None, target=None):
@@ -79,13 +79,13 @@ class Lightning(ActorItem):
         self.target.rect.y -= self.collision_delta_y
 
 
-class LightningA(Lightning):
-    """Represents a lightning of type A."""
+class LightningBoltA(LightningBolt):
+    """Represents a lightning bolt of type A."""
 
     def __init__(self, x, y, game, name=None, is_from_player_shot=None, owner=None, target=None):
-        self.explosion_class = ExplosionC
+        self.explosion_class = ExplosionMagicC2
         self.file_mid_prefix = '01'
-        self.type = ActorType.LIGHTNING_A
+        self.type = ActorType.LIGHTNING_BOLT_A
         super().__init__(x, y, game, name=name,
                          is_from_player_shot=is_from_player_shot,
                          owner=owner, target=target)

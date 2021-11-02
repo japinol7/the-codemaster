@@ -57,6 +57,9 @@ from codemaster.models.actors.items.explosions import (
     ExplosionA,
     ExplosionB,
     ExplosionC,
+    ExplosionMagicC2,
+    ExplosionMagicC3,
+    ExplosionMagicC4,
     )
 from codemaster.models.actors.items.energy_shields import (
     EnergyShieldA,
@@ -65,6 +68,6 @@ from codemaster.models.actors.items.clocks import (
     ClockA,
     ClockTimerA,
     )
-from codemaster.models.actors.items.lighning import (
-    LightningA,
+from codemaster.models.actors.items.lighning_bolts import (
+    LightningBoltA,
     )

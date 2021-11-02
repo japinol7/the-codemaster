@@ -113,6 +113,9 @@ class ActorType(Enum):
     EXPLOSION_A = 5051
     EXPLOSION_B = 5052
     EXPLOSION_C = 5053
+    EXPLOSION_MAGIC_C2 = 5054
+    EXPLOSION_MAGIC_C3 = 5055
+    EXPLOSION_MAGIC_C4 = 5056
     # Energy shields
     ENERGY_SHIELD_A = 5211
     # Clocks
@@ -124,7 +127,7 @@ class ActorType(Enum):
     # Text Selectors
     SELECTOR_A = 5401
     # Magics
-    LIGHTNING_A = 5501
+    LIGHTNING_BOLT_A = 5501
     # Skulls
     SKULL_GREEN = 1201
     SKULL_BLUE = 1202
