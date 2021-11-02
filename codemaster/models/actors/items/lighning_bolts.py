@@ -35,9 +35,9 @@ class LightningBolt(ActorItem):
         self.stats.strength = self.stats.strength_total = 1
         self.animation_speed = 0.4
         self.collision_delta_y = 24
-        super().__init__(x, -10, game, name=name)
+        super().__init__(x, -144, game, name=name)
 
-        self.change_y = 10
+        self.change_y = 12
         self.player.sound_effects and self.player.explosion_sound.play()
 
     def explosion(self):
