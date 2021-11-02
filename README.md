@@ -288,8 +288,6 @@
 	
 	optional arguments:
 	  -h, --help            show this help message and exit
-	  -s, 			--selectornolight
-                            Deactivate light surrounding magic selector for performance reasons
 	  -d, 			--debug
 	                        debug actions, information and traces
 	  -t, 			--debugtraces
@@ -308,9 +306,6 @@
 	If The Codemaster has not been installed as an app:
 		$ python -m codemaster
 
-
-    If for performance reasons, you want to start the game without light surrounding the magic selector: 
-		$ python -m codemaster -s
 
 **To make The CodeMaster work**
 

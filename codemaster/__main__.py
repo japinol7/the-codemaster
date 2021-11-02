@@ -19,8 +19,6 @@ def main():
     parser = ArgumentParser(description="The CodeMaster. Nightmare on Bots' Island.",
                             prog="codemaster",
                             usage="%(prog)s [-h] [-d] [-t]")
-    parser.add_argument('-s', '--selectornolight', default=None, action='store_true',
-                        help='Deactivate light surrounding magic selector for performance reasons')
     parser.add_argument('-d', '--debug', default=None, action='store_true',
                         help='Debug actions, information and traces')
     parser.add_argument('-t', '--debugtraces', default=None, action='store_true',
@@ -33,7 +31,7 @@ def main():
     # Multiple games loop
     while not Game.is_exit_game:
         try:
-            game = Game(is_debug=args.debug, has_selector_no_light=args.selectornolight)
+            game = Game(is_debug=args.debug)
             game.is_music_paused = is_music_paused
             screen_start_game = screens.StartGame(game)
             while game.is_start_screen:

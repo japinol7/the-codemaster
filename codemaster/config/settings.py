@@ -150,9 +150,8 @@ class Settings:
         cls.help_key_size = utils.Size(w=218, h=57)
 
     @classmethod
-    def calculate_settings(cls, full_screen=None, speed_pct=None, has_selector_no_light=False):
+    def calculate_settings(cls, full_screen=None, speed_pct=None):
         cls.clean()
-        cls.has_selector_no_light = has_selector_no_light
         # Define screen values to resize the screen and images if necessary
         cls.screen_width_adjusted = int(cls.screen_height * cls.screen_aspect_ratio)
         cls.screen_height_adjusted = cls.screen_height
