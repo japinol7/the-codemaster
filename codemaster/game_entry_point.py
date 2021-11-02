@@ -117,8 +117,8 @@ class Game:
             Settings.calculate_settings(speed_pct=speed_pct, has_selector_no_light=has_selector_no_light)
             # Set screen to the settings configuration
             Game.size = [Settings.screen_width, Settings.screen_height]
-            Game.full_screen_flags = pg.FULLSCREEN | pg.DOUBLEBUF | pg.HWSURFACE
-            Game.normal_screen_flags = pg.DOUBLEBUF | pg.HWSURFACE
+            Game.full_screen_flags = pg.FULLSCREEN | pg.DOUBLEBUF | pg.HWSURFACE | pg.SCALED
+            Game.normal_screen_flags = pg.DOUBLEBUF | pg.HWSURFACE | pg.SCALED
             if Settings.is_full_screen:
                 Game.screen_flags = Game.full_screen_flags
             else:
