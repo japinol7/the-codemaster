@@ -6,6 +6,7 @@ from codemaster.models.actors.items.platforms import Platform
 from codemaster.models.actors.items.bullets import Bullet
 from codemaster.models.actors.npcs.snakes import SnakeBodyPiece
 from codemaster.models.clocks import ClockBase
+from codemaster.models.special_effects.light import Light
 
 
 def clean_entity_ids():
@@ -14,3 +15,4 @@ def clean_entity_ids():
     Platform.type_id_count.clear()
     Bullet.type_id_count.clear()
     ClockBase.type_id_count.clear()
+    Light.type_id_count.clear()
