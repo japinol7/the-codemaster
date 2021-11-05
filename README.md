@@ -115,8 +115,14 @@
 	> Player level up: 
 	    > You can level up by gaining experience points.
 	    > When you level up you improve your skills:
-            > Currently, you just get the energize shield capability
-              when you level up to level 2.
+            > Currently, you just get skills when you level up to level 2.
+              That is what you get:
+                > Energy Shield A
+                > Vortex of Doom B spell, in slot 1.
+                > Vortex of Doom A spell, in slot 2.
+                > Lightning Bolt A spell, in slot 3.
+                > Doom Bolt B spell, in slot 4.
+                > Doom Bolt A spell, in slot 5.
             > In the future, your stats will be level-up-friendly and we will add more skills.
 	> Player actions:
 	    > Eat an apple from your stock.
