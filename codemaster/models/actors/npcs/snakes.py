@@ -242,7 +242,7 @@ class SnakeGreen(Snake):
         self.direction_stability = 46
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 5
-        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 1.1
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 1.4
         self.stats.health = self.stats.health_total = self.stats.strength
 
         super().__init__(x, y, game, name, change_x=change_x, change_y=change_y,
@@ -265,7 +265,7 @@ class SnakeBlue(Snake):
         self.direction_stability = 40
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 10
-        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 1.5
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 5
         self.stats.health = self.stats.health_total = self.stats.strength
 
         super().__init__(x, y, game, name, change_x=change_x, change_y=change_y,
@@ -288,7 +288,7 @@ class SnakeYellow(Snake):
         self.direction_stability = 32
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 5
-        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 18
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 17
         self.stats.health = self.stats.health_total = self.stats.strength
 
         super().__init__(x, y, game, name, change_x=change_x, change_y=change_y,
@@ -311,7 +311,7 @@ class SnakeRed(Snake):
         self.direction_stability = 30
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 16
-        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 19
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 18
         self.stats.health = self.stats.health_total = self.stats.strength
 
         super().__init__(x, y, game, name, change_x=change_x, change_y=change_y,

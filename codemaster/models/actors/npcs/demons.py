@@ -42,7 +42,7 @@ class DemonMale(Demon):
 
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 10
-        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 21
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 20
         self.stats.health = self.stats.health_total = self.stats.strength
 
         super().__init__(x, y, game, name=name,

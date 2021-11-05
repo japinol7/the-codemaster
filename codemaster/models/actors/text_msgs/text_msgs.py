@@ -5,7 +5,7 @@ from enum import Enum
 
 import pygame as pg
 
-from codemaster.config.constants import BM_TEXT_MSGS_FOLDER
+from codemaster.config.constants import BM_TEXT_MSGS_FOLDER, MSG_PC_DURATION
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorMsg
 from codemaster.models.stats import Stats
@@ -72,7 +72,7 @@ class TextMsg(ActorMsg):
                      width=1)
 
     @staticmethod
-    def create(text, game, time_in_secs=2, msg_class=None, x=None, y=None, color=None):
+    def create(text, game, time_in_secs=MSG_PC_DURATION, msg_class=None, x=None, y=None, color=None):
         class_ = msg_class or TextMsgPlayer
         text_msg = class_(
                x or game.player.rect.x,

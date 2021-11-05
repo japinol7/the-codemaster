@@ -62,7 +62,7 @@ class Explosion(ActorItem):
             for pc in players_hit_list:
                 if pc.direction == DIRECTION_RIP or pc.invulnerable:
                     continue
-                logger.debug(f"{pc.id} hit by {self.id}, npc_health: {str(round(pc.stats['health'], 2))}, "
+                logger.debug(f"{pc.id} hit by {self.id}, pc_health: {str(round(pc.stats['health'], 2))}, "
                              f"explosion_power: {str(self.stats.power)}")
                 pc.stats['health'] -= self.stats.power
                 if pc.stats['health'] <= 0:

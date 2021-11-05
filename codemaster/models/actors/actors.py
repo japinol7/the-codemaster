@@ -56,6 +56,7 @@ class Actor(pg.sprite.Sprite):
         self.player = game.player
         self.last_shot_time = 0
         self.time_between_shots_base = 1200
+        self.target_of_spells_count = Counter()
 
         if not getattr(self, 'base_type', None):
             self.base_type = ActorBaseType.NONE
@@ -310,6 +311,23 @@ class ActorItem(Actor):
     def __init__(self, x, y, game, name=None):
         super().__init__(x, y, game, name=name)
         self.base_type = ActorBaseType.ITEM
+
+    def draw_health(self):
+        pass
+
+
+class ActorMagic(Actor):
+    """Represents a magic actor.
+    It is not intended to be instantiated.
+    """
+    def __init__(self, x, y, game, name=None):
+        super().__init__(x, y, game, name=name)
+        self.base_type = ActorBaseType.MAGIC
+
+    def kill_hook(self):
+        self.target.target_of_spells_count[self.__class__.__name__] -= 1
+        self.game.level.spells_on_level_count[self.__class__.__base__.__name__] -= 1
+        self.kill()
 
     def draw_health(self):
         pass

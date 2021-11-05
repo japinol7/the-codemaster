@@ -95,7 +95,7 @@ class DebugInfo:
             print(debug_info)
 
     def super_cheat_superhero(self):
-        self.player.stats['score'] = 3600 if self.player.stats['score'] < 3600 else self.player.stats['score']
+        self.player.stats['score'] = 3700 if self.player.stats['score'] < 3700 else self.player.stats['score']
         self.player.stats['lives'] = 20
         self.player.stats['health'] = 100
         self.player.stats['power'] = 100

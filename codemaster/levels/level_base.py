@@ -1,8 +1,10 @@
 """Module base level."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-import pygame as pg
+from collections import Counter
 from os import path
+
+import pygame as pg
 
 from codemaster.config.constants import (
     FILE_NAMES, BM_BACKGROUNDS_FOLDER,
@@ -49,8 +51,13 @@ class Level:
         self.doors = pg.sprite.Group()
         self.normal_items = pg.sprite.Group()
         self.explosions = pg.sprite.Group()
+        self.magic_sprites = pg.sprite.Group()
+        self.particle_tuple_sprites = pg.sprite.Group()
+        self.particle_sprites = pg.sprite.Group()
         self.snakes = pg.sprite.Group()
         self.snakes_body_pieces = pg.sprite.Group()
+
+        self.spells_on_level_count = Counter()
 
         self.game.level = self
 
@@ -101,7 +108,8 @@ class Level:
 
     def update(self):
         self.all_sprites.update()
-        
+        self.magic_sprites.update()
+
     def draw(self):
         self.game.screen.blit(self.background, (self.world_shift // 3, self.world_shift_top))
         self.all_sprites.draw(self.game.screen)
@@ -117,8 +125,17 @@ class Level:
 
         for sprite in self.game.text_msg_sprites:
             sprite.rect.x += shift_x
-        for sprite in self.game.magic_sprites:
+        for sprite in self.magic_sprites:
             sprite.rect.x += shift_x
+
+        for sprite in self.particle_tuple_sprites:
+            for particle in sprite.particles.values():
+                particle[0][0] += shift_x
+
+        for sprite in self.particle_sprites:
+            for particle in sprite.particles:
+                particle.position[0] += shift_x
+
 
     def shift_world_top(self, shift_y):
         self.world_shift_top += shift_y
@@ -127,8 +144,16 @@ class Level:
 
         for sprite in self.game.text_msg_sprites:
             sprite.rect.y += shift_y
-        for sprite in self.game.magic_sprites:
+        for sprite in self.magic_sprites:
             sprite.rect.y += shift_y
+
+        for sprite in self.particle_tuple_sprites:
+            for particle in sprite.particles.values():
+                particle[0][1] += shift_y
+
+        for sprite in self.particle_sprites:
+            for particle in sprite.particles:
+                particle.position[1] += shift_y
 
     def update_pc_enter_level(self):
         self.player.stats['levels_visited'].add(self.id)
@@ -168,6 +193,8 @@ class Level:
                 self.doors.add(actor)
             elif actor.category_type == ActorCategoryType.EXPLOSION:
                 self.explosions.add(actor)
+            elif actor.category_type == ActorCategoryType.CLOCK:
+                self.clocks.add(actor)
             elif actor.category_type == ActorCategoryType.SNAKE:
                 self.npcs.add(actor)
                 self.snakes.add(actor)

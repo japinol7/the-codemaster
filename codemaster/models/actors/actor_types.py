@@ -126,8 +126,12 @@ class ActorType(Enum):
     TEXT_MSG_PLAYER = 5302
     # Text Selectors
     SELECTOR_A = 5401
-    # Magics
-    LIGHTNING_BOLT_A = 5501
+    # Magic Spells
+    DOOM_BOLT_A = 5501
+    DOOM_BOLT_B = 5502
+    LIGHTNING_BOLT_A = 5503
+    VORTEX_OF_DOOM_A = 5504
+    VORTEX_OF_DOOM_B = 5505
     # Skulls
     SKULL_GREEN = 1201
     SKULL_BLUE = 1202

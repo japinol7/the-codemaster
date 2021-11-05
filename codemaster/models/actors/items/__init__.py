@@ -68,6 +68,3 @@ from codemaster.models.actors.items.clocks import (
     ClockA,
     ClockTimerA,
     )
-from codemaster.models.actors.items.lighning_bolts import (
-    LightningBoltA,
-    )

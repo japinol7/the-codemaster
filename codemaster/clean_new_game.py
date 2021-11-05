@@ -7,6 +7,7 @@ from codemaster.models.actors.items.bullets import Bullet
 from codemaster.models.actors.npcs.snakes import SnakeBodyPiece
 from codemaster.models.clocks import ClockBase
 from codemaster.models.special_effects.light import Light
+from codemaster.models.special_effects.vortex import Vortex
 
 
 def clean_entity_ids():
@@ -16,3 +17,4 @@ def clean_entity_ids():
     Bullet.type_id_count.clear()
     ClockBase.type_id_count.clear()
     Light.type_id_count.clear()
+    Vortex.type_id_count.clear()

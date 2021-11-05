@@ -187,6 +187,42 @@ def draw_bar_graphic(surf, amount_pct, x, y, color_max=Color.GREEN,
                      int(bar_up_line_height))
 
 
+def create_circle_surface(radius, color):
+    surface = pg.Surface((radius * 2, radius * 2))
+    pg.draw.circle(surface, color, (radius, radius), radius)
+    surface.set_colorkey(Color.BLACK)
+    return surface
+
+
+def create_circle_in_surface(surface, color, center, radius):
+    circle_surface = pg.Surface((radius * 2, radius * 2))
+    pg.draw.circle(circle_surface, color, (radius, radius), radius)
+    surface.blit(circle_surface, center)
+
+
+def create_circle_surface_cached(radius, color, surface_renders):
+    radius_rounded = int(radius)
+    color_hash = hash(color)
+    if surface_renders.get((radius_rounded, color_hash)):
+        return surface_renders[(radius_rounded, color_hash)]
+
+    surface = pg.Surface((radius * 2, radius * 2))
+    pg.draw.circle(surface, color, (radius, radius), radius)
+    surface.set_colorkey(Color.BLACK)
+    surface_renders[(radius_rounded, color_hash)] = surface
+    return surface
+
+
+def create_circle_in_surface_cached(surface, color, position, radius, surface_renders):
+    circle_surface = create_circle_surface_cached(radius, color, surface_renders)
+    surface.blit(circle_surface, position)
+
+
+def draw_circle(surface, color, center, radius):
+    pg.draw.circle(surface, color, center, radius)
+    return surface
+
+
 def point_to_str(point):
     return f"{point[0]};{point[1]}"
 

@@ -23,6 +23,7 @@
 <img src="screenshots/screenshot1.jpg" width="980"> <br />
 <img src="screenshots/screenshot2.jpg" width="980"> <br />
 <img src="screenshots/screenshot3.jpg" width="980"> <br />
+<img src="screenshots/screenshot4.jpg" width="980"> <br />
 
 
 
@@ -126,8 +127,13 @@
         > Use the right keys on locked doors to unlock them.
         > Activate/deactivate an energy shield. 
           Only if the player has reach a certain level.
-        > Activate/deactivate magic NPC selector.
-        > Create lighning strikes that target an NPC.
+        > Activate/deactivate magic NPC selector (pressing m).
+        > Choose current magic attack  (pressing 1, 2, 3, 4, 5, etc)
+            > Choose 0 to have no spell ready.
+        > Cast spells that target an NPC:
+            > Vortex of Doom. 
+            > Lighning Bolts.
+            > Doom Bolts.
         > Kill its current life by pressing the <b> key for a time.
 	> Player's ways of dying:
 	    > A player dies if all his lives are killed.
@@ -167,7 +173,14 @@
           when you level up to level 2.
 	    > You can activate a magic selector to use magic on an NPC.
 	    > Magic spells:
-    	    > Lighning normal: A lightning strike targets the selected NPC.
+    	    1. Vortex of Doom B: A Vortex of Doom that targets the selected NPC.
+    	    2. Vortex of Doom A: A more powerful Vortex of Doom spell.
+    	    3. Lightning Bolt A: A lightning bolt that targets the selected NPC.
+    	    4. Doom Bolt B: A doom bolt that targets the selected NPC.
+    	    5. Doom Bolt A: A more powerful Doom Bolt spell.
+	    > There are limits of spells casted than depend on the type of spell:
+    	    > You can have only N active spells of one kind on a target.
+    	    > You can have only N active spells of one base kind on a level.
 	> Apples: 
 	    > Eat them to recover a bit of health.
           There are three types of apples:
@@ -230,7 +243,7 @@
 	        > Black bats: They deal great damage.
 	> Ghosts:
 	    > Cannot be killed/hit with normal weapons.
-          At this time there is no weapon on the game that can damage them; so, don't bother to try.
+          Only Dark magic spells can damage them, i.e, Vortex of Doom and Doom Bolts.
 	> Snakes:
 	    > They bite you whenever you are too close to them.
 	    > Their body also gives you damage but much less than their head.
@@ -253,18 +266,21 @@
 			   i        5:    fire a medium shot
 			   j        1:    fire a strong shot
 			   k        2:    fire a heavy shot
-               insert:        drink a health potion
-               delete:        drink a power potion
-               home:          eat a health apple
                t:             try unlocking door using each key in your inventory
                h:             Switch energy shield (if you have level up enough)
                m:             switch magic and magic NPC selector (via mouse clicks) 
+              1-5:            choose between numbered magic attack spells. You have to acquire them
+                                ex:  Vortex of Doom A, Lightning bolt A...
+               0:             no current spell selected
+           L_mouse_button:    cast current spell  (if magic is on and the PC has enough level)
+               insert:        drink a health potion
+               delete:        drink a power potion
+               home:          eat a health apple
                b:             hold b for a time to kill your current life
 			   p:    pause
 			 ESC: exit game
 			  ^m:    pause/resume music
-			  ^s:    sound effects on/off
-              Ctrl + Shift + s: Switch light surrounding magic selector for performance reasons
+ 			  ^s:    sound effects on/off
               L_Alt + R_Alt + Enter: change full screen / windowed screen mode
 			  L_Ctrl + R_Alt + g: grid on/off
 			  ^h:    shows this help to the console

@@ -32,50 +32,6 @@ class Ghost(NPC):
         pass
 
 
-class GhostBlue(Ghost):
-    """Represents a blue ghost."""
-
-    def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
-                 border_left=0, border_right=0,
-                 border_top=0, border_down=0,
-                 items_to_drop=None):
-        self.file_mid_prefix = '06'
-        self.type = ActorType.GHOST_BLUE
-
-        self.stats = Stats()
-        self.stats.power = self.stats.power_total = 1
-        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 1.1
-        self.stats.health = self.stats.health_total = self.stats.strength
-
-        super().__init__(x, y, game, name=name,
-                         change_x=change_x, change_y=change_y,
-                         border_left=border_left, border_right=border_right,
-                         border_top=border_top, border_down=border_down,
-                         items_to_drop=items_to_drop)
-
-
-class GhostYellow(Ghost):
-    """Represents a yellow ghost."""
-
-    def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
-                 border_left=0, border_right=0,
-                 border_top=0, border_down=0,
-                 items_to_drop=None):
-        self.file_mid_prefix = '07'
-        self.type = ActorType.GHOST_YELLOW
-
-        self.stats = Stats()
-        self.stats.power = self.stats.power_total = 1
-        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 1.1
-        self.stats.health = self.stats.health_total = self.stats.strength
-
-        super().__init__(x, y, game, name=name,
-                         change_x=change_x, change_y=change_y,
-                         border_left=border_left, border_right=border_right,
-                         border_top=border_top, border_down=border_down,
-                         items_to_drop=items_to_drop)
-
-
 class GhostGreen(Ghost):
     """Represents a green ghost."""
 
@@ -98,6 +54,50 @@ class GhostGreen(Ghost):
                          items_to_drop=items_to_drop)
 
 
+class GhostBlue(Ghost):
+    """Represents a blue ghost."""
+
+    def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
+                 border_left=0, border_right=0,
+                 border_top=0, border_down=0,
+                 items_to_drop=None):
+        self.file_mid_prefix = '06'
+        self.type = ActorType.GHOST_BLUE
+
+        self.stats = Stats()
+        self.stats.power = self.stats.power_total = 1
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 1.2
+        self.stats.health = self.stats.health_total = self.stats.strength
+
+        super().__init__(x, y, game, name=name,
+                         change_x=change_x, change_y=change_y,
+                         border_left=border_left, border_right=border_right,
+                         border_top=border_top, border_down=border_down,
+                         items_to_drop=items_to_drop)
+
+
+class GhostYellow(Ghost):
+    """Represents a yellow ghost."""
+
+    def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
+                 border_left=0, border_right=0,
+                 border_top=0, border_down=0,
+                 items_to_drop=None):
+        self.file_mid_prefix = '07'
+        self.type = ActorType.GHOST_YELLOW
+
+        self.stats = Stats()
+        self.stats.power = self.stats.power_total = 1
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 2
+        self.stats.health = self.stats.health_total = self.stats.strength
+
+        super().__init__(x, y, game, name=name,
+                         change_x=change_x, change_y=change_y,
+                         border_left=border_left, border_right=border_right,
+                         border_top=border_top, border_down=border_down,
+                         items_to_drop=items_to_drop)
+
+
 class GhostRed(Ghost):
     """Represents a red ghost."""
 
@@ -110,7 +110,7 @@ class GhostRed(Ghost):
 
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 1
-        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 1.1
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 5
         self.stats.health = self.stats.health_total = self.stats.strength
 
         super().__init__(x, y, game, name=name,

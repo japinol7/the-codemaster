@@ -86,7 +86,6 @@ class Game:
         self.clock_sprites = None
         self.text_msg_sprites = None
         self.text_msg_pc_sprites = None
-        self.magic_sprites = None
         self.selector_sprites = None
         self.level_cheat = False
         self.level_cheat_to_no = False
@@ -176,7 +175,6 @@ class Game:
         self.text_msg_sprites = pg.sprite.Group()
         self.text_msg_pc_sprites = pg.sprite.Group()
         self.selector_sprites = pg.sprite.Group()
-        self.magic_sprites = pg.sprite.Group()
 
         # Initialize levels
         self.levels = []
@@ -331,10 +329,18 @@ class Game:
                     text_msg.draw_text()
                 for clock in self.clock_sprites:
                     clock.draw_text()
+
+                for sprite in self.level.particle_tuple_sprites:
+                    sprite.update_particle_sprites()
+                for sprite in self.level.particle_sprites:
+                    sprite.update_particle_sprites()
+
                 if self.is_magic_on:
                     for selector in self.selector_sprites:
                         selector.update()
                     self.selector_sprites.draw(Game.screen)
+
+                self.level.magic_sprites.draw(Game.screen)
 
         self.show_fps and pg.display.set_caption(f"{self.clock.get_fps():.2f}")
 
@@ -413,6 +419,18 @@ class Game:
                         self.player.shot_bullet(bullet_type=BulletType.T3_PHOTONIC)
                     elif event.key == pg.K_k:
                         self.player.shot_bullet(bullet_type=BulletType.T4_NEUTRONIC)
+                    elif event.key == pg.K_1:
+                        self.player.choose_spell(1)
+                    elif event.key == pg.K_2:
+                        self.player.choose_spell(2)
+                    elif event.key == pg.K_3:
+                        self.player.choose_spell(3)
+                    elif event.key == pg.K_4:
+                        self.player.choose_spell(4)
+                    elif event.key == pg.K_5:
+                        self.player.choose_spell(5)
+                    elif event.key == pg.K_0:
+                        self.player.choose_spell(0)
                     elif event.key == pg.K_m:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.is_music_paused = not self.is_music_paused

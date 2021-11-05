@@ -21,6 +21,7 @@ from codemaster.config.constants import (
     DIRECTION_RIP,
     NEAR_BOTTOM,
     MSG_PC_DURATION,
+    MSG_PC_DUR_SHORT,
     )
 from codemaster import resources
 from codemaster.models.experience_points import ExperiencePoints
@@ -29,6 +30,13 @@ from codemaster.models.actors.items.bullets import BULLET_MAX_QTY
 from codemaster.models.actors.actor_types import ActorType, ActorBaseType
 from codemaster.models.actors.items import EnergyShieldA
 from codemaster.models.actors.text_msgs import TextMsg
+from codemaster.models.actors.spells import (
+    VortexOfDoomB,
+    VortexOfDoomA,
+    LightningBoltA,
+    DoomBoltB,
+    DoomBoltA,
+    )
 
 PL_X_SPEED = 6
 PL_JUMP_SPEED = 11
@@ -96,6 +104,7 @@ class Player(pg.sprite.Sprite):
             'power': PL_POWER_DEFAULT,
             'health': PL_HEALTH_DEFAULT,
             'speed': PL_SPEED_DEFAULT,
+            'magic_attack': None,
             'batteries': 0,
             'files_disks': 0,
             'files_disks_type': {'D': 0, 'C': 0, 'B': 0, 'A': 0},
@@ -130,6 +139,7 @@ class Player(pg.sprite.Sprite):
             ActorType.DOOR_KEY_YELLOW.name: 0,
             ActorType.DOOR_KEY_RED.name: 0,
             'energy_shields_stock': [],
+            'magic_attack_spells': {},
             'mines': 0,
             'mines_t01': 0,
             'mines_t02': 0,
@@ -562,6 +572,38 @@ class Player(pg.sprite.Sprite):
                 energy_shield = EnergyShieldA(self.rect.x, self.rect.y, self.game)
                 energy_shield.owner = self
                 self.stats['energy_shields_stock'].append(energy_shield)
+                logger.info(f"You have acquired an {energy_shield.type.name}.")
+
+                self.stats['magic_attack_spells'].update({'1': VortexOfDoomB})
+                self.stats['magic_attack'] = VortexOfDoomB
+                logger.info("You have acquired a Vortex of Doom B spell.")
+
+                self.stats['magic_attack_spells'].update({'2': VortexOfDoomA})
+                self.stats['magic_attack'] = VortexOfDoomA
+                logger.info("You have acquired a Vortex of Doom A spell.")
+
+                self.stats['magic_attack_spells'].update({'3': LightningBoltA})
+                self.stats['magic_attack'] = LightningBoltA
+                logger.info("You have acquired a Lightning Bolt A spell.")
+
+                self.stats['magic_attack_spells'].update({'4': DoomBoltB})
+                self.stats['magic_attack'] = DoomBoltB
+                logger.info("You have acquired a Doom Bolt B spell.")
+
+                self.stats['magic_attack_spells'].update({'5': DoomBoltA})
+                self.stats['magic_attack'] = DoomBoltA
+                logger.info("You have acquired a Doom Bolt A spell.")
+
+                TextMsg.create("You have acquired the following skills:\n"
+                               f"> Energy Shield A\n"
+                               "You have acquired the following spells:\n"
+                               "1. Vortex of Doom B\n"
+                               "2. Vortex of Doom A\n"
+                               "3. Lightning Bolt A\n"
+                               "4. Doom Bolt B\n"
+                               "5. Doom Bolt A\n"
+                               "\n!! Do not forget that 'm' switch \n  the magic mode."
+                               , self.game, time_in_secs=6)
 
     def switch_energy_shield(self):
         if self.direction == DIRECTION_RIP:
@@ -592,3 +634,17 @@ class Player(pg.sprite.Sprite):
                     self.stats[door_key.type.name] -= 1
                     door_key.use_key_in_door(door_key.door)
                     break
+
+    def choose_spell(self, slot_number):
+        if not slot_number:
+            self.stats['magic_attack'] = None
+            TextMsg.create("Set to NO spell.\n",
+                           self.game, time_in_secs=MSG_PC_DUR_SHORT)
+            return
+
+        if self.stats['magic_attack_spells'].get(str(slot_number)):
+            self.stats['magic_attack'] = self.stats['magic_attack_spells'][str(slot_number)]
+            TextMsg.create(f"{self.stats['magic_attack'].__name__}\n",
+                           self.game, time_in_secs=MSG_PC_DUR_SHORT)
+        else:
+            TextMsg.create("You've got NO spell in this slot.\n", self.game, time_in_secs=MSG_PC_DUR_SHORT)

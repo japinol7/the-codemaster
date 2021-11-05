@@ -43,6 +43,7 @@ FACE_DIRECTION = DIRECTION_RIGHT
 DIRECTION_RIP = 5    # Special direction to use when a player character is dead
 
 MSG_PC_DURATION = 3  # in secs
+MSG_PC_DUR_SHORT = 2
 
 DOOR_STD_WIDTH = 130
 DOOR_STD_HEIGHT = 188
@@ -193,7 +194,9 @@ FILE_NAMES = {
     'im_bg_black_t1': ('bg_black_t1', 'png'),
     'im_level_completed':  ('level_completed', 'png'),
     'im_magic_activated':  ('magic_activated', 'png'),
-    'im_lightning':  ('lightning', 'png'),
+    'im_lightning_bolt':  ('lightning_bolt', 'png'),
+    'im_doom_bolt':  ('doom_bolt', 'png'),
+    'im_vortex_of_doom': ('vortex_of_doom', 'png'),
     'snd_death_pl': ('death_pl_02',  SOUND_FORMAT),
     'snd_apple_hit': ('apple_found', SOUND_FORMAT),
     'snd_pl_battery_found': ('battery_found_j01', SOUND_FORMAT),

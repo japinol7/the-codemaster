@@ -13,7 +13,6 @@ from codemaster.models.stats import Stats
 from codemaster.utils.colors import Color
 from codemaster.models.special_effects.light import Light, LightGrid
 from codemaster.config.settings import logger
-from codemaster.models.actors.items import LightningBoltA
 from codemaster import resources
 from codemaster.config.settings import Settings
 
@@ -91,21 +90,27 @@ class Selector(ActorItem):
         if not self.game.is_magic_on:
             return hit_list
 
-        if self.game.player.stats['level'] < 2:
+        if not self.game.player.stats['magic_attack']:
             return hit_list
 
-        if self.game.player.stats['power'] < LightningBoltA.power_min_to_use[ActorType.LIGHTNING_BOLT_A.name]:
+        magic_attack_cls = self.player.stats['magic_attack']
+        if self.game.player.stats['power'] < magic_attack_cls.power_min_to_use[magic_attack_cls.actor_type.name]:
             self.game.sound_effects and resources.Resource.weapon_empty_sound.play()
             return hit_list
 
         snake_body_hit_list = pg.sprite.spritecollide(self, self.game.level.snakes_body_pieces, False)
         for sprite in snake_body_hit_list:
-            self.game.player.stats['power'] -= LightningBoltA.power_consumption[ActorType.LIGHTNING_BOLT_A.name]
-            lightning = LightningBoltA(sprite.rect.centerx, sprite.rect.y, self.game,
-                                       is_from_player_shot=True, owner=self.game.player, target=sprite.snake)
-            hit_list.append(lightning)
-            self.game.magic_sprites.add(lightning)
-            self.game.active_sprites.add(lightning)
+            if sprite.snake.target_of_spells_count[magic_attack_cls.__name__] >= magic_attack_cls.max_spells_on_target:
+                continue
+            self.game.player.stats['power'] -= magic_attack_cls.power_consumption[magic_attack_cls.actor_type.name]
+            magic_attack = magic_attack_cls(
+                        sprite.rect.centerx, sprite.rect.y, self.game,
+                        is_from_player_shot=True, owner=self.game.player,
+                        target=sprite.snake)
+            hit_list.append(magic_attack)
+            self.game.level.magic_sprites.add(magic_attack)
+            sprite.snake.target_of_spells_count[magic_attack_cls.__name__] += 1
+
             break
 
         if snake_body_hit_list:
@@ -113,11 +118,20 @@ class Selector(ActorItem):
 
         hit_list = pg.sprite.spritecollide(self, self.game.level.npcs, False)
         for sprite in hit_list:
-            self.game.player.stats['power'] -= LightningBoltA.power_consumption[ActorType.LIGHTNING_BOLT_A.name]
-            lightning = LightningBoltA(sprite.rect.centerx, sprite.rect.y, self.game,
-                                       is_from_player_shot=True, owner=self.game.player, target=sprite)
-            self.game.magic_sprites.add(lightning)
-            self.game.active_sprites.add(lightning)
+            if sprite.target_of_spells_count[magic_attack_cls.__name__] >= magic_attack_cls.max_spells_on_target:
+                continue
+
+            if self.game.level.spells_on_level_count[magic_attack_cls.__base__.__name__] >= magic_attack_cls.max_spells_on_level:
+                continue
+
+            self.game.player.stats['power'] -= magic_attack_cls.power_consumption[magic_attack_cls.actor_type.name]
+            magic_attack = magic_attack_cls(
+                        sprite.rect.centerx, sprite.rect.y, self.game,
+                        is_from_player_shot=True, owner=self.game.player,
+                        target=sprite)
+            self.game.level.magic_sprites.add(magic_attack)
+            sprite.target_of_spells_count[magic_attack_cls.__name__] += 1
+            self.game.level.spells_on_level_count[magic_attack_cls.__base__.__name__] += 1
             break
 
         return hit_list
