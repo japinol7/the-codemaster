@@ -335,7 +335,5 @@
 	Do this:
 	    1. Clone this repository in your local system.
 	    2. Go to its folder in your system.
-	    3. $ python -m codemaster
-
-     If you need to install the pygame dependency just do it this way. Try:
-	    $ pip install pygame
+	    3. $ pip install -r requirements.txt
+	    4. $ python -m codemaster
