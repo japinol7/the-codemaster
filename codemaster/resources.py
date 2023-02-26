@@ -58,7 +58,12 @@ class Resource:
 
     @classmethod
     def load_sound_resources(cls):
-        cls.apple_hit_sound = pg.mixer.Sound(file_name_get(name='snd_apple_hit', folder=consts.SOUNDS_FOLDER))
+        try:
+            cls.apple_hit_sound = pg.mixer.Sound(file_name_get(name='snd_apple_hit', folder=consts.SOUNDS_FOLDER))
+        except Exception as e:
+            raise Exception(f"{e} SDL Error. Probably no sound device found. "
+                            f"Connect your headphones and it should work")
+
         cls.bat_hit_sound = pg.mixer.Sound(file_name_get(name='snd_bat_hit', folder=consts.SOUNDS_FOLDER))
         cls.bat_scream_sound = pg.mixer.Sound(file_name_get(name='snd_bat_scream', folder=consts.SOUNDS_FOLDER))
         cls.bullet_t1_sound = pg.mixer.Sound(file_name_get(name='snd_bullet_t1', folder=consts.SOUNDS_FOLDER))
