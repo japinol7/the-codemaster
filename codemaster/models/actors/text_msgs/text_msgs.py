@@ -10,9 +10,9 @@ from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorMsg
 from codemaster.models.stats import Stats
 from codemaster.models.clocks import ClockTimer
-from codemaster.utils.colors import Color
-from codemaster.utils import utils_graphics as libg_jp
-from codemaster.config.settings import logger
+from codemaster.tools.utils.colors import Color
+from codemaster.tools.utils import utils_graphics as libg_jp
+from codemaster.tools.logger.logger import log
 
 
 class TextMsgPosition(Enum):
@@ -54,7 +54,7 @@ class TextMsg(ActorMsg):
         pass
 
     def die_hard(self):
-        logger.debug(f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
+        log.debug(f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
         self.kill()
 
     def draw_speech_balloon(self):

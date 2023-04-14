@@ -1,0 +1,103 @@
+No datetime | INFO | Start app codemaster version: 0.0.2
+No datetime | INFO | App arguments: -d -t -m -n -l
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Set logger level to: Debug
+No datetime | DEBUG | TEXT_MSG_PLAYER_00001 killed when TIMER_00001 ticked 0 secs.
+No datetime | INFO | All batteries and disks from level 1 recovered.
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | You have acquired an ENERGY_SHIELD_A.
+No datetime | INFO | You have acquired a Vortex of Doom B spell.
+No datetime | INFO | You have acquired a Vortex of Doom A spell.
+No datetime | INFO | You have acquired a Lightning Bolt A spell.
+No datetime | INFO | You have acquired a Doom Bolt B spell.
+No datetime | INFO | You have acquired a Doom Bolt A spell.
+No datetime | DEBUG | MINE_CYAN_00001 hit by T2_LASER2_0000001_from_player, health: 1, bullet_power: 7.0
+No datetime | DEBUG | MINE_CYAN_00001, !!! Dead by bullet T2_LASER2_0000001_from_player !!!
+No datetime | DEBUG | SKULL_YELLOW_00001 hit by T2_LASER2_0000002_from_player, health: 70, bullet_power: 7.0
+No datetime | DEBUG | SKULL_BLUE_00001 hit by T2_LASER2_0000003_from_player, health: 38.5, bullet_power: 7.0
+No datetime | DEBUG | TEXT_MSG_PLAYER_00002 killed when TIMER_00002 ticked 0 secs.
+No datetime | DEBUG | SKULL_YELLOW_00001 hit by T3_PHOTONIC_0000001_from_player, health: 63.0, bullet_power: 20
+No datetime | DEBUG | SKULL_YELLOW_00001 hit by T4_NEUTRONIC_0000001_from_player, health: 43.0, bullet_power: 40
+No datetime | DEBUG | SKULL_YELLOW_00001 hit by T1_LASER1_0000001_from_player, health: 3.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00001, !!! Dead by bullet T1_LASER1_0000001_from_player !!!
+No datetime | DEBUG | SKULL_BLUE_00001 hit by T2_LASER2_0000004_from_player, health: 31.5, bullet_power: 7.0
+No datetime | DEBUG | SKULL_BLUE_00001 hit by T3_PHOTONIC_0000002_from_player, health: 24.5, bullet_power: 20
+No datetime | DEBUG | SKULL_BLUE_00001 hit by T4_NEUTRONIC_0000002_from_player, health: 4.5, bullet_power: 40
+No datetime | DEBUG | SKULL_BLUE_00001, !!! Dead by bullet T4_NEUTRONIC_0000002_from_player !!!
+No datetime | DEBUG | SKULL_RED_00001 hit by T2_LASER2_0000005_from_player, health: 105, bullet_power: 7.0
+No datetime | DEBUG | MINE_CYAN_00003 hit by T2_LASER2_0000006_from_player, health: 1, bullet_power: 7.0
+No datetime | DEBUG | MINE_CYAN_00003, !!! Dead by bullet T2_LASER2_0000006_from_player !!!
+No datetime | DEBUG | SKULL_RED_00001 hit by EXPLOSION_B_00005, npc_health: 98.0, explosion_power: 300
+No datetime | DEBUG | SKULL_RED_00001, !!! Dead by EXPLOSION_B_00005 !!!
+No datetime | DEBUG | SKULL_YELLOW_00003 hit by EXPLOSION_B_00005, npc_health: 70, explosion_power: 300
+No datetime | DEBUG | SKULL_YELLOW_00003, !!! Dead by EXPLOSION_B_00005 !!!
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_DEMON_MALE_00002, pc_health: 56.0, bullet_power: 7.0
+No datetime | DEBUG | DEMON_MALE_00002 hit by EXPLOSION_B_00007, npc_health: 700, explosion_power: 300
+No datetime | DEBUG | DEMON_MALE_00002 hit by EXPLOSION_B_00008, npc_health: 400, explosion_power: 300
+No datetime | DEBUG | DEMON_MALE_00002 hit by EXPLOSION_B_00009, npc_health: 100, explosion_power: 300
+No datetime | DEBUG | DEMON_MALE_00002, !!! Dead by EXPLOSION_B_00009 !!!
+No datetime | DEBUG | DEMON_MALE_00001 hit by EXPLOSION_B_00011, npc_health: 700, explosion_power: 300
+No datetime | DEBUG | DEMON_MALE_00001 hit by EXPLOSION_B_00012, npc_health: 400, explosion_power: 300
+No datetime | DEBUG | DEMON_MALE_00001 hit by EXPLOSION_B_00013, npc_health: 100, explosion_power: 300
+No datetime | DEBUG | DEMON_MALE_00001, !!! Dead by EXPLOSION_B_00013 !!!
+No datetime | DEBUG | TEXT_MSG_PLAYER_00003 killed when TIMER_00004 ticked 0 secs.
+No datetime | DEBUG | TEXT_MSG_PLAYER_00004 killed when TIMER_00005 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: PLATFORM_A_0000108 in pos: (864, 370)
+No datetime | DEBUG | Mouse sprites: PLATFORM_A_0000109 in pos: (934, 370)
+No datetime | DEBUG | Mouse sprites: GHOST_BLUE_00001 in pos: (978, 370)
+No datetime | DEBUG | Mouse sprites: GHOST_BLUE_00001 in pos: (984, 385)
+No datetime | DEBUG | TEXT_MSG_PLAYER_00005 killed when TIMER_00006 ticked 0 secs.
+No datetime | DEBUG | GHOST_BLUE_00001 hit by DOOM_BOLT_B_00001, npc_health: 42.0, doom_bolt_partial_power: 22.0
+No datetime | DEBUG | GHOST_BLUE_00001 hit by DOOM_BOLT_B_00001, npc_health: 20.0, doom_bolt_partial_power: 22.0
+No datetime | DEBUG | DOOM_BOLT_B_00001 killed when TIMER_00008 ticked 6 secs.
+No datetime | DEBUG | GHOST_BLUE_00001 hit by DOOM_BOLT_B_00001, npc_health: -2.0, doom_bolt_partial_power: 66.0
+No datetime | DEBUG | GHOST_BLUE_00001, !!! Dead by DOOM_BOLT_B_00001 !!!
+No datetime | DEBUG | CLOCK_TIMER_A_00001 killed when TIMER_00003 ticked 0 secs.
+No datetime | DEBUG | TEXT_MSG_PLAYER_00006 killed when TIMER_00010 ticked 0 secs.
+No datetime | INFO | All batteries and disks from level 2 recovered.
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_DEMON_MALE_00003, pc_health: 25.0, bullet_power: 7.0
+No datetime | DEBUG | SKULL_YELLOW_00005 hit by T1_LASER1_0000004_from_player, health: 70, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00005 hit by T2_LASER2_0000008_from_player, health: 65, bullet_power: 7.0
+No datetime | DEBUG | SKULL_YELLOW_00005 hit by T1_LASER1_0000005_from_player, health: 58.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T2_LASER2_0000011_from_player, health: 70, bullet_power: 7.0
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T1_LASER1_0000007_from_player, health: 63.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T2_LASER2_0000012_from_player, health: 58.0, bullet_power: 7.0
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | SKULL_YELLOW_00005 hit by T2_LASER2_0000013_from_player, health: 53.0, bullet_power: 7.0
+No datetime | DEBUG | SKULL_YELLOW_00005 hit by T1_LASER1_0000010_from_player, health: 46.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00005 hit by T2_LASER2_0000014_from_player, health: 41.0, bullet_power: 7.0
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T1_LASER1_0000012_from_player, health: 51.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00005 hit by T3_PHOTONIC_0000004_from_player, health: 34.0, bullet_power: 20
+No datetime | DEBUG | SKULL_YELLOW_00005 hit by T4_NEUTRONIC_0000003_from_player, health: 14.0, bullet_power: 40
+No datetime | DEBUG | SKULL_YELLOW_00005, !!! Dead by bullet T4_NEUTRONIC_0000003_from_player !!!
+No datetime | DEBUG | SKULL_BLUE_00002 hit by T3_PHOTONIC_0000005_from_player, health: 38.5, bullet_power: 20
+No datetime | DEBUG | SKULL_BLUE_00002 hit by T4_NEUTRONIC_0000004_from_player, health: 18.5, bullet_power: 40
+No datetime | DEBUG | SKULL_BLUE_00002, !!! Dead by bullet T4_NEUTRONIC_0000004_from_player !!!
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T1_LASER1_0000013_from_player, health: 46.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T2_LASER2_0000016_from_player, health: 41.0, bullet_power: 7.0
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T1_LASER1_0000014_from_player, health: 34.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T1_LASER1_0000015_from_player, health: 29.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T2_LASER2_0000018_from_player, health: 24.0, bullet_power: 7.0
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T1_LASER1_0000016_from_player, health: 17.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T2_LASER2_0000019_from_player, health: 12.0, bullet_power: 7.0
+No datetime | DEBUG | SKULL_YELLOW_00006 hit by T1_LASER1_0000017_from_player, health: 5.0, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00006, !!! Dead by bullet T1_LASER1_0000017_from_player !!!
+No datetime | DEBUG | TEXT_MSG_PLAYER_00007 killed when TIMER_00011 ticked 1 secs.
+No datetime | DEBUG | player hit by T3_PHOTONIC_0000001_from_DEMON_MALE_00003, pc_health: 100, bullet_power: 20
+No datetime | DEBUG | player hit by T2_LASER2_0000003_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 80, bullet_power: 7.0
+No datetime | DEBUG | player hit by T2_LASER2_0000004_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 73.0, bullet_power: 7.0
+No datetime | DEBUG | player hit by T2_LASER2_0000005_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 66.0, bullet_power: 7.0
+No datetime | DEBUG | player hit by T2_LASER2_0000006_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 59.0, bullet_power: 7.0
+No datetime | DEBUG | player hit by T2_LASER2_0000007_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 52.0, bullet_power: 7.0
+No datetime | DEBUG | player hit by T3_PHOTONIC_0000001_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 45.0, bullet_power: 20
+No datetime | DEBUG | player hit by T2_LASER2_0000008_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 100, bullet_power: 7.0
+No datetime | DEBUG | player hit by T2_LASER2_0000009_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 93.0, bullet_power: 7.0
+No datetime | INFO | All batteries and disks from level 3 recovered.
+No datetime | DEBUG | player hit by T1_LASER1_0000001_from_TERMINATOR_EYE_GREEN_00001, pc_health: 86.0, bullet_power: 5
+No datetime | DEBUG | player hit by T1_LASER1_0000002_from_TERMINATOR_EYE_GREEN_00001, pc_health: 81.0, bullet_power: 5
+No datetime | DEBUG | player hit by T1_LASER1_0000003_from_TERMINATOR_EYE_GREEN_00001, pc_health: 76.0, bullet_power: 5
+No datetime | DEBUG | player hit by T1_LASER1_0000004_from_TERMINATOR_EYE_GREEN_00001, pc_health: 71.0, bullet_power: 5
+No datetime | DEBUG | TEXT_MSG_PLAYER_00008 killed when TIMER_00012 ticked 2 secs.
+No datetime | DEBUG | player hit by T2_LASER2_0000010_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 100, bullet_power: 7.0
+No datetime | DEBUG | player hit by T2_LASER2_0000011_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 93.0, bullet_power: 7.0
+No datetime | INFO | End app codemaster

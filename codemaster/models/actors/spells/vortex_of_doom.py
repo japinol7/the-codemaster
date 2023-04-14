@@ -7,14 +7,14 @@ import random
 import pygame as pg
 
 from codemaster.config.constants import BM_MAGIC_FOLDER
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorMagic
 from codemaster.models.clocks import ClockTimer
 from codemaster.models.special_effects.vortex import Vortex, VortexDrawMethod
 from codemaster.models.stats import Stats
-from codemaster.config.settings import logger
+from codemaster.tools.logger.logger import log
 
 
 class VortexOfDoom(ActorMagic):
@@ -65,8 +65,8 @@ class VortexOfDoom(ActorMagic):
         super().kill_hook()
 
     def update_target_health(self, divider):
-        logger.debug(f"{self.target.id} hit by {self.id}, npc_health: {str(round(self.target.stats.health, 2))}, "
-                     f"vortex_partial_power: {str(self.stats.power / divider)}")
+        log.debug(f"{self.target.id} hit by {self.id}, npc_health: {str(round(self.target.stats.health, 2))}, "
+                  f"vortex_partial_power: {str(self.stats.power / divider)}")
         self.target.stats.health -= self.stats.power / divider
         self.stats.power -= self.stats.power / divider
 
@@ -84,13 +84,13 @@ class VortexOfDoom(ActorMagic):
         self.update_target_health(divider=4)
 
     def die_hard(self):
-        logger.debug(f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
-        logger.debug(f"{self.target.id} hit by {self.id}, npc_health: {str(round(self.target.stats.health, 2))}, "
-                     f"vortex_partial_power: {str(self.stats.power)}")
+        log.debug(f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
+        log.debug(f"{self.target.id} hit by {self.id}, npc_health: {str(round(self.target.stats.health, 2))}, "
+                  f"vortex_partial_power: {str(self.stats.power)}")
         self.target.stats.health -= self.stats.power
         if self.target.stats.health <= 0:
             npc = self.target
-            logger.debug(f"{npc.id}, !!! Dead by {self.id} !!!")
+            log.debug(f"{npc.id}, !!! Dead by {self.id} !!!")
             if self.is_a_player_shot:
                 self.game.player.stats['score'] += ExperiencePoints.xp_points[npc.type.name]
             npc.drop_items()
@@ -107,7 +107,7 @@ class VortexOfDoom(ActorMagic):
         """
 
         if not self.target.alive():
-            logger.debug(f"{self.id} killed because target {self.target.id} is not alive.")
+            log.debug(f"{self.id} killed because target {self.target.id} is not alive.")
             self.kill_hook()
 
         if self.target:

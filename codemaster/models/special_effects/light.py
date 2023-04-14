@@ -7,9 +7,9 @@ import random
 
 import pygame as pg
 
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster.config.constants import BM_LIGHTS_FOLDER
-from codemaster.utils import utils_graphics as libg_jp
+from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.models.actors.actors import Actor
 
 

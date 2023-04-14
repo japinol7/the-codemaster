@@ -7,10 +7,11 @@ from random import randint
 
 import pygame as pg
 
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster.models.actors.items import bullets
 from codemaster.models.actors.items.bullets import Bullet
-from codemaster.config.settings import logger, Settings
+from codemaster.tools.logger.logger import log
+from codemaster.config.settings import Settings
 from codemaster.config.constants import (
     BITMAPS_FOLDER,
     BM_PC_PAC_FOLDER,
@@ -568,31 +569,31 @@ class Player(pg.sprite.Sprite):
         self.stats['level'] += 1
         if self.stats['level'] > 1:
             if not self.stats['energy_shields_stock']:
-                logger.debug("Create energy shield")
+                log.debug("Create energy shield")
                 energy_shield = EnergyShieldA(self.rect.x, self.rect.y, self.game)
                 energy_shield.owner = self
                 self.stats['energy_shields_stock'].append(energy_shield)
-                logger.info(f"You have acquired an {energy_shield.type.name}.")
+                log.info(f"You have acquired an {energy_shield.type.name}.")
 
                 self.stats['magic_attack_spells'].update({'1': VortexOfDoomB})
                 self.stats['magic_attack'] = VortexOfDoomB
-                logger.info("You have acquired a Vortex of Doom B spell.")
+                log.info("You have acquired a Vortex of Doom B spell.")
 
                 self.stats['magic_attack_spells'].update({'2': VortexOfDoomA})
                 self.stats['magic_attack'] = VortexOfDoomA
-                logger.info("You have acquired a Vortex of Doom A spell.")
+                log.info("You have acquired a Vortex of Doom A spell.")
 
                 self.stats['magic_attack_spells'].update({'3': LightningBoltA})
                 self.stats['magic_attack'] = LightningBoltA
-                logger.info("You have acquired a Lightning Bolt A spell.")
+                log.info("You have acquired a Lightning Bolt A spell.")
 
                 self.stats['magic_attack_spells'].update({'4': DoomBoltB})
                 self.stats['magic_attack'] = DoomBoltB
-                logger.info("You have acquired a Doom Bolt B spell.")
+                log.info("You have acquired a Doom Bolt B spell.")
 
                 self.stats['magic_attack_spells'].update({'5': DoomBoltA})
                 self.stats['magic_attack'] = DoomBoltA
-                logger.info("You have acquired a Doom Bolt A spell.")
+                log.info("You have acquired a Doom Bolt A spell.")
 
                 TextMsg.create("You have acquired the following skills:\n"
                                f"> Energy Shield A\n"

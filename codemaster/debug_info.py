@@ -4,8 +4,9 @@ __author__ = 'Joan A. Pinol  (japinol)'
 from datetime import datetime
 from collections import OrderedDict
 
-from codemaster.utils.utils import pretty_dict_to_string, write_list_to_file
-from codemaster.config.constants import LOG_FILE, MUSIC_BOX, DIRECTION_RIGHT
+from codemaster.tools.logger.logger import log
+from codemaster.tools.utils.utils import pretty_dict_to_string, write_list_to_file
+from codemaster.config.constants import MUSIC_BOX, DIRECTION_RIGHT
 from codemaster.models.actors.items.bullets import BULLET_MAX_QTY
 from codemaster.levels import Level
 
@@ -15,7 +16,6 @@ class DebugInfo:
     def __init__(self, player, game):
         self.player = player
         self.game = game
-        write_list_to_file(LOG_FILE, [], open_method='w')
 
     def print_help_keys(self):
         print('  ^ numpad_divide: \t interactive debug output\n'
@@ -90,7 +90,7 @@ class DebugInfo:
         debug_info = f"{debug_info}{pretty_dict_to_string(debug_dict, with_last_new_line=True)}" \
                      f"{'-' * (36 + len(debug_info_title) + 36)}\n"
         if to_log_file:
-            write_list_to_file(LOG_FILE, [debug_info], open_method='a')
+            log.info(debug_info)
         else:
             print(debug_info)
 

@@ -6,7 +6,7 @@ from codemaster.config.constants import (
     DOOR_POSITION_L,
     DOOR_POSITION_R,
     )
-from codemaster.utils.colors import ColorName
+from codemaster.tools.utils.colors import ColorName
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorItem, Actor
 from codemaster.models.stats import Stats

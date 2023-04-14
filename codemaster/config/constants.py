@@ -1,8 +1,11 @@
 """Module constants."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+from datetime import datetime
 import os
 import sys
+
+from codemaster.version import version
 
 SCREEN_WIDTH = 1160
 SCREEN_HEIGHT = 778
@@ -66,8 +69,14 @@ MAX_BATS_ON_BOARD = 7
 MAX_DIVIDER_APPLES_ON_BOARD = 186
 MAX_DIVIDER_MINES_ON_BOARD = 130
 
+APP_NAME = 'codemaster'
+LOG_START_APP_MSG = f"Start app {APP_NAME} version: {version.get_version()}"
+LOG_END_APP_MSG = f"End app {APP_NAME}"
 
-LOG_FILE = os.path.join('files', 'log.txt')
+LOG_FILE = os.path.join('logs', f"log_{datetime.now().strftime('%Y-%m-%d_%H_%M_%S_%f')}.log")
+LOG_FILE_UNIQUE = os.path.join('logs', "log.log")
+SYS_STDOUT = sys.stdout
+
 SCORES_FILE = os.path.join('files', 'scores.txt')
 
 SOUND_FORMAT = 'ogg'

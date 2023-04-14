@@ -10,7 +10,7 @@ from codemaster.config.constants import (
     FILE_NAMES, BM_BACKGROUNDS_FOLDER,
     DOOR_POSITION_L,
     )
-from codemaster.config.settings import logger
+from codemaster.tools.logger.logger import log
 from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryType
 from codemaster.clean_new_game import clean_entity_ids
 from codemaster.models.actors.actors import MovingActor
@@ -167,7 +167,7 @@ class Level:
                 if actor.border_right:
                     actor.border_right -= self.world_shift
 
-            logger.debug(f"Add actor {actor.category_type} to level {self}")
+            log.debug(f"Add actor {actor.category_type} to level {self}")
             if actor.category_type == ActorCategoryType.NPC:
                 self.npcs.add(actor)
             elif actor.category_type == ActorCategoryType.BATTERY:

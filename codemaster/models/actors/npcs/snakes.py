@@ -12,7 +12,7 @@ import codemaster.config.constants as consts
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorBaseType, ActorType
 from codemaster.models.actors.actors import NPC, Actor, NPC_STRENGTH_BASE
 from codemaster.models.stats import Stats
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster import resources
 
 SNAKE_BODY_MAPPING = {

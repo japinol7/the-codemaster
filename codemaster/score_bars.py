@@ -1,8 +1,8 @@
 """Module score_bars."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from codemaster.utils.colors import Color
-from codemaster.utils import utils_graphics as libg_jp
+from codemaster.tools.utils.colors import Color
+from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.resources import Resource
 from codemaster.config.settings import Settings
 from codemaster.models.actors.actor_types import ActorType

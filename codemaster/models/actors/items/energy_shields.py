@@ -13,7 +13,6 @@ from codemaster.config.constants import (
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import Actor, ActorItem
 from codemaster.models.stats import Stats
-from codemaster.utils.colors import Color
 
 
 class EnergyShield(ActorItem):

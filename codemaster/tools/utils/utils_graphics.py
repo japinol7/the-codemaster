@@ -5,7 +5,7 @@ import os
 
 import pygame as pg
 
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster.config import constants as consts
 from codemaster.config.settings import Settings
 
@@ -245,3 +245,10 @@ def multiply_color_on_surface(surface, color):
 
 def get_chunk(point, chunk_size):
     return [point[0] // chunk_size, point[1] // chunk_size]
+
+
+def draw_grid(screen, cell_size, screen_width, screen_height, screen_near_top, color):
+    for x in range(0, screen_width, cell_size):
+        pg.draw.line(screen, color, (x, screen_near_top), (x, screen_height))
+    for y in range(screen_near_top, screen_height, cell_size):
+        pg.draw.line(screen, color, (0, y), (screen_width, y))

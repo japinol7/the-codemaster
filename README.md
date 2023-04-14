@@ -3,7 +3,7 @@
 	The CodeMaster is a spin-off sci-fi mystery based on 1988 RPG platformer game Pac's Revenge.
 	program: The CodeMaster. Nightmare on Bots' Island.
     name as a package: codemaster 
-	version: 0.0.1
+	version: 0.0.2
 	language: English
 	author: Joan A. Pinol
 	author_nickname: japinol
@@ -14,6 +14,7 @@
 	requirements: pygame
 	Python requires: 3.8 or greater.
 	Python versions tested: 
+        > 3.10.10 64bits under Windows 11
         > 3.9.12 64bits under Windows 11
         > 3.8.5  64bits under Windows 10
         > 3.8.5  under Ubuntu 20.04
@@ -307,10 +308,16 @@
 
 ## Usage
 
-	codemaster [-h] [-d] [-t]
+	codemaster [-h] [-l] [-m] [-n] [-d] [-t]
 	
 	optional arguments:
 	  -h, --help            show this help message and exit
+	  -l, 			--multiplelogfiles
+	                        A log file by app execution, instead of one unique log file.
+	  -m, 			--stdoutlog
+	                        Print logs to the console along with writing them to the log file.
+	  -n, 			--nologdatetime
+	                        Logs will not print a datetime.
 	  -d, 			--debug
 	                        debug actions, information and traces
 	  -t, 			--debugtraces
@@ -319,7 +326,9 @@
 
 **Default optional arguments**
 
-	selectornolight 	False
+	multiplelogfiles    False
+	stdoutlog           False
+	nologdatetime       False
 	debug   		    False
 	debugtraces		    False
 

@@ -10,9 +10,9 @@ from codemaster.config.constants import BM_SELECTORS_FOLDER, DIRECTION_RIP
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorItem
 from codemaster.models.stats import Stats
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster.models.special_effects.light import Light, LightGrid
-from codemaster.config.settings import logger
+from codemaster.tools.logger.logger import log
 from codemaster import resources
 from codemaster.config.settings import Settings
 
@@ -82,10 +82,10 @@ class Selector(ActorItem):
         if self.player.direction == DIRECTION_RIP:
             return hit_list
 
-        if logging.getLevelName(logger.level) == 'DEBUG':
+        if logging.getLevelName(log.level) == 'DEBUG':
             hit_list = pg.sprite.spritecollide(self, self.game.level.all_sprites, False)
             for sprite in hit_list:
-                logger.debug(f"Mouse sprites: {sprite.id} in pos: ({sprite.rect.x}, {sprite.rect.y})")
+                log.debug(f"Mouse sprites: {sprite.id} in pos: ({sprite.rect.x}, {sprite.rect.y})")
 
         if not self.game.is_magic_on:
             return hit_list

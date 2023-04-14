@@ -9,13 +9,13 @@ from random import randint
 import pygame as pg
 
 from codemaster.models.actors.actor_types import ActorType, ActorCategoryType
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster.config import constants as consts
-from codemaster.utils import utils
+from codemaster.tools.utils import utils
 from codemaster import resources
 from codemaster.config.settings import Settings
 from codemaster.config.constants import DIRECTION_RIP
-from codemaster.config.settings import logger
+from codemaster.tools.logger.logger import log
 
 
 BULLET_STD_WIDTH = 12
@@ -217,13 +217,13 @@ class Bullet(pg.sprite.Sprite):
         for pc in players_hit_list:
             if pc.direction == DIRECTION_RIP or pc.invulnerable:
                 continue
-            logger.debug(f"{pc.id} hit by {self.id}, "
-                         f"pc_health: {str(round(pc.stats['health'], 2))}, "
-                         f"bullet_power: {str(self.attack_power)}")
+            log.debug(f"{pc.id} hit by {self.id}, "
+                      f"pc_health: {str(round(pc.stats['health'], 2))}, "
+                      f"bullet_power: {str(self.attack_power)}")
             pc.stats['health'] -= self.attack_power
             self.kill()
             if pc.stats['health'] <= 0:
-                logger.debug(f"{pc.id}, !!! Dead by bullet {self.id} !!!")
+                log.debug(f"{pc.id}, !!! Dead by bullet {self.id} !!!")
                 pc.die_hard()
             self.kill()
 

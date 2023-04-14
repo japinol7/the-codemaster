@@ -7,8 +7,8 @@ import math
 
 import pygame as pg
 
-from codemaster.utils.colors import Color
-from codemaster.utils import utils_graphics as libg_jp
+from codemaster.tools.utils.colors import Color
+from codemaster.tools.utils import utils_graphics as libg_jp
 
 COLOR_TRANSP_RATIO_DEFAULT = 0.2
 

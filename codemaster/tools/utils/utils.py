@@ -3,7 +3,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 from collections import namedtuple
 
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster.config import constants as consts
 
 

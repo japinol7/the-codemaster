@@ -5,7 +5,7 @@ import pygame as pg
 
 from codemaster.config.constants import BM_EXPLOSIONS_FOLDER, DIRECTION_RIP
 from codemaster.models.experience_points import ExperiencePoints
-from codemaster.config.settings import logger
+from codemaster.tools.logger.logger import log
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorItem
 from codemaster.models.stats import Stats
@@ -38,11 +38,11 @@ class Explosion(ActorItem):
             for npc in npcs_hit_list:
                 if not npc.can_be_killed_normally:
                     continue
-                logger.debug(f"{npc.id} hit by {self.id}, npc_health: {str(round(npc.stats.health, 2))}, "
-                             f"explosion_power: {str(self.stats.power)}")
+                log.debug(f"{npc.id} hit by {self.id}, npc_health: {str(round(npc.stats.health, 2))}, "
+                          f"explosion_power: {str(self.stats.power)}")
                 npc.stats.health -= self.stats.power
                 if npc.stats.health <= 0:
-                    logger.debug(f"{npc.id}, !!! Dead by {self.id} !!!")
+                    log.debug(f"{npc.id}, !!! Dead by {self.id} !!!")
                     if self.is_a_player_shot:
                         self.player.stats['score'] += ExperiencePoints.xp_points[npc.type.name]
                     npc.drop_items()
@@ -62,11 +62,11 @@ class Explosion(ActorItem):
             for pc in players_hit_list:
                 if pc.direction == DIRECTION_RIP or pc.invulnerable:
                     continue
-                logger.debug(f"{pc.id} hit by {self.id}, pc_health: {str(round(pc.stats['health'], 2))}, "
-                             f"explosion_power: {str(self.stats.power)}")
+                log.debug(f"{pc.id} hit by {self.id}, pc_health: {str(round(pc.stats['health'], 2))}, "
+                          f"explosion_power: {str(self.stats.power)}")
                 pc.stats['health'] -= self.stats.power
                 if pc.stats['health'] <= 0:
-                    logger.debug(f"{pc.id}, !!! Dead by {self.id} !!!")
+                    log.debug(f"{pc.id}, !!! Dead by {self.id} !!!")
                     pc.die_hard()
 
         if self.frame_index >= self.images_sprite_no:

@@ -7,18 +7,18 @@ import logging
 
 import pygame as pg
 
+from codemaster.tools.logger.logger import log
 from codemaster.models.actors.items.bullets import BulletType
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster.debug_info import DebugInfo
 from codemaster.help_info import HelpInfo
 from codemaster import levels
-from codemaster.utils import utils_graphics as libg_jp
-from codemaster.utils.utils import file_read_list
-from codemaster.utils import utils
+from codemaster.tools.utils import utils_graphics as libg_jp, utils
+from codemaster.tools.utils.utils import file_read_list
 from codemaster.resources import Resource
 from codemaster.score_bars import ScoreBar
-from codemaster import screens
-from codemaster.config.settings import logger, Settings
+from codemaster import screen
+from codemaster.config.settings import Settings
 from codemaster.config.constants import (
     INIT_OPTIONS_FILE,
     SCROLL_NEAR_RIGHT_SIDE,
@@ -143,10 +143,10 @@ class Game:
             levels.Level.clean_entity_ids()
 
         # Initialize screens
-        self.screen_exit_current_game = screens.ExitCurrentGame(self)
-        self.screen_help = screens.Help(self)
-        self.screen_pause = screens.Pause(self)
-        self.screen_game_over = screens.GameOver(self)
+        self.screen_exit_current_game = screen.ExitCurrentGame(self)
+        self.screen_help = screen.Help(self)
+        self.screen_pause = screen.Pause(self)
+        self.screen_game_over = screen.GameOver(self)
 
     @staticmethod
     def set_is_exit_game(is_exit_game):
@@ -157,14 +157,6 @@ class Game:
         # TODO: scores
         # Scores.write_scores_to_file(self)
         self.writen_info_game_over_to_file = True
-
-    @staticmethod
-    def draw_grid():
-        for x in range(0, Settings.screen_width, Settings.cell_size):
-            pg.draw.line(Game.screen, Color.GRAY10, (x, Settings.screen_near_top),
-                         (x, Settings.screen_height))
-        for y in range(Settings.screen_near_top, Settings.screen_height, Settings.cell_size):
-            pg.draw.line(Game.screen, Color.GRAY10, (0, y), (Settings.screen_width, y))
 
     def put_initial_actors_on_the_board(self):
         self.player = Player('Pac', self)
@@ -192,6 +184,7 @@ class Game:
         self.super_cheat = init_options and len(init_options) > 0 and 'supercheat' in init_options[0] or False
 
         if self.super_cheat:
+            log.info("Super cheat mode activated!")
             DebugInfo.super_cheat_superhero(self)
 
         self.level_no = START_LEVEL
@@ -316,7 +309,9 @@ class Game:
                 Game.screen.blit(Resource.images['bg_blue_t2'], (0, 0))
             # Draw level sprites
             self.level.draw()
-            self.show_grid and self.draw_grid()
+            if self.show_grid:
+                libg_jp.draw_grid(Game.screen, Settings.cell_size, Settings.screen_width, Settings.screen_height,
+                                  Settings.screen_near_top, Color.GRAY10)
             # Update score bars
             self.score_bars.update(self.level_no, self.level_no_old)
 
@@ -442,10 +437,10 @@ class Game:
                             self.is_magic_on = not self.is_magic_on
                     elif event.key == pg.K_n:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
-                            logger.info("NPCs health from all levels, ordered by NPC name:")
+                            log.info("NPCs health from all levels, ordered by NPC name:")
                             utils.pretty_dict_print(NPC.get_npcs_health(self, sorted_by_level=False))
                         elif self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
-                            logger.info("NPCs health from all levels, ordered by level:")
+                            log.info("NPCs health from all levels, ordered by level:")
                             utils.pretty_dict_print(NPC.get_npcs_health(self))
                     elif event.key == pg.K_h:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
@@ -461,7 +456,8 @@ class Game:
                         if not self.is_exit_curr_game_confirm:
                             self.is_help_screen = not self.is_help_screen
                     elif event.key == pg.K_g:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_RALT:
+                        if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
+                                and pg.key.get_mods() & pg.KMOD_RALT:
                             self.show_grid = not self.show_grid
                     elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
                         if pg.key.get_mods() & pg.KMOD_LALT and pg.key.get_mods() & pg.KMOD_RALT:
@@ -470,20 +466,20 @@ class Game:
                     elif event.key == pg.K_KP_DIVIDE:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.player.debug = not self.player.debug
-                            if logger.level != logging.DEBUG:
-                                logger.setLevel(logging.DEBUG)
-                                logger.info("Set logger level to: Debug")
+                            if log.level != logging.DEBUG:
+                                log.setLevel(logging.DEBUG)
+                                log.info("Set logger level to: Debug")
                             else:
-                                logger.setLevel(logging.INFO)
-                                logger.info("Set logger level to: Info")
+                                log.setLevel(logging.INFO)
+                                log.info("Set logger level to: Info")
                     elif event.key == pg.K_KP_MINUS:
                         if self.super_cheat and pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.debug_info.super_cheat_superhero()
-                            logger.info(f"Replenish stats to superhero maximum (cheat).")
+                            log.info(f"Replenish stats to superhero maximum (cheat).")
                     elif event.key == pg.K_KP_MULTIPLY:
                         if self.super_cheat and pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.player.invulnerable = not self.player.invulnerable
-                            logger.info(f"Set player invulnerability state to: {self.player.invulnerable} (cheat)")
+                            log.info(f"Set player invulnerability state to: {self.player.invulnerable} (cheat)")
                     elif event.key == pg.K_b:
                         if not self.K_b_keydown_seconds:
                             t = datetime.now().time()
@@ -522,7 +518,7 @@ class Game:
                     self.level.batteries or self.level.files_disks):
                 self.player.stats['score'] += ExperiencePoints.xp_points['level']
                 self.level.completed = True
-                logger.info(f"All batteries and disks from level {self.level_no + 1} recovered.")
+                log.info(f"All batteries and disks from level {self.level_no + 1} recovered.")
 
             # Check if we hit any door
             door_hit_list = pg.sprite.spritecollide(self.player, self.level.doors, False)

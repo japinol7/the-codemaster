@@ -5,9 +5,9 @@ import os
 
 import pygame as pg
 
-from codemaster.utils.colors import Color
+from codemaster.tools.utils.colors import Color
 from codemaster.config import constants as consts
-from codemaster.utils import utils_graphics as libg_jp
+from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.config.settings import Settings
 
 

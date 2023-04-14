@@ -7,9 +7,10 @@ from random import randint
 
 import pygame as pg
 
-from codemaster.utils import utils_graphics as libg_jp
-from codemaster.utils.colors import Color
-from codemaster.config.settings import logger, Settings
+from codemaster.tools.utils import utils_graphics as libg_jp
+from codemaster.tools.utils.colors import Color
+from codemaster.tools.logger.logger import log
+from codemaster.config.settings import Settings
 from codemaster.config.constants import (
     FILE_NAMES,
     DIRECTION_LEFT,
@@ -219,15 +220,15 @@ class Actor(pg.sprite.Sprite):
                 continue
             if not self.can_be_shot_by_its_owner and self.owner == bullet.owner:
                 continue
-            logger.debug(f"{self.id} hit by {bullet.id}, health: {str(round(self.stats.health, 2))}, "
-                         f"bullet_power: {str(bullet.attack_power)}")
+            log.debug(f"{self.id} hit by {bullet.id}, health: {str(round(self.stats.health, 2))}, "
+                      f"bullet_power: {str(bullet.attack_power)}")
             self.stats.health -= bullet.attack_power
             has_been_hit = True
             bullet.kill()
 
         has_been_hit and self.player.sound_effects and self.player.enemy_hit_sound.play()
         if self.stats.health <= 0:
-            logger.debug(f"{self.id}, !!! Dead by bullet {bullet.id} !!!")
+            log.debug(f"{self.id}, !!! Dead by bullet {bullet.id} !!!")
             self.player.sound_effects and self.player.npc_killed_sound.play()
             if bullet.is_a_player_shot:
                 self.player.stats['score'] += ExperiencePoints.xp_points[self.type.name]
@@ -274,17 +275,17 @@ class Actor(pg.sprite.Sprite):
 
         for item in self.items_to_drop:
             lucky_drop = randint(1, 100)
-            logger.debug(f"{self.id}, lucky_drop_dice: {str(lucky_drop)}, "
-                         f"probability_to_drop: {item.probability_to_drop:3d}, "
-                         f"item type: {item.type}")
+            log.debug(f"{self.id}, lucky_drop_dice: {str(lucky_drop)}, "
+                      f"probability_to_drop: {item.probability_to_drop:3d}, "
+                      f"item type: {item.type}")
             if lucky_drop + item.probability_to_drop >= 100:
-                logger.debug("Create item to drop")
+                log.debug("Create item to drop")
                 new_item = item.class_(
                     x=self.rect.x + item.x_delta, y=self.rect.y + item.y_delta, game=self.game,
                     **item.args)
                 item.add_to_list.add(new_item)
                 self.game.level.all_sprites.add(new_item)
-                logger.debug(f"Dropped: {new_item.id}")
+                log.debug(f"Dropped: {new_item.id}")
 
     def is_actor_on_the_left(self, actor):
         if actor.rect.x < self.rect.x:

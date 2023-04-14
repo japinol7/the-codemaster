@@ -1,23 +1,14 @@
 """Module settings."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-import logging
-
-from codemaster.utils import utils
+from codemaster.tools.utils import utils
 from codemaster.config.constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_SCALE
-
-LOGGER_LEVEL = logging.INFO
-LOGGER_FORMAT = '%(levelname)s: %(message)s'
 
 FPS_DEFAULT = 92  # Recommended: 92
 FPS_MIN = 60
 FPS_MAX = 900
 
 CELL_DEFAULT_SIZE = 14
-
-logging.basicConfig(format=LOGGER_FORMAT)
-logger = logging.getLogger(__name__)
-logger.setLevel(LOGGER_LEVEL)
 
 
 class Settings:

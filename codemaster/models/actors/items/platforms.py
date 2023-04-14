@@ -8,7 +8,7 @@ import pygame as pg
 
 from codemaster.config.constants import BITMAPS_FOLDER, FILE_NAMES, DIRECTION_RIP
 from codemaster.config.constants import VELOCITY_DEFAULT
-from codemaster.utils.utils_graphics import SpriteSheet
+from codemaster.tools.utils.utils_graphics import SpriteSheet
 from codemaster.models.actors.actor_types import ActorType, ActorBaseType, ActorCategoryType
 
 PLAT_STD_WIDTH = 70

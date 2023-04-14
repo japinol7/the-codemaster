@@ -5,7 +5,7 @@ from codemaster.config.constants import BM_DOOR_KEYS_FOLDER
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorItem
 from codemaster.models.stats import Stats
-from codemaster.utils.colors import ColorName
+from codemaster.tools.utils.colors import ColorName
 
 
 class DoorKey(ActorItem):
