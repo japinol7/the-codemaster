@@ -19,7 +19,7 @@ class Screen:
         self.previous = None
         self.game = game
 
-    def start_up(self, current_time):
+    def start_up(self, current_time=None, *args, **kwargs):
         self.start_time = current_time
         self.done = False
         pg.display.set_caption(self.game.name_short)
@@ -73,7 +73,7 @@ class ExitCurrentGame(Screen):
     def __init__(self, game):
         super().__init__(game)
 
-    def start_up(self):
+    def start_up(self, current_time=None, *args, **kwargs):
         super().start_up(current_time=self.game.current_time)
 
         while not self.done:
@@ -101,7 +101,7 @@ class GameOver(Screen):
     def __init__(self, game):
         super().__init__(game)
 
-    def start_up(self):
+    def start_up(self, current_time=None, *args, **kwargs):
         super().start_up(current_time=self.game.current_time)
 
         while not self.done:
@@ -129,7 +129,7 @@ class Help(Screen):
     def __init__(self, game):
         super().__init__(game)
 
-    def start_up(self):
+    def start_up(self, current_time=None, *args, **kwargs):
         super().start_up(current_time=self.game.current_time)
         clock = pg.time.Clock()
 
@@ -162,7 +162,7 @@ class Pause(Screen):
         self.background_screenshot = None
         self.is_full_screen_switch = False
 
-    def start_up(self, is_full_screen_switch=False):
+    def start_up(self, current_time=None, is_full_screen_switch=False, *args, **kwargs):
         self.is_full_screen_switch = is_full_screen_switch
         if self.is_full_screen_switch:
             self._full_screen_switch_hook()
@@ -207,7 +207,7 @@ class StartGame(Screen):
     def __init__(self, game):
         super().__init__(game)
 
-    def start_up(self):
+    def start_up(self, current_time=None, *args, **kwargs):
         super().start_up(current_time=self.game.current_time)
         clock = pg.time.Clock()
         self.game.is_start_screen = True
