@@ -3,7 +3,7 @@
 	The CodeMaster is a spin-off sci-fi mystery based on 1988 RPG platformer game Pac's Revenge.
 	program: The CodeMaster. Nightmare on Bots' Island.
     name as a package: codemaster 
-	version: 0.0.2
+	version: 0.0.3
 	language: English
 	author: Joan A. Pinol
 	author_nickname: japinol
@@ -14,6 +14,7 @@
 	requirements: pygame
 	Python requires: 3.8 or greater.
 	Python versions tested: 
+        > 3.11.3 64bits under Windows 11
         > 3.10.10 64bits under Windows 11
         > 3.9.12 64bits under Windows 11
         > 3.8.5  64bits under Windows 10
@@ -27,6 +28,10 @@
 <img src="screenshots/screenshot2.jpg" width="980"> <br />
 <img src="screenshots/screenshot3.jpg" width="980"> <br />
 
+
+## Videos
+
+[![Video](https://img.youtube.com/vi/oYR3eQFQD3M/maxresdefault.jpg)](https://www.youtube.com/watch?v=oYR3eQFQD3M)
 
 
 ## History of the series. A spin-off? What do you mean?

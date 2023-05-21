@@ -460,7 +460,7 @@ class Game:
                                 and pg.key.get_mods() & pg.KMOD_RALT:
                             self.show_grid = not self.show_grid
                     elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
-                        if pg.key.get_mods() & pg.KMOD_LALT and pg.key.get_mods() & pg.KMOD_RALT:
+                        if pg.key.get_mods() & pg.KMOD_LALT:
                             self.is_paused = True
                             self.is_full_screen_switch = True
                     elif event.key == pg.K_KP_DIVIDE:
