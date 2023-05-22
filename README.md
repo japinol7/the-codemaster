@@ -338,6 +338,13 @@
 	debugtraces		    False
 
 
+**Basic test suite**
+
+	To run the test suite:
+		$ python -m suiteoftests
+
+    Note: Press ESC if you want to abort the current test.
+
 **Examples of usage**
 
 	If The Codemaster has not been installed as an app:

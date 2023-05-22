@@ -21,15 +21,8 @@ from codemaster import screen
 from codemaster.config.settings import Settings
 from codemaster.config.constants import (
     INIT_OPTIONS_FILE,
-    SCROLL_NEAR_RIGHT_SIDE,
-    SCROLL_NEAR_LEFT_SIDE,
-    SCROLL_NEAR_TOP,
-    SCROLL_NEAR_BOTTOM,
-    NEAR_TOP,
     NEAR_BOTTOM,
-    NEAR_LEFT_SIDE,
     DIRECTION_RIP,
-    DOOR_DEST_NL, DOOR_DEST_TL, DOOR_DEST_TR, DOOR_POSITION_L, DOOR_POSITION_R,
     FONT_DEFAULT_NAME, FONT_FIXED_DEFAULT_NAME
     )
 from codemaster.models.actors.player import Player, PL_SELF_DESTRUCTION_COUNT_DEF
@@ -37,6 +30,7 @@ from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.actors import NPC
 from codemaster.models.actors.selectors import SelectorA
+from codemaster.level_scroll_screen import level_scroll_shift_control, change_screen_level
 
 
 START_LEVEL = 0   # First level: 0
@@ -204,88 +198,6 @@ class Game:
         self.level.start_up()
         self.player.start_time = self.start_time
         self.player.stats['levels_visited'].add(self.level.id)
-
-    def scroll_shift_control(self):
-        # If the player gets near the right side, shift the world left (-x)
-        if self.player.rect.right >= SCROLL_NEAR_RIGHT_SIDE:
-            if self.level.world_shift > self.level.level_limit:
-                diff = self.player.rect.right - SCROLL_NEAR_RIGHT_SIDE
-                self.player.rect.right = SCROLL_NEAR_RIGHT_SIDE
-                diff and self.level.shift_world(-diff)
-            else:
-                if self.player.rect.right > self.level.level_limit - self.player.rect.width:
-                    self.player.rect.right = SCROLL_NEAR_RIGHT_SIDE
-
-        # If the player gets near the left side, shift the world right (+x)
-        if self.player.rect.left <= SCROLL_NEAR_LEFT_SIDE:
-            if self.level.world_shift < 0:
-                diff = SCROLL_NEAR_LEFT_SIDE - self.player.rect.left
-                self.player.rect.left = SCROLL_NEAR_LEFT_SIDE
-                diff and self.level.shift_world(diff)
-            else:
-                if self.player.rect.left < NEAR_LEFT_SIDE:
-                    self.player.rect.left = NEAR_LEFT_SIDE
-
-        # If the player gets near the top, shift the world to the bottom
-        if self.player.rect.top <= SCROLL_NEAR_TOP:
-            if self.level.world_shift_top < 0:
-                diff = self.player.rect.top - SCROLL_NEAR_TOP
-                self.player.rect.top = SCROLL_NEAR_TOP
-                diff and self.level.shift_world_top(-diff)
-            else:
-                if self.player.rect.top < NEAR_TOP:
-                    self.player.rect.top = NEAR_TOP
-
-        # If the player gets near the bottom, shift the world to the top
-        if self.player.rect.bottom >= SCROLL_NEAR_BOTTOM:
-            if self.level.world_shift_top < 1200 and self.level.world_shift_top > -900:
-                diff = SCROLL_NEAR_BOTTOM - self.player.rect.bottom
-                self.player.rect.bottom = SCROLL_NEAR_BOTTOM
-                diff and self.level.shift_world_top(diff)
-            else:
-                if self.player.rect.bottom > NEAR_BOTTOM:
-                    self.player.rect.bottom = NEAR_BOTTOM
-
-    def change_screen_level(self, door):
-        self.level_no_old = self.level_no
-        self.level_no = door.level_dest
-        self.level = self.levels[self.level_no]
-        self.player.level = self.level
-
-        if door.door_dest_pos == DOOR_DEST_NL and door.door_type == DOOR_POSITION_R:
-            self.level.door_previous_position = DOOR_POSITION_L
-            self.level.door_previous_pos_world = (
-                self.level.world_start_pos_left[0], self.level.world_start_pos_left[1])
-            self.level.door_previous_pos_player = (
-                self.level.player_start_pos_left[0], self.level.player_start_pos_left[1])
-        elif door.door_dest_pos == DOOR_DEST_NL and door.door_type == DOOR_POSITION_L:
-            self.level.door_previous_position = DOOR_POSITION_R
-            self.level.door_previous_pos_world = (
-                self.level.world_start_pos_right[0], self.level.world_start_pos_right[1])
-            self.level.door_previous_pos_player = (
-            self.level.player_start_pos_right[0], self.level.player_start_pos_right[1])
-        elif door.door_dest_pos == DOOR_DEST_TR:
-            self.level.door_previous_position = DOOR_POSITION_L
-            self.level.door_previous_pos_world = (
-                self.level.world_start_pos_rtop[0], self.level.world_start_pos_rtop[1])
-            self.level.door_previous_pos_player = (
-                self.level.player_start_pos_rtop[0], self.level.player_start_pos_rtop[1])
-        elif door.door_dest_pos == DOOR_DEST_TL:
-            self.level.door_previous_position = DOOR_POSITION_L
-            self.level.door_previous_pos_world = (
-                self.level.world_start_pos_ltop[0], self.level.world_start_pos_ltop[1])
-            self.level.door_previous_pos_player = (
-                self.level.player_start_pos_ltop[0], self.level.player_start_pos_ltop[1])
-
-        self.level.shift_world(self.level.door_previous_pos_world[0] - self.level.world_shift)
-        self.level.shift_world_top(
-            self.level.door_previous_pos_world[1] - self.level.world_shift_top)
-        self.player.rect.x = self.level.door_previous_pos_player[0]
-        self.player.rect.y = self.level.door_previous_pos_player[1]
-        self.player.change_y = 0
-
-        if self.level_no not in self.player.stats['levels_visited']:
-            self.level.update_pc_enter_level()
 
     def update_screen(self):
         # Handle game screens
@@ -511,7 +423,7 @@ class Game:
                             selector.get_pointed_sprites()
                 self.mouse_pos = pg.mouse.get_pos()
 
-            self.scroll_shift_control()
+            level_scroll_shift_control(game=self)
 
             # If the player gets all the batteries and files, level completed
             if not self.level.completed and not (
@@ -524,7 +436,7 @@ class Game:
             door_hit_list = pg.sprite.spritecollide(self.player, self.level.doors, False)
             for door in door_hit_list:
                 if not door.is_locked:
-                    self.change_screen_level(door)
+                    change_screen_level(game=self, door=door)
 
             # update sprites and level
             if not self.is_paused:
