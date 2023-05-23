@@ -70,9 +70,10 @@ class LevelTest1(Level):
         # Add platforms (n_blocs, x, y, type)
         level_plats = [[5, 100, 460, platforms.PLAT_TYPE_01],
                        [5, 300, 220, platforms.PLAT_TYPE_01],
-                       [4, 980, 570, platforms.PLAT_TYPE_01],
+                       [4, 980, 562, platforms.PLAT_TYPE_01],
                        [3, 1100, 260, platforms.PLAT_TYPE_01],
-                       [9, 1900, 110, platforms.PLAT_TYPE_01],
+                       [9, 1906, 110, platforms.PLAT_TYPE_01],
+                       [3, 1300, 120, platforms.PLAT_TYPE_01],
                        [8, 2580, 440, platforms.PLAT_TYPE_01],
                        [4, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        [44, 630, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
@@ -101,7 +102,6 @@ class LevelTest1(Level):
 
         # Add sliding bands (n_blocs, x, y, type, velocity)
         level_plats = [[5, 280, SCREEN_HEIGHT - platforms.PLAT_TYPE_03_SLIDING_R_MID[3], platforms.PLAT_TYPE_03_SLIDING, -2],
-                       [3, 1300, 120, platforms.PLAT_TYPE_03_SLIDING, 3]
                        ]
         plats = []
         for platform in level_plats:
@@ -121,6 +121,7 @@ class LevelTest1(Level):
 
         # Add files_disks
         self.files_disks.add([
+            FilesDiskD(1140, 526, self.game),
             FilesDiskD(2200, 74, self.game),
             ])
 
