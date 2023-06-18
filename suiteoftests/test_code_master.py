@@ -263,8 +263,8 @@ class Game:
             ['go_left', 4],
             ['stop', 1],
             ['go_right', 148],
-            ['jump', 20],
-            ['go_right', 30],
+            ['jump', 5],
+            ['go_right', 34],
             ]
 
         self._game_loop()
@@ -288,7 +288,7 @@ class Game:
         self.player_actions = [
             ['stop', 1],
             ['go_left', 45],
-            ['jump', 1],
+            ['jump', 5],
             ['go_left', 15],
             ]
 
@@ -313,8 +313,8 @@ class Game:
         self.player_actions = [
             ['stop', 1],
             ['go_right', 192],
-            ['jump', 1],
-            ['go_right', 18],
+            ['jump', 5],
+            ['go_right', 22],
             ]
 
         self._game_loop()
