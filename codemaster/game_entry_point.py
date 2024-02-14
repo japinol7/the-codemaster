@@ -110,12 +110,9 @@ class Game:
             Settings.calculate_settings(speed_pct=speed_pct)
             # Set screen to the settings configuration
             Game.size = [Settings.screen_width, Settings.screen_height]
-            Game.full_screen_flags = pg.FULLSCREEN | pg.DOUBLEBUF | pg.HWSURFACE | pg.SCALED
+            Game.full_screen_flags = pg.FULLSCREEN | pg.DOUBLEBUF | pg.HWSURFACE
             Game.normal_screen_flags = pg.DOUBLEBUF | pg.HWSURFACE
-            if Settings.is_full_screen:
-                Game.screen_flags = Game.full_screen_flags
-            else:
-                Game.screen_flags = Game.normal_screen_flags
+            Game.screen_flags = Game.full_screen_flags if Settings.is_full_screen else Game.normal_screen_flags
             Game.screen = pg.display.set_mode(Game.size, Game.screen_flags)
             # Load and render resources
             Resource.load_and_render_background_images()

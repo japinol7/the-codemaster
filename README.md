@@ -12,14 +12,7 @@
 	main module: codemaster.py
 	description: A spin-off sci-fi mystery based on Pac's Revenge series games by @japinol  (c) 1988, 2015, 2021.
 	requirements: pygame
-	Python requires: 3.8 or greater.
-	Python versions tested: 
-        > 3.11.3 64bits under Windows 11
-        > 3.10.10 64bits under Windows 11
-        > 3.9.12 64bits under Windows 11
-        > 3.8.5  64bits under Windows 10
-        > 3.8.5  under Ubuntu 20.04
-        > 3.9.12 under Ubuntu 20.04
+	Python requires: 3.11 or greater.
 
 
 ## Screenshots

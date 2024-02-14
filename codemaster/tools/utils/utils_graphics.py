@@ -59,9 +59,9 @@ def screen_change_scale(game):
 
 def full_screen_switch(game):
     Settings.is_full_screen = not Settings.is_full_screen
-    game.screen = pg.display.set_mode(game.size,
-                                      Settings.is_full_screen and game.full_screen_flags
-                                      or game.normal_screen_flags)
+    game.screen = pg.display.set_mode(
+        game.size,
+        Settings.is_full_screen and game.full_screen_flags or game.normal_screen_flags)
 
 
 def draw_text(text, x, y, screen, font_name=consts.FONT_DEFAULT_NAME, size=None,
