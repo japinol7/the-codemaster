@@ -5,19 +5,13 @@ Future Improvements.
 > General:
     > Finish the basic game.
 
-    > Magic spells using the green selector.
-      1. Only one spell, for now, that would affect all npcs in the smaller green area.
-         Maybe one of these:
-            a) Lightning
-            b) Vortex
-
 > Settings:
     > Allow users to use a gamepad.
-    > Let users to introduce their names.
+    > Let users introduce their names.
     > Screen to show scores.
 
 > Game play:
-	> Add elements, magic and more skills.
+	> Add elements, more magic spells and more skills.
     > Improve level up system
 
 > Clean code and refactoring improvements:
@@ -29,5 +23,5 @@ Future Improvements.
 > Networking:
 	> Client/server option so the players can play on the net.
 	    > One player will run the server version and the client version for its game.
-	    > Other players will run the client version and will be assign to the game available that he chooses.
+	    > Other players will run the client version and will be assigned to the game available that he chooses.
 	    > Allow several players to play in the same game. 

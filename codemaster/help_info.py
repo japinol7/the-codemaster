@@ -14,7 +14,7 @@ class HelpInfo:
               ' ESC: exit game\n'
               '  ^m: \t pause/resume music\n'
               '  ^s: \t sound effects on/off\n'
-              '  L_Alt + R_Alt + Enter: change full screen / normal screen mode\n'
+              '  Alt + Enter: change full screen / normal screen mode\n'
               '  ^h: \t shows this help\n'
               '     \t hold b to kill your current life\n'
               '     \t drink health potion,  insert\n'

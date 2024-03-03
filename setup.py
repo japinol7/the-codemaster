@@ -7,7 +7,7 @@ setup(
     license='MIT',
     description="The CodeMaster",
     long_description="The CodeMaster. Nightmare on Bots' Island",
-    url='https://github.com/japinol7/codemaster',
+    url='https://github.com/japinol7/the-codemaster',
     packages=['codemaster'],
     python_requires='>=3.11',
     install_requires=['pygame-ce'],

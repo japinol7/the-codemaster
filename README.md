@@ -4,14 +4,13 @@
 	program: The CodeMaster. Nightmare on Bots' Island.
     name as a package: codemaster 
 	version: 0.0.3
-	language: English
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
 	author_twitter: @japinol
 	main module: codemaster.py
-	description: A spin-off sci-fi mystery based on Pac's Revenge series games by @japinol  (c) 1988, 2015, 2021.
-	requirements: pygame
+	description: A spin-off sci-fi mystery based on Pac's Revenge 
+      series games by @japinol  (c) 1988, 2015, 2021, 2024.
 	Python requires: 3.11 or greater.
 
 
@@ -287,7 +286,7 @@
 			 ESC: exit game
 			  ^m:    pause/resume music
  			  ^s:    sound effects on/off
-              L_Alt + R_Alt + Enter: change full screen / windowed screen mode
+              Alt + Enter: change full screen / windowed screen mode
 			  L_Ctrl + R_Alt + g: grid on/off
 			  ^h:    shows this help to the console
 
