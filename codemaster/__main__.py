@@ -21,7 +21,7 @@ def main():
     # Parse optional arguments from the command line
     parser = ArgumentParser(description="The CodeMaster. Nightmare on Bots' Island.",
                             prog="codemaster",
-                            usage="%(prog)s [-h] [-f] [-l] [-m] [-n] [-s] [-d] [-t]")
+                            usage="%(prog)s [-h] [-f] [-l] [-m] [-n] [-u] [-d] [-t]")
     parser.add_argument('-f', '--fullscreen', default=False, action='store_true',
                         help='Full screen display activated when starting the game')
     parser.add_argument('-l', '--multiplelogfiles', default=False, action='store_true',
@@ -30,7 +30,7 @@ def main():
                         help='Print logs to the console along with writing them to the log file')
     parser.add_argument('-n', '--nologdatetime', default=False, action='store_true',
                         help='Logs will not print a datetime')
-    parser.add_argument('-s', '--nodisplayscaled', default=False, action='store_true',
+    parser.add_argument('-u', '--nodisplayscaled', default=False, action='store_true',
                         help='Remove the scaling of the game screen. '
                              'Resolution depends on desktop size and scale graphics. '
                              'Note that Pygame scaled is considered an experimental API '

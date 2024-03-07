@@ -305,7 +305,7 @@
 
 ## Usage
 
-	codemaster [-h] [-f] [-l] [-m] [-n] [-s] [-d] [-t]
+	codemaster [-h] [-f] [-l] [-m] [-n] [-u] [-d] [-t]
 	
 	optional arguments:
 	  -h, --help            show this help message and exit
@@ -318,7 +318,7 @@
 	  -n, 			--nologdatetime
 	                        Logs will not print a datetime.
 	                        Deactivate the scaling of the game screen. 
-	  -s, 			--nodisplayscaled
+	  -u, 			--nodisplayscaled
 	                        Deactivate the scaling of the game screen. 
 	                        Resolution depends on desktop size and scale graphics. 
 	                        Note that Pygame scaled is considered an experimental API 
