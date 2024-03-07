@@ -21,13 +21,20 @@ def main():
     # Parse optional arguments from the command line
     parser = ArgumentParser(description="The CodeMaster. Nightmare on Bots' Island.",
                             prog="codemaster",
-                            usage="%(prog)s [-h] [-l] [-m] [-n] [-d] [-t]")
+                            usage="%(prog)s [-h] [-f] [-l] [-m] [-n] [-s] [-d] [-t]")
+    parser.add_argument('-f', '--fullscreen', default=False, action='store_true',
+                        help='Full screen display activated when starting the game')
     parser.add_argument('-l', '--multiplelogfiles', default=False, action='store_true',
                         help='A log file by app execution, instead of one unique log file')
     parser.add_argument('-m', '--stdoutlog', default=False, action='store_true',
                         help='Print logs to the console along with writing them to the log file')
     parser.add_argument('-n', '--nologdatetime', default=False, action='store_true',
                         help='Logs will not print a datetime')
+    parser.add_argument('-s', '--nodisplayscaled', default=False, action='store_true',
+                        help='Remove the scaling of the game screen. '
+                             'Resolution depends on desktop size and scale graphics. '
+                             'Note that Pygame scaled is considered an experimental API '
+                             'and is subject to change.')
     parser.add_argument('-d', '--debug', default=None, action='store_true',
                         help='Debug actions, information and traces')
     parser.add_argument('-t', '--debugtraces', default=None, action='store_true',
@@ -46,11 +53,12 @@ def main():
     log.info(LOG_START_APP_MSG)
     not args.stdoutlog and print(LOG_START_APP_MSG)
     log.info(f"App arguments: {' '.join(sys.argv[1:])}")
-    # Multiple games loop
 
+    # Multiple games loop
     while not Game.is_exit_game:
         try:
-            game = Game(is_debug=args.debug)
+            game = Game(is_debug=args.debug, is_full_screen=args.fullscreen,
+                        is_no_display_scaled=args.nodisplayscaled)
             game.is_music_paused = is_music_paused
             screen_start_game = screen.StartGame(game)
             while game.is_start_screen:

@@ -305,16 +305,24 @@
 
 ## Usage
 
-	codemaster [-h] [-l] [-m] [-n] [-d] [-t]
+	codemaster [-h] [-f] [-l] [-m] [-n] [-s] [-d] [-t]
 	
 	optional arguments:
 	  -h, --help            show this help message and exit
+	  -f, 			--fullscreen
+	                        Full screen display activated when starting the game
 	  -l, 			--multiplelogfiles
-	                        A log file by app execution, instead of one unique log file.
+	                        A log file by app execution, instead of one unique log file
 	  -m, 			--stdoutlog
-	                        Print logs to the console along with writing them to the log file.
+	                        Print logs to the console along with writing them to the log file
 	  -n, 			--nologdatetime
 	                        Logs will not print a datetime.
+	                        Deactivate the scaling of the game screen. 
+	  -s, 			--nodisplayscaled
+	                        Deactivate the scaling of the game screen. 
+	                        Resolution depends on desktop size and scale graphics. 
+	                        Note that Pygame scaled is considered an experimental API 
+	                        and is subject to change.
 	  -d, 			--debug
 	                        debug actions, information and traces
 	  -t, 			--debugtraces
@@ -323,9 +331,11 @@
 
 **Default optional arguments**
 
+	fullscreen          False
 	multiplelogfiles    False
 	stdoutlog           False
 	nologdatetime       False
+	nodisplayscaled     False
 	debug   		    False
 	debugtraces		    False
 
@@ -339,8 +349,11 @@
 
 **Examples of usage**
 
-	If The Codemaster has not been installed as an app:
+	Run the game:
 		$ python -m codemaster
+
+	Run the game starting in full screen mode:
+		$ python -m codemaster -f
 
 
 **To make The CodeMaster work**

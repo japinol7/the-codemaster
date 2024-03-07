@@ -50,7 +50,7 @@ class Game:
     normal_screen_flags = None
     full_screen_flags = None
 
-    def __init__(self, is_debug=None, speed_pct=None):
+    def __init__(self, is_debug=None, is_full_screen=None, is_no_display_scaled=None):
         self.name = "The CodeMaster v 0.01"
         self.name_short = "The CodeMaster"
         self.name_long = "The CodeMaster. Nightmare on Bots' Island."
@@ -107,11 +107,11 @@ class Game:
             pg_display_info = pg.display.Info()
             Settings.display_start_width = pg_display_info.current_w
             Settings.display_start_height = pg_display_info.current_h
-            Settings.calculate_settings(speed_pct=speed_pct)
+            Settings.calculate_settings(full_screen=is_full_screen)
             # Set screen to the settings configuration
             Game.size = [Settings.screen_width, Settings.screen_height]
-            Game.full_screen_flags = pg.FULLSCREEN | pg.DOUBLEBUF | pg.HWSURFACE
-            Game.normal_screen_flags = pg.DOUBLEBUF | pg.HWSURFACE
+            Game.full_screen_flags = pg.FULLSCREEN if is_no_display_scaled else pg.FULLSCREEN | pg.SCALED
+            Game.normal_screen_flags = pg.SHOWN if is_no_display_scaled else pg.SHOWN | pg.SCALED
             Game.screen_flags = Game.full_screen_flags if Settings.is_full_screen else Game.normal_screen_flags
             Game.screen = pg.display.set_mode(Game.size, Game.screen_flags)
             # Load and render resources
