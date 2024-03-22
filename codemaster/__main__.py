@@ -34,7 +34,9 @@ def main():
                         help='Remove the scaling of the game screen. '
                              'Resolution depends on desktop size and scale graphics. '
                              'Note that Pygame scaled is considered an experimental API '
-                             'and is subject to change.')
+                             'and is subject to change. '
+                             'In most systems, is better to have the scaling activated when '
+                             'using the full screen display mode')
     parser.add_argument('-d', '--debug', default=None, action='store_true',
                         help='Debug actions, information and traces')
     parser.add_argument('-t', '--debugtraces', default=None, action='store_true',

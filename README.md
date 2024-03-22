@@ -317,12 +317,13 @@
 	                        Print logs to the console along with writing them to the log file
 	  -n, 			--nologdatetime
 	                        Logs will not print a datetime.
-	                        Deactivate the scaling of the game screen. 
 	  -u, 			--nodisplayscaled
 	                        Deactivate the scaling of the game screen. 
 	                        Resolution depends on desktop size and scale graphics. 
 	                        Note that Pygame scaled is considered an experimental API 
 	                        and is subject to change.
+	                        In most systems, is better to have the scaling activated when 
+	                        using the full screen display mode. 
 	  -d, 			--debug
 	                        debug actions, information and traces
 	  -t, 			--debugtraces
