@@ -16,6 +16,7 @@ from codemaster.models.actors.npcs import (
     )
 from codemaster.models.actors.items import (
     BatteryA,
+    DoorLeftBlue,
     DoorRightYellow,
     MineCyan,
     )
@@ -36,15 +37,17 @@ class Level1(Level):
         self.background = pg.image.load(self.file_name_im_get(1)).convert()
         self.level_limit = -1800
         self.level_limit_top = -1000
-        self.player_start_pos_left = (80, 480)
+        self.player_start_pos_left = (220, 480)
         self.player_start_pos_right = (600, 480)
         self.player_start_pos_rtop = (300, 100)
         self.player_start_pos_ltop = (80, 100)
         self.player_start_pos_bottom = (300, 800)
-        self.world_start_pos_left = (0, -758)
+        self.world_start_pos_left = (0, -658)
         self.world_start_pos_right = (self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758)
         self.world_start_pos_rtop = (self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900)
         self.world_start_pos_ltop = (0, -900)
+        self.door_previous_pos_player = self.player_start_pos_left
+        self.door_previous_pos_world = self.world_start_pos_left
 
         self._add_actors()
         self._sprites_all_add()
@@ -102,5 +105,6 @@ class Level1(Level):
 
         # Add doors
         self.doors.add([
+            DoorLeftBlue(2, 550, self.game, level_dest=3, door_dest_pos=DOOR_DEST_NL),
             DoorRightYellow(2570, 550, self.game, level_dest=1, door_dest_pos=DOOR_DEST_NL),
             ])
