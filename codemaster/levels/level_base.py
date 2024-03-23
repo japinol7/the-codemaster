@@ -41,6 +41,7 @@ class Level:
         self.files_disks = pg.sprite.Group()
         self.computers = pg.sprite.Group()
         self.npcs = pg.sprite.Group()
+        self.npcs_moving_y = pg.sprite.Group()  # Used to update y-axis border limits for vertical moving NPCs
         self.apples = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
         self.cartridges = pg.sprite.Group()
@@ -95,6 +96,8 @@ class Level:
             self.all_sprites.add(sprite)
         for sprite in self.npcs:
             self.all_sprites.add(sprite)
+            if sprite.border_top or sprite.border_down:
+                self.npcs_moving_y.add(sprite)
         for sprite in self.snakes:
             self.npcs.add(sprite)
             self.all_sprites.add(sprite)
@@ -136,11 +139,15 @@ class Level:
             for particle in sprite.particles:
                 particle.position[0] += shift_x
 
-
     def shift_world_top(self, shift_y):
         self.world_shift_top += shift_y
         for sprite in self.all_sprites:
             sprite.rect.y += shift_y
+
+        # Update border limits for moving NPCs
+        for npc_moving_y in self.npcs_moving_y:
+            npc_moving_y.border_top += shift_y
+            npc_moving_y.border_down += shift_y
 
         for sprite in self.game.text_msg_sprites:
             sprite.rect.y += shift_y
