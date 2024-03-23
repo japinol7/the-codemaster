@@ -370,9 +370,7 @@ class MovingActor(Actor):
         super().update()
 
         # Check the boundaries and see if we need to reverse direction.
-        cur_pos_y = self.rect.y - self.game.level.world_shift_top // 2
-        # TODO: Fix vertical boundaries related to vertical scroll
-        if self.change_y and (cur_pos_y > self.border_down or cur_pos_y < self.border_top):
+        if self.change_y and (self.rect.y > self.border_down or self.rect.y < self.border_top):
             self.change_y *= -1
 
         cur_pos_x = self.rect.x - self.game.level.world_shift

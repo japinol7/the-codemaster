@@ -33,7 +33,7 @@ from codemaster.models.actors.selectors import SelectorA
 from codemaster.level_scroll_screen import level_scroll_shift_control, change_screen_level
 
 
-START_LEVEL = 0   # First level: 0
+START_LEVEL = 0
 
 
 class Game:
