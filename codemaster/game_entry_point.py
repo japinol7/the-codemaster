@@ -56,6 +56,10 @@ class Game:
     full_screen_flags = None
 
     def __init__(self, is_debug=None, is_full_screen=None, is_no_display_scaled=None):
+        self.name = APP_NAME
+        self.name_short = APP_NAME_SHORT
+        self.name_long = APP_NAME_LONG
+        self.name_desc = APP_NAME_DESC
         self.start_time = None
         self.done = None
         self.player = None
@@ -103,11 +107,6 @@ class Game:
             Game.is_first_game = False
 
         if Game.is_first_game:
-            # Game metadata
-            self.name = APP_NAME
-            self.name_short = APP_NAME_SHORT
-            self.name_long = APP_NAME_LONG
-            self.name_desc = APP_NAME_DESC
             # Calculate settings
             pg_display_info = pg.display.Info()
             Settings.display_start_width = pg_display_info.current_w
