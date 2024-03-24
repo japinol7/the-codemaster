@@ -69,9 +69,15 @@ MAX_BATS_ON_BOARD = 7
 MAX_DIVIDER_APPLES_ON_BOARD = 186
 MAX_DIVIDER_MINES_ON_BOARD = 130
 
-APP_NAME = 'codemaster'
-LOG_START_APP_MSG = f"Start app {APP_NAME} version: {version.get_version()}"
-LOG_END_APP_MSG = f"End app {APP_NAME}"
+APP_TECH_NAME = 'codemaster'
+LOG_START_APP_MSG = f"Start app {APP_TECH_NAME} version: {version.get_version()}"
+LOG_END_APP_MSG = f"End app {APP_TECH_NAME}"
+
+APP_NAME = f"The CodeMaster v. {version.get_version()}"
+APP_NAME_SHORT = "The CodeMaster"
+APP_NAME_LONG = "The CodeMaster. Nightmare on Bots' Island."
+APP_NAME_DESC = "A spin-off sci-fi mystery based on " \
+                "Pac's Revenge series games by @japinol (c) 1987, 1988, 2015, 2021, 2024."
 
 LOG_FILE = os.path.join('logs', f"log_{datetime.now().strftime('%Y-%m-%d_%H_%M_%S_%f')}.log")
 LOG_FILE_UNIQUE = os.path.join('logs', "log.log")

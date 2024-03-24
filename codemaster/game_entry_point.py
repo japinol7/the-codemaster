@@ -20,10 +20,15 @@ from codemaster.score_bars import ScoreBar
 from codemaster import screen
 from codemaster.config.settings import Settings
 from codemaster.config.constants import (
+    APP_NAME,
+    APP_NAME_SHORT,
+    APP_NAME_LONG,
+    APP_NAME_DESC,
+    DIRECTION_RIP,
+    FONT_DEFAULT_NAME,
+    FONT_FIXED_DEFAULT_NAME,
     INIT_OPTIONS_FILE,
     NEAR_BOTTOM,
-    DIRECTION_RIP,
-    FONT_DEFAULT_NAME, FONT_FIXED_DEFAULT_NAME
     )
 from codemaster.models.actors.player import Player, PL_SELF_DESTRUCTION_COUNT_DEF
 from codemaster.models.actors.text_msgs import TextMsg
@@ -51,11 +56,6 @@ class Game:
     full_screen_flags = None
 
     def __init__(self, is_debug=None, is_full_screen=None, is_no_display_scaled=None):
-        self.name = "The CodeMaster v 0.01"
-        self.name_short = "The CodeMaster"
-        self.name_long = "The CodeMaster. Nightmare on Bots' Island."
-        self.name_desc = "A spin-off sci-fi mystery based on " \
-                         "Pac's Revenge series games by @japinol  (c) 1988, 2015, 2021."
         self.start_time = None
         self.done = None
         self.player = None
@@ -103,6 +103,11 @@ class Game:
             Game.is_first_game = False
 
         if Game.is_first_game:
+            # Game metadata
+            self.name = APP_NAME
+            self.name_short = APP_NAME_SHORT
+            self.name_long = APP_NAME_LONG
+            self.name_desc = APP_NAME_DESC
             # Calculate settings
             pg_display_info = pg.display.Info()
             Settings.display_start_width = pg_display_info.current_w
