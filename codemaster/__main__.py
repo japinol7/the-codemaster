@@ -38,7 +38,9 @@ def main():
                              'In most systems, is better to have the scaling activated when '
                              'using the full screen display mode')
     parser.add_argument('-d', '--debug', default=None, action='store_true',
-                        help='Debug actions, information and traces')
+                        help='Debug actions, information and traces. '
+                             'This does not set the log level to debug. '
+                             'Use the key shortcut ^ L_Alt + numpad_divide to toggle log levels')
     parser.add_argument('-t', '--debugtraces', default=None, action='store_true',
                         help='Show debug back traces information when something goes wrong')
     args = parser.parse_args()

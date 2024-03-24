@@ -351,10 +351,10 @@ class Game:
                     elif event.key == pg.K_n:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
                             log.info("NPCs health from all levels, ordered by NPC name:")
-                            utils.pretty_dict_print(NPC.get_npcs_health(self, sorted_by_level=False))
+                            log.debug(utils.pretty_dict_to_string(NPC.get_npcs_health(self, sorted_by_level=False)))
                         elif self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
                             log.info("NPCs health from all levels, ordered by level:")
-                            utils.pretty_dict_print(NPC.get_npcs_health(self))
+                            log.debug(utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
                     elif event.key == pg.K_h:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.help_info.print_help_keys()
@@ -377,7 +377,8 @@ class Game:
                             self.is_paused = True
                             self.is_full_screen_switch = True
                     elif event.key == pg.K_KP_DIVIDE:
-                        if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
+                        if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
+                                and pg.key.get_mods() & pg.KMOD_LALT:
                             self.player.debug = not self.player.debug
                             if log.level != logging.DEBUG:
                                 log.setLevel(logging.DEBUG)

@@ -9,7 +9,7 @@ import pygame as pg
 from codemaster.models.actors.items import ClockTimerA
 from codemaster.models.actors.player import Player
 from codemaster.config.constants import (
-    APP_NAME,
+    APP_TECH_NAME,
     FONT_DEFAULT_NAME, FONT_FIXED_DEFAULT_NAME
     )
 from codemaster.models.actors.text_msgs import TextMsg
@@ -26,10 +26,10 @@ from suiteoftests.levels.level_test_1 import LevelTest1
 PLAYER_HEALTH_SUPER_HERO = 90_000
 CLOCK_TIMER_IN_SECS = 10
 
-LOG_START_TEST_APP_MSG = f"Test app {APP_NAME} version: {version.get_version()}"
-LOG_END_TEST_APP_MSG = f"End Testing {APP_NAME}"
+LOG_START_TEST_APP_MSG = f"Test app {APP_TECH_NAME} version: {version.get_version()}"
+LOG_END_TEST_APP_MSG = f"End Testing {APP_TECH_NAME}"
 
-IN_GAME_START_MSG = f"Let's test app {APP_NAME}\nversion: {version.get_version()}"
+IN_GAME_START_MSG = f"Let's test app {APP_TECH_NAME}\nversion: {version.get_version()}"
 
 GROUP_DASHES_LINE = f"{'-' * 62}"
 DASHES_LINE_SHORT = f"{'-' * 20}"
@@ -141,7 +141,7 @@ class Game:
         self.player.start_time = self.start_time
         self.player.stats['levels_visited'].add(self.level.id)
 
-        pg.display.set_caption(f"{APP_NAME}_test_suite")
+        pg.display.set_caption(f"{APP_TECH_NAME}_test_suite")
 
     def tear_down(self):
         levels.Level.clean_entity_ids()

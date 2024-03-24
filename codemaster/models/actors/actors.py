@@ -417,7 +417,7 @@ class NPC(MovingActor):
                                f"level: {level.name:4}", f"{level.id + 1:3d}")
         if sorted_by_level:
             return OrderedDict(sorted([x for x in res.items()], key=lambda x: (x[1][3], x[0])))
-        return OrderedDict(sorted([x for x in res.items()]))
+        return OrderedDict(sorted([x for x in res.items()], key=lambda x: (x[0], x[1][3])))
 
 
 class PC(MovingActor):

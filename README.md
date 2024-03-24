@@ -291,7 +291,7 @@
 			  ^h:    shows this help to the console
 
 	    > Additional keys for debug mode:
-			  ^ numpad_divide:  set logger to debug. Print info for hits, etc
+			  ^ L_Alt + numpad_divide:  toggle logger to debug/info. Print info for hits, etc
 			  ^ n:              print a list of all NPCs in all levels, ordered by level
 			  ^ + shifth + n:   print a list of all NPCs in all levels, ordered by NPC name
 			  ^d:    print debug information to the console
@@ -326,6 +326,8 @@
 	                        using the full screen display mode. 
 	  -d, 			--debug
 	                        debug actions, information and traces
+	                        This does not set the log level to debug. 
+	                        Use the key shortcut ^ L_Alt + numpad_divide to toggle log levels. 
 	  -t, 			--debugtraces
 	                        show debug back traces information when something goes wrong
 
