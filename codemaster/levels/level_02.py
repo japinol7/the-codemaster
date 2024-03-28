@@ -39,8 +39,8 @@ class Level2(Level):
         super().__init__(game)
         self.id = 1
         self.name = '02'
-        self.next_level_left = 1
-        self.next_level_right = 3
+        self.next_level_left = 0
+        self.next_level_right = 2
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(2)).convert()

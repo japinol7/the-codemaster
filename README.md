@@ -3,7 +3,7 @@
 	The CodeMaster is a spin-off sci-fi mystery based on 1988 RPG platformer game Pac's Revenge.
 	program: The CodeMaster. Nightmare on Bots' Island.
     name as a package: codemaster 
-	version: 0.0.3
+	version: 0.0.4
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
@@ -18,7 +18,7 @@
 
 <img src="screenshots/screenshot1.jpg" width="980"> <br />
 <img src="screenshots/screenshot2.jpg" width="980"> <br />
-<img src="screenshots/screenshot3.jpg" width="980"> <br />
+<img src="screenshots/screenshot3.png" width="980"> <br />
 
 
 ## Videos
@@ -95,9 +95,10 @@
         > 'The Codemaster' is an open-world RPG platformer game. 
           You can move around all levels whenever it makes sense to the story.
 	> To beat the game:
-	    > In this demo, you just have to get all the batteries and files disks from the 6 levels.
+	    > In this demo, you just have to get all the batteries and files disks from aLL the levels.
 	> Levels: 
 	    > In this demo, levels are completed by getting all the batteries and files disks.
+	    > Number of levels implemented for this demo: 12.
 	> Doors: 
 	    > Use them to go to other levels.
         > To unlock a locked door you need to use the right door key.
@@ -239,27 +240,30 @@
 	> Clocks: 
 	    > Currently, clock timers do not have a real effect in the game.
           In the future, they will trigger some cool stuff.
-	> Bats:
-	    > They bite your head/neck whenever you are too close to them.
-	    > There are four types of bats:
-	        > Blue bats: They deal basic damage.
-	        > Lilac bats: They deal medium damage
-	        > Red bats: They deal a good deal of damage.
-	        > Black bats: They deal great damage.
-	> Ghosts:
-	    > Cannot be killed/hit with normal weapons.
-          Only Dark magic spells can damage them, i.e, Vortex of Doom and Doom Bolts.
-	> Snakes:
-	    > They bite you whenever you are too close to them.
-	    > Their body also gives you damage but much less than their head.
-        > You can hit only their head. So do not waste bullets on their body.
-	> Other NPCs:
-	    > Skulls.
-	    > Wolf-men.
-	    > Male vampires.
-	    > Female vampires.
+	> NPCs:
+	    > Bats:
+    	    > They bite your head/neck whenever you are too close to them.
+    	    > There are four types of bats:
+	            > Blue bats: They deal basic damage.
+	            > Lilac bats: They deal medium damage
+	            > Red bats: They deal a good deal of damage.
+    	        > Black bats: They deal great damage.
 	    > Demons. Beware, they have weapons.
+	    > Ghosts:
+	        > Cannot be killed/hit with normal weapons.
+              Only Dark magic spells can damage them, i.e, 
+              Vortex of Doom and Doom Bolts.
+	    > Mages. Beware, they have magic weapons.
+	    > Pokoyos.
+	    > Robots. Beware, they have weapons.
+	    > Skulls.
+	    > Snakes:
+    	    > They bite you whenever you are too close to them.
+    	    > Their body also gives you damage but much less than their head.
+            > You can hit only their head. So do not waste bullets on their body.
 	    > Terminator Eyes. Beware, they have weapons.
+	    > Vampires
+	    > Wolf-men.
 
 
 ## Keyboard keys

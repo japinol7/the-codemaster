@@ -26,6 +26,7 @@ class ColorName(Enum):
     GRAY10 = 16
     GRAY15 = 17
     GRAY30 = 18
+    MAGENTA = 19
 
 
 class Color:
@@ -50,3 +51,4 @@ class Color:
     GRAY10 = (28, 28, 28)
     GRAY15 = (38, 38, 38)
     GRAY30 = (77, 77, 77)
+    MAGENTA = (255, 0, 255)

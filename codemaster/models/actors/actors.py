@@ -57,6 +57,8 @@ class Actor(pg.sprite.Sprite):
         self.player = game.player
         self.last_shot_time = 0
         self.time_between_shots_base = 1200
+        self.last_spell_casted_time = 0
+        self.time_between_spell_casting_base = 7200
         self.target_of_spells_count = Counter()
 
         if not getattr(self, 'base_type', None):
@@ -110,14 +112,26 @@ class Actor(pg.sprite.Sprite):
         if not getattr(self, 'can_drop_items', None):
             self.can_drop_items = True if self.items_to_drop else False
 
+        if not getattr(self, 'hostility_level', None):
+            self.hostility_level = 1
+
         if not getattr(self, 'can_shot', None):
             self.can_shot = False
+
+        if not getattr(self, 'can_cast_spells', None):
+            self.can_cast_spells = False
 
         if not getattr(self, 'shot_x_delta_max', None):
             self.shot_x_delta_max = 500
 
         if not getattr(self, 'shot_y_delta', None):
             self.shot_y_delta = 75
+
+        if not getattr(self, 'spell_cast_x_delta_max', None):
+            self.spell_cast_x_delta_max = 500
+
+        if not getattr(self, 'spell_cast_y_delta_max', None):
+            self.spell_cast_y_delta_max = 500
 
         self.can_be_shot_by_its_owner = True
         self.name = name or 'unnamed'
@@ -186,7 +200,7 @@ class Actor(pg.sprite.Sprite):
         if self.frame_index >= self.images_sprite_no:
             self.frame_index = 0
 
-        if self.can_shot:
+        if self.hostility_level > 0 and self.can_shot:
             is_between_y_boundaries = (self.player.rect.y - self.shot_y_delta < self.rect.y
                                        < self.player.rect.y + self.shot_y_delta)
             shot_x_delta = abs(self.rect.x - self.player.rect.x)
@@ -198,6 +212,14 @@ class Actor(pg.sprite.Sprite):
                     and self.player.rect.x >= self.rect.x
                     and is_between_y_boundaries):
                 self.update_shot_bullet()
+
+        if self.hostility_level > 0 and self.can_cast_spells:
+            is_between_x_boundaries = (self.player.rect.x - self.spell_cast_x_delta_max < self.rect.x
+                                       < self.player.rect.x + self.spell_cast_x_delta_max)
+            is_between_y_boundaries = (self.player.rect.y - self.spell_cast_y_delta_max < self.rect.y
+                                       < self.player.rect.y + self.spell_cast_y_delta_max)
+            if is_between_x_boundaries and is_between_y_boundaries:
+                self.update_cast_spell()
 
         self.update_sprite_image()
         self.update_when_hit()
@@ -225,6 +247,8 @@ class Actor(pg.sprite.Sprite):
             self.stats.health -= bullet.attack_power
             has_been_hit = True
             bullet.kill()
+            if bullet.owner == self.player and self.hostility_level == 0:
+                self.hostility_level = 1
 
         has_been_hit and self.player.sound_effects and self.player.enemy_hit_sound.play()
         if self.stats.health <= 0:
@@ -250,6 +274,15 @@ class Actor(pg.sprite.Sprite):
             self.shot_bullet(BulletType.T1_LASER1)
         else:
             self.shot_bullet(BulletType.T2_LASER2)
+
+    def update_cast_spell(self):
+        time_delta = self.game.current_time - self.last_spell_casted_time
+        if time_delta > self.stats.time_between_spell_casting:
+            self.last_spell_casted_time = self.game.current_time
+            self.update_cast_spell_cast_actions()
+
+    def update_cast_spell_cast_actions(self):
+        pass
 
     def draw_health(self):
         if self.stats.health < self.stats.health_total - 1:
@@ -417,7 +450,7 @@ class NPC(MovingActor):
                                f"level: {level.name:4}", f"{level.id + 1:3d}")
         if sorted_by_level:
             return OrderedDict(sorted([x for x in res.items()], key=lambda x: (x[1][3], x[0])))
-        return OrderedDict(sorted([x for x in res.items()], key=lambda x: (x[0], x[1][3])))
+        return OrderedDict(sorted([x for x in res.items()]))
 
 
 class PC(MovingActor):

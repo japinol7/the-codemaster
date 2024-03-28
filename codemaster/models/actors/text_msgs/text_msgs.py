@@ -5,7 +5,7 @@ from enum import Enum
 
 import pygame as pg
 
-from codemaster.config.constants import BM_TEXT_MSGS_FOLDER, MSG_PC_DURATION
+from codemaster.config.constants import BM_TEXT_MSGS_FOLDER, MSG_PC_DURATION, MSG_PC_DELTA_X, MSG_PC_DELTA_Y
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorMsg
 from codemaster.models.stats import Stats
@@ -19,7 +19,7 @@ class TextMsgPosition(Enum):
     """Text msg positions."""
     NONE = 0
     ABSOLUTE = 1
-    NEAR_PC = 2
+    NEAR_ACTOR = 2
     NEAR_OBJECT = 3
 
 
@@ -27,11 +27,14 @@ class TextMsg(ActorMsg):
     """Represents a base text message.
     It is not intended to be instantiated.
     """
-    def __init__(self, x, y, game, time_in_secs, name=None):
+    def __init__(self, x, y, game, time_in_secs, name=None, delta_x=0, delta_y=0, owner=None):
+        self.owner = owner
         self.file_folder = BM_TEXT_MSGS_FOLDER
         self.file_name_key = 'text_msgs'
         self.images_sprite_no = 1
         self.category_type = ActorCategoryType.TEXT_MSG
+        self.delta_x = delta_x
+        self.delta_y = delta_y
         self.stats = Stats()
         self.stats.health = self.stats.health_total = 1
         self.stats.power = self.stats.power_total = 0
@@ -72,12 +75,17 @@ class TextMsg(ActorMsg):
                      width=1)
 
     @staticmethod
-    def create(text, game, time_in_secs=MSG_PC_DURATION, msg_class=None, x=None, y=None, color=None):
-        class_ = msg_class or TextMsgPlayer
+    def create(text, game, time_in_secs=MSG_PC_DURATION, msg_class=None, x=None, y=None,
+               color=None, delta_x=None, delta_y=None, owner=None):
+        class_ = msg_class or TextMsgActor
+        owner = owner or game.player
+        delta_x = MSG_PC_DELTA_X if delta_x is None else delta_x
+        delta_y = MSG_PC_DELTA_Y if delta_y is None else delta_y
         text_msg = class_(
-               x or game.player.rect.x,
-               y or game.player.rect.y - 60,
-               game, time_in_secs, name=text, color=color)
+               x or owner.rect.x - delta_x,
+               y or owner.rect.y - delta_y,
+               game, time_in_secs, name=text,
+               color=color, delta_x=delta_x, delta_y=delta_y, owner=owner)
         game.active_sprites.add([text_msg])
         game.text_msg_sprites.add([text_msg])
 
@@ -86,17 +94,20 @@ class TextMsg(ActorMsg):
         game.text_msg_pc_sprites.add([text_msg])
 
         text_msg.update()
+        return text_msg
 
 
 class TextMsgAbsolute(TextMsg):
     """Represents a text message in an absolute position."""
 
-    def __init__(self, x, y, game, time_in_secs, name=None, color=None):
+    def __init__(self, x, y, game, time_in_secs, name=None, color=None,
+                 delta_x=0, delta_y=0, owner=None):
         self.file_mid_prefix = 'timer_01'
         self.color = color
         self.msg_position = TextMsgPosition.ABSOLUTE
         self.type = ActorType.TEXT_MSG_ABS
-        super().__init__(x, y, game, name=name, time_in_secs=time_in_secs)
+        super().__init__(x, y, game, name=name, time_in_secs=time_in_secs,
+                         delta_x=delta_x, delta_y=delta_y, owner=owner)
 
     def draw_text(self):
         libg_jp.draw_text_rendered(
@@ -106,19 +117,22 @@ class TextMsgAbsolute(TextMsg):
             space_btw_chars=12, space_btw_words=14)
 
 
-class TextMsgPlayer(TextMsg):
-    """Represents a text message from the player."""
+class TextMsgActor(TextMsg):
+    """Represents a text message from an actor."""
 
-    def __init__(self, x, y, game, time_in_secs, name=None, color=None):
+    def __init__(self, x, y, game, time_in_secs, name=None, color=None,
+                 delta_x=0, delta_y=0, owner=None):
         self.file_mid_prefix = 'timer_01'
         self.color = color
-        self.msg_position = TextMsgPosition.NEAR_PC
-        self.type = ActorType.TEXT_MSG_PLAYER
-        super().__init__(x, y, game, name=name, time_in_secs=time_in_secs)
+        self.msg_position = TextMsgPosition.NEAR_ACTOR
+        self.type = ActorType.TEXT_MSG_PLAYER if owner == game.player else ActorType.TEXT_MSG_ACTOR
+
+        super().__init__(x, y, game, name=name, time_in_secs=time_in_secs,
+                         delta_x=delta_x, delta_y=delta_y, owner=owner)
 
     def update(self):
-        self.rect.x = self.player.rect.x - 14
-        self.rect.bottom = self.player.rect.y - 35
+        self.rect.x = self.owner.rect.x - self.delta_x
+        self.rect.bottom = self.owner.rect.y - self.delta_y
         super().update()
 
     def draw_text(self):

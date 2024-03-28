@@ -80,6 +80,7 @@ class ActorType(Enum):
     DOOR_LEFT_WHITE = 615
     DOOR_LEFT_GOLD = 616
     DOOR_LEFT_RED = 617
+    DOOR_LEFT_MAGENTA = 618
     DOOR_RIGHT_GREEN = 651
     DOOR_RIGHT_BLUE = 652
     DOOR_RIGHT_YELLOW = 653
@@ -87,6 +88,7 @@ class ActorType(Enum):
     DOOR_RIGHT_WHITE = 655
     DOOR_RIGHT_GOLD = 656
     DOOR_RIGHT_RED = 657
+    DOOR_RIGHT_MAGENTA = 658
     # Doors
     DOOR_KEY_GREEN = 711
     DOOR_KEY_BLUE = 712
@@ -95,6 +97,7 @@ class ActorType(Enum):
     DOOR_KEY_WHITE = 715
     DOOR_KEY_GOLD = 716
     DOOR_KEY_RED = 717
+    DOOR_KEY_MAGENTA = 718
     # Water
     PLAT_WATER_A = 851
     PLAT_WATER_A_DEEP = 852
@@ -124,6 +127,7 @@ class ActorType(Enum):
     # Text Messages
     TEXT_MSG_ABS = 5301
     TEXT_MSG_PLAYER = 5302
+    TEXT_MSG_ACTOR = 5303
     # Text Selectors
     SELECTOR_A = 5401
     # Magic Spells
@@ -149,6 +153,9 @@ class ActorType(Enum):
     BAT_BLACK = 1334
     # Wolfmen
     WOLFMAN_MALE = 1351
+    # Pokoyos
+    POKOYO_A = 1361
+    POKOYO_B = 1362
     # Vampires
     VAMPIRE_MALE = 1371
     VAMPIRE_FEMALE = 1372
@@ -173,3 +180,8 @@ class ActorType(Enum):
     TERMINATOR_BIG_EYE_BLUE = 1612
     TERMINATOR_BIG_EYE_YELLOW = 1613
     TERMINATOR_BIG_EYE_RED = 1614
+    # Mages
+    MAGE_FEMALE_A = 1625
+    # Robots
+    ROBOT_A = 1640
+    ROBOT_B = 1641

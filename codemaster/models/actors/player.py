@@ -133,12 +133,13 @@ class Player(pg.sprite.Sprite):
             ActorType.APPLE_RED.name: 0,
             'door_keys': 0,
             'door_keys_stock': [],
-            'door_keys_type': {'G': 0, 'B': 0, 'A': 0, 'Y': 0, 'R': 0},
+            'door_keys_type': {'G': 0, 'B': 0, 'A': 0, 'Y': 0, 'R': 0, 'M': 0},
             ActorType.DOOR_KEY_GREEN.name: 0,
             ActorType.DOOR_KEY_BLUE.name: 0,
             ActorType.DOOR_KEY_AQUA.name: 0,
             ActorType.DOOR_KEY_YELLOW.name: 0,
             ActorType.DOOR_KEY_RED.name: 0,
+            ActorType.DOOR_KEY_MAGENTA.name: 0,
             'energy_shields_stock': [],
             'magic_attack_spells': {},
             'mines': 0,
@@ -403,6 +404,8 @@ class Player(pg.sprite.Sprite):
             enemy_hit_list = pg.sprite.spritecollide(self, self.level.npcs, False)
             has_been_hit = False
             for enemy in enemy_hit_list:
+                if enemy.hostility_level == 0:
+                    continue
                 if (self.is_energy_shield_activated and self.direction == DIRECTION_RIGHT
                         and enemy.is_actor_on_the_left(self)):
                     continue

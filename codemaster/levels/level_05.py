@@ -43,8 +43,8 @@ class Level5(Level):
         super().__init__(game)
         self.id = 4
         self.name = '05'
-        self.next_level_left = 4
-        self.next_level_right = 6
+        self.next_level_left = 3
+        self.next_level_right = 5
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(5)).convert()

@@ -7,6 +7,8 @@ import sys
 
 from codemaster.version import version
 
+N_LEVELS = 12
+
 SCREEN_WIDTH = 1160
 SCREEN_HEIGHT = 778
 # Screen Scale. Strongly recommended 1.  Other values: 1.1, 1.15, 1.2, 1.25
@@ -47,6 +49,13 @@ DIRECTION_RIP = 5    # Special direction to use when a player character is dead
 
 MSG_PC_DURATION = 3  # in secs
 MSG_PC_DUR_SHORT = 2
+MSG_PC_DELTA_X = 14
+MSG_PC_DELTA_Y = 35
+
+MSG_NPC_DURATION = 3
+MSG_NPC_DUR_SHORT = 2
+MSG_NPC_DURATION_LONG = 5
+MSG_NPC_DURATION_VERY_LONG = 9
 
 DOOR_STD_WIDTH = 130
 DOOR_STD_HEIGHT = 188
@@ -171,9 +180,12 @@ FILE_NAMES = {
     'im_en_skulls': ('skull', 'png'),
     'im_en_bats': ('im_bat', 'png'),
     'im_en_wolfmen': ('wolfman', 'png'),
+    'im_en_pokoyos': ('pokoyo', 'png'),
     'im_en_vampires': ('vampire', 'png'),
     'im_en_demons': ('demon', 'png'),
     'im_terminator_eyes': ('terminator_eye', 'png'),
+    'im_en_mages': ('mage', 'png'),
+    'im_en_robots': ('robot', 'png'),
     'im_files_disks': ('files_disk', 'png'),
     'im_computer': ('computer', 'png'),
     'im_apples': ('im_apple', 'png'),

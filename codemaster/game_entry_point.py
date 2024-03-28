@@ -38,7 +38,7 @@ from codemaster.models.actors.selectors import SelectorA
 from codemaster.level_scroll_screen import level_scroll_shift_control, change_screen_level
 
 
-START_LEVEL = 0
+START_LEVEL = 10
 
 
 class Game:
@@ -164,15 +164,7 @@ class Game:
         self.selector_sprites = pg.sprite.Group()
 
         # Initialize levels
-        self.levels = []
-        self.levels.extend([
-             levels.Level1(self),
-             levels.Level2(self),
-             levels.Level3(self),
-             levels.Level4(self),
-             levels.Level5(self),
-             levels.Level6(self),
-             ])
+        self.levels = levels.Level.factory(levels_module=levels, game=self)
         self.levels_qty = len(self.levels)
 
         init_options = file_read_list(INIT_OPTIONS_FILE, 1)
@@ -379,7 +371,6 @@ class Game:
                     elif event.key == pg.K_KP_DIVIDE:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
                                 and pg.key.get_mods() & pg.KMOD_LALT:
-                            self.player.debug = not self.player.debug
                             if log.level != logging.DEBUG:
                                 log.setLevel(logging.DEBUG)
                                 log.info("Set logger level to: Debug")

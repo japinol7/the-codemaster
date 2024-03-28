@@ -8,8 +8,8 @@ import pygame as pg
 
 from codemaster.config.constants import (
     FILE_NAMES, BM_BACKGROUNDS_FOLDER,
-    DOOR_POSITION_L,
-    )
+    DOOR_POSITION_L, N_LEVELS,
+)
 from codemaster.tools.logger.logger import log
 from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryType
 from codemaster.clean_new_game import clean_entity_ids
@@ -211,6 +211,11 @@ class Level:
 
         self.all_sprites.add(actors)
         snake_pieces and self.all_sprites.add(snake_pieces)
+
+    @staticmethod
+    def factory(levels_module, game):
+        return [getattr(levels_module, f"Level{level_id}")(game)
+                for level_id in range(1, N_LEVELS + 1)]
 
     @staticmethod
     def file_name_im_get(id_):
