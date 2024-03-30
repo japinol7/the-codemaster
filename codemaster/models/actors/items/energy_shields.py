@@ -82,25 +82,25 @@ class EnergyShield(ActorItem):
             self.image = Actor.sprite_images[self.type.name][0]
 
     def update(self):
-        self.rect.y = self.player.rect.y - 8
-        self.direction = DIRECTION_LEFT if self.player.direction == DIRECTION_LEFT else DIRECTION_RIGHT
-        if self.player.direction == DIRECTION_RIGHT:
-            self.rect.x = self.player.rect.x + self.rect.w + 22
-        elif self.player.direction == DIRECTION_LEFT:
-            self.rect.x = self.player.rect.x - self.rect.w - 8
+        self.rect.y = self.owner.rect.y - 8
+        self.direction = DIRECTION_LEFT if self.owner.direction == DIRECTION_LEFT else DIRECTION_RIGHT
+        if self.owner.direction == DIRECTION_RIGHT:
+            self.rect.x = self.owner.rect.x + self.rect.w + 22
+        elif self.owner.direction == DIRECTION_LEFT:
+            self.rect.x = self.owner.rect.x - self.rect.w - 8
 
-        if self.is_activated and self.owner == self.player:
-            self.owner.stats['power'] -= self.power_cost
-            if self.owner.stats['power'] <= 0:
+        if self.is_activated:
+            self.owner.power -= self.power_cost
+            if self.owner.power <= 0:
                 self.deactivate()
 
         super().update()
 
     def update_sprite_image(self):
         image_direction = self.direction
-        if self.stats.health < self.stats.health_total // 3.6:
+        if self.health < self.stats.health_total // 3.6:
             image_direction = 3 if self.direction == DIRECTION_LEFT else 4
-        elif self.stats.health < self.stats.health_total // 1.9:
+        elif self.health < self.stats.health_total // 1.9:
             image_direction = 5 if self.direction == DIRECTION_LEFT else 6
         self.image = Actor.sprite_images[self.type.name][image_direction][int(self.frame_index)]
 
@@ -116,15 +116,17 @@ class EnergyShield(ActorItem):
         self.stats.power_total = self.stats.power
 
     def kill_hook(self):
-        self.player.stats['power'] -= self.power_killed_cost
+        if self.owner == self.game.player:
+            self.owner.power -= self.power_killed_cost
         self.deactivate()
+
         super().kill_hook()
 
     def activate(self):
         self.is_activated = True
         self.owner.is_energy_shield_activated = True
-        if self.stats.health < 0:
-            self.stats.health = self.stats.health_total
+        if self.health < 0:
+            self.health = self.stats.health_total
         self.game.active_sprites.add(self)
 
     def deactivate(self):
@@ -149,5 +151,5 @@ class EnergyShieldA(EnergyShield):
 
         self.power_cost = 0.02
         self.power_killed_cost = 12
-        self.stats.health = self.stats.health_total = 150
+        self.health = self.stats.health_total = 150
         self.stats.strength = self.stats.strength_total = 1

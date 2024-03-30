@@ -1,12 +1,21 @@
 """Module mage."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+from random import randint
+
 import pygame as pg
 
-from codemaster.config.constants import BM_NPCS_FOLDER, MSG_NPC_DURATION_LONG, DIRECTION_RIP
-from codemaster.tools.logger.logger import log
+from codemaster.config.constants import (
+    BM_NPCS_FOLDER,
+    MSG_NPC_DURATION_LONG,
+    DIRECTION_LEFT,
+    DIRECTION_RIGHT,
+    DIRECTION_RIP,
+    )
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import NPC, NPC_STRENGTH_BASE
+from codemaster.models.actors.spells import DrainLifeA, DrainLifeB, VortexOfDoomB
+from codemaster.models.actors.items.energy_shields import EnergyShieldA
 from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.models.stats import Stats
 
@@ -41,7 +50,8 @@ class MageFemaleA(Mage):
         self.type = ActorType.MAGE_FEMALE_A
 
         self.stats = Stats()
-        self.stats.power = self.stats.power_total = 0.07
+        self.stats.power = self.stats.power_total = NPC_STRENGTH_BASE
+        self.stats.power_recovery = 10
         self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 7
         self.stats.health = self.stats.health_total = NPC_STRENGTH_BASE * 8
         self.msg_texts = [
@@ -60,12 +70,22 @@ class MageFemaleA(Mage):
                          border_top=border_top, border_down=border_down,
                          items_to_drop=items_to_drop)
 
+        self.magic_resistance = 150
+        self.stats.energy_shields_stock = [EnergyShieldA(self.rect.x, self.rect.y, self.game)]
+        self.stats.energy_shield = self.stats.energy_shields_stock[0]
+        self.stats.energy_shield.owner = self
         self.hostility_level = 0
         self.stats.time_between_spell_casting = 1000 # self.time_between_spell_casting_base
         self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.6
         self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
 
+    def kill_hook(self):
+        self.stats.energy_shield.kill()
+        super().kill_hook()
+
     def update_after_inc_index_hook(self):
+        self.direction = DIRECTION_LEFT if self.is_actor_on_the_left(self.player) else DIRECTION_RIGHT
+
         if self.msg_texts and not self.msgs:
             is_between_x_boundaries = (self.player.rect.x - self.msgs_delta_max[0] < self.rect.x
                                        < self.player.rect.x + self.msgs_delta_max[0])
@@ -85,15 +105,30 @@ class MageFemaleA(Mage):
         super().update_after_inc_index_hook()
 
     def update_cast_spell_cast_actions(self):
-        pc = self.player
-        attack_power = 5
+        if not self.stats.energy_shield.is_activated:
+            self.recover_power()
+            self.stats.energy_shield.activate()
 
-        if pc.direction == DIRECTION_RIP or pc.invulnerable:
-            return
-        log.debug(f"{pc.id} hit by {self.id}, "
-                  f"pc_health: {str(round(pc.stats['health'], 2))}, "
-                  f"magic_attach_power: {str(attack_power)}")
-        pc.stats['health'] -= attack_power
-        if pc.stats['health'] <= 0:
-            log.debug(f"{pc.id}, !!! Dead by magic_attach {self.id} !!!")
-            pc.die_hard()
+        probability_to_cast_vortex_b = 8
+        probability_to_cast_spell_a = 13
+        dice_shot = randint(1, 100)
+        if all([
+            self.game.player.direction != DIRECTION_RIP,
+            dice_shot + probability_to_cast_vortex_b >= 100,
+            sum(1 for x in self.game.level.magic_sprites
+                if x.target == self.player and x.type.name == ActorType.VORTEX_OF_DOOM_B.name) < 1,
+        ]):
+            spell_class = VortexOfDoomB
+        elif dice_shot + probability_to_cast_spell_a >= 100:
+            spell_class = DrainLifeA
+        else:
+            spell_class = DrainLifeB
+
+        delta_x = -20 if self.direction == DIRECTION_LEFT else 40
+        magic_attack = spell_class(
+            self.rect.x+delta_x, self.rect.y-10, self.game,
+            is_from_player_shot=False, owner=self,
+            target=self.player)
+        self.game.level.magic_sprites.add(magic_attack)
+        self.player.target_of_spells_count[spell_class.__name__] += 1
+        self.game.level.spells_on_level_count[spell_class.__base__.__name__] += 1

@@ -119,6 +119,7 @@ class ActorType(Enum):
     EXPLOSION_MAGIC_C2 = 5054
     EXPLOSION_MAGIC_C3 = 5055
     EXPLOSION_MAGIC_C4 = 5056
+    EXPLOSION_MAGIC_C5 = 5057
     # Energy shields
     ENERGY_SHIELD_A = 5211
     # Clocks
@@ -136,6 +137,8 @@ class ActorType(Enum):
     LIGHTNING_BOLT_A = 5503
     VORTEX_OF_DOOM_A = 5504
     VORTEX_OF_DOOM_B = 5505
+    DRAIN_LIFE_A = 5506
+    DRAIN_LIFE_B = 5507
     # Skulls
     SKULL_GREEN = 1201
     SKULL_BLUE = 1202

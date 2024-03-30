@@ -121,6 +121,9 @@ class Actor(pg.sprite.Sprite):
         if not getattr(self, 'can_cast_spells', None):
             self.can_cast_spells = False
 
+        if not getattr(self, 'is_magic_item', None):
+            self.is_magic_item = False
+
         if not getattr(self, 'shot_x_delta_max', None):
             self.shot_x_delta_max = 500
 
@@ -194,6 +197,30 @@ class Actor(pg.sprite.Sprite):
     def init_after_load_sprites_hook(self):
         pass
 
+    @property
+    def power(self):
+        return self.stats.power
+
+    @power.setter
+    def power(self, value):
+        self.stats.power = value
+
+    @property
+    def health(self):
+        return self.stats.health
+
+    @health.setter
+    def health(self, value):
+        self.stats.health = value
+
+    @property
+    def magic_resistance(self):
+        return self.stats.magic_resistance
+
+    @magic_resistance.setter
+    def magic_resistance(self, value):
+        self.stats.magic_resistance = value
+
     def update(self):
         self.frame_index += self.animation_speed
         self.update_after_inc_index_hook()
@@ -221,6 +248,9 @@ class Actor(pg.sprite.Sprite):
             if is_between_x_boundaries and is_between_y_boundaries:
                 self.update_cast_spell()
 
+        if self.power is None or self.power < 0:
+            self.power = 0
+
         self.update_sprite_image()
         self.update_when_hit()
 
@@ -242,8 +272,9 @@ class Actor(pg.sprite.Sprite):
                 continue
             if not self.can_be_shot_by_its_owner and self.owner == bullet.owner:
                 continue
-            log.debug(f"{self.id} hit by {bullet.id}, health: {str(round(self.stats.health, 2))}, "
-                      f"bullet_power: {str(bullet.attack_power)}")
+            self.game.is_log_debug and log.debug(
+                f"{self.id} hit by {bullet.id}, health: {str(round(self.stats.health, 2))}, "
+                f"bullet_power: {str(bullet.attack_power)}")
             self.stats.health -= bullet.attack_power
             has_been_hit = True
             bullet.kill()
@@ -252,7 +283,7 @@ class Actor(pg.sprite.Sprite):
 
         has_been_hit and self.player.sound_effects and self.player.enemy_hit_sound.play()
         if self.stats.health <= 0:
-            log.debug(f"{self.id}, !!! Dead by bullet {bullet.id} !!!")
+            self.game.is_log_debug and log.debug(f"{self.id}, !!! Dead by bullet {bullet.id} !!!")
             self.player.sound_effects and self.player.npc_killed_sound.play()
             if bullet.is_a_player_shot:
                 self.player.stats['score'] += ExperiencePoints.xp_points[self.type.name]
@@ -308,20 +339,21 @@ class Actor(pg.sprite.Sprite):
 
         for item in self.items_to_drop:
             lucky_drop = randint(1, 100)
-            log.debug(f"{self.id}, lucky_drop_dice: {str(lucky_drop)}, "
-                      f"probability_to_drop: {item.probability_to_drop:3d}, "
-                      f"item type: {item.type}")
+            self.game.is_log_debug and log.debug(
+                f"{self.id}, lucky_drop_dice: {str(lucky_drop)}, "
+                f"probability_to_drop: {item.probability_to_drop:3d}, "
+                f"item type: {item.type}")
             if lucky_drop + item.probability_to_drop >= 100:
-                log.debug("Create item to drop")
+                self.game.is_log_debug and log.debug("Create item to drop")
                 new_item = item.class_(
                     x=self.rect.x + item.x_delta, y=self.rect.y + item.y_delta, game=self.game,
                     **item.args)
                 item.add_to_list.add(new_item)
                 self.game.level.all_sprites.add(new_item)
-                log.debug(f"Dropped: {new_item.id}")
+                self.game.is_log_debug and log.debug(f"Dropped: {new_item.id}")
 
     def is_actor_on_the_left(self, actor):
-        if actor.rect.x < self.rect.x:
+        if actor.rect.x <= self.rect.x:
             return True
         return False
 
@@ -329,6 +361,34 @@ class Actor(pg.sprite.Sprite):
         if actor.rect.x > self.rect.x:
             return True
         return False
+
+    def is_actor_on_top(self, actor):
+        if actor.rect.y <= self.rect.y:
+            return True
+        return False
+
+    def is_actor_on_bottom(self, actor):
+        if actor.rect.y > self.rect.y:
+            return True
+        return False
+
+    def is_actor_on_the_left_top(self, actor):
+        if self.is_actor_on_the_left(actor) and self.is_actor_on_top(actor):
+            return True
+        return False
+
+    def is_actor_on_the_left_bottom(self, actor):
+        if self.is_actor_on_the_left(actor) and self.is_actor_on_bottom(actor):
+            return True
+        return False
+
+    def recover_power(self):
+        if self.is_a_player:
+            return
+
+        self.stats.power += self.stats.power_recovery
+        if self.stats.power > self.stats.power_total:
+            self.stats.power = self.stats.power_total
 
     @staticmethod
     def file_name_im_get(folder, file_name_key, mid_prefix, suffix_index):

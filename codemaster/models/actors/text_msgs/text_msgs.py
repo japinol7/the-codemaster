@@ -57,7 +57,8 @@ class TextMsg(ActorMsg):
         pass
 
     def die_hard(self):
-        log.debug(f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
+        self.game.is_log_debug and log.debug(
+            f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
         self.kill()
 
     def draw_speech_balloon(self):

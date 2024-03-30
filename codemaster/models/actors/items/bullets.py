@@ -177,7 +177,7 @@ class Bullet(pg.sprite.Sprite):
 
         self.is_a_player_shot = self.owner.__getattribute__('is_a_player')
 
-        # Add bullet to the active sprite list
+        # Add a bullet to the active sprite list
         self.level.bullets.add(self)
         self.level.all_sprites.add(self)
 
@@ -217,13 +217,13 @@ class Bullet(pg.sprite.Sprite):
         for pc in players_hit_list:
             if pc.direction == DIRECTION_RIP or pc.invulnerable:
                 continue
-            log.debug(f"{pc.id} hit by {self.id}, "
-                      f"pc_health: {str(round(pc.stats['health'], 2))}, "
-                      f"bullet_power: {str(self.attack_power)}")
+            self.game.is_log_debug and log.debug(
+                f"{pc.id} hit by {self.id}, pc_health: {str(round(pc.stats['health'], 2))}, "
+                f"bullet_power: {str(self.attack_power)}")
             pc.stats['health'] -= self.attack_power
             self.kill()
             if pc.stats['health'] <= 0:
-                log.debug(f"{pc.id}, !!! Dead by bullet {self.id} !!!")
+                self.game.is_log_debug and log.debug(f"{pc.id}, !!! Dead by bullet {self.id} !!!")
                 pc.die_hard()
             self.kill()
 

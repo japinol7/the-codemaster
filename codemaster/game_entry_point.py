@@ -38,7 +38,7 @@ from codemaster.models.actors.selectors import SelectorA
 from codemaster.level_scroll_screen import level_scroll_shift_control, change_screen_level
 
 
-START_LEVEL = 10
+START_LEVEL = 0
 
 
 class Game:
@@ -90,6 +90,7 @@ class Game:
         self.score_bars = None
         self.help_info = None
         self.debug_info = None
+        self.is_log_debug = False
         self.current_song = 0
         self.writen_info_game_over_to_file = False
         self.level_no = 0
@@ -343,10 +344,12 @@ class Game:
                     elif event.key == pg.K_n:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
                             log.info("NPCs health from all levels, ordered by NPC name:")
-                            log.debug(utils.pretty_dict_to_string(NPC.get_npcs_health(self, sorted_by_level=False)))
+                            self.is_log_debug and log.debug(
+                                utils.pretty_dict_to_string(NPC.get_npcs_health(self, sorted_by_level=False)))
                         elif self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
                             log.info("NPCs health from all levels, ordered by level:")
-                            log.debug(utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
+                            self.is_log_debug and log.debug(
+                                utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
                     elif event.key == pg.K_h:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.help_info.print_help_keys()
@@ -373,9 +376,11 @@ class Game:
                                 and pg.key.get_mods() & pg.KMOD_LALT:
                             if log.level != logging.DEBUG:
                                 log.setLevel(logging.DEBUG)
+                                self.is_log_debug = True
                                 log.info("Set logger level to: Debug")
                             else:
                                 log.setLevel(logging.INFO)
+                                self.is_log_debug = False
                                 log.info("Set logger level to: Info")
                     elif event.key == pg.K_KP_MINUS:
                         if self.super_cheat and pg.key.get_mods() & pg.KMOD_LCTRL:

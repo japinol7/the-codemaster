@@ -56,7 +56,7 @@ class Level6(Level):
         self.background = pg.image.load(self.file_name_im_get(6)).convert()
         self.level_limit = -2700
         self.level_limit_top = -1000
-        self.player_start_pos_left = (250, 480)
+        self.player_start_pos_left = (220, 480)
         self.player_start_pos_right = (600, 480)
         self.player_start_pos_rtop = (900, -390)
         self.player_start_pos_ltop = (80, 100)

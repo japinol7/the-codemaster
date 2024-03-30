@@ -224,6 +224,7 @@ FILE_NAMES = {
     'im_lightning_bolt':  ('lightning_bolt', 'png'),
     'im_doom_bolt':  ('doom_bolt', 'png'),
     'im_vortex_of_doom': ('vortex_of_doom', 'png'),
+    'im_drain_life':  ('drain_life', 'png'),
     'snd_death_pl': ('death_pl_02',  SOUND_FORMAT),
     'snd_apple_hit': ('apple_found', SOUND_FORMAT),
     'snd_pl_battery_found': ('battery_found_j01', SOUND_FORMAT),

@@ -174,7 +174,7 @@ class Level:
                 if actor.border_right:
                     actor.border_right -= self.world_shift
 
-            log.debug(f"Add actor {actor.category_type} to level {self}")
+            self.game.is_log_debug and log.debug(f"Add actor {actor.category_type} to level {self}")
             if actor.category_type == ActorCategoryType.NPC:
                 self.npcs.add(actor)
             elif actor.category_type == ActorCategoryType.BATTERY:
