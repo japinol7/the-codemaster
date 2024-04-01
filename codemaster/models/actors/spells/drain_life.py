@@ -6,9 +6,9 @@ import pygame as pg
 from codemaster.config.constants import BM_MAGIC_FOLDER, DIRECTION_RIP
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorMagic
-from codemaster.models.actors.player import PL_MAGIC_RESISTANCE
 from codemaster.models.stats import Stats
 from codemaster.config.settings import Settings
+from codemaster import resources
 from codemaster.tools.logger.logger import log
 from codemaster.tools.utils.utils import Point
 
@@ -41,7 +41,7 @@ class DrainLife(ActorMagic):
 
         self.origin = Point(self.rect.x, self.rect.y)
         self.change_y = 2
-        self.player.sound_effects and self.player.explosion_sound.play()
+        self.player.sound_effects and resources.Resource.bullet_t4_sound.play()
 
     def explosion(self):
         """When hit the target, explodes."""
@@ -115,7 +115,7 @@ class DrainLife(ActorMagic):
 
 
 class DrainLifeB(DrainLife):
-    """Represents a drain life spell of type A."""
+    """Represents a drain life spell of type B."""
     actor_type = ActorType.DRAIN_LIFE_B
     max_spells_on_target = 2
     power_min_to_use = {ActorType.DRAIN_LIFE_B.name: 30,
@@ -131,7 +131,7 @@ class DrainLifeB(DrainLife):
                          is_from_player_shot=is_from_player_shot,
                          owner=owner, target=target)
 
-        self.stats.power = self.stats.power_total = PL_MAGIC_RESISTANCE + 4
+        self.stats.power = self.stats.power_total = self.game.player.stats['magic_resistance_base'] + 4
         self.max_distance_to_origin = 1200
 
 
@@ -152,5 +152,5 @@ class DrainLifeA(DrainLife):
                          is_from_player_shot=is_from_player_shot,
                          owner=owner, target=target)
 
-        self.stats.power = self.stats.power_total = PL_MAGIC_RESISTANCE + 9
+        self.stats.power = self.stats.power_total = self.game.player.stats['magic_resistance_base'] + 9
         self.max_distance_to_origin = 1200

@@ -3,6 +3,7 @@
 __author__ = 'Joan A. Pinol  (japinol)'
 
 import traceback
+from collections import namedtuple
 
 import pygame as pg
 
@@ -21,7 +22,7 @@ from codemaster.resources import Resource
 from codemaster.config.settings import Settings
 from codemaster import levels
 from codemaster.level_scroll_screen import level_scroll_shift_control
-from suiteoftests.levels.level_test_1 import LevelTest1
+from suiteoftests import levels as test_levels
 
 PLAYER_HEALTH_SUPER_HERO = 90_000
 CLOCK_TIMER_IN_SECS = 10
@@ -33,6 +34,11 @@ IN_GAME_START_MSG = f"Let's test app {APP_TECH_NAME}\nversion: {version.get_vers
 
 GROUP_DASHES_LINE = f"{'-' * 62}"
 DASHES_LINE_SHORT = f"{'-' * 20}"
+
+
+TestMethodWithSetupLevels = namedtuple(
+    'TestMethodWithSetupLevels', ['test', 'level_name_nums', 'starting_level_n', 'skip']
+    )
 
 
 class Game:
@@ -47,16 +53,20 @@ class Game:
         self.test_aborted_count = 0
         self.test_failed_count = 0
         self.test_passed_count = 0
-        self.tests_total = 2
-        self.tests_passed = []
-        self.tests_failed = []
+        self.test_skipped_count = 0
+        self.tests_total = 0
         self.tests_aborted = []
+        self.tests_failed = []
+        self.tests_passed = []
+        self.tests_skipped = []
+        self.tests_skipped_text = ''
 
         self.done = False
         self.aborted = False
         self.clock = None
         self.clock_timer = None
         self.start_time = None
+        self.is_log_debug = True
         self.active_sprites = None
         self.clock_sprites = None
         self.text_msg_sprites = None
@@ -74,17 +84,35 @@ class Game:
     def main(self):
         pg.init()
         tests = [
-            self.test_big_jump_and_fetch_3_batteries_n_1_disk,
-            self.test_big_jump_and_fetch_1_file_disk,
-            self.test_fetch_two_apples,
+            TestMethodWithSetupLevels(
+                self.test_big_jump_and_fetch_1_life_n_7_potions_power, [2], 0, skip=False,
+                ),
+            TestMethodWithSetupLevels(
+                self.test_big_jump_and_fetch_3_batteries_n_1_disk, [1], 0, skip=False,
+                ),
+            TestMethodWithSetupLevels(
+                self.test_big_jump_and_fetch_1_file_disk, [1], 0, skip=False,
+                ),
+            TestMethodWithSetupLevels(
+                self.test_fetch_two_apples, [1], 0, skip=False,
+                ),
             ]
-        self.tests_total = len(tests)
+        self.tests_skipped = [test.test.__name__ for test in tests if test.skip]
+        self.test_skipped_count = len(self.tests_skipped)
+        self.tests_skipped_text = f". Tests skipped: {self.test_skipped_count}" if self.test_skipped_count else ''
+
+        tests = [test for test in tests if not test.skip]
+        self.tests_total = sum(1 for test in tests if not test.skip)
+
         log.info(LOG_START_TEST_APP_MSG)
-        log.info(f"Total tests to pass: {self.tests_total}")
+        log.info(f"Total tests to pass: {self.tests_total}{self.tests_skipped_text}")
         try:
             for test_n in range(self.tests_total):
-                self.set_up()
-                tests.pop()()
+                test_method_with_setup_levels = tests.pop()
+                self.set_up(
+                    level_name_nums=test_method_with_setup_levels.level_name_nums,
+                    starting_level_n=test_method_with_setup_levels.starting_level_n)
+                test_method_with_setup_levels.test()
                 self.tear_down()
         except Exception as e:
             traceback.print_tb(e.__traceback__)
@@ -107,11 +135,11 @@ class Game:
             for test_failed in self.tests_failed:
                 log.info(f"FAILED:  {test_failed}")
         log.info(DASHES_LINE_SHORT)
-        log.info(f"{self.test_passed_count} tests passed of {self.tests_total}")
+        log.info(f"{self.test_passed_count} tests passed of {self.tests_total}{self.tests_skipped_text}")
         log.info(GROUP_DASHES_LINE)
         log.info(GROUP_DASHES_LINE)
 
-    def set_up(self):
+    def set_up(self, level_name_nums=None, starting_level_n=0):
         log.info("Set Up")
         self.aborted = False
         self._init_settings()
@@ -124,11 +152,7 @@ class Game:
         self.players = pg.sprite.Group()
         self.players.add(self.player)
 
-        log.info("Load test level 1")
-        self.levels = [LevelTest1(self)]
-        self.levels_qty = len(self.levels)
-        self.level_no = 0
-        self.level = self.levels[self.level_no]
+        self.load_test_levels(level_name_nums=level_name_nums, starting_level_n=starting_level_n)
 
         log.info("Set clock")
         self.clock = pg.time.Clock()
@@ -142,6 +166,14 @@ class Game:
         self.player.stats['levels_visited'].add(self.level.id)
 
         pg.display.set_caption(f"{APP_TECH_NAME}_test_suite")
+
+    def load_test_levels(self, level_name_nums=None, starting_level_n=0):
+        log.info(f"Load test levels: {level_name_nums}")
+        self.levels = levels.Level.factory_by_nums(
+            levels_module=test_levels, game=self,
+            level_name_nums=level_name_nums, level_name_prefix='LevelTest')
+        self.levels_qty = len(self.levels)
+        self.level = self.levels[starting_level_n]
 
     def tear_down(self):
         levels.Level.clean_entity_ids()
@@ -231,7 +263,7 @@ class Game:
             self.current_time = pg.time.get_ticks()
             for event in pg.event.get():
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                    log.warning("Warning! Abort test suite by user request")
+                    log.warning("Warning! Abort test by user request")
                     self.done = True
                     self.aborted = True
                     self.test_aborted_count += 1
@@ -322,4 +354,41 @@ class Game:
         self.calc_test_result(
             failed_condition=self.player.stats['batteries'] < 3 or self.player.stats['files_disks'] < 1,
             failed_msg="Test FAILED: Player did not fetch at least 3 batteries and 1 disk.",
+            test_name=test_name)
+
+    def test_big_jump_and_fetch_1_life_n_7_potions_power(self):
+        test_name = 'test_big_jump_and_fetch_1_life_n_7_potions_power'
+        log.info(f"Start {test_name}")
+
+        def player_die_hard_mock():
+            self.player.stats['lives'] -= 1
+            self.player.stop()
+            self.player_actions = []
+
+        self.player.rect.x = 3000
+        self.player.rect.y = 500
+        self.player.stats['health'] = PLAYER_HEALTH_SUPER_HERO
+        self.player.stats['lives'] = 3
+
+        self.player.die_hard = player_die_hard_mock
+
+        TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {test_name}",
+                       self, time_in_secs=5)
+        self._init_clock_timer(time_in_secs=4)
+
+        self.player_actions = [
+            ['stop', 1],
+            ['go_right', 78],
+            ['jump', 5],
+            ['go_right', 12],
+            ['go_left', 64],
+            ['jump', 5],
+            ['go_left', 22],
+            ]
+
+        self._game_loop()
+
+        self.calc_test_result(
+            failed_condition=self.player.stats['lives'] < 4 or len(self.player.stats['potions_power']) < 7,
+            failed_msg="Test FAILED: Player did not fetch at least 1 life recovery and 7 potions_power.",
             test_name=test_name)

@@ -218,6 +218,11 @@ class Level:
                 for level_id in range(1, N_LEVELS + 1)]
 
     @staticmethod
+    def factory_by_nums(levels_module, game, level_name_nums=None, level_name_prefix='Level'):
+        return [getattr(levels_module, f"{level_name_prefix}{level_id}")(game)
+                for level_id in level_name_nums]
+
+    @staticmethod
     def file_name_im_get(id_):
         return path.join(BM_BACKGROUNDS_FOLDER,
                          f"{FILE_NAMES['im_backgrounds'][0]}_{id_:02d}."

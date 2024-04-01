@@ -18,7 +18,7 @@ from codemaster.tools.utils.utils import file_read_list
 from codemaster.resources import Resource
 from codemaster.score_bars import ScoreBar
 from codemaster import screen
-from codemaster.config.settings import Settings
+from codemaster.config.settings import Settings, DEFAULT_MUSIC_VOLUME
 from codemaster.config.constants import (
     APP_NAME,
     APP_NAME_SHORT,
@@ -130,7 +130,7 @@ class Game:
             libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)
 
             # Initialize music
-            pg.mixer.music.set_volume(0.7)
+            pg.mixer.music.set_volume(DEFAULT_MUSIC_VOLUME)
             pg.mixer.music.play(loops=-1)
             if self.is_music_paused:
                 pg.mixer.music.pause()

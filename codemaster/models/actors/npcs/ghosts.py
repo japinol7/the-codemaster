@@ -27,7 +27,8 @@ class Ghost(NPC):
 
     def update_when_hit(self):
         """Ghosts cannot be hit with normal weapons.
-        Right now is transparent for bullets and cannot be killed
+        They are out of phase.
+        Because of this, they cannot be killed with bullets.
         """
         pass
 

@@ -23,7 +23,7 @@
 
 ## Videos
 
-[![Video](https://img.youtube.com/vi/oYR3eQFQD3M/maxresdefault.jpg)](https://www.youtube.com/watch?v=oYR3eQFQD3M)
+[![Video](https://img.youtube.com/vi/c7vq87Ryk6I/maxresdefault.jpg)](https://www.youtube.com/watch?v=c7vq87Ryk6I)
 
 
 ## History of the series. A spin-off? What do you mean?
@@ -248,12 +248,12 @@
 	            > Lilac bats: They deal medium damage
 	            > Red bats: They deal a good deal of damage.
     	        > Black bats: They deal great damage.
-	    > Demons. Beware, they have weapons.
+	    > Demons. Beware, they have weapons and some resistance to magic.
 	    > Ghosts:
 	        > Cannot be killed/hit with normal weapons.
               Only Dark magic spells can damage them, i.e, 
               Vortex of Doom and Doom Bolts.
-	    > Mages. Beware, they have magic weapons.
+	    > Mages. Beware, they have magic weapons and some resistance to magic.
 	    > Pokoyos.
 	    > Robots. Beware, they have weapons.
 	    > Skulls.

@@ -9,15 +9,20 @@ from codemaster.config.constants import (
     )
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
+from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.npcs import (
     PokoyoA,
     PokoyoB,
+    SnakeBlue,
+    SnakeYellow,
     )
 from codemaster.models.actors.items import (
     BatteryA,
+    ComputerA,
     DoorLeftMagenta,
-    FilesDiskB,
-    PotionHealth,
+    FilesDiskA,
+    FilesDiskC,
+    LifeRecoveryA,
     PotionPower,
     )
 from codemaster.levels.level_base import Level
@@ -51,10 +56,8 @@ class Level12(Level):
 
     def _add_actors(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[12, 620, 210, platforms.PLAT_TYPE_01],
-                       [2, 1600, 335, platforms.PLAT_TYPE_01],
-                       [2, 1780, 460, platforms.PLAT_TYPE_01],
-                       [2, 1960, 585, platforms.PLAT_TYPE_01],
+        level_plats = [[7, 620, 380, platforms.PLAT_TYPE_01],
+                       [7, 1460, 440, platforms.PLAT_TYPE_01],
                        [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        ]
         plats = []
@@ -67,30 +70,52 @@ class Level12(Level):
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
 
+        # Add moving platforms (type, x, y, ...)
+        self.platforms.add(platforms.MovingPlatform(
+            platforms.PLAT_TYPE_02_STONE_MIDDLE, 1220, 600, self.game,
+            border_top=470, border_down=700, change_y=2, level=self))
+
         # Add batteries
         self.batteries.add([
-            BatteryA(660, 174, self.game),
-            BatteryA(720, 174, self.game),
-            BatteryA(780, 174, self.game),
+            BatteryA(1640, 405, self.game),
             ])
 
         # Add files_disks
         self.files_disks.add([
-            FilesDiskB(900, 173, self.game),
+            FilesDiskC(1680, 403, self.game),
+            FilesDiskA(1720, 403, self.game),
             ])
 
-        # Add potions
-        self.potions.add([
-            PotionPower(1000, 168, self.game),
-            PotionHealth(1080, 168, self.game),
+        # Add computers
+        self.computers.add([
+            ComputerA(1780, 336, self.game),
             ])
 
         # Add NPCs
         pokoyos = [
-            PokoyoA(700, 340, self.game, border_top=270, border_down=665, change_y=3),
-            PokoyoB(770, 600, self.game, border_top=270, border_down=665, change_y=3),
+            PokoyoA(700, 460, self.game, border_top=440, border_down=665, change_y=3),
+            PokoyoB(770, 600, self.game, border_top=440, border_down=665, change_y=3),
+            PokoyoA(920, 570, self.game, border_top=440, border_down=665, change_y=3),
+            PokoyoB(990, 470, self.game, border_top=440, border_down=665, change_y=3),
             ]
         self.npcs.add(pokoyos)
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=60, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 40, 'random_max': 60}),
+            ]
+        self.snakes.add(SnakeBlue(1500, 415, self.game, border_left=1210, border_right=2940,
+                                  border_top=90, border_down=810, change_x=1, change_y=1,
+                                  items_to_drop=items_to_drop))
+
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=80, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 60, 'random_max': 75}),
+            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=100, add_to_list=self.cartridges,
+                     x_delta=70),
+            ]
+        self.snakes.add(SnakeYellow(2100, 500, self.game, border_left=1200, border_right=2900,
+                                    border_top=100, border_down=806, change_x=3, change_y=3,
+                                    items_to_drop=items_to_drop))
 
         # Add doors
         self.doors.add([

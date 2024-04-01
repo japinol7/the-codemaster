@@ -60,6 +60,7 @@ class Level7(Level):
                        [2, 1600, 335, platforms.PLAT_TYPE_01],
                        [2, 1780, 460, platforms.PLAT_TYPE_01],
                        [2, 1960, 585, platforms.PLAT_TYPE_01],
+                       [12, 1890, 192, platforms.PLAT_TYPE_01],
                        [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        ]
         plats = []
@@ -75,21 +76,21 @@ class Level7(Level):
         # Add batteries
         self.batteries.add([
             BatteryA(660, 174, self.game),
-            BatteryA(720, 174, self.game),
-            BatteryA(780, 174, self.game),
+            BatteryA(2600, 156, self.game),
+            BatteryA(2646, 156, self.game),
             ])
 
         # Add files_disks
         self.files_disks.add([
-            FilesDiskB(900, 173, self.game),
+            FilesDiskB(700, 173, self.game),
             ])
 
         # Add potions
         self.potions.add([
-            PotionPower(1000, 168, self.game),
-            PotionHealth(1040, 168, self.game),
-            PotionPower(1080, 168, self.game),
-            PotionPower(1120, 168, self.game),
+            PotionPower(1090, 172, self.game),
+            PotionHealth(1090, 132, self.game),
+            PotionPower(1130, 172, self.game),
+            PotionPower(1130, 132, self.game),
             ])
 
         # Add cartridges

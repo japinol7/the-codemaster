@@ -74,20 +74,12 @@ class Level11(Level):
 
         # Add batteries
         self.batteries.add([
-            BatteryA(660, 174, self.game),
-            BatteryA(720, 174, self.game),
-            BatteryA(780, 174, self.game),
-            ])
-
-        # Add files_disks
-        self.files_disks.add([
-            FilesDiskB(900, 173, self.game),
+            BatteryA(460, 174, self.game),
             ])
 
         # Add potions
         self.potions.add([
-            PotionPower(1000, 168, self.game),
-            PotionHealth(1080, 168, self.game),
+            PotionPower(510, 174, self.game),
             ])
 
         # Add doors

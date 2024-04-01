@@ -203,8 +203,7 @@ class Bullet(pg.sprite.Sprite):
             self.kill()
 
         if Settings.are_bullets_allowed_to_collide:
-            # Check if it hit any other bullet, not considering bullets from the same player
-            # or bullets from the same type of actor
+            # Check if it hit any other bullet, not considering bullets from the same type of actor
             bullet_hit_list = pg.sprite.spritecollide(self, self.level.bullets, False)
             for bullet in bullet_hit_list:
                 if bullet is not self and bullet.owner.type.name != self.owner.type.name:

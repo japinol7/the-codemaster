@@ -1,4 +1,4 @@
-"""Module level 9."""
+"""Module level test 2."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 import pygame as pg
@@ -8,7 +8,6 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     DOOR_DEST_TR,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
@@ -17,25 +16,23 @@ from codemaster.models.actors.npcs import (
     )
 from codemaster.models.actors.items import (
     BatteryA,
-    CartridgeGreen,
-    CartridgeBlue,
+    DoorLeftWhite,
     DoorRightAqua,
     DoorRightYellow,
-    DoorLeftWhite,
     LifeRecoveryA,
     PotionPower,
     )
 from codemaster.levels.level_base import Level
 
 
-class Level9(Level):
+class LevelTest2(Level):
 
     def __init__(self, game):
         super().__init__(game)
-        self.id = 8
-        self.name = '09'
-        self.next_level_left = 7
-        self.next_level_right = 9
+        self.id = 1
+        self.name = '02'
+        self.next_level_left = False
+        self.next_level_right = False
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(9)).convert()
@@ -87,42 +84,30 @@ class Level9(Level):
 
         # Add life_recs
         self.life_recs.add([
-            LifeRecoveryA(2960, 194, self.game),
+            LifeRecoveryA(2940, 194, self.game),
             ])
 
         # Add cartridges
-        self.cartridges.add([
-            CartridgeGreen(2800, 204, self.game),
-            CartridgeBlue(2840, 204, self.game),
-            CartridgeBlue(2880, 204, self.game),
-            CartridgeGreen(2800, 164, self.game),
-            CartridgeBlue(2840, 164, self.game),
-            CartridgeBlue(2880, 164, self.game),
-            CartridgeGreen(2800, 124, self.game),
+        self.potions.add([
+            PotionPower(2800, 204, self.game),
+            PotionPower(2840, 204, self.game),
+            PotionPower(2880, 204, self.game),
+            PotionPower(2800, 164, self.game),
+            PotionPower(2840, 164, self.game),
+            PotionPower(2880, 164, self.game),
+            PotionPower(2800, 124, self.game),
             ])
 
         # Add NPCs
-        items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=70, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 65, 'random_max': 75}),
-            ]
-        self.snakes.add(SnakeGreen(660, 415, self.game, border_left=285, border_right=2840,
-                                   border_top=80, border_down=810, change_x=1, change_y=1,
-                                   items_to_drop=items_to_drop))
+        self.snakes.add(SnakeGreen(1700, 415, self.game, border_left=1100, border_right=3400,
+                                   border_top=80, border_down=810, change_x=1, change_y=1))
 
-        items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 65, 'random_max': 75}),
-            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=70),
-            ]
-        self.snakes.add(SnakeYellow(800, 500, self.game, border_left=320, border_right=2700,
-                                    border_top=100, border_down=810, change_x=3, change_y=3,
-                                    items_to_drop=items_to_drop))
+        self.snakes.add(SnakeYellow(2400, 500, self.game, border_left=2000, border_right=3380,
+                                    border_top=100, border_down=810, change_x=3, change_y=3))
 
         # Add doors
         self.doors.add([
-            DoorLeftWhite(2, 550, self.game, level_dest=7, door_dest_pos=DOOR_DEST_NL),
-            DoorRightAqua(3368, -18, self.game, level_dest=5, door_dest_pos=DOOR_DEST_TR),
-            DoorRightYellow(3640, 550, self.game, level_dest=9, door_dest_pos=DOOR_DEST_NL),
+            DoorLeftWhite(2, 550, self.game, level_dest=7, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightAqua(3368, -18, self.game, level_dest=5, door_dest_pos=DOOR_DEST_TR, is_locked=True),
+            DoorRightYellow(3640, 550, self.game, level_dest=9, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])

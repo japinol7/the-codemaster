@@ -278,7 +278,7 @@ class Actor(pg.sprite.Sprite):
             self.stats.health -= bullet.attack_power
             has_been_hit = True
             bullet.kill()
-            if bullet.owner == self.player and self.hostility_level == 0:
+            if bullet.owner == self.player and self.hostility_level < 1:
                 self.hostility_level = 1
 
         has_been_hit and self.player.sound_effects and self.player.enemy_hit_sound.play()

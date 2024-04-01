@@ -61,7 +61,7 @@ class TextMsg(ActorMsg):
             f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
         self.kill()
 
-    def draw_speech_balloon(self):
+    def draw_speech_balloon(self, color):
         lines_count = self.name.count('\n')
         if lines_count > 1:
             text_len = len(max(self.name.splitlines(), key=len))
@@ -71,7 +71,7 @@ class TextMsg(ActorMsg):
             height = self.rect.height
         width = 2 + 14 * text_len if text_len < 20 else 13.1 * text_len
 
-        pg.draw.rect(self.game.screen, Color.GREEN,
+        pg.draw.rect(self.game.screen, color,
                      (self.rect.x, self.rect.y - lines_count * 22, int(width), int(height)),
                      width=1)
 
@@ -91,7 +91,8 @@ class TextMsg(ActorMsg):
         game.text_msg_sprites.add([text_msg])
 
         for old_pc_msg in game.text_msg_pc_sprites:
-            old_pc_msg.kill()
+            if old_pc_msg.owner == owner:
+                old_pc_msg.kill()
         game.text_msg_pc_sprites.add([text_msg])
 
         text_msg.update()
@@ -137,7 +138,7 @@ class TextMsgActor(TextMsg):
         super().update()
 
     def draw_text(self):
-        self.draw_speech_balloon()
+        self.draw_speech_balloon(self.color or Color.GREEN)
         if '\n' not in self.name:
             text_render_method = libg_jp.draw_text_rendered
             optional_args = {}

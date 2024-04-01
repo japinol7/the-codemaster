@@ -108,6 +108,7 @@ class Player(pg.sprite.Sprite):
             'power': PL_POWER_DEFAULT,
             'health': PL_HEALTH_DEFAULT,
             'magic_resistance': PL_MAGIC_RESISTANCE,
+            'magic_resistance_base': PL_MAGIC_RESISTANCE,
             'speed': PL_SPEED_DEFAULT,
             'magic_attack': None,
             'batteries': 0,
@@ -146,20 +147,14 @@ class Player(pg.sprite.Sprite):
             ActorType.DOOR_KEY_MAGENTA.name: 0,
             'energy_shields_stock': [],
             'magic_attack_spells': {},
-            'mines': 0,
-            'mines_t01': 0,
-            'mines_t02': 0,
-            'bats': 0,
-            'bats_t01': 0,
-            'bats_t02': 0,
-            'bats_t03': 0,
-        }
+            }
         self.stats_old = {
             'level': 1,
             'score': None,
             'lives': None,
             'power': None,
             'health': None,
+            'magic_resistance': PL_MAGIC_RESISTANCE,
             'speed': None,
             'batteries': None,
             'files_disks': None,
@@ -176,8 +171,7 @@ class Player(pg.sprite.Sprite):
             ActorType.FILES_DISK_A.name: None,
             'apples': None,
             'door_keys': None,
-            'mines': None,
-        }
+            }
         self.stats_render = {
             'level': None,
             'score': None,
@@ -214,8 +208,7 @@ class Player(pg.sprite.Sprite):
             'files_disk_t04_title': None,
             'apples': None,
             'door_keys': None,
-            'mines': None,
-        }
+            }
         self.level = None
         self.sound_effects = True
 
@@ -396,13 +389,15 @@ class Player(pg.sprite.Sprite):
             self.stats['files_disks_type'][files_disk.disk_type] += 1
             self.stats[files_disk.type.name] += 1
             self.stats['score'] += ExperiencePoints.xp_points[files_disk.type.name]
-        len(files_disk_hit_list) and TextMsg.create("Yeah! I've found another disk!", self.game, time_in_secs=MSG_PC_DURATION)
+        len(files_disk_hit_list) and TextMsg.create(
+            "Yeah!\nI've found\nanother disk!", self.game, time_in_secs=MSG_PC_DURATION)
 
         # Check if we hit any computer
         computers_hit_list = pg.sprite.spritecollide(self, self.level.computers, False)
         for computer in computers_hit_list:
             if not computer.visited:
-                TextMsg.create("Hey! This computer is a beauty!", self.game, time_in_secs=MSG_PC_DURATION)
+                TextMsg.create(
+                    "Hey!\nThis computer\nis a beauty!", self.game, time_in_secs=MSG_PC_DURATION)
                 computer.visited = True
 
         # Check if we hit any cartridge
@@ -682,4 +677,5 @@ class Player(pg.sprite.Sprite):
             TextMsg.create(f"{self.stats['magic_attack'].__name__}\n",
                            self.game, time_in_secs=MSG_PC_DUR_SHORT)
         else:
-            TextMsg.create("You've got NO spell in this slot.\n", self.game, time_in_secs=MSG_PC_DUR_SHORT)
+            TextMsg.create(
+                "You've got \nNO spell\nin this slot.", self.game, time_in_secs=MSG_PC_DUR_SHORT)

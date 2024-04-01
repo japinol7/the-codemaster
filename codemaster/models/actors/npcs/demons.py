@@ -51,6 +51,7 @@ class DemonMale(Demon):
                          border_top=border_top, border_down=border_down,
                          items_to_drop=items_to_drop)
 
+        self.magic_resistance = 120
         self.stats.time_between_shots = self.time_between_shots_base / 2.6
         self.shot_x_delta_max = self.shot_x_delta_max + 150
 

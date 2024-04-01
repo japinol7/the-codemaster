@@ -71,7 +71,7 @@ class Level6(Level):
 
     def update_pc_enter_level(self):
         self.player.stats['levels_visited'].add(self.id)
-        TextMsg.create("Aargh! These snakes are crazy!", self.game, time_in_secs=4)
+        TextMsg.create("Aargh!\nThese snakes\nare crazy!", self.game, time_in_secs=4)
 
     def _add_actors(self):
         # Add platforms (n_blocs, x, y, type)

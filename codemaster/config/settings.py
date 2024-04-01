@@ -8,7 +8,9 @@ FPS_DEFAULT = 92  # Recommended: 92
 FPS_MIN = 60
 FPS_MAX = 900
 
-CELL_DEFAULT_SIZE = 14
+DEFAULT_MUSIC_VOLUME = 0.5
+
+DEFAULT_CELL_SIZE = 14
 
 
 class Settings:
@@ -88,8 +90,8 @@ class Settings:
         cls.screen_aspect_ratio = cls.screen_width / cls.screen_height
         cls.screen_height_adjusted = None
         cls.screen_width_adjusted = None
-        cls.cell_size = CELL_DEFAULT_SIZE
-        cls.cell_size_ratio = cls.screen_width * cls.screen_height / CELL_DEFAULT_SIZE
+        cls.cell_size = DEFAULT_CELL_SIZE
+        cls.cell_size_ratio = cls.screen_width * cls.screen_height / DEFAULT_CELL_SIZE
         cls.fps = FPS_DEFAULT
         cls.fps_paused = 14
         cls.speed_pct = 100

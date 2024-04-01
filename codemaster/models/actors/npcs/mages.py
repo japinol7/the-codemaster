@@ -75,12 +75,15 @@ class MageFemaleA(Mage):
         self.stats.energy_shield = self.stats.energy_shields_stock[0]
         self.stats.energy_shield.owner = self
         self.hostility_level = 0
-        self.stats.time_between_spell_casting = 1000 # self.time_between_spell_casting_base
+        self.stats.time_between_spell_casting = 1000
         self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.6
         self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
 
     def kill_hook(self):
         self.stats.energy_shield.kill()
+        for msg in self.msgs:
+            msg.kill()
+
         super().kill_hook()
 
     def update_after_inc_index_hook(self):

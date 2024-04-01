@@ -9,16 +9,23 @@ from codemaster.config.constants import (
     )
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
+from codemaster.models.actors.actor_types import ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.npcs import (
+    BatBlack,
+    BatBlue,
     RobotA,
-    RobotB,
+    TerminatorEyeYellow,
     )
 from codemaster.models.actors.items import (
     BatteryA,
-    DoorRightBlue,
+    CartridgeGreen,
+    CartridgeBlue,
+    CartridgeYellow,
+    CartridgeRed,
     DoorLeftYellow,
-    FilesDiskB,
-    PotionHealth,
+    DoorRightBlue,
+    FilesDiskA,
     PotionPower,
     )
 from codemaster.levels.level_base import Level
@@ -52,11 +59,18 @@ class Level10(Level):
 
     def _add_actors(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[12, 620, 210, platforms.PLAT_TYPE_01],
-                       [2, 1600, 335, platforms.PLAT_TYPE_01],
-                       [2, 1780, 460, platforms.PLAT_TYPE_01],
-                       [2, 1960, 585, platforms.PLAT_TYPE_01],
-                       [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
+        level_plats = [[8, 2000, -16, platforms.PLAT_TYPE_01],
+                       [8, 2600, 84, platforms.PLAT_TYPE_01],
+                       [3, 20, 300, platforms.PLAT_TYPE_01],
+                       [2, 368, 350, platforms.PLAT_TYPE_01],
+                       [7, 740, 150, platforms.PLAT_TYPE_01],
+                       [6, 1400, 150, platforms.PLAT_TYPE_01],
+                       [2, 600, 400, platforms.PLAT_TYPE_01],
+                       [10, 1200, 440, platforms.PLAT_TYPE_01],
+                       [3, 1960, 280, platforms.PLAT_TYPE_01],
+                       [7, 1860, 586, platforms.PLAT_TYPE_01],
+                       [13, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
+                       [21, 2320, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        ]
         plats = []
         for platform in level_plats:
@@ -68,30 +82,56 @@ class Level10(Level):
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
 
+        # Add moving platforms (type, x, y, ...)
+        self.platforms.add(platforms.MovingPlatform(
+            platforms.PLAT_TYPE_02_STONE_MIDDLE, 1000, 586, self.game,
+            border_left=790, border_right=1120, change_x=2, level=self))
+
         # Add batteries
         self.batteries.add([
-            BatteryA(660, 174, self.game),
-            BatteryA(720, 174, self.game),
-            BatteryA(780, 174, self.game),
+            BatteryA(3086, 49, self.game),
             ])
 
         # Add files_disks
         self.files_disks.add([
-            FilesDiskB(900, 173, self.game),
+            FilesDiskA(36, 263, self.game),
             ])
 
         # Add potions
         self.potions.add([
-            PotionPower(1000, 168, self.game),
-            PotionHealth(1080, 168, self.game),
+            PotionPower(3036, 46, self.game),
+            PotionPower(3036, 9, self.game),
+            ])
+
+        # Add cartridges
+        self.cartridges.add([
+            CartridgeGreen(760, 116, self.game),
+            CartridgeBlue(800, 116, self.game),
+            CartridgeYellow(840, 116, self.game),
+            CartridgeRed(880, 116, self.game),
+            CartridgeGreen(760, 78, self.game),
+            CartridgeBlue(800, 78, self.game),
             ])
 
         # Add NPCs
-        robots = [
-            RobotA(1900, 665, self.game, border_left=1900, border_right=2400, change_x=3),
-            RobotB(2220, 665, self.game, border_left=1850, border_right=2250, change_x=2),
+        self.npcs.add([
+            BatBlue(2650, -20, self.game, border_left=2600, border_right=3080, change_x=3),
+            BatBlack(2766, 10, self.game, border_left=2600, border_right=3080, change_x=3),
+            TerminatorEyeYellow(50, 212, self.game, border_left=30, border_right=380, change_x=3),
+            ])
+
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=80, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 50, 'random_max': 75}),
+            DropItem(CartridgeYellow, ActorType.CARTRIDGE_YELLOW, probability_to_drop=70,
+                     add_to_list=self.cartridges, x_delta=60),
             ]
-        self.npcs.add(robots)
+        self.npcs.add([
+            RobotA(1500, 78, self.game, border_left=1400, border_right=1790, change_x=3,
+                   items_to_drop=items_to_drop),
+            RobotA(1740, 78, self.game, border_left=1400, border_right=1790, change_x=3,
+                   items_to_drop=items_to_drop),
+            ])
 
         # Add doors
         self.doors.add([
