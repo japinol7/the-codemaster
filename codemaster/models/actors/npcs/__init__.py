@@ -39,3 +39,14 @@ from codemaster.models.actors.npcs.snakes import (
     SnakeYellow,
     SnakeRed,
     )
+from codemaster.models.actors.npcs.pokoyos import (
+    PokoyoA,
+    PokoyoB,
+    )
+from codemaster.models.actors.npcs.mages import (
+    MageFemaleA,
+    )
+from codemaster.models.actors.npcs.robots import (
+    RobotA,
+    RobotB,
+    )

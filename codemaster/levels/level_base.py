@@ -8,8 +8,8 @@ import pygame as pg
 
 from codemaster.config.constants import (
     FILE_NAMES, BM_BACKGROUNDS_FOLDER,
-    DOOR_POSITION_L,
-    )
+    DOOR_POSITION_L, N_LEVELS,
+)
 from codemaster.tools.logger.logger import log
 from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryType
 from codemaster.clean_new_game import clean_entity_ids
@@ -174,7 +174,7 @@ class Level:
                 if actor.border_right:
                     actor.border_right -= self.world_shift
 
-            log.debug(f"Add actor {actor.category_type} to level {self}")
+            self.game.is_log_debug and log.debug(f"Add actor {actor.category_type} to level {self}")
             if actor.category_type == ActorCategoryType.NPC:
                 self.npcs.add(actor)
             elif actor.category_type == ActorCategoryType.BATTERY:
@@ -211,6 +211,16 @@ class Level:
 
         self.all_sprites.add(actors)
         snake_pieces and self.all_sprites.add(snake_pieces)
+
+    @staticmethod
+    def factory(levels_module, game):
+        return [getattr(levels_module, f"Level{level_id}")(game)
+                for level_id in range(1, N_LEVELS + 1)]
+
+    @staticmethod
+    def factory_by_nums(levels_module, game, level_name_nums=None, level_name_prefix='Level'):
+        return [getattr(levels_module, f"{level_name_prefix}{level_id}")(game)
+                for level_id in level_name_nums]
 
     @staticmethod
     def file_name_im_get(id_):

@@ -88,3 +88,14 @@ class DoorKeyRed(DoorKey):
         self.color = ColorName.RED.name
         self.key_type = 'R'
         super().__init__(x, y, game, door, name=name)
+
+
+class DoorKeyMagenta(DoorKey):
+    """Represents a magenta door key."""
+
+    def __init__(self, x, y, game, door, name=None):
+        self.file_mid_prefix = '06'
+        self.type = ActorType.DOOR_KEY_MAGENTA
+        self.color = ColorName.MAGENTA.name
+        self.key_type = 'M'
+        super().__init__(x, y, game, door, name=name)

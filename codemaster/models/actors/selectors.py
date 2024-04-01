@@ -82,7 +82,7 @@ class Selector(ActorItem):
         if self.player.direction == DIRECTION_RIP:
             return hit_list
 
-        if logging.getLevelName(log.level) == 'DEBUG':
+        if self.game.is_log_debug:
             hit_list = pg.sprite.spritecollide(self, self.game.level.all_sprites, False)
             for sprite in hit_list:
                 log.debug(f"Mouse sprites: {sprite.id} in pos: ({sprite.rect.x}, {sprite.rect.y})")

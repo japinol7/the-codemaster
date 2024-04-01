@@ -13,6 +13,7 @@ from codemaster.models.actors.items.door_keys import (
     DoorKeyBlue,
     DoorKeyYellow,
     DoorKeyRed,
+    DoorKeyMagenta,
     )
 from codemaster.models.actors.items.files_disks import (
     FilesDiskD,
@@ -48,6 +49,8 @@ from codemaster.models.actors.items.doors import (
     DoorRightWhite,
     DoorLeftRed,
     DoorRightRed,
+    DoorLeftMagenta,
+    DoorRightMagenta,
     )
 from codemaster.models.actors.items.mines import (
     MineCyan,

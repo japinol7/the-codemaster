@@ -18,7 +18,7 @@ from codemaster.tools.utils.utils import file_read_list
 from codemaster.resources import Resource
 from codemaster.score_bars import ScoreBar
 from codemaster import screen
-from codemaster.config.settings import Settings
+from codemaster.config.settings import Settings, DEFAULT_MUSIC_VOLUME
 from codemaster.config.constants import (
     APP_NAME,
     APP_NAME_SHORT,
@@ -90,6 +90,7 @@ class Game:
         self.score_bars = None
         self.help_info = None
         self.debug_info = None
+        self.is_log_debug = False
         self.current_song = 0
         self.writen_info_game_over_to_file = False
         self.level_no = 0
@@ -129,7 +130,7 @@ class Game:
             libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)
 
             # Initialize music
-            pg.mixer.music.set_volume(0.7)
+            pg.mixer.music.set_volume(DEFAULT_MUSIC_VOLUME)
             pg.mixer.music.play(loops=-1)
             if self.is_music_paused:
                 pg.mixer.music.pause()
@@ -164,15 +165,7 @@ class Game:
         self.selector_sprites = pg.sprite.Group()
 
         # Initialize levels
-        self.levels = []
-        self.levels.extend([
-             levels.Level1(self),
-             levels.Level2(self),
-             levels.Level3(self),
-             levels.Level4(self),
-             levels.Level5(self),
-             levels.Level6(self),
-             ])
+        self.levels = levels.Level.factory(levels_module=levels, game=self)
         self.levels_qty = len(self.levels)
 
         init_options = file_read_list(INIT_OPTIONS_FILE, 1)
@@ -351,10 +344,12 @@ class Game:
                     elif event.key == pg.K_n:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
                             log.info("NPCs health from all levels, ordered by NPC name:")
-                            log.debug(utils.pretty_dict_to_string(NPC.get_npcs_health(self, sorted_by_level=False)))
+                            self.is_log_debug and log.debug(
+                                utils.pretty_dict_to_string(NPC.get_npcs_health(self, sorted_by_level=False)))
                         elif self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
                             log.info("NPCs health from all levels, ordered by level:")
-                            log.debug(utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
+                            self.is_log_debug and log.debug(
+                                utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
                     elif event.key == pg.K_h:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.help_info.print_help_keys()
@@ -379,12 +374,13 @@ class Game:
                     elif event.key == pg.K_KP_DIVIDE:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
                                 and pg.key.get_mods() & pg.KMOD_LALT:
-                            self.player.debug = not self.player.debug
                             if log.level != logging.DEBUG:
                                 log.setLevel(logging.DEBUG)
+                                self.is_log_debug = True
                                 log.info("Set logger level to: Debug")
                             else:
                                 log.setLevel(logging.INFO)
+                                self.is_log_debug = False
                                 log.info("Set logger level to: Info")
                     elif event.key == pg.K_KP_MINUS:
                         if self.super_cheat and pg.key.get_mods() & pg.KMOD_LCTRL:

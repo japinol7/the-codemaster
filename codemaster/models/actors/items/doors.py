@@ -212,3 +212,27 @@ class DoorRightRed(Door):
         self.color = ColorName.RED.name
         self.is_right_door = True
         super().__init__(x, y, game, level_dest, door_dest_pos, name=name, is_locked=is_locked)
+
+
+class DoorLeftMagenta(Door):
+    """Represents a left magenta door."""
+
+    def __init__(self, x, y, game, level_dest, door_dest_pos, name=None, is_locked=False):
+        self.file_mid_prefix = 't08_left'
+        self.type = ActorType.DOOR_LEFT_MAGENTA
+        self.door_type = DOOR_POSITION_L
+        self.color = ColorName.MAGENTA.name
+        self.is_right_door = False
+        super().__init__(x, y, game, level_dest, door_dest_pos, name=name, is_locked=is_locked)
+
+
+class DoorRightMagenta(Door):
+    """Represents a right magenta door."""
+
+    def __init__(self, x, y, game, level_dest, door_dest_pos, name=None, is_locked=False):
+        self.file_mid_prefix = 't08_right'
+        self.type = ActorType.DOOR_RIGHT_MAGENTA
+        self.door_type = DOOR_POSITION_R
+        self.color = ColorName.MAGENTA.name
+        self.is_right_door = True
+        super().__init__(x, y, game, level_dest, door_dest_pos, name=name, is_locked=is_locked)

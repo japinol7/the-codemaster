@@ -10,6 +10,7 @@ from codemaster.config.constants import (
     SCREEN_HEIGHT,
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
+    DOOR_DEST_TR,
     )
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.npcs import (
@@ -29,6 +30,7 @@ from codemaster.models.actors.items import (
     CartridgeYellow,
     CartridgeRed,
     ComputerA,
+    DoorLeftAqua,
     DoorRightGreen,
     DoorLeftRed,
     FilesDiskC,
@@ -47,16 +49,16 @@ class Level6(Level):
         super().__init__(game)
         self.id = 5
         self.name = '06'
-        self.next_level_left = 5
-        self.next_level_right = 1
+        self.next_level_left = 4
+        self.next_level_right = 6
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(6)).convert()
         self.level_limit = -2700
         self.level_limit_top = -1000
-        self.player_start_pos_left = (250, 480)
+        self.player_start_pos_left = (220, 480)
         self.player_start_pos_right = (600, 480)
-        self.player_start_pos_rtop = (300, 100)
+        self.player_start_pos_rtop = (900, -390)
         self.player_start_pos_ltop = (80, 100)
         self.player_start_pos_bottom = (300, 800)
         self.world_start_pos_left = (0, -758)
@@ -69,7 +71,7 @@ class Level6(Level):
 
     def update_pc_enter_level(self):
         self.player.stats['levels_visited'].add(self.id)
-        TextMsg.create("Aargh! These snakes are crazy!", self.game, time_in_secs=4)
+        TextMsg.create("Aargh!\nThese snakes\nare crazy!", self.game, time_in_secs=4)
 
     def _add_actors(self):
         # Add platforms (n_blocs, x, y, type)
@@ -80,6 +82,10 @@ class Level6(Level):
                        [3, 1100, 260, platforms.PLAT_TYPE_01],
                        [9, 1900, 110, platforms.PLAT_TYPE_01],
                        [8, 2580, 440, platforms.PLAT_TYPE_01],
+                       [4, 2780, 98, platforms.PLAT_TYPE_01],
+                       [2, 3340, 98, platforms.PLAT_TYPE_01],
+                       [2, 3200, 196, platforms.PLAT_TYPE_01],
+                       [2, 3060, 294, platforms.PLAT_TYPE_01],
                        [4, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        [14, 630, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        [30, 1700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
@@ -97,7 +103,7 @@ class Level6(Level):
             border_left=1250, border_right=1650, change_x=2, level=self))
         self.platforms.add(platforms.MovingPlatform(
             platforms.PLAT_TYPE_02_STONE_MIDDLE, 1600, 360, self.game,
-            border_left=1350, border_right=2650, change_x=7, level=self))
+            border_left=1350, border_right=2620, change_x=7, level=self))
         self.platforms.add(platforms.MovingPlatform(
             platforms.PLAT_TYPE_02_STONE_MIDDLE, 950, 260, self.game,
             border_top=200, border_down=450, change_y=3, level=self))
@@ -146,15 +152,17 @@ class Level6(Level):
 
         # Add cartridges
         self.cartridges.add([
-            CartridgeGreen(2600, 405, self.game),
+            CartridgeGreen(2660, 405, self.game),
             CartridgeBlue(2700, 405, self.game),
-            CartridgeYellow(2800, 405, self.game),
-            CartridgeRed(2900, 405, self.game),
+            CartridgeBlue(2700, 366, self.game),
+            CartridgeBlue(2700, 327, self.game),
+            CartridgeYellow(2740, 405, self.game),
+            CartridgeRed(2780, 405, self.game),
             ])
 
         # Add computers
         self.computers.add([
-            ComputerA(2960, 336, self.game),
+            ComputerA(2860, 336, self.game),
             ])
 
         # Add NPCs
@@ -239,6 +247,7 @@ class Level6(Level):
 
         # Add doors
         self.doors.add([
-            DoorRightGreen(3400, 550, self.game, level_dest=5, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             DoorLeftRed(2, 550, self.game, level_dest=4, door_dest_pos=DOOR_DEST_NL),
+            DoorLeftAqua(2786, -90, self.game, level_dest=8, door_dest_pos=DOOR_DEST_TR),
+            DoorRightGreen(3400, 550, self.game, level_dest=6, door_dest_pos=DOOR_DEST_NL),
             ])

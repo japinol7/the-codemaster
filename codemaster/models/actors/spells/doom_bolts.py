@@ -36,7 +36,7 @@ class DoomBolt(ActorMagic):
         self.target = target
         self.is_a_player_shot = True if owner == game.player else False
         self.stats = Stats()
-        self.stats.health = self.stats.health_total = 1
+        self.health = self.health_total = 1
         self.stats.strength = self.stats.strength_total = 1
         self.animation_speed = 0.4
         self.collision_delta_y = 24
@@ -97,10 +97,23 @@ class DoomBolt(ActorMagic):
         self.clock.tick()
 
     def update_target_health(self, divider):
-        log.debug(f"{self.target.id} hit by {self.id}, npc_health: {str(round(self.target.stats.health, 2))}, "
-                     f"doom_bolt_partial_power: {str(self.stats.power / divider)}")
-        self.target.stats.health -= self.stats.power / divider
-        self.stats.power -= self.stats.power / divider
+        if self.target == self.game.player and self.target.invulnerable:
+            return
+
+        if self.owner == self.game.player and self.target.hostility_level < 1:
+            self.target.hostility_level = 1
+
+        self.game.is_log_debug and log.debug(
+            f"{self.target.id} hit by {self.id}, health: {round(self.target.health, 2)}, "
+            f"doom_bolt_partial_power: {self.power / divider:.2f}, "
+            f"magic_res: {self.target.magic_resistance / divider:.2f}, owner: {self.owner.id}")
+
+        attack_power_res = self.power / divider - self.target.magic_resistance / divider
+        if attack_power_res > 0:
+            self.target.health -= attack_power_res
+
+        if self.target == self.game.player:
+            self.power -= self.power / divider
 
     def die_soft(self):
         self.particle_pos_delta_y = 0.28
@@ -116,36 +129,44 @@ class DoomBolt(ActorMagic):
         self.update_target_health(divider=4)
 
     def die_hard(self):
-        log.debug(f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
-        log.debug(f"{self.target.id} hit by {self.id}, npc_health: {str(round(self.target.stats.health, 2))}, "
-                  f"doom_bolt_partial_power: {str(self.stats.power)}")
-        self.target.stats.health -= self.stats.power
-        if self.target.stats.health <= 0:
-            npc = self.target
-            log.debug(f"{npc.id}, !!! Dead by {self.id} !!!")
-            if self.is_a_player_shot:
-                self.game.player.stats['score'] += ExperiencePoints.xp_points[npc.type.name]
-            npc.drop_items()
-            npc.kill_hook()
-            self.game.player.sound_effects and self.game.player.enemy_hit_sound.play()
+        target = self.target
 
-            self.target.kill_hook()
+        self.game.is_log_debug and log.debug(
+            f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
+
+        self.update_target_health(divider=1)
+
+        if target.health <= 0:
+            self.game.is_log_debug and log.debug(
+                f"{target.id}, !!! Dead by {self.id}, owner: {self.owner.id} !!!")
+            if self.is_a_player_shot:
+                self.game.player.stats['score'] += ExperiencePoints.xp_points[target.type.name]
+
+            if target != self.game.player:
+                target.drop_items()
+                target.kill_hook()
+                self.game.player.sound_effects and self.game.player.enemy_hit_sound.play()
+            else:
+                target.die_hard()
+
         self.explosion()
         self.kill_hook()
 
     def explosion(self):
+        """When hit the target, explodes."""
         super().explosion()
+
         explosion = self.explosion_class(
-                self.rect.centerx,
+                self.target.rect.centerx - 40,
                 self.target.rect.bottom - 60 - self.collision_delta_y,
-                self.game, owner=self.player)
+                self.game, owner=self.owner)
         self.game.level.explosions.add(explosion)
         self.game.level.all_sprites.add(explosion)
 
         explosion = self.explosion_class(
-                self.rect.centerx,
+                self.target.rect.centerx - 40,
                 self.target.rect.centery - 60 - self.collision_delta_y,
-                self.game, owner=self.player)
+                self.game, owner=self.owner)
         self.game.level.explosions.add(explosion)
         self.game.level.all_sprites.add(explosion)
 
@@ -158,7 +179,8 @@ class DoomBolt(ActorMagic):
             return
 
         if not self.target.alive():
-            log.debug(f"{self.id} killed because target {self.target.id} is not alive.")
+            self.game.is_log_debug and log.debug(
+                f"{self.id} killed because target {self.target.id} is not alive.")
             self.kill_hook()
 
         if self.target:
@@ -228,7 +250,7 @@ class DoomBoltB(DoomBolt):
         super().__init__(x, y, game, name=name,
                          is_from_player_shot=is_from_player_shot,
                          owner=owner, target=target)
-        self.stats.power = self.stats.power_total = 110
+        self.power = self.power_total = 110
         self.color = Color.YELLOW
         self.color_external = Color.GREEN
         self.color_mode = pg.BLEND_RGB_ADD
@@ -254,7 +276,7 @@ class DoomBoltA(DoomBolt):
                          is_from_player_shot=is_from_player_shot,
                          owner=owner, target=target)
 
-        self.stats.power = self.stats.power_total = 126
+        self.power = self.power_total = 126
         self.color = (240, 240, 240)
         self.color_external = Color.RED
         self.color_mode = pg.BLENDMODE_NONE

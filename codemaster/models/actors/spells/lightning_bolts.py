@@ -29,7 +29,7 @@ class LightningBolt(ActorMagic):
         self.is_a_player_shot = True if owner == game.player else False
         self.stats = Stats()
         self.stats.health = self.stats.health_total = 1
-        self.stats.power = self.stats.power_total = 0
+        self.power = self.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
         self.animation_speed = 0.4
         self.collision_delta_y = 24
@@ -42,17 +42,20 @@ class LightningBolt(ActorMagic):
         """When hit the target, explodes."""
         super().explosion()
 
+        if self.owner == self.game.player and self.target.hostility_level < 1:
+            self.target.hostility_level = 1
+
         explosion = self.explosion_class(
-                self.rect.centerx,
+                self.target.rect.centerx - 40,
                 self.target.rect.bottom - 60 - self.collision_delta_y,
-                self.game, owner=self.player)
+                self.game, owner=self.owner)
         self.game.level.explosions.add(explosion)
         self.game.level.all_sprites.add(explosion)
 
         explosion = self.explosion_class(
-                self.rect.centerx,
+                self.target.rect.centerx - 40,
                 self.target.rect.centery - 60 - self.collision_delta_y,
-                self.game, owner=self.player)
+                self.game, owner=self.owner)
         self.game.level.explosions.add(explosion)
         self.game.level.all_sprites.add(explosion)
 

@@ -27,14 +27,10 @@ from codemaster.models.actors.items import (
     AppleYellow,
     AppleRed,
     BatteryA,
-    CartridgeGreen,
-    CartridgeBlue,
-    CartridgeYellow,
     ComputerA,
     DoorLeftGreen,
     DoorRightYellow,
     FilesDiskD,
-    PotionPower,
     PotionHealth,
     )
 from codemaster.levels.level_base import Level
@@ -148,24 +144,14 @@ class LevelTest1(Level):
             BatLilac(2250, 570, self.game, border_left=1780, border_right=2600, change_x=4),
             ])
 
-        items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 58, 'random_max': 72}),
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=75, add_to_list=self.cartridges,
-                     x_delta=170),
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=195),
-            ]
         self.npcs.add([
             TerminatorEyeYellow(1700, 650, self.game, border_left=1680, border_right=2370,
-                                change_x=3, items_to_drop=items_to_drop),
+                                change_x=3),
             ])
 
         items_to_drop = [
             DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
                      x_delta=16, **{'random_min': 58, 'random_max': 72}),
-            DropItem(CartridgeYellow, ActorType.CARTRIDGE_GREEN, probability_to_drop=75, add_to_list=self.cartridges,
-                     x_delta=170),
             ]
         self.npcs.add([
             DemonMale(2280, 662, self.game, border_left=1680, border_right=2370,

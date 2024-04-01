@@ -24,7 +24,7 @@ class Explosion(ActorItem):
         self.owner = owner
         self.is_a_player_shot = True if owner == game.player else False
         self.stats = Stats()
-        self.stats.health = self.stats.health_total = 1
+        self.health = self.health_total = 1
         self.stats.strength = self.stats.strength_total = 1
         self.animation_speed = 0.4
         self.transparency_alpha = True
@@ -38,11 +38,24 @@ class Explosion(ActorItem):
             for npc in npcs_hit_list:
                 if not npc.can_be_killed_normally:
                     continue
-                log.debug(f"{npc.id} hit by {self.id}, npc_health: {str(round(npc.stats.health, 2))}, "
-                          f"explosion_power: {str(self.stats.power)}")
-                npc.stats.health -= self.stats.power
-                if npc.stats.health <= 0:
-                    log.debug(f"{npc.id}, !!! Dead by {self.id} !!!")
+                # Manage npc damage
+                attack_power_res = self.power
+                if self.is_magic_item:
+                    attack_power_res = self.power - npc.magic_resistance
+                    self.game.is_log_debug and log.debug(
+                        f"{npc.id} hit by {self.id}, npc_health: {str(round(npc.health, 2))}, "
+                        f"explosion_power: {str(self.power)}, magic_res: {npc.magic_resistance}, "
+                        f"owner: {self.owner.id}")
+                else:
+                    self.game.is_log_debug and log.debug(
+                        f"{npc.id} hit by {self.id}, npc_health: {str(round(npc.health, 2))}, "
+                        f"explosion_power: {str(self.power)}, owner: {self.owner.id}")
+                if attack_power_res > 0:
+                    npc.health -= attack_power_res
+
+                if npc.health <= 0:
+                    self.game.is_log_debug and log.debug(
+                        f"{npc.id}, !!! Dead by {self.id}. Owner: {self.owner.type.name} !!!")
                     if self.is_a_player_shot:
                         self.player.stats['score'] += ExperiencePoints.xp_points[npc.type.name]
                     npc.drop_items()
@@ -52,8 +65,8 @@ class Explosion(ActorItem):
             # Check if we hit any mine
             mines_hit_list = pg.sprite.spritecollide(self, self.game.level.mines, False)
             for mine in mines_hit_list:
-                mine.stats.health -= self.stats.power
-                if mine.stats.health <= 0:
+                mine.health -= self.power
+                if mine.health <= 0:
                     mine.explosion()
                     mine.kill()
 
@@ -62,11 +75,25 @@ class Explosion(ActorItem):
             for pc in players_hit_list:
                 if pc.direction == DIRECTION_RIP or pc.invulnerable:
                     continue
-                log.debug(f"{pc.id} hit by {self.id}, pc_health: {str(round(pc.stats['health'], 2))}, "
-                          f"explosion_power: {str(self.stats.power)}")
-                pc.stats['health'] -= self.stats.power
+
+                # Manage player damage
+                attack_power_res = self.power
+                if self.is_magic_item:
+                    attack_power_res = self.power - pc.magic_resistance
+                    self.game.is_log_debug and log.debug(
+                        f"{pc.id} hit by {self.id}, pc_health: {str(round(pc.health, 2))}, "
+                        f"explosion_power: {str(self.power)}, magic_res: {pc.magic_resistance}, "
+                        f"owner: {self.owner.id}")
+                else:
+                    self.game.is_log_debug and log.debug(
+                        f"{pc.id} hit by {self.id}, pc_health: {str(round(pc.health, 2))}, "
+                        f"explosion_power: {str(self.power)}, owner: {self.owner.id}")
+                if attack_power_res > 0:
+                    pc.health -= attack_power_res
+
                 if pc.stats['health'] <= 0:
-                    log.debug(f"{pc.id}, !!! Dead by {self.id} !!!")
+                    self.game.is_log_debug and log.debug(
+                        f"{pc.id}, !!! Dead by {self.id} Owner: {self.owner.id} !!!")
                     pc.die_hard()
 
         if self.frame_index >= self.images_sprite_no:
@@ -86,7 +113,7 @@ class ExplosionC(Explosion):
         super().__init__(x, y, game, name=name,
                          is_from_player_shot=is_from_player_shot,
                          owner=owner)
-        self.stats.power = self.stats.power_total = 190
+        self.power = self.power_total = 140
 
 
 class ExplosionB(Explosion):
@@ -98,7 +125,7 @@ class ExplosionB(Explosion):
         super().__init__(x, y, game, name=name,
                          is_from_player_shot=is_from_player_shot,
                          owner=owner)
-        self.stats.power = self.stats.power_total = 300
+        self.power = self.power_total = 170
 
 
 class ExplosionA(Explosion):
@@ -110,7 +137,7 @@ class ExplosionA(Explosion):
         super().__init__(x, y, game, name=name,
                          is_from_player_shot=is_from_player_shot,
                          owner=owner)
-        self.stats.power = self.stats.power_total = 500
+        self.power = self.power_total = 350
 
 
 class ExplosionMagicC2(Explosion):
@@ -122,7 +149,8 @@ class ExplosionMagicC2(Explosion):
         super().__init__(x, y, game, name=name,
                          is_from_player_shot=is_from_player_shot,
                          owner=owner)
-        self.stats.power = self.stats.power_total = 200
+        self.power = self.power_total = 160
+        self.is_magic_item = True
 
 
 class ExplosionMagicC3(Explosion):
@@ -134,7 +162,8 @@ class ExplosionMagicC3(Explosion):
         super().__init__(x, y, game, name=name,
                          is_from_player_shot=is_from_player_shot,
                          owner=owner)
-        self.stats.power = self.stats.power_total = 215
+        self.power = self.power_total = 185
+        self.is_magic_item = True
 
 
 class ExplosionMagicC4(Explosion):
@@ -146,4 +175,18 @@ class ExplosionMagicC4(Explosion):
         super().__init__(x, y, game, name=name,
                          is_from_player_shot=is_from_player_shot,
                          owner=owner)
-        self.stats.power = self.stats.power_total = 230
+        self.power = self.power_total = 210
+        self.is_magic_item = True
+
+
+class ExplosionMagicC5(Explosion):
+    """Represents an explosion of type C5."""
+
+    def __init__(self, x, y, game, name=None, is_from_player_shot=None, owner=None):
+        self.file_mid_prefix = 't2'
+        self.type = ActorType.EXPLOSION_MAGIC_C5
+        super().__init__(x, y, game, name=name,
+                         is_from_player_shot=is_from_player_shot,
+                         owner=owner)
+        self.power = self.power_total = 300
+        self.is_magic_item = True

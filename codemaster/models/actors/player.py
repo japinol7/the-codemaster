@@ -1,6 +1,7 @@
 """Module player."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+from collections import Counter
 from datetime import datetime
 from os import path
 from random import randint
@@ -46,6 +47,7 @@ PL_POWER = 100
 PL_POWER_DEFAULT = 100
 PL_HEALTH = 100
 PL_HEALTH_DEFAULT = 100
+PL_MAGIC_RESISTANCE = 70
 PL_SPEED_DEFAULT = 8
 PL_BULLETS_T01_DEFAULT = 150
 PL_BULLETS_T02_DEFAULT = 80
@@ -97,6 +99,7 @@ class Player(pg.sprite.Sprite):
         self.invulnerable = False
         self.bullet_start_position_delta_x = 0
         self.is_energy_shield_activated = False
+        self.target_of_spells_count = Counter()
         self.stats = {
             'level': 1,
             'levels_visited': set(),
@@ -104,6 +107,8 @@ class Player(pg.sprite.Sprite):
             'lives': PL_LIVES_DEFAULT,
             'power': PL_POWER_DEFAULT,
             'health': PL_HEALTH_DEFAULT,
+            'magic_resistance': PL_MAGIC_RESISTANCE,
+            'magic_resistance_base': PL_MAGIC_RESISTANCE,
             'speed': PL_SPEED_DEFAULT,
             'magic_attack': None,
             'batteries': 0,
@@ -133,28 +138,23 @@ class Player(pg.sprite.Sprite):
             ActorType.APPLE_RED.name: 0,
             'door_keys': 0,
             'door_keys_stock': [],
-            'door_keys_type': {'G': 0, 'B': 0, 'A': 0, 'Y': 0, 'R': 0},
+            'door_keys_type': {'G': 0, 'B': 0, 'A': 0, 'Y': 0, 'R': 0, 'M': 0},
             ActorType.DOOR_KEY_GREEN.name: 0,
             ActorType.DOOR_KEY_BLUE.name: 0,
             ActorType.DOOR_KEY_AQUA.name: 0,
             ActorType.DOOR_KEY_YELLOW.name: 0,
             ActorType.DOOR_KEY_RED.name: 0,
+            ActorType.DOOR_KEY_MAGENTA.name: 0,
             'energy_shields_stock': [],
             'magic_attack_spells': {},
-            'mines': 0,
-            'mines_t01': 0,
-            'mines_t02': 0,
-            'bats': 0,
-            'bats_t01': 0,
-            'bats_t02': 0,
-            'bats_t03': 0,
-        }
+            }
         self.stats_old = {
             'level': 1,
             'score': None,
             'lives': None,
             'power': None,
             'health': None,
+            'magic_resistance': PL_MAGIC_RESISTANCE,
             'speed': None,
             'batteries': None,
             'files_disks': None,
@@ -171,8 +171,7 @@ class Player(pg.sprite.Sprite):
             ActorType.FILES_DISK_A.name: None,
             'apples': None,
             'door_keys': None,
-            'mines': None,
-        }
+            }
         self.stats_render = {
             'level': None,
             'score': None,
@@ -209,8 +208,7 @@ class Player(pg.sprite.Sprite):
             'files_disk_t04_title': None,
             'apples': None,
             'door_keys': None,
-            'mines': None,
-        }
+            }
         self.level = None
         self.sound_effects = True
 
@@ -247,6 +245,30 @@ class Player(pg.sprite.Sprite):
         self.door_unlock_sound = pg.mixer.Sound(self.file_name_sound_get('snd_door_unlock'))
         self.npc_killed_sound = pg.mixer.Sound(self.file_name_sound_get('snd_npc_killed'))
         self.explosion_sound = pg.mixer.Sound(self.file_name_sound_get('snd_explosion'))
+
+    @property
+    def power(self):
+        return self.stats['power']
+
+    @power.setter
+    def power(self, value):
+        self.stats['power'] = value
+
+    @property
+    def health(self):
+        return self.stats['health']
+
+    @health.setter
+    def health(self, value):
+        self.stats['health'] = value
+
+    @property
+    def magic_resistance(self):
+        return self.stats['magic_resistance']
+
+    @magic_resistance.setter
+    def magic_resistance(self, value):
+        self.stats['magic_resistance'] = value
 
     def update(self):
         # when RIP
@@ -367,13 +389,15 @@ class Player(pg.sprite.Sprite):
             self.stats['files_disks_type'][files_disk.disk_type] += 1
             self.stats[files_disk.type.name] += 1
             self.stats['score'] += ExperiencePoints.xp_points[files_disk.type.name]
-        len(files_disk_hit_list) and TextMsg.create("Yeah! I've found another disk!", self.game, time_in_secs=MSG_PC_DURATION)
+        len(files_disk_hit_list) and TextMsg.create(
+            "Yeah!\nI've found\nanother disk!", self.game, time_in_secs=MSG_PC_DURATION)
 
         # Check if we hit any computer
         computers_hit_list = pg.sprite.spritecollide(self, self.level.computers, False)
         for computer in computers_hit_list:
             if not computer.visited:
-                TextMsg.create("Hey! This computer is a beauty!", self.game, time_in_secs=MSG_PC_DURATION)
+                TextMsg.create(
+                    "Hey!\nThis computer\nis a beauty!", self.game, time_in_secs=MSG_PC_DURATION)
                 computer.visited = True
 
         # Check if we hit any cartridge
@@ -403,6 +427,8 @@ class Player(pg.sprite.Sprite):
             enemy_hit_list = pg.sprite.spritecollide(self, self.level.npcs, False)
             has_been_hit = False
             for enemy in enemy_hit_list:
+                if enemy.hostility_level == 0:
+                    continue
                 if (self.is_energy_shield_activated and self.direction == DIRECTION_RIGHT
                         and enemy.is_actor_on_the_left(self)):
                     continue
@@ -503,6 +529,9 @@ class Player(pg.sprite.Sprite):
             clock.die_hard()
         for text_msg in self.game.text_msg_sprites:
             text_msg.die_hard()
+        for spell in self.game.level.magic_sprites:
+            if spell.target == self:
+                spell.kill_hook()
 
     def self_destruction(self):
         if self.direction == DIRECTION_RIP:
@@ -569,7 +598,7 @@ class Player(pg.sprite.Sprite):
         self.stats['level'] += 1
         if self.stats['level'] > 1:
             if not self.stats['energy_shields_stock']:
-                log.debug("Create energy shield")
+                self.game.is_log_debug and log.debug("Create energy shield")
                 energy_shield = EnergyShieldA(self.rect.x, self.rect.y, self.game)
                 energy_shield.owner = self
                 self.stats['energy_shields_stock'].append(energy_shield)
@@ -603,8 +632,8 @@ class Player(pg.sprite.Sprite):
                                "3. Lightning Bolt A\n"
                                "4. Doom Bolt B\n"
                                "5. Doom Bolt A\n"
-                               "\n!! Do not forget that 'm' switch \n  the magic mode."
-                               , self.game, time_in_secs=6)
+                               "\n!! Do not forget that 'm' switch \n  the magic mode.",
+                               self.game, time_in_secs=6)
 
     def switch_energy_shield(self):
         if self.direction == DIRECTION_RIP:
@@ -648,4 +677,5 @@ class Player(pg.sprite.Sprite):
             TextMsg.create(f"{self.stats['magic_attack'].__name__}\n",
                            self.game, time_in_secs=MSG_PC_DUR_SHORT)
         else:
-            TextMsg.create("You've got NO spell in this slot.\n", self.game, time_in_secs=MSG_PC_DUR_SHORT)
+            TextMsg.create(
+                "You've got \nNO spell\nin this slot.", self.game, time_in_secs=MSG_PC_DUR_SHORT)

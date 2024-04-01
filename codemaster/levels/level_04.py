@@ -29,7 +29,6 @@ from codemaster.models.actors.items import (
     DoorRightYellow,
     DoorKeyYellow,
     FilesDiskB,
-    LifeRecoveryA,
     PotionHealth,
     PotionPower,
     )
@@ -42,14 +41,14 @@ class Level4(Level):
         super().__init__(game)
         self.id = 3
         self.name = '04'
-        self.next_level_left = 3
-        self.next_level_right = 1
+        self.next_level_left = 2
+        self.next_level_right = 4
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(4)).convert()
         self.level_limit = -3000
         self.level_limit_top = -1000
-        self.player_start_pos_left = (210, 520)
+        self.player_start_pos_left = (220, 520)
         self.player_start_pos_right = (300, 520)
         self.player_start_pos_rtop = (250, -440)
         self.player_start_pos_ltop = (80, 100)

@@ -31,7 +31,7 @@ class Level1(Level):
         self.id = 0
         self.name = '01'
         self.next_level_left = False
-        self.next_level_right = 2
+        self.next_level_right = 1
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(1)).convert()
