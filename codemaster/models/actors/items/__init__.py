@@ -13,6 +13,7 @@ from codemaster.models.actors.items.door_keys import (
     DoorKeyBlue,
     DoorKeyYellow,
     DoorKeyRed,
+    DoorKeyAqua,
     DoorKeyMagenta,
     )
 from codemaster.models.actors.items.files_disks import (

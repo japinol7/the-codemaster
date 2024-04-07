@@ -18,7 +18,6 @@ from codemaster.models.actors.items import (
     CartridgeGreen,
     CartridgeBlue,
     CartridgeYellow,
-    CartridgeRed,
     DoorRightYellow,
     DoorLeftGreen,
     FilesDiskB,
@@ -87,23 +86,17 @@ class Level7(Level):
 
         # Add potions
         self.potions.add([
-            PotionPower(1090, 172, self.game),
-            PotionHealth(1090, 132, self.game),
+            PotionHealth(1090, 172, self.game),
             PotionPower(1130, 172, self.game),
             PotionPower(1130, 132, self.game),
             ])
 
         # Add cartridges
         self.cartridges.add([
-            CartridgeGreen(1180, 173, self.game),
-            CartridgeBlue(1220, 173, self.game),
-            CartridgeYellow(1260, 173, self.game),
-            CartridgeRed(1300, 173, self.game),
-            CartridgeBlue(1340, 173, self.game),
-            CartridgeGreen(1180, 130, self.game),
-            CartridgeBlue(1220, 130, self.game),
-            CartridgeBlue(1340, 130, self.game),
-            CartridgeGreen(1180, 87, self.game),
+            CartridgeYellow(1180, 175, self.game),
+            CartridgeBlue(1220, 175, self.game),
+            CartridgeGreen(1180, 136, self.game),
+            CartridgeGreen(1180, 98, self.game),
             ])
 
         # Add NPCs

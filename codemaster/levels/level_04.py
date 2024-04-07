@@ -92,6 +92,9 @@ class Level4(Level):
         # Add batteries
         self.batteries.add([
             BatteryA(2410, 74, self.game),
+            BatteryA(564, 415, self.game),
+            BatteryA(614, 415, self.game),
+            BatteryA(664, 415, self.game),
             ])
 
         # Add files_disks

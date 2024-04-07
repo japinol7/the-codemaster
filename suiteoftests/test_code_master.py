@@ -7,7 +7,9 @@ from collections import namedtuple
 
 import pygame as pg
 
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.items import ClockTimerA
+from codemaster.models.actors.items.bullets import BulletType
 from codemaster.models.actors.player import Player
 from codemaster.config.constants import (
     APP_TECH_NAME,
@@ -39,6 +41,16 @@ DASHES_LINE_SHORT = f"{'-' * 20}"
 TestMethodWithSetupLevels = namedtuple(
     'TestMethodWithSetupLevels', ['test', 'level_name_nums', 'starting_level_n', 'skip']
     )
+
+PlayerActionMethodArgs = namedtuple('PlayerActionsArgs', ['method_name', 'kwargs'])
+PLAYER_ACTION_METHODS_MAP = {
+    'go_right': PlayerActionMethodArgs('go_right', kwargs={}),
+    'go_left': PlayerActionMethodArgs('go_left', kwargs={}),
+    'jump': PlayerActionMethodArgs('jump', kwargs={}),
+    'shot_bullet_t3_photonic': PlayerActionMethodArgs(
+        'shot_bullet', kwargs={'bullet_type': BulletType.T3_PHOTONIC}),
+    'stop': PlayerActionMethodArgs('stop', kwargs={}),
+    }
 
 
 class Game:
@@ -85,16 +97,24 @@ class Game:
         pg.init()
         tests = [
             TestMethodWithSetupLevels(
-                self.test_big_jump_and_fetch_1_life_n_7_potions_power, [2], 0, skip=False,
+                self.test_bat_hit_with_enough_bullets_must_die_and_give_xp,
+                level_name_nums=[3], starting_level_n=0, skip=False,
                 ),
             TestMethodWithSetupLevels(
-                self.test_big_jump_and_fetch_3_batteries_n_1_disk, [1], 0, skip=False,
+                self.test_big_jump_and_fetch_1_life_n_7_potions_power,
+                level_name_nums=[2], starting_level_n=0, skip=False,
                 ),
             TestMethodWithSetupLevels(
-                self.test_big_jump_and_fetch_1_file_disk, [1], 0, skip=False,
+                self.test_big_jump_and_fetch_3_batteries_n_1_disk,
+                level_name_nums=[1], starting_level_n=0, skip=False,
                 ),
             TestMethodWithSetupLevels(
-                self.test_fetch_two_apples, [1], 0, skip=False,
+                self.test_big_jump_and_fetch_1_file_disk,
+                level_name_nums=[1], starting_level_n=0, skip=False,
+                ),
+            TestMethodWithSetupLevels(
+                self.test_fetch_two_apples,
+                level_name_nums=[1], starting_level_n=0, skip=False,
                 ),
             ]
         self.tests_skipped = [test.test.__name__ for test in tests if test.skip]
@@ -232,14 +252,8 @@ class Game:
         else:
             player_action = self.player_actions.pop()[0]
 
-        if player_action == 'go_right':
-            self.player.go_right()
-        elif player_action == 'go_left':
-            self.player.go_left()
-        elif player_action == 'jump':
-            self.player.jump()
-        elif player_action == 'stop':
-            self.player.stop()
+        player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
+        getattr(self.player, player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
 
     def calc_test_result(self, failed_condition, failed_msg, test_name):
         if self.aborted:
@@ -391,4 +405,28 @@ class Game:
         self.calc_test_result(
             failed_condition=self.player.stats['lives'] < 4 or len(self.player.stats['potions_power']) < 7,
             failed_msg="Test FAILED: Player did not fetch at least 1 life recovery and 7 potions_power.",
+            test_name=test_name)
+
+    def test_bat_hit_with_enough_bullets_must_die_and_give_xp(self):
+        test_name = 'test_bat_hit_with_enough_bullets_must_die_and_give_xp'
+        log.info(f"Start {test_name}")
+        self.player.rect.x = 240
+        self.player.rect.y = 620
+        self.player.stats['health'] = PLAYER_HEALTH_SUPER_HERO
+
+        TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {test_name}",
+                       self, time_in_secs=5)
+        self._init_clock_timer(time_in_secs=3)
+
+        self.player_actions = [
+            ['shot_bullet_t3_photonic', 15],
+            ]
+
+        bat_black = [npc for npc in self.level.npcs if npc.type == ActorType.BAT_BLACK][0]
+
+        self._game_loop()
+
+        self.calc_test_result(
+            failed_condition=bat_black.alive(),
+            failed_msg="Test FAILED: Player did not kill bat.",
             test_name=test_name)

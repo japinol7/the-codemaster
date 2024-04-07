@@ -33,6 +33,7 @@ from codemaster.models.actors.items import (
     DoorLeftAqua,
     DoorRightGreen,
     DoorLeftRed,
+    DoorKeyAqua,
     FilesDiskC,
     LifeRecoveryA,
     MineLilac,
@@ -152,10 +153,8 @@ class Level6(Level):
 
         # Add cartridges
         self.cartridges.add([
-            CartridgeGreen(2660, 405, self.game),
             CartridgeBlue(2700, 405, self.game),
             CartridgeBlue(2700, 366, self.game),
-            CartridgeBlue(2700, 327, self.game),
             CartridgeYellow(2740, 405, self.game),
             CartridgeRed(2780, 405, self.game),
             ])
@@ -248,6 +247,11 @@ class Level6(Level):
         # Add doors
         self.doors.add([
             DoorLeftRed(2, 550, self.game, level_dest=4, door_dest_pos=DOOR_DEST_NL),
-            DoorLeftAqua(2786, -90, self.game, level_dest=8, door_dest_pos=DOOR_DEST_TR),
+            DoorLeftAqua(2786, -90, self.game, level_dest=8, door_dest_pos=DOOR_DEST_TR, is_locked=True),
             DoorRightGreen(3400, 550, self.game, level_dest=6, door_dest_pos=DOOR_DEST_NL),
+            ])
+
+        # Add door keys
+        self.door_keys.add([
+            DoorKeyAqua(2740, 374, self.game, door=[door for door in self.doors if door.is_locked][0]),
             ])

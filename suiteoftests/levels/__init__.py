@@ -1,2 +1,3 @@
-from suiteoftests.levels.level_test_1 import LevelTest1
-from suiteoftests.levels.level_test_2 import LevelTest2
+from suiteoftests.levels.level_test_01 import LevelTest1
+from suiteoftests.levels.level_test_02 import LevelTest2
+from suiteoftests.levels.level_test_03 import LevelTest3

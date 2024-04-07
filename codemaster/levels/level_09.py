@@ -82,7 +82,7 @@ class Level9(Level):
 
         # Add batteries
         self.batteries.add([
-            BatteryA(2610, 380, self.game),
+            BatteryA(2610, 385, self.game),
             ])
 
         # Add life_recs
@@ -92,13 +92,9 @@ class Level9(Level):
 
         # Add cartridges
         self.cartridges.add([
-            CartridgeGreen(2800, 204, self.game),
-            CartridgeBlue(2840, 204, self.game),
-            CartridgeBlue(2880, 204, self.game),
-            CartridgeGreen(2800, 164, self.game),
-            CartridgeBlue(2840, 164, self.game),
-            CartridgeBlue(2880, 164, self.game),
-            CartridgeGreen(2800, 124, self.game),
+            CartridgeGreen(2840, 205, self.game),
+            CartridgeBlue(2880, 205, self.game),
+            CartridgeGreen(2840, 165, self.game),
             ])
 
         # Add NPCs
