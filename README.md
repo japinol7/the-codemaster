@@ -23,7 +23,7 @@
 
 ## Videos
 
-[![Video](https://img.youtube.com/vi/c7vq87Ryk6I/maxresdefault.jpg)](https://www.youtube.com/watch?v=c7vq87Ryk6I)
+[![Video](https://img.youtube.com/vi/c7vq87Ryk6I/maxresdefault.jpg)](https://www.youtube.com/watch?v=Xfnl2X9hIU8)
 
 
 ## History of the series. A spin-off? What do you mean?
