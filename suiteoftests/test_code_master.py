@@ -24,6 +24,7 @@ from codemaster.resources import Resource
 from codemaster.config.settings import Settings
 from codemaster import levels
 from codemaster.level_scroll_screen import level_scroll_shift_control
+from codemaster.tools.utils.queue import Queue
 from suiteoftests import levels as test_levels
 
 PLAYER_HEALTH_SUPER_HERO = 90_000
@@ -85,7 +86,7 @@ class Game:
         self.text_msg_pc_sprites = None
         self.player = None
         self.players = None
-        self.player_actions = []
+        self.player_actions = Queue()
         self.levels = []
         self.levels_qty = None
         self.level_no = None
@@ -95,17 +96,9 @@ class Game:
 
     def main(self):
         pg.init()
-        tests = [
+        tests = Queue((
             TestMethodWithSetupLevels(
-                self.test_bat_hit_with_enough_bullets_must_die_and_give_xp,
-                level_name_nums=[3], starting_level_n=0, skip=False,
-                ),
-            TestMethodWithSetupLevels(
-                self.test_big_jump_and_fetch_1_life_n_7_potions_power,
-                level_name_nums=[2], starting_level_n=0, skip=False,
-                ),
-            TestMethodWithSetupLevels(
-                self.test_big_jump_and_fetch_3_batteries_n_1_disk,
+                self.test_fetch_two_apples,
                 level_name_nums=[1], starting_level_n=0, skip=False,
                 ),
             TestMethodWithSetupLevels(
@@ -113,22 +106,31 @@ class Game:
                 level_name_nums=[1], starting_level_n=0, skip=False,
                 ),
             TestMethodWithSetupLevels(
-                self.test_fetch_two_apples,
+                self.test_big_jump_and_fetch_3_batteries_n_1_disk,
                 level_name_nums=[1], starting_level_n=0, skip=False,
                 ),
-            ]
+            TestMethodWithSetupLevels(
+                self.test_big_jump_and_fetch_1_life_n_7_potions_power,
+                level_name_nums=[2], starting_level_n=0, skip=False,
+                ),
+            TestMethodWithSetupLevels(
+                self.test_bat_hit_with_enough_bullets_must_die_and_give_xp,
+                level_name_nums=[3], starting_level_n=0, skip=False,
+                ),
+            ))
         self.tests_skipped = [test.test.__name__ for test in tests if test.skip]
         self.test_skipped_count = len(self.tests_skipped)
         self.tests_skipped_text = f". Tests skipped: {self.test_skipped_count}" if self.test_skipped_count else ''
 
-        tests = [test for test in tests if not test.skip]
         self.tests_total = sum(1 for test in tests if not test.skip)
 
         log.info(LOG_START_TEST_APP_MSG)
         log.info(f"Total tests to pass: {self.tests_total}{self.tests_skipped_text}")
         try:
-            for test_n in range(self.tests_total):
+            for test in tuple(tests):
                 test_method_with_setup_levels = tests.pop()
+                if test.skip:
+                    continue
                 self.set_up(
                     level_name_nums=test_method_with_setup_levels.level_name_nums,
                     starting_level_n=test_method_with_setup_levels.starting_level_n)
@@ -246,9 +248,9 @@ class Game:
         if not self.player_actions:
             return
 
-        if self.player_actions[-1][1] > 1:
-            player_action = self.player_actions[-1][0]
-            self.player_actions[-1][1] -= 1
+        if self.player_actions.peek()[1] > 1:
+            player_action = self.player_actions.peek()[0]
+            self.player_actions.peek()[1] -= 1
         else:
             player_action = self.player_actions.pop()[0]
 
@@ -304,14 +306,14 @@ class Game:
                        self, time_in_secs=5)
         self._init_clock_timer(time_in_secs=4)
 
-        self.player_actions = [
+        self.player_actions = Queue((
+            ['go_right', 34],
+            ['jump', 5],
+            ['go_right', 148],
             ['stop', 1],
             ['go_left', 4],
             ['stop', 1],
-            ['go_right', 148],
-            ['jump', 5],
-            ['go_right', 34],
-            ]
+            ))
 
         self._game_loop()
 
@@ -331,12 +333,12 @@ class Game:
                        self, time_in_secs=5)
         self._init_clock_timer(time_in_secs=4)
 
-        self.player_actions = [
-            ['stop', 1],
-            ['go_left', 45],
-            ['jump', 5],
+        self.player_actions = Queue((
             ['go_left', 15],
-            ]
+            ['jump', 5],
+            ['go_left', 45],
+            ['stop', 1],
+            ))
 
         self._game_loop()
 
@@ -356,12 +358,12 @@ class Game:
                        self, time_in_secs=5)
         self._init_clock_timer(time_in_secs=5)
 
-        self.player_actions = [
-            ['stop', 1],
-            ['go_right', 192],
-            ['jump', 5],
+        self.player_actions = Queue((
             ['go_right', 22],
-            ]
+            ['jump', 5],
+            ['go_right', 192],
+            ['stop', 1],
+            ))
 
         self._game_loop()
 
@@ -390,15 +392,15 @@ class Game:
                        self, time_in_secs=5)
         self._init_clock_timer(time_in_secs=4)
 
-        self.player_actions = [
-            ['stop', 1],
-            ['go_right', 78],
-            ['jump', 5],
-            ['go_right', 12],
-            ['go_left', 64],
-            ['jump', 5],
+        self.player_actions = Queue((
             ['go_left', 22],
-            ]
+            ['jump', 5],
+            ['go_left', 64],
+            ['go_right', 12],
+            ['jump', 5],
+            ['go_right', 78],
+            ['stop', 1],
+            ))
 
         self._game_loop()
 
@@ -418,9 +420,9 @@ class Game:
                        self, time_in_secs=5)
         self._init_clock_timer(time_in_secs=3)
 
-        self.player_actions = [
+        self.player_actions = Queue((
             ['shot_bullet_t3_photonic', 15],
-            ]
+            ))
 
         bat_black = [npc for npc in self.level.npcs if npc.type == ActorType.BAT_BLACK][0]
 
