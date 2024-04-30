@@ -45,8 +45,8 @@ class Vortex:
             self.draw_method = self.draw_method_circle
 
     def calc_move(self, dt):
-        return [math.cos(self.angle) * self.speed * dt,
-                math.sin(self.angle) * self.speed * dt]
+        return (math.cos(self.angle) * self.speed * dt,
+                math.sin(self.angle) * self.speed * dt)
 
     def set_point_towards(self, angle, rate):
         rotate_dir = ((angle - self.angle + math.pi * 3) % (math.pi * 2)) - math.pi
@@ -69,18 +69,18 @@ class Vortex:
             self.alive = False
 
     def draw_method_polygon(self, surface):
-        lateral_point = [
+        lateral_point = (
             self.position[0] + math.cos(self.angle + math.pi / 2) * self.speed * self.scale * 0.3,
-            self.position[1] + math.sin(self.angle + math.pi / 2) * self.speed * self.scale * 0.3]
+            self.position[1] + math.sin(self.angle + math.pi / 2) * self.speed * self.scale * 0.3)
 
-        points = [
-            [self.position[0] + math.cos(self.angle) * self.speed * self.scale,
-             self.position[1] + math.sin(self.angle) * self.speed * self.scale],
+        points = (
+            (self.position[0] + math.cos(self.angle) * self.speed * self.scale,
+             self.position[1] + math.sin(self.angle) * self.speed * self.scale),
             lateral_point,
-            [self.position[0] + math.cos(self.angle) * self.speed * self.scale * 3.5,
-             self.position[1] + math.sin(self.angle) * self.speed * self.scale * 3.5],
+            (self.position[0] + math.cos(self.angle) * self.speed * self.scale * 3.5,
+             self.position[1] + math.sin(self.angle) * self.speed * self.scale * 3.5),
             lateral_point,
-            ]
+            )
         pg.draw.polygon(surface, self.color, points)
 
     def draw_method_circle(self, surface):

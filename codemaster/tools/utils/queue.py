@@ -2,12 +2,10 @@ from collections import deque
 
 
 class Queue:
-    def __init__(self, iterable=(), maxlen=None, name=''):
+    def __init__(self, iterable=(), maxlen=None, name='', num=0):
         self._container = deque(iterable=iterable, maxlen=maxlen)
         self.name = name
-
-    def __iter__(self):
-        return iter(self._container)
+        self.num = num
 
     @property
     def is_empty(self):
@@ -21,6 +19,9 @@ class Queue:
 
     def peek(self):
         return self._container[0] if not self.is_empty else None
+
+    def __iter__(self):
+        return iter(self._container)
 
     def __len__(self):
         return len(self._container)

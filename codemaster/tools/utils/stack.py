@@ -7,9 +7,6 @@ class Stack:
         self.name = name
         self.num = num
 
-    def __iter__(self):
-        return iter(self._container)
-
     @property
     def is_empty(self):
         return not self._container
@@ -22,6 +19,9 @@ class Stack:
 
     def peek(self):
         return self._container[-1] if not self.is_empty else None
+
+    def __iter__(self):
+        return iter(self._container)
 
     def __len__(self):
         return len(self._container)

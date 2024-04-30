@@ -298,7 +298,7 @@ class SnakeYellow(Snake):
 
 
 class SnakeRed(Snake):
-    """Represents a blue red."""
+    """Represents a red snake."""
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
                  border_left=0, border_right=0,
