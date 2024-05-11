@@ -42,4 +42,4 @@ class TestPlayerFetchItems(GameTest):
         game.calc_test_result(
             failed_condition=game.player.stats['apples'] != 2,
             failed_msg="Test FAILED: Player did not fetch 2 apples.",
-            test_name=__name__)
+            test_name=game.current_test.__name__)

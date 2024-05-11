@@ -40,4 +40,4 @@ class TestPlayerShootsNPCs(GameTest):
         game.calc_test_result(
             failed_condition=bat_black.alive(),
             failed_msg="Test FAILED: Player did not kill bat.",
-            test_name=__name__)
+            test_name=game.current_test.__name__)

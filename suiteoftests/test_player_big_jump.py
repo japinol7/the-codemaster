@@ -48,7 +48,7 @@ class TestPlayerBigJump(GameTest):
         game.calc_test_result(
             failed_condition=game.player.stats['files_disks'] != 1,
             failed_msg="Test FAILED: Player did not fetch 1 disk.",
-            test_name=__name__)
+            test_name=game.current_test.__name__)
 
     def test_big_jump_and_fetch_3_batteries_n_1_disk(self, game):
         game.player.rect.x = 1500
@@ -69,7 +69,7 @@ class TestPlayerBigJump(GameTest):
         game.calc_test_result(
             failed_condition=game.player.stats['batteries'] < 3 or game.player.stats['files_disks'] < 1,
             failed_msg="Test FAILED: Player did not fetch at least 3 batteries and 1 disk.",
-            test_name=__name__)
+            test_name=game.current_test.__name__)
 
     def test_big_jump_and_fetch_1_life_n_7_potions_power(self, game):
         def player_die_hard_mock():
@@ -101,4 +101,4 @@ class TestPlayerBigJump(GameTest):
         game.calc_test_result(
             failed_condition=game.player.stats['lives'] < 4 or len(game.player.stats['potions_power']) < 7,
             failed_msg="Test FAILED: Player did not fetch at least 1 life recovery and 7 potions_power.",
-            test_name=__name__)
+            test_name=game.current_test.__name__)

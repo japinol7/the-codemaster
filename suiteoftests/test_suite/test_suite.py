@@ -51,6 +51,7 @@ class GameTestSuite:
         self.test_failed_count = 0
         self.test_passed_count = 0
         self.test_skipped_count = 0
+        self.current_test = None
         self.tests_total = 0
         self.tests_aborted = []
         self.tests_failed = []
@@ -258,13 +259,14 @@ class GameTestSuite:
         try:
             for test in tuple(self.tests):
                 test_method_with_setup_levels = self.tests.pop()
+                self.current_test = test_method_with_setup_levels.test
                 if test.skip:
                     continue
                 self.set_up(
                     level_name_nums=test_method_with_setup_levels.level_name_nums,
                     starting_level_n=test_method_with_setup_levels.starting_level_n)
-                log.info(f"Start {test_method_with_setup_levels.test.__name__}")
-                TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {__name__}",
+                log.info(f"Start {self.current_test.__name__}")
+                TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {self.current_test.__name__}",
                                self, time_in_secs=5)
 
                 test_method_with_setup_levels.test(game=self)
