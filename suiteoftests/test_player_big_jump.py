@@ -36,19 +36,18 @@ class TestPlayerBigJump(GameTest):
 
         game.init_clock_timer(time_in_secs=4)
 
-        game.player_actions = Queue((
+        game.add_player_actions((
             ['go_left', 15],
             ['jump', 5],
             ['go_left', 45],
             ['stop', 1],
             ))
 
-        game._game_loop()
+        game.game_loop()
 
         game.calc_test_result(
             failed_condition=game.player.stats['files_disks'] != 1,
-            failed_msg="Test FAILED: Player did not fetch 1 disk.",
-            test_name=game.current_test.__name__)
+            failed_msg="Player did not fetch 1 disk.")
 
     def test_big_jump_and_fetch_3_batteries_n_1_disk(self, game):
         game.player.rect.x = 1500
@@ -57,19 +56,18 @@ class TestPlayerBigJump(GameTest):
 
         game.init_clock_timer(time_in_secs=5)
 
-        game.player_actions = Queue((
+        game.add_player_actions((
             ['go_right', 22],
             ['jump', 5],
             ['go_right', 192],
             ['stop', 1],
             ))
 
-        game._game_loop()
+        game.game_loop()
 
         game.calc_test_result(
             failed_condition=game.player.stats['batteries'] < 3 or game.player.stats['files_disks'] < 1,
-            failed_msg="Test FAILED: Player did not fetch at least 3 batteries and 1 disk.",
-            test_name=game.current_test.__name__)
+            failed_msg="Player did not fetch at least 3 batteries and 1 disk.")
 
     def test_big_jump_and_fetch_1_life_n_7_potions_power(self, game):
         def player_die_hard_mock():
@@ -86,7 +84,7 @@ class TestPlayerBigJump(GameTest):
 
         game.init_clock_timer(time_in_secs=4)
 
-        game.player_actions = Queue((
+        game.add_player_actions((
             ['go_left', 22],
             ['jump', 5],
             ['go_left', 64],
@@ -96,9 +94,8 @@ class TestPlayerBigJump(GameTest):
             ['stop', 1],
             ))
 
-        game._game_loop()
+        game.game_loop()
 
         game.calc_test_result(
             failed_condition=game.player.stats['lives'] < 4 or len(game.player.stats['potions_power']) < 7,
-            failed_msg="Test FAILED: Player did not fetch at least 1 life recovery and 7 potions_power.",
-            test_name=game.current_test.__name__)
+            failed_msg="Player did not fetch at least 1 life recovery and 7 potions_power.")

@@ -79,18 +79,18 @@ class GameTestSuite:
         self.current_time = None
         self.sound_effects = False
 
-        self.add_tests()
-
     @property
     def tests(self):
         return self.__class__._tests
 
-    def add_tests(self, tests=None):
-        if not tests:
-            return
-
+    def add_tests(self, tests):
         for test in tests:
             self.__class__._tests.push(test)
+
+    def add_player_actions(self, actions):
+        """Adds player actions for the current test."""
+        for action in actions:
+            self.player_actions.push(action)
 
     def _print_test_results(self):
         log.info(GROUP_DASHES_LINE)
@@ -121,6 +121,7 @@ class GameTestSuite:
         self.text_msg_pc_sprites = pg.sprite.Group()
         self.players = pg.sprite.Group()
         self.players.add(self.player)
+        self.player_actions = Queue()
 
         self.load_test_levels(level_name_nums=level_name_nums, starting_level_n=starting_level_n)
 
@@ -205,22 +206,22 @@ class GameTestSuite:
         player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
         getattr(self.player, player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
 
-    def calc_test_result(self, failed_condition, failed_msg, test_name):
+    def calc_test_result(self, failed_condition, failed_msg):
         if self.aborted:
             self.test_aborted_count += 1
-            self.tests_aborted += [test_name]
+            self.tests_aborted += [self.current_test.__name__]
             return
 
         if failed_condition:
-            log.warning(failed_msg)
-            self.tests_failed += [test_name]
+            log.warning(f"Test FAILED: {failed_msg}")
+            self.tests_failed += [self.current_test.__name__]
             self.test_failed_count += 1
             return
 
-        self.tests_passed += [test_name]
+        self.tests_passed += [self.current_test.__name__]
         self.test_passed_count += 1
 
-    def _game_loop(self):
+    def game_loop(self):
         log.info("Start game loop")
         self.done = False
         while not self.done:

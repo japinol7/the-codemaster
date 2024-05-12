@@ -1,7 +1,6 @@
 """Module test_player_shoots_npcs."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from codemaster.tools.utils.queue import Queue
 from suiteoftests.config.constants import (
     PLAYER_HEALTH_SUPER_HERO,
     TestMethodWithSetupLevels,
@@ -29,15 +28,14 @@ class TestPlayerShootsNPCs(GameTest):
 
         game.init_clock_timer(time_in_secs=3)
 
-        game.player_actions = Queue((
+        game.add_player_actions((
             ['shot_bullet_t3_photonic', 15],
             ))
 
         bat_black = [npc for npc in game.level.npcs if npc.type == ActorType.BAT_BLACK][0]
 
-        game._game_loop()
+        game.game_loop()
 
         game.calc_test_result(
             failed_condition=bat_black.alive(),
-            failed_msg="Test FAILED: Player did not kill bat.",
-            test_name=game.current_test.__name__)
+            failed_msg="Player did not kill bat.")

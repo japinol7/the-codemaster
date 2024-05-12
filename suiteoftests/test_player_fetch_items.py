@@ -1,7 +1,6 @@
 """Module test_player_fetch_items."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from codemaster.tools.utils.queue import Queue
 from suiteoftests.config.constants import (
     PLAYER_HEALTH_SUPER_HERO,
     TestMethodWithSetupLevels,
@@ -28,7 +27,7 @@ class TestPlayerFetchItems(GameTest):
 
         game.init_clock_timer(time_in_secs=4)
 
-        game.player_actions = Queue((
+        game.add_player_actions((
             ['go_right', 34],
             ['jump', 5],
             ['go_right', 148],
@@ -37,9 +36,8 @@ class TestPlayerFetchItems(GameTest):
             ['stop', 1],
             ))
 
-        game._game_loop()
+        game.game_loop()
 
         game.calc_test_result(
             failed_condition=game.player.stats['apples'] != 2,
-            failed_msg="Test FAILED: Player did not fetch 2 apples.",
-            test_name=game.current_test.__name__)
+            failed_msg="Player did not fetch 2 apples.")
