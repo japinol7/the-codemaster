@@ -11,6 +11,9 @@ class Queue:
     def is_empty(self):
         return not self._container
 
+    def extend(self, iterable):
+        self._container.extend(iterable)
+
     def push(self, item):
         self._container.append(item)
 

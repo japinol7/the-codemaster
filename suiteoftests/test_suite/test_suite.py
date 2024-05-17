@@ -12,6 +12,13 @@ from codemaster.config.constants import (
     FONT_DEFAULT_NAME,
     FONT_FIXED_DEFAULT_NAME
     )
+from codemaster.models.actors.selectors import SelectorA
+from codemaster.models.actors.spells import (
+    LightningBoltA,
+    DoomBoltA,
+    VortexOfDoomA,
+    VortexOfDoomB,
+    )
 from codemaster.tools.logger.logger import log
 from codemaster.tools.utils import utils_graphics as libg_jp
 
@@ -78,6 +85,10 @@ class GameTestSuite:
         self.level = None
         self.current_time = None
         self.sound_effects = False
+        self.mouse_pos = 0, 0
+        self.is_magic_on = False
+        self.selector_sprites = pg.sprite.Group()
+        self.test_spell_target = None
 
     @property
     def tests(self):
@@ -89,8 +100,7 @@ class GameTestSuite:
 
     def add_player_actions(self, actions):
         """Adds player actions for the current test."""
-        for action in actions:
-            self.player_actions.push(action)
+        self.player_actions.extend(actions)
 
     def _print_test_results(self):
         log.info(GROUP_DASHES_LINE)
@@ -119,6 +129,7 @@ class GameTestSuite:
         self.active_sprites = pg.sprite.Group()
         self.text_msg_sprites = pg.sprite.Group()
         self.text_msg_pc_sprites = pg.sprite.Group()
+        self.selector_sprites = pg.sprite.Group()
         self.players = pg.sprite.Group()
         self.players.add(self.player)
         self.player_actions = Queue()
@@ -135,6 +146,10 @@ class GameTestSuite:
         self.player.level = self.level
         self.player.start_time = self.start_time
         self.player.stats['levels_visited'].add(self.level.id)
+
+        self.selector_sprites.add(
+            SelectorA(0, 0, self),
+            )
 
         pg.display.set_caption(f"{APP_TECH_NAME}_test_suite")
 
@@ -191,6 +206,16 @@ class GameTestSuite:
         for clock in self.clock_sprites:
             clock.draw_text()
 
+        for sprite in self.level.particle_tuple_sprites:
+            sprite.update_particle_sprites()
+        for sprite in self.level.particle_sprites:
+            sprite.update_particle_sprites()
+
+        if self.is_magic_on:
+            for selector in self.selector_sprites:
+                selector.update()
+            self.selector_sprites.draw(GameTestSuite.screen)
+
         self.level.magic_sprites.draw(GameTestSuite.screen)
 
     def _player_move(self):
@@ -204,15 +229,33 @@ class GameTestSuite:
             player_action = self.player_actions.pop()[0]
 
         player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
+
+        if player_action_methods_map.method_name == 'cast_spell_on_target':
+            if player_action_methods_map.kwargs.get('spell') == 'cast_lightning_bolt':
+                self.player.stats['magic_attack'] = LightningBoltA
+            elif player_action_methods_map.kwargs.get('spell') == 'cast_doom_bolt':
+                self.player.stats['magic_attack'] = DoomBoltA
+            elif player_action_methods_map.kwargs.get('spell') == 'cast_vortex_of_doom_a':
+                self.player.stats['magic_attack'] = VortexOfDoomA
+            elif player_action_methods_map.kwargs.get('spell') == 'cast_vortex_of_doom_b':
+                self.player.stats['magic_attack'] = VortexOfDoomB
+            if not self.player.stats['magic_attack']:
+                raise ValueError("Magic attack missing. Cannot cast spell!")
+            for selector in self.selector_sprites:
+                selector.rect.x = self.test_spell_target.rect.centerx
+                selector.rect.y = self.test_spell_target.rect.centery
+                selector.get_pointed_sprites()
+            return
+
         getattr(self.player, player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
 
-    def calc_test_result(self, failed_condition, failed_msg):
+    def assert_test_passed(self, pass_condition, failed_msg):
         if self.aborted:
             self.test_aborted_count += 1
             self.tests_aborted += [self.current_test.__name__]
             return
 
-        if failed_condition:
+        if not pass_condition:
             log.warning(f"Test FAILED: {failed_msg}")
             self.tests_failed += [self.current_test.__name__]
             self.test_failed_count += 1
@@ -236,7 +279,6 @@ class GameTestSuite:
             level_scroll_shift_control(game=self)
 
             self._player_move()
-
             self.active_sprites.update()
             self.level.update()
 
@@ -270,7 +312,9 @@ class GameTestSuite:
                 TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {self.current_test.__name__}",
                                self, time_in_secs=5)
 
-                test_method_with_setup_levels.test(game=self)
+                test_method_with_setup_levels.test(
+                    self=test_method_with_setup_levels.__class__,
+                    game=self)
                 self.tear_down()
         except Exception as e:
             traceback.print_tb(e.__traceback__)

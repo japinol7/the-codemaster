@@ -11,7 +11,7 @@ from codemaster.models.actors.items.bullets import BulletType
 PLAYER_HEALTH_SUPER_HERO = 90_000
 CLOCK_TIMER_IN_SECS = 10
 
-IS_LOG_DEBUG_DEFAULT = True
+IS_LOG_DEBUG_DEFAULT = False
 
 LOG_START_TEST_APP_MSG = f"Test app {APP_TECH_NAME} version: {version.get_version()}"
 LOG_END_TEST_APP_MSG = f"End Testing {APP_TECH_NAME}"
@@ -27,6 +27,14 @@ TestMethodWithSetupLevels = namedtuple(
 
 PlayerActionMethodArgs = namedtuple('PlayerActionsArgs', ['method_name', 'kwargs'])
 PLAYER_ACTION_METHODS_MAP = {
+    'cast_lightning_bolt': PlayerActionMethodArgs(
+        'cast_spell_on_target', kwargs={'spell': 'cast_lightning_bolt'}),
+    'cast_doom_bolt': PlayerActionMethodArgs(
+        'cast_spell_on_target', kwargs={'spell': 'cast_doom_bolt'}),
+    'cast_vortex_of_doom_a': PlayerActionMethodArgs(
+        'cast_spell_on_target', kwargs={'spell': 'cast_vortex_of_doom_a'}),
+    'cast_vortex_of_doom_b': PlayerActionMethodArgs(
+        'cast_spell_on_target', kwargs={'spell': 'cast_vortex_of_doom_b'}),
     'go_right': PlayerActionMethodArgs('go_right', kwargs={}),
     'go_left': PlayerActionMethodArgs('go_left', kwargs={}),
     'jump': PlayerActionMethodArgs('jump', kwargs={}),

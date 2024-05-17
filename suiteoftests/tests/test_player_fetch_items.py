@@ -1,25 +1,14 @@
 """Module test_player_fetch_items."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from suiteoftests.config.constants import (
-    PLAYER_HEALTH_SUPER_HERO,
-    TestMethodWithSetupLevels,
-    )
-from suiteoftests.test_suite.game_test import GameTest
+from suiteoftests.config.constants import PLAYER_HEALTH_SUPER_HERO
+from suiteoftests.test_suite.game_test import game_test
 
 
-class TestPlayerFetchItems(GameTest):
+class TestPlayerFetchItems:
     """Player should be able to fetch items."""
 
-    def add_tests(self, tests):
-        tests = (
-            TestMethodWithSetupLevels(
-                self.test_fetch_two_apples,
-                level_name_nums=[1], starting_level_n=0, skip=False,
-                ),
-            )
-        super().add_tests(tests)
-
+    @game_test(levels=[1])
     def test_fetch_two_apples(self, game):
         game.player.rect.x = 240
         game.player.rect.y = 620
@@ -38,6 +27,6 @@ class TestPlayerFetchItems(GameTest):
 
         game.game_loop()
 
-        game.calc_test_result(
-            failed_condition=game.player.stats['apples'] != 2,
+        game.assert_test_passed(
+            pass_condition=game.player.stats['apples'] == 2,
             failed_msg="Player did not fetch 2 apples.")
