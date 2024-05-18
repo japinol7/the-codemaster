@@ -4,19 +4,20 @@ __author__ = 'Joan A. Pinol  (japinol)'
 from suiteoftests.config.constants import TestMethodWithSetupLevels
 
 
-def game_test(levels, starting_level=0, skip=False):
+def game_test(levels, starting_level=0, timeout=6, skip=False):
     """Decorates a game test function, so it can be automatically added
     to the suite of tests.
     @param levels: List of levels to load. Each level must be an integer.
     The First level is 1, because it is based on the name of the level.
     @param starting_level: Starting level. It must be an integer. The First level is 0.
+    @param timeout: Timeout in seconds for the duration of the test.
     @param skip: Skip test.
     """
     def wrapper(func):
         GameTest.tests.append(
             TestMethodWithSetupLevels(
                 func,
-                levels, starting_level, skip
+                levels, starting_level, timeout, skip
             ),
         )
     return wrapper

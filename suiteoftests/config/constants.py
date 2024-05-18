@@ -22,7 +22,9 @@ GROUP_DASHES_LINE = '-' * 62
 DASHES_LINE_SHORT = '-' * 20
 
 TestMethodWithSetupLevels = namedtuple(
-    'TestMethodWithSetupLevels', ['test', 'level_name_nums', 'starting_level_n', 'skip']
+    'TestMethodWithSetupLevels', [
+        'test', 'level_name_nums', 'starting_level_n', 'timeout', 'skip'
+        ]
     )
 
 PlayerActionMethodArgs = namedtuple('PlayerActionsArgs', ['method_name', 'kwargs'])

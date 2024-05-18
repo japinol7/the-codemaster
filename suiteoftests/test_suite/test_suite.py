@@ -249,13 +249,13 @@ class GameTestSuite:
 
         getattr(self.player, player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
 
-    def assert_test_passed(self, pass_condition, failed_msg):
+    def assert_test_passed(self, condition, failed_msg):
         if self.aborted:
             self.test_aborted_count += 1
             self.tests_aborted += [self.current_test.__name__]
             return
 
-        if not pass_condition:
+        if not condition:
             log.warning(f"Test FAILED: {failed_msg}")
             self.tests_failed += [self.current_test.__name__]
             self.test_failed_count += 1
@@ -312,6 +312,7 @@ class GameTestSuite:
                 TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {self.current_test.__name__}",
                                self, time_in_secs=5)
 
+                self.init_clock_timer(test.timeout)
                 test_method_with_setup_levels.test(
                     self=test_method_with_setup_levels.__class__,
                     game=self)

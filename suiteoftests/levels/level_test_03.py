@@ -107,7 +107,7 @@ class LevelTest3(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftWhite(2, 550, self.game, level_dest=7, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorRightAqua(3368, -18, self.game, level_dest=5, door_dest_pos=DOOR_DEST_TR, is_locked=True),
-            DoorRightYellow(3640, 550, self.game, level_dest=9, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftWhite(2, 550, self.game, level_dest=1, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightAqua(3368, -18, self.game, level_dest=3, door_dest_pos=DOOR_DEST_TR, is_locked=True),
+            DoorRightYellow(3640, 550, self.game, level_dest=5, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])
