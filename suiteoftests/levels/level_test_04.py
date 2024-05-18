@@ -14,7 +14,7 @@ from codemaster.models.actors.npcs import (
     )
 from codemaster.models.actors.items import (
     DoorLeftBlue,
-    DoorRightMagenta,
+    DoorRightGreen,
     )
 from codemaster.levels.level_base import Level
 
@@ -71,6 +71,6 @@ class LevelTest4(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftBlue(2, 550, self.game, level_dest=9, door_dest_pos=DOOR_DEST_NL),
-            DoorRightMagenta(3640, 550, self.game, level_dest=11, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftBlue(2, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightGreen(3640, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])

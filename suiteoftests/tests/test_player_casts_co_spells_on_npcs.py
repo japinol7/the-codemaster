@@ -10,7 +10,7 @@ class TestPlayerCastsCoSpellsOnNPCs:
 
     @game_test(levels=[4], timeout=3)
     def test_bat_hit_with_lightning_bolt_must_die(self, game):
-        game.player.rect.x, game.player.rect.y = 240, 620
+        game.player.rect.x, game.player.rect.y = 240, 660
         game.is_magic_on = True
 
         game.add_player_actions((
@@ -28,7 +28,7 @@ class TestPlayerCastsCoSpellsOnNPCs:
 
     @game_test(levels=[4], timeout=6)
     def test_bat_hit_with_doom_bolt_must_die(self, game):
-        game.player.rect.x, game.player.rect.y = 240, 620
+        game.player.rect.x, game.player.rect.y = 240, 660
         game.is_magic_on = True
 
         game.add_player_actions((
@@ -46,7 +46,7 @@ class TestPlayerCastsCoSpellsOnNPCs:
 
     @game_test(levels=[4], timeout=6)
     def test_bat_hit_with_vortex_of_doom_must_die(self, game):
-        game.player.rect.x, game.player.rect.y = 240, 620
+        game.player.rect.x, game.player.rect.y = 240, 660
         game.is_magic_on = True
 
         game.add_player_actions((

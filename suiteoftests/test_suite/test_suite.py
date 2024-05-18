@@ -24,7 +24,7 @@ from codemaster.tools.utils import utils_graphics as libg_jp
 
 from codemaster.resources import Resource
 from codemaster.config.settings import Settings
-from codemaster.level_scroll_screen import level_scroll_shift_control
+from codemaster.level_scroll_screen import level_scroll_shift_control, change_screen_level
 from codemaster.tools.utils.queue import Queue
 from codemaster import levels
 from suiteoftests import levels as test_levels
@@ -277,6 +277,12 @@ class GameTestSuite:
                     self.test_aborted_count += 1
 
             level_scroll_shift_control(game=self)
+
+            # Check if we hit any door
+            door_hit_list = pg.sprite.spritecollide(self.player, self.level.doors, False)
+            for door in door_hit_list:
+                if not door.is_locked:
+                    change_screen_level(game=self, door=door)
 
             self._player_move()
             self.active_sprites.update()
