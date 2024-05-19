@@ -200,6 +200,7 @@ class GameTestSuite:
         # Render characters in some colors to use it as a cache
         libg_jp.chars_render_text_tuple(font_name=FONT_DEFAULT_NAME)
         libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)
+        self.is_settings_initialized_before = True
 
     def init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
         self.clock_timer = ClockTimerA(
