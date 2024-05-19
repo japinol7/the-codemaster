@@ -9,7 +9,7 @@ from codemaster.models.actors.items.bullets import BulletType
 
 
 PLAYER_HEALTH_SUPER_HERO = 90_000
-CLOCK_TIMER_IN_SECS = 10
+CLOCK_TIMER_IN_SECS = 6
 
 IS_LOG_DEBUG_DEFAULT = False
 
@@ -31,8 +31,10 @@ PlayerActionMethodArgs = namedtuple('PlayerActionsArgs', ['method_name', 'kwargs
 PLAYER_ACTION_METHODS_MAP = {
     'cast_lightning_bolt': PlayerActionMethodArgs(
         'cast_spell_on_target', kwargs={'spell': 'cast_lightning_bolt'}),
-    'cast_doom_bolt': PlayerActionMethodArgs(
-        'cast_spell_on_target', kwargs={'spell': 'cast_doom_bolt'}),
+    'cast_doom_bolt_a': PlayerActionMethodArgs(
+        'cast_spell_on_target', kwargs={'spell': 'cast_doom_bolt_a'}),
+    'cast_doom_bolt_b': PlayerActionMethodArgs(
+        'cast_spell_on_target', kwargs={'spell': 'cast_doom_bolt_b'}),
     'cast_vortex_of_doom_a': PlayerActionMethodArgs(
         'cast_spell_on_target', kwargs={'spell': 'cast_vortex_of_doom_a'}),
     'cast_vortex_of_doom_b': PlayerActionMethodArgs(

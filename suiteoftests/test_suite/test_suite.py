@@ -16,6 +16,7 @@ from codemaster.models.actors.selectors import SelectorA
 from codemaster.models.actors.spells import (
     LightningBoltA,
     DoomBoltA,
+    DoomBoltB,
     VortexOfDoomA,
     VortexOfDoomB,
     )
@@ -37,8 +38,16 @@ from suiteoftests.config.constants import (
     LOG_START_TEST_APP_MSG,
     LOG_END_TEST_APP_MSG,
     PLAYER_ACTION_METHODS_MAP,
-    )
+)
 from codemaster.models.actors.text_msgs import TextMsg
+
+CAST_SPELL_ON_TARGET_CLASSES_MAP = {
+    'cast_lightning_bolt': LightningBoltA,
+    'cast_doom_bolt_a': DoomBoltA,
+    'cast_doom_bolt_b': DoomBoltB,
+    'cast_vortex_of_doom_a': VortexOfDoomA,
+    'cast_vortex_of_doom_b': VortexOfDoomB,
+    }
 
 
 class GameTestSuite:
@@ -50,9 +59,9 @@ class GameTestSuite:
     screen = None
     size = None
     screen_flags = None
-    _tests = Queue()
 
     def __init__(self):
+        self._tests = Queue()
         self.test_num = 0
         self.test_aborted_count = 0
         self.test_failed_count = 0
@@ -89,14 +98,15 @@ class GameTestSuite:
         self.is_magic_on = False
         self.selector_sprites = pg.sprite.Group()
         self.test_spell_target = None
+        self.is_settings_initialized_before = False
 
     @property
     def tests(self):
-        return self.__class__._tests
+        return self._tests
 
     def add_tests(self, tests):
         for test in tests:
-            self.__class__._tests.push(test)
+            self._tests.push(test)
 
     def add_player_actions(self, actions):
         """Adds player actions for the current test."""
@@ -171,6 +181,10 @@ class GameTestSuite:
 
     def _init_settings(self):
         log.info("Calculate settings")
+        if self.is_settings_initialized_before:
+            Settings.calculate_settings(speed_pct=None)
+            return
+
         pg_display_info = pg.display.Info()
         Settings.display_start_width = pg_display_info.current_w
         Settings.display_start_height = pg_display_info.current_h
@@ -231,14 +245,8 @@ class GameTestSuite:
         player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
 
         if player_action_methods_map.method_name == 'cast_spell_on_target':
-            if player_action_methods_map.kwargs.get('spell') == 'cast_lightning_bolt':
-                self.player.stats['magic_attack'] = LightningBoltA
-            elif player_action_methods_map.kwargs.get('spell') == 'cast_doom_bolt':
-                self.player.stats['magic_attack'] = DoomBoltA
-            elif player_action_methods_map.kwargs.get('spell') == 'cast_vortex_of_doom_a':
-                self.player.stats['magic_attack'] = VortexOfDoomA
-            elif player_action_methods_map.kwargs.get('spell') == 'cast_vortex_of_doom_b':
-                self.player.stats['magic_attack'] = VortexOfDoomB
+            spell = player_action_methods_map.kwargs.get('spell')
+            self.player.stats['magic_attack'] = CAST_SPELL_ON_TARGET_CLASSES_MAP.get(spell)
             if not self.player.stats['magic_attack']:
                 raise ValueError("Magic attack missing. Cannot cast spell!")
             for selector in self.selector_sprites:

@@ -32,7 +32,8 @@ class TestPlayerCastsCoSpellsOnNPCs:
         game.is_magic_on = True
 
         game.add_player_actions((
-            ['cast_doom_bolt', 1],
+            ['cast_doom_bolt_a', 1],
+            ['cast_doom_bolt_b', 1],
             ))
 
         bat_black = [npc for npc in game.level.npcs if npc.type == ActorType.BAT_BLACK][0]

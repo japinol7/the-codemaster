@@ -1,10 +1,10 @@
 """Module game_test."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from suiteoftests.config.constants import TestMethodWithSetupLevels
+from suiteoftests.config.constants import CLOCK_TIMER_IN_SECS, TestMethodWithSetupLevels
 
 
-def game_test(*, levels, starting_level=0, timeout=6, skip=False):
+def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=False):
     """Decorates a game test function, so it can be automatically added
     to the suite of tests.
     @param levels: List of level names to load. Each level must be an integer.
