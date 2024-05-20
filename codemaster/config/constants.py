@@ -7,13 +7,10 @@ import sys
 
 from codemaster.version import version
 
-N_LEVELS = 12
+N_LEVELS = 18
 
 SCREEN_WIDTH = 1160
 SCREEN_HEIGHT = 778
-# Screen Scale. Strongly recommended 1.  Other values: 1.1, 1.15, 1.2, 1.25
-# It does not scale sprites on loading time, but the entire screen on each frame
-SCREEN_SCALE = 1
 
 SCROLL_NEAR_LEFT_SIDE = 380
 SCROLL_NEAR_RIGHT_SIDE = SCREEN_WIDTH - SCROLL_NEAR_LEFT_SIDE
@@ -71,12 +68,6 @@ VELOCITY_DEFAULT = 2
 POS_SCREEN_RATIO = 30
 
 CELL_SIZE_MIN_FOR_IM_MD = 19       # Minimum cell size for image in medium resolution
-
-MAX_APPLES_ON_BOARD = 18
-MAX_MINES_ON_BOARD = 30
-MAX_BATS_ON_BOARD = 7
-MAX_DIVIDER_APPLES_ON_BOARD = 186
-MAX_DIVIDER_MINES_ON_BOARD = 130
 
 APP_TECH_NAME = 'codemaster'
 LOG_START_APP_MSG = f"Start app {APP_TECH_NAME} version: {version.get_version()}"
@@ -143,8 +134,10 @@ BM_LIGHTS_FOLDER = os.path.join(BM_SPECIAL_EFFECTS_FOLDER, 'lights')
 BM_PCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'PCs')
 BM_PC_PAC_FOLDER = os.path.join(BM_PCS_FOLDER, 'Pac')
 BM_NPCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'NPCs')
+BM_TETHLORIENS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'tethloriens')
 BM_TERMINATOR_EYES_FOLDER = os.path.join(BM_NPCS_FOLDER, 'terminator_eyes')
 BM_SNAKES_FOLDER = os.path.join(BM_NPCS_FOLDER, 'snakes')
+BM_DRAGONS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'dragons')
 BM_BATS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'bats')
 BM_SKULLS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'skulls')
 BM_GHOSTS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'ghosts')
@@ -175,6 +168,12 @@ FILE_NAMES = {
     'im_snake_head_d_r': ('im_snake_head_d_r', 'png'),
     'im_snake_body': ('im_snake_body', 'png'),
     'im_snake_tail': ('im_snake_tail', 'png'),
+    'im_dragons': ('im_dragon', 'png'),
+    'im_dragon_head': ('im_dragon_head', 'png'),
+    'im_dragon_head_u_r': ('im_dragon_head_u_r', 'png'),
+    'im_dragon_head_d_r': ('im_dragon_head_d_r', 'png'),
+    'im_dragon_body': ('im_dragon_body', 'png'),
+    'im_dragon_tail': ('im_dragon_tail', 'png'),
     'im_door_keys': ('door_key', 'png'),
     'im_en_ghosts': ('ghost', 'png'),
     'im_en_skulls': ('skull', 'png'),
@@ -186,6 +185,7 @@ FILE_NAMES = {
     'im_terminator_eyes': ('terminator_eye', 'png'),
     'im_en_mages': ('mage', 'png'),
     'im_en_robots': ('robot', 'png'),
+    'im_tethloriens': ('tethlorien', 'png'),
     'im_files_disks': ('files_disk', 'png'),
     'im_computer': ('computer', 'png'),
     'im_apples': ('im_apple', 'png'),
@@ -224,6 +224,8 @@ FILE_NAMES = {
     'im_lightning_bolt':  ('lightning_bolt', 'png'),
     'im_doom_bolt':  ('doom_bolt', 'png'),
     'im_vortex_of_doom': ('vortex_of_doom', 'png'),
+    'im_fire_breath': ('fire_breath', 'png'),
+    'im_neutrinos_bolt': ('neutrinos_bolt', 'png'),
     'im_drain_life':  ('drain_life', 'png'),
     'snd_death_pl': ('death_pl_02',  SOUND_FORMAT),
     'snd_apple_hit': ('apple_found', SOUND_FORMAT),

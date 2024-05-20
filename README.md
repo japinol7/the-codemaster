@@ -3,7 +3,7 @@
 	The CodeMaster is a spin-off sci-fi mystery based on 1988 RPG platformer game Pac's Revenge.
 	program: The CodeMaster. Nightmare on Bots' Island.
     name as a package: codemaster 
-	version: 0.0.4
+	version: 0.0.5
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
@@ -11,7 +11,7 @@
 	main module: codemaster.py
 	description: A spin-off sci-fi mystery based on Pac's Revenge 
       series games by @japinol  (c) 1988, 2015, 2021, 2024.
-	Python requires: 3.11 or greater.
+	Python requires: 3.12 or greater.
 
 
 ## Screenshots
@@ -29,7 +29,7 @@
 ## History of the series. A spin-off? What do you mean?
 	> Yes, this is a spin-off of an old game from the same author [myself.  ; ) ]
 	> Original Pac's Revenge (1987-88); ahead of its time story:
-	    > In a world where the human race has expanded for several planets of the nearby galaxies, 
+	    > In a world where humanity has expanded for several planets of the nearby galaxies, 
           there is an environmental menace about to explode.
           This menace would have catastrophic consequences for the settlements in the Systems of 
           Draco II, Hydrus I, and the very Milky Way.
@@ -42,7 +42,7 @@
           Given the seriousness of this crisis, the UFEP send their best scientific secret agent 
           to find out what is going on in the Negasus System, to collect evidence of 
           transgressions of the UFEP laws, and to minimize the environmental crisis if possible 
-          by reducing the radiation waste.
+          by reducing radiation waste.
         > Pac's Revenge had two parts, that I called phases:
 			> Part 1:
               Pac travels with his spaceship to the Negasus System.
@@ -65,7 +65,7 @@
               Tetsuo's motivation seems to be acquiring power and money to attract cute young women.
               The fact that she receives him sitting on a throne that is actually a toilet makes 
               Pac suspect that he has to deal with a madman.
-              Someway, Pac has to come back to de UFEP headquarters with the batteries he has recovered, 
+              Someway, Pac must come back to de UFEP headquarters with the batteries he has recovered, 
               and prove what is happening in the Negasus Imperial Planet.
               Finally, Pac beats Tetsuo escaping from Negasus and completing his mission.
         > What made Pac's Revenge an interesting game was dealing with philosophical
@@ -81,7 +81,7 @@
         > Questions you will not get an answer from this demo:
 			> Will Pac get Kaede's hand from her father?
 			> What is really happening in Kaito's kingdom? 
-			> Who is the CodeMaster and what he has to do with all this?
+			> Who is the CodeMaster and what does he have to do with all this?
 
 
 
@@ -95,10 +95,12 @@
         > 'The Codemaster' is an open-world RPG platformer game. 
           You can move around all levels whenever it makes sense to the story.
 	> To beat the game:
-	    > In this demo, you just have to get all the batteries and files disks from aLL the levels.
+	    > In this demo, you just have to get all the batteries 
+          and files disks from aLL the levels.
 	> Levels: 
-	    > In this demo, levels are completed by getting all the batteries and files disks.
-	    > Number of levels implemented for this demo: 12.
+	    > In this demo, levels are completed by getting all the batteries 
+          and files disks.
+	    > Number of levels implemented for this demo: 18.
 	> Doors: 
 	    > Use them to go to other levels.
         > To unlock a locked door you need to use the right door key.
@@ -144,7 +146,7 @@
 	> Player's ways of dying:
 	    > A player dies if all his lives are killed.
 	    > A life is killed:
-            > When its heatlh is lower than 0.
+            > When its health is lower than 0.
             > When the player falls into a hole reaching the lower screen boundary.
             > When the player is stuck in some trap and press the <b> key for a time.
 	> Information in the score line:
@@ -221,7 +223,7 @@
                 > Snakes change their direction when they hit one.
                 > It consumes a little bit of your power while is on.
                 > When destroyed, it costs you some power. Then, it is created again.
-                > Its color changes from light blue to yellow and dark pink depending on his health stat.
+                > Its color changes from light blue to yellow and dark pink depending on its health stat.
 	> Files disks: 
 	    > There are four types of files disks:
 	        > Type D: They contain low interesting data.
@@ -248,20 +250,30 @@
 	            > Lilac bats: They deal medium damage
 	            > Red bats: They deal a good deal of damage.
     	        > Black bats: They deal great damage.
-	    > Demons. Beware, they have weapons and some resistance to magic.
+	    > Demons:
+    	    > Beware, they have weapons, can cast spells 
+    	      and have some resistance to magic.
+	    > Dragons:
+    	    > Beware, they have magic weapons and some resistance to magic.
 	    > Ghosts:
-	        > Cannot be killed/hit with normal weapons.
+    	    > Cannot be killed/hit with normal weapons.
               Only Dark magic spells can damage them, i.e, 
               Vortex of Doom and Doom Bolts.
-	    > Mages. Beware, they have magic weapons and some resistance to magic.
+	    > Mages:
+    	    > Beware, they have magic weapons and some resistance to magic.
 	    > Pokoyos.
-	    > Robots. Beware, they have weapons.
+	    > Robots:
+    	    > Beware, they have weapons.
 	    > Skulls.
 	    > Snakes:
     	    > They bite you whenever you are too close to them.
     	    > Their body also gives you damage but much less than their head.
             > You can hit only their head. So do not waste bullets on their body.
-	    > Terminator Eyes. Beware, they have weapons.
+	    > Terminator Eyes:
+	        > Beware, they have weapons.
+	    > Tethloriens:
+	        > Beware, they have weapons, magic weapons 
+	          and have some small resistance to magic.
 	    > Vampires
 	    > Wolf-men.
 
@@ -353,6 +365,7 @@
 		$ python -m suiteoftests
 
     Note: Press ESC if you want to abort the current test.
+
 
 **Examples of usage**
 

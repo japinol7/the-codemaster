@@ -12,7 +12,7 @@ from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
     BatBlack,
-    DemonMale,
+    RobotA,
     GhostBlue,
     SkullGreen,
     SkullYellow,
@@ -38,23 +38,23 @@ class Level2(Level):
     def __init__(self, game):
         super().__init__(game)
         self.id = 1
-        self.name = '02'
-        self.next_level_left = 0
-        self.next_level_right = 2
+        self.name = str(self.id + 1)
+        self.next_level_left = self.id - 1
+        self.next_level_right = self.id + 1
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(2)).convert()
         self.level_limit = -2500
         self.level_limit_top = -1000
-        self.player_start_pos_left = (220, 480)
-        self.player_start_pos_right = (530, 480)
-        self.player_start_pos_rtop = (300, 100)
-        self.player_start_pos_ltop = (80, 100)
-        self.player_start_pos_bottom = (300, 800)
-        self.world_start_pos_left = (0, -758)
-        self.world_start_pos_right = (self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758)
-        self.world_start_pos_rtop = (self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900)
-        self.world_start_pos_ltop = (0, -900)
+        self.player_start_pos_left = 220, 480
+        self.player_start_pos_right = 530, 480
+        self.player_start_pos_rtop = 300, 100
+        self.player_start_pos_ltop = 80, 100
+        self.player_start_pos_bottom = 300, 800
+        self.world_start_pos_left = 0, -758
+        self.world_start_pos_right = self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758
+        self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
+        self.world_start_pos_ltop = 0, -900
 
         self._add_actors()
         self._sprites_all_add()
@@ -150,8 +150,8 @@ class Level2(Level):
             SkullYellow(600, 600, self.game, border_left=410, border_right=800, change_x=2),
             BatBlack(1900, 640, self.game, border_left=1900, border_right=2400, change_x=3),
             BatBlack(2220, 640, self.game, border_left=1850, border_right=2250, change_x=2),
-            DemonMale(650, 650, self.game, border_left=620, border_right=920, change_x=2),
-            DemonMale(780, 650, self.game, border_left=620, border_right=920, change_x=2),
+            RobotA(650, 650, self.game, border_left=620, border_right=920, change_x=2),
+            RobotA(780, 650, self.game, border_left=620, border_right=920, change_x=2),
             ])
 
         # Add mines

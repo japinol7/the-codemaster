@@ -21,7 +21,7 @@ class VortexOfDoom(ActorMagic):
     """Represents a vortex of doom.
     It is not intended to be instantiated.
     """
-    max_spells_on_level = 3
+    max_spells_on_level = 4
 
     def __init__(self, x, y, game, name=None, is_from_player_shot=None, owner=None, target=None):
         self.file_folder = BM_MAGIC_FOLDER

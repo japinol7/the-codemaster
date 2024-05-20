@@ -19,6 +19,7 @@ class ActorBaseType(Enum):
     SELECTOR = 53
     MAGIC = 54
     SNAKE_BODY_PART = 101
+    DRAGON_BODY_PART = 111
 
 
 class ActorCategoryType(Enum):
@@ -47,6 +48,8 @@ class ActorCategoryType(Enum):
     NPC = 61
     SNAKE = 65
     SNAKE_BODY_PART = 67
+    DRAGON = 71
+    DRAGON_BODY_PART = 73
 
 
 class ActorType(Enum):
@@ -137,8 +140,12 @@ class ActorType(Enum):
     LIGHTNING_BOLT_A = 5503
     VORTEX_OF_DOOM_A = 5504
     VORTEX_OF_DOOM_B = 5505
-    DRAIN_LIFE_A = 5506
-    DRAIN_LIFE_B = 5507
+    FIRE_BREATH_A = 5506
+    FIRE_BREATH_B = 5507
+    NEUTRINOS_BOLT_A = 5508
+    NEUTRINOS_BOLT_B = 5509
+    DRAIN_LIFE_A = 5510
+    DRAIN_LIFE_B = 5511
     # Skulls
     SKULL_GREEN = 1201
     SKULL_BLUE = 1202
@@ -173,6 +180,15 @@ class ActorType(Enum):
     SNAKE_BODY_PART_B = 1416
     SNAKE_BODY_PART_Y = 1417
     SNAKE_BODY_PART_R = 1418
+    # Dragons
+    DRAGON_GREEN = 1501
+    DRAGON_BLUE = 1502
+    DRAGON_YELLOW = 1503
+    DRAGON_RED = 1504
+    DRAGON_BODY_PART_G = 1515
+    DRAGON_BODY_PART_B = 1516
+    DRAGON_BODY_PART_Y = 1517
+    DRAGON_BODY_PART_R = 1518
     # Terminator Eyes
     TERMINATOR_EYE_GREEN = 1601
     TERMINATOR_EYE_BLUE = 1602
@@ -188,3 +204,7 @@ class ActorType(Enum):
     # Robots
     ROBOT_A = 1640
     ROBOT_B = 1641
+    # Tethloriens
+    TETHLORIEN_LILAC = 1661
+    TETHLORIEN_YELLOW = 1662
+    TETHLORIEN_RED = 1663

@@ -29,23 +29,23 @@ class Level1(Level):
     def __init__(self, game):
         super().__init__(game)
         self.id = 0
-        self.name = '01'
+        self.name = str(self.id + 1)
         self.next_level_left = False
-        self.next_level_right = 1
+        self.next_level_right = self.id + 1
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(1)).convert()
         self.level_limit = -1800
         self.level_limit_top = -1000
-        self.player_start_pos_left = (220, 480)
-        self.player_start_pos_right = (600, 480)
-        self.player_start_pos_rtop = (300, 100)
-        self.player_start_pos_ltop = (80, 100)
-        self.player_start_pos_bottom = (300, 800)
-        self.world_start_pos_left = (0, -658)
-        self.world_start_pos_right = (self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758)
-        self.world_start_pos_rtop = (self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900)
-        self.world_start_pos_ltop = (0, -900)
+        self.player_start_pos_left = 220, 480
+        self.player_start_pos_right = 600, 480
+        self.player_start_pos_rtop = 300, 100
+        self.player_start_pos_ltop = 80, 100
+        self.player_start_pos_bottom = 300, 800
+        self.world_start_pos_left = 0, -658
+        self.world_start_pos_right = self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758
+        self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
+        self.world_start_pos_ltop = 0, -900
         self.door_previous_pos_player = self.player_start_pos_left
         self.door_previous_pos_world = self.world_start_pos_left
 

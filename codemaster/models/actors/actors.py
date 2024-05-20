@@ -136,14 +136,26 @@ class Actor(pg.sprite.Sprite):
         if not getattr(self, 'spell_cast_y_delta_max', None):
             self.spell_cast_y_delta_max = 500
 
+        if not getattr(self, 'change_x', None):
+            self.change_x = change_x
+
+        if not getattr(self, 'change_y', None):
+            self.change_y = change_y
+
+        if not getattr(self, 'direction', None):
+            self.direction = DIRECTION_RIGHT
+
+        if not getattr(self, 'spell_cast_y_delta_max', None):
+            self.spell_cast_y_delta_max = 500
+
         self.can_be_shot_by_its_owner = True
         self.name = name or 'unnamed'
-        self.change_x = change_x
-        self.change_y = change_y
-        self.direction = DIRECTION_RIGHT
 
         self.init_before_load_sprites_hook()
         self._load_sprites()
+
+        if not self.image:
+            print("oops!")
 
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -379,6 +391,11 @@ class Actor(pg.sprite.Sprite):
 
     def is_actor_on_the_left_bottom(self, actor):
         if self.is_actor_on_the_left(actor) and self.is_actor_on_bottom(actor):
+            return True
+        return False
+
+    def is_actor_centered_on_y(self, actor, epsilon=0):
+        if self.rect.centery - epsilon <= actor.rect.centery <= self.rect.centery + epsilon:
             return True
         return False
 

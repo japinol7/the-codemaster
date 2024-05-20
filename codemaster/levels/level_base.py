@@ -9,7 +9,7 @@ import pygame as pg
 from codemaster.config.constants import (
     FILE_NAMES, BM_BACKGROUNDS_FOLDER,
     DOOR_POSITION_L, N_LEVELS,
-)
+    )
 from codemaster.tools.logger.logger import log
 from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryType
 from codemaster.clean_new_game import clean_entity_ids
@@ -31,8 +31,8 @@ class Level:
         self.completed = False
         self.start_time = None
         self.door_previous_position = DOOR_POSITION_L
-        self.door_previous_pos_player = (80, 480)
-        self.door_previous_pos_world = (0, -758)
+        self.door_previous_pos_player = 80, 480
+        self.door_previous_pos_world = 0, -758
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.decors = pg.sprite.Group()
@@ -57,6 +57,8 @@ class Level:
         self.particle_sprites = pg.sprite.Group()
         self.snakes = pg.sprite.Group()
         self.snakes_body_pieces = pg.sprite.Group()
+        self.dragons = pg.sprite.Group()
+        self.dragons_body_pieces = pg.sprite.Group()
 
         self.spells_on_level_count = Counter()
 
@@ -94,6 +96,11 @@ class Level:
             self.all_sprites.add(sprite)
         for sprite in self.mines:
             self.all_sprites.add(sprite)
+        for sprite in self.dragons:
+            self.npcs.add(sprite)
+            for dragon_piece in sprite.body_pieces:
+                self.dragons_body_pieces.add(dragon_piece)
+                self.all_sprites.add(dragon_piece)
         for sprite in self.npcs:
             self.all_sprites.add(sprite)
             if sprite.border_top or sprite.border_down:
@@ -167,6 +174,7 @@ class Level:
 
     def add_actors(self, actors):
         snake_pieces = []
+        dragon_pieces = []
         for actor in actors:
             if isinstance(actor, MovingActor):
                 if actor.border_left:
@@ -208,9 +216,16 @@ class Level:
                 for snake_piece in actor.body_pieces:
                     self.snakes_body_pieces.add(snake_piece)
                     snake_pieces.append(snake_piece)
+            elif actor.category_type == ActorCategoryType.DRAGON:
+                self.npcs.add(actor)
+                self.dragons.add(actor)
+                for dragon_piece in actor.body_pieces:
+                    self.dragons_body_pieces.add(dragon_piece)
+                    dragon_pieces.append(dragon_piece)
 
         self.all_sprites.add(actors)
         snake_pieces and self.all_sprites.add(snake_pieces)
+        dragon_pieces and self.all_sprites.add(dragon_pieces)
 
     @staticmethod
     def factory(levels_module, game):

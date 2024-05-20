@@ -11,6 +11,7 @@ from codemaster.tools.utils.colors import Color
 from codemaster.tools.utils import utils_graphics as libg_jp
 
 COLOR_TRANSP_RATIO_DEFAULT = 0.2
+VORTEX_SCALE_DEFAULT = 1
 
 
 class VortexDrawMethod(Enum):
@@ -26,10 +27,14 @@ class Vortex:
     surface_renders = {}
 
     def __init__(self, position, angle, speed, color=Color.WHITE,
-                 color_transparency_ratio=COLOR_TRANSP_RATIO_DEFAULT, scale=1,
-                 draw_method=VortexDrawMethod.CIRCLE):
-        self.type = 'SPARK_' + ''.join([f'{x:03d}' for x in color])
-        Vortex.type_id_count[self.type] += 1
+                 color_transparency_ratio=COLOR_TRANSP_RATIO_DEFAULT,
+                 scale=VORTEX_SCALE_DEFAULT,
+                 draw_method=VortexDrawMethod.CIRCLE,
+                 type_base='SPARK_VX_',
+                 angle_acceleration=0.14, speed_acceleration=0.1):
+
+        self.type = type_base + ''.join([f'{x:03d}' for x in color])
+        self.__class__.type_id_count[self.type] += 1
         self.id = f"{self.type}_{Vortex.type_id_count[self.type]:05d}"
         self.position = position
         self.angle = angle
@@ -38,6 +43,8 @@ class Vortex:
         self.alive = True
         self.color_transparency_ratio = color_transparency_ratio
         self.color = [x * color_transparency_ratio for x in color]
+        self.angle_acceleration = angle_acceleration
+        self.speed_acceleration = speed_acceleration
 
         if draw_method == VortexDrawMethod.POLYGON:
             self.draw_method = self.draw_method_polygon
@@ -62,9 +69,8 @@ class Vortex:
         self.position[0] += move[0]
         self.position[1] += move[1]
 
-        self.angle += 0.14
-
-        self.speed -= 0.1
+        self.angle += self.angle_acceleration
+        self.speed -= self.speed_acceleration
         if self.speed <= 0:
             self.alive = False
 

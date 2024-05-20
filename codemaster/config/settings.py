@@ -2,7 +2,7 @@
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from codemaster.tools.utils import utils
-from codemaster.config.constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_SCALE
+from codemaster.config.constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
 FPS_DEFAULT = 92  # Recommended: 92
 FPS_MIN = 60
@@ -84,7 +84,7 @@ class Settings:
 
     @classmethod
     def clean(cls):
-        cls.screen_scale = SCREEN_SCALE
+        cls.screen_scale = 1
         cls.screen_width = int(SCREEN_WIDTH * cls.screen_scale)
         cls.screen_height = int(SCREEN_HEIGHT * cls.screen_scale)
         cls.screen_aspect_ratio = cls.screen_width / cls.screen_height

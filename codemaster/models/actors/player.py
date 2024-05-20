@@ -41,7 +41,7 @@ from codemaster.models.actors.spells import (
     )
 
 PL_X_SPEED = 6
-PL_JUMP_SPEED = 11.6
+PL_JUMP_SPEED = 11.5
 PL_LIVES_DEFAULT = 3
 PL_POWER = 100
 PL_POWER_DEFAULT = 100

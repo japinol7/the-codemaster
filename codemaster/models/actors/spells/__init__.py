@@ -10,7 +10,15 @@ from codemaster.models.actors.spells.vortex_of_doom import (
     VortexOfDoomA,
     VortexOfDoomB,
     )
+from codemaster.models.actors.spells.fire_breath import (
+    FireBreathA,
+    FireBreathB,
+    )
 from codemaster.models.actors.spells.drain_life import (
     DrainLifeA,
     DrainLifeB,
+    )
+from codemaster.models.actors.spells.neutrinos_bolts import (
+    NeutrinosBoltA,
+    NeutrinosBoltB,
     )

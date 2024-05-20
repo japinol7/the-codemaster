@@ -100,7 +100,7 @@ class Game:
         self.screen_pause = None
         self.super_cheat = False
         self.screen_help = None
-        self.mouse_pos = (0, 0)
+        self.mouse_pos = 0, 0
         self.is_magic_on = False
 
         Game.is_exit_game = False
@@ -150,8 +150,6 @@ class Game:
 
     def write_game_over_info_to_file(self):
         self.debug_info.print_debug_info(to_log_file=True)
-        # TODO: scores
-        # Scores.write_scores_to_file(self)
         self.writen_info_game_over_to_file = True
 
     def put_initial_actors_on_the_board(self):
@@ -226,6 +224,8 @@ class Game:
             if not Game.is_over:
                 # Draw active sprites
                 self.active_sprites.draw(Game.screen)
+                for dragon in self.level.dragons:
+                    dragon.draw()
                 for text_msg in self.text_msg_sprites:
                     text_msg.draw_text()
                 for clock in self.clock_sprites:
@@ -343,13 +343,14 @@ class Game:
                             self.is_magic_on = not self.is_magic_on
                     elif event.key == pg.K_n:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
-                            log.info("NPCs health from all levels, ordered by NPC name:")
-                            self.is_log_debug and log.debug(
-                                utils.pretty_dict_to_string(NPC.get_npcs_health(self, sorted_by_level=False)))
+                            if self.is_log_debug:
+                                log.debug("NPCs health from all levels, ordered by NPC name:")
+                                log.debug(utils.pretty_dict_to_string(
+                                    NPC.get_npcs_health(self, sorted_by_level=False)))
                         elif self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
-                            log.info("NPCs health from all levels, ordered by level:")
-                            self.is_log_debug and log.debug(
-                                utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
+                            if self.is_log_debug:
+                                log.debug("NPCs health from all levels, ordered by level:")
+                                log.debug(utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
                     elif event.key == pg.K_h:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.help_info.print_help_keys()
@@ -452,7 +453,5 @@ class Game:
                 Game.is_over = True
 
             self.update_screen()
-            if Settings.screen_scale != 1:
-                libg_jp.screen_change_scale(self)
             self.is_paused and self.clock.tick(Settings.fps_paused) or self.clock.tick(Settings.fps)
             pg.display.flip()

@@ -31,8 +31,8 @@ class Selector(ActorItem):
         self.stats.power = self.stats.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
         self.light_grid = None
-        self.light_grid_surf_size = (34, 34)
-        self.light_grid_surf_size_half = (self.light_grid_surf_size[0] // 2, self.light_grid_surf_size[1] // 2)
+        self.light_grid_surf_size = 34, 34
+        self.light_grid_surf_size_half = self.light_grid_surf_size[0] // 2, self.light_grid_surf_size[1] // 2
         self.light_color = Color.GREEN
 
         super().__init__(x, y, game, name=name)
@@ -115,6 +115,24 @@ class Selector(ActorItem):
 
         if snake_body_hit_list:
             return snake_body_hit_list
+
+        dragon_body_hit_list = pg.sprite.spritecollide(self, self.game.level.dragons_body_pieces, False)
+        for sprite in dragon_body_hit_list:
+            if sprite.dragon.target_of_spells_count[magic_attack_cls.__name__] >= magic_attack_cls.max_spells_on_target:
+                continue
+            self.game.player.stats['power'] -= magic_attack_cls.power_consumption[magic_attack_cls.actor_type.name]
+            magic_attack = magic_attack_cls(
+                        sprite.rect.centerx, sprite.rect.y, self.game,
+                        is_from_player_shot=True, owner=self.game.player,
+                        target=sprite.dragon)
+            hit_list.append(magic_attack)
+            self.game.level.magic_sprites.add(magic_attack)
+            sprite.dragon.target_of_spells_count[magic_attack_cls.__name__] += 1
+
+            break
+
+        if dragon_body_hit_list:
+            return dragon_body_hit_list
 
         hit_list = pg.sprite.spritecollide(self, self.game.level.npcs, False)
         for sprite in hit_list:

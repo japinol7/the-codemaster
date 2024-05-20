@@ -254,7 +254,7 @@ class DoomBoltB(DoomBolt):
         self.color = Color.YELLOW
         self.color_external = Color.GREEN
         self.color_mode = pg.BLEND_RGB_ADD
-        self.size_rand = (3, 8)
+        self.size_rand = 3, 8
         self.size_ext_multiplier = 1.8
 
 
@@ -277,8 +277,8 @@ class DoomBoltA(DoomBolt):
                          owner=owner, target=target)
 
         self.power = self.power_total = 126
-        self.color = (240, 240, 240)
+        self.color = 240, 240, 240
         self.color_external = Color.RED
         self.color_mode = pg.BLENDMODE_NONE
-        self.size_rand = (4, 9)
+        self.size_rand = 4, 9
         self.size_ext_multiplier = 1.9

@@ -42,23 +42,23 @@ class Level5(Level):
     def __init__(self, game):
         super().__init__(game)
         self.id = 4
-        self.name = '05'
-        self.next_level_left = 3
-        self.next_level_right = 5
+        self.name = str(self.id + 1)
+        self.next_level_left = self.id - 1
+        self.next_level_right = self.id + 1
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(5)).convert()
         self.level_limit = -2700
         self.level_limit_top = -1000
-        self.player_start_pos_left = (220, 480)
-        self.player_start_pos_right = (600, 480)
-        self.player_start_pos_rtop = (300, 100)
-        self.player_start_pos_ltop = (80, 100)
-        self.player_start_pos_bottom = (300, 800)
-        self.world_start_pos_left = (0, -758)
-        self.world_start_pos_right = (self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758)
-        self.world_start_pos_rtop = (self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900)
-        self.world_start_pos_ltop = (0, -900)
+        self.player_start_pos_left = 220, 480
+        self.player_start_pos_right = 600, 480
+        self.player_start_pos_rtop = 300, 100
+        self.player_start_pos_ltop = 80, 100
+        self.player_start_pos_bottom = 300, 800
+        self.world_start_pos_left = 0, -758
+        self.world_start_pos_right = self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758
+        self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
+        self.world_start_pos_ltop = 0, -900
 
         self._add_actors()
         self._sprites_all_add()

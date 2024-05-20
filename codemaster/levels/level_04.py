@@ -40,23 +40,23 @@ class Level4(Level):
     def __init__(self, game):
         super().__init__(game)
         self.id = 3
-        self.name = '04'
-        self.next_level_left = 2
-        self.next_level_right = 4
+        self.name = str(self.id + 1)
+        self.next_level_left = self.id - 1
+        self.next_level_right = self.id + 1
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(4)).convert()
         self.level_limit = -3000
         self.level_limit_top = -1000
-        self.player_start_pos_left = (220, 520)
-        self.player_start_pos_right = (300, 520)
-        self.player_start_pos_rtop = (250, -440)
-        self.player_start_pos_ltop = (80, 100)
-        self.player_start_pos_bottom = (300, 800)
-        self.world_start_pos_left = (0, -758)
-        self.world_start_pos_right = (self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758)
-        self.world_start_pos_rtop = (self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900)
-        self.world_start_pos_ltop = (0, -900)
+        self.player_start_pos_left = 220, 520
+        self.player_start_pos_right = 300, 520
+        self.player_start_pos_rtop = 250, -440
+        self.player_start_pos_ltop = 80, 100
+        self.player_start_pos_bottom = 300, 800
+        self.world_start_pos_left = 0, -758
+        self.world_start_pos_right = self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758
+        self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
+        self.world_start_pos_ltop = 0, -900
 
         self._add_actors()
         self._sprites_all_add()
@@ -123,7 +123,7 @@ class Level4(Level):
             ]
         self.npcs.add(DemonMale(
             800, 146, self.game,
-            border_left=800, border_right=1210, change_x=3, items_to_drop=items_to_drop))
+            border_left=690, border_right=1210, change_x=3, items_to_drop=items_to_drop))
 
         self.npcs.add([
             WolfManMale(2360, 37, self.game, border_left=2180, border_right=2500, change_x=3),

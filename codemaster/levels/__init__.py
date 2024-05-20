@@ -12,3 +12,9 @@ from codemaster.levels.level_09 import Level9
 from codemaster.levels.level_10 import Level10
 from codemaster.levels.level_11 import Level11
 from codemaster.levels.level_12 import Level12
+from codemaster.levels.level_13 import Level13
+from codemaster.levels.level_14 import Level14
+from codemaster.levels.level_15 import Level15
+from codemaster.levels.level_16 import Level16
+from codemaster.levels.level_17 import Level17
+from codemaster.levels.level_18 import Level18

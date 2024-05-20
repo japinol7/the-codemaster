@@ -39,6 +39,12 @@ from codemaster.models.actors.npcs.snakes import (
     SnakeYellow,
     SnakeRed,
     )
+from codemaster.models.actors.npcs.dragons import (
+    DragonGreen,
+    DragonBlue,
+    DragonYellow,
+    DragonRed,
+    )
 from codemaster.models.actors.npcs.pokoyos import (
     PokoyoA,
     PokoyoB,
@@ -49,4 +55,9 @@ from codemaster.models.actors.npcs.mages import (
 from codemaster.models.actors.npcs.robots import (
     RobotA,
     RobotB,
+    )
+from codemaster.models.actors.npcs.tethloriens import (
+    TethlorienLilac,
+    TethlorienYellow,
+    TethlorienRed,
     )
