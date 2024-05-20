@@ -25,3 +25,21 @@ class TestPlayerEntersDoorLevel:
         game.assert_test_passed(
             condition=game.level.name == '4',
             failed_msg="Player did not go to the next level.")
+
+    @game_test(levels=[4, 3], starting_level=1, timeout=2)
+    def test_player_cannot_enter_locked_door_to_next_level(self, game):
+        game.player.rect.x, game.player.rect.y = 250, 660
+
+        game.add_player_actions((
+            ['go_left', 50],
+            ['stop', 1],
+            ))
+
+        left_door = [door for door in game.level.doors if door.type == ActorType.DOOR_LEFT_GREEN][0]
+        left_door.is_locked = True
+
+        game.game_loop()
+
+        game.assert_test_passed(
+            condition=game.level.name == '3',
+            failed_msg="Player did go to the next level through an open door.")

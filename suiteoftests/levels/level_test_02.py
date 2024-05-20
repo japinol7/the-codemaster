@@ -117,7 +117,7 @@ class LevelTest2(Level):
 
         # Add files_disks
         self.files_disks.add([
-            FilesDiskD(1140, 526, self.game),
+            FilesDiskD(1040, 526, self.game),
             FilesDiskD(2200, 74, self.game),
             ])
 

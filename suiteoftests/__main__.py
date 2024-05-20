@@ -20,7 +20,7 @@ if __name__ == '__main__':
     try:
         test_suite = GameTestSuite()
         GameTest(test_suite)
-        test_suite.main()
+        test_suite.run()
     except Exception as e:
         traceback.print_tb(e.__traceback__)
         log.critical(f'Error: {e}')

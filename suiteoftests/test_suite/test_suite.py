@@ -301,7 +301,7 @@ class GameTestSuite:
             self.clock.tick(Settings.fps)
             pg.display.flip()
 
-    def main(self):
+    def run(self):
         if not self.tests:
             return
 

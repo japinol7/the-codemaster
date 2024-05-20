@@ -95,7 +95,6 @@ class LevelTest3(Level):
             PotionPower(2800, 164, self.game),
             PotionPower(2840, 164, self.game),
             PotionPower(2880, 164, self.game),
-            PotionPower(2800, 124, self.game),
             ])
 
         # Add NPCs

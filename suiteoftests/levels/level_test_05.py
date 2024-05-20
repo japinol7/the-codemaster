@@ -12,7 +12,7 @@ from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
-    WolfManMale,
+    TethlorienYellow,
     VampireFemale,
     )
 from codemaster.models.actors.items import (
@@ -107,7 +107,7 @@ class LevelTest5(Level):
             DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
                      **{'random_min': 25, 'random_max': 45}),
             ]
-        self.npcs.add(WolfManMale(
+        self.npcs.add(TethlorienYellow(
             1750, 8, self.game,
             border_left=1320, border_right=1780, change_x=2, items_to_drop=items_to_drop))
 
