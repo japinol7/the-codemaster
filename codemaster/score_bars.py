@@ -130,13 +130,13 @@ class ScoreBar:
         self.level_no = level_no
         self.level_no_old = level_no_old
         libg_jp.draw_bar_graphic(
-            self.screen, amount_pct=self.player.stats['health'] / self.player.health_total,
+            self.screen, amount_pct=self.player.health / self.player.health_total,
             x=Settings.score_pos_health1_xy[0], y=Settings.score_pos_health1_xy[1],
             bar_width=Settings.score_pos_health_size[0],
             bar_height=Settings.score_pos_health_size[1])
 
         libg_jp.draw_bar_graphic(
-            self.screen, amount_pct=self.player.stats['power'] / self.player.power_total,
+            self.screen, amount_pct=self.player.power / self.player.power_total,
             x=Settings.score_pos_health1_xy[0],
             y=Settings.score_pos_health1_xy[1] + 39 * Settings.font_pos_factor,
             bar_width=Settings.score_pos_power_size[0],

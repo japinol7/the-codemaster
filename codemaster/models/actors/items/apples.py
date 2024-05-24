@@ -25,9 +25,9 @@ class Apple(ActorItem):
         pass
 
     def eat(self):
-        self.player.stats['health'] += self.stats.power
-        if self.player.stats['health'] > 100:
-            self.player.stats['health'] = 100
+        self.player.health += self.stats.power
+        if self.player.health > 100:
+            self.player.health = 100
         self.kill()
 
 

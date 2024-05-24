@@ -19,6 +19,7 @@ from codemaster.models.actors.items import (
     BatteryA,
     DoorLeftAqua,
     DoorRightYellow,
+    FilesDiskB,
     LifeRecoveryA,
     PotionPower,
     )
@@ -79,7 +80,17 @@ class Level14(Level):
 
         # Add batteries
         self.batteries.add([
-            BatteryA(1940, 264, self.game),
+            BatteryA(1930, 264, self.game),
+            ])
+
+        # Add files_disks
+        self.files_disks.add([
+            FilesDiskB(1984, 263, self.game),
+            ])
+
+        # Add life_recs
+        self.life_recs.add([
+            LifeRecoveryA(650, 334, self.game),
             ])
 
         # Add NPCs

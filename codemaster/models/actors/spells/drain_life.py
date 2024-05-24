@@ -55,7 +55,7 @@ class DrainLife(ActorMagic):
 
         self.game.is_log_debug and log.debug(
             f"{self.target.id} hit by {self.id}, "
-            f"pc_health: {str(round(self.target.stats['health'], 2))}, "
+            f"pc_health: {str(round(self.target.health, 2))}, "
             f"magic_attach_power: {str(self.stats.power)}, "
             f"magic_res: {self.target.magic_resistance:.2f}, ")
 
@@ -63,7 +63,7 @@ class DrainLife(ActorMagic):
         if attack_power_res > 0:
             self.target.health -= attack_power_res
 
-        if self.target.stats['health'] <= 0:
+        if self.target.health <= 0:
             self.game.is_log_debug and log.debug(
                 f"{self.target.id}, !!! Dead by magic_attach {self.id}, "
                 f"owner: {self.owner.id} !!!")

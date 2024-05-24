@@ -217,11 +217,11 @@ class Bullet(pg.sprite.Sprite):
             if pc.direction == DIRECTION_RIP or pc.invulnerable:
                 continue
             self.game.is_log_debug and log.debug(
-                f"{pc.id} hit by {self.id}, pc_health: {str(round(pc.stats['health'], 2))}, "
+                f"{pc.id} hit by {self.id}, pc_health: {str(round(pc.health, 2))}, "
                 f"bullet_power: {str(self.attack_power)}")
-            pc.stats['health'] -= self.attack_power
+            pc.health -= self.attack_power
             self.kill()
-            if pc.stats['health'] <= 0:
+            if pc.health <= 0:
                 self.game.is_log_debug and log.debug(f"{pc.id}, !!! Dead by bullet {self.id} !!!")
                 pc.die_hard()
             self.kill()

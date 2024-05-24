@@ -91,7 +91,7 @@ class Explosion(ActorItem):
                 if attack_power_res > 0:
                     pc.health -= attack_power_res
 
-                if pc.stats['health'] <= 0:
+                if pc.health <= 0:
                     self.game.is_log_debug and log.debug(
                         f"{pc.id}, !!! Dead by {self.id} Owner: {self.owner.id} !!!")
                     pc.die_hard()

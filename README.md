@@ -100,6 +100,12 @@
 	> Levels: 
 	    > In this demo, levels are completed by getting all the batteries 
           and files disks.
+	    > What happens in a level, stays in that level.
+	      > That means that when you leave a level, all effects and NPCs  
+	        in that level get paused; to be reactivated as soon 
+	        as the player enters that level again.
+	      > This is a game feature, not a bug. 
+	        Yeah, really. It is a design decision.
 	    > Number of levels implemented for this demo: 18.
 	> Doors: 
 	    > Use them to go to other levels.

@@ -94,7 +94,7 @@ class Selector(ActorItem):
             return hit_list
 
         magic_attack_cls = self.player.stats['magic_attack']
-        if self.game.player.stats['power'] < magic_attack_cls.power_min_to_use[magic_attack_cls.actor_type.name]:
+        if self.game.player.power < magic_attack_cls.power_min_to_use[magic_attack_cls.actor_type.name]:
             self.game.sound_effects and resources.Resource.weapon_empty_sound.play()
             return hit_list
 
@@ -102,7 +102,7 @@ class Selector(ActorItem):
         for sprite in snake_body_hit_list:
             if sprite.snake.target_of_spells_count[magic_attack_cls.__name__] >= magic_attack_cls.max_spells_on_target:
                 continue
-            self.game.player.stats['power'] -= magic_attack_cls.power_consumption[magic_attack_cls.actor_type.name]
+            self.game.player.power -= magic_attack_cls.power_consumption[magic_attack_cls.actor_type.name]
             magic_attack = magic_attack_cls(
                         sprite.rect.centerx, sprite.rect.y, self.game,
                         is_from_player_shot=True, owner=self.game.player,
@@ -120,7 +120,7 @@ class Selector(ActorItem):
         for sprite in dragon_body_hit_list:
             if sprite.dragon.target_of_spells_count[magic_attack_cls.__name__] >= magic_attack_cls.max_spells_on_target:
                 continue
-            self.game.player.stats['power'] -= magic_attack_cls.power_consumption[magic_attack_cls.actor_type.name]
+            self.game.player.power -= magic_attack_cls.power_consumption[magic_attack_cls.actor_type.name]
             magic_attack = magic_attack_cls(
                         sprite.rect.centerx, sprite.rect.y, self.game,
                         is_from_player_shot=True, owner=self.game.player,
@@ -142,7 +142,7 @@ class Selector(ActorItem):
             if self.game.level.spells_on_level_count[magic_attack_cls.__base__.__name__] >= magic_attack_cls.max_spells_on_level:
                 continue
 
-            self.game.player.stats['power'] -= magic_attack_cls.power_consumption[magic_attack_cls.actor_type.name]
+            self.game.player.power -= magic_attack_cls.power_consumption[magic_attack_cls.actor_type.name]
             magic_attack = magic_attack_cls(
                         sprite.rect.centerx, sprite.rect.y, self.game,
                         is_from_player_shot=True, owner=self.game.player,

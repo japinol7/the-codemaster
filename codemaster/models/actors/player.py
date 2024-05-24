@@ -43,9 +43,7 @@ from codemaster.models.actors.spells import (
 PL_X_SPEED = 6
 PL_JUMP_SPEED = 11.5
 PL_LIVES_DEFAULT = 3
-PL_POWER = 100
 PL_POWER_DEFAULT = 100
-PL_HEALTH = 100
 PL_HEALTH_DEFAULT = 100
 PL_MAGIC_RESISTANCE = 70
 PL_SPEED_DEFAULT = 8
@@ -247,12 +245,12 @@ class Player(pg.sprite.Sprite):
         self.explosion_sound = pg.mixer.Sound(self.file_name_sound_get('snd_explosion'))
 
     @property
-    def power(self):
-        return self.stats['power']
+    def lives(self):
+        return self.stats['lives']
 
-    @power.setter
-    def power(self, value):
-        self.stats['power'] = value
+    @lives.setter
+    def lives(self, value):
+        self.stats['lives'] = value
 
     @property
     def health(self):
@@ -270,10 +268,18 @@ class Player(pg.sprite.Sprite):
     def magic_resistance(self, value):
         self.stats['magic_resistance'] = value
 
+    @property
+    def power(self):
+        return self.stats['power']
+
+    @power.setter
+    def power(self, value):
+        self.stats['power'] = value
+
     def update(self):
         # when RIP
         if self.direction == DIRECTION_RIP:
-            if self.stats['lives'] < 1:
+            if self.lives < 1:
                 self.is_alive = False
             t = datetime.now().time()
             if ((t.hour * 60 + t.minute) * 60 + t.second) - self.rip_seconds >= 1:
@@ -374,9 +380,9 @@ class Player(pg.sprite.Sprite):
         # Check if we hit any life recovery
         life_rec_hit_list = pg.sprite.spritecollide(self, self.level.life_recs, False)
         for life_rec in life_rec_hit_list:
-            self.stats['lives'] += 1
-            if self.stats['lives'] > 99:
-                self.stats['lives'] = 99
+            self.lives += 1
+            if self.lives > 99:
+                self.lives = 99
             life_rec.kill()
             self.sound_effects and self.life_rec_found_sound.play()
 
@@ -436,9 +442,9 @@ class Player(pg.sprite.Sprite):
                         and enemy.is_actor_on_the_right(self)):
                     continue
                 has_been_hit = True
-                self.stats['health'] -= enemy.stats.power
+                self.health -= enemy.stats.power
             if has_been_hit:
-                if self.stats['health'] < 1:
+                if self.health < 1:
                     self.die_hard()
                 else:
                     self.sound_effects and self.enemy_hit_sound.play()
@@ -452,9 +458,9 @@ class Player(pg.sprite.Sprite):
                 is_snake_bp_hit = True
                 snakes_set.add(snake_bp.snake)
             for snake in snakes_set:
-                self.stats['health'] -= snake.stats.power // 5
+                self.health -= snake.stats.power // 5
             if is_snake_bp_hit:
-                if self.stats['health'] < 1:
+                if self.health < 1:
                     self.die_hard()
                 else:
                     self.sound_effects and self.enemy_hit_sound.play()
@@ -514,8 +520,8 @@ class Player(pg.sprite.Sprite):
             return
         self.stop()
         self.image = self.rip_frames[0]
-        self.stats['lives'] -= 1
-        self.stats['health'] = PL_HEALTH_DEFAULT
+        self.lives -= 1
+        self.health = PL_HEALTH_DEFAULT
         self.enemy_hit_sound.stop()
         self.sound_effects and self.death_sound.play()
         self.image = self.rip_frames[0]
@@ -548,20 +554,20 @@ class Player(pg.sprite.Sprite):
         if self.direction == DIRECTION_RIP:
             return
         if (self.stats[bullet_type.value] < 1
-                or self.stats['power'] < Bullet.power_min_to_use[bullet_type.name]):
+                or self.power < Bullet.power_min_to_use[bullet_type.name]):
             # Not enough bullets or power for this kind of weapon
             self.game.sound_effects and resources.Resource.weapon_empty_sound.play()
             return
         self.stats[f'{bullet_type.value}_shot'] += 1
         self.stats[bullet_type.value] -= 1
-        self.stats['power'] -= Bullet.power_consumption[bullet_type.name]
+        self.power -= Bullet.power_consumption[bullet_type.name]
         Bullet.shot(bullet_type=bullet_type, change_x=bullets.BULLET_STD_VELOCITY,
                     change_y=0, owner=self, game=self.game)
 
     def drink_potion_health(self):
         if self.direction == DIRECTION_RIP:
             return
-        if self.stats['health'] > 99:
+        if self.health > 99:
             return
         if len(self.stats['potions_health']) > 0:
             self.stats[ActorType.POTION_HEALTH.name] -= 1
@@ -570,7 +576,7 @@ class Player(pg.sprite.Sprite):
     def drink_potion_power(self):
         if self.direction == DIRECTION_RIP:
             return
-        if self.stats['power'] > 99:
+        if self.power > 99:
             return
         if len(self.stats['potions_power']) > 0:
             self.stats[ActorType.POTION_POWER.name] -= 1
@@ -579,7 +585,7 @@ class Player(pg.sprite.Sprite):
     def eat_apple(self):
         if self.direction == DIRECTION_RIP:
             return
-        if self.stats['health'] > 99:
+        if self.health > 99:
             return
         if len(self.stats['apples_stock']) > 0:
             self.stats['apples'] -= 1
@@ -638,7 +644,7 @@ class Player(pg.sprite.Sprite):
     def switch_energy_shield(self):
         if self.direction == DIRECTION_RIP:
             return
-        if self.stats['power'] <= 0:
+        if self.power <= 0:
             return
         if not self.stats['energy_shields_stock']:
             return
