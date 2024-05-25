@@ -172,6 +172,7 @@ class GameTestSuite:
         self.level = self.levels[starting_level_n]
 
     def tear_down(self):
+        log.info("Tear Down")
         levels.Level.clean_entity_ids()
 
     def _clock_die_hard(self):
