@@ -80,7 +80,7 @@ class Resource:
     def render_text_frequently_used(cls, game):
         libg_jp.render_text('– PAUSED –', Settings.screen_width // 2, Settings.screen_height // 2,
                             cls.txt_surfaces, 'game_paused', color=Color.CYAN,
-                            size=int(148*Settings.font_pos_factor), align="center")
+                            size=int(70*Settings.font_pos_factor), align="center")
 
         libg_jp.render_text('– Press Escape to Exit this Game  –', Settings.screen_width // 2,
                             (Settings.screen_height // 2.6) - int(6 * Settings.font_pos_factor_t2),

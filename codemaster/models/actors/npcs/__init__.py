@@ -51,6 +51,7 @@ from codemaster.models.actors.npcs.pokoyos import (
     )
 from codemaster.models.actors.npcs.mages import (
     MageFemaleA,
+    MageFemaleAVanished,
     )
 from codemaster.models.actors.npcs.robots import (
     RobotA,
@@ -60,4 +61,7 @@ from codemaster.models.actors.npcs.tethloriens import (
     TethlorienLilac,
     TethlorienYellow,
     TethlorienRed,
+    )
+from codemaster.models.actors.npcs.samurais import (
+    SamuraiMale,
     )

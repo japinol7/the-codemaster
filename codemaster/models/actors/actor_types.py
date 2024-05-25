@@ -144,8 +144,10 @@ class ActorType(Enum):
     FIRE_BREATH_B = 5507
     NEUTRINOS_BOLT_A = 5508
     NEUTRINOS_BOLT_B = 5509
-    DRAIN_LIFE_A = 5510
-    DRAIN_LIFE_B = 5511
+    SAMUTRINOS_BOLT_A = 5510
+    SAMUTRINOS_BOLT_B = 5511
+    DRAIN_LIFE_A = 5512
+    DRAIN_LIFE_B = 5513
     # Skulls
     SKULL_GREEN = 1201
     SKULL_BLUE = 1202
@@ -201,6 +203,7 @@ class ActorType(Enum):
     TERMINATOR_BIG_EYE_RED = 1614
     # Mages
     MAGE_FEMALE_A = 1625
+    MAGE_FEMALE_A_VANISHED = 1626
     # Robots
     ROBOT_A = 1640
     ROBOT_B = 1641
@@ -208,3 +211,5 @@ class ActorType(Enum):
     TETHLORIEN_LILAC = 1661
     TETHLORIEN_YELLOW = 1662
     TETHLORIEN_RED = 1663
+    # Samurais
+    SAMURAI_MALE = 1671

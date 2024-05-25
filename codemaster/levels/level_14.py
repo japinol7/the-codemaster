@@ -11,13 +11,14 @@ from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.npcs import (
+    DragonGreen,
     DragonBlue,
     DragonYellow,
     DragonRed,
     )
 from codemaster.models.actors.items import (
     BatteryA,
-    DoorLeftAqua,
+    DoorLeftGreen,
     DoorRightYellow,
     FilesDiskB,
     LifeRecoveryA,
@@ -95,23 +96,42 @@ class Level14(Level):
 
         # Add NPCs
         items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 40, 'random_max': 60}),
+            ]
+        self.dragons.add(DragonGreen(700, 640, self.game, border_left=640, border_right=2680,
+                                     border_top=50, border_down=780, change_x=1, change_y=1,
+                                     items_to_drop=items_to_drop))
+        items_to_drop = [
             DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=80, add_to_list=self.potions,
                      x_delta=16, **{'random_min': 60, 'random_max': 75}),
             DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=100, add_to_list=self.cartridges,
                      x_delta=70),
             ]
-        self.dragons.add(DragonYellow(500, 500, self.game, border_left=400, border_right=900,
+        self.dragons.add(DragonYellow(520, 500, self.game, border_left=400, border_right=900,
                                       border_top=50, border_down=780, change_x=1, change_y=1,
                                       items_to_drop=items_to_drop))
-        self.dragons.add(DragonBlue(490, 700, self.game, border_left=400, border_right=1100,
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=80, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 40, 'random_max': 60}),
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 70, 'random_max': 80}),
+            ]
+        self.dragons.add(DragonBlue(500, 700, self.game, border_left=400, border_right=1100,
                                     border_top=50, border_down=780, change_x=1, change_y=1,
                                     items_to_drop=items_to_drop))
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 80, 'random_max': 80}),
+            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=100, add_to_list=self.cartridges,
+                     x_delta=70),
+            ]
         self.dragons.add(DragonRed(2000, 700, self.game, border_left=1160, border_right=2700,
                                    border_top=50, border_down=780, change_x=1, change_y=1,
                                    items_to_drop=items_to_drop))
 
         # Add doors
         self.doors.add([
-            DoorLeftAqua(2, 550, self.game, level_dest=12, door_dest_pos=DOOR_DEST_NL),
+            DoorLeftGreen(2, 550, self.game, level_dest=12, door_dest_pos=DOOR_DEST_NL),
             DoorRightYellow(3640, 550, self.game, level_dest=14, door_dest_pos=DOOR_DEST_NL),
             ])

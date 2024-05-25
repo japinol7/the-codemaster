@@ -7,7 +7,7 @@ import sys
 
 from codemaster.version import version
 
-N_LEVELS = 18
+N_LEVELS = 24
 
 SCREEN_WIDTH = 1160
 SCREEN_HEIGHT = 778
@@ -186,6 +186,7 @@ FILE_NAMES = {
     'im_en_mages': ('mage', 'png'),
     'im_en_robots': ('robot', 'png'),
     'im_tethloriens': ('tethlorien', 'png'),
+    'im_en_samurais': ('samurai', 'png'),
     'im_files_disks': ('files_disk', 'png'),
     'im_computer': ('computer', 'png'),
     'im_apples': ('im_apple', 'png'),
@@ -226,6 +227,7 @@ FILE_NAMES = {
     'im_vortex_of_doom': ('vortex_of_doom', 'png'),
     'im_fire_breath': ('fire_breath', 'png'),
     'im_neutrinos_bolt': ('neutrinos_bolt', 'png'),
+    'im_samutrinos_bolt': ('samutrinos_bolt', 'png'),
     'im_drain_life':  ('drain_life', 'png'),
     'snd_death_pl': ('death_pl_02',  SOUND_FORMAT),
     'snd_apple_hit': ('apple_found', SOUND_FORMAT),

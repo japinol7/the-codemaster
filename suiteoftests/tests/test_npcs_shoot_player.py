@@ -17,20 +17,13 @@ class TestNPCsShootPlayer:
                 return
             game.player.lives -= 1
             TextMsg.create("Player DIED! RIP", game, time_in_secs=5)
-
-        game.player.rect.x, game.player.rect.y = 260, 620
-        game.player.health = 24
-        game.player.lives = 1
-
         game.player.die_hard = player_die_hard_mock
 
-        game.add_player_actions((
-            ['stop', 1],
-            ))
+        game.player.rect.x, game.player.rect.y = 260, 620
+        game.player.health = 22
+        game.player.lives = 1
 
-        npc = TerminatorEyeRed(
-                600, 650, game, border_left=590, border_right=610,
-                change_x=0, items_to_drop=None)
+        npc = TerminatorEyeRed(600, 650, game, change_x=0)
         npc.direction = DIRECTION_LEFT
         game.level.add_actors([npc])
 

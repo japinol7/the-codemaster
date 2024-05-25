@@ -30,6 +30,7 @@ class ExperiencePoints:
         ActorType.POKOYO_B.name: 75,
         ActorType.ROBOT_A.name: 110,
         ActorType.ROBOT_B.name: 180,
+        ActorType.SAMURAI_MALE.name: 190,
         ActorType.TETHLORIEN_LILAC.name: 170,
         ActorType.TETHLORIEN_YELLOW.name: 180,
         ActorType.TETHLORIEN_RED.name: 200,

@@ -1,4 +1,4 @@
-"""Module level 18."""
+"""Module level 20."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 import pygame as pg
@@ -23,8 +23,8 @@ from codemaster.models.actors.items import (
     CartridgeBlue,
     CartridgeYellow,
     CartridgeRed,
-    DoorLeftYellow,
-    DoorRightBlue,
+    DoorLeftMagenta,
+    DoorRightGreen,
     FilesDiskA,
     LifeRecoveryA,
     PotionHealth,
@@ -33,11 +33,11 @@ from codemaster.models.actors.items import (
 from codemaster.levels.level_base import Level
 
 
-class Level18(Level):
+class Level20(Level):
 
     def __init__(self, game):
         super().__init__(game)
-        self.id = 17
+        self.id = 19
         self.name = str(self.id + 1)
         self.next_level_left = self.id - 1
         self.next_level_right = 1
@@ -180,6 +180,6 @@ class Level18(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftYellow(2, 550, self.game, level_dest=16, door_dest_pos=DOOR_DEST_NL),
-            DoorRightBlue(3640, 550, self.game, level_dest=18, door_dest_pos=DOOR_DEST_NL),
+            DoorLeftMagenta(2, 550, self.game, level_dest=18, door_dest_pos=DOOR_DEST_NL),
+            DoorRightGreen(3640, 550, self.game, level_dest=20, door_dest_pos=DOOR_DEST_NL),
             ])

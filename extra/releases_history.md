@@ -4,7 +4,7 @@
 
 ### New features and improvements:
 
-* Add six new levels. Current level count: 18.
+* Add twelve new levels. Current level count: 24.
 * Improve NPCs: 
   * Demons now can cast these spells:
     * Fire Breath B: Most of the time they will cast this one.
@@ -17,6 +17,12 @@
       * Fire Breath B: Most of the time they will cast this one.
       * Fire Breath A: Some change to cast this one.
       * VortexOfDoom B: Low change to cast this one.
+  * Samurais.
+    * They can shoot.
+    * They have a bit of a resistance to magic.
+    * They can cast these spells:
+      * Samutrinos Bolt B: Most of the time they will cast this one.
+      * Samutrinos Bolt A: Low change to cast this one.
   * Tethloriens.
     * They can shoot.
     * They have a bit of a resistance to magic.
@@ -28,6 +34,8 @@
   * Fire Breath A.
   * Neutrinos Bolt A.
   * Neutrinos Bolt B.
+  * Samutrinos Bolt A.
+  * Samutrinos Bolt B.
 * Improve spell casting and spells.
 * Improve the test suite.
 

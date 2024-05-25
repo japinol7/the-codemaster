@@ -50,12 +50,11 @@ class TestPlayerBigJump:
             game.player.lives -= 1
             game.player.stop()
             game.player_actions = []
+        game.player.die_hard = player_die_hard_mock
 
         game.player.rect.x, game.player.rect.y = 3000, 500
         game.player.health = PLAYER_HEALTH_SUPER_HERO
         game.player.lives = 3
-
-        game.player.die_hard = player_die_hard_mock
 
         game.add_player_actions((
             ['go_left', 22],
@@ -97,11 +96,10 @@ class TestPlayerBigJump:
             game.player.lives -= 1
             game.player.stop()
             game.player_actions = []
+        game.player.die_hard = player_die_hard_mock
 
         game.player.rect.x, game.player.rect.y = 1020, 600
         game.player.health = PLAYER_HEALTH_SUPER_HERO
-
-        game.player.die_hard = player_die_hard_mock
 
         game.add_player_actions((
             ['go_right', 10],
@@ -124,11 +122,10 @@ class TestPlayerBigJump:
             game.player.lives -= 1
             game.player.stop()
             game.player_actions = []
+        game.player.die_hard = player_die_hard_mock
 
         game.player.rect.x, game.player.rect.y = 1850, 400
         game.player.health = PLAYER_HEALTH_SUPER_HERO
-
-        game.player.die_hard = player_die_hard_mock
 
         game.add_player_actions((
             ['go_right', 10],

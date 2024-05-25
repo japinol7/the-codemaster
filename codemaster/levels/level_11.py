@@ -14,6 +14,7 @@ from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
     MageFemaleA,
+    MageFemaleAVanished,
     )
 from codemaster.models.actors.items import (
     BatteryA,
@@ -89,10 +90,12 @@ class Level11(Level):
         # Add NPCs
         items_to_drop = [
             DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=14, **{'random_min': 68, 'random_max': 85}),
+                     x_delta=22, y_delta=38, **{'random_min': 68, 'random_max': 85}),
             DropItem(DoorKeyMagenta, ActorType.DOOR_KEY_MAGENTA, probability_to_drop=100,
-                     add_to_list=self.door_keys, x_delta=20, y_delta=50,
+                     add_to_list=self.door_keys, x_delta=20, y_delta=58,
                      door=[door for door in self.doors if door.is_locked][0]),
+            DropItem(MageFemaleAVanished, ActorType.MAGE_FEMALE_A_VANISHED, probability_to_drop=100,
+                     add_to_list=self.npcs, x_delta=0),
             ]
         mage = MageFemaleA(3570, 655, self.game, items_to_drop=items_to_drop)
         mage.direction = DIRECTION_LEFT

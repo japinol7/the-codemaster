@@ -465,6 +465,22 @@ class Player(pg.sprite.Sprite):
                 else:
                     self.sound_effects and self.enemy_hit_sound.play()
 
+        # Check if we hit any dragon body piece
+        if not self.invulnerable:
+            dragon_bp_hit_list = pg.sprite.spritecollide(self, self.level.dragons_body_pieces, False)
+            is_dragon_bp_hit = False
+            dragons_set = set()
+            for dragon_bp in dragon_bp_hit_list:
+                is_dragon_bp_hit = True
+                dragons_set.add(dragon_bp.dragon)
+            for dragon in dragons_set:
+                self.health -= dragon.stats.power // 6
+            if is_dragon_bp_hit:
+                if self.health < 1:
+                    self.die_hard()
+                else:
+                    self.sound_effects and self.enemy_hit_sound.play()
+
         # Check if we hit any mine
         mines_hit_list = pg.sprite.spritecollide(self, self.level.mines, False)
         for mine in mines_hit_list:

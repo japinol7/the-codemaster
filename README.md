@@ -106,7 +106,7 @@
 	        as the player enters that level again.
 	      > This is a game feature, not a bug. 
 	        Yeah, really. It is a design decision.
-	    > Number of levels implemented for this demo: 18.
+	    > Number of levels implemented for this demo: 24.
 	> Doors: 
 	    > Use them to go to other levels.
         > To unlock a locked door you need to use the right door key.
@@ -270,6 +270,9 @@
 	    > Pokoyos.
 	    > Robots:
     	    > Beware, they have weapons.
+	    > Samurais:
+	        > Beware, they have weapons, magic weapons 
+	          and have some small resistance to magic.
 	    > Skulls.
 	    > Snakes:
     	    > They bite you whenever you are too close to them.

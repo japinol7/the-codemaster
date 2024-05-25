@@ -135,3 +135,59 @@ class MageFemaleA(Mage):
         self.game.level.magic_sprites.add(magic_attack)
         self.player.target_of_spells_count[spell_class.__name__] += 1
         self.game.level.spells_on_level_count[spell_class.__base__.__name__] += 1
+
+
+class MageFemaleAVanished(Mage):
+    """Represents a Mage Female A vanished."""
+
+    def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
+                 border_left=0, border_right=0,
+                 border_top=0, border_down=0,
+                 items_to_drop=None):
+        self.file_mid_prefix = '02_vanished'
+        self.type = ActorType.MAGE_FEMALE_A_VANISHED
+
+        self.stats = Stats()
+        self.stats.power = self.stats.power_total = NPC_STRENGTH_BASE
+        self.stats.power_recovery = 10
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 7
+        self.stats.health = self.stats.health_total = NPC_STRENGTH_BASE * 8
+        self.msg_texts = [
+            "You've vanished me!\nBut, I will return!\nYou.. Jerk!",
+            ]
+        self.msg_text_to_repeat = "I will return!"
+        self.msgs_delta_max = 310, 310
+        self.msgs = pg.sprite.Group()
+
+        super().__init__(x, y, game, name=name,
+                         change_x=change_x, change_y=change_y,
+                         border_left=border_left, border_right=border_right,
+                         border_top=border_top, border_down=border_down,
+                         items_to_drop=items_to_drop)
+        self.hostility_level = 0
+
+    def kill_hook(self):
+        for msg in self.msgs:
+            msg.kill()
+
+        super().kill_hook()
+
+    def update_after_inc_index_hook(self):
+        self.direction = DIRECTION_LEFT if self.is_actor_on_the_left(self.player) else DIRECTION_RIGHT
+
+        if self.msg_texts and not self.msgs:
+            is_between_x_boundaries = (self.player.rect.x - self.msgs_delta_max[0] < self.rect.x
+                                       < self.player.rect.x + self.msgs_delta_max[0])
+            is_between_y_boundaries = (self.player.rect.y - self.msgs_delta_max[1] < self.rect.y
+                                       < self.player.rect.y + self.msgs_delta_max[1])
+            if is_between_x_boundaries and is_between_y_boundaries:
+                msg = TextMsg.create(
+                    self.msg_texts.pop(), self.game,
+                    time_in_secs=7,
+                    delta_x=180, delta_y=34, owner=self)
+                self.msgs.add([msg])
+
+        if not self.msg_texts and not self.msgs:
+            self.kill_hook()
+
+        super().update_after_inc_index_hook()

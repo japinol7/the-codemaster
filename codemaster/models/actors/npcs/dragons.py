@@ -184,8 +184,8 @@ class Dragon(NPC):
         self.rect_old = self.image.get_rect()
         self.rect_old.x = self.rect.x
         self.rect_old.y = self.rect.y
-        self.change_x += self.cell_size // 5
-        self.change_y += self.cell_size // 5
+        self.change_x += self.cell_size // 8
+        self.change_y += self.cell_size // 8
 
         # Dragon's body and tail
         previous_body_piece = self
@@ -299,7 +299,7 @@ class DragonGreen(Dragon):
         self.file_mid_prefix = '01'
         self.color = 1
         self.type = ActorType.DRAGON_GREEN
-        self.body_len_start = self.body_length = 46
+        self.body_len_start = self.body_length = 110
         self.direction_stability = 46
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 7
@@ -330,7 +330,7 @@ class DragonBlue(Dragon):
         self.file_mid_prefix = '03'
         self.color = 3
         self.type = ActorType.DRAGON_BLUE
-        self.body_len_start = self.body_length = 52
+        self.body_len_start = self.body_length = 64
         self.direction_stability = 40
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 10
@@ -361,7 +361,7 @@ class DragonYellow(Dragon):
         self.file_mid_prefix = '02'
         self.color = 2
         self.type = ActorType.DRAGON_YELLOW
-        self.body_len_start = self.body_length = 64
+        self.body_len_start = self.body_length = 82
         self.direction_stability = 36
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 15
@@ -392,7 +392,7 @@ class DragonRed(Dragon):
         self.file_mid_prefix = '04'
         self.color = 4
         self.type = ActorType.DRAGON_RED
-        self.body_len_start = self.body_length = 86
+        self.body_len_start = self.body_length = 98
         self.direction_stability = 33
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 20
