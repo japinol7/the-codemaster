@@ -52,21 +52,24 @@
               the most industrialized planet of the Negasus System where its government lies.
 			> Part 2:
               Pac lands his spaceship on the outskirts of the planet.
-              He takes his anti-radiation briefcase and enters what clearly is a very industrialized land.
+              He takes his anti-radiation briefcase and enters what 
+              clearly is a very industrialized land.
               The platformer part of Pac's Revenge game started this way.
               Pac with his special briefcase starts to collect all the radioactive 
               batteries that he can find while bypassing the security defenses and traps.
               In the platformer part of the original game, our protagonist did not have any
-              weapon, he just could dodge the industrial machines and robots that he encounters.
+              weapon, he just could dodge the industrial machines 
+              and robots that he encounters.
               A lot of industrial robots make this difficult, but finally, Pac arrives 
               at the government offices.
               There, he discovers that the country's government has been transformed into a 
               dictatorship at the hands of a tyrant who calls himself Great Emperor Tetsuo.
               Tetsuo's motivation seems to be acquiring power and money to attract cute young women.
-              The fact that she receives him sitting on a throne that is actually a toilet makes 
+              The fact that he receives him sitting on a throne that is actually a toilet makes 
               Pac suspect that he has to deal with a madman.
-              Someway, Pac must come back to de UFEP headquarters with the batteries he has recovered, 
-              and prove what is happening in the Negasus Imperial Planet.
+              Someway, Pac must come back to de UFEP headquarters 
+              with the batteries he has recovered, and prove what is happening 
+              in the Negasus Imperial Planet.
               Finally, Pac beats Tetsuo escaping from Negasus and completing his mission.
         > What made Pac's Revenge an interesting game was dealing with philosophical
           and political issues in a futuristic world: environmental contamination, 
@@ -75,13 +78,14 @@
     > The CodeMaster. Nightmare on Bots' Island ...
         > Takes place some years later. 
         > Pac is considered a hero at the headquarters of the UFEP.
-        > Pac now has a girlfriend, Kaede, to who he wants to propose (he met her in Pac's Revenge 2).
+        > Pac now has a girlfriend, Kaede, to whom he wants to propose 
+          (he met her in Pac's Revenge 2).
         > For this reason he travels to the planet where Kaede's father, Kaito, 
           has his kingdom, but something there is wrong.
         > Questions you will not get an answer from this demo:
-			> Will Pac get Kaede's hand from her father?
-			> What is really happening in Kaito's kingdom? 
-			> Who is the CodeMaster and what does he have to do with all this?
+            > Will Pac get Kaede's hand from her father?
+            > What is really happening in Kaito's kingdom? 
+            > Who is the CodeMaster and what does he have to do with all this?
 
 
 
@@ -96,7 +100,7 @@
           You can move around all levels whenever it makes sense to the story.
 	> To beat the game:
 	    > In this demo, you just have to get all the batteries 
-          and files disks from aLL the levels.
+          and files disks from all the levels.
 	> Levels: 
 	    > In this demo, levels are completed by getting all the batteries 
           and files disks.
@@ -198,7 +202,7 @@
 	> Apples: 
 	    > Eat them to recover a bit of health.
           There are three types of apples:
-    	    > Green apples: They are less than normal quality apples but still tasty.
+	        > Green apples: They are less than normal quality apples but still tasty.
 	        > Yellow apples: They are normal quality apples.
 	        > Red apples: They are high-quality apples.
 	> Weapons and bullets:
@@ -222,12 +226,12 @@
                 > Very difficult to find.
 	> Energy shields:
         > Right now there is only one kind of them.
-            > A neutronic energy shield o type A:
+            > A neutronic energy shield of type A:
                 > To be able to use it, you need a skill that will be activated
                   when you level up to level 2.
                 > It blocks all the bullets headed in its direction.
                 > Snakes change their direction when they hit one.
-                > It consumes a little bit of your power while is on.
+                > It consumes a little bit of your power while it is on.
                 > When destroyed, it costs you some power. Then, it is created again.
                 > Its color changes from light blue to yellow and dark pink depending on its health stat.
 	> Files disks: 
@@ -368,12 +372,19 @@
 	debugtraces		    False
 
 
-**Basic test suite**
+**Test suite**
 
 	To run the test suite:
 		$ python -m suiteoftests
 
-    Note: Press ESC if you want to abort the current test.
+	You can run the test suite executing only some tests. Examples:
+		$ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
+		$ python -m suiteoftests -n 'test_player_enters_door_to_next_level, test_bat_hit_with_enough_bullets_must_die'
+
+    Notes: 
+		* Press ESC if you want to abort the current test.
+		* If you tell the test suite to run some specific tests, <br> 
+		  these tests will be run even if you have decorated these tests to skip them.
 
 
 **Examples of usage**

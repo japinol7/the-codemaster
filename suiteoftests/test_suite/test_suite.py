@@ -305,15 +305,14 @@ class GameTestSuite:
         if not self.tests:
             return
 
-        pg.init()
         self.tests_skipped = [test.test.__name__ for test in self.tests if test.skip]
         self.test_skipped_count = len(self.tests_skipped)
         self.tests_skipped_text = f". Tests skipped: {self.test_skipped_count}" if self.test_skipped_count else ''
-
         self.tests_total = sum(1 for test in self.tests if not test.skip)
 
         log.info(LOG_START_TEST_APP_MSG)
         log.info(f"Total tests to pass: {self.tests_total}{self.tests_skipped_text}")
+        pg.init()
         try:
             for test in tuple(self.tests):
                 test_method_with_setup_levels = self.tests.pop()
