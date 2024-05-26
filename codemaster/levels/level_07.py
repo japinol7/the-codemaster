@@ -14,6 +14,9 @@ from codemaster.models.actors.npcs import (
     PokoyoB,
     )
 from codemaster.models.actors.items import (
+    AppleGreen,
+    AppleRed,
+    AppleYellow,
     BatteryA,
     CartridgeGreen,
     CartridgeBlue,
@@ -21,7 +24,6 @@ from codemaster.models.actors.items import (
     DoorRightYellow,
     DoorLeftGreen,
     FilesDiskB,
-    PotionHealth,
     PotionPower,
     )
 from codemaster.levels.level_base import Level
@@ -84,9 +86,16 @@ class Level7(Level):
             FilesDiskB(700, 173, self.game),
             ])
 
+        # Add apples
+        self.apples.add([
+            AppleGreen(800, 186, self.game),
+            AppleGreen(800, 160, self.game),
+            AppleYellow(830, 186, self.game),
+            AppleRed(860, 186, self.game),
+            ])
+
         # Add potions
         self.potions.add([
-            PotionHealth(1090, 172, self.game),
             PotionPower(1130, 172, self.game),
             PotionPower(1130, 132, self.game),
             ])

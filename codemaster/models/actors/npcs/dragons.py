@@ -116,7 +116,6 @@ class Dragon(NPC):
         self.probability_to_cast_fire_breath_a = 13
 
     def _load_sprites(self):
-        # TODO: Cache this invisible dragon image
         # We want to draw the dragon's head on top of the body,
         # for this reason, we make the usual actor image invisible
         self.image = pg.image.load(self.file_name_im_get(

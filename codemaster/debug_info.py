@@ -21,6 +21,8 @@ class DebugInfo:
         print('  ^ numpad_divide: \t interactive debug output\n'
               '  ^n: \t print a list of all NPCs in all levels, ordered by level\n'
               '  ^ Shift + n: \t print a list of all NPCs in all levels, ordered by NPC name\n'
+              '  Alt + n: \t print a list of all items in all levels, ordered by level\n'
+              '  Alt + Shift + n: \t print a list of all items in all levels, ordered by item name\n'
               '  ^d: \t print debug information to console\n'
               '  ^l: \t write debug information to a log file\n'
               )

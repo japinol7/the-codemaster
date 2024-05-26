@@ -51,6 +51,7 @@ class Level:
         self.door_keys = pg.sprite.Group()
         self.doors = pg.sprite.Group()
         self.normal_items = pg.sprite.Group()
+        self.items = pg.sprite.Group()
         self.explosions = pg.sprite.Group()
         self.magic_sprites = pg.sprite.Group()
         self.particle_tuple_sprites = pg.sprite.Group()
@@ -76,24 +77,33 @@ class Level:
         for sprite in self.computers:
             self.all_sprites.add(sprite)
             self.normal_items.add(sprite)
+            self.items.add(sprite)
         for sprite in self.doors:
             self.all_sprites.add(sprite)
         for sprite in self.clocks:
             self.all_sprites.add(sprite)
+            self.items.add(sprite)
         for sprite in self.batteries:
             self.all_sprites.add(sprite)
+            self.items.add(sprite)
         for sprite in self.files_disks:
             self.all_sprites.add(sprite)
+            self.items.add(sprite)
         for sprite in self.cartridges:
             self.all_sprites.add(sprite)
+            self.items.add(sprite)
         for sprite in self.potions:
             self.all_sprites.add(sprite)
+            self.items.add(sprite)
         for sprite in self.life_recs:
             self.all_sprites.add(sprite)
+            self.items.add(sprite)
         for sprite in self.door_keys:
             self.all_sprites.add(sprite)
+            self.items.add(sprite)
         for sprite in self.apples:
             self.all_sprites.add(sprite)
+            self.items.add(sprite)
         for sprite in self.mines:
             self.all_sprites.add(sprite)
         for sprite in self.dragons:

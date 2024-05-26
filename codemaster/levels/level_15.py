@@ -13,6 +13,9 @@ from codemaster.models.actors.npcs import (
     BatBlack,
     )
 from codemaster.models.actors.items import (
+    AppleGreen,
+    AppleRed,
+    AppleYellow,
     BatteryA,
     DoorLeftYellow,
     DoorRightBlue,
@@ -32,7 +35,7 @@ class Level15(Level):
         self.next_level_right = self.id + 1
         self.next_level_top = False
         self.next_level_bottom = False
-        self.background = pg.image.load(self.file_name_im_get(5)).convert()
+        self.background = pg.image.load(self.file_name_im_get(11)).convert()
         self.level_limit = -3000
         self.level_limit_top = -1000
         self.player_start_pos_left = 220, 520
@@ -90,9 +93,15 @@ class Level15(Level):
             FilesDiskA(2920, -27, self.game),
             ])
 
-        # Add potions
-        self.potions.add([
-            PotionHealth(8, 52, self.game),
+        # Add apples
+        self.apples.add([
+            AppleGreen(950, 85, self.game),
+            AppleGreen(950, 59, self.game),
+            AppleYellow(980, 85, self.game),
+            AppleYellow(980, 59, self.game),
+            AppleYellow(1010, 85, self.game),
+            AppleRed(1040, 85, self.game),
+            AppleRed(1070, 85, self.game),
             ])
 
         # Add NPCs

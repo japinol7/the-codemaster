@@ -9,16 +9,18 @@ from codemaster.config.constants import (
     DOOR_DEST_TR,
     )
 from codemaster.models.actors.actors import DropItem, ActorType
-from codemaster.models.actors.items import platforms, DoorRightAqua
+from codemaster.models.actors.items import platforms
 from codemaster.models.actors.npcs import (
     SkullGreen,
     SkullYellow,
     SkullRed,
     SamuraiMale,
+    TerminatorEyeYellow,
     )
 from codemaster.models.actors.items import (
     BatteryA,
     CartridgeBlue,
+    CartridgeGreen,
     ComputerA,
     DoorLeftYellow,
     DoorRightAqua,
@@ -39,7 +41,7 @@ class Level22(Level):
         self.next_level_right = 1
         self.next_level_top = False
         self.next_level_bottom = False
-        self.background = pg.image.load(self.file_name_im_get(1)).convert()
+        self.background = pg.image.load(self.file_name_im_get(12)).convert()
         self.level_limit = -3000
         self.level_limit_top = -1000
         self.player_start_pos_left = 220, 520
@@ -60,7 +62,7 @@ class Level22(Level):
         level_plats = [[12, 420, 210, platforms.PLAT_TYPE_01],
                        [5, 3270, 240, platforms.PLAT_TYPE_01],
                        [1, 3200, 360, platforms.PLAT_TYPE_01],
-                       [8, 1960, 130, platforms.PLAT_TYPE_01],
+                       [10, 1960, 130, platforms.PLAT_TYPE_01],
                        [2, 1500, 210, platforms.PLAT_TYPE_01],
                        [2, 1680, 300, platforms.PLAT_TYPE_01],
                        [2, 1420, 575, platforms.PLAT_TYPE_01],
@@ -77,8 +79,10 @@ class Level22(Level):
 
         # Add batteries
         self.batteries.add([
-            BatteryA(2160, 94, self.game),
-            BatteryA(2200, 94, self.game),
+            BatteryA(2180, 94, self.game),
+            BatteryA(2220, 94, self.game),
+            BatteryA(2260, 94, self.game),
+            BatteryA(2300, 94, self.game),
             BatteryA(760, 174, self.game),
             BatteryA(800, 174, self.game),
             BatteryA(840, 174, self.game),
@@ -91,12 +95,23 @@ class Level22(Level):
 
         # Add NPCs
         self.npcs.add([
-            SkullGreen(2000, 67, self.game, border_left=1950, border_right=2200, change_x=3),
-            SkullGreen(2070, 67, self.game, border_left=1950, border_right=2200, change_x=3),
+            SkullGreen(2100, 67, self.game, border_left=1950, border_right=2200, change_x=3),
             SkullYellow(2360, 67, self.game, border_left=2080, border_right=2500, change_x=3),
-            SkullRed(2410, 67, self.game, border_left=2170, border_right=2500, change_x=3),
             SkullRed(2460, 67, self.game, border_left=2170, border_right=2500, change_x=3),
             ])
+
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 58, 'random_max': 72}),
+            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
+                     x_delta=170),
+            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=80, add_to_list=self.cartridges,
+                     x_delta=195),
+                ]
+        self.npcs.add([
+            TerminatorEyeYellow(2300, 48, self.game, border_left=2000, border_right=2480, change_x=2,
+                                items_to_drop=items_to_drop),
+                ])
 
         items_to_drop = [
             DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100,

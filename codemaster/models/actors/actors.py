@@ -426,6 +426,21 @@ class ActorItem(Actor):
     def draw_health(self):
         pass
 
+    @staticmethod
+    def get_all_items(game, sorted_by_level=True):
+        """Returns an ordered dictionary with the item id and the level where you can find them.
+          Example:
+              OrderedDict({'BATTERY_A_00001': ('level: 1 ', ' 1'), 'BATTERY_A_00002': ('level: 1 ', ' 1')})
+        """
+        res = {}
+        for level in game.levels:
+            for item in level.items:
+                res[item.id] = f"level: {level.name:4}", f"{level.id + 1:3d}"
+
+        if sorted_by_level:
+            return OrderedDict(sorted([x for x in res.items()], key=lambda x: (x[1][1], x[0])))
+        return OrderedDict(sorted([x for x in res.items()]))
+
 
 class ActorMagic(Actor):
     """Represents a magic actor.

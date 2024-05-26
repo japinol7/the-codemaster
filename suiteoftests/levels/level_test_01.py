@@ -35,7 +35,7 @@ class LevelTest1(Level):
         self.next_level_right = False
         self.next_level_top = False
         self.next_level_bottom = False
-        self.background = pg.image.load(self.file_name_im_get(7)).convert()
+        self.background = pg.image.load(self.file_name_im_get(11)).convert()
         self.level_limit = -2700
         self.level_limit_top = -1000
         self.player_start_pos_left = 250, 480

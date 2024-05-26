@@ -56,7 +56,7 @@ class Samurai(NPC):
 
         delta_x = -10 if self.direction == DIRECTION_LEFT else 20
         magic_attack = spell_class(
-            self.rect.x+delta_x, self.rect.y+15, self.game,
+            self.rect.x+delta_x, self.rect.y+22, self.game,
             is_from_player_shot=False, owner=self,
             target=self.player)
         self.game.level.magic_sprites.add(magic_attack)

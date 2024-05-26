@@ -7,28 +7,18 @@ from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.items import platforms
+from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
-    DemonMale,
-    GhostGreen,
-    GhostYellow,
-    SkullYellow,
-    SkullRed,
-    TethlorienLilac,
-    TethlorienRed,
+    PokoyoA,
+    PokoyoB,
     )
 from codemaster.models.actors.items import (
     BatteryA,
-    CartridgeBlue,
-    CartridgeYellow,
-    CartridgeRed,
     DoorLeftMagenta,
     DoorRightGreen,
-    FilesDiskA,
-    LifeRecoveryA,
-    PotionHealth,
-    PotionPower,
+    FilesDiskB,
+    FilesDiskD,
     )
 from codemaster.levels.level_base import Level
 
@@ -40,7 +30,7 @@ class Level20(Level):
         self.id = 19
         self.name = str(self.id + 1)
         self.next_level_left = self.id - 1
-        self.next_level_right = 1
+        self.next_level_right = self.id + 1
         self.next_level_top = False
         self.next_level_bottom = False
         self.background = pg.image.load(self.file_name_im_get(3)).convert()
@@ -61,122 +51,45 @@ class Level20(Level):
 
     def _add_actors(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[5, 300, 220, platforms.PLAT_TYPE_01],
-                       [3, 800, 440, platforms.PLAT_TYPE_01],
-                       [2, 670, 300, platforms.PLAT_TYPE_01],
-                       [3, 1100, 260, platforms.PLAT_TYPE_01],
-                       [9, 1900, 110, platforms.PLAT_TYPE_01],
-                       [6, 2580, 440, platforms.PLAT_TYPE_01],
-                       [5, 2680, 98, platforms.PLAT_TYPE_01],
-                       [2, 3340, 98, platforms.PLAT_TYPE_01],
-                       [2, 3200, 196, platforms.PLAT_TYPE_01],
-                       [2, 3060, 294, platforms.PLAT_TYPE_01],
-                       [1, 2395, 586, platforms.PLAT_TYPE_01],
-                       [19, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
-                       [28, 2000, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
+        level_plats = [[8, 620, 440, platforms.PLAT_TYPE_01],
+                       [4, 1460, 440, platforms.PLAT_TYPE_01],
+                       [1, 1260, 570, platforms.PLAT_TYPE_01],
+                       [10, 1700, 440, platforms.PLAT_TYPE_01],
+                       [1, 2580, 350, platforms.PLAT_TYPE_01],
+                       [3, 2700, 250, platforms.PLAT_TYPE_01],
+                       [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        ]
         plats = []
         for platform in level_plats:
-            plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2],
-                                                                       platform[3])
+            plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2], platform[3])
         for platform in plats:
             block = platforms.Platform(platform[0], platform[1], platform[2], self.game)
             self.platforms.add(block)
 
-        # Add moving platforms (type, x, y, ...)
-        self.platforms.add(platforms.MovingPlatform(
-            platforms.PLAT_TYPE_02_STONE_MIDDLE, 1600, 360, self.game,
-            border_left=1430, border_right=2620, change_x=4, level=self))
-        self.platforms.add(platforms.MovingPlatform(
-            platforms.PLAT_TYPE_02_STONE_MIDDLE, 1350, 260, self.game,
-            border_top=200, border_down=920, change_y=3, level=self))
-
-        # Add sliding bands (n_blocs, x, y, type, velocity)
-        level_plats = [
-            [3, 1500, 120, platforms.PLAT_TYPE_03_SLIDING, 3]
-            ]
-        plats = []
-        for platform in level_plats:
-            plats += platforms.Platform.sprite_sheet_data_for_n_blocks(
-                platform[0], platform[1], platform[2], platform[3], velocity=platform[4])
-        for platform in plats:
-            block = platforms.SlidingBands(
-                platform[0], platform[1], platform[2], self.game, velocity=platform[3], level=self)
-            self.platforms.add(block)
+        # Add water blocks
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
 
         # Add batteries
         self.batteries.add([
-            BatteryA(2160, 74, self.game),
-            BatteryA(2200, 74, self.game),
-            BatteryA(2240, 74, self.game),
-            BatteryA(2280, 74, self.game),
-            ])
-
-        # Add potions
-        self.potions.add([
-            PotionPower(330, 184, self.game),
-            PotionHealth(380, 184, self.game),
+            BatteryA(880, 405, self.game),
+            BatteryA(2840, 215, self.game),
             ])
 
         # Add files_disks
         self.files_disks.add([
-            FilesDiskA(2376, 72, self.game),
-            ])
-
-        # Add life_recs
-        self.life_recs.add([
-            LifeRecoveryA(2324, 68, self.game),
-            ])
-
-        # Add cartridges
-        self.cartridges.add([
-            CartridgeBlue(2800, 62, self.game),
-            CartridgeBlue(2800, 24, self.game),
-            CartridgeYellow(2840, 62, self.game),
-            CartridgeRed(2880, 62, self.game),
+            FilesDiskD(800, 403, self.game),
+            FilesDiskB(960, 403, self.game),
             ])
 
         # Add NPCs
-        self.npcs.add([
-            GhostGreen(910, 180, self.game, border_left=800, border_right=1300, change_x=2),
-            GhostYellow(960, 180, self.game, border_left=800, border_right=1700, change_x=3),
-            SkullYellow(2360, 47, self.game, border_left=2080, border_right=2500, change_x=3),
-            SkullRed(2410, 47, self.game, border_left=2170, border_right=2500, change_x=3),
-            ])
-
-        items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 65, 'random_max': 65}),
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=95),
+        pokoyos = [
+            PokoyoA(700, 160, self.game, border_top=130, border_down=370, change_y=3),
+            PokoyoB(770, 200, self.game, border_top=130, border_down=370, change_y=3),
+            PokoyoA(920, 270, self.game, border_top=130, border_down=370, change_y=3),
+            PokoyoB(990, 170, self.game, border_top=130, border_down=370, change_y=3),
+            PokoyoA(1060, 300, self.game, border_top=130, border_down=370, change_y=3),
             ]
-        self.npcs.add(DemonMale(
-            1200, 186, self.game,
-            border_left=1100, border_right=1280, change_x=2, items_to_drop=items_to_drop))
-
-        items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 60, 'random_max': 60}),
-            ]
-        self.npcs.add(DemonMale(
-            600, 146, self.game,
-            border_left=300, border_right=600, change_x=2, items_to_drop=items_to_drop))
-
-        items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 45, 'random_max': 45}),
-            ]
-        self.npcs.add(TethlorienRed(
-            2200, 32, self.game,
-            border_left=2080, border_right=2450, change_x=2, items_to_drop=items_to_drop))
-
-        items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 25, 'random_max': 30}),
-            ]
-        self.npcs.add(TethlorienLilac(
-            3390, 20, self.game,
-            border_left=3320, border_right=3440, change_x=1, items_to_drop=items_to_drop))
+        self.npcs.add(pokoyos)
 
         # Add doors
         self.doors.add([

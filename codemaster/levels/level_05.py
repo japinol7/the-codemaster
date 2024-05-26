@@ -47,7 +47,7 @@ class Level5(Level):
         self.next_level_right = self.id + 1
         self.next_level_top = False
         self.next_level_bottom = False
-        self.background = pg.image.load(self.file_name_im_get(5)).convert()
+        self.background = pg.image.load(self.file_name_im_get(12)).convert()
         self.level_limit = -2700
         self.level_limit_top = -1000
         self.player_start_pos_left = 220, 480

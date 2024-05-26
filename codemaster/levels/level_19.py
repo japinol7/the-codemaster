@@ -8,23 +8,18 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     DOOR_DEST_TR,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
-from codemaster.models.actors.items import platforms, DoorRightAqua
+from codemaster.models.actors.items import platforms
 from codemaster.models.actors.npcs import (
     SkullGreen,
     SkullYellow,
     SkullRed,
-    SamuraiMale,
     )
 from codemaster.models.actors.items import (
     BatteryA,
-    CartridgeBlue,
     ComputerA,
     DoorLeftBlue,
     DoorRightAqua,
     DoorRightMagenta,
-    PotionHealth,
-    PotionPower,
     )
 from codemaster.levels.level_base import Level
 
@@ -57,12 +52,10 @@ class Level19(Level):
 
     def _add_actors(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[12, 420, 210, platforms.PLAT_TYPE_01],
-                       [5, 3270, 240, platforms.PLAT_TYPE_01],
+        level_plats = [[5, 3270, 240, platforms.PLAT_TYPE_01],
                        [1, 3200, 360, platforms.PLAT_TYPE_01],
                        [8, 1960, 130, platforms.PLAT_TYPE_01],
-                       [2, 1500, 210, platforms.PLAT_TYPE_01],
-                       [2, 1680, 300, platforms.PLAT_TYPE_01],
+                       [2, 1780, 300, platforms.PLAT_TYPE_01],
                        [2, 1420, 575, platforms.PLAT_TYPE_01],
                        [21, 1640, 460, platforms.PLAT_TYPE_01],
                        [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
@@ -79,9 +72,7 @@ class Level19(Level):
         self.batteries.add([
             BatteryA(2160, 94, self.game),
             BatteryA(2200, 94, self.game),
-            BatteryA(760, 174, self.game),
-            BatteryA(800, 174, self.game),
-            BatteryA(840, 174, self.game),
+            BatteryA(2240, 94, self.game),
             ])
 
         # Add computers
@@ -97,22 +88,6 @@ class Level19(Level):
             SkullRed(2410, 67, self.game, border_left=2170, border_right=2500, change_x=3),
             SkullRed(2460, 67, self.game, border_left=2170, border_right=2500, change_x=3),
             ])
-
-        items_to_drop = [
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100,
-                     add_to_list=self.cartridges, x_delta=50),
-            ]
-        self.npcs.add(SamuraiMale(
-            620, 127, self.game,
-            border_left=550, border_right=1130, change_x=2, items_to_drop=items_to_drop))
-
-        items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100,
-                     add_to_list=self.potions, **{'random_min': 30, 'random_max': 40}),
-            ]
-        self.npcs.add(SamuraiMale(
-            1000, 127, self.game,
-            border_left=440, border_right=1100, change_x=2, items_to_drop=items_to_drop))
 
         # Add doors
         self.doors.add([

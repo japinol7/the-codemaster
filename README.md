@@ -108,7 +108,7 @@
 	      > That means that when you leave a level, all effects and NPCs  
 	        in that level get paused; to be reactivated as soon 
 	        as the player enters that level again.
-	      > This is a game feature, not a bug. 
+	      > This is not a bug, it's a feature. 
 	        Yeah, really. It is a design decision.
 	    > Number of levels implemented for this demo: 24.
 	> Doors: 
@@ -321,8 +321,10 @@
 
 	    > Additional keys for debug mode:
 			  ^ L_Alt + numpad_divide:  toggle logger to debug/info. Print info for hits, etc
-			  ^ n:              print a list of all NPCs in all levels, ordered by level
-			  ^ + shifth + n:   print a list of all NPCs in all levels, ordered by NPC name
+			  ^ n:             print a list of all NPCs in all levels, ordered by level
+			  ^ + Shift + n:   print a list of all NPCs in all levels, ordered by NPC name
+			  Alt + n:         print a list of all items in all levels, ordered by level
+			  Alt + Shift + n: print a list of all items in all levels, ordered by item name
 			  ^d:    print debug information to the console
 			  ^l:    write debug information to a log file
 
@@ -379,12 +381,12 @@
 
 	You can run the test suite executing only some tests. Examples:
 		$ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
-		$ python -m suiteoftests -n 'test_player_enters_door_to_next_level, test_bat_hit_with_enough_bullets_must_die'
+		$ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_player_enters_door_to_next_level'
 
     Notes: 
 		* Press ESC if you want to abort the current test.
 		* If you tell the test suite to run some specific tests, <br> 
-		  these tests will be run even if you have decorated these tests to skip them.
+		  these tests will be run even if you have decorated these tests to be skipped.
 
 
 **Examples of usage**
