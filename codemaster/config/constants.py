@@ -242,6 +242,7 @@ FILE_NAMES = {
     'snd_bullet_t4': ('bullet_t4', SOUND_FORMAT),
     'snd_weapon_empty': ('weapon_empty', SOUND_FORMAT),
     'snd_explosion': ('explosion', SOUND_FORMAT),
+    'magic_bolt': ('magic_bolt', SOUND_FORMAT),
     'snd_mine_hit': ('torpedo', SOUND_FORMAT),
     'snd_npc_killed': ('explosion', SOUND_FORMAT),
     'snd_door_unlock': ('door_unlock', SOUND_FORMAT),

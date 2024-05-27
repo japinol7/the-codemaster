@@ -47,7 +47,7 @@ class NeutrinosBolt(ActorMagic):
 
         super().__init__(x, y, game, name=name)
 
-        self.player.sound_effects and self.player.explosion_sound.play()
+        self.player.sound_effects and self.player.magic_bolt_sound.play()
         self.game.level.particle_sprites.add(self)
         self.particles = []
         self.color_mode = None

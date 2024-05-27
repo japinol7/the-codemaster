@@ -10,7 +10,7 @@
 	author_twitter: @japinol
 	main module: codemaster.py
 	description: A spin-off sci-fi mystery based on Pac's Revenge 
-      series games by @japinol  (c) 1988, 2015, 2021, 2024.
+      series games by @japinol  (c) 1987, 1988, 2015, 2021, 2024.
 	Python requires: 3.12 or greater.
 
 
@@ -23,7 +23,7 @@
 
 ## Videos
 
-[![Video](https://img.youtube.com/vi/Xfnl2X9hIU8/maxresdefault.jpg)](https://www.youtube.com/watch?v=Xfnl2X9hIU8)
+[![Video](https://img.youtube.com/vi/BUPmMyAXjcA/maxresdefault.jpg)](https://www.youtube.com/watch?v=BUPmMyAXjcA)
 
 
 ## History of the series. A spin-off? What do you mean?
@@ -65,8 +65,9 @@
               There, he discovers that the country's government has been transformed into a 
               dictatorship at the hands of a tyrant who calls himself Great Emperor Tetsuo.
               Tetsuo's motivation seems to be acquiring power and money to attract cute young women.
-              The fact that he receives him sitting on a throne that is actually a toilet makes 
-              Pac suspect that he has to deal with a madman.
+              The fact that G.E. Tetsuo receives him sitting on a throne 
+              that is actually a toilet makes Pac suspect that he has to deal 
+              with a madman.
               Someway, Pac must come back to de UFEP headquarters 
               with the batteries he has recovered, and prove what is happening 
               in the Negasus Imperial Planet.
@@ -105,7 +106,7 @@
 	    > In this demo, levels are completed by getting all the batteries 
           and files disks.
 	    > What happens in a level, stays in that level.
-	      > That means that when you leave a level, all effects and NPCs  
+	      > This means that when you leave a level, all effects and NPCs  
 	        in that level get paused; to be reactivated as soon 
 	        as the player enters that level again.
 	      > This is not a bug, it's a feature. 
@@ -118,17 +119,17 @@
 	    > Some objects and NPCs in the game represent their difficulty, utility, power, 
           or effectiveness by using colors.
           These are such colors ordered from lower to higher:
-			> Green:  Low level items or NPCs.
-			> Blue:  Medium level items or NPCs.
-			> Yellow:  Better than medium level items or NPCs.
-			> Red:  High level items or NPCs.
+            > Green:  Low level items or NPCs.
+            > Blue:  Medium level items or NPCs.
+            > Yellow:  Better than medium level items or NPCs.
+            > Red:  High level items or NPCs.
 	> Player movement: 
 	    > You just can move left, right or jump.
 	> Player level up: 
 	    > You can level up by gaining experience points.
 	    > When you level up you improve your skills:
             > Currently, you just get skills when you level up to level 2.
-              That is what you get:
+              This is what you get:
                 > Energy Shield A
                 > Vortex of Doom B spell, in slot 1.
                 > Vortex of Doom A spell, in slot 2.
@@ -264,11 +265,13 @@
     	    > Beware, they have weapons, can cast spells 
     	      and have some resistance to magic.
 	    > Dragons:
-    	    > Beware, they have magic weapons and some resistance to magic.
+    	    > Beware, they have magic weapons 
+    	      and some resistance to magic.
+    	    > Beware, the dragons land is very dangerous.
 	    > Ghosts:
     	    > Cannot be killed/hit with normal weapons.
-              Only Dark magic spells can damage them, i.e, 
-              Vortex of Doom and Doom Bolts.
+    	      Only Dark magic spells can damage them, i.e, 
+    	      Vortex of Doom and Doom Bolts.
 	    > Mages:
     	    > Beware, they have magic weapons and some resistance to magic.
 	    > Pokoyos.
@@ -353,7 +356,7 @@
 	                        Resolution depends on desktop size and scale graphics. 
 	                        Note that Pygame scaled is considered an experimental API 
 	                        and is subject to change.
-	                        In most systems, is better to have the scaling activated when 
+	                        In most systems, it is better to have the scaling activated when 
 	                        using the full screen display mode. 
 	  -d, 			--debug
 	                        debug actions, information and traces
@@ -386,7 +389,7 @@
     Notes: 
 		* Press ESC if you want to abort the current test.
 		* If you tell the test suite to run some specific tests, <br> 
-		  these tests will be run even if you have decorated these tests to be skipped.
+		  the test suite will run them even if you have decorated these tests to be skipped.
 
 
 **Examples of usage**

@@ -151,7 +151,7 @@ class MageFemaleAVanished(Mage):
         self.stats.power = self.stats.power_total = NPC_STRENGTH_BASE
         self.stats.power_recovery = 10
         self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 7
-        self.stats.health = self.stats.health_total = NPC_STRENGTH_BASE * 8
+        self.stats.health = self.stats.health_total = NPC_STRENGTH_BASE * 12
         self.msg_texts = [
             "You've vanished me!\nBut, I will return!\nYou.. Jerk!",
             ]

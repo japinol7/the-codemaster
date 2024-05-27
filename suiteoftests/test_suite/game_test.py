@@ -51,7 +51,7 @@ class GameTest:
                     ),
                 )
 
-        self.test_code_master.add_tests([test for test in tests])
+        self.test_code_master.add_tests(tests)
 
     @classmethod
     def get_test_names_to_run(cls):

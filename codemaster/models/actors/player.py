@@ -42,7 +42,7 @@ from codemaster.models.actors.spells import (
 
 PL_X_SPEED = 6
 PL_JUMP_SPEED = 11.5
-PL_LIVES_DEFAULT = 3
+PL_LIVES_DEFAULT = 5
 PL_POWER_DEFAULT = 100
 PL_HEALTH_DEFAULT = 100
 PL_MAGIC_RESISTANCE = 70
@@ -243,6 +243,7 @@ class Player(pg.sprite.Sprite):
         self.door_unlock_sound = pg.mixer.Sound(self.file_name_sound_get('snd_door_unlock'))
         self.npc_killed_sound = pg.mixer.Sound(self.file_name_sound_get('snd_npc_killed'))
         self.explosion_sound = pg.mixer.Sound(self.file_name_sound_get('snd_explosion'))
+        self.magic_bolt_sound = pg.mixer.Sound(self.file_name_sound_get('magic_bolt'))
 
     @property
     def lives(self):
