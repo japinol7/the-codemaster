@@ -60,7 +60,7 @@ class LevelTest5(Level):
         level_plats = [[6, 2620, 170, platforms.PLAT_TYPE_01],
                        [5, 3270, 240, platforms.PLAT_TYPE_01],
                        [2, 3060, 384, platforms.PLAT_TYPE_01],
-                       [2, 2000, 150, platforms.PLAT_TYPE_01],
+                       [2, 2000, 173, platforms.PLAT_TYPE_01],
                        [3, 2180, 300, platforms.PLAT_TYPE_01],
                        [7, 1330, 80, platforms.PLAT_TYPE_01],
                        [5, 810, 215, platforms.PLAT_TYPE_01],
@@ -84,8 +84,8 @@ class LevelTest5(Level):
 
         # Add apples
         self.apples.add([
-            AppleGreen(2030, 125, self.game),
-            AppleRed(2070, 125, self.game),
+            AppleGreen(2030, 148, self.game),
+            AppleRed(2070, 148, self.game),
             ])
 
         # Add files_disks

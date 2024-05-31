@@ -13,13 +13,6 @@ from codemaster.config.constants import (
     FONT_FIXED_DEFAULT_NAME
     )
 from codemaster.models.actors.selectors import SelectorA
-from codemaster.models.actors.spells import (
-    LightningBoltA,
-    DoomBoltA,
-    DoomBoltB,
-    VortexOfDoomA,
-    VortexOfDoomB,
-    )
 from codemaster.tools.logger.logger import log
 from codemaster.tools.utils import utils_graphics as libg_jp
 
@@ -37,17 +30,12 @@ from suiteoftests.config.constants import (
     IS_LOG_DEBUG_DEFAULT,
     LOG_START_TEST_APP_MSG,
     LOG_END_TEST_APP_MSG,
+    )
+from suiteoftests.test_suite.actor_actions import (
+    CAST_SPELL_ON_TARGET_CLASSES_MAP,
     PLAYER_ACTION_METHODS_MAP,
-)
+    )
 from codemaster.models.actors.text_msgs import TextMsg
-
-CAST_SPELL_ON_TARGET_CLASSES_MAP = {
-    'cast_lightning_bolt': LightningBoltA,
-    'cast_doom_bolt_a': DoomBoltA,
-    'cast_doom_bolt_b': DoomBoltB,
-    'cast_vortex_of_doom_a': VortexOfDoomA,
-    'cast_vortex_of_doom_b': VortexOfDoomB,
-    }
 
 
 class GameTestSuite:
@@ -129,7 +117,7 @@ class GameTestSuite:
         log.info(GROUP_DASHES_LINE)
         log.info(GROUP_DASHES_LINE)
 
-    def set_up(self, level_name_nums=None, starting_level_n=0):
+    def _set_up(self, level_name_nums=None, starting_level_n=0):
         log.info("Set Up")
         self.aborted = False
         self._init_settings()
@@ -144,7 +132,7 @@ class GameTestSuite:
         self.players.add(self.player)
         self.player_actions = Queue()
 
-        self.load_test_levels(level_name_nums=level_name_nums, starting_level_n=starting_level_n)
+        self._load_test_levels(level_name_nums=level_name_nums, starting_level_n=starting_level_n)
 
         log.info("Set clock")
         self.clock = pg.time.Clock()
@@ -163,7 +151,7 @@ class GameTestSuite:
 
         pg.display.set_caption(f"{APP_TECH_NAME}_test_suite")
 
-    def load_test_levels(self, level_name_nums=None, starting_level_n=0):
+    def _load_test_levels(self, level_name_nums=None, starting_level_n=0):
         log.info(f"Load test levels: {level_name_nums}")
         self.levels = levels.Level.factory_by_nums(
             levels_module=test_levels, game=self,
@@ -171,7 +159,7 @@ class GameTestSuite:
         self.levels_qty = len(self.levels)
         self.level = self.levels[starting_level_n]
 
-    def tear_down(self):
+    def _tear_down(self):
         log.info("Tear Down")
         levels.Level.clean_entity_ids()
 
@@ -203,7 +191,7 @@ class GameTestSuite:
         libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)
         self.is_settings_initialized_before = True
 
-    def init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
+    def _init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
         self.clock_timer = ClockTimerA(
                             self.player.rect.x, self.player.rect.y - 60,
                             self, time_in_secs)
@@ -306,7 +294,7 @@ class GameTestSuite:
         if not self.tests:
             return
 
-        self.tests_skipped = [test.test.__name__ for test in self.tests if test.skip]
+        self.tests_skipped = [test.test_func.__name__ for test in self.tests if test.skip]
         self.test_skipped_count = len(self.tests_skipped)
         self.tests_skipped_text = f". Tests skipped: {self.test_skipped_count}" if self.test_skipped_count else ''
         self.tests_total = sum(1 for test in self.tests if not test.skip)
@@ -317,21 +305,21 @@ class GameTestSuite:
         try:
             for test in tuple(self.tests):
                 test_method_with_setup_levels = self.tests.pop()
-                self.current_test = test_method_with_setup_levels.test
+                self.current_test = test_method_with_setup_levels.test_func
                 if test.skip:
                     continue
-                self.set_up(
+                self._set_up(
                     level_name_nums=test_method_with_setup_levels.level_name_nums,
                     starting_level_n=test_method_with_setup_levels.starting_level_n)
                 log.info(f"Start {self.current_test.__name__}")
                 TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {self.current_test.__name__}",
                                self, time_in_secs=5)
 
-                self.init_clock_timer(test.timeout)
-                test_method_with_setup_levels.test(
+                self._init_clock_timer(test.timeout)
+                test_method_with_setup_levels.test_func(
                     self=test_method_with_setup_levels.__class__,
                     game=self)
-                self.tear_down()
+                self._tear_down()
         except Exception as e:
             traceback.print_tb(e.__traceback__)
             log.critical(f'Error while testing: {e}')

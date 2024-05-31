@@ -1,7 +1,7 @@
 """Module game_test."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from suiteoftests.config.constants import CLOCK_TIMER_IN_SECS, TestMethodWithSetupLevels
+from suiteoftests.config.constants import CLOCK_TIMER_IN_SECS, TestFuncWithSetupLevels
 
 
 def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=False):
@@ -15,7 +15,7 @@ def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=Fal
     """
     def wrapper(func):
         GameTest.add_test(
-            TestMethodWithSetupLevels(
+            TestFuncWithSetupLevels(
                 func,
                 levels, starting_level, timeout, skip
                 ),
@@ -24,8 +24,9 @@ def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=Fal
 
 
 class GameTest:
-    """Represents a game related grouping of tests.
-    Its purpose is to group game tests related to each other.
+    """Represents a game related collection of tests.
+    Its purpose is to manage the addition of the game tests
+    to the test suite framework.
     """
 
     _test_names_to_run = {}
@@ -33,25 +34,14 @@ class GameTest:
 
     def __init__(self, test_code_master):
         self.test_code_master = test_code_master
-        self.add_tests_to_test_suite()
+        self._add_tests_to_test_suite()
 
-    def add_tests_to_test_suite(self):
-        """Adds tests to the test suite."""
-
-        tests = []
-        for test in self.__class__._tests:
-            skip = test.skip
-            if self.get_test_names_to_run():
-                skip = test.test.__name__ not in self.get_test_names_to_run()
-
-            tests.append(
-                TestMethodWithSetupLevels(
-                    test.test,
-                    test.level_name_nums, test.starting_level_n, test.timeout, skip
-                    ),
-                )
-
-        self.test_code_master.add_tests(tests)
+    @classmethod
+    def add_test(cls, test):
+        if test.test_func.__name__ in cls.get_test_names():
+            raise ValueError("This test function name has been used more than once: "
+                             f"{test.test_func.__name__}")
+        cls._tests.append(test)
 
     @classmethod
     def get_test_names_to_run(cls):
@@ -59,11 +49,7 @@ class GameTest:
 
     @classmethod
     def get_test_names(cls):
-        return (test.test.__name__ for test in cls._tests)
-
-    @classmethod
-    def add_test(cls, test):
-        cls._tests.append(test)
+        return (test.test_func.__name__ for test in cls._tests)
 
     @classmethod
     def set_tests_to_run(cls, test_names):
@@ -80,3 +66,21 @@ class GameTest:
                 raise ValueError(f"These tests do not exist: {missing_test_names}")
 
         cls._test_names_to_run = test_names
+
+    def _add_tests_to_test_suite(self):
+        """Adds tests to the test suite."""
+
+        tests = []
+        for test in self.__class__._tests:
+            skip = test.skip
+            if self.get_test_names_to_run():
+                skip = test.test_func.__name__ not in self.get_test_names_to_run()
+
+            tests.append(
+                TestFuncWithSetupLevels(
+                    test.test_func,
+                    test.level_name_nums, test.starting_level_n, test.timeout, skip
+                    ),
+                )
+
+        self.test_code_master.add_tests(tests)

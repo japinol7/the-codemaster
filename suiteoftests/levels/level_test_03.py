@@ -63,7 +63,7 @@ class LevelTest3(Level):
                        [5, 810, 270, platforms.PLAT_TYPE_01],
                        [8, 700, 410, platforms.PLAT_TYPE_01],
                        [12, 560, 550, platforms.PLAT_TYPE_01],
-                       [2, 2900, 590, platforms.PLAT_TYPE_01],
+                       [2, 2900, 616, platforms.PLAT_TYPE_01],
                        [10, 3090, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        [22, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        ]

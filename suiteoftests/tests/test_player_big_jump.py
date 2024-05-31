@@ -117,7 +117,7 @@ class TestPlayerBigJump:
             failed_msg="Player did not fetch 2 disks.")
 
     @game_test(levels=[5], timeout=3)
-    def test_big_jump_too_high_should_fail(self, game):
+    def test_big_jump_too_high_should_fail_with_apples(self, game):
         def player_die_hard_mock():
             game.player.lives -= 1
             game.player.stop()
@@ -140,3 +140,21 @@ class TestPlayerBigJump:
             condition=game.player.stats['apples'] == 0,
             failed_msg="Player should not be able to jump that high. "
                        "Fetching the 2 apples should fail.")
+
+    @game_test(levels=[1], timeout=3)
+    def test_big_jump_too_high_should_fail_with_disks(self, game):
+        game.player.rect.x, game.player.rect.y = 150, 400
+
+        game.add_player_actions((
+            ['go_right', 10],
+            ['jump', 5],
+            ['go_right', 80],
+            ['stop', 1],
+            ))
+
+        game.game_loop()
+
+        game.assert_test_passed(
+            condition=game.player.stats['files_disks'] == 0,
+            failed_msg="Player should not be able to jump that high. "
+                       "Fetching the 2 files disks should fail.")
