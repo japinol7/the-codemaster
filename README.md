@@ -1,6 +1,8 @@
 ## The CodeMaster. Nightmare on Bots' Island
 
-	The CodeMaster is a spin-off sci-fi mystery based on 1988 RPG platformer game Pac's Revenge.
+	The CodeMaster is a spin-off sci-fi mystery based on the 
+	1988 RPG platformer game Pac's Revenge.
+
 	program: The CodeMaster. Nightmare on Bots' Island.
     name as a package: codemaster 
 	version: 0.0.5
@@ -23,7 +25,7 @@
 
 ## Videos
 
-[![Video](https://img.youtube.com/vi/BUPmMyAXjcA/maxresdefault.jpg)](https://www.youtube.com/watch?v=BUPmMyAXjcA)
+[![Video](https://img.youtube.com/vi/JmMCWs-6Waw/maxresdefault.jpg)](https://www.youtube.com/watch?v=JmMCWs-6Waw)
 
 
 ## History of the series. A spin-off? What do you mean?

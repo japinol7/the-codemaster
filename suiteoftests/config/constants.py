@@ -8,7 +8,7 @@ from codemaster.config.constants import APP_TECH_NAME
 
 
 PLAYER_HEALTH_SUPER_HERO = 90_000
-CLOCK_TIMER_IN_SECS = 6
+CLOCK_TIMER_IN_SECS = 5
 
 IS_LOG_DEBUG_DEFAULT = False
 

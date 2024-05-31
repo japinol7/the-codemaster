@@ -28,6 +28,7 @@ from codemaster.config.constants import (
     FONT_DEFAULT_NAME,
     FONT_FIXED_DEFAULT_NAME,
     INIT_OPTIONS_FILE,
+    MIN_TICKS_ALLOWED_TO_PAUSE_GAME,
     NEAR_BOTTOM,
     )
 from codemaster.models.actors.player import Player, PL_SELF_DESTRUCTION_COUNT_DEF
@@ -70,6 +71,7 @@ class Game:
         self.levels = []
         self.levels_qty = 0
         self.is_paused = False
+        self.is_allowed_to_pause = False
         self.is_start_screen = True
         self.is_full_screen_switch = False
         self.is_help_screen = False
@@ -278,6 +280,10 @@ class Game:
                     self.is_exit_curr_game_confirm = True
                 elif event.type == pg.KEYDOWN:
                     if event.key == pg.K_p:
+                        if (not self.is_allowed_to_pause and
+                                self.current_time - self.start_time <= MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
+                            continue
+                        self.is_allowed_to_pause = True
                         self.is_paused = True
                     if event.key == pg.K_LEFT:
                         self.player.go_left()

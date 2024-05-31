@@ -78,7 +78,7 @@ class DragonBodyPiece(pg.sprite.Sprite):
         self.direction_old = self.direction
         self.rect.x = self.previous_body_piece.rect_old.x
         self.rect.y = self.previous_body_piece.rect_old.y
-        self.direction = self.previous_body_piece.direction
+        self.direction = self.previous_body_piece.direction_old
 
 
 class Dragon(NPC):
@@ -191,7 +191,7 @@ class Dragon(NPC):
         for i in range(self.body_length):
             self.body_pieces.append(
                 DragonBodyPiece(dragon=self, previous_body_piece=previous_body_piece,
-                                x=self.rect.x-((i+1)*self.cell_size), y=self.rect.y))
+                                x=self.rect.x-((i+1)*2), y=self.rect.y))
             previous_body_piece = self.body_pieces[i]
 
     def draw(self):
@@ -329,7 +329,7 @@ class DragonBlue(Dragon):
         self.file_mid_prefix = '03'
         self.color = 3
         self.type = ActorType.DRAGON_BLUE
-        self.body_len_start = self.body_length = 64
+        self.body_len_start = self.body_length = 78
         self.direction_stability = 40
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 10
@@ -343,7 +343,7 @@ class DragonBlue(Dragon):
 
         self.stats.time_between_spell_casting = 1000
         self.magic_resistance = 156
-        self.probability_to_cast_vortex_b = 7
+        self.probability_to_cast_vortex_b = 6
         self.probability_to_cast_fire_breath_a = 13
         self.max_multi_vortex_b = 1
         self.max_multi_fire_breath_a = 1
@@ -360,7 +360,7 @@ class DragonYellow(Dragon):
         self.file_mid_prefix = '02'
         self.color = 2
         self.type = ActorType.DRAGON_YELLOW
-        self.body_len_start = self.body_length = 82
+        self.body_len_start = self.body_length = 86
         self.direction_stability = 36
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 15

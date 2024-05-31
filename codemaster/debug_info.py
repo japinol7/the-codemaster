@@ -105,3 +105,9 @@ class DebugInfo:
         self.player.stats['bullets_t02'] = BULLET_MAX_QTY
         self.player.stats['bullets_t03'] = BULLET_MAX_QTY
         self.player.stats['bullets_t04'] = BULLET_MAX_QTY
+
+    def super_cheat_superhero_minor(self):
+        if self.player.health < 66:
+            self.player.health += 22
+        if self.player.power < 66:
+            self.player.power += 25

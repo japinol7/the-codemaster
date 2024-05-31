@@ -69,6 +69,8 @@ POS_SCREEN_RATIO = 30
 
 CELL_SIZE_MIN_FOR_IM_MD = 19       # Minimum cell size for image in medium resolution
 
+MIN_TICKS_ALLOWED_TO_PAUSE_GAME = 1060
+
 APP_TECH_NAME = 'codemaster'
 LOG_START_APP_MSG = f"Start app {APP_TECH_NAME} version: {version.get_version()}"
 LOG_END_APP_MSG = f"End app {APP_TECH_NAME}"

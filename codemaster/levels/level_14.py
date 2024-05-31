@@ -13,7 +13,6 @@ from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.npcs import (
     DragonGreen,
     DragonBlue,
-    DragonYellow,
     DragonRed,
     )
 from codemaster.models.actors.items import (
@@ -99,7 +98,7 @@ class Level14(Level):
             DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
                      x_delta=16, **{'random_min': 40, 'random_max': 60}),
             ]
-        self.dragons.add(DragonGreen(700, 640, self.game, border_left=640, border_right=2680,
+        self.dragons.add(DragonGreen(550, 640, self.game, border_left=500, border_right=2200,
                                      border_top=50, border_down=780, change_x=1, change_y=1,
                                      items_to_drop=items_to_drop))
         items_to_drop = [
@@ -108,16 +107,7 @@ class Level14(Level):
             DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=100, add_to_list=self.cartridges,
                      x_delta=70),
             ]
-        self.dragons.add(DragonYellow(520, 500, self.game, border_left=400, border_right=900,
-                                      border_top=50, border_down=780, change_x=1, change_y=1,
-                                      items_to_drop=items_to_drop))
-        items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=80, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 40, 'random_max': 60}),
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 70, 'random_max': 80}),
-            ]
-        self.dragons.add(DragonBlue(500, 700, self.game, border_left=400, border_right=1100,
+        self.dragons.add(DragonBlue(760, 500, self.game, border_left=600, border_right=2820,
                                     border_top=50, border_down=780, change_x=1, change_y=1,
                                     items_to_drop=items_to_drop))
         items_to_drop = [
@@ -126,7 +116,7 @@ class Level14(Level):
             DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=100, add_to_list=self.cartridges,
                      x_delta=70),
             ]
-        self.dragons.add(DragonRed(2000, 700, self.game, border_left=1160, border_right=2700,
+        self.dragons.add(DragonRed(2000, 700, self.game, border_left=1160, border_right=2950,
                                    border_top=50, border_down=780, change_x=1, change_y=1,
                                    items_to_drop=items_to_drop))
 

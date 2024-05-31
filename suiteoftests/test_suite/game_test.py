@@ -1,6 +1,8 @@
 """Module game_test."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+from collections.abc import Iterable
+
 from suiteoftests.config.constants import CLOCK_TIMER_IN_SECS, TestFuncWithSetupLevels
 
 
@@ -13,6 +15,15 @@ def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=Fal
     @param timeout: Timeout in seconds for the duration of the test.
     @param skip: Skip test.
     """
+    if not isinstance(levels, Iterable) or not levels:
+        raise TypeError("Argument must be an iterable of at least one int: levels.")
+    if not isinstance(starting_level, int):
+        raise TypeError("Argument must be an int: starting_level.")
+    if not isinstance(skip, bool):
+        raise TypeError("Argument must be a bool: skip.")
+    if not isinstance(timeout, (int, float)) or timeout < 1.5:
+        raise TypeError("Argument must be an int or float of at least 1.5 seconds: timeout.")
+
     def wrapper(func):
         GameTest.add_test(
             TestFuncWithSetupLevels(
