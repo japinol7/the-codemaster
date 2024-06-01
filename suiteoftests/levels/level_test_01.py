@@ -11,8 +11,6 @@ from codemaster.config.constants import (
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.items import (
-    AppleYellow,
-    AppleRed,
     ComputerA,
     DoorLeftGreen,
     DoorRightYellow,
@@ -103,12 +101,6 @@ class LevelTest1(Level):
         self.files_disks.add([
             FilesDiskB(480, 222, self.game),
             FilesDiskC(530, 222, self.game),
-            ])
-
-        # Add apples
-        self.apples.add([
-            AppleYellow(1042, 712, self.game),
-            AppleRed(1140, 712, self.game),
             ])
 
         # Add doors

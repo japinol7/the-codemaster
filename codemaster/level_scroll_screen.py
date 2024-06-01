@@ -9,7 +9,8 @@ from codemaster.config.constants import (
     NEAR_TOP,
     NEAR_BOTTOM,
     NEAR_LEFT_SIDE,
-    DOOR_DEST_NL, DOOR_DEST_TL, DOOR_DEST_TR, DOOR_POSITION_L, DOOR_POSITION_R,
+    DOOR_DEST_NL, DOOR_DEST_TL, DOOR_DEST_TR,
+    DOOR_POSITION_L, DOOR_POSITION_R,
     )
 
 

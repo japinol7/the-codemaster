@@ -126,12 +126,6 @@ class LevelTest2(Level):
             ComputerA(2960, 336, self.game),
             ])
 
-        # Add apples
-        self.apples.add([
-            AppleYellow(1042, 712, self.game),
-            AppleRed(1140, 712, self.game),
-            ])
-
         # Add NPCs
         self.npcs.add([
             SkullYellow(2360, 47, self.game, border_left=2180, border_right=2500, change_x=3),

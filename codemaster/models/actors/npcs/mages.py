@@ -15,7 +15,7 @@ from codemaster.config.constants import (
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import NPC, NPC_STRENGTH_BASE
 from codemaster.models.actors.spells import DrainLifeA, DrainLifeB, VortexOfDoomB
-from codemaster.models.actors.items.energy_shields import EnergyShieldA
+from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.models.stats import Stats
 
@@ -71,16 +71,15 @@ class MageFemaleA(Mage):
                          items_to_drop=items_to_drop)
 
         self.magic_resistance = 150
-        self.stats.energy_shields_stock = [EnergyShieldA(self.rect.x, self.rect.y, self.game)]
-        self.stats.energy_shield = self.stats.energy_shields_stock[0]
-        self.stats.energy_shield.owner = self
         self.hostility_level = 0
         self.stats.time_between_spell_casting = 1000
+        self.stats.time_between_energy_shield_casting = 1000
         self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.6
         self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
 
+        EnergyShield.actor_acquire_energy_shield(self, self.game)
+
     def kill_hook(self):
-        self.stats.energy_shield.kill()
         for msg in self.msgs:
             msg.kill()
 
@@ -103,15 +102,12 @@ class MageFemaleA(Mage):
 
         if not self.msg_texts:
             self.hostility_level = 1
+            self.stats.energy_shield.activate()
             self.msg_texts.append(self.msg_text_to_repeat)
 
         super().update_after_inc_index_hook()
 
     def update_cast_spell_cast_actions(self):
-        if not self.stats.energy_shield.is_activated:
-            self.recover_power()
-            self.stats.energy_shield.activate()
-
         probability_to_cast_vortex_b = 8
         probability_to_cast_spell_a = 13
         dice_shot = randint(1, 100)

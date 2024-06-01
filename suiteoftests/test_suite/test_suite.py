@@ -117,6 +117,15 @@ class GameTestSuite:
         log.info(GROUP_DASHES_LINE)
         log.info(GROUP_DASHES_LINE)
 
+    def _mock_player_die_hard(self):
+        def player_die_hard_mock():
+            if self.player.lives < 1:
+                return
+            self.player.lives -= 1
+            TextMsg.create("Player DIED! RIP", self, time_in_secs=5)
+
+        self.player.die_hard = player_die_hard_mock
+
     def _set_up(self, level_name_nums=None, starting_level_n=0):
         log.info("Set Up")
         self.aborted = False
@@ -150,6 +159,8 @@ class GameTestSuite:
             )
 
         pg.display.set_caption(f"{APP_TECH_NAME}_test_suite")
+
+        self._mock_player_die_hard()
 
     def _load_test_levels(self, level_name_nums=None, starting_level_n=0):
         log.info(f"Load test levels: {level_name_nums}")

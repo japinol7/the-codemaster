@@ -15,6 +15,7 @@ from codemaster.config.constants import (
     FILE_NAMES,
     DIRECTION_LEFT,
     DIRECTION_RIGHT,
+    ACTOR_TIME_BETWEEN_ENERGY_SHIELD_CASTING_DEFAULT,
     )
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryType, ActorType
@@ -58,7 +59,9 @@ class Actor(pg.sprite.Sprite):
         self.last_shot_time = 0
         self.time_between_shots_base = 1200
         self.last_spell_casted_time = 0
+        self.energy_shield_casted_time = 0
         self.time_between_spell_casting_base = 7200
+        self.time_between_energy_shield_casting_base = ACTOR_TIME_BETWEEN_ENERGY_SHIELD_CASTING_DEFAULT
         self.target_of_spells_count = Counter()
 
         if not getattr(self, 'base_type', None):
@@ -147,6 +150,14 @@ class Actor(pg.sprite.Sprite):
 
         if not getattr(self, 'spell_cast_y_delta_max', None):
             self.spell_cast_y_delta_max = 500
+
+        if self.stats is not None:
+            if not getattr(self.stats, 'power_recovery', None):
+                self.stats.power_recovery = 0
+            if not getattr(self.stats, 'energy_shield', None):
+                self.stats.energy_shield = None
+            if not getattr(self.stats, 'time_between_energy_shield_casting', None):
+                self.stats.time_between_energy_shield_casting = 0
 
         self.can_be_shot_by_its_owner = True
         self.name = name or 'unnamed'
@@ -260,6 +271,8 @@ class Actor(pg.sprite.Sprite):
             if is_between_x_boundaries and is_between_y_boundaries:
                 self.update_cast_spell()
 
+        self.update_energy_shield()
+
         if self.power is None or self.power < 0:
             self.power = 0
 
@@ -292,6 +305,8 @@ class Actor(pg.sprite.Sprite):
             bullet.kill()
             if bullet.owner == self.player and self.hostility_level < 1:
                 self.hostility_level = 1
+                if self.stats.energy_shield and not self.stats.energy_shield.is_activated:
+                    self.stats.energy_shield.activate()
 
         has_been_hit and self.player.sound_effects and self.player.enemy_hit_sound.play()
         if self.stats.health <= 0:
@@ -304,6 +319,8 @@ class Actor(pg.sprite.Sprite):
             self.kill_hook()
 
     def kill_hook(self):
+        if self.stats.energy_shield:
+            self.stats.energy_shield.kill()
         self.kill()
 
     def update_shot_bullet(self):
@@ -317,6 +334,16 @@ class Actor(pg.sprite.Sprite):
             self.shot_bullet(BulletType.T1_LASER1)
         else:
             self.shot_bullet(BulletType.T2_LASER2)
+
+    def update_energy_shield(self):
+        time_delta = self.game.current_time - self.energy_shield_casted_time
+        if time_delta > self.stats.time_between_energy_shield_casting:
+            self.energy_shield_casted_time = self.game.current_time
+            self.update_energy_shield_hook(self)
+
+    def update_energy_shield_hook(self, actor):
+        """Should be redefined on the EnergyShield class"""
+        pass
 
     def update_cast_spell(self):
         time_delta = self.game.current_time - self.last_spell_casted_time
@@ -453,7 +480,7 @@ class ActorMagic(Actor):
     def kill_hook(self):
         self.target.target_of_spells_count[self.__class__.__name__] -= 1
         self.game.level.spells_on_level_count[self.__class__.__base__.__name__] -= 1
-        self.kill()
+        super().kill_hook()
 
     def draw_health(self):
         pass

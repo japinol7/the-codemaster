@@ -9,6 +9,7 @@ from codemaster.config.constants import (
     )
 from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.items import platforms
+from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.models.actors.npcs import (
     DemonMale,
     GhostGreen,
@@ -174,9 +175,12 @@ class Level18(Level):
             DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
                      **{'random_min': 25, 'random_max': 30}),
             ]
-        self.npcs.add(TethlorienLilac(
+        tethlorien_lilac = TethlorienLilac(
             3390, 20, self.game,
-            border_left=3320, border_right=3440, change_x=1, items_to_drop=items_to_drop))
+            border_left=3320, border_right=3440, change_x=1, items_to_drop=items_to_drop)
+        self.npcs.add(tethlorien_lilac)
+        EnergyShield.actor_acquire_energy_shield(tethlorien_lilac, self.game, health_total=200)
+        tethlorien_lilac.stats.energy_shield.activate()
 
         # Add doors
         self.doors.add([

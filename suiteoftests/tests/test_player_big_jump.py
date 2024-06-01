@@ -46,12 +46,6 @@ class TestPlayerBigJump:
 
     @game_test(levels=[3], timeout=4)
     def test_big_jump_and_fetch_1_life_n_6_potions_power(self, game):
-        def player_die_hard_mock():
-            game.player.lives -= 1
-            game.player.stop()
-            game.player_actions = []
-        game.player.die_hard = player_die_hard_mock
-
         game.player.rect.x, game.player.rect.y = 3000, 500
         game.player.health = PLAYER_HEALTH_SUPER_HERO
         game.player.lives = 3
@@ -92,12 +86,6 @@ class TestPlayerBigJump:
 
     @game_test(levels=[5], timeout=4)
     def test_big_jump_and_fetch_2_disks(self, game):
-        def player_die_hard_mock():
-            game.player.lives -= 1
-            game.player.stop()
-            game.player_actions = []
-        game.player.die_hard = player_die_hard_mock
-
         game.player.rect.x, game.player.rect.y = 1020, 600
         game.player.health = PLAYER_HEALTH_SUPER_HERO
 
@@ -118,12 +106,6 @@ class TestPlayerBigJump:
 
     @game_test(levels=[5], timeout=3)
     def test_big_jump_too_high_should_fail_with_apples(self, game):
-        def player_die_hard_mock():
-            game.player.lives -= 1
-            game.player.stop()
-            game.player_actions = []
-        game.player.die_hard = player_die_hard_mock
-
         game.player.rect.x, game.player.rect.y = 1850, 400
         game.player.health = PLAYER_HEALTH_SUPER_HERO
 

@@ -25,11 +25,22 @@ PLAYER_ACTION_METHODS_MAP = {
         'cast_spell_on_target', kwargs={'spell': 'cast_vortex_of_doom_a'}),
     'cast_vortex_of_doom_b': PlayerActionMethodArgs(
         'cast_spell_on_target', kwargs={'spell': 'cast_vortex_of_doom_b'}),
+    'acquire_energy_shield': PlayerActionMethodArgs('acquire_energy_shield', kwargs={}),
+    'switch_energy_shield': PlayerActionMethodArgs('switch_energy_shield', kwargs={}),
+    'drink_potion_health': PlayerActionMethodArgs('drink_potion_health', kwargs={}),
+    'drink_potion_power': PlayerActionMethodArgs('drink_potion_power', kwargs={}),
+    'eat_apple': PlayerActionMethodArgs('eat_apple', kwargs={}),
     'go_right': PlayerActionMethodArgs('go_right', kwargs={}),
     'go_left': PlayerActionMethodArgs('go_left', kwargs={}),
     'jump': PlayerActionMethodArgs('jump', kwargs={}),
+    'shot_bullet_t1_laser1': PlayerActionMethodArgs(
+        'shot_bullet', kwargs={'bullet_type': BulletType.T1_LASER1}),
+    'shot_bullet_t2_laser2': PlayerActionMethodArgs(
+        'shot_bullet', kwargs={'bullet_type': BulletType.T2_LASER2}),
     'shot_bullet_t3_photonic': PlayerActionMethodArgs(
         'shot_bullet', kwargs={'bullet_type': BulletType.T3_PHOTONIC}),
+    'shot_bullet_t4_neutronic': PlayerActionMethodArgs(
+        'shot_bullet', kwargs={'bullet_type': BulletType.T4_NEUTRONIC}),
     'stop': PlayerActionMethodArgs('stop', kwargs={}),
     }
 

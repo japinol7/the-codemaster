@@ -277,6 +277,16 @@ class Player(pg.sprite.Sprite):
     def power(self, value):
         self.stats['power'] = value
 
+    def acquire_energy_shield(self):
+        if self.stats['energy_shields_stock']:
+            return
+
+        self.game.is_log_debug and log.debug("Create energy shield")
+        energy_shield = EnergyShieldA(self.rect.x, self.rect.y, self.game)
+        energy_shield.owner = self
+        self.stats['energy_shields_stock'].append(energy_shield)
+        log.info(f"You have acquired an {energy_shield.type.name}.")
+
     def update(self):
         # when RIP
         if self.direction == DIRECTION_RIP:
@@ -301,7 +311,6 @@ class Player(pg.sprite.Sprite):
 
         # Move left/right
         self.rect.x += self.change_x
-        pos = self.rect.x + self.level.world_shift
         if self.direction == DIRECTION_RIGHT:
             if self.change_x:
                 self.frame = int((pg.time.get_ticks() // 100 - self.start_time) *
@@ -621,11 +630,7 @@ class Player(pg.sprite.Sprite):
         self.stats['level'] += 1
         if self.stats['level'] > 1:
             if not self.stats['energy_shields_stock']:
-                self.game.is_log_debug and log.debug("Create energy shield")
-                energy_shield = EnergyShieldA(self.rect.x, self.rect.y, self.game)
-                energy_shield.owner = self
-                self.stats['energy_shields_stock'].append(energy_shield)
-                log.info(f"You have acquired an {energy_shield.type.name}.")
+                self.acquire_energy_shield()
 
                 self.stats['magic_attack_spells'].update({'1': VortexOfDoomB})
                 self.stats['magic_attack'] = VortexOfDoomB

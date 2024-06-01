@@ -3,7 +3,6 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 from codemaster.models.actors.items import MineLilac
 from codemaster.models.actors.npcs import SkullYellow
-from codemaster.models.actors.text_msgs import TextMsg
 from suiteoftests.test_suite.game_test import game_test
 
 
@@ -12,13 +11,6 @@ class TestMinesAndExplosions:
 
     @game_test(levels=[3], timeout=3)
     def test_mine_explosion_should_kill_player_and_npc(self, game):
-        def player_die_hard_mock():
-            if game.player.lives < 1:
-                return
-            game.player.lives -= 1
-            TextMsg.create("Player DIED! RIP", game, time_in_secs=5)
-        game.player.die_hard = player_die_hard_mock
-
         game.player.rect.x, game.player.rect.y = 380, 650
         game.player.health = 22
         game.player.lives = 1

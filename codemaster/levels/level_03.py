@@ -192,11 +192,11 @@ class Level3(Level):
 
         for _ in range(2):
             self.npcs.add(SkullYellow(
-                320 + randint(7, 200), 145, self.game,
+                320 + randint(7, 200), 155, self.game,
                 border_left=300, border_right=650, change_x=randint(3, 6)))
 
         self.npcs.add(SkullBlue(
-            320 + randint(15, 200), 145, self.game,
+            320 + randint(15, 200), 155, self.game,
             border_left=310, border_right=600, change_x=randint(3, 7)))
 
         self.npcs.add([

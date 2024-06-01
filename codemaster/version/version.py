@@ -2,5 +2,5 @@ VERSION = "0.0.5"
 
 
 def get_version():
-    """Gets program version."""
+    """Gets the program version."""
     return VERSION

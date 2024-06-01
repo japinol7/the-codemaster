@@ -9,6 +9,10 @@ from codemaster.config.constants import (
     BM_ENERGY_SHIELD_FOLDER,
     DIRECTION_LEFT,
     DIRECTION_RIGHT,
+    ACTOR_MIN_TIME_BETWEEN_ENERGY_SHIELD_CASTING,
+    ACTOR_POWER_RECOVERY_DEFAULT,
+    ACTOR_MIN_POWER_RECOVERY,
+    ACTOR_TIME_BETWEEN_ENERGY_SHIELD_CASTING_DEFAULT,
     )
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import Actor, ActorItem
@@ -133,6 +137,37 @@ class EnergyShield(ActorItem):
         self.is_activated = False
         self.owner.is_energy_shield_activated = False
         self.game.active_sprites.remove(self)
+
+    @staticmethod
+    def actor_update_energy_shield(actor):
+        if (actor.hostility_level > 0 and actor.stats.energy_shield and
+                not actor.stats.energy_shield.is_activated):
+            actor.recover_power()
+            actor.stats.energy_shield.activate()
+
+    @staticmethod
+    def actor_acquire_energy_shield(actor, game, delta_x=0, delta_y=0, health_total=0):
+        """This method should not be used by player actors, only by NPCs or items."""
+        if actor.is_a_player or actor is game.player:
+            return
+
+        actor.stats.energy_shields_stock = [
+            EnergyShieldA(actor.rect.x + delta_x, actor.rect.y + delta_y, game)
+            ]
+        actor.stats.energy_shield = actor.stats.energy_shields_stock[0]
+        actor.stats.energy_shield.owner = actor
+
+        if health_total > 0:
+            actor.stats.energy_shield.health_total = health_total
+            actor.stats.energy_shield.health = health_total
+
+        if actor.stats.power_recovery < ACTOR_MIN_POWER_RECOVERY:
+            actor.stats.power_recovery = ACTOR_POWER_RECOVERY_DEFAULT
+
+        if actor.stats.time_between_energy_shield_casting < ACTOR_MIN_TIME_BETWEEN_ENERGY_SHIELD_CASTING:
+            actor.stats.time_between_energy_shield_casting = ACTOR_TIME_BETWEEN_ENERGY_SHIELD_CASTING_DEFAULT
+
+        actor.update_energy_shield_hook = EnergyShield.actor_update_energy_shield
 
 
 class EnergyShieldA(EnergyShield):
