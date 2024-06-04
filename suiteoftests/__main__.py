@@ -11,7 +11,7 @@ from suiteoftests.test_suite.test_suite import GameTestSuite
 from suiteoftests.test_suite.game_test import GameTest
 
 # Import the test classes to run
-from suiteoftests.tests import *
+from . import tests
 
 logger.add_stdout_handler(LOGGER_FORMAT)
 log.setLevel(logging.DEBUG)

@@ -108,7 +108,7 @@ class LevelTest5(Level):
                      **{'random_min': 25, 'random_max': 45}),
             ]
         self.npcs.add(TethlorienYellow(
-            1750, 8, self.game,
+            1750, 2, self.game,
             border_left=1320, border_right=1780, change_x=2, items_to_drop=items_to_drop))
 
         # Add doors

@@ -12,17 +12,10 @@ def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=Fal
     @param levels: List of level names to load. Each level must be an integer.
     The First level is 1, because it is based on the name of the level.
     @param starting_level: Starting level. It must be an integer. The First level is 0.
-    @param timeout: Timeout in seconds for the duration of the test.
-    @param skip: Skip test.
+    @param timeout: Timeout in seconds for the duration of the game loop.
+    @param skip: Skip this test if true.
     """
-    if not isinstance(levels, Iterable) or not levels:
-        raise TypeError("Argument must be an iterable of at least one int: levels.")
-    if not isinstance(starting_level, int):
-        raise TypeError("Argument must be an int: starting_level.")
-    if not isinstance(skip, bool):
-        raise TypeError("Argument must be a bool: skip.")
-    if not isinstance(timeout, (int, float)) or timeout < 1.5:
-        raise TypeError("Argument must be an int or float of at least 1.5 seconds: timeout.")
+    _validate_game_test_arguments(levels, starting_level, timeout, skip)
 
     def wrapper(func):
         GameTest.add_test(
@@ -32,6 +25,17 @@ def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=Fal
                 ),
             )
     return wrapper
+
+
+def _validate_game_test_arguments(levels, starting_level, timeout, skip):
+    if not isinstance(levels, Iterable) or not levels:
+        raise TypeError("Argument must be an iterable of at least one int: levels.")
+    if not isinstance(starting_level, int):
+        raise TypeError("Argument must be an int: starting_level.")
+    if not isinstance(skip, bool):
+        raise TypeError("Argument must be a bool: skip.")
+    if not isinstance(timeout, (int, float)) or timeout < 1.5:
+        raise TypeError("Argument must be an int or float of at least 1.5 seconds: timeout.")
 
 
 class GameTest:

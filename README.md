@@ -25,7 +25,7 @@
 
 ## Videos
 
-[![Video](https://img.youtube.com/vi/JmMCWs-6Waw/maxresdefault.jpg)](https://www.youtube.com/watch?v=JmMCWs-6Waw)
+[![Video](https://img.youtube.com/vi/TCofF737lR0/maxresdefault.jpg)](https://www.youtube.com/watch?v=TCofF737lR0)
 
 
 ## History of the series. A spin-off? What do you mean?
@@ -385,8 +385,10 @@
 		$ python -m suiteoftests
 
 	You can run the test suite executing only some tests. Examples:
-		$ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
-		$ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_player_enters_door_to_next_level'
+        * Execute only one test:
+		    $ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
+        * Execute only two tests (example using bash):
+		    $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_player_enters_door_to_next_level'
 
     Notes: 
 		* Press ESC if you want to abort the current test.

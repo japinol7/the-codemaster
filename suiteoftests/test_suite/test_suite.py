@@ -176,7 +176,7 @@ class GameTestSuite:
 
     def _clock_die_hard(self):
         self.clock_timer.die_hard()
-        log.info("Exit test game triggered by the timer clock")
+        log.info("Exit game loop triggered by the timer clock. Test: %s", self.current_test.__name__)
         self.done = True
 
     def _init_settings(self):
@@ -280,7 +280,7 @@ class GameTestSuite:
             self.current_time = pg.time.get_ticks()
             for event in pg.event.get():
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                    log.warning("Warning! Abort test by user request")
+                    log.warning("Abort test by user request: %s", self.current_test.__name__)
                     self.done = True
                     self.aborted = True
                     self.test_aborted_count += 1
