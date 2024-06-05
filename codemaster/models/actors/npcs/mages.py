@@ -32,6 +32,7 @@ class Mage(NPC):
         self.file_name_key = 'im_en_mages'
         self.images_sprite_no = 1
         self.can_cast_spells = True
+
         super().__init__(x, y, game, name=name,
                          change_x=change_x, change_y=change_y,
                          border_left=border_left, border_right=border_right,

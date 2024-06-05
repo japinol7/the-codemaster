@@ -29,6 +29,7 @@ class Tethlorien(NPC):
         self.can_shot = True
         self.can_cast_spells = True
         self.bullet_start_position_delta_x = 14
+
         super().__init__(x, y, game, name=name,
                          change_x=change_x, change_y=change_y,
                          border_left=border_left, border_right=border_right,

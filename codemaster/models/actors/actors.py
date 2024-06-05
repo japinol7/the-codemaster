@@ -151,6 +151,9 @@ class Actor(pg.sprite.Sprite):
         if not getattr(self, 'spell_cast_y_delta_max', None):
             self.spell_cast_y_delta_max = 500
 
+        if not getattr(self, 'health_bar_delta_y', None):
+            self.health_bar_delta_y = 0
+
         if self.stats is not None:
             if not getattr(self.stats, 'power_recovery', None):
                 self.stats.power_recovery = 0
@@ -360,7 +363,7 @@ class Actor(pg.sprite.Sprite):
                 self.game.screen,
                 amount_pct=self.stats.health / self.stats.health_total,
                 x=self.rect.x + (self.rect.width // 2) - Settings.sprite_health_bar_pos_rel.x,
-                y=self.rect.y - Settings.sprite_health_bar_pos_rel.y,
+                y=self.rect.y - Settings.sprite_health_bar_pos_rel.y - self.health_bar_delta_y,
                 bar_width=Settings.sprite_health_bar_size.w,
                 bar_height=Settings.sprite_health_bar_size.h,
                 bar_outline=False, bar_up_line=True)

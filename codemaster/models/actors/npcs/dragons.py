@@ -99,6 +99,7 @@ class Dragon(NPC):
         self.direction_complete = None
         self.is_a_dragon = True
         self.can_cast_spells = True
+        self.health_bar_delta_y = 50
 
         super().__init__(x, y, game, name, change_x=change_x, change_y=change_y,
                          border_left=border_left, border_right=border_right,

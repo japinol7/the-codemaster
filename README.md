@@ -163,24 +163,24 @@
             > When the player falls into a hole reaching the lower screen boundary.
             > When the player is stuck in some trap and press the <b> key for a time.
 	> Information in the score line:
-		> First line:
-			> ====:  Health bar.
-			> Heart:  Remaining lives.
-			> Batteries: # of Batteries you have recovered.
-			> XP: 	  Experience points. They also represent your score.
-			> #: Current level.
-			> Files Disks D, C, B, A: # files disks of each type that you have recovered.
-			> L: Player level  (level up by collecting XP).
-		> Second line:
-			> ====:  Power bar.
-			> Remaining bullets for each of the four weapons.
-			> Under #: A check symbol appears if you have beaten the current level.
-			> Apples: Stock of apples in your inventory.
-			> Health potions: Stock of health potions in your inventory.
-			> Power potions: Stock of power potions in your inventory.
-			> Door keys: Stock of door keys in your inventory.
-			> A green hat indicates that the magic mode is on.
-              		  You can select a target when you level up to level 2.
+	    > First line:
+            > ====:  Health bar.
+            > Heart:  Remaining lives.
+            > Batteries: # of Batteries you have recovered.
+            > XP: 	  Experience points. They also represent your score.
+            > #: Current level.
+            > Files Disks D, C, B, A: # files disks of each type that you have recovered.
+            > L: Player level  (level up by collecting XP).
+	    > Second line:
+            > ====:  Power bar.
+            > Remaining bullets for each of the four weapons.
+            > Under #: A check symbol appears if you have beaten the current level.
+            > Apples: Stock of apples in your inventory.
+            > Health potions: Stock of health potions in your inventory.
+            > Power potions: Stock of power potions in your inventory.
+            > Door keys: Stock of door keys in your inventory.
+            > A green hat indicates that the magic mode is on.
+              You can select a target when you level up to level 2.
 	> Batteries: 
 	    > They represent radioactive waste due to cheap nuclear industrialization an weaponry.
           Radioactive batteries are the main thing that connects this game to the original Pac's Revenge game.
@@ -194,14 +194,14 @@
           when you level up to level 2.
 	    > You can activate a magic selector to use magic on an NPC.
 	    > Magic spells:
-    	    1. Vortex of Doom B: A Vortex of Doom that targets the selected NPC.
-    	    2. Vortex of Doom A: A more powerful Vortex of Doom spell.
-    	    3. Lightning Bolt A: A lightning bolt that targets the selected NPC.
-    	    4. Doom Bolt B: A doom bolt that targets the selected NPC.
-    	    5. Doom Bolt A: A more powerful Doom Bolt spell.
+	        1. Vortex of Doom B: A Vortex of Doom that targets the selected NPC.
+	        2. Vortex of Doom A: A more powerful Vortex of Doom spell.
+	        3. Lightning Bolt A: A lightning bolt that targets the selected NPC.
+	        4. Doom Bolt B: A doom bolt that targets the selected NPC.
+	        5. Doom Bolt A: A more powerful Doom Bolt spell.
 	    > There are limits of spells casted than depend on the type of spell:
-    	    > You can have only N active spells of one kind on a target.
-    	    > You can have only N active spells of one base kind on a level.
+	        > You can have only N active spells of one kind on a target.
+	        > You can have only N active spells of one base kind on a level.
 	> Apples: 
 	    > Eat them to recover a bit of health.
           There are three types of apples:
@@ -230,13 +230,14 @@
 	> Energy shields:
         > Right now there is only one kind of them.
             > A neutronic energy shield of type A:
-                > To be able to use it, you need a skill that will be activated
-                  when you level up to level 2.
-                > It blocks all the bullets headed in its direction.
-                > Snakes change their direction when they hit one.
-                > It consumes a little bit of your power while it is on.
-                > When destroyed, it costs you some power. Then, it is created again.
-                > Its color changes from light blue to yellow and dark pink depending on its health stat.
+            > To be able to use it, you need a skill that will be activated
+              when you level up to level 2.
+            > It blocks all the bullets headed in its direction.
+            > Snakes change their direction when they hit one.
+            > It consumes a little bit of your power while it is on.
+            > When destroyed, it costs you some power. Then, it is created again.
+            > Its color changes from light blue to yellow and dark pink 
+              depending on its health stat.
 	> Files disks: 
 	    > There are four types of files disks:
 	        > Type D: They contain low interesting data.
@@ -257,36 +258,42 @@
           In the future, they will trigger some cool stuff.
 	> NPCs:
 	    > Bats:
-    	    > They bite your head/neck whenever you are too close to them.
-    	    > There are four types of bats:
+	        > They bite your head/neck whenever you are too close to them.
+	        > There are four types of bats:
 	            > Blue bats: They deal basic damage.
 	            > Lilac bats: They deal medium damage
 	            > Red bats: They deal a good deal of damage.
     	        > Black bats: They deal great damage.
 	    > Demons:
-    	    > Beware, they have weapons, can cast spells 
-    	      and have some resistance to magic.
+	        > Beware, they have weapons, can cast spells 
+	          and have some resistance to magic.
 	    > Dragons:
-    	    > Beware, they have magic weapons 
-    	      and some resistance to magic.
-    	    > Beware, the dragons land is very dangerous.
+	        > Beware, they have magic weapons 
+	          and some resistance to magic.
+	        > Beware, the dragons land is very dangerous.
 	    > Ghosts:
-    	    > Cannot be killed/hit with normal weapons.
-    	      Only Dark magic spells can damage them, i.e, 
-    	      Vortex of Doom and Doom Bolts.
+	        > Cannot be killed/hit with normal weapons.
+	          Only Dark magic spells can damage them, i.e, 
+	          Vortex of Doom and Doom Bolts.
 	    > Mages:
-    	    > Beware, they have magic weapons and some resistance to magic.
+	        > Beware, they have magic weapons and some resistance to magic.
 	    > Pokoyos.
+	    > Pumpkin zombies:
+	        > Beware, they have magic weapons 
+	          and have some small resistance to magic.
+	    > Pumpkin heads (zombies):
+	        > Beware, they have magic weapons 
+	          and have some small resistance to magic.
 	    > Robots:
-    	    > Beware, they have weapons.
+	        > Beware, they have weapons.
 	    > Samurais:
 	        > Beware, they have weapons, magic weapons 
 	          and have some small resistance to magic.
 	    > Skulls.
 	    > Snakes:
-    	    > They bite you whenever you are too close to them.
-    	    > Their body also gives you damage but much less than their head.
-            > You can hit only their head. So do not waste bullets on their body.
+	        > They bite you whenever you are too close to them.
+	        > Their body also gives you damage but much less than their head.
+	        > You can hit only their head. So do not waste bullets on their body.
 	    > Terminator Eyes:
 	        > Beware, they have weapons.
 	    > Tethloriens:
@@ -297,46 +304,47 @@
 
 
 ## Keyboard keys
-			  F1:    Show a help screen while playing the game
-			  left,     a:    move to the left
-			  right,    d:    move to the right
-			  up,       w:    jump
-			   u        4:    fire a light shot
-			   i        5:    fire a medium shot
-			   j        1:    fire a strong shot
-			   k        2:    fire a heavy shot
-               t:             try unlocking door using each key in your inventory
-               h:             Switch energy shield (if you have level up enough)
-               m:             switch magic and magic NPC selector (via mouse clicks) 
-              1-5:            choose between numbered magic attack spells. You have to acquire them
-                                ex:  Vortex of Doom A, Lightning bolt A...
-               0:             no current spell selected
-           L_mouse_button:    cast current spell  (if magic is on and the PC has enough level)
-               insert:        drink a health potion
-               delete:        drink a power potion
-               home:          eat a health apple
-               b:             hold b for a time to kill your current life
-			   p:    pause
-			 ESC: exit game
-			  ^m:    pause/resume music
- 			  ^s:    sound effects on/off
-              Alt + Enter: change full screen / windowed screen mode
-			  L_Ctrl + R_Alt + g: grid on/off
-			  ^h:    shows this help to the console
 
-	    > Additional keys for debug mode:
-			  ^ L_Alt + numpad_divide:  toggle logger to debug/info. Print info for hits, etc
-			  ^ n:             print a list of all NPCs in all levels, ordered by level
-			  ^ + Shift + n:   print a list of all NPCs in all levels, ordered by NPC name
-			  Alt + n:         print a list of all items in all levels, ordered by level
-			  Alt + Shift + n: print a list of all items in all levels, ordered by item name
-			  ^d:    print debug information to the console
-			  ^l:    write debug information to a log file
+    F1:    Show a help screen while playing the game
+    left,     a:    move to the left
+    right,    d:    move to the right
+    up,       w:    jump
+    u         4:    fire a light shot
+    i         5:    fire a medium shot
+    j         1:    fire a strong shot
+    k         2:    fire a heavy shot
+    t:              try unlocking door using each key in your inventory
+    h:              Switch energy shield (if you have level up enough)
+    m:              switch magic and magic NPC selector (via mouse clicks) 
+    1-5:            choose between numbered magic attack spells. You have to acquire them
+                    ex:  Vortex of Doom A, Lightning bolt A...
+    0:              no current spell selected
+    L_mouse_button:    cast current spell  (if magic is on and the PC has enough level)
+    insert:        drink a health potion
+    delete:        drink a power potion
+    home:          eat a health apple
+    b:             hold b for a time to kill your current life
+    p:           pause
+    ESC:         exit game
+     ^m:         pause/resume music
+     ^s:         sound effects on/off
+    Alt + Enter: change full screen / windowed screen mode
+    L_Ctrl + R_Alt + g: grid on/off
+      ^h:        shows this help to the console
 
-	    > Additional keys for cheating mode:
-			  ^i:                teletransportation: put the player above it\'s current position  (cheat)
-			  ^ numpad_minus:    great advantage superhero (cheat)
-			  ^ numpad_multiply: out of phase superhero invulnerability flag (cheat)
+    > Additional keys for debug mode:
+      ^ L_Alt + numpad_divide:  toggle logger to debug/info. Print info for hits, etc
+      ^ n:             print a list of all NPCs in all levels, ordered by level
+      ^ + Shift + n:   print a list of all NPCs in all levels, ordered by NPC name
+      Alt + n:         print a list of all items in all levels, ordered by level
+      Alt + Shift + n: print a list of all items in all levels, ordered by item name
+      ^d:    print debug information to the console
+      ^l:    write debug information to a log file
+
+    > Additional keys for cheating mode:
+      ^i:                teletransportation: put the player above it\'s current position  (cheat)
+      ^ numpad_minus:    great advantage superhero (cheat)
+      ^ numpad_multiply: out of phase superhero invulnerability flag (cheat)
 
 
 ## Usage
@@ -344,28 +352,28 @@
 	codemaster [-h] [-f] [-l] [-m] [-n] [-u] [-d] [-t]
 	
 	optional arguments:
-	  -h, --help            show this help message and exit
+	  -h, --help, 	show this help message and exit
 	  -f, 			--fullscreen
-	                        Full screen display activated when starting the game
+                    Full screen display activated when starting the game
 	  -l, 			--multiplelogfiles
-	                        A log file by app execution, instead of one unique log file
+                    A log file by app execution, instead of one unique log file
 	  -m, 			--stdoutlog
-	                        Print logs to the console along with writing them to the log file
+                    Print logs to the console along with writing them to the log file
 	  -n, 			--nologdatetime
-	                        Logs will not print a datetime.
+                    Logs will not print a datetime.
 	  -u, 			--nodisplayscaled
-	                        Deactivate the scaling of the game screen. 
-	                        Resolution depends on desktop size and scale graphics. 
-	                        Note that Pygame scaled is considered an experimental API 
-	                        and is subject to change.
-	                        In most systems, it is better to have the scaling activated when 
-	                        using the full screen display mode. 
+                    Deactivate the scaling of the game screen. 
+                    Resolution depends on desktop size and scale graphics. 
+                    Note that Pygame scaled is considered an experimental API 
+                    and is subject to change.
+                    In most systems, it is better to have the scaling activated when 
+                    using the full screen display mode. 
 	  -d, 			--debug
-	                        debug actions, information and traces
-	                        This does not set the log level to debug. 
-	                        Use the key shortcut ^ L_Alt + numpad_divide to toggle log levels. 
+                    debug actions, information and traces
+                    This does not set the log level to debug. 
+                    Use the key shortcut ^ L_Alt + numpad_divide to toggle log levels. 
 	  -t, 			--debugtraces
-	                        show debug back traces information when something goes wrong
+                    show debug back traces information when something goes wrong
 
 
 **Default optional arguments**
@@ -375,34 +383,34 @@
 	stdoutlog           False
 	nologdatetime       False
 	nodisplayscaled     False
-	debug   		    False
-	debugtraces		    False
+	debug               False
+	debugtraces         False
 
 
 **Test suite**
 
 	To run the test suite:
-		$ python -m suiteoftests
+	    $ python -m suiteoftests
 
 	You can run the test suite executing only some tests. Examples:
-        * Execute only one test:
-		    $ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
-        * Execute only two tests (example using bash):
-		    $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_player_enters_door_to_next_level'
+	    * Execute only one test:
+	        $ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
+	    * Execute only two tests (example using bash):
+	        $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_player_enters_door_to_next_level'
 
     Notes: 
-		* Press ESC if you want to abort the current test.
-		* If you tell the test suite to run some specific tests, <br> 
+	    * Press ESC if you want to abort the current test.
+	    * If you tell the test suite to run some specific tests, <br> 
 		  the test suite will run them even if you have decorated these tests to be skipped.
 
 
 **Examples of usage**
 
 	Run the game:
-		$ python -m codemaster
+	    $ python -m codemaster
 
 	Run the game starting in full screen mode:
-		$ python -m codemaster -f
+	    $ python -m codemaster -f
 
 
 **To make The CodeMaster work**

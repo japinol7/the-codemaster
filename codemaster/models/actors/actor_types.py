@@ -211,5 +211,8 @@ class ActorType(Enum):
     TETHLORIEN_LILAC = 1661
     TETHLORIEN_YELLOW = 1662
     TETHLORIEN_RED = 1663
+    # Pumpkin Zombies
+    PUMPKIN_ZOMBIE_A = 1667
+    PUMPKIN_HEAD_A = 1668
     # Samurais
-    SAMURAI_MALE = 1671
+    SAMURAI_MALE = 1675

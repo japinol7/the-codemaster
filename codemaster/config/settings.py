@@ -240,4 +240,4 @@ class Settings:
             h=2 + cls.cell_size / 2.5)
         cls.sprite_health_bar_pos_rel = utils.Point(
             x=-1 + cls.cell_size * 1.2 if cls.cell_size * 1.2 > 8 else 8,
-            y=cls.cell_size * 0.8 if cls.cell_size * 0.8 < 9 else 9)
+            y=cls.cell_size * 0.8 if cls.cell_size * 0.8 < 10 else 10)

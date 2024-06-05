@@ -194,6 +194,8 @@ FILE_NAMES = {
     'im_en_robots': ('robot', 'png'),
     'im_tethloriens': ('tethlorien', 'png'),
     'im_en_samurais': ('samurai', 'png'),
+    'im_en_pumpkin_zombies': ('pumpkin_zombie', 'png'),
+    'im_en_pumpkin_heads': ('pumpkin_head', 'png'),
     'im_files_disks': ('files_disk', 'png'),
     'im_computer': ('computer', 'png'),
     'im_apples': ('im_apple', 'png'),

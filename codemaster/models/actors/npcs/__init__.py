@@ -65,3 +65,9 @@ from codemaster.models.actors.npcs.tethloriens import (
 from codemaster.models.actors.npcs.samurais import (
     SamuraiMale,
     )
+from codemaster.models.actors.npcs.pumpkin_zombies import (
+    PumpkinZombieA,
+    )
+from codemaster.models.actors.npcs.pumpkin_heads import (
+    PumpkinHeadA,
+    )

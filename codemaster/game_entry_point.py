@@ -280,11 +280,10 @@ class Game:
                     self.is_exit_curr_game_confirm = True
                 elif event.type == pg.KEYDOWN:
                     if event.key == pg.K_p:
-                        if (not self.is_allowed_to_pause and
-                                self.current_time - self.start_time <= MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
-                            continue
-                        self.is_allowed_to_pause = True
-                        self.is_paused = True
+                        if (self.is_allowed_to_pause or
+                                self.current_time - self.start_time > MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
+                            self.is_allowed_to_pause = True
+                            self.is_paused = True
                     if event.key == pg.K_LEFT:
                         self.player.go_left()
                     elif event.key == pg.K_RIGHT:
@@ -382,8 +381,10 @@ class Game:
                             self.show_grid = not self.show_grid
                     elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
                         if pg.key.get_mods() & pg.KMOD_LALT:
-                            self.is_paused = True
-                            self.is_full_screen_switch = True
+                            if (self.is_allowed_to_pause or
+                                    self.current_time - self.start_time > MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
+                                self.is_paused = True
+                                self.is_full_screen_switch = True
                     elif event.key == pg.K_KP_DIVIDE:
                         if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
                                 and pg.key.get_mods() & pg.KMOD_LALT:

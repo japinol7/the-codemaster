@@ -10,6 +10,8 @@ from codemaster.config.constants import (
 from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.npcs import (
+    PumpkinZombieA,
+    PumpkinHeadA,
     RobotA,
     RobotB,
     )
@@ -18,6 +20,7 @@ from codemaster.models.actors.items import (
     AppleYellow,
     AppleRed,
     BatteryA,
+    CartridgeBlue,
     CartridgeGreen,
     DoorLeftGreen,
     DoorRightYellow,
@@ -58,7 +61,7 @@ class Level21(Level):
                        [1, 1500, 240, platforms.PLAT_TYPE_01],
                        [1, 1780, 310, platforms.PLAT_TYPE_01],
                        [1, 1800, 575, platforms.PLAT_TYPE_01],
-                       [10, 1960, 460, platforms.PLAT_TYPE_01],
+                       [7, 1960, 460, platforms.PLAT_TYPE_01],
                        [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
                        ]
         plats = []
@@ -87,7 +90,7 @@ class Level21(Level):
 
         # Add NPCs
         items_to_drop = [
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_BLUE, probability_to_drop=100,
+            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100,
                      add_to_list=self.cartridges, x_delta=16),
             ]
 
@@ -101,6 +104,26 @@ class Level21(Level):
             ]
         self.npcs.add(RobotA(
             710, 138, self.game, border_left=680, border_right=1200, change_x=3,
+            items_to_drop=items_to_drop))
+
+        items_to_drop = [
+            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=26, y_delta=-28, **{'random_min': 60, 'random_max': 60}),
+            DropItem(PumpkinHeadA, ActorType.PUMPKIN_HEAD_A, probability_to_drop=100,
+                     add_to_list=self.npcs, y_delta=24),
+            ]
+        self.npcs.add(PumpkinZombieA(
+            2050, 358, self.game, border_left=1980, border_right=2390, change_x=2,
+            items_to_drop=items_to_drop))
+
+        items_to_drop = [
+            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100,
+                     add_to_list=self.cartridges, x_delta=26, y_delta=-28),
+            DropItem(PumpkinHeadA, ActorType.PUMPKIN_HEAD_A, probability_to_drop=100,
+                     add_to_list=self.npcs, y_delta=24),
+            ]
+        self.npcs.add(PumpkinZombieA(
+            2300, 358, self.game, border_left=1970, border_right=2370, change_x=2,
             items_to_drop=items_to_drop))
 
         # Add doors

@@ -17,6 +17,17 @@
       * Fire Breath B: Most of the time they will cast this one.
       * Fire Breath A: Some change to cast this one.
       * VortexOfDoom B: Low change to cast this one.
+  * Pumpkin zombies.
+    * They have some resistance to magic.
+    * They can cast these spells: 
+      * Drain life B: Most of the time they will cast this one.
+      * Drain life A: Some change to cast this one.
+  * Pumpkin heads (zombies).
+    * They have some resistance to magic.
+    * They can cast these spells: 
+      * Drain life B: Most of the time they will cast this one.
+      * Drain life A: Some change to cast this one.
+      * VortexOfDoom B: Low change to cast this one.
   * Samurais.
     * They can shoot.
     * They have a bit of a resistance to magic.
