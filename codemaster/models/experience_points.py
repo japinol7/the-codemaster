@@ -25,6 +25,7 @@ class ExperiencePoints:
         ActorType.BAT_RED.name: 75,
         ActorType.BAT_BLACK.name: 80,
         ActorType.MAGE_FEMALE_A.name: 750,
+        ActorType.MAGE_FEMALE_A_VANISHED.name: 0,
         ActorType.WOLFMAN_MALE.name: 120,
         ActorType.POKOYO_B.name: 65,
         ActorType.POKOYO_A.name: 75,

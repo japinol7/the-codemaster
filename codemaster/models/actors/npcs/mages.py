@@ -145,7 +145,7 @@ class MageFemaleAVanished(Mage):
         self.type = ActorType.MAGE_FEMALE_A_VANISHED
 
         self.stats = Stats()
-        self.stats.power = self.stats.power_total = NPC_STRENGTH_BASE
+        self.stats.power = self.stats.power_total = 0.01
         self.stats.power_recovery = 10
         self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 7
         self.stats.health = self.stats.health_total = NPC_STRENGTH_BASE * 12
@@ -161,7 +161,18 @@ class MageFemaleAVanished(Mage):
                          border_left=border_left, border_right=border_right,
                          border_top=border_top, border_down=border_down,
                          items_to_drop=items_to_drop)
+
+        self.magic_resistance = 990
         self.hostility_level = 0
+        self.stats.time_between_spell_casting = 10000
+        self.stats.time_between_energy_shield_casting = 10000
+
+    def update_when_hit(self):
+        """Vanished mages cannot be hit with normal weapons.
+        They are out of phase.
+        Because of this, they cannot be killed with bullets.
+        """
+        pass
 
     def kill_hook(self):
         for msg in self.msgs:
