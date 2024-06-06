@@ -115,6 +115,7 @@ class Dragon(NPC):
 
         self.probability_to_cast_vortex_b = 8
         self.probability_to_cast_fire_breath_a = 13
+        self.probability_to_cast_fire_breath_b = 100
 
     def _load_sprites(self):
         # We want to draw the dragon's head on top of the body,
@@ -273,8 +274,11 @@ class Dragon(NPC):
                 if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_A.name) < 1,
         )):
             spell_class = FireBreathA
-        elif sum(1 for x in self.game.level.magic_sprites
-                 if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_B.name) < 3:
+        elif all((
+            dice_shot + self.probability_to_cast_fire_breath_b >= 100,
+            sum(1 for x in self.game.level.magic_sprites
+                 if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_B.name) < 3,
+        )):
             spell_class = FireBreathB
         else:
             return

@@ -39,6 +39,10 @@ class Mage(NPC):
                          border_top=border_top, border_down=border_down,
                          items_to_drop=items_to_drop)
 
+        self.probability_to_cast_vortex_b = 8
+        self.probability_to_cast_spell_a = 13
+        self.probability_to_cast_spell_b = 100
+
 
 class MageFemaleA(Mage):
     """Represents a Mage Female A."""
@@ -109,20 +113,28 @@ class MageFemaleA(Mage):
         super().update_after_inc_index_hook()
 
     def update_cast_spell_cast_actions(self):
-        probability_to_cast_vortex_b = 8
-        probability_to_cast_spell_a = 13
         dice_shot = randint(1, 100)
         if all([
             self.game.player.direction != DIRECTION_RIP,
-            dice_shot + probability_to_cast_vortex_b >= 100,
+            dice_shot + self.probability_to_cast_vortex_b > 100,
             sum(1 for x in self.game.level.magic_sprites
                 if x.target == self.player and x.type.name == ActorType.VORTEX_OF_DOOM_B.name) < 1,
         ]):
             spell_class = VortexOfDoomB
-        elif dice_shot + probability_to_cast_spell_a >= 100:
+        elif all([
+            dice_shot + self.probability_to_cast_spell_a > 100,
+            sum(1 for x in self.game.level.magic_sprites
+                if x.target == self.player and x.type.name == ActorType.DRAIN_LIFE_A.name) < 1,
+        ]):
             spell_class = DrainLifeA
-        else:
+        elif all([
+            dice_shot + self.probability_to_cast_spell_b > 100,
+            sum(1 for x in self.game.level.magic_sprites
+                if x.target == self.player and x.type.name == ActorType.DRAIN_LIFE_B.name) < 1,
+        ]):
             spell_class = DrainLifeB
+        else:
+            return
 
         delta_x = -20 if self.direction == DIRECTION_LEFT else 40
         magic_attack = spell_class(

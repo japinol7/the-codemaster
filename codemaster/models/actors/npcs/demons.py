@@ -41,24 +41,28 @@ class Demon(NPC):
 
         self.probability_to_cast_vortex_b = 8
         self.probability_to_cast_fire_breath_a = 13
+        self.probability_to_cast_fire_breath_b = 100
 
     def update_cast_spell_cast_actions(self):
         dice_shot = randint(1, 100)
         if all((
             self.game.player.direction != DIRECTION_RIP,
-            dice_shot + self.probability_to_cast_vortex_b >= 100,
+            dice_shot + self.probability_to_cast_vortex_b > 100,
             sum(1 for x in self.game.level.magic_sprites
                 if x.target == self.player and x.type.name == ActorType.VORTEX_OF_DOOM_B.name) < 1,
         )):
             spell_class = VortexOfDoomB
         elif all((
-            dice_shot + self.probability_to_cast_fire_breath_a >= 100,
+            dice_shot + self.probability_to_cast_fire_breath_a > 100,
             sum(1 for x in self.game.level.magic_sprites
                 if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_A.name) < 1,
         )):
             spell_class = FireBreathA
-        elif sum(1 for x in self.game.level.magic_sprites
-                 if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_B.name) < 3:
+        elif all((
+            dice_shot + self.probability_to_cast_fire_breath_b > 100,
+            sum(1 for x in self.game.level.magic_sprites
+                 if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_B.name) < 3,
+        )):
             spell_class = FireBreathB
         else:
             return

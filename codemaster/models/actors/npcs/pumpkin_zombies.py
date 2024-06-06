@@ -59,14 +59,25 @@ class PumpkinZombieA(PumpkinZombie):
         self.stats.time_between_energy_shield_casting = 1000
         self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.1
         self.spell_cast_y_delta_max = self.spell_cast_y_delta_max
+        self.probability_to_cast_drain_life_a = 13
+        self.probability_to_cast_drain_life_b = 100
 
     def update_cast_spell_cast_actions(self):
-        probability_to_cast_spell_a = 13
         dice_shot = randint(1, 100)
-        if dice_shot + probability_to_cast_spell_a >= 100:
+        if all((
+            dice_shot + self.probability_to_cast_drain_life_a > 100,
+            sum(1 for x in self.game.level.magic_sprites
+                if x.target == self.player and x.type.name == ActorType.DRAIN_LIFE_A.name) < 1,
+        )):
             spell_class = DrainLifeA
-        else:
+        elif all((
+            dice_shot + self.probability_to_cast_drain_life_b > 100,
+            sum(1 for x in self.game.level.magic_sprites
+                 if x.target == self.player and x.type.name == ActorType.DRAIN_LIFE_B.name) < 3
+        )):
             spell_class = DrainLifeB
+        else:
+            return
 
         delta_x = -20 if self.direction == DIRECTION_LEFT else 40
         magic_attack = spell_class(

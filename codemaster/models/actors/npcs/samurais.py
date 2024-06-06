@@ -39,17 +39,21 @@ class Samurai(NPC):
         self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
 
         self.probability_to_cast_samutrinos_bolt_a = 6
+        self.probability_to_cast_samutrinos_bolt_b = 100
 
     def update_cast_spell_cast_actions(self):
         dice_shot = randint(1, 100)
         if all((
-            dice_shot + self.probability_to_cast_samutrinos_bolt_a >= 100,
+            dice_shot + self.probability_to_cast_samutrinos_bolt_a > 100,
             sum(1 for x in self.game.level.magic_sprites
-                if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_A.name) < 1,
+                if x.target == self.player and x.type.name == ActorType.SAMUTRINOS_BOLT_A.name) < 1,
         )):
             spell_class = SamutrinosBoltA
-        elif sum(1 for x in self.game.level.magic_sprites
-                 if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_B.name) < 3:
+        elif all((
+            dice_shot + self.probability_to_cast_samutrinos_bolt_b > 100,
+            sum(1 for x in self.game.level.magic_sprites
+                if x.target == self.player and x.type.name == ActorType.SAMUTRINOS_BOLT_B.name) < 3
+        )):
             spell_class = SamutrinosBoltB
         else:
             return

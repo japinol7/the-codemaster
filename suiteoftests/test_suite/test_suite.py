@@ -196,7 +196,7 @@ class GameTestSuite:
 
         log.info("Load and render resources")
         Resource.load_and_render_background_images()
-        Resource.load_and_render_scorebar_images_and_txt()
+        Resource.load_sound_resources()
         # Render characters in some colors to use it as a cache
         libg_jp.chars_render_text_tuple(font_name=FONT_DEFAULT_NAME)
         libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)

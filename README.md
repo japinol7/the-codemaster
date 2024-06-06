@@ -266,7 +266,7 @@
     	        > Black bats: They deal great damage.
 	    > Demons:
 	        > Beware, they have weapons, can cast spells 
-	          and have some resistance to magic.
+	          and have great resistance to magic.
 	    > Dragons:
 	        > Beware, they have magic weapons 
 	          and some resistance to magic.
