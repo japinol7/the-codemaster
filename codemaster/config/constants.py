@@ -167,6 +167,7 @@ FILE_NAMES = {
     'im_pc_pac': ('Pac_01_walk', 'png'),
     'im_pj_rip': ('rip_player_ld', 'png'),
     'im_batteries': ('battery', 'png'),
+    'im_radios': ('radio', 'png'),
     'life_recoveries': ('life', 'png'),
     'life_heart': ('heart', 'png'),
     'im_snakes': ('im_snake', 'png'),

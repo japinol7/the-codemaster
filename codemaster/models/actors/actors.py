@@ -547,6 +547,7 @@ class NPC(MovingActor):
         self.category_type = ActorCategoryType.NPC
         self.is_npc = True
         self.can_drop_items = True
+
         super().__init__(x, y, game, name=name,
                          change_x=change_x, change_y=change_y,
                          border_left=border_left, border_right=border_right,

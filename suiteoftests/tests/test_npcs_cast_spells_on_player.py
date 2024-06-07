@@ -2,6 +2,7 @@
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from codemaster.config.constants import DIRECTION_LEFT
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     DemonMale,
     PumpkinHeadA,
@@ -24,9 +25,12 @@ class TestNPCsCastSpellsOnPlayer:
         npc = DemonMale(600, 664, game, change_x=0)
         npc.direction = DIRECTION_LEFT
         npc.can_shot = False
-        npc.probability_to_cast_vortex_b = 0
-        npc.probability_to_cast_fire_breath_a = 100
-        npc.probability_to_cast_fire_breath_b = 0
+
+        npc.spell_2_name = ActorType.FIRE_BREATH_A.name
+        npc.probability_to_cast_spell_1 = 0
+        npc.probability_to_cast_spell_2 = 100
+        npc.probability_to_cast_spell_3 = 0
+
         game.level.add_actors([npc])
 
         game.game_loop()
@@ -45,8 +49,12 @@ class TestNPCsCastSpellsOnPlayer:
         npc = TethlorienRed(600, 660, game, change_x=0)
         npc.direction = DIRECTION_LEFT
         npc.can_shot = False
-        npc.probability_to_cast_neutrinos_bolt_a = 100
-        npc.probability_to_cast_neutrinos_bolt_b = 0
+
+        npc.spell_1_name = ActorType.NEUTRINOS_BOLT_A.name
+        npc.probability_to_cast_spell_1 = 100
+        npc.probability_to_cast_spell_2 = 0
+        npc.probability_to_cast_spell_3 = 0
+
         game.level.add_actors([npc])
 
         game.game_loop()
@@ -65,8 +73,11 @@ class TestNPCsCastSpellsOnPlayer:
         npc = SamuraiMale(600, 654, game, change_x=0)
         npc.direction = DIRECTION_LEFT
         npc.can_shot = False
-        npc.probability_to_cast_samutrinos_bolt_a = 100
-        npc.probability_to_cast_samutrinos_bolt_b = 0
+
+        npc.spell_1_name = ActorType.SAMUTRINOS_BOLT_A.name
+        npc.probability_to_cast_spell_1 = 100
+        npc.probability_to_cast_spell_2 = 0
+        npc.probability_to_cast_spell_3 = 0
         npc.stats.time_between_spell_casting = 820
 
         game.level.add_actors([npc])
@@ -87,9 +98,35 @@ class TestNPCsCastSpellsOnPlayer:
         npc = DemonMale(600, 664, game, change_x=0)
         npc.direction = DIRECTION_LEFT
         npc.can_shot = False
-        npc.probability_to_cast_vortex_b = 100
-        npc.probability_to_cast_fire_breath_a = 0
-        npc.probability_to_cast_fire_breath_b = 0
+
+        npc.spell_1_name = ActorType.VORTEX_OF_DOOM_A.name
+        npc.probability_to_cast_spell_1 = 100
+        npc.probability_to_cast_spell_2 = 0
+        npc.probability_to_cast_spell_3 = 0
+
+        game.level.add_actors([npc])
+
+        game.game_loop()
+
+        game.assert_test_passed(
+            condition=player.lives < 1,
+            failed_msg="NPC did not kill the player.")
+
+    @game_test(levels=[3], timeout=6)
+    def test_player_hit_with_doom_bold_spell_must_die(self, game):
+        player = game.player
+        player.rect.x, player.rect.y = 260, 620
+        player.health = 22
+        player.lives = 1
+
+        npc = DemonMale(600, 664, game, change_x=0)
+        npc.direction = DIRECTION_LEFT
+        npc.can_shot = False
+
+        npc.spell_1_name = ActorType.DOOM_BOLT_B.name
+        npc.probability_to_cast_spell_1 = 100
+        npc.probability_to_cast_spell_2 = 0
+        npc.probability_to_cast_spell_3 = 0
 
         game.level.add_actors([npc])
 
@@ -109,9 +146,11 @@ class TestNPCsCastSpellsOnPlayer:
         npc = PumpkinHeadA(600, 660, game, change_x=0)
         npc.direction = DIRECTION_LEFT
         npc.can_shot = False
-        npc.probability_to_cast_vortex_b = 0
-        npc.probability_to_cast_drain_life_a = 100
-        npc.probability_to_cast_drain_life_b = 0
+
+        npc.spell_2_name = ActorType.DRAIN_LIFE_A.name
+        npc.probability_to_cast_spell_1 = 0
+        npc.probability_to_cast_spell_2 = 100
+        npc.probability_to_cast_spell_3 = 0
         npc.stats.time_between_spell_casting = 180
 
         game.level.add_actors([npc])

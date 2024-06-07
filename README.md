@@ -269,14 +269,15 @@
 	          and have great resistance to magic.
 	    > Dragons:
 	        > Beware, they have magic weapons 
-	          and some resistance to magic.
+	          and good or great resistance to magic.
 	        > Beware, the dragons land is very dangerous.
 	    > Ghosts:
 	        > Cannot be killed/hit with normal weapons.
 	          Only Dark magic spells can damage them, i.e, 
 	          Vortex of Doom and Doom Bolts.
 	    > Mages:
-	        > Beware, they have magic weapons and some resistance to magic.
+	        > Beware, they have magic weapons
+	          and good resistance to magic.
 	    > Pokoyos.
 	    > Pumpkin zombies:
 	        > Beware, they have magic weapons 
@@ -326,11 +327,11 @@
     b:             hold b for a time to kill your current life
     p:           pause
     ESC:         exit game
-     ^m:         pause/resume music
-     ^s:         sound effects on/off
+    ^m:          pause/resume music
+    ^s:          sound effects on/off
     Alt + Enter: change full screen / windowed screen mode
     L_Ctrl + R_Alt + g: grid on/off
-      ^h:        shows this help to the console
+    ^h:          shows this help to the console
 
     > Additional keys for debug mode:
       ^ L_Alt + numpad_divide:  toggle logger to debug/info. Print info for hits, etc

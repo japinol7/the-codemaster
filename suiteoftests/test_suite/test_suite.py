@@ -5,7 +5,7 @@ import traceback
 
 import pygame as pg
 
-from codemaster.models.actors.items import ClockTimerA
+from codemaster.models.actors.items import ClockTimerA, RadioA
 from codemaster.models.actors.player import Player
 from codemaster.config.constants import (
     APP_TECH_NAME,
@@ -160,6 +160,10 @@ class GameTestSuite:
 
         pg.display.set_caption(f"{APP_TECH_NAME}_test_suite")
 
+        # Add an actor that will hold the test name msg
+        self.actor_test_name_holder = RadioA(5, 390, self)
+        self.level.add_actors([self.actor_test_name_holder])
+
         self._mock_player_die_hard()
 
     def _load_test_levels(self, level_name_nums=None, starting_level_n=0):
@@ -258,6 +262,12 @@ class GameTestSuite:
 
         getattr(self.player, player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
 
+    def _create_test_name_msg_actor(self, test_method_with_setup_levels):
+        TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {self.current_test.__name__}",
+                       game=self, owner=self.actor_test_name_holder,
+                       delta_x=0, delta_y=3,
+                       time_in_secs=test_method_with_setup_levels.timeout-0.06)
+
     def assert_test_passed(self, condition, failed_msg):
         if self.aborted:
             self.test_aborted_count += 1
@@ -323,9 +333,7 @@ class GameTestSuite:
                     level_name_nums=test_method_with_setup_levels.level_name_nums,
                     starting_level_n=test_method_with_setup_levels.starting_level_n)
                 log.info(f"Start {self.current_test.__name__}")
-                TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {self.current_test.__name__}",
-                               self, time_in_secs=5)
-
+                self._create_test_name_msg_actor(test_method_with_setup_levels)
                 self._init_clock_timer(test.timeout)
                 test_method_with_setup_levels.test_func(
                     self=test_method_with_setup_levels.__class__,

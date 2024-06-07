@@ -36,6 +36,7 @@ class ActorCategoryType(Enum):
     APPLE = 9
     MINE = 10
     EXPLOSION = 11
+    RADIO = 12
     ENERGY_SHIELD = 15
     CLOCK = 16
     PLATFORM = 17
@@ -59,6 +60,7 @@ class ActorType(Enum):
     BULLET = 121
     # Objects
     BATTERY_A = 301
+    RADIO_A = 302
     # Life recoveries
     LIFE_RECOVERY = 321
     # Potions

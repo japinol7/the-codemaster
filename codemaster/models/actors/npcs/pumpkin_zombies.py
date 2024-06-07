@@ -1,16 +1,11 @@
 """Module pumpkin_zombies."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from random import randint
-
-from codemaster.config.constants import (
-    BM_NPCS_FOLDER,
-    DIRECTION_LEFT,
-    )
+from codemaster.config.constants import BM_NPCS_FOLDER
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import NPC, NPC_STRENGTH_BASE
-from codemaster.models.actors.spells import DrainLifeA, DrainLifeB
 from codemaster.models.stats import Stats
+from codemaster.models.actors import magic
 
 
 class PumpkinZombie(NPC):
@@ -31,6 +26,15 @@ class PumpkinZombie(NPC):
                          border_left=border_left, border_right=border_right,
                          border_top=border_top, border_down=border_down,
                          items_to_drop=items_to_drop)
+
+        self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.1
+        self.spell_cast_y_delta_max = self.spell_cast_y_delta_max
+        self.spell_1_name = ActorType.DRAIN_LIFE_A.name
+        self.spell_2_name = ActorType.DRAIN_LIFE_B.name
+        self.probability_to_cast_spell_1 = 13
+        self.probability_to_cast_spell_2 = 100
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 2
 
 
 class PumpkinZombieA(PumpkinZombie):
@@ -57,33 +61,6 @@ class PumpkinZombieA(PumpkinZombie):
         self.magic_resistance = 100
         self.stats.time_between_spell_casting = 1000
         self.stats.time_between_energy_shield_casting = 1000
-        self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.1
-        self.spell_cast_y_delta_max = self.spell_cast_y_delta_max
-        self.probability_to_cast_drain_life_a = 13
-        self.probability_to_cast_drain_life_b = 100
 
     def update_cast_spell_cast_actions(self):
-        dice_shot = randint(1, 100)
-        if all((
-            dice_shot + self.probability_to_cast_drain_life_a > 100,
-            sum(1 for x in self.game.level.magic_sprites
-                if x.target == self.player and x.type.name == ActorType.DRAIN_LIFE_A.name) < 1,
-        )):
-            spell_class = DrainLifeA
-        elif all((
-            dice_shot + self.probability_to_cast_drain_life_b > 100,
-            sum(1 for x in self.game.level.magic_sprites
-                 if x.target == self.player and x.type.name == ActorType.DRAIN_LIFE_B.name) < 3
-        )):
-            spell_class = DrainLifeB
-        else:
-            return
-
-        delta_x = -20 if self.direction == DIRECTION_LEFT else 40
-        magic_attack = spell_class(
-            self.rect.x+delta_x, self.rect.y-10, self.game,
-            is_from_player_shot=False, owner=self,
-            target=self.player)
-        self.game.level.magic_sprites.add(magic_attack)
-        self.player.target_of_spells_count[spell_class.__name__] += 1
-        self.game.level.spells_on_level_count[spell_class.__base__.__name__] += 1
+        magic.update_cast_spell_cast_actions(actor=self)

@@ -1,8 +1,6 @@
 """Module mage."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from random import randint
-
 import pygame as pg
 
 from codemaster.config.constants import (
@@ -10,14 +8,13 @@ from codemaster.config.constants import (
     MSG_NPC_DURATION_LONG,
     DIRECTION_LEFT,
     DIRECTION_RIGHT,
-    DIRECTION_RIP,
     )
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import NPC, NPC_STRENGTH_BASE
-from codemaster.models.actors.spells import DrainLifeA, DrainLifeB, VortexOfDoomB
 from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.models.stats import Stats
+from codemaster.models.actors import magic
 
 
 class Mage(NPC):
@@ -39,9 +36,17 @@ class Mage(NPC):
                          border_top=border_top, border_down=border_down,
                          items_to_drop=items_to_drop)
 
-        self.probability_to_cast_vortex_b = 8
-        self.probability_to_cast_spell_a = 13
-        self.probability_to_cast_spell_b = 100
+        self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.6
+        self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
+        self.spell_1_name = ActorType.VORTEX_OF_DOOM_A.name
+        self.spell_2_name = ActorType.DRAIN_LIFE_A.name
+        self.spell_3_name = ActorType.DRAIN_LIFE_B.name
+        self.probability_to_cast_spell_1 = 8
+        self.probability_to_cast_spell_2 = 13
+        self.probability_to_cast_spell_3 = 100
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 2
+        self.max_multi_spell_3 = 4
 
 
 class MageFemaleA(Mage):
@@ -79,8 +84,6 @@ class MageFemaleA(Mage):
         self.hostility_level = 0
         self.stats.time_between_spell_casting = 1000
         self.stats.time_between_energy_shield_casting = 1000
-        self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.6
-        self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
 
         EnergyShield.actor_acquire_energy_shield(self, self.game)
 
@@ -113,37 +116,7 @@ class MageFemaleA(Mage):
         super().update_after_inc_index_hook()
 
     def update_cast_spell_cast_actions(self):
-        dice_shot = randint(1, 100)
-        if all([
-            self.game.player.direction != DIRECTION_RIP,
-            dice_shot + self.probability_to_cast_vortex_b > 100,
-            sum(1 for x in self.game.level.magic_sprites
-                if x.target == self.player and x.type.name == ActorType.VORTEX_OF_DOOM_B.name) < 1,
-        ]):
-            spell_class = VortexOfDoomB
-        elif all([
-            dice_shot + self.probability_to_cast_spell_a > 100,
-            sum(1 for x in self.game.level.magic_sprites
-                if x.target == self.player and x.type.name == ActorType.DRAIN_LIFE_A.name) < 1,
-        ]):
-            spell_class = DrainLifeA
-        elif all([
-            dice_shot + self.probability_to_cast_spell_b > 100,
-            sum(1 for x in self.game.level.magic_sprites
-                if x.target == self.player and x.type.name == ActorType.DRAIN_LIFE_B.name) < 1,
-        ]):
-            spell_class = DrainLifeB
-        else:
-            return
-
-        delta_x = -20 if self.direction == DIRECTION_LEFT else 40
-        magic_attack = spell_class(
-            self.rect.x+delta_x, self.rect.y-10, self.game,
-            is_from_player_shot=False, owner=self,
-            target=self.player)
-        self.game.level.magic_sprites.add(magic_attack)
-        self.player.target_of_spells_count[spell_class.__name__] += 1
-        self.game.level.spells_on_level_count[spell_class.__base__.__name__] += 1
+        magic.update_cast_spell_cast_actions_3_spells(actor=self)
 
 
 class MageFemaleAVanished(Mage):
@@ -174,8 +147,8 @@ class MageFemaleAVanished(Mage):
                          border_top=border_top, border_down=border_down,
                          items_to_drop=items_to_drop)
 
-        self.magic_resistance = 990
         self.hostility_level = 0
+        self.magic_resistance = 990
         self.stats.time_between_spell_casting = 10000
         self.stats.time_between_energy_shield_casting = 10000
 

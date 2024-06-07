@@ -1,6 +1,6 @@
 """Package items."""
 from codemaster.models.actors.items.batteries import (
-    BatteryA
+    BatteryA,
     )
 from codemaster.models.actors.items.cartridges import (
     CartridgeGreen,
@@ -71,4 +71,7 @@ from codemaster.models.actors.items.energy_shields import (
 from codemaster.models.actors.items.clocks import (
     ClockA,
     ClockTimerA,
+    )
+from codemaster.models.actors.items.radios import (
+    RadioA,
     )

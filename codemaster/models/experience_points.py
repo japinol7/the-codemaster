@@ -55,4 +55,5 @@ class ExperiencePoints:
         ActorType.TERMINATOR_EYE_YELLOW.name: 260,
         ActorType.TERMINATOR_EYE_RED.name: 410,
         ActorType.ENERGY_SHIELD_A.name: 0,
+        ActorType.RADIO_A.name: 0,
     }

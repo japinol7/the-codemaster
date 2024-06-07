@@ -1,8 +1,6 @@
 """Module dragons."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from random import randint
-
 from collections import Counter
 
 import pygame as pg
@@ -10,7 +8,6 @@ import pygame as pg
 from codemaster.config.constants import (
     DIRECTION_LEFT,
     DIRECTION_RIGHT,
-    DIRECTION_RIP,
     DIRECTION_DOWN_LEFT,
     DIRECTION_DOWN_RIGHT,
     DIRECTION_UP_LEFT,
@@ -19,10 +16,10 @@ from codemaster.config.constants import (
     )
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorBaseType, ActorType
 from codemaster.models.actors.actors import NPC, Actor, NPC_STRENGTH_BASE
-from codemaster.models.actors.spells import FireBreathA, FireBreathB, VortexOfDoomB
 from codemaster.models.stats import Stats
 from codemaster.tools.utils.colors import Color
 from codemaster import resources
+from codemaster.models.actors import magic
 
 DRAGON_BODY_MAPPING = {
     ActorType.DRAGON_GREEN: ActorType.DRAGON_BODY_PART_G,
@@ -112,10 +109,15 @@ class Dragon(NPC):
         self.hostility_level = 1
         self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.6
         self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
-
-        self.probability_to_cast_vortex_b = 8
-        self.probability_to_cast_fire_breath_a = 13
-        self.probability_to_cast_fire_breath_b = 100
+        self.spell_1_name = ActorType.VORTEX_OF_DOOM_A.name
+        self.spell_2_name = ActorType.FIRE_BREATH_A.name
+        self.spell_3_name = ActorType.FIRE_BREATH_B.name
+        self.probability_to_cast_spell_1 = 4
+        self.probability_to_cast_spell_2 = 8
+        self.probability_to_cast_spell_3 = 100
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 2
+        self.max_multi_spell_3 = 4
 
     def _load_sprites(self):
         # We want to draw the dragon's head on top of the body,
@@ -260,37 +262,7 @@ class Dragon(NPC):
         self.body_length += 1
 
     def update_cast_spell_cast_actions(self):
-        dice_shot = randint(1, 100)
-        if all((
-            self.game.player.direction != DIRECTION_RIP,
-            dice_shot + self.probability_to_cast_vortex_b >= 100,
-            sum(1 for x in self.game.level.magic_sprites
-                if x.target == self.player and x.type.name == ActorType.VORTEX_OF_DOOM_B.name) < 1,
-        )):
-            spell_class = VortexOfDoomB
-        elif all((
-            dice_shot + self.probability_to_cast_fire_breath_a >= 100,
-            sum(1 for x in self.game.level.magic_sprites
-                if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_A.name) < 1,
-        )):
-            spell_class = FireBreathA
-        elif all((
-            dice_shot + self.probability_to_cast_fire_breath_b >= 100,
-            sum(1 for x in self.game.level.magic_sprites
-                 if x.target == self.player and x.type.name == ActorType.FIRE_BREATH_B.name) < 3,
-        )):
-            spell_class = FireBreathB
-        else:
-            return
-
-        delta_x = -20 if self.direction == DIRECTION_LEFT else 40
-        magic_attack = spell_class(
-            self.rect.x+delta_x, self.rect.y-10, self.game,
-            is_from_player_shot=False, owner=self,
-            target=self.player)
-        self.game.level.magic_sprites.add(magic_attack)
-        self.player.target_of_spells_count[spell_class.__name__] += 1
-        self.game.level.spells_on_level_count[spell_class.__base__.__name__] += 1
+        magic.update_cast_spell_cast_actions_3_spells(actor=self)
 
 
 class DragonGreen(Dragon):
@@ -317,11 +289,12 @@ class DragonGreen(Dragon):
 
         self.stats.time_between_spell_casting = 1000
         self.magic_resistance = 130
-        self.probability_to_cast_vortex_b = 0
-        self.probability_to_cast_fire_breath_a = 9
-        self.max_multi_vortex_b = 0
-        self.max_multi_fire_breath_a = 1
-        self.max_multi_fire_breath_b = 2
+        self.probability_to_cast_spell_1 = 0
+        self.probability_to_cast_spell_2 = 9
+        self.probability_to_cast_spell_3 = 100
+        self.max_multi_spell_1 = 0
+        self.max_multi_spell_2 = 1
+        self.max_multi_spell_3 = 2
 
 
 class DragonBlue(Dragon):
@@ -348,11 +321,12 @@ class DragonBlue(Dragon):
 
         self.stats.time_between_spell_casting = 1000
         self.magic_resistance = 156
-        self.probability_to_cast_vortex_b = 6
-        self.probability_to_cast_fire_breath_a = 13
-        self.max_multi_vortex_b = 1
-        self.max_multi_fire_breath_a = 1
-        self.max_multi_fire_breath_b = 3
+        self.probability_to_cast_spell_1 = 6
+        self.probability_to_cast_spell_2 = 13
+        self.probability_to_cast_spell_3 = 100
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 1
+        self.max_multi_spell_3 = 3
 
 
 class DragonYellow(Dragon):
@@ -379,11 +353,12 @@ class DragonYellow(Dragon):
 
         self.stats.time_between_spell_casting = 900
         self.magic_resistance = 175
-        self.probability_to_cast_vortex_b = 8
-        self.probability_to_cast_fire_breath_a = 13
-        self.max_multi_vortex_b = 1
-        self.max_multi_fire_breath_a = 2
-        self.max_multi_fire_breath_b = 3
+        self.probability_to_cast_spell_1 = 8
+        self.probability_to_cast_spell_2 = 13
+        self.probability_to_cast_spell_3 = 100
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 2
+        self.max_multi_spell_3 = 3
 
 
 class DragonRed(Dragon):
@@ -410,8 +385,9 @@ class DragonRed(Dragon):
 
         self.stats.time_between_spell_casting = 750
         self.magic_resistance = 194
-        self.probability_to_cast_vortex_b = 10
-        self.probability_to_cast_fire_breath_a = 16
-        self.max_multi_vortex_b = 1
-        self.max_multi_fire_breath_a = 2
-        self.max_multi_fire_breath_b = 5
+        self.probability_to_cast_spell_1 = 10
+        self.probability_to_cast_spell_2 = 16
+        self.probability_to_cast_spell_3 = 100
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 2
+        self.max_multi_spell_3 = 5

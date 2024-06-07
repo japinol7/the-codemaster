@@ -10,8 +10,8 @@ from codemaster.config.constants import (
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import NPC, NPC_STRENGTH_BASE
 from codemaster.models.actors.items.bullets import BulletType
-from codemaster.models.actors.spells import NeutrinosBoltA, NeutrinosBoltB
 from codemaster.models.stats import Stats
+from codemaster.models.actors import magic
 
 
 class Tethlorien(NPC):
@@ -40,34 +40,16 @@ class Tethlorien(NPC):
         self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.6
         self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
 
-        self.probability_to_cast_neutrinos_bolt_a = 8
-        self.probability_to_cast_neutrinos_bolt_b = 100
+        self.spell_1_name = ActorType.SAMUTRINOS_BOLT_A.name
+        self.spell_2_name = ActorType.SAMUTRINOS_BOLT_B.name
+        self.probability_to_cast_spell_2 = 100
+        self.probability_to_cast_spell_1 = 8
+        self.probability_to_cast_spell_2 = 100
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 2
 
     def update_cast_spell_cast_actions(self):
-        dice_shot = randint(1, 100)
-        if all((
-            dice_shot + self.probability_to_cast_neutrinos_bolt_a > 100,
-            sum(1 for x in self.game.level.magic_sprites
-                if x.target == self.player and x.type.name == ActorType.NEUTRINOS_BOLT_A.name) < 1,
-        )):
-            spell_class = NeutrinosBoltA
-        elif all((
-            dice_shot + self.probability_to_cast_neutrinos_bolt_b > 100,
-            sum(1 for x in self.game.level.magic_sprites
-                if x.target == self.player and x.type.name == ActorType.NEUTRINOS_BOLT_B.name) < 3
-        )):
-            spell_class = NeutrinosBoltB
-        else:
-            return
-
-        delta_x = -10 if self.direction == DIRECTION_LEFT else 20
-        magic_attack = spell_class(
-            self.rect.x+delta_x, self.rect.y+15, self.game,
-            is_from_player_shot=False, owner=self,
-            target=self.player)
-        self.game.level.magic_sprites.add(magic_attack)
-        self.player.target_of_spells_count[spell_class.__name__] += 1
-        self.game.level.spells_on_level_count[spell_class.__base__.__name__] += 1
+        magic.update_cast_spell_cast_actions(actor=self)
 
 
 class TethlorienLilac(Tethlorien):
@@ -96,9 +78,9 @@ class TethlorienLilac(Tethlorien):
 
         self.stats.time_between_spell_casting = 2300
         self.magic_resistance = 10
-        self.probability_to_cast_neutrinos_bolt_a = 8
-        self.max_multi_neutrinos_bolt_a = 1
-        self.max_multi_neutrinos_bolt_b = 1
+        self.probability_to_cast_spell_1 = 8
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 1
 
     def update_shot_bullet_fire_shots(self):
         if randint(1, 100) + 50 >= 100:
@@ -133,9 +115,9 @@ class TethlorienYellow(Tethlorien):
 
         self.stats.time_between_spell_casting = 2200
         self.magic_resistance = 20
-        self.probability_to_cast_neutrinos_bolt_a = 8
-        self.max_multi_neutrinos_bolt_a = 1
-        self.max_multi_neutrinos_bolt_b = 2
+        self.probability_to_cast_spell_1 = 8
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 2
 
     def update_shot_bullet_fire_shots(self):
         dice = randint(1, 100)
@@ -171,9 +153,9 @@ class TethlorienRed(Tethlorien):
 
         self.stats.time_between_spell_casting = 2000
         self.magic_resistance = 30
-        self.probability_to_cast_neutrinos_bolt_a = 10
-        self.max_multi_neutrinos_bolt_a = 1
-        self.max_multi_neutrinos_bolt_b = 2
+        self.probability_to_cast_spell_1 = 10
+        self.max_multi_spell_1 = 1
+        self.max_multi_spell_2 = 2
 
     def update_shot_bullet_fire_shots(self):
         dice = randint(1, 100)
