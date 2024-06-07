@@ -10,7 +10,7 @@ class TestMinesAndExplosions:
     """Mines and explosions of enough power should kill player and NPC lives."""
 
     @game_test(levels=[3], timeout=3)
-    def test_mine_explosion_should_kill_player_and_npc(self, game):
+    def test_mine_explosion_should_kill_pc_and_npc(self, game):
         game.player.rect.x, game.player.rect.y = 380, 650
         game.player.health = 22
         game.player.lives = 1

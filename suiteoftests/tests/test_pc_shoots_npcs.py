@@ -9,10 +9,11 @@ class TestPlayerShootsNPCs:
     """Player should be able to kill NPCs when he shoots them with enough bullets."""
 
     @game_test(levels=[3], timeout=2)
-    def test_player_must_spend_power_and_bullets_to_shoot(self, game):
-        game.player.rect.x, game.player.rect.y = 240, 620
-        game.player.power = 100
-        game.player.stats['bullets_t03'] = 15
+    def test_pc_must_spend_power_and_bullets_to_shoot(self, game):
+        player = game.player
+        player.rect.x, player.rect.y = 240, 620
+        player.power = 100
+        player.stats['bullets_t03'] = 15
 
         game.add_player_actions((
             ['shot_bullet_t3_photonic', 15],
@@ -21,7 +22,7 @@ class TestPlayerShootsNPCs:
         game.game_loop()
 
         game.assert_test_passed(
-            condition=game.player.power < 100 and game.player.stats['bullets_t03'] == 0,
+            condition=player.power < 100 and player.stats['bullets_t03'] == 0,
             failed_msg="Player must spend power and bullets to shoot bullets.")
 
     @game_test(levels=[4], timeout=3)

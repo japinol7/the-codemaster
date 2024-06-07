@@ -237,6 +237,24 @@ class Level:
         snake_pieces and self.all_sprites.add(snake_pieces)
         dragon_pieces and self.all_sprites.add(dragon_pieces)
 
+    def get_npcs_filtered_by_actor_type(self, actor_type):
+        return [actor for actor in self.npcs if actor.type == actor_type]
+
+    def count_npcs_filtered_by_actor_type(self, actor_type):
+        return sum(1 for actor in self.npcs if actor.type == actor_type)
+
+    def get_items_filtered_by_actor_type(self, actor_type):
+        return [actor for actor in self.items if actor.type == actor_type]
+
+    def count_items_filtered_by_actor_type(self, actor_type):
+        return sum(1 for actor in self.items if actor.type == actor_type)
+
+    def get_actors_in_group_filtered_by_actor_type(self, actor_type, actor_group):
+        return [actor for actor in actor_group if actor.type == actor_type]
+
+    def count_actors_in_group_filtered_by_actor_type(self, actor_type, actor_group):
+        return sum(1 for actor in actor_group if actor.type == actor_type)
+
     @staticmethod
     def factory(levels_module, game):
         return [getattr(levels_module, f"Level{level_id}")(game)

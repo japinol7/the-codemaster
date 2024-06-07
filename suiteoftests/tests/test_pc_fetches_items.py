@@ -17,7 +17,7 @@ class TestPlayerFetchesItems:
     """Player should be able to fetch items."""
 
     @game_test(levels=[4], timeout=2)
-    def test_player_fetches_three_batteries(self, game):
+    def test_pc_fetches_three_batteries(self, game):
         player = game.player
         player.rect.x, player.rect.y = 906, 640
         player.stats['batteries'] = 0
@@ -40,7 +40,7 @@ class TestPlayerFetchesItems:
             failed_msg="Player did not fetch 3 batteries.")
 
     @game_test(levels=[1], timeout=2)
-    def test_player_fetches_two_apples(self, game):
+    def test_pc_fetches_two_apples(self, game):
         player = game.player
         player.rect.x, player.rect.y = 706, 640
         player.stats['apples'] = 0
@@ -62,7 +62,7 @@ class TestPlayerFetchesItems:
             failed_msg="Player did not fetch 2 apples.")
 
     @game_test(levels=[3], timeout=2)
-    def test_player_fetches_cartridge_with_bullets_t1(self, game):
+    def test_pc_fetches_cartridge_with_bullets_t1(self, game):
         player = game.player
         player.rect.x, player.rect.y = 706, 640
         game.player.stats['bullets_t01'] = 5
@@ -83,7 +83,7 @@ class TestPlayerFetchesItems:
             failed_msg="Player did not fetch cartridge with bullets t1.")
 
     @game_test(levels=[3], timeout=2)
-    def test_player_fetches_cartridge_with_bullets_t2(self, game):
+    def test_pc_fetches_cartridge_with_bullets_t2(self, game):
         player = game.player
         player.rect.x, player.rect.y = 706, 640
         game.player.stats['bullets_t02'] = 5
@@ -104,7 +104,7 @@ class TestPlayerFetchesItems:
             failed_msg="Player did not fetch cartridge with bullets t2.")
 
     @game_test(levels=[4], timeout=2)
-    def test_player_fetches_cartridge_with_bullets_t3(self, game):
+    def test_pc_fetches_cartridge_with_bullets_t3(self, game):
         player = game.player
         player.rect.x, player.rect.y = 706, 640
         game.player.stats['bullets_t03'] = 5
@@ -125,7 +125,7 @@ class TestPlayerFetchesItems:
             failed_msg="Player did not fetch cartridge with bullets t3.")
 
     @game_test(levels=[3], timeout=2)
-    def test_player_fetches_cartridge_with_bullets_t4(self, game):
+    def test_pc_fetches_cartridge_with_bullets_t4(self, game):
         player = game.player
         player.rect.x, player.rect.y = 706, 640
         game.player.stats['bullets_t04'] = 5

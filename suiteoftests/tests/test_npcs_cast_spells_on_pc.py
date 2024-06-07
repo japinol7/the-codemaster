@@ -16,7 +16,7 @@ class TestNPCsCastSpellsOnPlayer:
     """NPCs should be able to kill a player life when they cast combat spells on them."""
 
     @game_test(levels=[3], timeout=3)
-    def test_player_hit_with_fire_breath_spell_must_die(self, game):
+    def test_pc_hit_with_fire_breath_spell_must_die(self, game):
         player = game.player
         player.rect.x, player.rect.y = 260, 620
         player.health = 22
@@ -40,7 +40,7 @@ class TestNPCsCastSpellsOnPlayer:
             failed_msg="NPC did not kill the player.")
 
     @game_test(levels=[3], timeout=3)
-    def test_player_hit_with_neutrinos_bolt_must_die(self, game):
+    def test_pc_hit_with_neutrinos_bolt_must_die(self, game):
         player = game.player
         player.rect.x, player.rect.y = 260, 620
         player.health = 22
@@ -64,7 +64,7 @@ class TestNPCsCastSpellsOnPlayer:
             failed_msg="NPC did not kill the player.")
 
     @game_test(levels=[3], timeout=3)
-    def test_player_hit_with_samutrinos_bolt_must_die(self, game):
+    def test_pc_hit_with_samutrinos_bolt_must_die(self, game):
         player = game.player
         player.rect.x, player.rect.y = 260, 620
         player.health = 22
@@ -89,7 +89,7 @@ class TestNPCsCastSpellsOnPlayer:
             failed_msg="NPC did not kill the player.")
 
     @game_test(levels=[3], timeout=6)
-    def test_player_hit_with_vortex_doom_spell_must_die(self, game):
+    def test_pc_hit_with_vortex_doom_spell_must_die(self, game):
         player = game.player
         player.rect.x, player.rect.y = 260, 620
         player.health = 22
@@ -113,7 +113,7 @@ class TestNPCsCastSpellsOnPlayer:
             failed_msg="NPC did not kill the player.")
 
     @game_test(levels=[3], timeout=6)
-    def test_player_hit_with_doom_bold_spell_must_die(self, game):
+    def test_pc_hit_with_doom_bold_spell_must_die(self, game):
         player = game.player
         player.rect.x, player.rect.y = 260, 620
         player.health = 22
@@ -137,13 +137,13 @@ class TestNPCsCastSpellsOnPlayer:
             failed_msg="NPC did not kill the player.")
 
     @game_test(levels=[3], timeout=3)
-    def test_player_hit_with_enough_drain_life_spells_must_die(self, game):
+    def test_pc_hit_with_enough_drain_life_spells_must_die(self, game):
         player = game.player
         player.rect.x, player.rect.y = 260, 620
         player.health = 22
         player.lives = 1
 
-        npc = PumpkinHeadA(600, 660, game, change_x=0)
+        npc = PumpkinHeadA(600, 662, game, change_x=0)
         npc.direction = DIRECTION_LEFT
         npc.can_shot = False
 

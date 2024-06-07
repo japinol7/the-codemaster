@@ -12,6 +12,7 @@ class ActorBaseType(Enum):
     """Actor base types."""
     NONE = 0
     PLATFORM = 1
+    WATER = 7
     PC = 11
     NPC = 21
     ITEM = 51
@@ -94,7 +95,7 @@ class ActorType(Enum):
     DOOR_RIGHT_GOLD = 656
     DOOR_RIGHT_RED = 657
     DOOR_RIGHT_MAGENTA = 658
-    # Doors
+    # Door keys
     DOOR_KEY_GREEN = 711
     DOOR_KEY_BLUE = 712
     DOOR_KEY_YELLOW = 713
@@ -198,11 +199,6 @@ class ActorType(Enum):
     TERMINATOR_EYE_BLUE = 1602
     TERMINATOR_EYE_YELLOW = 1603
     TERMINATOR_EYE_RED = 1604
-    # Terminator Big Eyes
-    TERMINATOR_BIG_EYE_GREEN = 1611
-    TERMINATOR_BIG_EYE_BLUE = 1612
-    TERMINATOR_BIG_EYE_YELLOW = 1613
-    TERMINATOR_BIG_EYE_RED = 1614
     # Mages
     MAGE_FEMALE_A = 1625
     MAGE_FEMALE_A_VANISHED = 1626

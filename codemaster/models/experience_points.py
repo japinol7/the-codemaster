@@ -40,8 +40,6 @@ class ExperiencePoints:
         ActorType.VAMPIRE_MALE.name: 140,
         ActorType.VAMPIRE_FEMALE.name: 160,
         ActorType.DEMON_MALE.name: 500,
-        ActorType.MINE_CYAN.name: 0,
-        ActorType.MINE_LILAC.name: 0,
         ActorType.SNAKE_GREEN.name: 130,
         ActorType.SNAKE_BLUE.name: 165,
         ActorType.SNAKE_YELLOW.name: 230,
@@ -55,5 +53,7 @@ class ExperiencePoints:
         ActorType.TERMINATOR_EYE_YELLOW.name: 260,
         ActorType.TERMINATOR_EYE_RED.name: 410,
         ActorType.ENERGY_SHIELD_A.name: 0,
+        ActorType.MINE_CYAN.name: 0,
+        ActorType.MINE_LILAC.name: 0,
         ActorType.RADIO_A.name: 0,
     }

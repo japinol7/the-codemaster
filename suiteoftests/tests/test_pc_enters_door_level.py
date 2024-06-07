@@ -9,7 +9,7 @@ class TestPlayerEntersDoorLevel:
     """Player should be able to enter a door to go to the next level."""
 
     @game_test(levels=[4, 3], starting_level=1, timeout=2)
-    def test_player_enters_door_to_next_level(self, game):
+    def test_pc_enters_door_to_next_level(self, game):
         game.player.rect.x, game.player.rect.y = 250, 660
 
         game.add_player_actions((
@@ -27,7 +27,7 @@ class TestPlayerEntersDoorLevel:
             failed_msg="Player did not go to the next level.")
 
     @game_test(levels=[4, 3], starting_level=1, timeout=2)
-    def test_player_cannot_enter_locked_door_to_next_level(self, game):
+    def test_pc_cannot_enter_locked_door_to_next_level(self, game):
         game.player.rect.x, game.player.rect.y = 250, 660
 
         game.add_player_actions((

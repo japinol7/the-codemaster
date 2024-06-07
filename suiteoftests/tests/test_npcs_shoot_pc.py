@@ -10,7 +10,7 @@ class TestNPCsShootPlayer:
     """NPCs should be able to kill a player life when they shoot them with enough bullets."""
 
     @game_test(levels=[3], timeout=3)
-    def test_player_hit_with_enough_bullets_must_die(self, game):
+    def test_pc_hit_with_enough_bullets_must_die(self, game):
         game.player.rect.x, game.player.rect.y = 260, 620
         game.player.health = 22
         game.player.lives = 1

@@ -13,7 +13,7 @@ class TestPlayerConsumesStuff:
     """Player should be able to consume items and receiving the items' perks."""
 
     @game_test(levels=[2], timeout=2)
-    def test_player_drinks_health_potion(self, game):
+    def test_pc_drinks_health_potion(self, game):
         game.player.rect.x, game.player.rect.y = 760, 640
         game.player.health = 10
 
@@ -34,7 +34,7 @@ class TestPlayerConsumesStuff:
             failed_msg="Player did not get health after fetching and drinking a health potion.")
 
     @game_test(levels=[2], timeout=2)
-    def test_player_drinks_power_potion(self, game):
+    def test_pc_drinks_power_potion(self, game):
         game.player.rect.x, game.player.rect.y = 760, 640
         game.player.power = 10
 
@@ -55,7 +55,7 @@ class TestPlayerConsumesStuff:
             failed_msg="Player did not get power after fetching and drinking a power potion.")
 
     @game_test(levels=[1], timeout=2)
-    def test_player_eats_apple(self, game):
+    def test_pc_eats_apple(self, game):
         game.player.rect.x, game.player.rect.y = 790, 640
         game.player.health = 10
 

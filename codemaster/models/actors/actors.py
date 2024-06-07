@@ -391,6 +391,8 @@ class Actor(pg.sprite.Sprite):
                     x=self.rect.x + item.x_delta, y=self.rect.y + item.y_delta, game=self.game,
                     **item.args)
                 item.add_to_list.add(new_item)
+                if new_item.base_type == ActorBaseType.ITEM:
+                    self.game.level.items.add(new_item)
                 self.game.level.all_sprites.add(new_item)
                 self.game.is_log_debug and log.debug(f"Dropped: {new_item.id}")
 

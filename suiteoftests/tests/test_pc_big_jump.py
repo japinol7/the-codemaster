@@ -46,9 +46,10 @@ class TestPlayerBigJump:
 
     @game_test(levels=[3], timeout=4)
     def test_big_jump_and_fetch_1_life_n_6_potions_power(self, game):
-        game.player.rect.x, game.player.rect.y = 3000, 500
-        game.player.health = PLAYER_HEALTH_SUPER_HERO
-        game.player.lives = 3
+        player = game.player
+        player.rect.x, player.rect.y = 3000, 500
+        player.health = PLAYER_HEALTH_SUPER_HERO
+        player.lives = 3
 
         game.add_player_actions((
             ['go_left', 22],
@@ -63,7 +64,7 @@ class TestPlayerBigJump:
         game.game_loop()
 
         game.assert_test_passed(
-            condition=game.player.lives == 4 and len(game.player.stats['potions_power']) == 6,
+            condition=player.lives == 4 and len(player.stats['potions_power']) == 6,
             failed_msg="Player did not fetch 1 life recovery and 6 potions_power.")
 
     @game_test(levels=[6], timeout=3)

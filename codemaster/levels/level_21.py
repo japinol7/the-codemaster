@@ -108,22 +108,22 @@ class Level21(Level):
 
         items_to_drop = [
             DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=26, y_delta=-28, **{'random_min': 60, 'random_max': 60}),
+                     x_delta=26, y_delta=-35, **{'random_min': 60, 'random_max': 60}),
             DropItem(PumpkinHeadA, ActorType.PUMPKIN_HEAD_A, probability_to_drop=100,
-                     add_to_list=self.npcs, y_delta=24),
+                     add_to_list=self.npcs, y_delta=15),
             ]
         self.npcs.add(PumpkinZombieA(
-            2050, 358, self.game, border_left=1980, border_right=2390, change_x=2,
+            2050, 370, self.game, border_left=1980, border_right=2390, change_x=2,
             items_to_drop=items_to_drop))
 
         items_to_drop = [
             DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100,
-                     add_to_list=self.cartridges, x_delta=26, y_delta=-28),
+                     add_to_list=self.cartridges, x_delta=26, y_delta=-35),
             DropItem(PumpkinHeadA, ActorType.PUMPKIN_HEAD_A, probability_to_drop=100,
-                     add_to_list=self.npcs, y_delta=24),
+                     add_to_list=self.npcs, y_delta=15),
             ]
         self.npcs.add(PumpkinZombieA(
-            2300, 358, self.game, border_left=1970, border_right=2370, change_x=2,
+            2300, 370, self.game, border_left=1970, border_right=2370, change_x=2,
             items_to_drop=items_to_drop))
 
         # Add doors

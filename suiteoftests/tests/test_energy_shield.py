@@ -11,7 +11,7 @@ class TestEnergyShield:
     """Energy shields should protect actors from bullets."""
 
     @game_test(levels=[3], timeout=3)
-    def test_energy_shield_should_protect_player_from_bullets(self, game):
+    def test_energy_shield_should_protect_pc_from_bullets(self, game):
         player = game.player
         player.rect.x, player.rect.y = 240, 620
         player.health, player.power = 22, 100

@@ -126,10 +126,10 @@ class GameTestSuite:
 
         self.player.die_hard = player_die_hard_mock
 
-    def _set_up(self, level_name_nums=None, starting_level_n=0):
+    def _set_up(self, level_name_nums=None, starting_level_n=0, is_debug=False, is_full_screen=False):
         log.info("Set Up")
         self.aborted = False
-        self._init_settings()
+        self._init_settings(is_debug=is_debug, is_full_screen=is_full_screen)
 
         log.info("Create PC")
         self.player = Player('Pac', self)
@@ -183,20 +183,23 @@ class GameTestSuite:
         log.info("Exit game loop triggered by the timer clock. Test: %s", self.current_test.__name__)
         self.done = True
 
-    def _init_settings(self):
+    def _init_settings(self, is_debug=False, is_full_screen=False):
         log.info("Calculate settings")
         if self.is_settings_initialized_before:
-            Settings.calculate_settings(speed_pct=None)
+            Settings.calculate_settings(speed_pct=None, full_screen=is_full_screen)
             return
 
+        suite = GameTestSuite
         pg_display_info = pg.display.Info()
         Settings.display_start_width = pg_display_info.current_w
         Settings.display_start_height = pg_display_info.current_h
-        Settings.calculate_settings(speed_pct=None)
+        Settings.calculate_settings(speed_pct=None, full_screen=is_full_screen)
         # Set screen to the settings configuration
-        GameTestSuite.size = [Settings.screen_width, Settings.screen_height]
-        GameTestSuite.screen_flags = pg.DOUBLEBUF | pg.HWSURFACE
-        GameTestSuite.screen = pg.display.set_mode(GameTestSuite.size, GameTestSuite.screen_flags)
+        suite.size = [Settings.screen_width, Settings.screen_height]
+        suite.full_screen_flags = pg.FULLSCREEN | pg.SCALED
+        suite.normal_screen_flags = pg.SHOWN
+        suite.screen_flags = suite.full_screen_flags if Settings.is_full_screen else suite.normal_screen_flags
+        suite.screen = pg.display.set_mode(suite.size, suite.screen_flags)
 
         log.info("Load and render resources")
         Resource.load_and_render_background_images()
@@ -204,6 +207,7 @@ class GameTestSuite:
         # Render characters in some colors to use it as a cache
         libg_jp.chars_render_text_tuple(font_name=FONT_DEFAULT_NAME)
         libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)
+        self.is_log_debug = is_debug
         self.is_settings_initialized_before = True
 
     def _init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
@@ -311,7 +315,7 @@ class GameTestSuite:
             self.clock.tick(Settings.fps)
             pg.display.flip()
 
-    def run(self):
+    def run(self, is_debug=False, is_full_screen=False):
         if not self.tests:
             return
 
@@ -331,7 +335,8 @@ class GameTestSuite:
                     continue
                 self._set_up(
                     level_name_nums=test_method_with_setup_levels.level_name_nums,
-                    starting_level_n=test_method_with_setup_levels.starting_level_n)
+                    starting_level_n=test_method_with_setup_levels.starting_level_n,
+                    is_debug=is_debug, is_full_screen=is_full_screen)
                 log.info(f"Start {self.current_test.__name__}")
                 self._create_test_name_msg_actor(test_method_with_setup_levels)
                 self._init_clock_timer(test.timeout)

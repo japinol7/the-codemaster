@@ -23,13 +23,17 @@ def main():
                             prog="suiteoftests")
     parser.add_argument('-n', '--names', default=None,
                         help="a comma separated list of tests to run.")
+    parser.add_argument('-f', '--fullscreen', default=False, action='store_true',
+                        help='Full screen display activated when starting the test suite')
+    parser.add_argument('-d', '--debug', default=None, action='store_true',
+                        help='Set the log level to debug.')
     args = parser.parse_args()
 
     try:
         GameTest.set_tests_to_run(args.names or None)
         test_suite = GameTestSuite()
         GameTest(test_suite)
-        test_suite.run()
+        test_suite.run(is_debug=args.debug, is_full_screen=args.fullscreen)
 
         if test_suite.tests_failed:
             quit(1)
