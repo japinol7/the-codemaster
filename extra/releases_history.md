@@ -10,9 +10,10 @@
     * Fire Breath B: Most of the time they will cast this one.
     * Fire Breath A: Low change to cast this one.
     * VortexOfDoom B: Very low change to cast this one.
+  * They have great resistance to magic. 
 * Add new NPCs:
   * Dragons.
-    * They have some resistance to magic.
+    * They have good or great resistance to magic.
     * They can cast these spells: 
       * Fire Breath B: Most of the time they will cast this one.
       * Fire Breath A: Some change to cast this one.
