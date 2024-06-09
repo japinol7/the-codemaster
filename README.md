@@ -10,7 +10,6 @@
 	author_nickname: japinol
 	author_gitHub: japinol7
 	author_twitter: @japinol
-	main module: codemaster.py
 	description: A spin-off sci-fi mystery based on Pac's Revenge 
       series games by @japinol  (c) 1987, 1988, 2015, 2021, 2024.
 	Python requires: 3.12 or greater.
