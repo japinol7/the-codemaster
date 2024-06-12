@@ -64,8 +64,12 @@ class ClockTimerA(Clock):
         super().__init__(0, 0, game, name=name, owner=owner)
 
         self.clock = ClockTimer(self.game, time_in_secs, trigger_method=self.die_hard)
-        self.dx = (self.owner.rect.w - self.text_img_w) // 2
-        self.dy = -7
+
+        if dx == dy == 0:
+            self.dx = (self.owner.rect.w - self.text_img_w) // 2
+            self.dy = -7
+            return
+        self.dx, self.dy = dx, dy
 
     def update(self):
         self.rect.bottom = self.owner.rect.y + self.dy

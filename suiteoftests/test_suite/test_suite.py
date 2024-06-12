@@ -212,7 +212,7 @@ class GameTestSuite:
 
     def _init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
         self.clock_timer = ClockTimerA(
-            52, 32,
+            42, 26,
             self, time_in_secs,
             owner=self.actor_test_name_holder)
         self.clock_timer.clock.trigger_method = self._clock_die_hard
