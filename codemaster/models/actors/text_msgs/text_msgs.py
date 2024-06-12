@@ -44,6 +44,7 @@ class TextMsg(ActorMsg):
             self.msg_position = TextMsgPosition.NONE
 
         super().__init__(x, y, game, name=name)
+
         self.clock = ClockTimer(self.game, time_in_secs, trigger_method=self.die_hard)
 
     def update(self):

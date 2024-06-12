@@ -212,8 +212,9 @@ class GameTestSuite:
 
     def _init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
         self.clock_timer = ClockTimerA(
-                            self.player.rect.x, self.player.rect.y - 60,
-                            self, time_in_secs)
+            52, 32,
+            self, time_in_secs,
+            owner=self.actor_test_name_holder)
         self.clock_timer.clock.trigger_method = self._clock_die_hard
         self.active_sprites.add(self.clock_timer)
         self.clock_sprites = pg.sprite.Group()

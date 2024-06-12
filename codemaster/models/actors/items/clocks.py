@@ -15,16 +15,20 @@ class Clock(ActorItem):
     """Represents a clock.
     It is not intended to be instantiated.
     """
-    def __init__(self, x, y, game, name=None):
+    def __init__(self, x, y, game, name=None, owner=None):
         self.file_folder = BM_CLOCKS_FOLDER
         self.file_name_key = 'im_clocks'
+        self.owner = owner or game.player
         self.images_sprite_no = 1
         self.category_type = ActorCategoryType.CLOCK
         self.stats = Stats()
         self.stats.health = self.stats.health_total = 1
         self.stats.power = self.stats.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
+
         super().__init__(x, y, game, name=name)
+
+        self.text_img_w = 80
 
     def update_when_hit(self):
         """Cannot be hit."""
@@ -44,8 +48,7 @@ class ClockA(Clock):
         super().__init__(x, y, game, name=name)
 
     def set_on(self):
-        clock = ClockTimerA(self.game.player.rect.x, self.game.player.rect.y - 60,
-                            self.game, self.time_in_secs)
+        clock = ClockTimerA(0, 0, self.game, self.time_in_secs)
         self.game.active_sprites.add([clock])
         self.game.clock_sprites.add([clock])
         self.kill()
@@ -54,16 +57,19 @@ class ClockA(Clock):
 class ClockTimerA(Clock):
     """Represents a clock timer of type A."""
 
-    def __init__(self, x, y, game, time_in_secs, name=None):
+    def __init__(self, dx, dy, game, time_in_secs, name=None, owner=None):
         self.file_mid_prefix = 'timer_01'
         self.type = ActorType.CLOCK_TIMER_A
-        super().__init__(x, y, game, name=name)
+
+        super().__init__(0, 0, game, name=name, owner=owner)
 
         self.clock = ClockTimer(self.game, time_in_secs, trigger_method=self.die_hard)
+        self.dx = (self.owner.rect.w - self.text_img_w) // 2
+        self.dy = -7
 
     def update(self):
-        self.rect.bottom = self.player.rect.y - 6
-        self.rect.x = self.player.rect.x - 14
+        self.rect.bottom = self.owner.rect.y + self.dy
+        self.rect.x = self.owner.rect.x + self.dx
         super().update()
         self.clock.tick()
 

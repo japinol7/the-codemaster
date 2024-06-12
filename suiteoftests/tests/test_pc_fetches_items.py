@@ -9,6 +9,7 @@ from codemaster.models.actors.items import (
     CartridgeBlue,
     CartridgeYellow,
     CartridgeRed,
+    LifeRecoveryA,
     )
 from suiteoftests.test_suite.game_test import game_test
 
@@ -144,3 +145,24 @@ class TestPlayerFetchesItems:
         game.assert_test_passed(
             condition=game.player.stats['bullets_t04'] > 5,
             failed_msg="Player did not fetch cartridge with bullets t4.")
+
+    @game_test(levels=[1], timeout=2)
+    def test_pc_fetches_life(self, game):
+        player = game.player
+        player.rect.x, player.rect.y = 110, 355
+        game.player.lives = 1
+
+        game.add_player_actions((
+            ['go_right', 50],
+            ['stop', 1],
+            ))
+
+        game.level.add_actors((
+            LifeRecoveryA(250, 402, game),
+            ))
+
+        game.game_loop()
+
+        game.assert_test_passed(
+            condition=game.player.lives == 2,
+            failed_msg="Player did not fetch a life.")
