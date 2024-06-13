@@ -105,7 +105,6 @@ class Level4(Level):
         # Add potions
         self.potions.add([
             PotionHealth(2350, 72, self.game),
-            PotionHealth(2350, 72, self.game),
             PotionPower(1000, 150, self.game),
             ])
 
