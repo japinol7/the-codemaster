@@ -38,6 +38,7 @@ class ActorCategoryType(Enum):
     MINE = 10
     EXPLOSION = 11
     RADIO = 12
+    INVISIBLE_HOLDER = 13
     ENERGY_SHIELD = 15
     CLOCK = 16
     PLATFORM = 17
@@ -62,6 +63,7 @@ class ActorType(Enum):
     # Objects
     BATTERY_A = 301
     RADIO_A = 302
+    INVISIBLE_HOLDER_A = 303
     # Life recoveries
     LIFE_RECOVERY = 321
     # Potions

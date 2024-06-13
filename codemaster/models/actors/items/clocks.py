@@ -57,7 +57,8 @@ class ClockA(Clock):
 class ClockTimerA(Clock):
     """Represents a clock timer of type A."""
 
-    def __init__(self, dx, dy, game, time_in_secs, name=None, owner=None):
+    def __init__(self, dx, dy, game, time_in_secs, name=None,
+                 owner=None, x_centered=True, y_on_top=True):
         self.file_mid_prefix = 'timer_01'
         self.type = ActorType.CLOCK_TIMER_A
 
@@ -65,11 +66,13 @@ class ClockTimerA(Clock):
 
         self.clock = ClockTimer(self.game, time_in_secs, trigger_method=self.die_hard)
 
-        if dx == dy == 0:
+        self.dx, self.dy = 0, 0
+        if x_centered:
             self.dx = (self.owner.rect.w - self.text_img_w) // 2
+        self.dx += dx
+        if y_on_top:
             self.dy = -7
-            return
-        self.dx, self.dy = dx, dy
+        self.dy += dy
 
     def update(self):
         self.rect.bottom = self.owner.rect.y + self.dy

@@ -56,4 +56,5 @@ class ExperiencePoints:
         ActorType.MINE_CYAN.name: 0,
         ActorType.MINE_LILAC.name: 0,
         ActorType.RADIO_A.name: 0,
+        ActorType.INVISIBLE_HOLDER_A.name: 0,
     }

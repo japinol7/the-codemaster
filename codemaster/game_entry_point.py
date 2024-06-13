@@ -348,20 +348,29 @@ class Game:
                             self.is_magic_on = not self.is_magic_on
                     elif event.key == pg.K_n:
                         if self.is_debug and self.is_log_debug:
-                            if pg.key.get_mods() & pg.KMOD_LALT and pg.key.get_mods() & pg.KMOD_LSHIFT:
-                                log.debug("Items from all levels, ordered by item name:")
-                                log.debug(utils.pretty_dict_to_string(
-                                    ActorItem.get_all_items(self, sorted_by_level=False)))
-                            elif pg.key.get_mods() & pg.KMOD_LALT:
-                                log.debug("Items from all levels, ordered by level:")
-                                log.debug(utils.pretty_dict_to_string(ActorItem.get_all_items(self)))
-                            elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
+                            if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT \
+                                    and pg.key.get_mods() & pg.KMOD_LSHIFT:
                                 log.debug("NPCs health from all levels, ordered by NPC name:")
                                 log.debug(utils.pretty_dict_to_string(
                                     NPC.get_npcs_health(self, sorted_by_level=False)))
-                            elif pg.key.get_mods() & pg.KMOD_LCTRL:
+                            elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
                                 log.debug("NPCs health from all levels, ordered by level:")
                                 log.debug(utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
+                            elif pg.key.get_mods() & pg.KMOD_LALT and pg.key.get_mods() & pg.KMOD_LSHIFT:
+                                log.debug("Items from all levels, ordered by level:")
+                                log.debug(utils.pretty_dict_to_string(ActorItem.get_all_items(self)))
+                            elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT:
+                                log.debug("Items from all levels, ordered by item name:")
+                                log.debug(utils.pretty_dict_to_string(
+                                    ActorItem.get_all_items(self, sorted_by_level=False)))
+                            elif pg.key.get_mods() & pg.KMOD_LCTRL:
+                                log.debug("NPCs health from the current level:")
+                                log.debug(utils.pretty_dict_to_string(
+                                    NPC.get_npcs_from_level(self.level)))
+                            elif pg.key.get_mods() & pg.KMOD_LALT:
+                                log.debug("Items from the current level:")
+                                log.debug(utils.pretty_dict_to_string(
+                                    ActorItem.get_items_from_level(self.level)))
                     elif event.key == pg.K_h:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.help_info.print_help_keys()

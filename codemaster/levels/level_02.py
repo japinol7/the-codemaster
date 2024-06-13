@@ -20,6 +20,7 @@ from codemaster.models.actors.npcs import (
     )
 from codemaster.models.actors.items import (
     BatteryA,
+    ClockA,
     DoorRightGreen,
     DoorLeftYellow,
     FilesDiskD,
@@ -28,7 +29,6 @@ from codemaster.models.actors.items import (
     MineCyan,
     PotionHealth,
     PotionPower,
-    ClockA,
     )
 from codemaster.levels.level_base import Level
 

@@ -383,13 +383,16 @@
     > Additional keys for debug mode:
     ^ L_Alt + numpad_divide:  toggle logger to debug/info, print info 
                      for hits...
-    ^ n:             print a list of all NPCs in all levels, 
-                     ordered by level
+    ^ n:             print a list of all NPCs in the current level
     ^ + Shift + n:   print a list of all NPCs in all levels, 
-                     ordered by NPC name
-    Alt + n:         print a list of all items in all levels, 
                      ordered by level
+    ^ + Alt + Shift + n:
+                     print a list of all NPCs in all levels, 
+                     ordered by NPC name
+    Alt + n:         print a list of all items in the current level 
     Alt + Shift + n: print a list of all items in all levels, 
+                     ordered by level
+    ^ + Alt + n:     print a list of all items in all levels, 
                      ordered by item name
     ^d:    print debug information to the console
     ^l:    write debug information to a log file

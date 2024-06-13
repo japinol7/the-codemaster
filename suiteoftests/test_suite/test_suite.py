@@ -5,7 +5,7 @@ import traceback
 
 import pygame as pg
 
-from codemaster.models.actors.items import ClockTimerA, RadioA
+from codemaster.models.actors.items import ClockTimerA, InvisibleHolderA
 from codemaster.models.actors.player import Player
 from codemaster.config.constants import (
     APP_TECH_NAME,
@@ -161,7 +161,7 @@ class GameTestSuite:
         pg.display.set_caption(f"{APP_TECH_NAME}_test_suite")
 
         # Add an actor that will hold the test name msg
-        self.actor_test_name_holder = RadioA(5, 390, self)
+        self.actor_test_name_holder = InvisibleHolderA(5, 390, self)
         self.level.add_actors([self.actor_test_name_holder])
 
         self._mock_player_die_hard()
@@ -212,8 +212,9 @@ class GameTestSuite:
 
     def _init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
         self.clock_timer = ClockTimerA(
-            42, 26,
+            0, 26,
             self, time_in_secs,
+            x_centered=False, y_on_top=False,
             owner=self.actor_test_name_holder)
         self.clock_timer.clock.trigger_method = self._clock_die_hard
         self.active_sprites.add(self.clock_timer)

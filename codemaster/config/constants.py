@@ -168,6 +168,7 @@ FILE_NAMES = {
     'im_pj_rip': ('rip_player_ld', 'png'),
     'im_batteries': ('battery', 'png'),
     'im_radios': ('radio', 'png'),
+    'im_invisible_holders': ('invisible_holder', 'png'),
     'life_recoveries': ('life', 'png'),
     'life_heart': ('heart', 'png'),
     'im_snakes': ('im_snake', 'png'),
