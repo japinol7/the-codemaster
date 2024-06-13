@@ -378,13 +378,12 @@ class Player(pg.sprite.Sprite):
         # Check if we hit any potion
         potion_hit_list = pg.sprite.spritecollide(self, self.level.potions, False)
         for potion in potion_hit_list:
+            potion.kill()
             self.stats[potion.type.name] += 1
             if potion.type.name == ActorType.POTION_POWER.name:
                 self.stats['potions_power'].append(potion)
             elif potion.type.name == ActorType.POTION_HEALTH.name:
                 self.stats['potions_health'].append(potion)
-            self.game.level.potions.remove(potion)
-            self.game.level.all_sprites.remove(potion)
             self.sound_effects and self.rec_potion_found_sound.play()
 
         # Check if we hit any life recovery
