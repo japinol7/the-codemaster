@@ -197,7 +197,7 @@ class GameTestSuite:
         # Set screen to the settings configuration
         suite.size = [Settings.screen_width, Settings.screen_height]
         suite.full_screen_flags = pg.FULLSCREEN | pg.SCALED
-        suite.normal_screen_flags = pg.SHOWN
+        suite.normal_screen_flags = pg.SHOWN | pg.SCALED
         suite.screen_flags = suite.full_screen_flags if Settings.is_full_screen else suite.normal_screen_flags
         suite.screen = pg.display.set_mode(suite.size, suite.screen_flags)
 
