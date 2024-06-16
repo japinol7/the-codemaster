@@ -30,7 +30,7 @@ class TestEnergyShield:
 
         game.assert_test_passed(
             condition=player.lives == 1 and len(player.stats['energy_shields_stock']) > 0,
-            failed_msg="Player must spend power and bullets to shoot bullets.")
+            failed_msg="NPC killed the player, but they should be protected by an energy shield.")
 
     @game_test(levels=[5], timeout=3)
     def test_energy_shield_should_protect_npc_from_bullets(self, game):
