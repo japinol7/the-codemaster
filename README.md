@@ -297,56 +297,6 @@
           This can especially happen with snakes and dragons.
 	      > This is not a bug, it's a feature. 
 	        Yeah, really. It is a design decision. ; p
-	> NPCs (bestiary, monsters, and others):
-	    > Bats:
-	        > They bite your head/neck whenever you are too close to them.
-	        > There are four types of bats:
-	            > Blue bats: They deal basic damage.
-	            > Lilac bats: They deal medium damage
-	            > Red bats: They deal a good deal of damage.
-    	        > Black bats: They deal great damage.
-	    > Demons:
-	        > Beware, they have weapons, can cast spells 
-	          and have great resistance to magic.
-	    > Dragons:
-	        > Beware, they have magic weapons 
-	          and good or great resistance to magic.
-	        > You can hit only their head. So do not waste bullets 
-              on their body.
-	        > Beware, the dragons land is very dangerous.
-	    > Ghosts:
-	        > Cannot be killed/hit with normal weapons.
-	          Only Dark magic spells can damage them, i.e, 
-	          Vortex of Doom and Doom Bolts.
-	    > Mages:
-	        > Beware, they have magic weapons
-	          and good resistance to magic.
-	    > Pokoyos.
-	    > Pumpkin zombies:
-	        > Beware, they have magic weapons 
-	          and have some small resistance to magic.
-	    > Pumpkin heads (zombies):
-	        > Beware, they have magic weapons 
-	          and have some small resistance to magic.
-	    > Robots:
-	        > Beware, they have weapons.
-	    > Samurais:
-	        > Beware, they have weapons, magic weapons 
-	          and have some small resistance to magic.
-	    > Skulls.
-	    > Snakes:
-	        > They bite you whenever you are too close to them.
-	        > Their body also gives you damage but much less 
-              than their head.
-	        > You can hit only their head. So do not waste bullets 
-              on their body.
-	    > Terminator Eyes:
-	        > Beware, they have weapons.
-	    > Tethloriens:
-	        > Beware, they have weapons, magic weapons 
-	          and have some small resistance to magic.
-	    > Vampires
-	    > Wolf-men.
 
 
 ## Keyboard keys
@@ -455,7 +405,7 @@
 	    * Execute only one test:
 	        $ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
 	    * Execute only two tests (example using bash):
-	        $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_player_enters_door_to_next_level'
+	        $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_pc_enters_door_to_next_level'
 
 	To run the test suite in full screen mode:
 	    $ python -m suiteoftests -f
