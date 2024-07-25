@@ -245,7 +245,7 @@ class Game:
 
                 self.level.magic_sprites.draw(Game.screen)
 
-        self.show_fps and pg.display.set_caption(f"{self.clock.get_fps():.2f}")
+        self.is_debug and self.show_fps and pg.display.set_caption(f"{self.clock.get_fps():.2f}")
 
     def start(self):
         Game.is_exit_game = False
@@ -436,7 +436,11 @@ class Game:
                             self.player.self_destruction()
                             self.K_b_keydown_seconds = 0
                     if event.key == pg.K_F5:
-                        self.show_fps = not self.show_fps
+                        if (self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL
+                                and pg.key.get_mods() & pg.KMOD_LALT):
+                            self.show_fps = not self.show_fps
+                            if not self.show_fps:
+                                pg.display.set_caption(self.name_short)
                 elif event.type == pg.MOUSEBUTTONDOWN:
                     if self.is_magic_on:
                         self.mouse_pos = pg.mouse.get_pos()
