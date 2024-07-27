@@ -35,7 +35,7 @@ def main():
         GameTest(test_suite)
         test_suite.run(is_debug=args.debug, is_full_screen=args.fullscreen)
 
-        if test_suite.tests_failed:
+        if test_suite.tests_failed or test_suite.tests_aborted:
             quit(1)
     except Exception as e:
         traceback.print_tb(e.__traceback__)

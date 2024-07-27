@@ -98,7 +98,8 @@ class GameTestSuite:
 
     def add_player_actions(self, actions):
         """Adds player actions for the current test."""
-        self.player_actions.extend(actions)
+        for action in actions:
+            self.player_actions.push(list(action))
 
     def _print_test_results(self):
         log.info(GROUP_DASHES_LINE)
