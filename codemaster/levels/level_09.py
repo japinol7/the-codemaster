@@ -30,14 +30,8 @@ from codemaster.levels.level_base import Level
 
 class Level9(Level):
 
-    def __init__(self, game):
-        super().__init__(game)
-        self.id = 8
-        self.name = str(self.id + 1)
-        self.next_level_left = self.id - 1
-        self.next_level_right = self.id + 1
-        self.next_level_top = False
-        self.next_level_bottom = False
+    def __init__(self, id_, game):
+        super().__init__(id_, game)
         self.background = pg.image.load(self.file_name_im_get(9)).convert()
         self.level_limit = -3000
         self.level_limit_top = -1000
@@ -51,10 +45,7 @@ class Level9(Level):
         self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
         self.world_start_pos_ltop = 0, -900
 
-        self._add_actors()
-        self._sprites_all_add()
-
-    def _add_actors(self):
+    def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
         level_plats = [[5, 3160, 170, platforms.PLAT_TYPE_01],
                        [5, 2700, 240, platforms.PLAT_TYPE_01],
@@ -67,8 +58,8 @@ class Level9(Level):
                        [8, 700, 410, platforms.PLAT_TYPE_01],
                        [12, 560, 550, platforms.PLAT_TYPE_01],
                        [2, 2900, 590, platforms.PLAT_TYPE_01],
-                       [10, 3090, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
-                       [22, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
+                       [10, 3090, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+                       [22, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
                        ]
         plats = []
         for platform in level_plats:

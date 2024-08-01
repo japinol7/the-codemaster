@@ -33,14 +33,8 @@ from codemaster.levels.level_base import Level
 
 class Level22(Level):
 
-    def __init__(self, game):
-        super().__init__(game)
-        self.id = 21
-        self.name = str(self.id + 1)
-        self.next_level_left = self.id - 1
-        self.next_level_right = 1
-        self.next_level_top = False
-        self.next_level_bottom = False
+    def __init__(self, id_, game):
+        super().__init__(id_, game)
         self.background = pg.image.load(self.file_name_im_get(12)).convert()
         self.level_limit = -3000
         self.level_limit_top = -1000
@@ -54,10 +48,7 @@ class Level22(Level):
         self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
         self.world_start_pos_ltop = 0, -900
 
-        self._add_actors()
-        self._sprites_all_add()
-
-    def _add_actors(self):
+    def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
         level_plats = [[12, 420, 210, platforms.PLAT_TYPE_01],
                        [5, 3270, 240, platforms.PLAT_TYPE_01],
@@ -67,7 +58,7 @@ class Level22(Level):
                        [2, 1680, 300, platforms.PLAT_TYPE_01],
                        [2, 1420, 575, platforms.PLAT_TYPE_01],
                        [21, 1640, 460, platforms.PLAT_TYPE_01],
-                       [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
+                       [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
                        ]
         plats = []
         for platform in level_plats:

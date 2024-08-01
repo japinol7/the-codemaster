@@ -26,14 +26,8 @@ from codemaster.levels.level_base import Level
 
 class Level1(Level):
 
-    def __init__(self, game):
-        super().__init__(game)
-        self.id = 0
-        self.name = str(self.id + 1)
-        self.next_level_left = False
-        self.next_level_right = self.id + 1
-        self.next_level_top = False
-        self.next_level_bottom = False
+    def __init__(self, id_, game):
+        super().__init__(id_, game)
         self.background = pg.image.load(self.file_name_im_get(1)).convert()
         self.level_limit = -1800
         self.level_limit_top = -1000
@@ -49,10 +43,7 @@ class Level1(Level):
         self.door_previous_pos_player = self.player_start_pos_left
         self.door_previous_pos_world = self.world_start_pos_left
 
-        self._add_actors()
-        self._sprites_all_add()
-
-    def _add_actors(self):
+    def _add_actors_hook(self):
         # Add platforms (blocs, x, y, type)
         level_plats = [[5, 100, 360, platforms.PLAT_TYPE_01],
                        [3, 200, 190, platforms.PLAT_TYPE_01],
@@ -60,10 +51,10 @@ class Level1(Level):
                        [7, 800, 90, platforms.PLAT_TYPE_01],
                        [4, 1360, 560, platforms.PLAT_TYPE_01],
                        [3, 1250, 420, platforms.PLAT_TYPE_01],
-                       [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
-                       [15, 800, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
-                       [24, 1950, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
-                       [15, 400, SCREEN_HEIGHT + 190, platforms.PLAT_TYPE_01],  # earth
+                       [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+                       [15, 800, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+                       [24, 1950, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+                       [15, 400, SCREEN_HEIGHT + 190, platforms.PLAT_TYPE_01],
                        ]
         plats = []
         for platform in level_plats:

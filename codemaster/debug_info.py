@@ -84,7 +84,7 @@ class DebugInfo:
                     ('bullets_t04', self.player.stats['bullets_t04']),
                 ])
                  ),
-                ('levels completed: ', [x[0] + 1 for x in Level.levels_completed(self.game)]),
+                ('levels completed: ', Level.levels_completed_ids(self.game)),
             ])
              )
         ])
