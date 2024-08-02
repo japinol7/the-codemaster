@@ -1,4 +1,4 @@
-"""Module test_player_casts_co_spells_on_npcs."""
+"""Module test_pc_casts_co_spells_on_npcs."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from codemaster.models.actors.actor_types import ActorType

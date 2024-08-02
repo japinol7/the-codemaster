@@ -4,7 +4,10 @@
 
 ### New features and improvements:
 
-* X.
+* Improve level models.
+* Add new NPCs:
+  * Squirrels.
+* Improve the test suite.
 
 <br>
 

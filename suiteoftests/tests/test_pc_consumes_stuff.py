@@ -1,4 +1,4 @@
-"""Module test_player_consumes_stuff."""
+"""Module test_pc_consumes_stuff."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from codemaster.models.actors.items import (

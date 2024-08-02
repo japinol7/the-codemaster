@@ -15,3 +15,4 @@ from . import test_mines_and_explosions
 from . import test_energy_shield
 from . import test_pc_enters_door_level
 from . import test_pc_consumes_stuff
+from . import test_pc_physics

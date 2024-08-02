@@ -12,6 +12,7 @@
 	author_twitter: @japinol
 	description: A spin-off sci-fi mystery based on Pac's Revenge 
       series games by @japinol  (c) 1987, 1988, 2015, 2021, 2024.
+    Pixel art graphics (c) 1987, 1988, 2015, 2021, 2024.
 	Python requires: 3.12 or greater.
 
 
@@ -23,6 +24,8 @@
 
 
 ## Videos
+
+### Video example for previous game version 0.05
 
 [![Video](https://img.youtube.com/vi/g_bQu2BlSw4/maxresdefault.jpg)](https://www.youtube.com/watch?v=g_bQu2BlSw4)
 

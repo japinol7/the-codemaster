@@ -13,6 +13,7 @@ from codemaster.models.actors.npcs import (
     GhostGreen,
     SkullBlue,
     SkullYellow,
+    SquirrelA,
     )
 from codemaster.models.actors.items import (
     BatteryA,
@@ -92,6 +93,7 @@ class Level1(Level):
             GhostGreen(500, 312, self.game, border_left=480, border_right=750, change_x=3),
             SkullBlue(410, 314, self.game, border_left=410, border_right=800, change_x=2),
             SkullYellow(600, 314, self.game, border_left=410, border_right=800, change_x=2),
+            SquirrelA(900, 38, self.game, border_left=805, border_right=1218, change_x=2),
             ])
 
         # Add doors

@@ -71,3 +71,6 @@ from codemaster.models.actors.npcs.pumpkin_zombies import (
 from codemaster.models.actors.npcs.pumpkin_heads import (
     PumpkinHeadA,
     )
+from codemaster.models.actors.npcs.squirrels import (
+    SquirrelA,
+    )

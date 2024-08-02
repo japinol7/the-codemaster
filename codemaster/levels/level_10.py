@@ -15,6 +15,7 @@ from codemaster.models.actors.npcs import (
     BatBlack,
     BatBlue,
     RobotA,
+    SquirrelA,
     TerminatorEyeYellow,
     )
 from codemaster.models.actors.items import (
@@ -108,6 +109,7 @@ class Level10(Level):
         self.npcs.add([
             BatBlue(2650, -20, self.game, border_left=2600, border_right=3080, change_x=3),
             BatBlack(2766, 10, self.game, border_left=2600, border_right=3080, change_x=3),
+            SquirrelA(1500, 388, self.game, border_left=1200, border_right=1800, change_x=2),
             TerminatorEyeYellow(50, 212, self.game, border_left=30, border_right=380, change_x=3),
             ])
 

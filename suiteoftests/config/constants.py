@@ -17,8 +17,8 @@ LOG_END_TEST_APP_MSG = f"End Testing {APP_TECH_NAME}"
 
 IN_GAME_START_MSG = f"Let's test app {APP_TECH_NAME}\nversion: {version.get_version()}"
 
-GROUP_DASHES_LINE = '-' * 62
-DASHES_LINE_SHORT = '-' * 20
+GROUP_DASHES_LINE = '-' * 64
+DASHES_LINE_SHORT = '-' * 22
 
 TestFuncWithSetupLevels = namedtuple(
     'TestMethodWithSetupLevels', [

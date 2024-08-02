@@ -4,8 +4,17 @@ __author__ = 'Joan A. Pinol  (japinol)'
 from codemaster.config.constants import DIRECTION_LEFT
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import DropItem
-from codemaster.models.actors.items import CartridgeGreen, CartridgeYellow
-from codemaster.models.actors.npcs import PumpkinHeadA, PumpkinZombieA, WolfManMale
+from codemaster.models.actors.items import (
+    CartridgeGreen,
+    CartridgeYellow,
+    CartridgeRed,
+    )
+from codemaster.models.actors.npcs import (
+    PumpkinHeadA,
+    PumpkinZombieA,
+    SkullRed,
+    WolfManMale,
+    )
 from suiteoftests.config.constants import PLAYER_HEALTH_SUPER_HERO
 from suiteoftests.test_suite.game_test import game_test
 
@@ -41,6 +50,37 @@ class TestNPCsDropItems:
         game.assert_test_passed(
             condition=cartridge_count == 1,
             failed_msg="NPC must drop a green cartridge.")
+
+    @game_test(levels=[1], timeout=3)
+    def test_npc_drops_2_red_cartridges_when_dies(self, game):
+        level = game.level
+        player = game.player
+        player.rect.x, player.rect.y = 260, 632
+        player.health = PLAYER_HEALTH_SUPER_HERO
+        player.power = 100
+        player.stats['bullets_t04'] = 6
+
+        game.add_player_actions((
+            ['shot_bullet_t4_neutronic', 6],
+            ))
+
+        items_to_drop = [
+            DropItem(CartridgeRed, ActorType.CARTRIDGE_RED, probability_to_drop=100,
+                     add_to_list=level.cartridges, y_delta=-4),
+            DropItem(CartridgeRed, ActorType.CARTRIDGE_RED, probability_to_drop=100,
+                     add_to_list=level.cartridges, y_delta=36),
+            ]
+        npc = SkullRed(600, 668, game, change_x=0, items_to_drop=items_to_drop)
+        npc.direction = DIRECTION_LEFT
+        level.add_actors([npc])
+
+        game.game_loop()
+
+        cartridge_count = level.count_items_filtered_by_actor_type(ActorType.CARTRIDGE_RED)
+
+        game.assert_test_passed(
+            condition=cartridge_count == 2,
+            failed_msg="NPC must drop 2 red cartridges.")
 
     @game_test(levels=[3], timeout=3)
     def test_npc_drops_pumpkin_n_yellow_cartridge_when_dies(self, game):

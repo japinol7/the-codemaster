@@ -11,6 +11,7 @@ from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
     BatBlack,
+    SquirrelA,
     )
 from codemaster.models.actors.items import (
     AppleGreen,
@@ -20,7 +21,6 @@ from codemaster.models.actors.items import (
     DoorLeftYellow,
     DoorRightBlue,
     FilesDiskA,
-    PotionHealth,
     )
 from codemaster.levels.level_base import Level
 
@@ -100,6 +100,8 @@ class Level15(Level):
             BatBlack(1000, 40, self.game, border_left=700, border_right=1650, change_x=3),
             BatBlack(1190, 40, self.game, border_left=700, border_right=1650, change_x=3),
             BatBlack(1380, 40, self.game, border_left=700, border_right=1650, change_x=3),
+            SquirrelA(2700, -42, self.game, border_left=2610, border_right=2960, change_x=2),
+            SquirrelA(2930, -42, self.game, border_left=2610, border_right=2960, change_x=2),
             ])
 
         # Add doors

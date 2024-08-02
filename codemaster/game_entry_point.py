@@ -364,11 +364,11 @@ class Game:
                                 log.debug("\n" + utils.pretty_dict_to_string(
                                     ActorItem.get_all_items(self, sorted_by_level=False)))
                             elif pg.key.get_mods() & pg.KMOD_LCTRL:
-                                log.debug("NPCs health from the current level:")
+                                log.debug("NPCs health from the current level %i:", self.level.id)
                                 log.debug("\n" + utils.pretty_dict_to_string(
                                     NPC.get_npcs_from_level(self.level)))
                             elif pg.key.get_mods() & pg.KMOD_LALT:
-                                log.debug("Items from the current level:")
+                                log.debug("Items from the current level %i:", self.level.id)
                                 log.debug("\n" + utils.pretty_dict_to_string(
                                     ActorItem.get_items_from_level(self.level)))
                     elif event.key == pg.K_h:

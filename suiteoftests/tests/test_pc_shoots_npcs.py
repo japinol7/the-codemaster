@@ -1,7 +1,9 @@
-"""Module test_player_shoots_npcs."""
+"""Module test_pc_shoots_npcs."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+from codemaster.config.constants import DIRECTION_LEFT
 from codemaster.models.actors.actor_types import ActorType
+from codemaster.models.actors.npcs import SquirrelA
 from suiteoftests.test_suite.game_test import game_test
 
 
@@ -41,3 +43,24 @@ class TestPlayerShootsNPCs:
         game.assert_test_passed(
             condition=not bat_black.alive(),
             failed_msg="Player did not kill bat.")
+
+    @game_test(levels=[3], timeout=2)
+    def test_squirrel_hit_with_enough_bullets_must_die(self, game):
+        player = game.player
+        player.rect.x, player.rect.y = 240, 662
+        player.power = 100
+        player.stats['bullets_t02'] = 2
+
+        npc = SquirrelA(600, 686, game, change_x=0)
+        npc.direction = DIRECTION_LEFT
+        game.level.add_actors([npc])
+
+        game.add_player_actions((
+            ['shot_bullet_t2_laser2', 2],
+            ))
+
+        game.game_loop()
+
+        game.assert_test_passed(
+            condition=not npc.alive(),
+            failed_msg="Player did not kill squirrel.")
