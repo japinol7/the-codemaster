@@ -216,3 +216,5 @@ class ActorType(Enum):
     PUMPKIN_HEAD_A = 1668
     # Samurais
     SAMURAI_MALE = 1675
+    # Squirrels
+    SQUIRREL_A = 1681

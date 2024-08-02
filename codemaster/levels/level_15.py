@@ -11,6 +11,7 @@ from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
     BatBlack,
+    SquirrelA,
     )
 from codemaster.models.actors.items import (
     AppleGreen,
@@ -20,21 +21,14 @@ from codemaster.models.actors.items import (
     DoorLeftYellow,
     DoorRightBlue,
     FilesDiskA,
-    PotionHealth,
     )
 from codemaster.levels.level_base import Level
 
 
 class Level15(Level):
 
-    def __init__(self, game):
-        super().__init__(game)
-        self.id = 14
-        self.name = str(self.id + 1)
-        self.next_level_left = self.id - 1
-        self.next_level_right = self.id + 1
-        self.next_level_top = False
-        self.next_level_bottom = False
+    def __init__(self, id_, game):
+        super().__init__(id_, game)
         self.background = pg.image.load(self.file_name_im_get(11)).convert()
         self.level_limit = -3000
         self.level_limit_top = -1000
@@ -48,10 +42,7 @@ class Level15(Level):
         self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
         self.world_start_pos_ltop = 0, -900
 
-        self._add_actors()
-        self._sprites_all_add()
-
-    def _add_actors(self):
+    def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
         level_plats = [[3, 300, 460, platforms.PLAT_TYPE_01],
                        [6, 300, 220, platforms.PLAT_TYPE_01],
@@ -65,8 +56,8 @@ class Level15(Level):
                        [9, 1350, 460, platforms.PLAT_TYPE_01],
                        [4, 2560, 400, platforms.PLAT_TYPE_01],
                        [2, 2860, 560, platforms.PLAT_TYPE_01],
-                       [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
-                       [14, 2700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],  # earth
+                       [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+                       [14, 2700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
                        ]
         plats = []
         for platform in level_plats:
@@ -109,6 +100,8 @@ class Level15(Level):
             BatBlack(1000, 40, self.game, border_left=700, border_right=1650, change_x=3),
             BatBlack(1190, 40, self.game, border_left=700, border_right=1650, change_x=3),
             BatBlack(1380, 40, self.game, border_left=700, border_right=1650, change_x=3),
+            SquirrelA(2700, -42, self.game, border_left=2610, border_right=2960, change_x=2),
+            SquirrelA(2930, -42, self.game, border_left=2610, border_right=2960, change_x=2),
             ])
 
         # Add doors

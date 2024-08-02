@@ -1,5 +1,16 @@
 # Release History
 
+## v0.0.6:
+
+### New features and improvements:
+
+* Improve level models.
+* Add new NPCs:
+  * Squirrels.
+* Improve the test suite.
+
+<br>
+
 ## v0.0.5:
 
 ### New features and improvements:

@@ -462,12 +462,15 @@ class ActorItem(Actor):
     def get_all_items(game, sorted_by_level=True):
         """Returns an ordered dictionary with the item id and the level where you can find them.
           Example:
-              OrderedDict({'BATTERY_A_00001': ('level: 1 ', ' 1'), 'BATTERY_A_00002': ('level: 1 ', ' 1')})
+              OrderedDict({
+              'BATTERY_A_00001': ('level: 1', '1'),
+              'BATTERY_A_00002': ('level: 1', '1'),
+              })
         """
         res = {}
         for level in game.levels:
             for item in level.items:
-                res[item.id] = f"level: {level.name:4}", f"{level.id + 1:3d}"
+                res[item.id] = f"level: {level.name:4}", f"{level.id:3d}"
 
         if sorted_by_level:
             return OrderedDict(sorted([x for x in res.items()], key=lambda x: (x[1][1], x[0])))
@@ -477,11 +480,14 @@ class ActorItem(Actor):
     def get_items_from_level(level):
         """Returns an ordered dictionary with the item id of all items in the level.
           Example:
-              OrderedDict({'BATTERY_A_00001': ('level: 1 ', ' 1'), 'BATTERY_A_00002': ('level: 1 ', ' 1')})
+              OrderedDict({
+              'BATTERY_A_00001': ('level: 1', '1'),
+              'BATTERY_A_00002': ('level: 1', '1')
+              })
         """
         res = {}
         for item in level.items:
-            res[item.id] = f"level: {level.name:4}", f"{level.id + 1:3d}"
+            res[item.id] = f"level: {level.name:4}", f"{level.id:3d}"
 
         return OrderedDict(sorted([x for x in res.items()]))
 
@@ -576,15 +582,17 @@ class NPC(MovingActor):
         """Returns an ordered dictionary with the npc id, its total health, its current health and
         the level where you can find them.
           Example:
-              OrderedDict([('GHOST_GREEN_00001', ('health_total:   38.5', 'health:   38.5', 'level: 01  ', '  1')),
-              ('BAT_BLUE_00002', ('health_total:  112.0', 'health:  112.0', 'level: 04  ', '  4'))])
+              OrderedDict([
+              ('GHOST_GREEN_00001', ('health_total:   38.5', 'health:   38.5', 'level: 1', '1')),
+              ('BAT_BLUE_00002', ('health_total:  112.0', 'health:  112.0', 'level: 4', '4')),
+              ])
         """
         res = {}
         for level in game.levels:
             for npc in level.npcs:
                 res[npc.id] = (f"health_total: {npc.stats.health_total:6}",
                                f"health: {npc.stats.health:6}",
-                               f"level: {level.name:4}", f"{level.id + 1:3d}")
+                               f"level: {level.name:4}", f"{level.id:3d}")
         if sorted_by_level:
             return OrderedDict(sorted([x for x in res.items()], key=lambda x: (x[1][3], x[0])))
         return OrderedDict(sorted([x for x in res.items()]))
@@ -594,14 +602,16 @@ class NPC(MovingActor):
         """Returns an ordered dictionary with the npc id, its total health and its current health
         for all NPCs from the level.
           Example:
-              OrderedDict([('GHOST_GREEN_00001', ('health_total:   38.5', 'health:   38.5', 'level: 01  ', '  1')),
-              ('BAT_BLUE_00002', ('health_total:  112.0', 'health:  112.0', 'level: 04  ', '  4'))])
+              OrderedDict([
+              ('GHOST_GREEN_00001', ('health_total:   38.5', 'health:   38.5', 'level: 1', '1')),
+              ('BAT_BLUE_00002', ('health_total:  112.0', 'health:  112.0', 'level: 4', '4')),
+              ])
         """
         res = {}
         for npc in level.npcs:
             res[npc.id] = (f"health_total: {npc.stats.health_total:6}",
                            f"health: {npc.stats.health:6}",
-                           f"level: {level.name:4}", f"{level.id + 1:3d}")
+                           f"level: {level.name:4}", f"{level.id:3d}")
 
         return OrderedDict(sorted([x for x in res.items()]))
 

@@ -114,7 +114,8 @@ class GameTestSuite:
             for test_failed in self.tests_failed:
                 log.info(f"FAILED:  {test_failed}")
         log.info(DASHES_LINE_SHORT)
-        log.info(f"{self.test_passed_count} tests passed of {self.tests_total}{self.tests_skipped_text}")
+        log.info(f"{self.test_passed_count} tests passed of "
+                 f"{self.tests_total}{self.tests_skipped_text}")
         log.info(GROUP_DASHES_LINE)
         log.info(GROUP_DASHES_LINE)
 
@@ -330,12 +331,15 @@ class GameTestSuite:
         log.info(LOG_START_TEST_APP_MSG)
         log.info(f"Total tests to pass: {self.tests_total}{self.tests_skipped_text}")
         pg.init()
+        count = 0
         try:
             for test in tuple(self.tests):
                 test_method_with_setup_levels = self.tests.pop()
                 self.current_test = test_method_with_setup_levels.test_func
                 if test.skip:
                     continue
+                count += 1
+                log.info(f"------ Test {count:2} / {self.tests_total} ------")
                 self._set_up(
                     level_name_nums=test_method_with_setup_levels.level_name_nums,
                     starting_level_n=test_method_with_setup_levels.starting_level_n,

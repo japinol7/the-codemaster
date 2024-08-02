@@ -24,8 +24,9 @@ class Level:
     world_shift = 0
     world_shift_top = -500
 
-    def __init__(self, game):
-        self.id = None
+    def __init__(self, id_, game):
+        self.id = id_
+        self.name = str(self.id)
         self.game = game
         self.player = game.player
         self.completed = False
@@ -41,7 +42,6 @@ class Level:
         self.files_disks = pg.sprite.Group()
         self.computers = pg.sprite.Group()
         self.npcs = pg.sprite.Group()
-        self.npcs_moving_y = pg.sprite.Group()  # Used to update y-axis border limits for vertical moving NPCs
         self.apples = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
         self.cartridges = pg.sprite.Group()
@@ -62,11 +62,22 @@ class Level:
         self.dragons_body_pieces = pg.sprite.Group()
 
         self.spells_on_level_count = Counter()
+        # Used to update y-axis border limits for vertical moving NPCs
+        self.npcs_moving_y = pg.sprite.Group()
 
         self.game.level = self
 
+        self._add_actors()
+
     def start_up(self):
         self.start_time = self.game.current_time
+
+    def _add_actors(self):
+        self._add_actors_hook()
+        self._sprites_all_add()
+
+    def _add_actors_hook(self):
+        pass
 
     def _sprites_all_add(self):
         for sprite in self.platforms:
@@ -257,12 +268,12 @@ class Level:
 
     @staticmethod
     def factory(levels_module, game):
-        return [getattr(levels_module, f"Level{level_id}")(game)
+        return [getattr(levels_module, f"Level{level_id}")(level_id, game)
                 for level_id in range(1, N_LEVELS + 1)]
 
     @staticmethod
     def factory_by_nums(levels_module, game, level_name_nums=None, level_name_prefix='Level'):
-        return [getattr(levels_module, f"{level_name_prefix}{level_id}")(game)
+        return [getattr(levels_module, f"{level_name_prefix}{level_id}")(level_id, game)
                 for level_id in level_name_nums]
 
     @staticmethod
@@ -272,8 +283,12 @@ class Level:
                          f"{FILE_NAMES['im_backgrounds'][1]}")
 
     @staticmethod
-    def levels_completed(game):
-        return [(x.id, x.name) for x in game.levels if x.completed]
+    def levels_completed_ids(game):
+        return [x.id for x in game.levels if x.completed]
+
+    @staticmethod
+    def levels_completed_count(game):
+        return sum(1 for x in game.levels if x.completed)
 
     @staticmethod
     def clean_entity_ids():

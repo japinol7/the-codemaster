@@ -1,4 +1,4 @@
-"""Module test_player_enters_door_level."""
+"""Module test_pc_enters_door_level."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from codemaster.models.actors.actor_types import ActorType

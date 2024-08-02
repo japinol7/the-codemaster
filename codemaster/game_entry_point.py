@@ -351,25 +351,25 @@ class Game:
                             if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT \
                                     and pg.key.get_mods() & pg.KMOD_LSHIFT:
                                 log.debug("NPCs health from all levels, ordered by NPC name:")
-                                log.debug(utils.pretty_dict_to_string(
+                                log.debug("\n" + utils.pretty_dict_to_string(
                                     NPC.get_npcs_health(self, sorted_by_level=False)))
                             elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
                                 log.debug("NPCs health from all levels, ordered by level:")
-                                log.debug(utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
+                                log.debug("\n" + utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
                             elif pg.key.get_mods() & pg.KMOD_LALT and pg.key.get_mods() & pg.KMOD_LSHIFT:
                                 log.debug("Items from all levels, ordered by level:")
-                                log.debug(utils.pretty_dict_to_string(ActorItem.get_all_items(self)))
+                                log.debug("\n" + utils.pretty_dict_to_string(ActorItem.get_all_items(self)))
                             elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT:
                                 log.debug("Items from all levels, ordered by item name:")
-                                log.debug(utils.pretty_dict_to_string(
+                                log.debug("\n" + utils.pretty_dict_to_string(
                                     ActorItem.get_all_items(self, sorted_by_level=False)))
                             elif pg.key.get_mods() & pg.KMOD_LCTRL:
-                                log.debug("NPCs health from the current level:")
-                                log.debug(utils.pretty_dict_to_string(
+                                log.debug("NPCs health from the current level %i:", self.level.id)
+                                log.debug("\n" + utils.pretty_dict_to_string(
                                     NPC.get_npcs_from_level(self.level)))
                             elif pg.key.get_mods() & pg.KMOD_LALT:
-                                log.debug("Items from the current level:")
-                                log.debug(utils.pretty_dict_to_string(
+                                log.debug("Items from the current level %i:", self.level.id)
+                                log.debug("\n" + utils.pretty_dict_to_string(
                                     ActorItem.get_items_from_level(self.level)))
                     elif event.key == pg.K_h:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
@@ -469,11 +469,11 @@ class Game:
                 self.level.update()
 
             # Check if the player has beaten the game, that is, if he has completed all levels
-            if len(levels.Level.levels_completed(self)) >= self.levels_qty:
+            if levels.Level.levels_completed_count(self) >= self.levels_qty:
                 self.winner = self.player
             if not self.player.is_alive:
                 Game.is_over = True
-                if len(levels.Level.levels_completed(self)) >= self.levels_qty:
+                if levels.Level.levels_completed_count(self) >= self.levels_qty:
                     self.winner = self.player
             if self.winner or Game.is_over:
                 Game.is_over = True

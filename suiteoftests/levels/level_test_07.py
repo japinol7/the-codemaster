@@ -1,4 +1,4 @@
-"""Module level test 1."""
+"""Module level test 7."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 import pygame as pg
@@ -11,20 +11,17 @@ from codemaster.config.constants import (
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.items import (
-    ComputerA,
     DoorLeftGreen,
     DoorRightYellow,
-    FilesDiskB,
-    FilesDiskC,
     )
 from codemaster.levels.level_base import Level
 
 
-class LevelTest1(Level):
+class LevelTest7(Level):
 
     def __init__(self, id_, game):
         super().__init__(id_, game)
-        self.background = pg.image.load(self.file_name_im_get(11)).convert()
+        self.background = pg.image.load(self.file_name_im_get(2)).convert()
         self.level_limit = -2700
         self.level_limit_top = -1000
         self.player_start_pos_left = 250, 480
@@ -39,8 +36,8 @@ class LevelTest1(Level):
 
     def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[6, 100, 460, platforms.PLAT_TYPE_01],
-                       [5, 300, 258, platforms.PLAT_TYPE_01],
+        level_plats = [[5, 100, 460, platforms.PLAT_TYPE_01],
+                       [5, 300, 220, platforms.PLAT_TYPE_01],
                        [4, 980, 562, platforms.PLAT_TYPE_01],
                        [3, 1100, 260, platforms.PLAT_TYPE_01],
                        [9, 1906, 110, platforms.PLAT_TYPE_01],
@@ -72,7 +69,7 @@ class LevelTest1(Level):
             border_top=200, border_down=450, change_y=3, level=self))
 
         # Add sliding bands (n_blocs, x, y, type, velocity)
-        level_plats = [[5, 280, SCREEN_HEIGHT - platforms.PLAT_TYPE_03_SLIDING_R_MID[3], platforms.PLAT_TYPE_03_SLIDING, -2],
+        level_plats = [[5, 280, SCREEN_HEIGHT - platforms.PLAT_TYPE_03_SLIDING_R_MID[3], platforms.PLAT_TYPE_03_SLIDING, 2],
                        ]
         plats = []
         for platform in level_plats:
@@ -82,17 +79,6 @@ class LevelTest1(Level):
             block = platforms.SlidingBands(platform[0], platform[1], platform[2],
                                            self.game, velocity=platform[3], level=self)
             self.platforms.add(block)
-
-        # Add computers
-        self.computers.add([
-            ComputerA(2960, 336, self.game),
-            ])
-
-        # Add files_disks
-        self.files_disks.add([
-            FilesDiskB(480, 222, self.game),
-            FilesDiskC(530, 222, self.game),
-            ])
 
         # Add doors
         self.doors.add([

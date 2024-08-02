@@ -1,4 +1,4 @@
-"""Module test_npcs_shoot_player."""
+"""Module test_npcs_shoot_pc."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from codemaster.config.constants import DIRECTION_LEFT

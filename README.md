@@ -5,13 +5,14 @@
 
 	program: The CodeMaster. Nightmare on Bots' Island.
     name as a package: codemaster 
-	version: 0.0.5
+	version: 0.0.6
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
 	author_twitter: @japinol
 	description: A spin-off sci-fi mystery based on Pac's Revenge 
       series games by @japinol  (c) 1987, 1988, 2015, 2021, 2024.
+    Pixel art graphics (c) 1987, 1988, 2015, 2021, 2024.
 	Python requires: 3.12 or greater.
 
 
@@ -23,6 +24,8 @@
 
 
 ## Videos
+
+### Video example for previous game version 0.05
 
 [![Video](https://img.youtube.com/vi/g_bQu2BlSw4/maxresdefault.jpg)](https://www.youtube.com/watch?v=g_bQu2BlSw4)
 

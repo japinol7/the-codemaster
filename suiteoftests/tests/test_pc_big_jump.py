@@ -1,4 +1,4 @@
-"""Module test_player_big_jump."""
+"""Module test_pc_big_jump."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from suiteoftests.config.constants import PLAYER_HEALTH_SUPER_HERO
