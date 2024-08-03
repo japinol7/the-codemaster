@@ -14,6 +14,7 @@ from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
     SnakeGreen,
     SnakeYellow,
+    SquirrelA,
     )
 from codemaster.models.actors.items import (
     BatteryA,
@@ -31,19 +32,13 @@ from codemaster.levels.level_base import Level
 class Level9(Level):
 
     def __init__(self, id_, game):
-        super().__init__(id_, game)
         self.background = pg.image.load(self.file_name_im_get(9)).convert()
-        self.level_limit = -3000
-        self.level_limit_top = -1000
         self.player_start_pos_left = 220, 520
         self.player_start_pos_right = 520, 520
         self.player_start_pos_rtop = 800, -292
         self.player_start_pos_ltop = 80, 100
-        self.player_start_pos_bottom = 300, 800
-        self.world_start_pos_left = 0, -758
-        self.world_start_pos_right = self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758
-        self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
-        self.world_start_pos_ltop = 0, -900
+        
+        super().__init__(id_, game)
 
     def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
@@ -89,6 +84,21 @@ class Level9(Level):
             ])
 
         # Add NPCs
+        self.npcs.add([
+            SquirrelA(700, 358, self.game, border_left=690, border_right=1210, change_x=2),
+            SquirrelA(740, 358, self.game, border_left=690, border_right=1210, change_x=3),
+            SquirrelA(820, 358, self.game, border_left=700, border_right=1210, change_x=2),
+            SquirrelA(860, 358, self.game, border_left=690, border_right=1210, change_x=1),
+            SquirrelA(900, 358, self.game, border_left=700, border_right=1210, change_x=2),
+            SquirrelA(660, 498, self.game, border_left=590, border_right=1300, change_x=2),
+            SquirrelA(700, 498, self.game, border_left=590, border_right=1270, change_x=3),
+            SquirrelA(820, 498, self.game, border_left=600, border_right=1300, change_x=2),
+            SquirrelA(860, 498, self.game, border_left=590, border_right=1200, change_x=1),
+            SquirrelA(900, 498, self.game, border_left=600, border_right=1260, change_x=2),
+            SquirrelA(970, 498, self.game, border_left=590, border_right=1300, change_x=1),
+            SquirrelA(1100, 498, self.game, border_left=600, border_right=1290, change_x=1),
+            ])
+
         items_to_drop = [
             DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=70, add_to_list=self.potions,
                      x_delta=16, **{'random_min': 65, 'random_max': 75}),

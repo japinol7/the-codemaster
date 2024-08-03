@@ -30,19 +30,13 @@ from codemaster.models.actors.text_msgs import TextMsg
 class Level14(Level):
 
     def __init__(self, id_, game):
-        super().__init__(id_, game)
         self.background = pg.image.load(self.file_name_im_get(1)).convert()
-        self.level_limit = -3000
-        self.level_limit_top = -1000
         self.player_start_pos_left = 220, 520
         self.player_start_pos_right = 520, 520
         self.player_start_pos_rtop = 250, -440
         self.player_start_pos_ltop = 80, 100
-        self.player_start_pos_bottom = 300, 800
-        self.world_start_pos_left = 0, -758
-        self.world_start_pos_right = self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758
-        self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
-        self.world_start_pos_ltop = 0, -900
+        
+        super().__init__(id_, game)
 
     def update_pc_enter_level(self):
         super().update_pc_enter_level()

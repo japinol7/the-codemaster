@@ -15,6 +15,14 @@ from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryTyp
 from codemaster.clean_new_game import clean_entity_ids
 from codemaster.models.actors.actors import MovingActor
 
+LEVEL_SIZE_LIMIT_DEFAULT = -3000
+LEVEL_SIZE_LIMIT_TOP_DEFAULT = -1000
+LEVEL_WORLD_START_POS_LEFT = 0, -758
+
+
+class LevelException(Exception):
+    pass
+
 
 class Level:
     """Represents a base level.
@@ -66,6 +74,34 @@ class Level:
         self.npcs_moving_y = pg.sprite.Group()
 
         self.game.level = self
+
+        if not getattr(self, 'level_limit', None):
+            self.level_limit = LEVEL_SIZE_LIMIT_DEFAULT
+
+        if not getattr(self, 'level_limit_top', None):
+            self.level_limit_top = LEVEL_SIZE_LIMIT_TOP_DEFAULT
+
+        if not getattr(self, 'background', None):
+            raise LevelException(f"Level {self.id} does not set attribute: background")
+
+        if not getattr(self, 'player_start_pos_left', None):
+            raise LevelException(f"Level {self.id} does not set attribute: player_start_pos_left")
+
+        if not getattr(self, 'player_start_pos_right', None):
+            raise LevelException(f"Level {self.id} does not set attribute: player_start_pos_right")
+
+        if not getattr(self, 'player_start_pos_rtop', None):
+            raise LevelException(f"Level {self.id} does not set attribute: player_start_pos_rtop")
+
+        if not getattr(self, 'player_start_pos_ltop', None):
+            raise LevelException(f"Level {self.id} does not set attribute: player_start_pos_ltop")
+
+        if not getattr(self, 'world_start_pos_left', None):
+            self.world_start_pos_left = LEVEL_WORLD_START_POS_LEFT
+
+        self.world_start_pos_right = self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758
+        self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
+        self.world_start_pos_ltop = 0, -900
 
         self._add_actors()
 

@@ -28,19 +28,17 @@ from codemaster.levels.level_base import Level
 class Level1(Level):
 
     def __init__(self, id_, game):
-        super().__init__(id_, game)
-        self.background = pg.image.load(self.file_name_im_get(1)).convert()
         self.level_limit = -1800
-        self.level_limit_top = -1000
+        self.background = pg.image.load(self.file_name_im_get(1)).convert()
         self.player_start_pos_left = 220, 480
         self.player_start_pos_right = 600, 480
         self.player_start_pos_rtop = 300, 100
         self.player_start_pos_ltop = 80, 100
-        self.player_start_pos_bottom = 300, 800
         self.world_start_pos_left = 0, -658
-        self.world_start_pos_right = self.level_limit + self.SCROLL_LV_NEAR_RIGHT_SIDE, -758
-        self.world_start_pos_rtop = self.level_limit + 500 + self.SCROLL_LV_NEAR_RIGHT_SIDE, -900
-        self.world_start_pos_ltop = 0, -900
+
+        super().__init__(id_, game)
+
+        # Special init attributes for first level
         self.door_previous_pos_player = self.player_start_pos_left
         self.door_previous_pos_world = self.world_start_pos_left
 

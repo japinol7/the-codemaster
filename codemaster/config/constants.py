@@ -30,7 +30,6 @@ NEAR_RIGHT_SIDE = SCREEN_WIDTH - NEAR_LEFT_SIDE
 SCREEN_BAR_NEAR_TOP = 10
 SCREEN_BAR_NEAR_BOTTOM = SCREEN_HEIGHT - 25
 
-
 # Directions for moving actors. They are also used for sprite images frame index
 DIRECTION_LEFT = 1
 DIRECTION_RIGHT = 2
