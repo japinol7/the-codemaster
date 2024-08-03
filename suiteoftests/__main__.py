@@ -10,7 +10,7 @@ from codemaster.tools.logger.logger import log, LOGGER_FORMAT
 from suiteoftests.test_suite.test_suite import GameTestSuite
 from suiteoftests.test_suite.game_test import GameTest
 
-# Import the test classes to run
+# Import the tests to run
 from . import tests
 
 logger.add_stdout_handler(LOGGER_FORMAT)
