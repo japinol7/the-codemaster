@@ -169,7 +169,7 @@ class Actor(pg.sprite.Sprite):
         self._load_sprites()
 
         if not self.image:
-            print("oops!")
+            log.warning("Actor image missing: %s", self.id)
 
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -438,6 +438,10 @@ class Actor(pg.sprite.Sprite):
         self.stats.power += self.stats.power_recovery
         if self.stats.power > self.stats.power_total:
             self.stats.power = self.stats.power_total
+
+    @staticmethod
+    def factory(actors_module, type_name, x, y, game, kwargs):
+        return getattr(actors_module, type_name)(x, y, game, **kwargs)
 
     @staticmethod
     def file_name_im_get(folder, file_name_key, mid_prefix, suffix_index):

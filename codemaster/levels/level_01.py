@@ -9,7 +9,11 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     )
 from codemaster.models.actors.items import platforms
+from codemaster.models.actors.actor_types import ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.npcs import (
+    BatBlue,
+    BatBlack,
     GhostGreen,
     SkullBlue,
     SkullYellow,
@@ -93,6 +97,14 @@ class Level1(Level):
             SkullYellow(600, 314, self.game, border_left=410, border_right=800, change_x=2),
             SquirrelA(900, 38, self.game, border_left=805, border_right=1218, change_x=2),
             ])
+
+        items_to_drop = [
+            DropItem(BatBlack, ActorType.BAT_BLACK, probability_to_drop=100, add_to_list=self.npcs,
+                     **{'border_left': 640, 'border_right': 1040, 'change_x': 2}),
+            ]
+        self.npcs.add(BatBlue(
+            640, 510, self.game,
+            border_left=640, border_right=1040, change_x=2, items_to_drop=items_to_drop))
 
         # Add doors
         self.doors.add([
