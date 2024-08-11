@@ -94,5 +94,5 @@ def change_screen_level(game, door):
     game.player.rect.y = game.level.door_previous_pos_player[1]
     game.player.change_y = 0
 
-    if game.level_no not in game.player.stats['levels_visited']:
+    if game.level_no + 1 not in game.player.stats['levels_visited']:
         game.level.update_pc_enter_level()
