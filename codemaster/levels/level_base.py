@@ -29,8 +29,6 @@ class Level:
     It is not intended to be instantiated.
     """
     SCROLL_LV_NEAR_RIGHT_SIDE = 150
-    world_shift = 0
-    world_shift_top = -500
 
     def __init__(self, id_, game):
         self.id = id_
@@ -39,9 +37,14 @@ class Level:
         self.player = game.player
         self.completed = False
         self.start_time = None
+        self.world_shift_initial = 0
+        self.world_shift_top_initial = -500
+        self.world_shift = self.world_shift_initial
+        self.world_shift_top = self.world_shift_top_initial
         self.door_previous_position = DOOR_POSITION_L
         self.door_previous_pos_player = 80, 480
         self.door_previous_pos_world = 0, -758
+        self.previous_door_crossed = None
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.decors = pg.sprite.Group()
@@ -286,6 +289,9 @@ class Level:
 
     def get_npcs_filtered_by_actor_type(self, actor_type):
         return [actor for actor in self.npcs if actor.type == actor_type]
+
+    def get_npc_by_id(self, actor_id):
+        return [actor for actor in self.npcs if actor.id == actor_id][0]
 
     def count_npcs_filtered_by_actor_type(self, actor_type):
         return sum(1 for actor in self.npcs if actor.type == actor_type)

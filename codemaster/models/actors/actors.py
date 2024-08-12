@@ -101,6 +101,11 @@ class Actor(pg.sprite.Sprite):
             self.is_item = False
         if not getattr(self, 'is_a_snake', None):
             self.is_a_snake = False
+        if not getattr(self, 'is_a_dragon', None):
+            self.is_a_dragon = False
+
+        if not getattr(self, 'is_not_initial_actor', None):
+            self.is_not_initial_actor = False
 
         if getattr(self, 'can_be_killed_normally', None) is None:
             self.can_be_killed_normally = True
@@ -394,6 +399,7 @@ class Actor(pg.sprite.Sprite):
                 if new_item.base_type == ActorBaseType.ITEM:
                     self.game.level.items.add(new_item)
                 self.game.level.all_sprites.add(new_item)
+                new_item.is_not_initial_actor = True
                 self.game.is_log_debug and log.debug(f"Dropped: {new_item.id}")
 
     def is_actor_on_the_left(self, actor):
