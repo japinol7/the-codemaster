@@ -8,6 +8,7 @@
 * Add new NPCs:
   * Squirrels.
 * Improve the test suite.
+* Fix some minor issues.
 
 <br>
 
