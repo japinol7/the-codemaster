@@ -18,7 +18,11 @@ from codemaster.config.constants import (
     ACTOR_TIME_BETWEEN_ENERGY_SHIELD_CASTING_DEFAULT,
     )
 from codemaster.models.experience_points import ExperiencePoints
-from codemaster.models.actors.actor_types import ActorBaseType, ActorCategoryType, ActorType
+from codemaster.models.actors.actor_types import (
+    ActorBaseType,
+    ActorCategoryType,
+    ActorType
+    )
 from codemaster.models.actors.items import bullets
 from codemaster.models.actors.items.bullets import Bullet, BulletType
 
@@ -215,7 +219,6 @@ class Actor(pg.sprite.Sprite):
                 walking_frames_r.append(image)
                 if self.can_move:
                     image = pg.transform.flip(image, True, False)
-                image.set_colorkey(Color.BLACK)
                 walking_frames_l.append(image)
             Actor.sprite_images[self.type.name] = (image, walking_frames_l, walking_frames_r)
             self.image = walking_frames_r[0]

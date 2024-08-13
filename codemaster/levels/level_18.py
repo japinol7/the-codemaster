@@ -141,7 +141,7 @@ class Level18(Level):
             border_left=1100, border_right=1280, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
                      **{'random_min': 60, 'random_max': 60}),
             ]
         self.npcs.add(DemonMale(
@@ -157,7 +157,7 @@ class Level18(Level):
             border_left=2080, border_right=2450, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
                      **{'random_min': 25, 'random_max': 30}),
             ]
         tethlorien_lilac = TethlorienLilac(

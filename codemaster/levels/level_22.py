@@ -107,7 +107,7 @@ class Level22(Level):
             border_left=550, border_right=1130, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100,
+            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100,
                      add_to_list=self.potions, **{'random_min': 30, 'random_max': 40}),
             ]
         self.npcs.add(SamuraiMale(

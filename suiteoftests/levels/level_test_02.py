@@ -128,7 +128,7 @@ class LevelTest2(Level):
             ])
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
                      x_delta=16, **{'random_min': 58, 'random_max': 72}),
             ]
         self.npcs.add([

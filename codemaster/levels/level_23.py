@@ -31,7 +31,7 @@ class Level23(Level):
         self.background = pg.image.load(self.file_name_im_get(4)).convert()
         self.player_start_pos_left = 220, 520
         self.player_start_pos_right = 520, 520
-        self.player_start_pos_rtop = 250, -440
+        self.player_start_pos_rtop = 880, -292
         self.player_start_pos_ltop = 80, 100
         
         super().__init__(id_, game)
@@ -76,7 +76,7 @@ class Level23(Level):
             ])
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
                      **{'random_min': 60, 'random_max': 60}),
             ]
         self.npcs.add(DemonMale(
@@ -84,7 +84,7 @@ class Level23(Level):
             border_left=300, border_right=600, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
+            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
                      **{'random_min': 25, 'random_max': 30}),
             ]
         tethlorien_lilac = TethlorienLilac(

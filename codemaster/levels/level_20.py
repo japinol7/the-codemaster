@@ -37,9 +37,8 @@ class Level20(Level):
     def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
         level_plats = [[8, 620, 440, platforms.PLAT_TYPE_01],
-                       [4, 1460, 440, platforms.PLAT_TYPE_01],
                        [1, 1260, 570, platforms.PLAT_TYPE_01],
-                       [10, 1700, 440, platforms.PLAT_TYPE_01],
+                       [14, 1460, 440, platforms.PLAT_TYPE_01],
                        [1, 2580, 350, platforms.PLAT_TYPE_01],
                        [3, 2700, 250, platforms.PLAT_TYPE_01],
                        [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
