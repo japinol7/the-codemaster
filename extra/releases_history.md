@@ -4,9 +4,11 @@
 
 ### New features and improvements:
 
-* Improve level models.
+* Add three new game levels. Current level count: 27.
 * Add new NPCs:
+  * Kung Fu Fighters.
   * Squirrels.
+* Improve level models.
 * Improve the test suite.
 * Fix some minor issues.
 
@@ -16,7 +18,7 @@
 
 ### New features and improvements:
 
-* Add twelve new levels. Current level count: 24.
+* Add twelve new game levels. Current level count: 24.
 * Improve NPCs: 
   * Demons now can cast these spells:
     * Fire Breath B: Most of the time they will cast this one.
@@ -69,7 +71,7 @@
 
 ### New features and improvements:
 
-* Add six new levels. Current level count: 12.
+* Add six new game levels. Current level count: 12.
 * Add new NPCs:
   * Pokoyos.
   * Robots.

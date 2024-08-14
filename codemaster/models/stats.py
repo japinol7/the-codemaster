@@ -19,6 +19,7 @@ class Stats:
         self.time_between_shots = None
         self.energy_shield = None
         self.energy_shields_stock = []
+        self.is_not_initial_actor = False
 
 
 class NPCStats(Stats):

@@ -627,19 +627,3 @@ class NPC(MovingActor):
                            f"level: {level.name:4}", f"{level.id:3d}")
 
         return OrderedDict(sorted([x for x in res.items()]))
-
-
-class PC(MovingActor):
-    """Represents a PC.
-    It is not intended to be instantiated.
-    """
-    def __init__(self, x, y, game, name=None, change_x=0, change_y=0):
-        self.base_type = ActorBaseType.PC
-        self.category_type = ActorCategoryType.PC
-        self.is_pc = True
-        super().__init__(x, y, game, name=name, change_x=change_x, change_y=change_y)
-        self.stats_old = None
-        self.stats_render = None
-
-    def update(self):
-        super().update()

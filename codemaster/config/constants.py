@@ -7,7 +7,7 @@ import sys
 
 from codemaster.version import version
 
-N_LEVELS = 24
+N_LEVELS = 27
 
 SCREEN_WIDTH = 1160
 SCREEN_HEIGHT = 778
@@ -194,6 +194,7 @@ FILE_NAMES = {
     'im_en_mages': ('mage', 'png'),
     'im_en_robots': ('robot', 'png'),
     'im_tethloriens': ('tethlorien', 'png'),
+    'im_en_kung_fu_fighters': ('kung_fu_fighter', 'png'),
     'im_en_samurais': ('samurai', 'png'),
     'im_en_squirrels': ('squirrel', 'png'),
     'im_en_pumpkin_zombies': ('pumpkin_zombie', 'png'),

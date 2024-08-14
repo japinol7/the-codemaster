@@ -5,6 +5,7 @@ from codemaster.config.constants import DIRECTION_LEFT
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     DemonMale,
+    KungFuFighterMale,
     PumpkinHeadA,
     SamuraiMale,
     TethlorienRed,
@@ -71,6 +72,31 @@ class TestNPCsCastSpellsOnPlayer:
         player.lives = 1
 
         npc = SamuraiMale(600, 654, game, change_x=0)
+        npc.direction = DIRECTION_LEFT
+        npc.can_shot = False
+
+        npc.spell_1_name = ActorType.SAMUTRINOS_BOLT_A.name
+        npc.probability_to_cast_spell_1 = 100
+        npc.probability_to_cast_spell_2 = 0
+        npc.probability_to_cast_spell_3 = 0
+        npc.stats.time_between_spell_casting = 820
+
+        game.level.add_actors([npc])
+
+        game.game_loop()
+
+        game.assert_test_passed(
+            condition=player.lives < 1,
+            failed_msg="NPC did not kill the player.")
+
+    @game_test(levels=[3], timeout=3)
+    def test_pc_hit_with_kungfu_samutrinos_bolt_must_die(self, game):
+        player = game.player
+        player.rect.x, player.rect.y = 260, 620
+        player.health = 22
+        player.lives = 1
+
+        npc = KungFuFighterMale(600, 656, game, change_x=0)
         npc.direction = DIRECTION_LEFT
         npc.can_shot = False
 

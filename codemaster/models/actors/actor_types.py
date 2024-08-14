@@ -215,6 +215,8 @@ class ActorType(Enum):
     PUMPKIN_ZOMBIE_A = 1667
     PUMPKIN_HEAD_A = 1668
     # Samurais
-    SAMURAI_MALE = 1675
+    SAMURAI_MALE = 1673
+    # Kung Fu Fighter
+    KUNG_FU_FIGHTER_MALE = 1677
     # Squirrels
     SQUIRREL_A = 1681

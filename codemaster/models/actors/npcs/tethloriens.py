@@ -42,7 +42,6 @@ class Tethlorien(NPC):
 
         self.spell_1_name = ActorType.SAMUTRINOS_BOLT_A.name
         self.spell_2_name = ActorType.SAMUTRINOS_BOLT_B.name
-        self.probability_to_cast_spell_2 = 100
         self.probability_to_cast_spell_1 = 8
         self.probability_to_cast_spell_2 = 100
         self.max_multi_spell_1 = 1

@@ -6,6 +6,7 @@ import pygame as pg
 from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
+    DOOR_DEST_TR,
     )
 from codemaster.models.actors.actors import DropItem, ActorType
 from codemaster.models.actors.items import platforms
@@ -19,6 +20,7 @@ from codemaster.models.actors.npcs import (
 from codemaster.models.actors.items import (
     BatteryA,
     DoorLeftBlue,
+    DoorRightAqua,
     DoorRightRed,
     PotionHealth,
     )
@@ -49,8 +51,8 @@ class Level23(Level):
                        [9, 1900, 110, platforms.PLAT_TYPE_01],
                        [6, 2580, 440, platforms.PLAT_TYPE_01],
                        [4, 2730, 98, platforms.PLAT_TYPE_01],
-                       [1, 3200, 196, platforms.PLAT_TYPE_01],
-                       [1, 3060, 294, platforms.PLAT_TYPE_01],
+                       [6, 3200, 240, platforms.PLAT_TYPE_01],
+                       [1, 3060, 310, platforms.PLAT_TYPE_01],
                        [1, 2395, 586, platforms.PLAT_TYPE_01],
                        [19, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
                        [24, 2140, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
@@ -92,10 +94,10 @@ class Level23(Level):
             border_left=1320, border_right=1680, change_x=2, items_to_drop=items_to_drop)
         self.npcs.add(tethlorien_lilac)
         EnergyShield.actor_acquire_energy_shield(tethlorien_lilac, self.game, health_total=200)
-        tethlorien_lilac.stats.energy_shield.activate()
 
         # Add doors
         self.doors.add([
             DoorLeftBlue(2, 550, self.game, level_dest=21, door_dest_pos=DOOR_DEST_NL),
+            DoorRightAqua(3480, 52, self.game, level_dest=26, door_dest_pos=DOOR_DEST_TR),
             DoorRightRed(3640, 550, self.game, level_dest=23, door_dest_pos=DOOR_DEST_NL),
             ])

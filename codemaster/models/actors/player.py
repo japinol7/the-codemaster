@@ -651,6 +651,8 @@ class Player(pg.sprite.Sprite):
                 self.stats['magic_attack'] = DoomBoltA
                 log.info("You have acquired a Doom Bolt A spell.")
 
+                self.game.is_magic_on = True
+
                 TextMsg.create("You have acquired the following skills:\n"
                                f"> Energy Shield A\n"
                                "You have acquired the following spells:\n"

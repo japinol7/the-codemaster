@@ -134,7 +134,7 @@
 	        as the player enters that level again.
 	      > This is not a bug, it's a feature. 
 	        Yeah, really. It is a design decision.
-	    > Number of levels implemented for this demo: 24.
+	    > Number of levels implemented for this demo: 27.
 	> Doors: 
 	    > Use them to go to other levels.
         > To unlock a locked door you need to use the right door key.
