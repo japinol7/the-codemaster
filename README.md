@@ -4,7 +4,6 @@
 	1988 RPG platformer game Pac's Revenge.
 
 	program: The CodeMaster. Nightmare on Bots' Island.
-    name as a package: codemaster 
 	version: 0.0.6
 	author: Joan A. Pinol
 	author_nickname: japinol

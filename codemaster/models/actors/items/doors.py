@@ -59,7 +59,8 @@ class Door(ActorItem):
     @staticmethod
     def get_doors_dest_to_level_filtered_by_door_type_position(level_id, door_position, game):
         """Gets all the doors that go to a given level filtered by a given
-        door type position."""
+        door type position.
+        """
         return [door for level in game.levels for door in level.doors
                 if door.level_dest == level_id and door.door_type == door_position]
 
