@@ -7,7 +7,11 @@ import pygame as pg
 
 
 from codemaster.config.constants import BM_SELECTORS_FOLDER, DIRECTION_RIP
-from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
+from codemaster.models.actors.actor_types import (
+    ActorBaseType,
+    ActorCategoryType,
+    ActorType,
+    )
 from codemaster.models.actors.actors import ActorItem
 from codemaster.models.stats import Stats
 from codemaster.tools.utils.colors import Color
@@ -25,6 +29,7 @@ class Selector(ActorItem):
         self.file_folder = BM_SELECTORS_FOLDER
         self.file_name_key = 'im_selectors'
         self.images_sprite_no = 1
+        self.base_type = ActorBaseType.SELECTOR
         self.category_type = ActorCategoryType.SELECTOR
         self.stats = Stats()
         self.stats.health = self.stats.health_total = 1

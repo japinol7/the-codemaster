@@ -6,7 +6,11 @@ import pygame as pg
 from codemaster.config.constants import BM_EXPLOSIONS_FOLDER, DIRECTION_RIP
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.tools.logger.logger import log
-from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
+from codemaster.models.actors.actor_types import (
+    ActorBaseType,
+    ActorCategoryType,
+    ActorType,
+    )
 from codemaster.models.actors.actors import ActorItem
 from codemaster.models.stats import Stats
 
@@ -19,6 +23,7 @@ class Explosion(ActorItem):
         self.file_folder = BM_EXPLOSIONS_FOLDER
         self.file_name_key = 'explosions'
         self.images_sprite_no = 8
+        self.base_type = ActorBaseType.EXPLOSION
         self.category_type = ActorCategoryType.EXPLOSION
         self.is_from_player_shot = is_from_player_shot
         self.owner = owner
@@ -28,7 +33,9 @@ class Explosion(ActorItem):
         self.stats.strength = self.stats.strength_total = 1
         self.animation_speed = 0.4
         self.transparency_alpha = True
+
         super().__init__(x, y, game, name=name)
+
         self.player.sound_effects and self.player.explosion_sound.play()
 
     def update_after_inc_index_hook(self):

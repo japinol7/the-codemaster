@@ -9,9 +9,12 @@ from codemaster.models.actors.npcs.dragons import DragonBodyPiece
 from codemaster.models.clocks import ClockBase
 from codemaster.models.special_effects.light import Light
 from codemaster.models.special_effects.vortex import Vortex
+from codemaster.tools.logger.logger import log
 
 
 def clean_entity_ids():
+    log.info("Clean game data")
+    Actor.actors.clear()
     Actor.type_id_count.clear()
     SnakeBodyPiece.type_id_count.clear()
     DragonBodyPiece.type_id_count.clear()

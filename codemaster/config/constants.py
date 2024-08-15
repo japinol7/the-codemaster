@@ -79,6 +79,9 @@ APP_TECH_NAME = 'codemaster'
 LOG_START_APP_MSG = f"Start app {APP_TECH_NAME} version: {version.get_version()}"
 LOG_END_APP_MSG = f"End app {APP_TECH_NAME}"
 
+LOG_GAME_OVER = "Game over!"
+LOG_GAME_BEATEN = "Congrats! You have beaten the game!"
+
 APP_NAME = f"The CodeMaster v. {version.get_version()}"
 APP_NAME_SHORT = "The CodeMaster"
 APP_NAME_LONG = "The CodeMaster. Nightmare on Bots' Island."

@@ -51,8 +51,7 @@ class Actor(pg.sprite.Sprite):
     type_id_count = Counter()
     # key: sprite_sheet_data_id, value: (image, walking_frames_l, walking_frames_r)
     sprite_images = {}
-    # Security size so the sprite will not be too close to the border of the screen.
-    CELL_SCREEN_SECURITY_SIZE = 1
+    actors = {}
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0, items_to_drop=None):
         super().__init__()
@@ -70,6 +69,10 @@ class Actor(pg.sprite.Sprite):
 
         if not getattr(self, 'base_type', None):
             self.base_type = ActorBaseType.NONE
+
+        if self.base_type.name in (ActorBaseType.ITEM.name, ActorBaseType.NPC.name):
+            Actor.actors[self.id] = self
+
         if not getattr(self, 'category_type', None):
             self.category_type = ActorCategoryType.NONE
         if not getattr(self, 'type', None):
@@ -449,6 +452,14 @@ class Actor(pg.sprite.Sprite):
             self.stats.power = self.stats.power_total
 
     @staticmethod
+    def get_actor(actor_id):
+        return Actor.actors.get(actor_id)
+
+    @staticmethod
+    def get_actors_by_ids(actor_ids):
+        return [Actor.actors[k] for k in actor_ids]
+
+    @staticmethod
     def factory(actors_module, type_name, x, y, game, kwargs):
         return getattr(actors_module, type_name)(x, y, game, **kwargs)
 
@@ -465,14 +476,16 @@ class ActorItem(Actor):
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None):
+        if not getattr(self, 'base_type', None):
+            self.base_type = ActorBaseType.ITEM
+
         super().__init__(x, y, game, name=name)
-        self.base_type = ActorBaseType.ITEM
 
     def draw_health(self):
         pass
 
     @staticmethod
-    def get_all_items(game, sorted_by_level=True):
+    def get_all_item_ids_basic_info(game, sorted_by_level=True):
         """Returns an ordered dictionary with the item id and the level where you can find them.
           Example:
               OrderedDict({
@@ -490,7 +503,7 @@ class ActorItem(Actor):
         return OrderedDict(sorted([x for x in res.items()]))
 
     @staticmethod
-    def get_items_from_level(level):
+    def get_all_item_ids_basic_info_from_level(level):
         """Returns an ordered dictionary with the item id of all items in the level.
           Example:
               OrderedDict({
@@ -510,8 +523,10 @@ class ActorMagic(Actor):
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None):
+        if not getattr(self, 'base_type', None):
+            self.base_type = ActorBaseType.MAGIC
+
         super().__init__(x, y, game, name=name)
-        self.base_type = ActorBaseType.MAGIC
 
     def kill_hook(self):
         self.target.target_of_spells_count[self.__class__.__name__] -= 1
@@ -527,8 +542,10 @@ class ActorMsg(Actor):
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None):
+        if not getattr(self, 'base_type', None):
+            self.base_type = ActorBaseType.TEXT_MSG
+
         super().__init__(x, y, game, name=name)
-        self.base_type = ActorBaseType.TEXT_MSG
 
     def draw_health(self):
         pass
@@ -591,7 +608,7 @@ class NPC(MovingActor):
         super().update()
 
     @staticmethod
-    def get_npcs_health(game, sorted_by_level=True):
+    def get_npc_ids_health(game, sorted_by_level=True):
         """Returns an ordered dictionary with the npc id, its total health, its current health and
         the level where you can find them.
           Example:
@@ -611,7 +628,7 @@ class NPC(MovingActor):
         return OrderedDict(sorted([x for x in res.items()]))
 
     @staticmethod
-    def get_npcs_from_level(level):
+    def get_npc_ids_health_from_level(level):
         """Returns an ordered dictionary with the npc id, its total health and its current health
         for all NPCs from the level.
           Example:

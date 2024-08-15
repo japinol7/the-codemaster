@@ -46,11 +46,6 @@ class Door(ActorItem):
         pass
 
     @staticmethod
-    def get_door_by_id(door_id, game):
-        return [door for level in game.levels for door in level.doors
-                if door.id == door_id][0]
-
-    @staticmethod
     def get_doors_dest_to_level(level_id, game):
         """Gets all the doors that go to a given level"""
         return [door for level in game.levels for door in level.doors

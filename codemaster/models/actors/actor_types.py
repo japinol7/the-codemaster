@@ -13,14 +13,16 @@ class ActorBaseType(Enum):
     NONE = 0
     PLATFORM = 1
     WATER = 7
-    PC = 11
-    NPC = 21
-    ITEM = 51
-    TEXT_MSG = 52
-    SELECTOR = 53
-    MAGIC = 54
-    SNAKE_BODY_PART = 101
-    DRAGON_BODY_PART = 111
+    PC = 15
+    NPC = 16
+    ITEM = 21
+    BULLET = 22
+    EXPLOSION = 23
+    SELECTOR = 31
+    TEXT_MSG = 32
+    MAGIC = 33
+    SNAKE_BODY_PART = 41
+    DRAGON_BODY_PART = 42
 
 
 class ActorCategoryType(Enum):

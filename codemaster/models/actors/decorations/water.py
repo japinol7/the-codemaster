@@ -26,11 +26,11 @@ class Water(ActorItem):
         self.stats.health = self.stats.health_total = 1
         self.stats.power = self.stats.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
+        self.base_type = ActorBaseType.WATER
         self.category_type = ActorCategoryType.DECORATION
 
         super().__init__(x, y, game, name=name)
 
-        self.base_type = ActorBaseType.WATER
 
     def update_when_hit(self):
         """A block of water cannot be hit."""

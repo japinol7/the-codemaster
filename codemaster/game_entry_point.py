@@ -30,7 +30,9 @@ from codemaster.config.constants import (
     INIT_OPTIONS_FILE,
     MIN_TICKS_ALLOWED_TO_PAUSE_GAME,
     NEAR_BOTTOM,
-    )
+    LOG_GAME_BEATEN,
+    LOG_GAME_OVER,
+)
 from codemaster.models.actors.player import Player, PL_SELF_DESTRUCTION_COUNT_DEF
 from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.models.experience_points import ExperiencePoints
@@ -136,9 +138,6 @@ class Game:
             pg.mixer.music.play(loops=-1)
             if self.is_music_paused:
                 pg.mixer.music.pause()
-        else:
-            # Clear entity ids
-            levels.Level.clean_entity_ids()
 
         # Initialize screens
         self.screen_exit_current_game = screen.ExitCurrentGame(self)
@@ -204,10 +203,12 @@ class Game:
         elif self.is_exit_curr_game_confirm:
             self.player.stop()
             self.screen_exit_current_game.start_up()
+            levels.Level.clean_entity_ids()
         elif Game.is_over:
             self.screen_game_over.start_up()
             if not self.writen_info_game_over_to_file:
                 self.write_game_over_info_to_file()
+            levels.Level.clean_entity_ids()
         else:
             if not Game.is_over:
                 Game.screen.blit(Resource.images['background'], (0, 0))
@@ -271,7 +272,8 @@ class Game:
                        "- Are you ready?\n- I'm not ready!\n- Are you ready?\n- I'm not ready!",
                        self, time_in_secs=4)
 
-        # Current game loop
+        log.info("Start game")
+        # Game loop
         self.done = False
         while not self.done:
             self.current_time = pg.time.get_ticks()
@@ -352,25 +354,26 @@ class Game:
                                     and pg.key.get_mods() & pg.KMOD_LSHIFT:
                                 log.debug("NPCs health from all levels, ordered by NPC name:")
                                 log.debug("\n" + utils.pretty_dict_to_string(
-                                    NPC.get_npcs_health(self, sorted_by_level=False)))
+                                    NPC.get_npc_ids_health(self, sorted_by_level=False)))
                             elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
                                 log.debug("NPCs health from all levels, ordered by level:")
-                                log.debug("\n" + utils.pretty_dict_to_string(NPC.get_npcs_health(self)))
+                                log.debug("\n" + utils.pretty_dict_to_string(NPC.get_npc_ids_health(self)))
                             elif pg.key.get_mods() & pg.KMOD_LALT and pg.key.get_mods() & pg.KMOD_LSHIFT:
                                 log.debug("Items from all levels, ordered by level:")
-                                log.debug("\n" + utils.pretty_dict_to_string(ActorItem.get_all_items(self)))
+                                log.debug("\n" + utils.pretty_dict_to_string(
+                                    ActorItem.get_all_item_ids_basic_info(self)))
                             elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT:
                                 log.debug("Items from all levels, ordered by item name:")
                                 log.debug("\n" + utils.pretty_dict_to_string(
-                                    ActorItem.get_all_items(self, sorted_by_level=False)))
+                                    ActorItem.get_all_item_ids_basic_info(self, sorted_by_level=False)))
                             elif pg.key.get_mods() & pg.KMOD_LCTRL:
                                 log.debug("NPCs health from the current level %i:", self.level.id)
                                 log.debug("\n" + utils.pretty_dict_to_string(
-                                    NPC.get_npcs_from_level(self.level)))
+                                    NPC.get_npc_ids_health_from_level(self.level)))
                             elif pg.key.get_mods() & pg.KMOD_LALT:
                                 log.debug("Items from the current level %i:", self.level.id)
                                 log.debug("\n" + utils.pretty_dict_to_string(
-                                    ActorItem.get_items_from_level(self.level)))
+                                    ActorItem.get_all_item_ids_basic_info_from_level(self.level)))
                     elif event.key == pg.K_h:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.help_info.print_help_keys()
@@ -471,10 +474,14 @@ class Game:
             # Check if the player has beaten the game, that is, if he has completed all levels
             if levels.Level.levels_completed_count(self) >= self.levels_qty:
                 self.winner = self.player
+                log.info(LOG_GAME_BEATEN)
             if not self.player.is_alive:
                 Game.is_over = True
                 if levels.Level.levels_completed_count(self) >= self.levels_qty:
                     self.winner = self.player
+                    log.info(LOG_GAME_BEATEN)
+                else:
+                    log.info(LOG_GAME_OVER)
             if self.winner or Game.is_over:
                 Game.is_over = True
 

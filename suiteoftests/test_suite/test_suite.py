@@ -106,13 +106,13 @@ class GameTestSuite:
         log.info(GROUP_DASHES_LINE)
         if self.test_passed_count:
             for test_passed in self.tests_passed:
-                log.info(f"OK:      {test_passed}")
+                log.info(f"OK      {test_passed}")
         if self.test_aborted_count:
             for test_aborted in self.tests_aborted:
-                log.info(f"ABORTED: {test_aborted}")
+                log.info(f"ABORTED {test_aborted}")
         if self.test_passed_count < self.tests_total:
             for test_failed in self.tests_failed:
-                log.info(f"FAILED:  {test_failed}")
+                log.info(f"FAILED  {test_failed}")
         log.info(DASHES_LINE_SHORT)
         log.info(f"{self.test_passed_count} tests passed of "
                  f"{self.tests_total}{self.tests_skipped_text}")
@@ -142,6 +142,7 @@ class GameTestSuite:
         self.players = pg.sprite.Group()
         self.players.add(self.player)
         self.player_actions = Queue()
+        self.player.sound_effects = self.sound_effects
 
         self._load_test_levels(level_name_nums=level_name_nums, starting_level_n=starting_level_n)
 

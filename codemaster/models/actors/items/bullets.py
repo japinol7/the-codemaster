@@ -8,7 +8,11 @@ from random import randint
 
 import pygame as pg
 
-from codemaster.models.actors.actor_types import ActorType, ActorCategoryType
+from codemaster.models.actors.actor_types import (
+    ActorBaseType,
+    ActorCategoryType,
+    ActorType,
+    )
 from codemaster.tools.utils.colors import Color
 from codemaster.config import constants as consts
 from codemaster.tools.utils import utils
@@ -76,6 +80,7 @@ class Bullet(pg.sprite.Sprite):
         self.rect = None
         self.game = game
         self.owner = owner
+        self.base_type = ActorBaseType.BULLET
         self.category_type = ActorCategoryType.BULLET
         self.type = self.bullet_type = bullet_type
         self.id_key = f"{self.bullet_type}_f_{self.owner.id}"

@@ -8,6 +8,7 @@
 * Add new NPCs:
   * Kung Fu Fighters.
   * Squirrels.
+* Improve actor models. 
 * Improve level models.
 * Improve the test suite.
 * Fix some minor issues.
