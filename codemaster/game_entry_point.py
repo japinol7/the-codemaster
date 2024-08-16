@@ -203,12 +203,14 @@ class Game:
         elif self.is_exit_curr_game_confirm:
             self.player.stop()
             self.screen_exit_current_game.start_up()
-            levels.Level.clean_entity_ids()
+            if self.done:
+                levels.Level.clean_entity_ids()
         elif Game.is_over:
             self.screen_game_over.start_up()
             if not self.writen_info_game_over_to_file:
                 self.write_game_over_info_to_file()
-            levels.Level.clean_entity_ids()
+            if self.done:
+                levels.Level.clean_entity_ids()
         else:
             if not Game.is_over:
                 Game.screen.blit(Resource.images['background'], (0, 0))
