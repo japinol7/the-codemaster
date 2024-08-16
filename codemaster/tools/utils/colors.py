@@ -35,6 +35,7 @@ class Color:
     BLACK_SAFE = (10, 10, 10)
     WHITE = (255, 255, 255)
     RED = (255, 0, 0)
+    RED_DARK = (134, 0, 0)
     GREEN = (0, 255, 0)
     BLUE = (0, 0, 255)
     YELLOW = (255, 255, 0)
