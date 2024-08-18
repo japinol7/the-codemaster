@@ -768,7 +768,5 @@ class Player(pg.sprite.Sprite):
             ActorType.DOOR_KEY_YELLOW.name: pc.stats[ActorType.DOOR_KEY_YELLOW.name],
             ActorType.DOOR_KEY_RED.name: pc.stats[ActorType.DOOR_KEY_RED.name],
             ActorType.DOOR_KEY_MAGENTA.name: pc.stats[ActorType.DOOR_KEY_MAGENTA.name],
-            # 'energy_shields_stock': len(pc.stats.batteries),
-            # 'magic_attack_spells': None,
             }
         return res
