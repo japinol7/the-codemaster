@@ -1,5 +1,15 @@
 # Release History
 
+## v0.0.7
+
+### New features and improvements:
+
+* WIP Experimental Feature: Add persistence.
+  * When the player exits a game, it automatically saves the game state.
+  * The player can start a new game or continue the previous one.
+
+<br>
+
 ## v0.0.6
 
 ### New features and improvements:

@@ -4,7 +4,7 @@
 	1988 RPG platformer game Pac's Revenge.
 
 	program: The CodeMaster. Nightmare on Bots' Island.
-	version: 0.0.6
+	version: 0.0.7
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
@@ -358,7 +358,7 @@
 
 ## Usage
 
-    codemaster [-h] [-f] [-l] [-m] [-n] [-u] [-d] [-t]
+    codemaster [-h] [-f] [-l] [-m] [-n] [-p] [-u] [-d] [-t]
 	
     optional arguments:
      -h, --help, 	show this help message and exit
@@ -371,6 +371,11 @@
             log file
      -n, 	--nologdatetime
             Logs will not print a datetime.
+     -p, 	--persistdata
+            WIP Experimental feature: Persist and recover game data.
+            Automatically save the game state when the user exits the game.
+            Continue last game instead of starting a new game if
+            the player chooses this option from the main menu.
      -u, 	--nodisplayscaled
             Deactivate the scaling of the game screen. 
             Resolution depends on desktop size and scale graphics. 
@@ -394,6 +399,7 @@
 	stdoutlog           False
 	nologdatetime       False
 	nodisplayscaled     False
+	persistdata         False
 	debug               False
 	debugtraces         False
 

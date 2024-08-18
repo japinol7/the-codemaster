@@ -22,6 +22,8 @@ Future Improvements.
 
 > Networking:
 	> Client/server option so the players can play on the net.
-	    > One player will run the server version and the client version for its game.
-	    > Other players will run the client version and will be assigned to the game available that he chooses.
+	    > One player will run the server version and the client
+	      version for its game.
+	    > Other players will run the client version and will be assigned
+	      to the game available that he chooses.
 	    > Allow several players to play in the same game. 
