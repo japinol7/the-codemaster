@@ -156,6 +156,7 @@ class Level:
             self.items.add(sprite)
         for sprite in self.mines:
             self.all_sprites.add(sprite)
+            self.items.add(sprite)
         for sprite in self.dragons:
             self.npcs.add(sprite)
             for dragon_piece in sprite.body_pieces:
@@ -236,6 +237,7 @@ class Level:
         snake_pieces = []
         dragon_pieces = []
         for actor in actors:
+            actor.is_not_initial_actor = True
             if isinstance(actor, MovingActor):
                 if actor.border_left:
                     actor.border_left -= self.world_shift
@@ -247,29 +249,39 @@ class Level:
                 self.npcs.add(actor)
             elif actor.category_type == ActorCategoryType.BATTERY:
                 self.batteries.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.FILES_DISK:
                 self.files_disks.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.COMPUTER:
                 self.computers.add(actor)
                 self.normal_items.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.APPLE:
                 self.apples.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.CARTRIDGE:
                 self.cartridges.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.POTION:
                 self.potions.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.MINE:
                 self.mines.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.LIFE_RECOVERY:
                 self.life_recs.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.DOOR_KEY:
                 self.door_keys.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.DOOR:
                 self.doors.add(actor)
             elif actor.category_type == ActorCategoryType.EXPLOSION:
                 self.explosions.add(actor)
             elif actor.category_type == ActorCategoryType.CLOCK:
                 self.clocks.add(actor)
+                self.items.add(actor)
             elif actor.category_type == ActorCategoryType.SNAKE:
                 self.npcs.add(actor)
                 self.snakes.add(actor)
@@ -307,6 +319,29 @@ class Level:
 
     def count_actors_in_group_filtered_by_actor_type(self, actor_type, actor_group):
         return sum(1 for actor in actor_group if actor.type == actor_type)
+
+    def get_scroll_shift_delta(self):
+        return abs(self.world_shift) - self.world_shift_initial
+
+    def get_scroll_shift_top_delta(self):
+        return self.world_shift_top - self.world_shift_top_initial
+
+    @staticmethod
+    def get_scroll_shift_delta_from_params(world_shift, world_shift_initial):
+        return abs(world_shift) - world_shift_initial
+
+    @staticmethod
+    def get_scroll_shift_top_delta_from_params(world_shift_top, world_shift_top_initial):
+        return world_shift_top - world_shift_top_initial
+
+    @staticmethod
+    def get_scroll_shift_delta_tuple(game_level, level_data):
+        return (
+            game_level.get_scroll_shift_delta_from_params(
+                level_data['world_shift'], level_data['world_shift_initial']),
+            game_level.get_scroll_shift_top_delta_from_params(
+                level_data['world_shift_top'], level_data['world_shift_top_initial']),
+            )
 
     @staticmethod
     def factory(levels_module, game):
