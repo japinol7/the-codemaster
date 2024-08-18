@@ -76,6 +76,7 @@ def _load_npcs_data(game):
         for npc in game_level.npcs:
             npc_data = npcs_level.get(npc.id)
             if not npc_data:
+                npc.kill_hook()
                 npc.kill()
                 continue
             npc.health = npc_data['health']
