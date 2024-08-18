@@ -14,7 +14,6 @@ from codemaster.tools.logger.logger import log
 
 def clean_entity_ids():
     log.info("Clean game data")
-    Actor.actors.clear()
     Actor.type_id_count.clear()
     SnakeBodyPiece.type_id_count.clear()
     DragonBodyPiece.type_id_count.clear()

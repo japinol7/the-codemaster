@@ -51,7 +51,6 @@ class Actor(pg.sprite.Sprite):
     type_id_count = Counter()
     # key: sprite_sheet_data_id, value: (image, walking_frames_l, walking_frames_r)
     sprite_images = {}
-    actors = {}
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0, items_to_drop=None):
         super().__init__()
@@ -69,9 +68,6 @@ class Actor(pg.sprite.Sprite):
 
         if not getattr(self, 'base_type', None):
             self.base_type = ActorBaseType.NONE
-
-        if self.base_type.name in (ActorBaseType.ITEM.name, ActorBaseType.NPC.name):
-            Actor.actors[self.id] = self
 
         if not getattr(self, 'category_type', None):
             self.category_type = ActorCategoryType.NONE
@@ -450,14 +446,6 @@ class Actor(pg.sprite.Sprite):
         self.stats.power += self.stats.power_recovery
         if self.stats.power > self.stats.power_total:
             self.stats.power = self.stats.power_total
-
-    @staticmethod
-    def get_actor(actor_id):
-        return Actor.actors.get(actor_id)
-
-    @staticmethod
-    def get_actors_by_ids(actor_ids):
-        return [Actor.actors[k] for k in actor_ids]
 
     @staticmethod
     def factory(actors_module, type_name, x, y, game, kwargs):
