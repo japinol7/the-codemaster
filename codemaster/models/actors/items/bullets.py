@@ -60,16 +60,18 @@ class Bullet(pg.sprite.Sprite):
     cell_size_ratio = 1
     size = None
     sprite_images = {}
-    power_min_to_use = {BulletType.T1_LASER1.name: 1,
-                        BulletType.T2_LASER2.name: 10,
-                        BulletType.T3_PHOTONIC.name: 20,
-                        BulletType.T4_NEUTRONIC.name: 35,
-                        }
-    power_consumption = {BulletType.T1_LASER1.name: 0.2,
-                         BulletType.T2_LASER2.name: 0.5,
-                         BulletType.T3_PHOTONIC.name: 3,
-                         BulletType.T4_NEUTRONIC.name: 7,
-                         }
+    power_min_to_use = {
+        BulletType.T1_LASER1.name: 1,
+        BulletType.T2_LASER2.name: 10,
+        BulletType.T3_PHOTONIC.name: 20,
+        BulletType.T4_NEUTRONIC.name: 35,
+        }
+    power_consumption = {
+        BulletType.T1_LASER1.name: 0.2,
+        BulletType.T2_LASER2.name: 0.5,
+        BulletType.T3_PHOTONIC.name: 3,
+        BulletType.T4_NEUTRONIC.name: 7,
+        }
     type_id_count = Counter()
 
     def __init__(self, x, y, bullet_type, game, owner, change_x=0, change_y=0):

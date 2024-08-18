@@ -21,7 +21,7 @@ def main():
     # Parse optional arguments from the command line
     parser = ArgumentParser(description="The CodeMaster. Nightmare on Bots' Island.",
                             prog="codemaster",
-                            usage="%(prog)s [-h] [-f] [-l] [-m] [-n] [-u] [-d] [-t]")
+                            usage="%(prog)s [-h] [-f] [-l] [-m] [-n] [-p] [-u] [-d] [-t]")
     parser.add_argument('-f', '--fullscreen', default=False, action='store_true',
                         help='Full screen display activated when starting the game')
     parser.add_argument('-l', '--multiplelogfiles', default=False, action='store_true',
@@ -30,6 +30,11 @@ def main():
                         help='Print logs to the console along with writing them to the log file')
     parser.add_argument('-n', '--nologdatetime', default=False, action='store_true',
                         help='Logs will not print a datetime')
+    parser.add_argument('-p', '--persistdata', default=False, action='store_true',
+                        help='WIP Experimental feature: Persist and recover game data. '
+                             'Automatically save the game state when the user exits the game. '
+                             'Continue last game instead of starting a new game if '
+                             'the player chooses this option from the main menu. ')
     parser.add_argument('-u', '--nodisplayscaled', default=False, action='store_true',
                         help='Remove the scaling of the game screen. '
                              'Resolution depends on desktop size and scale graphics. '
@@ -62,6 +67,7 @@ def main():
     while not Game.is_exit_game:
         try:
             game = Game(is_debug=args.debug, is_full_screen=args.fullscreen,
+                        is_persist_data=args.persistdata,
                         is_no_display_scaled=args.nodisplayscaled)
             game.is_music_paused = is_music_paused
             screen_start_game = screen.StartGame(game)

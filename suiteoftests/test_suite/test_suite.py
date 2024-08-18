@@ -44,6 +44,7 @@ class GameTestSuite:
     You can skip a test by setting its skip attribute to True.
     """
 
+    is_log_debug = IS_LOG_DEBUG_DEFAULT
     screen = None
     size = None
     screen_flags = None
@@ -68,7 +69,6 @@ class GameTestSuite:
         self.clock = None
         self.clock_timer = None
         self.start_time = None
-        self.is_log_debug = IS_LOG_DEBUG_DEFAULT
         self.active_sprites = None
         self.clock_sprites = None
         self.text_msg_sprites = None
@@ -210,7 +210,7 @@ class GameTestSuite:
         # Render characters in some colors to use it as a cache
         libg_jp.chars_render_text_tuple(font_name=FONT_DEFAULT_NAME)
         libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)
-        self.is_log_debug = is_debug
+        GameTestSuite.is_log_debug = is_debug
         self.is_settings_initialized_before = True
 
     def _init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
