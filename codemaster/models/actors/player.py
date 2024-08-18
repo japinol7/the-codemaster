@@ -277,7 +277,7 @@ class Player(pg.sprite.Sprite):
     def power(self, value):
         self.stats['power'] = value
 
-    def acquire_energy_shield(self):
+    def acquire_energy_shield(self, msg_echo=True):
         if self.stats['energy_shields_stock']:
             return
 
@@ -285,7 +285,7 @@ class Player(pg.sprite.Sprite):
         energy_shield = EnergyShieldA(self.rect.x, self.rect.y, self.game)
         energy_shield.owner = self
         self.stats['energy_shields_stock'].append(energy_shield)
-        log.info(f"You have acquired an {energy_shield.type.name}.")
+        msg_echo and log.info(f"You have acquired an {energy_shield.type.name}.")
 
     def update(self):
         # when RIP
@@ -628,44 +628,45 @@ class Player(pg.sprite.Sprite):
             return True
         return False
 
-    def level_up(self):
+    def level_up(self, msg_echo=True):
         self.stats['level'] += 1
         if self.stats['level'] > 1:
             if not self.stats['energy_shields_stock']:
-                self.acquire_energy_shield()
+                self.acquire_energy_shield(msg_echo=msg_echo)
 
                 self.stats['magic_attack_spells'].update({'1': VortexOfDoomB})
                 self.stats['magic_attack'] = VortexOfDoomB
-                log.info("You have acquired a Vortex of Doom B spell.")
+                msg_echo and log.info("You have acquired a Vortex of Doom B spell.")
 
                 self.stats['magic_attack_spells'].update({'2': VortexOfDoomA})
                 self.stats['magic_attack'] = VortexOfDoomA
-                log.info("You have acquired a Vortex of Doom A spell.")
+                msg_echo and log.info("You have acquired a Vortex of Doom A spell.")
 
                 self.stats['magic_attack_spells'].update({'3': LightningBoltA})
                 self.stats['magic_attack'] = LightningBoltA
-                log.info("You have acquired a Lightning Bolt A spell.")
+                msg_echo and log.info("You have acquired a Lightning Bolt A spell.")
 
                 self.stats['magic_attack_spells'].update({'4': DoomBoltB})
                 self.stats['magic_attack'] = DoomBoltB
-                log.info("You have acquired a Doom Bolt B spell.")
+                msg_echo and log.info("You have acquired a Doom Bolt B spell.")
 
                 self.stats['magic_attack_spells'].update({'5': DoomBoltA})
                 self.stats['magic_attack'] = DoomBoltA
-                log.info("You have acquired a Doom Bolt A spell.")
+                msg_echo and log.info("You have acquired a Doom Bolt A spell.")
 
                 self.game.is_magic_on = True
 
-                TextMsg.create("You have acquired the following skills:\n"
-                               f"> Energy Shield A\n"
-                               "You have acquired the following spells:\n"
-                               "1. Vortex of Doom B\n"
-                               "2. Vortex of Doom A\n"
-                               "3. Lightning Bolt A\n"
-                               "4. Doom Bolt B\n"
-                               "5. Doom Bolt A\n"
-                               "\n!! Do not forget that 'm' switch \n  the magic mode.",
-                               self.game, time_in_secs=6)
+                msg_echo and TextMsg.create(
+                    "You have acquired the following skills:\n"
+                    f"> Energy Shield A\n"
+                    "You have acquired the following spells:\n"
+                    "1. Vortex of Doom B\n"
+                    "2. Vortex of Doom A\n"
+                    "3. Lightning Bolt A\n"
+                    "4. Doom Bolt B\n"
+                    "5. Doom Bolt A\n"
+                    "\n!! Do not forget that 'm' switch \n  the magic mode.",
+                   self.game, time_in_secs=6)
 
     def switch_energy_shield(self):
         if self.direction == DIRECTION_RIP:
@@ -711,6 +712,13 @@ class Player(pg.sprite.Sprite):
         else:
             TextMsg.create(
                 "You've got \nNO spell\nin this slot.", self.game, time_in_secs=MSG_PC_DUR_SHORT)
+
+    @staticmethod
+    def create_starting_game_msg(game):
+        TextMsg.create(
+            "Ok. Let's go.\n"
+            "- Are you ready?\n- I'm not ready!\n- Are you ready?\n- I'm not ready!",
+            game, time_in_secs=4)
 
     @staticmethod
     def get_stats_to_persist(game):

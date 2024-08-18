@@ -164,6 +164,9 @@ class TestNPCsCastSpellsOnPlayer:
 
     @game_test(levels=[3], timeout=3)
     def test_pc_hit_with_enough_drain_life_spells_must_die(self, game):
+        """Tests that a drain life spell can kill the player
+        and that the owner of the spell recovers some health.
+        """
         player = game.player
         player.rect.x, player.rect.y = 260, 620
         player.health = 22
@@ -172,6 +175,8 @@ class TestNPCsCastSpellsOnPlayer:
         npc = PumpkinHeadA(600, 662, game, change_x=0)
         npc.direction = DIRECTION_LEFT
         npc.can_shot = False
+        npc.health = npc.health // 2
+        npc_health_orig = npc.health
 
         npc.spell_2_name = ActorType.DRAIN_LIFE_A.name
         npc.probability_to_cast_spell_1 = 0
@@ -184,5 +189,5 @@ class TestNPCsCastSpellsOnPlayer:
         game.game_loop()
 
         game.assert_test_passed(
-            condition=player.lives < 1,
+            condition=player.lives < 1 and npc.health > npc_health_orig,
             failed_msg="NPC did not kill the player.")

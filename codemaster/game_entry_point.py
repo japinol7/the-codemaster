@@ -282,9 +282,8 @@ class Game:
         self.help_info = HelpInfo()
         self.debug_info = DebugInfo(self.player, self)
 
-        TextMsg.create("Ok. Let's go.\n"
-                       "- Are you ready?\n- I'm not ready!\n- Are you ready?\n- I'm not ready!",
-                       self, time_in_secs=4)
+        if not self.is_load_last_game:
+            self.player.create_starting_game_msg(self)
 
         not self.done and log.info("Start game")
         # Game loop

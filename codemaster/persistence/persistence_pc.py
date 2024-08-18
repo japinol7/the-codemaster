@@ -61,6 +61,7 @@ def _load_pc_data(game):
     pc.stats.update({
         'lives': pc_data['lives'],
         'score': pc_data['score'],
+        'level': pc_data['level'] - 1,
         'levels_visited': set(pc_data['levels_visited']),
         'door_previous_position': pc_data['door_previous_position'],
         'door_previous_pos_player': pc_data['door_previous_pos_player'],
@@ -103,6 +104,8 @@ def _load_pc_data(game):
 
     levels_completed_ids = set(pc_data['levels_completed'])
     levels_completed = [level for level in game.levels if level.id in levels_completed_ids]
+    pc.level_up(msg_echo=False)
+
     for level in levels_completed:
         level.completed = True
 

@@ -41,6 +41,9 @@ class DrainLife(ActorMagic):
 
         self.origin = Point(self.rect.x, self.rect.y)
         self.change_y = 2
+        self.drain_recover_health_factor = 1.6
+        self.drain_recover_health_max_pge = 0.1
+        self.drain_recover_health_max = self.owner.stats.health_total * self.drain_recover_health_max_pge
         self.player.sound_effects and resources.Resource.bullet_t4_sound.play()
 
     def explosion(self):
@@ -62,6 +65,12 @@ class DrainLife(ActorMagic):
         attack_power_res = self.power - self.target.magic_resistance
         if attack_power_res > 0:
             self.target.health -= attack_power_res
+            recover_health = attack_power_res / self.drain_recover_health_factor
+            if recover_health > self.drain_recover_health_max:
+                recover_health = self.drain_recover_health_max
+            self.owner.health += recover_health
+            if self.owner.health > self.owner.stats.health_total:
+                self.owner.health = self.owner.stats.health_total
 
         if self.target.health <= 0:
             self.game.is_log_debug and log.debug(

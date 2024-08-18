@@ -7,6 +7,8 @@
 * WIP Experimental Feature: Add persistence.
   * When the player exits a game, it automatically saves the game state.
   * The player can start a new game or continue the previous one.
+* Improve spells: 
+  * Drain life.
 
 <br>
 
