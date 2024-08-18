@@ -1,10 +1,13 @@
 """Module screen."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+import logging
+
 import pygame as pg
 
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.config.settings import Settings
+from codemaster.tools.logger.logger import log
 
 
 class Screen:
@@ -234,3 +237,24 @@ class StartGame(Screen):
                     self.done = True
                 elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
                     self.game.is_start_screen = False
+                    self.game.is_load_last_game = False
+                elif event.key == pg.K_SPACE:
+                    if self.game.is_persist_data:
+                        self.game.is_start_screen = False
+                        self.game.is_load_last_game = True
+                        self.done = True
+                elif event.key == pg.K_SPACE:
+                    if self.game.is_persist_data:
+                        self.game.is_start_screen = False
+                        self.game.is_load_last_game = True
+                elif event.key == pg.K_KP_DIVIDE:
+                    if self.game.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
+                            and pg.key.get_mods() & pg.KMOD_LALT:
+                        if log.level != logging.DEBUG:
+                            log.setLevel(logging.DEBUG)
+                            self.game.__class__.is_log_debug = True
+                            log.info("Set logger level to: Debug")
+                        else:
+                            log.setLevel(logging.INFO)
+                            self.game.__class__.is_log_debug = False
+                            log.info("Set logger level to: Info")

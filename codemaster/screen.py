@@ -62,10 +62,24 @@ class StartGame(screen.StartGame):
     def __init__(self, game):
         super().__init__(game)
 
-        libg_jp.render_text('– Press Enter to Start –', Settings.screen_width // 2,
-                            114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.82,
-                            Resource.txt_surfaces, 'game_start', color=Color.CYAN,
-                            size=int(96*Settings.font_pos_factor_t2), align="center")
+        text_size_multiplier = 69.5 if self.game.is_persist_data else 96
+        text_start_game_pos_factor_y = 2.1 if self.game.is_persist_data else 1.82
+
+        libg_jp.render_text(
+            '– Press Enter to Start –', Settings.screen_width // 2,
+                114 * Settings.font_pos_factor_t2 + Settings.screen_height // text_start_game_pos_factor_y,
+                Resource.txt_surfaces, 'game_start', color=Color.CYAN,
+                size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
+        libg_jp.render_text(
+            '– Press Space to Continue Last Game –', Settings.screen_width // 2,
+                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.7,
+                Resource.txt_surfaces, 'game_continue_last', color=Color.CYAN,
+                size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
+        libg_jp.render_text(
+            '– Load Last Game Failed. Press Space to Retry –', Settings.screen_width // 2,
+                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.7,
+                Resource.txt_surfaces, 'game_continue_last_failed', color=Color.RED_DARK,
+                size=int(55*Settings.font_pos_factor_t2), align="center")
 
     def _draw(self):
         super()._draw()
@@ -86,3 +100,10 @@ class StartGame(screen.StartGame):
                                Settings.screen_height // 1.16 - Resource.images['seal_just_a_demo'].get_height() // 1.16
                                ))
         self.game.screen.blit(*Resource.txt_surfaces['game_start'])
+
+
+        if self.game.is_persist_data:
+            if self.game.is_load_last_game_failed:
+                self.game.screen.blit(*Resource.txt_surfaces['game_continue_last_failed'])
+            else:
+                self.game.screen.blit(*Resource.txt_surfaces['game_continue_last'])

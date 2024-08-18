@@ -39,6 +39,7 @@ from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.actors import NPC, ActorItem
 from codemaster.models.actors.selectors import SelectorA
 from codemaster.level_scroll_screen import level_scroll_shift_control, change_screen_level
+from codemaster.persistence import persistence
 
 
 START_LEVEL = 0
@@ -49,6 +50,8 @@ class Game:
     is_exit_game = False
     is_over = False
     is_first_game = True
+    is_load_last_game_failed = False
+    is_log_debug = False
     current_game = 0
     current_time = None
     K_b_keydown_seconds = False
@@ -58,7 +61,8 @@ class Game:
     normal_screen_flags = None
     full_screen_flags = None
 
-    def __init__(self, is_debug=None, is_full_screen=None, is_no_display_scaled=None):
+    def __init__(self, is_debug=None, is_full_screen=None,
+                 is_persist_data=None, is_no_display_scaled=None):
         self.name = APP_NAME
         self.name_short = APP_NAME_SHORT
         self.name_long = APP_NAME_LONG
@@ -69,6 +73,8 @@ class Game:
         self.players = None
         self.winner = None
         self.is_debug = is_debug
+        self.is_persist_data = is_persist_data
+        self.is_load_last_game = False
         self.level = None
         self.levels = []
         self.levels_qty = 0
@@ -94,7 +100,6 @@ class Game:
         self.score_bars = None
         self.help_info = None
         self.debug_info = None
-        self.is_log_debug = False
         self.current_song = 0
         self.writen_info_game_over_to_file = False
         self.level_no = 0
@@ -187,6 +192,10 @@ class Game:
             SelectorA(0, 0, self),
             )
 
+        # Restore last game data
+        if self.is_persist_data and self.is_load_last_game:
+            persistence.load_game_data(self)
+
         # Start first level
         self.level.start_up()
         self.player.start_time = self.start_time
@@ -204,12 +213,14 @@ class Game:
             self.player.stop()
             self.screen_exit_current_game.start_up()
             if self.done:
+                self.is_persist_data and persistence.persist_game_data(self)
                 levels.Level.clean_entity_ids()
         elif Game.is_over:
             self.screen_game_over.start_up()
             if not self.writen_info_game_over_to_file:
                 self.write_game_over_info_to_file()
             if self.done:
+                self.is_persist_data and persistence.clear_all_persisted_data()
                 levels.Level.clean_entity_ids()
         else:
             if not Game.is_over:
@@ -257,6 +268,7 @@ class Game:
         pg.display.set_caption(self.name_short)
         self.clock = pg.time.Clock()
         self.start_time = pg.time.get_ticks()
+        self.done = False
 
         self.put_initial_actors_on_the_board()
 
@@ -274,9 +286,8 @@ class Game:
                        "- Are you ready?\n- I'm not ready!\n- Are you ready?\n- I'm not ready!",
                        self, time_in_secs=4)
 
-        log.info("Start game")
+        not self.done and log.info("Start game")
         # Game loop
-        self.done = False
         while not self.done:
             self.current_time = pg.time.get_ticks()
             for event in pg.event.get():
@@ -404,11 +415,11 @@ class Game:
                                 and pg.key.get_mods() & pg.KMOD_LALT:
                             if log.level != logging.DEBUG:
                                 log.setLevel(logging.DEBUG)
-                                self.is_log_debug = True
+                                Game.is_log_debug = True
                                 log.info("Set logger level to: Debug")
                             else:
                                 log.setLevel(logging.INFO)
-                                self.is_log_debug = False
+                                Game.is_log_debug = False
                                 log.info("Set logger level to: Info")
                     elif event.key == pg.K_KP_MINUS:
                         if self.super_cheat and pg.key.get_mods() & pg.KMOD_LCTRL:

@@ -2,6 +2,7 @@
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from collections import Counter, OrderedDict
+from itertools import chain
 from os import path
 from random import randint
 
@@ -51,6 +52,7 @@ class Actor(pg.sprite.Sprite):
     type_id_count = Counter()
     # key: sprite_sheet_data_id, value: (image, walking_frames_l, walking_frames_r)
     sprite_images = {}
+    actors = {}
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0, items_to_drop=None):
         super().__init__()
@@ -69,6 +71,9 @@ class Actor(pg.sprite.Sprite):
         if not getattr(self, 'base_type', None):
             self.base_type = ActorBaseType.NONE
 
+        if self.base_type.name in (ActorBaseType.ITEM.name, ActorBaseType.NPC.name):
+            Actor.actors[self.id] = self
+
         if not getattr(self, 'category_type', None):
             self.category_type = ActorCategoryType.NONE
         if not getattr(self, 'type', None):
@@ -82,6 +87,9 @@ class Actor(pg.sprite.Sprite):
             self.file_prefix = None
         if not getattr(self, 'file_name_key', None):
             self.file_name_key = None
+
+        if not getattr(self, 'location_in_inventory', None):
+            self.is_location_in_inventory = False
 
         if not getattr(self, 'images_sprite_no', None):
             self.images_sprite_no = 1
@@ -328,6 +336,11 @@ class Actor(pg.sprite.Sprite):
             self.drop_items()
             self.kill_hook()
 
+    def kill(self):
+        if Actor.actors.get(self.id):
+            del Actor.actors[self.id]
+        super().kill()
+
     def kill_hook(self):
         if self.stats.energy_shield:
             self.stats.energy_shield.kill()
@@ -448,6 +461,22 @@ class Actor(pg.sprite.Sprite):
             self.stats.power = self.stats.power_total
 
     @staticmethod
+    def get_actor(actor_id):
+        return Actor.actors[actor_id]
+
+    @staticmethod
+    def get_actor_if_exists(actor_id):
+        return Actor.actors.get(actor_id)
+
+    @staticmethod
+    def get_actors_by_ids(actor_ids):
+        return [Actor.actors[k] for k in actor_ids]
+
+    @staticmethod
+    def get_actors_by_ids_if_exist(actor_ids):
+        return [Actor.actors[k] for k in actor_ids if Actor.actors.get(k)]
+
+    @staticmethod
     def factory(actors_module, type_name, x, y, game, kwargs):
         return getattr(actors_module, type_name)(x, y, game, **kwargs)
 
@@ -504,6 +533,107 @@ class ActorItem(Actor):
             res[item.id] = f"level: {level.name:4}", f"{level.id:3d}"
 
         return OrderedDict(sorted([x for x in res.items()]))
+
+    @staticmethod
+    def get_items_stats_to_persist(game):
+        """Returns a dictionary with all the items' stats to persist."""
+        res = {'game_levels': {}}
+        levels = res['game_levels']
+        for game_level_id in sorted(list(game.player.stats['levels_visited'])):
+            level = game.levels[game_level_id - 1]
+            levels[game_level_id] = {
+                'world_shift': level.world_shift,
+                'world_shift_initial': level.world_shift_initial,
+                'world_shift_top': level.world_shift_top,
+                'world_shift_top_initial': level.world_shift_top_initial,
+                'items': {},
+                }
+            for item in chain(level.items, level.doors):
+                if item.is_not_initial_actor:
+                    continue
+
+                if item.category_type == ActorCategoryType.DOOR:
+                    levels[level.id]['items'][item.id] = {
+                        'id': item.id,
+                        'category_type': item.category_type.name,
+                        'type': item.type.name,
+                        'door_type': item.door_type,
+                        'is_locked': item.is_locked,
+                        }
+                    continue
+
+                levels[level.id]['items'][item.id] = {
+                    'id': item.id,
+                    'category_type': item.category_type.name,
+                    'type': item.type.name,
+                    'health': item.stats.health,
+                    'health_total': item.stats.health_total,
+                    'x': item.rect.x,
+                    'y': item.rect.y,
+                    'direction': item.direction,
+                    }
+        return res
+
+    @staticmethod
+    def get_items_not_initial_actor_stats_to_persist(game):
+        """Returns a dictionary with the items' stats to persist
+        only for items not initially in a fresh game.
+        """
+        res = {'game_levels': {}}
+        levels = res['game_levels']
+        for game_level in game.levels:
+            level = {
+                'world_shift': game_level.world_shift,
+                'world_shift_initial': game_level.world_shift_initial,
+                'world_shift_top': game_level.world_shift_top,
+                'world_shift_top_initial': game_level.world_shift_top_initial,
+                'items': {},
+                }
+
+            include_in_inventory_items = False
+            if game_level.id == game.level.id:
+                include_in_inventory_items = True
+                items = chain(
+                    game_level.items,
+                    game.player.stats['door_keys_stock'],
+                    game.player.stats['potions_power'],
+                    game.player.stats['potions_health'],
+                    game.player.stats['apples_stock'],
+                    )
+            else:
+                items = game_level.items
+
+            for item in items:
+                if not include_in_inventory_items and not item.is_not_initial_actor:
+                    continue
+                if include_in_inventory_items and not item.is_not_initial_actor \
+                        and not item.is_location_in_inventory:
+                    continue
+
+                level['items'][item.id] = {
+                    'id': item.id,
+                    'is_not_initial_actor': item.is_not_initial_actor,
+                    'name': item.name,
+                    'base_type': item.base_type.name,
+                    'category_type': item.category_type.name,
+                    'type': item.type.name,
+                    'type_name': item.__class__.__name__,
+                    'health': item.stats.health,
+                    'health_total': item.stats.health_total,
+                    'direction': item.direction,
+                    'frame_index': round(item.frame_index, 3),
+                    'x': item.rect.x,
+                    'y': item.rect.y,
+                    'is_location_in_inventory': item.is_location_in_inventory
+                    }
+
+                if item.category_type == ActorCategoryType.DOOR_KEY:
+                    level['items'][item.id].update({
+                        'door': item.door.id,
+                        })
+
+                levels[game_level.id] = level
+        return res
 
 
 class ActorMagic(Actor):
@@ -632,3 +762,86 @@ class NPC(MovingActor):
                            f"level: {level.name:4}", f"{level.id:3d}")
 
         return OrderedDict(sorted([x for x in res.items()]))
+
+    @staticmethod
+    def get_npcs_stats_to_persist(game):
+        """Returns a dictionary with all the NPCs' stats to persist."""
+        res = {'game_levels': {}}
+        levels = res['game_levels']
+        for game_level_id in sorted(list(game.player.stats['levels_visited'])):
+            level = game.levels[game_level_id - 1]
+            levels[game_level_id] = {
+                'world_shift': level.world_shift,
+                'world_shift_initial': level.world_shift_initial,
+                'world_shift_top': level.world_shift_top,
+                'world_shift_top_initial': level.world_shift_top_initial,
+                'npcs': {},
+                }
+            for npc in level.npcs:
+                if npc.is_not_initial_actor:
+                    continue
+                levels[level.id]['npcs'][npc.id] = {
+                    'id': npc.id,
+                    'category_type': npc.category_type.name,
+                    'type': npc.type.name,
+                    'health': npc.stats.health,
+                    'health_total': npc.stats.health_total,
+                    'x': npc.rect.x,
+                    'y': npc.rect.y,
+                    'change_x': npc.change_x,
+                    'change_y': npc.change_y,
+                    'direction': npc.direction,
+                    'hostility_level': npc.hostility_level,
+                    }
+        return res
+
+    @staticmethod
+    def get_npcs_not_initial_actor_stats_to_persist(game):
+        """Returns a dictionary with the NPCs' stats to persist
+        only for NPCs not initially in a fresh game.
+        """
+        res = {'game_levels': {}}
+        levels = res['game_levels']
+        for game_level in game.levels:
+            level = {
+                'world_shift': game_level.world_shift,
+                'world_shift_initial': game_level.world_shift_initial,
+                'world_shift_top': game_level.world_shift_top,
+                'world_shift_top_initial': game_level.world_shift_top_initial,
+                'npcs': {},
+                }
+            for npc in game_level.npcs:
+                if not npc.is_not_initial_actor:
+                    continue
+                level['npcs'][npc.id] = {
+                    'id': npc.id,
+                    'is_not_initial_actor': npc.is_not_initial_actor,
+                    'name': npc.name,
+                    'base_type': npc.base_type.name,
+                    'category_type': npc.category_type.name,
+                    'type': npc.type.name,
+                    'type_name': npc.__class__.__name__,
+                    'health': npc.stats.health,
+                    'health_total': npc.stats.health_total,
+                    'frame_index': round(npc.frame_index, 3),
+                    'x': npc.rect.x,
+                    'y': npc.rect.y,
+                    'change_x': npc.change_x,
+                    'change_y': npc.change_y,
+                    'hostility_level': npc.hostility_level,
+                    'direction': npc.direction,
+                    'shot_x_delta_max': npc.shot_x_delta_max,
+                    'shot_y_delta': npc.shot_y_delta,
+                    'spell_cast_x_delta_max': npc.spell_cast_x_delta_max,
+                    'spell_cast_y_delta_max': npc.spell_cast_y_delta_max,
+                    'health_bar_delta_y': npc.health_bar_delta_y,
+                    'power_recovery': npc.stats.power_recovery,
+                    'energy_shield': npc.stats.energy_shield,
+                    'time_between_energy_shield_casting': npc.stats.time_between_energy_shield_casting,
+                    'border_left': npc.border_left,
+                    'border_right': npc.border_right,
+                    'border_top': npc.border_top,
+                    'border_down': npc.border_down,
+                    }
+                levels[game_level.id] = level
+        return res

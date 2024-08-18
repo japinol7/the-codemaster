@@ -94,6 +94,25 @@ SYS_STDOUT = sys.stdout
 
 SCORES_FILE = os.path.join('files', 'scores.txt')
 
+PERSISTENCE_PATH = os.path.join('save_data', "save_data")
+PERSISTENCE_PC_FILE = os.path.join(PERSISTENCE_PATH, "player.json")
+PERSISTENCE_NPCS_FILE = os.path.join(PERSISTENCE_PATH, "npcs.json")
+PERSISTENCE_NPCS_NEW_FILE = os.path.join(PERSISTENCE_PATH, "npcs_not_initial.json")
+PERSISTENCE_ITEMS_FILE = os.path.join(PERSISTENCE_PATH, "items.json")
+PERSISTENCE_ITEMS_NEW_FILE = os.path.join(PERSISTENCE_PATH, "items_not_initial.json")
+PERSISTENCE_NO_SAVED_GAME_DATA_MSG = "No saved data to load. " \
+                                     "Maybe last game ended with a Game Over or a Win?"
+GAME_DATA_HEADER = {
+    'saved_game_data': {
+        'app_name': APP_NAME_LONG,
+        'app_tech_name': APP_TECH_NAME,
+        'app_version': version.get_version(),
+        "continue_game": True,
+        },
+    }
+
+JSON_INDENT_SIZE = 4
+
 SOUND_FORMAT = 'ogg'
 MUSIC_FORMAT = 'ogg'
 

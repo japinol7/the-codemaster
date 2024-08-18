@@ -373,6 +373,7 @@ class Player(pg.sprite.Sprite):
             self.stats['apples'] += 1
             self.stats['apples_type'][apple.apple_type] += 1
             self.stats['apples_stock'].append(apple)
+            apple.is_location_in_inventory = True
             self.stats[apple.type.name] += 1
 
         # Check if we hit any potion
@@ -384,6 +385,7 @@ class Player(pg.sprite.Sprite):
                 self.stats['potions_power'].append(potion)
             elif potion.type.name == ActorType.POTION_HEALTH.name:
                 self.stats['potions_health'].append(potion)
+            potion.is_location_in_inventory = True
             self.sound_effects and self.rec_potion_found_sound.play()
 
         # Check if we hit any life recovery
@@ -503,6 +505,7 @@ class Player(pg.sprite.Sprite):
             self.stats['door_keys'] += 1
             self.stats['door_keys_type'][door_key.key_type] += 1
             self.stats['door_keys_stock'].append(door_key)
+            door_key.is_location_in_inventory = True
             self.stats[door_key.type.name] += 1
 
         # Check if we hit any clock
@@ -708,3 +711,64 @@ class Player(pg.sprite.Sprite):
         else:
             TextMsg.create(
                 "You've got \nNO spell\nin this slot.", self.game, time_in_secs=MSG_PC_DUR_SHORT)
+
+    @staticmethod
+    def get_stats_to_persist(game):
+        """Returns a dictionary with all the player's stats to persist."""
+        res = {'player': {}}
+        pc = game.player
+        level = game.level
+        res['player'] = {
+            'id': pc.id,
+            'direction': pc.direction,
+            'level': pc.stats['level'],
+            'game_level': level.id,
+            'door_previous_position': level.door_previous_position,
+            'door_previous_pos_player': level.door_previous_pos_player,
+            'door_previous_pos_world': level.door_previous_pos_world,
+            'previous_door_crossed': level.previous_door_crossed.id if level.previous_door_crossed else None,
+            'levels_visited': sorted(list(pc.stats['levels_visited'])),
+            'levels_completed': sorted(level.levels_completed_ids(game)),
+            'score': pc.stats['score'],
+            'lives': pc.stats['lives'],
+            'power': round(pc.stats['power'], 3),
+            'health': pc.stats['health'],
+            'magic_attack': None,
+            'batteries': pc.stats['batteries'],
+            'files_disks': pc.stats['files_disks'],
+            'files_disks_type': pc.stats['files_disks_type'],
+            'bullets_t01': pc.stats['bullets_t01'],
+            'bullets_t01_shot': pc.stats['bullets_t01_shot'],
+            'bullets_t02': pc.stats['bullets_t02'],
+            'bullets_t02_shot': pc.stats['bullets_t02_shot'],
+            'bullets_t03': pc.stats['bullets_t03'],
+            'bullets_t03_shot': pc.stats['bullets_t03_shot'],
+            'bullets_t04': pc.stats['bullets_t04'],
+            'bullets_t04_shot': pc.stats['bullets_t04_shot'],
+            'potions_power': [x.id for x in pc.stats['potions_power']],
+            'potions_health': [x.id for x in pc.stats['potions_health']],
+            ActorType.POTION_POWER.name: pc.stats[ActorType.POTION_POWER.name],
+            ActorType.POTION_HEALTH.name: pc.stats[ActorType.POTION_HEALTH.name],
+            ActorType.FILES_DISK_D.name: pc.stats[ActorType.FILES_DISK_D.name],
+            ActorType.FILES_DISK_C.name: pc.stats[ActorType.FILES_DISK_C.name],
+            ActorType.FILES_DISK_B.name: pc.stats[ActorType.FILES_DISK_B.name],
+            ActorType.FILES_DISK_A.name: pc.stats[ActorType.FILES_DISK_A.name],
+            'apples': pc.stats['apples'],
+            'apples_stock': [x.id for x in pc.stats['apples_stock']],
+            'apples_type': pc.stats['apples_type'],
+            ActorType.APPLE_GREEN.name: pc.stats[ActorType.APPLE_GREEN.name],
+            ActorType.APPLE_YELLOW.name: pc.stats[ActorType.APPLE_YELLOW.name],
+            ActorType.APPLE_RED.name: pc.stats[ActorType.APPLE_RED.name],
+            'door_keys': pc.stats['door_keys'],
+            'door_keys_stock': [x.id for x in pc.stats['door_keys_stock']],
+            'door_keys_type': pc.stats['door_keys_type'],
+            ActorType.DOOR_KEY_GREEN.name: pc.stats[ActorType.DOOR_KEY_GREEN.name],
+            ActorType.DOOR_KEY_BLUE.name: pc.stats[ActorType.DOOR_KEY_BLUE.name],
+            ActorType.DOOR_KEY_AQUA.name: pc.stats[ActorType.DOOR_KEY_AQUA.name],
+            ActorType.DOOR_KEY_YELLOW.name: pc.stats[ActorType.DOOR_KEY_YELLOW.name],
+            ActorType.DOOR_KEY_RED.name: pc.stats[ActorType.DOOR_KEY_RED.name],
+            ActorType.DOOR_KEY_MAGENTA.name: pc.stats[ActorType.DOOR_KEY_MAGENTA.name],
+            # 'energy_shields_stock': len(pc.stats.batteries),
+            # 'magic_attack_spells': None,
+            }
+        return res
