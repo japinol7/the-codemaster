@@ -299,6 +299,16 @@
           This can especially happen with snakes and dragons.
 	      > This is not a bug, it's a feature. 
 	        Yeah, really. It is a design decision. ; p
+<br>
+
+
+#### Starting with version 0.0.7 you can continue the last game
+	We added a persistence feature, which automatically saves the game 
+	state when the user exits the game and allows the user to continue 
+	the previous game instead of starting a new one.
+	Note that you cannot continue a game that ended in a Game Over 
+	or that you beated winning the game.
+<br>
 
 
 ## Keyboard keys
@@ -354,6 +364,7 @@
                        current position  (cheat)
     ^ numpad_minus:    great advantage superhero (cheat)
     ^ numpad_multiply: out of phase superhero invulnerability flag (cheat)
+<br>
 
 
 ## Usage
@@ -371,11 +382,9 @@
             log file
      -n, 	--nologdatetime
             Logs will not print a datetime.
-     -p, 	--persistdata
-            Experimental feature: Persist and recover game data.
-            Automatically save the game state when the user exits the game.
-            Continue last game instead of starting a new game if
-            the player chooses this option from the main menu.
+     -p, 	--nopersistdata
+            Deactivate feature: Persist and recover game data, which 
+            automatically save the game state when the user exits the game.
      -u, 	--nodisplayscaled
             Deactivate the scaling of the game screen. 
             Resolution depends on desktop size and scale graphics. 
@@ -399,7 +408,7 @@
 	stdoutlog           False
 	nologdatetime       False
 	nodisplayscaled     False
-	persistdata         False
+	nopersistdata       False
 	debug               False
 	debugtraces         False
 
@@ -433,14 +442,11 @@
 	Run the game:
 	  $ python -m codemaster
 
+	Run the game deactivating the persistence feature:
+	  $ python -m codemaster -p
+
 	Run the game starting in full screen mode:
 	  $ python -m codemaster -f
-
-	Run the game using the persistence experimental feature, which
-	automatically saves the game state when the user exits the game 
-	and allows the user to continue the previous game instead of 
-	starting a new one:
-	  $ python -m codemaster -p
 
 
 **To make The CodeMaster work**

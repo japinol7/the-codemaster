@@ -828,6 +828,7 @@ class NPC(MovingActor):
                     'y': npc.rect.y,
                     'change_x': npc.change_x,
                     'change_y': npc.change_y,
+                    'magic_resistance': npc.magic_resistance,
                     'hostility_level': npc.hostility_level,
                     'direction': npc.direction,
                     'shot_x_delta_max': npc.shot_x_delta_max,

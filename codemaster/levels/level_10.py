@@ -15,6 +15,7 @@ from codemaster.models.actors.npcs import (
     BatBlack,
     BatBlue,
     RobotA,
+    KungFuFighterMale,
     SquirrelA,
     TerminatorEyeYellow,
     )
@@ -27,6 +28,7 @@ from codemaster.models.actors.items import (
     DoorLeftYellow,
     DoorRightBlue,
     FilesDiskA,
+    PotionHealth,
     PotionPower,
     )
 from codemaster.levels.level_base import Level
@@ -103,8 +105,19 @@ class Level10(Level):
         self.npcs.add([
             BatBlue(2650, -20, self.game, border_left=2600, border_right=3080, change_x=3),
             BatBlack(2766, 10, self.game, border_left=2600, border_right=3080, change_x=3),
-            SquirrelA(1500, 388, self.game, border_left=1200, border_right=1800, change_x=2),
             TerminatorEyeYellow(50, 212, self.game, border_left=30, border_right=380, change_x=3),
+            ])
+
+        items_to_drop = [
+            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
+                     x_delta=16, **{'random_min': 40, 'random_max': 40}),
+            DropItem(KungFuFighterMale, ActorType.KUNG_FU_FIGHTER_MALE, probability_to_drop=100,
+                     y_delta=-31, add_to_list=self.npcs,
+                     **{'border_left': 1200, 'border_right': 1800, 'change_x': 2}),
+            ]
+        self.npcs.add([
+            SquirrelA(1500, 388, self.game, border_left=1200, border_right=1800, change_x=2,
+                      items_to_drop=items_to_drop),
             ])
 
         items_to_drop = [

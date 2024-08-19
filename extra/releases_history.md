@@ -4,7 +4,7 @@
 
 ### New features and improvements:
 
-* Add persistence - Experimental Feature.
+* Add persistence of the game state:
   * When the player exits a game, it automatically saves the game state.
   * The player can start a new game or continue the previous one.
 * Add spells: 

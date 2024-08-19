@@ -108,9 +108,10 @@ class MageFemaleA(Mage):
                     delta_x=180, delta_y=34, owner=self)
                 self.msgs.add([msg])
 
-        if not self.msg_texts:
+        if not self.msg_texts or self.hostility_level > 0:
             self.hostility_level = 1
             self.stats.energy_shield.activate()
+            self.msg_texts.clear()
             self.msg_texts.append(self.msg_text_to_repeat)
 
         super().update_after_inc_index_hook()

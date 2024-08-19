@@ -126,5 +126,7 @@ def _load_npcs_not_initial_data(game):
             npc.health = npc_data['health']
             npc.stats.health_total = npc_data['health_total']
             npc.direction = npc_data['direction']
+            npc.hostility_level = npc_data['hostility_level']
+            npc.magic_resistance = npc_data['magic_resistance']
             npcs.append(npc)
         level.add_actors(npcs)
