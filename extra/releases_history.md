@@ -4,11 +4,16 @@
 
 ### New features and improvements:
 
-* WIP Experimental Feature: Add persistence.
+* Add persistence - Experimental Feature.
   * When the player exits a game, it automatically saves the game state.
   * The player can start a new game or continue the previous one.
+* Add spells: 
+  * Mutentrinos Bolt A.
+  * Mutentrinos Bolt B.
 * Improve spells: 
   * Drain life.
+* Improve NPCs:
+  * Kung Fu Fighters.
 
 <br>
 

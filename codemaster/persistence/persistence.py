@@ -61,7 +61,7 @@ def _clear_persisted_data_file(file_name, key_to_add):
         file_out.write(data_json)
 
 def load_game_data(game):
-    def game_done():
+    def set_game_done():
         game.done = True
         game.__class__.is_load_last_game_failed = True
         game.level.clean_entity_ids()
@@ -75,15 +75,15 @@ def load_game_data(game):
         clear_persistence_working_data()
     except LoadGameWrongVersionException as e:
         log.warning("%s: %s", log_error_msg, e)
-        game_done()
+        set_game_done()
         return
     except LoadGameNoSavedGameDataException as e:
         log.warning("%s: %s", log_error_msg, e)
-        game_done()
+        set_game_done()
         return
     except LoadGameException as e:
         log.warning("%s: %s", log_error_msg, e)
-        game_done()
+        set_game_done()
         return
     except Exception as e:
         if game.is_debug:
@@ -91,7 +91,7 @@ def load_game_data(game):
             log.warning("%s: %s", log_error_msg, e)
         else:
             log.warning("%s", log_error_msg)
-        game_done()
+        set_game_done()
         return
 
     game.__class__.is_load_last_game_failed = False

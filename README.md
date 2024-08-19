@@ -372,7 +372,7 @@
      -n, 	--nologdatetime
             Logs will not print a datetime.
      -p, 	--persistdata
-            WIP Experimental feature: Persist and recover game data.
+            Experimental feature: Persist and recover game data.
             Automatically save the game state when the user exits the game.
             Continue last game instead of starting a new game if
             the player chooses this option from the main menu.
@@ -407,19 +407,19 @@
 **Test suite**
 
 	To run the test suite:
-	    $ python -m suiteoftests
+	$ python -m suiteoftests
 
 	You can run the test suite executing only some tests. Examples:
 	    * Execute only one test:
-	        $ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
+	      $ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
 	    * Execute only two tests (example using bash):
-	        $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_pc_enters_door_to_next_level'
+	      $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_pc_enters_door_to_next_level'
 
 	To run the test suite in full screen mode:
-	    $ python -m suiteoftests -f
+	$ python -m suiteoftests -f
 
 	To run the test suite with log debug messages:
-	    $ python -m suiteoftests -d
+	$ python -m suiteoftests -d
 
     Notes: 
 	    * Press ESC if you want to abort the current test.
@@ -431,16 +431,22 @@
 **Examples of usage**
 
 	Run the game:
-	    $ python -m codemaster
+	$ python -m codemaster
 
 	Run the game starting in full screen mode:
-	    $ python -m codemaster -f
+	$ python -m codemaster -f
+
+	Run the game using the persistence experimental feature, which
+	automatically save the game state when the user exits the game 
+	and allows the user to continue the last game instead of 
+	starting a new one:
+	$ python -m codemaster -p
 
 
 **To make The CodeMaster work**
 
 	Do this:
-	    1. Clone this repository in your local system.
-	    2. Go to its folder in your system.
-	    3. $ pip install -r requirements.txt
-	    4. $ python -m codemaster
+	  1. Clone this repository in your local system.
+	  2. Go to its folder in your system.
+	  3. $ pip install -r requirements.txt
+	  4. $ python -m codemaster

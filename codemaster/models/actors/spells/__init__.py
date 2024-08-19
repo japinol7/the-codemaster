@@ -26,3 +26,7 @@ from codemaster.models.actors.spells.samutrinos_bolts import (
     SamutrinosBoltA,
     SamutrinosBoltB,
     )
+from codemaster.models.actors.spells.mutentrinos_bolts import (
+    MutentrinosBoltA,
+    MutentrinosBoltB,
+    )

@@ -262,6 +262,7 @@ FILE_NAMES = {
     'im_fire_breath': ('fire_breath', 'png'),
     'im_neutrinos_bolt': ('neutrinos_bolt', 'png'),
     'im_samutrinos_bolt': ('samutrinos_bolt', 'png'),
+    'im_mutentrinos_bolt': ('mutentrinos_bolt', 'png'),
     'im_drain_life':  ('drain_life', 'png'),
     'snd_death_pl': ('death_pl_02',  SOUND_FORMAT),
     'snd_apple_hit': ('apple_found', SOUND_FORMAT),

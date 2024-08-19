@@ -37,11 +37,11 @@ class KungFuFighter(NPC):
         self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.6
         self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
 
-        self.spell_1_name = ActorType.SAMUTRINOS_BOLT_A.name
-        self.spell_2_name = ActorType.SAMUTRINOS_BOLT_B.name
+        self.spell_1_name = ActorType.MUTENTRINOS_BOLT_A.name
+        self.spell_2_name = ActorType.MUTENTRINOS_BOLT_B.name
         self.probability_to_cast_spell_1 = 9
         self.probability_to_cast_spell_2 = 100
-        self.max_multi_spell_1 = 1
+        self.max_multi_spell_1 = 2
         self.max_multi_spell_2 = 2
 
     def update_cast_spell_cast_actions(self):
@@ -74,8 +74,8 @@ class KungFuFighterMale(KungFuFighter):
 
         self.stats.time_between_spell_casting = 1400
         self.magic_resistance = 42
-        self.probability_to_cast_spell_1 = 10
-        self.max_multi_spell_1 = 1
+        self.probability_to_cast_spell_1 = 15
+        self.max_multi_spell_1 = 2
         self.max_multi_spell_2 = 2
 
     def update_shot_bullet_fire_shots(self):

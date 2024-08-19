@@ -90,7 +90,7 @@ class TestNPCsCastSpellsOnPlayer:
             failed_msg="NPC did not kill the player.")
 
     @game_test(levels=[3], timeout=3)
-    def test_pc_hit_with_kungfu_samutrinos_bolt_must_die(self, game):
+    def test_pc_hit_with_mutentrinos_bolt_must_die(self, game):
         player = game.player
         player.rect.x, player.rect.y = 260, 620
         player.health = 22
@@ -100,7 +100,7 @@ class TestNPCsCastSpellsOnPlayer:
         npc.direction = DIRECTION_LEFT
         npc.can_shot = False
 
-        npc.spell_1_name = ActorType.SAMUTRINOS_BOLT_A.name
+        npc.spell_1_name = ActorType.MUTENTRINOS_BOLT_A.name
         npc.probability_to_cast_spell_1 = 100
         npc.probability_to_cast_spell_2 = 0
         npc.probability_to_cast_spell_3 = 0

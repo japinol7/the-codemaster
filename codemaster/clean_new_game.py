@@ -9,14 +9,14 @@ from codemaster.models.actors.npcs.dragons import DragonBodyPiece
 from codemaster.models.clocks import ClockBase
 from codemaster.models.special_effects.light import Light
 from codemaster.models.special_effects.vortex import Vortex
-from codemaster.persistence.working_data import actors_map_old_id_with_new_instance
+from codemaster.persistence.working_data import clear_persistence_working_data
 from codemaster.tools.logger.logger import log
 
 
 def clean_entity_ids():
     log.info("Clean game data")
     Actor.actors.clear()
-    actors_map_old_id_with_new_instance.clear()
+    clear_persistence_working_data()
     Actor.type_id_count.clear()
     SnakeBodyPiece.type_id_count.clear()
     DragonBodyPiece.type_id_count.clear()

@@ -6,15 +6,14 @@ items.json:
   It only persists items from the levels that the player has visited,
   since levels not visited will not be changed.
   Note that when recovering the saved game, we look up in this file
-  just the items ids that are present in the game levels and update
+  just the item ids that are present in the game levels and update
   the items state regarding their attributes on the file.
 
 items_not_initial.json:
   Persists items added dynamically to each level.
   These items must be recreated dynamically again.
-  Note that the items ids when recreated will probably be different
+  Note that the item ids when recreated will probably be different
   from the ones in the file.
-  The only reason we put the items ids in the file is for debuting purposes.
 
 npcs.json:
   Persists changes to the NPCs defined in each level.
@@ -29,7 +28,6 @@ npcs_not_initial.json:
   These NPCs must be recreated dynamically again.
   Note that the NPCs ids when recreated will probably be different
   from the ones in the file.
-  The only reason we put the NPCs ids in the file is for debuting purposes.
 
 player.json:
   Persists the Player's state.

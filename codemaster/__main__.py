@@ -31,7 +31,7 @@ def main():
     parser.add_argument('-n', '--nologdatetime', default=False, action='store_true',
                         help='Logs will not print a datetime')
     parser.add_argument('-p', '--persistdata', default=False, action='store_true',
-                        help='WIP Experimental feature: Persist and recover game data. '
+                        help='Experimental feature: Persist and recover game data. '
                              'Automatically save the game state when the user exits the game. '
                              'Continue last game instead of starting a new game if '
                              'the player chooses this option from the main menu. ')
