@@ -437,7 +437,7 @@
 	  $ python -m codemaster -f
 
 	Run the game using the persistence experimental feature, which
-	automatically save the game state when the user exits the game 
+	automatically saves the game state when the user exits the game 
 	and allows the user to continue the last game instead of 
 	starting a new one:
 	  $ python -m codemaster -p
