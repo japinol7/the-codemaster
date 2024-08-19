@@ -423,9 +423,9 @@
 
     Notes: 
 	  * Press ESC if you want to abort the current test.
-	  * If you tell the test suite to run some specific tests, <br> 
-		the test suite will run them even if you have decorated, <br>
-		these tests to be skipped.
+	  * If you tell the test suite to run some specific tests,  
+        the test suite will run them even if you have decorated,
+        these tests to be skipped.
 
 
 **Examples of usage**
@@ -438,7 +438,7 @@
 
 	Run the game using the persistence experimental feature, which
 	automatically saves the game state when the user exits the game 
-	and allows the user to continue the last game instead of 
+	and allows the user to continue the previous game instead of 
 	starting a new one:
 	  $ python -m codemaster -p
 
