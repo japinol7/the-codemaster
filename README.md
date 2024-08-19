@@ -407,40 +407,40 @@
 **Test suite**
 
 	To run the test suite:
-	$ python -m suiteoftests
+	  $ python -m suiteoftests
 
 	You can run the test suite executing only some tests. Examples:
 	    * Execute only one test:
-	      $ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
+	        $ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
 	    * Execute only two tests (example using bash):
-	      $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_pc_enters_door_to_next_level'
+	        $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_pc_enters_door_to_next_level'
 
 	To run the test suite in full screen mode:
-	$ python -m suiteoftests -f
+	  $ python -m suiteoftests -f
 
 	To run the test suite with log debug messages:
-	$ python -m suiteoftests -d
+	  $ python -m suiteoftests -d
 
     Notes: 
-	    * Press ESC if you want to abort the current test.
-	    * If you tell the test suite to run some specific tests, <br> 
-		  the test suite will run them even if you have decorated, <br>
-		  these tests to be skipped.
+	  * Press ESC if you want to abort the current test.
+	  * If you tell the test suite to run some specific tests, <br> 
+		the test suite will run them even if you have decorated, <br>
+		these tests to be skipped.
 
 
 **Examples of usage**
 
 	Run the game:
-	$ python -m codemaster
+	  $ python -m codemaster
 
 	Run the game starting in full screen mode:
-	$ python -m codemaster -f
+	  $ python -m codemaster -f
 
 	Run the game using the persistence experimental feature, which
 	automatically save the game state when the user exits the game 
 	and allows the user to continue the last game instead of 
 	starting a new one:
-	$ python -m codemaster -p
+	  $ python -m codemaster -p
 
 
 **To make The CodeMaster work**
