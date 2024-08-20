@@ -742,7 +742,6 @@ class Player(pg.sprite.Sprite):
             'door_previous_pos_world': level.door_previous_pos_world,
             'levels_visited': sorted(list(pc.stats['levels_visited'])),
             'levels_completed': sorted(level.levels_completed_ids(game)),
-            'magic_attack': None,
             'batteries': pc.stats['batteries'],
             'files_disks': pc.stats['files_disks'],
             'files_disks_type': pc.stats['files_disks_type'],
