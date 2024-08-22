@@ -40,6 +40,7 @@ class EnergyShield(ActorItem):
 
         self.is_activated = False
         self.can_be_shot_by_its_owner = False
+        self.rect_w_half = self.rect.w // 2
 
     def _load_sprites(self):
         if not Actor.sprite_images.get(self.type.name):
@@ -89,9 +90,9 @@ class EnergyShield(ActorItem):
         self.rect.y = self.owner.rect.y - 8
         self.direction = DIRECTION_LEFT if self.owner.direction == DIRECTION_LEFT else DIRECTION_RIGHT
         if self.owner.direction == DIRECTION_RIGHT:
-            self.rect.x = self.owner.rect.x + self.rect.w + 22
+            self.rect.x = self.owner.rect.x + self.owner.rect.w - self.rect_w_half
         elif self.owner.direction == DIRECTION_LEFT:
-            self.rect.x = self.owner.rect.x - self.rect.w - 8
+            self.rect.x = self.owner.rect.x - self.rect_w_half
 
         if self.is_activated:
             self.owner.power -= self.power_cost

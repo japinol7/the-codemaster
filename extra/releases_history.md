@@ -10,6 +10,7 @@
 * Add spells: 
   * Mutentrinos Bolt A.
   * Mutentrinos Bolt B.
+* Improve energy shields effectiveness. 
 * Improve spells: 
   * Drain life.
 * Improve NPCs:
