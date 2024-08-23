@@ -554,7 +554,6 @@ class ActorItem(Actor):
 
                 if item.category_type == ActorCategoryType.DOOR:
                     levels[level.id]['items'][item.id] = {
-                        'id': item.id,
                         'category_type': item.category_type.name,
                         'type': item.type.name,
                         'door_type': item.door_type,
@@ -563,7 +562,6 @@ class ActorItem(Actor):
                     continue
 
                 levels[level.id]['items'][item.id] = {
-                    'id': item.id,
                     'category_type': item.category_type.name,
                     'type': item.type.name,
                     'health': item.stats.health,
@@ -611,7 +609,6 @@ class ActorItem(Actor):
                     continue
 
                 level['items'][item.id] = {
-                    'id': item.id,
                     'is_not_initial_actor': item.is_not_initial_actor,
                     'name': item.name,
                     'base_type': item.base_type.name,
@@ -781,7 +778,6 @@ class NPC(MovingActor):
                 if npc.is_not_initial_actor:
                     continue
                 levels[level.id]['npcs'][npc.id] = {
-                    'id': npc.id,
                     'category_type': npc.category_type.name,
                     'type': npc.type.name,
                     'health': npc.stats.health,
@@ -814,7 +810,6 @@ class NPC(MovingActor):
                 if not npc.is_not_initial_actor:
                     continue
                 level['npcs'][npc.id] = {
-                    'id': npc.id,
                     'is_not_initial_actor': npc.is_not_initial_actor,
                     'name': npc.name,
                     'base_type': npc.base_type.name,

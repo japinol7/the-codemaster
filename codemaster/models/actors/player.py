@@ -727,7 +727,6 @@ class Player(pg.sprite.Sprite):
         pc = game.player
         level = game.level
         res['player'] = {
-            'id': pc.id,
             'direction': pc.direction,
             'level': pc.stats['level'],
             'score': pc.stats['score'],
@@ -776,5 +775,7 @@ class Player(pg.sprite.Sprite):
             ActorType.DOOR_KEY_YELLOW.name: pc.stats[ActorType.DOOR_KEY_YELLOW.name],
             ActorType.DOOR_KEY_RED.name: pc.stats[ActorType.DOOR_KEY_RED.name],
             ActorType.DOOR_KEY_MAGENTA.name: pc.stats[ActorType.DOOR_KEY_MAGENTA.name],
+            'sound_effects': game.sound_effects,
+            'is_music_paused': game.is_music_paused,
             }
         return res

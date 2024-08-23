@@ -101,6 +101,8 @@ def _load_pc_data(game):
         'potions_health': get_actors_by_ids_considering_old_ids(pc_data['potions_health']),
         'apples_stock': get_actors_by_ids_considering_old_ids(pc_data['apples_stock']),
         })
+    pc.sound_effects = game.sound_effects = pc_data['sound_effects']
+    game.is_music_paused = pc_data['is_music_paused']
 
     levels_completed_ids = set(pc_data['levels_completed'])
     levels_completed = [level for level in game.levels if level.id in levels_completed_ids]
