@@ -3,7 +3,11 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 from collections.abc import Iterable
 
-from suiteoftests.config.constants import CLOCK_TIMER_IN_SECS, TestFuncWithSetupLevels
+from suiteoftests.config.constants import (
+    CLOCK_TIMER_IN_SECS,
+    TEST_TIMEOUT_MIN,
+    TestFuncWithSetupLevels,
+    )
 
 
 def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=False):
@@ -34,8 +38,13 @@ def _validate_game_test_arguments(levels, starting_level, timeout, skip):
         raise TypeError("Argument must be an int: starting_level.")
     if not isinstance(skip, bool):
         raise TypeError("Argument must be a bool: skip.")
-    if not isinstance(timeout, (int, float)) or timeout < 1.5:
-        raise TypeError("Argument must be an int or float of at least 1.5 seconds: timeout.")
+    validate_game_test_timeout(timeout)
+
+
+def validate_game_test_timeout(timeout):
+    if not isinstance(timeout, (int, float)) or timeout < TEST_TIMEOUT_MIN:
+        raise TypeError("Argument must be an int or float of at least "
+                        f"{TEST_TIMEOUT_MIN} seconds: timeout.")
 
 
 class GameTest:

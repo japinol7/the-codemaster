@@ -15,7 +15,9 @@
   * Drain life.
 * Improve NPCs:
   * Kung Fu Fighters.
-
+* Improve the test suite:
+  * To facilitate testing persistence.
+  * Current tests count: 57.
 <br>
 
 ## v0.0.6

@@ -8,7 +8,7 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     DOOR_DEST_TR,
     )
-from codemaster.models.actors.items import platforms
+from codemaster.models.actors.items import platforms, PotionHealth
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
     SnakeGreen,
@@ -18,7 +18,7 @@ from codemaster.models.actors.items import (
     BatteryA,
     DoorLeftGreen,
     DoorRightAqua,
-    DoorRightYellow,
+    DoorRightBlue,
     LifeRecoveryA,
     PotionPower,
     )
@@ -80,6 +80,8 @@ class LevelTest3(Level):
             PotionPower(2800, 164, self.game),
             PotionPower(2840, 164, self.game),
             PotionPower(2880, 164, self.game),
+            PotionHealth(3285, 700, self.game),
+            PotionHealth(3360, 700, self.game),
             ])
 
         # Add NPCs
@@ -91,7 +93,7 @@ class LevelTest3(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftGreen(2, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorRightAqua(3368, -18, self.game, level_dest=0, door_dest_pos=DOOR_DEST_TR, is_locked=True),
-            DoorRightYellow(3640, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftGreen(2, 550, self.game, level_dest=1, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightAqua(3368, -18, self.game, level_dest=3, door_dest_pos=DOOR_DEST_TR, is_locked=True),
+            DoorRightBlue(3640, 550, self.game, level_dest=3, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])

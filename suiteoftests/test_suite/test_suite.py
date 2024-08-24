@@ -1,11 +1,15 @@
 """Module test_suite."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+import os
 import traceback
 
 import pygame as pg
 
-from codemaster.models.actors.items import ClockTimerA, InvisibleHolderA
+from codemaster.models.actors.items import (
+    ClockTimerA,
+    InvisibleHolderA,
+    )
 from codemaster.models.actors.player import Player
 from codemaster.config.constants import (
     APP_TECH_NAME,
@@ -15,10 +19,12 @@ from codemaster.config.constants import (
 from codemaster.models.actors.selectors import SelectorA
 from codemaster.tools.logger.logger import log
 from codemaster.tools.utils import utils_graphics as libg_jp
-
 from codemaster.resources import Resource
 from codemaster.config.settings import Settings
-from codemaster.level_scroll_screen import level_scroll_shift_control, change_screen_level
+from codemaster.level_scroll_screen import (
+    level_scroll_shift_control,
+    change_screen_level,
+    )
 from codemaster.tools.utils.queue import Queue
 from codemaster import levels
 from suiteoftests import levels as test_levels
@@ -36,11 +42,15 @@ from suiteoftests.test_suite.actor_actions import (
     PLAYER_ACTION_METHODS_MAP,
     )
 from codemaster.models.actors.text_msgs import TextMsg
+from codemaster.persistence import persistence
+from codemaster.persistence.persistence_settings import PersistenceSettings
+from suiteoftests.test_suite.game_test import validate_game_test_timeout
 
 
 class GameTestSuite:
     """Represents a test suite framework for the code_master game.
-    All the tests added to the test suite using the add_tests method will be executed.
+    All the tests added to the test suite using the add_tests
+    method will be executed.
     You can skip a test by setting its skip attribute to True.
     """
 
@@ -69,6 +79,10 @@ class GameTestSuite:
         self.clock = None
         self.clock_timer = None
         self.start_time = None
+        self.level_name_nums = None
+        self.starting_level_n = None
+        self.game_loop_exec_times = 0
+        self.current_test_timeout = None
         self.active_sprites = None
         self.clock_sprites = None
         self.text_msg_sprites = None
@@ -81,12 +95,15 @@ class GameTestSuite:
         self.level_no = None
         self.level = None
         self.current_time = None
+        self.is_music_paused = True
         self.sound_effects = False
         self.mouse_pos = 0, 0
         self.is_magic_on = False
         self.selector_sprites = pg.sprite.Group()
         self.test_spell_target = None
         self.is_settings_initialized_before = False
+        self.is_persist_data = False
+        self.persistence_path = os.path.join('suiteoftests', 'data', "save_data")
 
     @property
     def tests(self):
@@ -128,10 +145,20 @@ class GameTestSuite:
 
         self.player.die_hard = player_die_hard_mock
 
-    def _set_up(self, level_name_nums=None, starting_level_n=0, is_debug=False, is_full_screen=False):
+    def _set_up(self, is_debug=False, is_full_screen=False,
+                is_set_up_actors_and_levels=True):
         log.info("Set Up")
         self.aborted = False
+        self.is_persist_data = False
+        self.game_loop_exec_times = 0
+        self.current_test_timeout = None
         self._init_settings(is_debug=is_debug, is_full_screen=is_full_screen)
+
+        if is_set_up_actors_and_levels:
+            self.set_up_actors_and_levels()
+
+    def set_up_actors_and_levels(self):
+        levels.Level.clean_entity_ids()
 
         log.info("Create PC")
         self.player = Player('Pac', self)
@@ -144,7 +171,8 @@ class GameTestSuite:
         self.player_actions = Queue()
         self.player.sound_effects = self.sound_effects
 
-        self._load_test_levels(level_name_nums=level_name_nums, starting_level_n=starting_level_n)
+        self._load_test_levels(level_name_nums=self.level_name_nums,
+                               starting_level_n=self.starting_level_n)
 
         log.info("Set clock")
         self.clock = pg.time.Clock()
@@ -180,10 +208,13 @@ class GameTestSuite:
     def _tear_down(self):
         log.info("Tear Down")
         levels.Level.clean_entity_ids()
+        if self.is_persist_data:
+            self.clear_all_persisted_data()
 
     def _clock_die_hard(self):
         self.clock_timer.die_hard()
-        log.info("Exit game loop triggered by the timer clock. Test: %s", self.current_test.__name__)
+        log.info("Exit game loop triggered by the timer clock. "
+                 "Test: %s", self.current_test.__name__)
         self.done = True
 
     def _init_settings(self, is_debug=False, is_full_screen=False):
@@ -201,7 +232,8 @@ class GameTestSuite:
         suite.size = [Settings.screen_width, Settings.screen_height]
         suite.full_screen_flags = pg.FULLSCREEN | pg.SCALED
         suite.normal_screen_flags = pg.SHOWN | pg.SCALED
-        suite.screen_flags = suite.full_screen_flags if Settings.is_full_screen else suite.normal_screen_flags
+        is_full_screen = Settings.is_full_screen
+        suite.screen_flags = suite.full_screen_flags if is_full_screen else suite.normal_screen_flags
         suite.screen = pg.display.set_mode(suite.size, suite.screen_flags)
 
         log.info("Load and render resources")
@@ -210,7 +242,7 @@ class GameTestSuite:
         # Render characters in some colors to use it as a cache
         libg_jp.chars_render_text_tuple(font_name=FONT_DEFAULT_NAME)
         libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)
-        GameTestSuite.is_log_debug = is_debug
+        GameTestSuite.is_log_debug = self.is_debug = is_debug
         self.is_settings_initialized_before = True
 
     def _init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
@@ -246,6 +278,21 @@ class GameTestSuite:
 
         self.level.magic_sprites.draw(GameTestSuite.screen)
 
+    def _init_persistence_settings(self):
+        self.is_persist_data = True
+        PersistenceSettings.init_settings(self.persistence_path)
+
+    def persist_game_data(self):
+        self._init_persistence_settings()
+        persistence.persist_game_data(self)
+
+    def load_game_data(self):
+        self.set_up_actors_and_levels()
+        persistence.load_game_data(self)
+
+    def clear_all_persisted_data(self):
+        persistence.clear_all_persisted_data()
+
     def _player_move(self):
         if not self.player_actions:
             return
@@ -269,13 +316,14 @@ class GameTestSuite:
                 selector.get_pointed_sprites()
             return
 
-        getattr(self.player, player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
+        getattr(self.player,
+                player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
 
-    def _create_test_name_msg_actor(self, test_method_with_setup_levels):
+    def _create_test_name_msg_actor(self, timeout):
         TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {self.current_test.__name__}",
                        game=self, owner=self.actor_test_name_holder,
                        delta_x=0, delta_y=3,
-                       time_in_secs=test_method_with_setup_levels.timeout-0.06)
+                       time_in_secs=timeout-0.06)
 
     def assert_test_passed(self, condition, failed_msg):
         if self.aborted:
@@ -292,14 +340,24 @@ class GameTestSuite:
         self.tests_passed += [self.current_test.__name__]
         self.test_passed_count += 1
 
-    def game_loop(self):
+    def game_loop(self, timeout=None):
         log.info("Start game loop")
+        if timeout is not None:
+            validate_game_test_timeout(timeout)
+            self.current_test_timeout = timeout
+
+        self._create_test_name_msg_actor(self.current_test_timeout)
+        self._init_clock_timer(self.current_test_timeout)
+
+        self.game_loop_exec_times += 1
         self.done = False
         while not self.done:
             self.current_time = pg.time.get_ticks()
             for event in pg.event.get():
-                if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                    log.warning("Abort test by user request: %s", self.current_test.__name__)
+                if event.type == pg.QUIT or \
+                        (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                    log.warning("Abort test by user request: "
+                                "%s", self.current_test.__name__)
                     self.done = True
                     self.aborted = True
                     self.test_aborted_count += 1
@@ -307,7 +365,8 @@ class GameTestSuite:
             level_scroll_shift_control(game=self)
 
             # Check if we hit any door
-            door_hit_list = pg.sprite.spritecollide(self.player, self.level.doors, False)
+            door_hit_list = pg.sprite.spritecollide(
+                self.player, self.level.doors, False)
             for door in door_hit_list:
                 if not door.is_locked:
                     change_screen_level(game=self, door=door)
@@ -326,11 +385,13 @@ class GameTestSuite:
 
         self.tests_skipped = [test.test_func.__name__ for test in self.tests if test.skip]
         self.test_skipped_count = len(self.tests_skipped)
-        self.tests_skipped_text = f". Tests skipped: {self.test_skipped_count}" if self.test_skipped_count else ''
+        self.tests_skipped_text = (". Tests skipped: "
+                                   f"{self.test_skipped_count}") if self.test_skipped_count else ''
         self.tests_total = sum(1 for test in self.tests if not test.skip)
 
         log.info(LOG_START_TEST_APP_MSG)
-        log.info(f"Total tests to pass: {self.tests_total}{self.tests_skipped_text}")
+        log.info("Total tests to pass: "
+                 f"{self.tests_total}{self.tests_skipped_text}")
         pg.init()
         count = 0
         try:
@@ -341,13 +402,11 @@ class GameTestSuite:
                     continue
                 count += 1
                 log.info(f"------ Test {count:2} / {self.tests_total} ------")
-                self._set_up(
-                    level_name_nums=test_method_with_setup_levels.level_name_nums,
-                    starting_level_n=test_method_with_setup_levels.starting_level_n,
-                    is_debug=is_debug, is_full_screen=is_full_screen)
+                self.level_name_nums = test_method_with_setup_levels.level_name_nums
+                self.starting_level_n = test_method_with_setup_levels.starting_level_n
+                self._set_up(is_debug=is_debug, is_full_screen=is_full_screen)
                 log.info(f"Start {self.current_test.__name__}")
-                self._create_test_name_msg_actor(test_method_with_setup_levels)
-                self._init_clock_timer(test.timeout)
+                self.current_test_timeout = test.timeout
                 test_method_with_setup_levels.test_func(
                     self=test_method_with_setup_levels.__class__,
                     game=self)

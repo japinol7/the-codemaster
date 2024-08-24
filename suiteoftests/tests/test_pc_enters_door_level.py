@@ -6,12 +6,12 @@ from suiteoftests.test_suite.game_test import game_test
 
 
 class TestPlayerEntersDoorLevel:
-    """Player should be able to enter a door to go to the next level
+    """Player should be able to enter a door to go to another level
     only if the door is open.
     """
 
-    @game_test(levels=[4, 3], starting_level=1, timeout=2)
-    def test_pc_enters_door_to_next_level(self, game):
+    @game_test(levels=[1, 2], starting_level=1, timeout=2)
+    def test_pc_enters_door_to_another_level(self, game):
         game.player.rect.x, game.player.rect.y = 250, 660
 
         game.add_player_actions((
@@ -19,17 +19,18 @@ class TestPlayerEntersDoorLevel:
             ['stop', 1],
             ))
 
-        left_door = [door for door in game.level.doors if door.type == ActorType.DOOR_LEFT_GREEN][0]
+        left_door = [door for door in game.level.doors
+                     if door.type == ActorType.DOOR_LEFT_GREEN][0]
         left_door.is_locked = False
 
         game.game_loop()
 
         game.assert_test_passed(
-            condition=game.level.name == '4',
-            failed_msg="Player did not go to the next level through an open door.")
+            condition=game.level.id == 1,
+            failed_msg="Player did not go to another level through an open door.")
 
-    @game_test(levels=[4, 3], starting_level=1, timeout=2)
-    def test_pc_cannot_enter_locked_door_to_next_level(self, game):
+    @game_test(levels=[1, 2], starting_level=1, timeout=2)
+    def test_pc_cannot_enter_locked_door_to_another_level(self, game):
         game.player.rect.x, game.player.rect.y = 250, 660
 
         game.add_player_actions((
@@ -37,11 +38,12 @@ class TestPlayerEntersDoorLevel:
             ['stop', 1],
             ))
 
-        left_door = [door for door in game.level.doors if door.type == ActorType.DOOR_LEFT_GREEN][0]
+        left_door = [door for door in game.level.doors
+                     if door.type == ActorType.DOOR_LEFT_GREEN][0]
         left_door.is_locked = True
 
         game.game_loop()
 
         game.assert_test_passed(
-            condition=game.level.name == '3',
-            failed_msg="Player did go to the next level through a locked door.")
+            condition=game.level.id == 2,
+            failed_msg="Player did go to another level through a locked door.")

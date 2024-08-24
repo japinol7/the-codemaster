@@ -16,3 +16,8 @@ from . import test_energy_shield
 from . import test_pc_enters_door_level
 from . import test_pc_consumes_stuff
 from . import test_pc_physics
+from . import test_persistence_pc
+from . import test_persistence_items
+from . import test_persistence_items_not_initial
+from . import test_persistence_npcs
+from . import test_persistence_npcs_not_initial

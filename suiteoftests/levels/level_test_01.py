@@ -12,8 +12,8 @@ from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.items import (
     ComputerA,
-    DoorLeftGreen,
-    DoorRightYellow,
+    DoorLeftYellow,
+    DoorRightGreen,
     FilesDiskB,
     FilesDiskC,
     )
@@ -29,7 +29,7 @@ class LevelTest1(Level):
         self.player_start_pos_right = 600, 470
         self.player_start_pos_rtop = 300, 100
         self.player_start_pos_ltop = 80, 100
-        
+
         super().__init__(id_, game)
 
     def _add_actors_hook(self):
@@ -91,6 +91,6 @@ class LevelTest1(Level):
 
         # Add doors
         self.doors.add([
-            DoorRightYellow(3400, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorLeftGreen(2, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftYellow(2, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightGreen(3400, 550, self.game, level_dest=1, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])

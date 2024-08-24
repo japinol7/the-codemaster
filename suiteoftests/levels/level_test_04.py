@@ -15,6 +15,7 @@ from codemaster.models.actors.npcs import (
 from codemaster.models.actors.items import (
     DoorLeftBlue,
     DoorRightGreen,
+    LifeRecoveryA,
     )
 from codemaster.levels.level_base import Level
 
@@ -49,6 +50,11 @@ class LevelTest4(Level):
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
 
+        # Add life_recs
+        self.life_recs.add([
+            LifeRecoveryA(560, 692, self.game),
+            ])
+
         # Add NPCs
         self.npcs.add([
             BatBlack(560, 640, self.game, border_left=500, border_right=860, change_x=2),
@@ -56,6 +62,6 @@ class LevelTest4(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftBlue(2, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorRightGreen(3640, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftBlue(2, 550, self.game, level_dest=2, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightGreen(3640, 550, self.game, level_dest=4, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])
