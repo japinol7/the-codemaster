@@ -4,6 +4,8 @@ __author__ = 'Joan A. Pinol  (japinol)'
 from codemaster.config.constants import (
     APP_NAME_LONG,
     APP_TECH_NAME,
+    )
+from codemaster.persistence.persistence_settings import (
     PERSISTENCE_NO_SAVED_GAME_DATA_MSG,
     )
 from codemaster.persistence.exceptions import (

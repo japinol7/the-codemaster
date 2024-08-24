@@ -46,18 +46,34 @@ class Door(ActorItem):
         pass
 
     @staticmethod
-    def get_doors_dest_to_level(level_id, game):
-        """Gets all the doors that go to a given level"""
+    def get_doors_dest_to_level(level_dest, game):
+        """Gets all the doors that go to a given level."""
         return [door for level in game.levels for door in level.doors
-                if door.level_dest == level_id]
+                if door.level_dest == level_dest]
 
     @staticmethod
-    def get_doors_dest_to_level_filtered_by_door_type_position(level_id, door_position, game):
+    def get_level_doors_dest_to_level(level_dest, game, level_orig):
+        """Gets all the doors from a level that go to a given level."""
+        return [door for door in game.levels[level_orig].doors
+                if door.level_dest == level_dest]
+
+    @staticmethod
+    def get_doors_dest_to_level_filtered_by_door_type_position(
+            level_dest, door_position, game):
         """Gets all the doors that go to a given level filtered by a given
         door type position.
         """
         return [door for level in game.levels for door in level.doors
-                if door.level_dest == level_id and door.door_type == door_position]
+                if door.level_dest == level_dest and door.door_type == door_position]
+
+    @staticmethod
+    def get_level_doors_dest_to_level_filtered_by_door_type_pos(
+            level_dest, door_position, game, level_orig):
+        """Gets all the doors from a level that go to a given level filtered by a given
+        door type position.
+        """
+        return [door for door in game.levels[level_orig].doors
+                if door.level_dest == level_dest and door.door_type == door_position]
 
 
 class DoorLeftGreen(Door):

@@ -3,15 +3,15 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 from copy import deepcopy
 
-from codemaster.config.constants import (
-    DOOR_POSITION_R,
-    GAME_DATA_HEADER,
-    PERSISTENCE_PC_FILE,
-    )
+from codemaster.config.constants import DOOR_POSITION_R
 from codemaster.models.actors.actors import Actor
 from codemaster.models.actors.player import Player
 from codemaster.models.actors.items.doors import Door
 from codemaster.level_scroll_screen import change_screen_level
+from codemaster.persistence.persistence_settings import (
+    GAME_DATA_HEADER,
+    PersistenceSettings,
+    )
 from codemaster.persistence.exceptions import (
     LoadGamePcException,
     )
@@ -32,7 +32,7 @@ def persist_game_pc_data(game):
     game_data = deepcopy(GAME_DATA_HEADER)
     pc_data = Player.get_stats_to_persist(game)
     game_data.update(pc_data)
-    save_data_to_file(PERSISTENCE_PC_FILE, game_data)
+    save_data_to_file(PersistenceSettings.settings['pc_file'], game_data)
 
 
 def load_game_pc_data(game):
@@ -47,7 +47,7 @@ def validate_load_data_basic_structure(pc_data):
 
 
 def _load_pc_data(game):
-    pc_data = load_data_from_file(PERSISTENCE_PC_FILE)
+    pc_data = load_data_from_file(PersistenceSettings.settings['pc_file'])
 
     validate_load_data_basic_structure(pc_data)
     validate_load_data_game_basic_metadata(pc_data)

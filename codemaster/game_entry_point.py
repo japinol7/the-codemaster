@@ -32,13 +32,16 @@ from codemaster.config.constants import (
     NEAR_BOTTOM,
     LOG_GAME_BEATEN,
     LOG_GAME_OVER,
-)
+    )
 from codemaster.models.actors.player import Player, PL_SELF_DESTRUCTION_COUNT_DEF
-from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.actors import NPC, ActorItem
 from codemaster.models.actors.selectors import SelectorA
 from codemaster.level_scroll_screen import level_scroll_shift_control, change_screen_level
+from codemaster.persistence.persistence_settings import (
+    PERSISTENCE_PATH_DEFAULT,
+    PersistenceSettings,
+    )
 from codemaster.persistence import persistence
 
 
@@ -74,6 +77,7 @@ class Game:
         self.winner = None
         self.is_debug = is_debug
         self.is_persist_data = is_persist_data
+        self.persistence_path = PERSISTENCE_PATH_DEFAULT if is_persist_data else None
         self.is_load_last_game = False
         self.level = None
         self.levels = []
@@ -143,6 +147,10 @@ class Game:
             pg.mixer.music.play(loops=-1)
             if self.is_music_paused:
                 pg.mixer.music.pause()
+
+            # Initialize persistence settings if necessary
+            if self.is_persist_data:
+                PersistenceSettings.init_settings(self.persistence_path)
 
         # Initialize screens
         self.screen_exit_current_game = screen.ExitCurrentGame(self)

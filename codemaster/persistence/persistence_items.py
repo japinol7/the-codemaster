@@ -4,15 +4,14 @@ __author__ = 'Joan A. Pinol  (japinol)'
 from copy import deepcopy
 from itertools import chain
 
-from codemaster.config.constants import (
-    GAME_DATA_HEADER,
-    PERSISTENCE_ITEMS_FILE,
-    PERSISTENCE_ITEMS_NEW_FILE,
-    PERSISTENCE_NO_SAVED_GAME_DATA_MSG,
-    )
 from codemaster.models.actors.actor_types import ActorCategoryType
 from codemaster.models.actors.actors import Actor, ActorItem
 from codemaster.models.actors import items as items_module
+from codemaster.persistence.persistence_settings import (
+    GAME_DATA_HEADER,
+    PERSISTENCE_NO_SAVED_GAME_DATA_MSG,
+    PersistenceSettings,
+    )
 from codemaster.persistence.exceptions import (
     LoadGameItemsException,
     LoadGameNoSavedGameDataException,
@@ -43,7 +42,7 @@ def _persist_items_data(game):
     game_data = deepcopy(GAME_DATA_HEADER)
     items_data = ActorItem.get_items_stats_to_persist(game)
     game_data.update(items_data)
-    save_data_to_file(PERSISTENCE_ITEMS_FILE, game_data)
+    save_data_to_file(PersistenceSettings.settings['items_file'], game_data)
 
 
 def _persist_items_not_initial_data(game):
@@ -51,7 +50,7 @@ def _persist_items_not_initial_data(game):
     game_data = deepcopy(GAME_DATA_HEADER)
     items_data = ActorItem.get_items_not_initial_actor_stats_to_persist(game)
     game_data.update(items_data)
-    save_data_to_file(PERSISTENCE_ITEMS_NEW_FILE, game_data)
+    save_data_to_file(PersistenceSettings.settings['items_new_file'], game_data)
 
 
 def validate_load_data_basic_structure(items_data):
@@ -62,7 +61,7 @@ def validate_load_data_basic_structure(items_data):
 
 def _load_items_data(game):
     game.is_debug and log.debug("Load last saved game items")
-    items_data = load_data_from_file(PERSISTENCE_ITEMS_FILE)
+    items_data = load_data_from_file(PersistenceSettings.settings['items_file'])
 
     validate_load_data_basic_structure(items_data)
     validate_load_data_game_basic_metadata(items_data)
@@ -95,7 +94,7 @@ def _load_items_data(game):
 
 def _load_items_not_initial_data(game):
     game.is_debug and log.debug("Load last saved game items: Not initial actors")
-    items_data = load_data_from_file(PERSISTENCE_ITEMS_NEW_FILE)
+    items_data = load_data_from_file(PersistenceSettings.settings['items_new_file'])
 
     validate_load_data_basic_structure(items_data)
     validate_load_data_game_basic_metadata(items_data)

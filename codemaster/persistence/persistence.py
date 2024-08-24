@@ -5,14 +5,10 @@ from copy import deepcopy
 import json
 import traceback
 
-from codemaster.config.constants import (
+from codemaster.config.constants import JSON_INDENT_SIZE
+from codemaster.persistence.persistence_settings import (
     GAME_DATA_HEADER,
-    JSON_INDENT_SIZE,
-    PERSISTENCE_PC_FILE,
-    PERSISTENCE_ITEMS_FILE,
-    PERSISTENCE_ITEMS_NEW_FILE,
-    PERSISTENCE_NPCS_FILE,
-    PERSISTENCE_NPCS_NEW_FILE,
+    PersistenceSettings,
     )
 from codemaster.persistence.exceptions import (
     LoadGameException,
@@ -46,11 +42,12 @@ def persist_game_data(game):
 
 def clear_all_persisted_data():
     log.info("Clean last saved game")
-    _clear_persisted_data_file(PERSISTENCE_PC_FILE, 'player')
-    _clear_persisted_data_file(PERSISTENCE_ITEMS_FILE, 'game_levels')
-    _clear_persisted_data_file(PERSISTENCE_ITEMS_NEW_FILE, 'game_levels')
-    _clear_persisted_data_file(PERSISTENCE_NPCS_FILE, 'game_levels')
-    _clear_persisted_data_file(PERSISTENCE_NPCS_NEW_FILE, 'game_levels')
+    settings = PersistenceSettings.settings
+    _clear_persisted_data_file(settings['pc_file'], 'player')
+    _clear_persisted_data_file(settings['items_file'], 'game_levels')
+    _clear_persisted_data_file(settings['items_new_file'], 'game_levels')
+    _clear_persisted_data_file(settings['npcs_file'], 'game_levels')
+    _clear_persisted_data_file(settings['npcs_new_file'], 'game_levels')
 
 def _clear_persisted_data_file(file_name, key_to_add):
     game_data = deepcopy(GAME_DATA_HEADER)

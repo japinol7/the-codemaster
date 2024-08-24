@@ -31,4 +31,12 @@ npcs_not_initial.json:
 
 player.json:
   Persists the Player's state.
+
+Notes:
+  * We assume that the levels in the game are contiunous in a way that:
+    * A level's id is a number. First level's id is: 1.
+      * If a game has five levels, their ids should be: 1, 2, 3, 4, 5.
+    * The levels in a game are stored in a sequence, starting with 0.
+      * If a game has five levels, their position inside the sequence
+        would be: 0, 1, 2, 3, 4.
 """

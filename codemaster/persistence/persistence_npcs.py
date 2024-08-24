@@ -3,14 +3,13 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 from copy import deepcopy
 
-from codemaster.config.constants import (
-    GAME_DATA_HEADER,
-    PERSISTENCE_NPCS_FILE,
-    PERSISTENCE_NPCS_NEW_FILE,
-    PERSISTENCE_NO_SAVED_GAME_DATA_MSG,
-    )
 from codemaster.models.actors.actors import NPC, Actor
 from codemaster.models.actors import npcs as npcs_module
+from codemaster.persistence.persistence_settings import (
+    GAME_DATA_HEADER,
+    PERSISTENCE_NO_SAVED_GAME_DATA_MSG,
+    PersistenceSettings,
+    )
 from codemaster.persistence.exceptions import (
     LoadGameNPCsException,
     LoadGameNoSavedGameDataException,
@@ -40,7 +39,7 @@ def _persist_npcs_data(game):
     game_data = deepcopy(GAME_DATA_HEADER)
     npcs_data = NPC.get_npcs_stats_to_persist(game)
     game_data.update(npcs_data)
-    save_data_to_file(PERSISTENCE_NPCS_FILE, game_data)
+    save_data_to_file(PersistenceSettings.settings['npcs_file'], game_data)
 
 
 def _persist_npcs_not_initial_data(game):
@@ -48,7 +47,7 @@ def _persist_npcs_not_initial_data(game):
     game_data = deepcopy(GAME_DATA_HEADER)
     npcs_data = NPC.get_npcs_not_initial_actor_stats_to_persist(game)
     game_data.update(npcs_data)
-    save_data_to_file(PERSISTENCE_NPCS_NEW_FILE, game_data)
+    save_data_to_file(PersistenceSettings.settings['npcs_new_file'], game_data)
 
 
 def validate_load_data_basic_structure(npcs_data):
@@ -59,7 +58,7 @@ def validate_load_data_basic_structure(npcs_data):
 
 def _load_npcs_data(game):
     game.is_debug and log.debug("Load last saved game NPCs")
-    npcs_data = load_data_from_file(PERSISTENCE_NPCS_FILE)
+    npcs_data = load_data_from_file(PersistenceSettings.settings['npcs_file'])
 
     validate_load_data_basic_structure(npcs_data)
     validate_load_data_game_basic_metadata(npcs_data)
@@ -94,7 +93,7 @@ def _load_npcs_data(game):
 
 def _load_npcs_not_initial_data(game):
     game.is_debug and log.debug("Load last saved game NPCs: Not initial actors")
-    npcs_data = load_data_from_file(PERSISTENCE_NPCS_NEW_FILE)
+    npcs_data = load_data_from_file(PersistenceSettings.settings['npcs_new_file'])
 
     validate_load_data_basic_structure(npcs_data)
     validate_load_data_game_basic_metadata(npcs_data)
