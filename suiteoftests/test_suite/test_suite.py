@@ -79,7 +79,7 @@ class GameTestSuite:
         self.clock = None
         self.clock_timer = None
         self.start_time = None
-        self.level_name_nums = None
+        self.level_ids = None
         self.starting_level_n = None
         self.game_loop_exec_times = 0
         self.current_test_timeout = None
@@ -171,7 +171,7 @@ class GameTestSuite:
         self.player_actions = Queue()
         self.player.sound_effects = self.sound_effects
 
-        self._load_test_levels(level_name_nums=self.level_name_nums,
+        self._load_test_levels(level_ids=self.level_ids,
                                starting_level_n=self.starting_level_n)
 
         log.info("Set clock")
@@ -197,11 +197,11 @@ class GameTestSuite:
 
         self._mock_player_die_hard()
 
-    def _load_test_levels(self, level_name_nums=None, starting_level_n=0):
-        log.info(f"Load test levels: {level_name_nums}")
+    def _load_test_levels(self, level_ids=None, starting_level_n=0):
+        log.info(f"Load test levels: {level_ids}")
         self.levels = levels.Level.factory_by_nums(
             levels_module=test_levels, game=self,
-            level_name_nums=level_name_nums, level_name_prefix='LevelTest')
+            level_ids=level_ids, level_name_prefix='LevelTest')
         self.levels_qty = len(self.levels)
         self.level = self.levels[starting_level_n]
 
@@ -341,10 +341,10 @@ class GameTestSuite:
         self.test_passed_count += 1
 
     def game_loop(self, timeout=None):
-        log.info("Start game loop")
         if timeout is not None:
             validate_game_test_timeout(timeout)
             self.current_test_timeout = timeout
+        log.info(f"Start game loop. timeout: {self.current_test_timeout}")
 
         self._create_test_name_msg_actor(self.current_test_timeout)
         self._init_clock_timer(self.current_test_timeout)
@@ -402,7 +402,7 @@ class GameTestSuite:
                     continue
                 count += 1
                 log.info(f"------ Test {count:2} / {self.tests_total} ------")
-                self.level_name_nums = test_method_with_setup_levels.level_name_nums
+                self.level_ids = test_method_with_setup_levels.level_ids
                 self.starting_level_n = test_method_with_setup_levels.starting_level_n
                 self._set_up(is_debug=is_debug, is_full_screen=is_full_screen)
                 log.info(f"Start {self.current_test.__name__}")

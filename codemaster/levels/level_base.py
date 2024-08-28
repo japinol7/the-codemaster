@@ -349,9 +349,9 @@ class Level:
                 for level_id in range(1, N_LEVELS + 1)]
 
     @staticmethod
-    def factory_by_nums(levels_module, game, level_name_nums=None, level_name_prefix='Level'):
+    def factory_by_nums(levels_module, game, level_ids=None, level_name_prefix='Level'):
         return [getattr(levels_module, f"{level_name_prefix}{level_id}")(level_id, game)
-                for level_id in level_name_nums]
+                for level_id in level_ids]
 
     @staticmethod
     def file_name_im_get(id_):

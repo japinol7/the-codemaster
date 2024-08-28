@@ -65,8 +65,11 @@ class TestPersistencePc:
             condition=game.level.id == 1,
             failed_msg="Game loaded did not set the player to the correct level.")
 
-    @game_test(levels=[1, 2], starting_level=1, timeout=2)
+    @game_test(levels=[1, 2, 3], starting_level=1, timeout=2)
     def test_persist_pc_basic_stats(self, game):
+        """Tests persistence of basic stats.
+        Loads three levels, the player visits two.
+        """
         player = game.player
         left_door = Door.get_level_doors_dest_to_level(
             level_dest=0, game=game, level_orig=1)[0]
@@ -105,5 +108,7 @@ class TestPersistencePc:
                       and player.stats['bullets_t01'] == 50
                       and player.stats['bullets_t02'] == 30
                       and player.stats['bullets_t03'] == 10
-                      and player.stats['bullets_t04'] == 6,
-        failed_msg="Game loaded did not set the player correct basic stats.")
+                      and player.stats['bullets_t04'] == 6
+                      and sorted(list(player.stats['levels_visited'])) == [1, 2]
+                      and sorted(list(game.level.levels_completed_ids(game))) == [],
+            failed_msg="Game loaded did not set the player correct basic stats.")

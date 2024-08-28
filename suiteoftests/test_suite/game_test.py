@@ -13,9 +13,12 @@ from suiteoftests.config.constants import (
 def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=False):
     """Decorates a game test function, so it can be automatically added
     to the suite of tests.
-    @param levels: List of level names to load. Each level must be an integer.
-    The First level is 1, because it is based on the name of the level.
-    @param starting_level: Starting level. It must be an integer. The First level is 0.
+    @param levels: List of level ids to load.
+    Each level must be an integer.
+    The First level is 1, because it is based on the id of the level.
+    @param starting_level: Starting level. It must be an integer.
+    The First level is 0, because it is based on the position of the level
+    in the iterable argument 'levels'.
     @param timeout: Timeout in seconds for the duration of the game loop.
     @param skip: Skip this test if true.
     """
@@ -103,7 +106,7 @@ class GameTest:
             tests.append(
                 TestFuncWithSetupLevels(
                     test.test_func,
-                    test.level_name_nums, test.starting_level_n, test.timeout, skip
+                    test.level_ids, test.starting_level_n, test.timeout, skip
                     ),
                 )
 

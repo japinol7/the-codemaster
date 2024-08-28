@@ -17,9 +17,9 @@
 
 ## Screenshots
 
-<img src="screenshots/screenshot1.jpg" width="980"> <br />
-<img src="screenshots/screenshot2.jpg" width="980"> <br />
-<img src="screenshots/screenshot3.png" width="980"> <br />
+<img src="screenshots/screenshot1.jpg" width="980" alt=""> <br />
+<img src="screenshots/screenshot2.jpg" width="980" alt=""> <br />
+<img src="screenshots/screenshot3.png" width="980" alt=""> <br />
 
 
 ## Videos
@@ -302,7 +302,7 @@
 <br>
 
 
-#### Starting with version 0.0.7 you can continue the last game
+#### Starting with version 0.0.7, you can continue the last game
 	We added a persistence feature, which automatically saves the game 
 	state when the user exits the game and allows the user to continue 
 	the previous game instead of starting a new one.
@@ -422,7 +422,7 @@
 	    * Execute only one test:
 	        $ python -m suiteoftests -n test_bat_hit_with_enough_bullets_must_die
 	    * Execute only two tests (example using bash):
-	        $ python -m suiteoftests -n 'test_bat_hit_with_enough_bullets_must_die, test_pc_enters_door_to_next_level'
+	        $ python -m suiteoftests -n 'test_bat_hit_with_lightning_bolt_must_die, test_pc_enters_door_to_another_level'
 
 	To run the test suite in full screen mode:
 	  $ python -m suiteoftests -f

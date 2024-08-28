@@ -23,6 +23,6 @@ DASHES_LINE_SHORT = '-' * 22
 
 TestFuncWithSetupLevels = namedtuple(
     'TestMethodWithSetupLevels', [
-        'test_func', 'level_name_nums', 'starting_level_n', 'timeout', 'skip'
+        'test_func', 'level_ids', 'starting_level_n', 'timeout', 'skip'
         ]
     )
