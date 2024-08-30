@@ -12,7 +12,7 @@ from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.items import (
     DoorLeftGreen,
-    DoorRightYellow,
+    DoorRightRed,
     )
 from codemaster.levels.level_base import Level
 
@@ -77,6 +77,6 @@ class LevelTest7(Level):
 
         # Add doors
         self.doors.add([
-            DoorRightYellow(3400, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorLeftGreen(2, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightRed(3400, 550, self.game, level_dest=5, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftGreen(2, 550, self.game, level_dest=7, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])

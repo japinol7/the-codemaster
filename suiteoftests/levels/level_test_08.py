@@ -1,4 +1,4 @@
-"""Module level test 4."""
+"""Module level test 8."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 import pygame as pg
@@ -7,23 +7,22 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     SCREEN_NEAR_EARTH,
     )
-from codemaster.models.actors.items import platforms
+from codemaster.models.actors.items import platforms, DoorLeftGreen, DoorRightYellow
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
     BatBlack,
     )
 from codemaster.models.actors.items import (
-    DoorLeftBlue,
-    DoorRightMagenta,
-    LifeRecoveryA,
+    DoorLeftGreen,
+    DoorRightYellow,
     )
 from codemaster.levels.level_base import Level
 
 
-class LevelTest4(Level):
+class LevelTest8(Level):
 
     def __init__(self, id_, game):
-        self.background = pg.image.load(self.file_name_im_get(6)).convert()
+        self.background = pg.image.load(self.file_name_im_get(12)).convert()
         self.player_start_pos_left = 220, 520
         self.player_start_pos_right = 520, 520
         self.player_start_pos_rtop = 800, -292
@@ -50,11 +49,6 @@ class LevelTest4(Level):
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
 
-        # Add life_recs
-        self.life_recs.add([
-            LifeRecoveryA(560, 692, self.game),
-            ])
-
         # Add NPCs
         self.npcs.add([
             BatBlack(560, 640, self.game, border_left=500, border_right=860, change_x=2),
@@ -62,6 +56,6 @@ class LevelTest4(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftBlue(2, 550, self.game, level_dest=2, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorRightMagenta(3640, 550, self.game, level_dest=4, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftGreen(2, 550, self.game, level_dest=6, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightYellow(3640, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])

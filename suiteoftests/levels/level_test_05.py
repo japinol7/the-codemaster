@@ -19,8 +19,8 @@ from codemaster.models.actors.items import (
     AppleGreen,
     AppleRed,
     CartridgeBlue,
-    DoorLeftAqua,
-    DoorRightMagenta,
+    DoorLeftMagenta,
+    DoorRightGreen,
     DoorRightYellow,
     FilesDiskA,
     FilesDiskB,
@@ -32,7 +32,7 @@ from codemaster.levels.level_base import Level
 class LevelTest5(Level):
 
     def __init__(self, id_, game):
-        self.background = pg.image.load(self.file_name_im_get(6)).convert()
+        self.background = pg.image.load(self.file_name_im_get(13)).convert()
         self.player_start_pos_left = 220, 520
         self.player_start_pos_right = 520, 520
         self.player_start_pos_rtop = 800, -292
@@ -98,7 +98,7 @@ class LevelTest5(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftAqua(2, 550, self.game, level_dest=11, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorRightMagenta(3480, 52, self.game, level_dest=16, door_dest_pos=DOOR_DEST_TR, is_locked=True),
-            DoorRightYellow(3640, 550, self.game, level_dest=13, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftMagenta(2, 550, self.game, level_dest=3, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightGreen(3480, 52, self.game, level_dest=6, door_dest_pos=DOOR_DEST_TR, is_locked=True),
+            DoorRightYellow(3640, 550, self.game, level_dest=5, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])

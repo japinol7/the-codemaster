@@ -1,12 +1,12 @@
 """Module selectors."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-import logging
-
 import pygame as pg
 
-
-from codemaster.config.constants import BM_SELECTORS_FOLDER, DIRECTION_RIP
+from codemaster.config.constants import (
+    BM_SELECTORS_FOLDER,
+    DIRECTION_RIP,
+    )
 from codemaster.models.actors.actor_types import (
     ActorBaseType,
     ActorCategoryType,
@@ -90,7 +90,11 @@ class Selector(ActorItem):
         if self.game.is_log_debug:
             hit_list = pg.sprite.spritecollide(self, self.game.level.all_sprites, False)
             for sprite in hit_list:
-                log.debug(f"Mouse sprites: {sprite.id} in pos: ({sprite.rect.x}, {sprite.rect.y})")
+                log.debug(
+                    f"Mouse sprites: {sprite.id} in pos: "
+                    f"({sprite.rect.x}, {sprite.rect.y}) - lev pos: "
+                    f"({sprite.rect.x + self.game.level.get_scroll_shift_delta()}, "
+                    f"{sprite.rect.y - self.game.level.get_scroll_shift_top_delta()})")
 
         if not self.game.is_magic_on:
             return hit_list

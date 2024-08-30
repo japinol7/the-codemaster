@@ -27,7 +27,7 @@ class TestPlayerShootsNPCs:
             condition=player.power < 100 and player.stats['bullets_t03'] == 0,
             failed_msg="Player must spend power and bullets to shoot bullets.")
 
-    @game_test(levels=[4], timeout=3)
+    @game_test(levels=[8], timeout=3)
     def test_bat_hit_with_enough_bullets_must_die(self, game):
         player = game.player
         player.rect.x, player.rect.y = 240, 620

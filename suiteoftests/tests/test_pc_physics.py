@@ -15,11 +15,10 @@ class TestPlayerPhysics:
         player = game.player
         player_orig_y = 554
         player.rect.x, player.rect.y = 450, player_orig_y
-        world_shift_top_before = game.level.world_shift_top
 
         game.game_loop()
 
-        world_shift_top_delta = game.level.world_shift_top - world_shift_top_before
+        world_shift_top_delta = game.level.get_scroll_shift_top_delta()
 
         game.assert_test_passed(
             condition=player.rect.y > player_orig_y + PC_FALL_DELTA_2_SECS + world_shift_top_delta,
@@ -30,11 +29,10 @@ class TestPlayerPhysics:
         player = game.player
         player_orig_y = 478
         player.rect.x, player.rect.y = 550, player_orig_y
-        world_shift_top_before = game.level.world_shift_top
 
         game.game_loop()
 
-        world_shift_top_delta = game.level.world_shift_top - world_shift_top_before
+        world_shift_top_delta = game.level.get_scroll_shift_top_delta()
 
         game.assert_test_passed(
             condition=player.rect.y == player_orig_y + world_shift_top_delta,
@@ -45,11 +43,10 @@ class TestPlayerPhysics:
         player = game.player
         player_orig_x = 450
         player.rect.x, player.rect.y = player_orig_x, 665
-        world_shift_before = game.level.world_shift
 
         game.game_loop()
 
-        world_shift_delta = world_shift_before - game.level.world_shift
+        world_shift_delta = game.level.get_scroll_shift_delta()
 
         game.assert_test_passed(
             condition=player.rect.x == player_orig_x - world_shift_delta,
@@ -60,11 +57,10 @@ class TestPlayerPhysics:
         player = game.player
         player_orig_x = 1600
         player.rect.x, player.rect.y = player_orig_x, 665
-        world_shift_before = game.level.world_shift
 
         game.game_loop()
 
-        world_shift_delta = world_shift_before - game.level.world_shift
+        world_shift_delta = game.level.get_scroll_shift_delta()
 
         game.assert_test_passed(
             condition=player.rect.x == player_orig_x - world_shift_delta,
@@ -76,11 +72,10 @@ class TestPlayerPhysics:
         player = game.player
         player_orig_x = 450
         player.rect.x, player.rect.y = player_orig_x, 665
-        world_shift_before = game.level.world_shift
 
         game.game_loop()
 
-        world_shift_delta = world_shift_before - game.level.world_shift
+        world_shift_delta = game.level.get_scroll_shift_delta()
 
         game.assert_test_passed(
             condition=player.rect.x < player_orig_x - PC_MOVE_DELTA_ON_MOV_PLAT - world_shift_delta,
@@ -91,11 +86,10 @@ class TestPlayerPhysics:
         player = game.player
         player_orig_x = 360
         player.rect.x, player.rect.y = player_orig_x, 665
-        world_shift_before = game.level.world_shift
 
         game.game_loop()
 
-        world_shift_delta = world_shift_before - game.level.world_shift
+        world_shift_delta = game.level.get_scroll_shift_delta()
 
         game.assert_test_passed(
             condition=player.rect.x > player_orig_x + PC_MOVE_DELTA_ON_MOV_PLAT + world_shift_delta,

@@ -5,3 +5,4 @@ from suiteoftests.levels.level_test_04 import LevelTest4
 from suiteoftests.levels.level_test_05 import LevelTest5
 from suiteoftests.levels.level_test_06 import LevelTest6
 from suiteoftests.levels.level_test_07 import LevelTest7
+from suiteoftests.levels.level_test_08 import LevelTest8
