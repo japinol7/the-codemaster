@@ -14,6 +14,9 @@ from codemaster.models.actors.npcs.dragons import (
     DragonYellow,
     DragonRed,
     )
+from codemaster.models.actors.npcs.ewlans import (
+    EwlanMale,
+    )
 from codemaster.models.actors.npcs.ghosts import (
     GhostGreen,
     GhostBlue,

@@ -5,7 +5,12 @@ from enum import Enum
 
 import pygame as pg
 
-from codemaster.config.constants import BM_TEXT_MSGS_FOLDER, MSG_PC_DURATION, MSG_PC_DELTA_X, MSG_PC_DELTA_Y
+from codemaster.config.constants import (
+    BM_TEXT_MSGS_FOLDER,
+    MSG_PC_DURATION,
+    MSG_PC_DELTA_X,
+    MSG_PC_DELTA_Y
+    )
 from codemaster.models.actors.actor_types import ActorCategoryType, ActorType
 from codemaster.models.actors.actors import ActorMsg
 from codemaster.models.stats import Stats
@@ -27,7 +32,8 @@ class TextMsg(ActorMsg):
     """Represents a base text message.
     It is not intended to be instantiated.
     """
-    def __init__(self, x, y, game, time_in_secs, name=None, delta_x=0, delta_y=0, owner=None):
+    def __init__(self, x, y, game, time_in_secs, name=None,
+                 delta_x=0, delta_y=0, owner=None):
         self.owner = owner
         self.file_folder = BM_TEXT_MSGS_FOLDER
         self.file_name_key = 'text_msgs'
@@ -59,7 +65,8 @@ class TextMsg(ActorMsg):
 
     def die_hard(self):
         self.game.is_log_debug and log.debug(
-            f"{self.id} killed when {self.clock.id} ticked {self.clock.get_time()} secs.")
+            f"{self.id} killed when {self.clock.id} "
+            f"ticked {self.clock.get_time()} secs.")
         self.kill()
 
     def draw_speech_balloon(self, color):
@@ -72,9 +79,10 @@ class TextMsg(ActorMsg):
             height = self.rect.height
         width = 2 + 14 * text_len if text_len < 20 else 13.1 * text_len
 
-        pg.draw.rect(self.game.screen, color,
-                     (self.rect.x, self.rect.y - lines_count * 22, int(width), int(height)),
-                     width=1)
+        pg.draw.rect(
+            self.game.screen, color,
+            (self.rect.x, self.rect.y - lines_count * 22, int(width), int(height)),
+            width=1)
 
     @staticmethod
     def create(text, game, time_in_secs=MSG_PC_DURATION, msg_class=None, x=None, y=None,
@@ -116,7 +124,8 @@ class TextMsgAbsolute(TextMsg):
         libg_jp.draw_text_rendered(
             text=self.name,
             x=self.rect.x + 12, y=self.rect.y + 3,
-            screen=self.game.screen, color=self.color or Color.GREEN, is_font_fixed=True,
+            screen=self.game.screen, color=self.color or Color.GREEN,
+            is_font_fixed=True,
             space_btw_chars=12, space_btw_words=14)
 
 

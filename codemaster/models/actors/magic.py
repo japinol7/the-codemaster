@@ -22,6 +22,7 @@ from codemaster.models.actors.spells import (
     VortexOfDoomA,
     VortexOfDoomB,
     )
+from codemaster.models.actors import npcs as npcs_module
 from codemaster.tools.logger.logger import log
 
 SPELL_ACTOR_TYPE_MAPPING = {
@@ -127,3 +128,10 @@ def update_cast_spell_cast_actions_3_spells(actor, delta_x=0, delta_y=0):
         actor.rect.x+dx, actor.rect.y+22+delta_y, actor.game,
         is_from_player_shot=False, owner=actor,
         target=actor.player)
+
+
+def summon_npc(actor_class_name, x, y, game, **kwargs):
+    actor_class = getattr(npcs_module, actor_class_name)
+    actor = actor_class(x, y, game, **kwargs)
+    game.level.add_actors([actor])
+    return actor

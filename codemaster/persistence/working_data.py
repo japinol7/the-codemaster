@@ -25,5 +25,13 @@ def get_actors_by_ids_considering_old_ids_if_exist(actor_ids):
             if Actor.actors.get(k) or actors_map_old_id_with_new_instance.get(k)]
 
 
-def get_actor_persistence_map_old_id_with_new_instance(actor_id):
+def get_actor_by_id_considering_old_id(actor_id):
+    return actors_map_old_id_with_new_instance[actor_id]
+
+
+def get_actor_by_id_considering_old_id_if_exists(actor_id):
     return actors_map_old_id_with_new_instance.get(actor_id)
+
+
+def set_actor_map_old_id_with_new_instance(actor_id, actor):
+    actors_map_old_id_with_new_instance[actor_id] = actor

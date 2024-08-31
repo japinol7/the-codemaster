@@ -19,7 +19,7 @@ from codemaster.models.actors.items import (
     BatteryA,
     CartridgeGreen,
     DoorLeftYellow,
-    DoorRightRed,
+    DoorRightGreen,
     PotionPower,
     )
 from codemaster.levels.level_base import Level
@@ -107,5 +107,5 @@ class Level26(Level):
         # Add doors
         self.doors.add([
             DoorLeftYellow(2, 550, self.game, level_dest=24, door_dest_pos=DOOR_DEST_NL),
-            DoorRightRed(3640, 550, self.game, level_dest=26, door_dest_pos=DOOR_DEST_NL),
+            DoorRightGreen(3640, 550, self.game, level_dest=26, door_dest_pos=DOOR_DEST_NL),
             ])

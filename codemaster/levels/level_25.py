@@ -32,7 +32,7 @@ from codemaster.levels.level_base import Level
 class Level25(Level):
 
     def __init__(self, id_, game):
-        self.background = pg.image.load(self.file_name_im_get(12)).convert()
+        self.background = pg.image.load(self.file_name_im_get(13)).convert()
         self.player_start_pos_left = 220, 520
         self.player_start_pos_right = 520, 520
         self.player_start_pos_rtop = 250, -440

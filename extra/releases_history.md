@@ -7,14 +7,18 @@
 * Add persistence of the game state:
   * When the player exits a game, it automatically saves the game state.
   * The player can start a new game or continue the previous one.
+* Add a new game level. Current level count: 28.
 * Add spells: 
   * Mutentrinos Bolt A.
   * Mutentrinos Bolt B.
 * Improve energy shields effectiveness. 
 * Improve spells: 
   * Drain life.
+* Add new NPCs:
+  * Ewlans.
 * Improve NPCs:
   * Kung Fu Fighters.
+  * Mages.
 * Improve the test suite:
   * To facilitate testing persistence.
   * Current tests count: 58.

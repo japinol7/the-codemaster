@@ -89,6 +89,7 @@ def _load_npcs_data(game):
             npc.change_y = npc_data['change_y']
             npc.direction = npc_data['direction']
             npc.hostility_level = npc_data['hostility_level']
+            npc.npc_summoned_count = npc_data['npc_summoned_count']
 
 
 def _load_npcs_not_initial_data(game):
@@ -127,5 +128,6 @@ def _load_npcs_not_initial_data(game):
             npc.direction = npc_data['direction']
             npc.hostility_level = npc_data['hostility_level']
             npc.magic_resistance = npc_data['magic_resistance']
+            npc.npc_summoned_count = npc_data['npc_summoned_count']
             npcs.append(npc)
         level.add_actors(npcs)

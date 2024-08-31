@@ -222,5 +222,7 @@ class ActorType(Enum):
     SAMURAI_MALE = 1673
     # Kung Fu Fighter
     KUNG_FU_FIGHTER_MALE = 1677
+    # Ewlans
+    EWLAN_MALE = 1678
     # Squirrels
     SQUIRREL_A = 1681

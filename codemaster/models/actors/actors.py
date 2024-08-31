@@ -35,14 +35,14 @@ NPC_STRENGTH_BASE = 35
 class DropItem:
 
     def __init__(self, actor_class, actor_type, probability_to_drop,
-                 add_to_list, x_delta=0, y_delta=0, **args):
+                 add_to_list, x_delta=0, y_delta=0, **kwargs):
         self.type = actor_type
         self.class_ = actor_class
         self.add_to_list = add_to_list
         self.x_delta = x_delta
         self.y_delta = y_delta
         self.probability_to_drop = probability_to_drop
-        self.args = args
+        self.args = kwargs
 
 
 class Actor(pg.sprite.Sprite):
@@ -56,6 +56,10 @@ class Actor(pg.sprite.Sprite):
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0, items_to_drop=None):
         super().__init__()
+
+        if not getattr(self, 'type', None):
+            self.type = ActorType.NONE
+
         Actor.type_id_count[self.type] += 1
         self.id = f"{self.type.name}_{Actor.type_id_count[self.type]:05d}"
         self.game = game
@@ -76,8 +80,6 @@ class Actor(pg.sprite.Sprite):
 
         if not getattr(self, 'category_type', None):
             self.category_type = ActorCategoryType.NONE
-        if not getattr(self, 'type', None):
-            self.type = ActorType.NONE
 
         if not getattr(self, 'file_folder', None):
             self.file_folder = None
@@ -164,6 +166,9 @@ class Actor(pg.sprite.Sprite):
         if not getattr(self, 'direction', None):
             self.direction = DIRECTION_RIGHT
 
+        if not getattr(self, 'color', None):
+            self.color = None
+
         if not getattr(self, 'spell_cast_y_delta_max', None):
             self.spell_cast_y_delta_max = 500
 
@@ -177,6 +182,9 @@ class Actor(pg.sprite.Sprite):
                 self.stats.energy_shield = None
             if not getattr(self.stats, 'time_between_energy_shield_casting', None):
                 self.stats.time_between_energy_shield_casting = 0
+
+        if not getattr(self, 'npc_summoned_count', None):
+            self.npc_summoned_count = 0
 
         self.can_be_shot_by_its_owner = True
         self.name = name or 'unnamed'
@@ -788,6 +796,7 @@ class NPC(MovingActor):
                     'change_y': npc.change_y,
                     'direction': npc.direction,
                     'hostility_level': npc.hostility_level,
+                    'npc_summoned_count':npc.npc_summoned_count,
                     }
         return res
 
@@ -832,8 +841,8 @@ class NPC(MovingActor):
                     'spell_cast_y_delta_max': npc.spell_cast_y_delta_max,
                     'health_bar_delta_y': npc.health_bar_delta_y,
                     'power_recovery': npc.stats.power_recovery,
-                    'energy_shield': npc.stats.energy_shield,
                     'time_between_energy_shield_casting': npc.stats.time_between_energy_shield_casting,
+                    'npc_summoned_count':npc.npc_summoned_count,
                     'border_left': npc.border_left,
                     'border_right': npc.border_right,
                     'border_top': npc.border_top,

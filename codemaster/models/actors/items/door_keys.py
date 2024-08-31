@@ -29,10 +29,9 @@ class DoorKey(ActorItem):
         pass
 
     def use_key_in_door(self, door):
-        if door is self.door:
-            if self.color == self.door.color:
-                self.player.sound_effects and self.player.door_unlock_sound.play()
-                self.door.is_locked = False
+        if door is self.door and self.color == self.door.color:
+            self.player.sound_effects and self.player.door_unlock_sound.play()
+            self.door.is_locked = False
 
 
 class DoorKeyGreen(DoorKey):

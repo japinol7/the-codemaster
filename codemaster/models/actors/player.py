@@ -406,15 +406,17 @@ class Player(pg.sprite.Sprite):
             self.stats['files_disks_type'][files_disk.disk_type] += 1
             self.stats[files_disk.type.name] += 1
             self.stats['score'] += ExperiencePoints.xp_points[files_disk.type.name]
-        len(files_disk_hit_list) and TextMsg.create(
-            "Yeah!\nI've found\nanother disk!", self.game, time_in_secs=MSG_PC_DURATION)
+        files_disk_hit_list and TextMsg.create(
+            "Yeah!\nI've found\nanother disk!", self.game,
+            time_in_secs=MSG_PC_DURATION)
 
         # Check if we hit any computer
         computers_hit_list = pg.sprite.spritecollide(self, self.level.computers, False)
         for computer in computers_hit_list:
             if not computer.visited:
                 TextMsg.create(
-                    "Hey!\nThis computer\nis a beauty!", self.game, time_in_secs=MSG_PC_DURATION)
+                    "Hey!\nThis computer\nis a beauty!", self.game,
+                    time_in_secs=MSG_PC_DURATION)
                 computer.visited = True
 
         # Check if we hit any cartridge
@@ -478,7 +480,8 @@ class Player(pg.sprite.Sprite):
 
         # Check if we hit any dragon body piece
         if not self.invulnerable:
-            dragon_bp_hit_list = pg.sprite.spritecollide(self, self.level.dragons_body_pieces, False)
+            dragon_bp_hit_list = pg.sprite.spritecollide(
+                self, self.level.dragons_body_pieces, False)
             is_dragon_bp_hit = False
             dragons_set = set()
             for dragon_bp in dragon_bp_hit_list:
@@ -573,8 +576,10 @@ class Player(pg.sprite.Sprite):
         self.die_hard()
 
     def reset_position(self):
-        self.level.shift_world(self.level.door_previous_pos_world[0] - self.level.world_shift)
-        self.level.shift_world_top(self.level.door_previous_pos_world[1] - self.level.world_shift_top)
+        self.level.shift_world(
+            self.level.door_previous_pos_world[0] - self.level.world_shift)
+        self.level.shift_world_top(
+            self.level.door_previous_pos_world[1] - self.level.world_shift_top)
         self.rect.x = self.level.door_previous_pos_player[0]
         self.rect.y = self.level.door_previous_pos_player[1]
 

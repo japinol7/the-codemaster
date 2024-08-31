@@ -35,6 +35,7 @@ class ExperiencePoints:
         ActorType.ROBOT_A.name: 180,
         ActorType.SAMURAI_MALE.name: 190,
         ActorType.KUNG_FU_FIGHTER_MALE.name: 210,
+        ActorType.EWLAN_MALE.name: 210,
         ActorType.SQUIRREL_A.name: 1,
         ActorType.TETHLORIEN_LILAC.name: 170,
         ActorType.TETHLORIEN_YELLOW.name: 180,

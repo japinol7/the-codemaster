@@ -23,7 +23,9 @@ from codemaster.persistence.persistence_utils import (
 from codemaster.persistence.validations import (
     validate_load_data_game_basic_metadata,
     )
-from codemaster.persistence.working_data import actors_map_old_id_with_new_instance
+from codemaster.persistence.working_data import (
+    set_actor_map_old_id_with_new_instance,
+    )
 from codemaster.tools.logger.logger import log
 
 
@@ -108,9 +110,9 @@ def _load_items_not_initial_data(game):
         items = []
         for item_id, item_data in level_data['items'].items():
             kwargs_ = {}
-            if  item_data['category_type'] == ActorCategoryType.DOOR_KEY.name:
+            if item_data['category_type'] == ActorCategoryType.DOOR_KEY.name:
                 kwargs_ = {
-                    'door': Actor.get_actor(item_data['door']) ,
+                    'door': Actor.get_actor(item_data['door']),
                     }
             item = Actor.factory(
                 items_module,
@@ -124,8 +126,8 @@ def _load_items_not_initial_data(game):
             item.stats.health_total = item_data['health_total']
             item.direction = item_data['direction']
             item.is_location_in_inventory = item_data['is_location_in_inventory']
-            if  item.is_location_in_inventory:
-                actors_map_old_id_with_new_instance[item_id] = item
+            if item.is_location_in_inventory:
+                set_actor_map_old_id_with_new_instance(item_id, item)
             items.append(item)
         level.add_actors(items)
         for item in items:

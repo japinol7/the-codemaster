@@ -47,6 +47,7 @@ class Mage(NPC):
         self.max_multi_spell_1 = 1
         self.max_multi_spell_2 = 2
         self.max_multi_spell_3 = 4
+        self.npc_summoned_count = 0
 
 
 class MageFemaleA(Mage):
@@ -118,6 +119,44 @@ class MageFemaleA(Mage):
 
     def update_cast_spell_cast_actions(self):
         magic.update_cast_spell_cast_actions_3_spells(actor=self)
+
+        if self.npc_summoned_count < 1:
+            self._summon_npc_minions()
+
+    def _summon_npc_minions(self):
+        # Summon EwlanMale
+        self.npc_summoned_count += 1
+        npc_x = self.rect.x - 754
+        npc = magic.summon_npc(
+            'EwlanMale',
+            npc_x,
+            self.rect.y - 277,
+            game=self.game,
+            **{'change_x': 2,
+               'border_left': npc_x - 190,
+               'border_right': npc_x + 236,
+               }
+            )
+        EnergyShield.actor_acquire_energy_shield(npc, self.game, health_total=200)
+
+        # Summon Bats
+        npcs_data = [
+            {'class_name': 'BatBlack', 'x': self.rect.x - 920, 'y': self.rect.y},
+            {'class_name': 'BatBlue', 'x': self.rect.x - 820, 'y': self.rect.y + 17},
+            {'class_name': 'BatBlack', 'x': self.rect.x - 720, 'y': self.rect.y},
+            ]
+        self.npc_summoned_count += len(npcs_data)
+        for npc_vals in npcs_data:
+            magic.summon_npc(
+                npc_vals['class_name'],
+                npc_vals['x'],
+                npc_vals['y'],
+                game=self.game,
+                **{'change_x': 2,
+                   'border_left': npc_vals['x'] - 220,
+                   'border_right': npc_vals['x'] + 220,
+                   }
+                )
 
 
 class MageFemaleAVanished(Mage):

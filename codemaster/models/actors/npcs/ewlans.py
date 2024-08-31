@@ -1,4 +1,4 @@
-"""Module kung_fu_fighters."""
+"""Module ewlans."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from random import randint
@@ -11,8 +11,8 @@ from codemaster.models.stats import Stats
 from codemaster.models.actors import magic
 
 
-class KungFuFighter(NPC):
-    """Represents a Kung Fu Fighter.
+class Ewlan(NPC):
+    """Represents an Ewlan.
     It is not intended to be instantiated.
     """
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
@@ -20,7 +20,7 @@ class KungFuFighter(NPC):
                  border_top=0, border_down=0,
                  items_to_drop=None):
         self.file_folder = BM_NPCS_FOLDER
-        self.file_name_key = 'im_en_kung_fu_fighters'
+        self.file_name_key = 'im_en_ewlans'
         self.images_sprite_no = 1
         self.transparency_alpha = True
         self.can_shot = True
@@ -48,19 +48,19 @@ class KungFuFighter(NPC):
         magic.update_cast_spell_cast_actions(actor=self)
 
 
-class KungFuFighterMale(KungFuFighter):
-    """Represents a classic male Kung Fu Fighter."""
+class EwlanMale(Ewlan):
+    """Represents a male Ewlan."""
 
     def __init__(self, x, y, game, name=None, change_x=0, change_y=0,
                  border_left=0, border_right=0,
                  border_top=0, border_down=0,
                  items_to_drop=None):
         self.file_mid_prefix = '01'
-        self.type = ActorType.KUNG_FU_FIGHTER_MALE
+        self.type = ActorType.EWLAN_MALE
 
         self.stats = Stats()
         self.stats.power = self.stats.power_total = 10
-        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 10
+        self.stats.strength = self.stats.strength_total = NPC_STRENGTH_BASE * 9
         self.stats.health = self.stats.health_total = self.stats.strength
 
         super().__init__(x, y, game, name=name,
@@ -72,15 +72,15 @@ class KungFuFighterMale(KungFuFighter):
         self.stats.time_between_shots = self.time_between_shots_base / 3.2
         self.shot_x_delta_max = self.shot_x_delta_max + 240
 
-        self.stats.time_between_spell_casting = 1350
-        self.magic_resistance = 42
-        self.probability_to_cast_spell_1 = 15
-        self.max_multi_spell_1 = 2
+        self.stats.time_between_spell_casting = 1200
+        self.magic_resistance = 110
+        self.probability_to_cast_spell_1 = 20
+        self.max_multi_spell_1 = 3
         self.max_multi_spell_2 = 2
 
     def update_shot_bullet_fire_shots(self):
         dice = randint(1, 100)
-        if dice + 45 >= 100:
+        if dice + 40 >= 100:
             self.shot_bullet(BulletType.T2_LASER2)
         else:
             self.shot_bullet(BulletType.T1_LASER1)

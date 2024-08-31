@@ -153,7 +153,7 @@ class EnergyShield(ActorItem):
             return
 
         actor.stats.energy_shields_stock = [
-            EnergyShieldA(actor.rect.x + delta_x, actor.rect.y + delta_y, game)
+            EnergyShieldA(actor.rect.x + delta_x, actor.rect.y + delta_y, game),
             ]
         actor.stats.energy_shield = actor.stats.energy_shields_stock[0]
         actor.stats.energy_shield.owner = actor
