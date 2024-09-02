@@ -841,6 +841,9 @@ class NPC(MovingActor):
                     'spell_cast_y_delta_max': npc.spell_cast_y_delta_max,
                     'health_bar_delta_y': npc.health_bar_delta_y,
                     'power_recovery': npc.stats.power_recovery,
+                    'has_energy_shield': npc.stats.energy_shield and True or False,
+                    'energy_shield_health': npc.stats.energy_shield.stats.health_total
+                                            if npc.stats.energy_shield else 0,
                     'time_between_energy_shield_casting': npc.stats.time_between_energy_shield_casting,
                     'npc_summoned_count':npc.npc_summoned_count,
                     'border_left': npc.border_left,

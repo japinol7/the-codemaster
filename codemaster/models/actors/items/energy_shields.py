@@ -159,8 +159,8 @@ class EnergyShield(ActorItem):
         actor.stats.energy_shield.owner = actor
 
         if health_total > 0:
-            actor.stats.energy_shield.health_total = health_total
-            actor.stats.energy_shield.health = health_total
+            actor.stats.energy_shield.stats.health_total = health_total
+            actor.stats.energy_shield.stats.health = health_total
 
         if actor.stats.power_recovery < ACTOR_MIN_POWER_RECOVERY:
             actor.stats.power_recovery = ACTOR_POWER_RECOVERY_DEFAULT

@@ -5,6 +5,7 @@ from copy import deepcopy
 
 from codemaster.models.actors.actors import NPC, Actor
 from codemaster.models.actors import npcs as npcs_module
+from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.persistence.persistence_settings import (
     GAME_DATA_HEADER,
     PERSISTENCE_NO_SAVED_GAME_DATA_MSG,
@@ -130,4 +131,9 @@ def _load_npcs_not_initial_data(game):
             npc.magic_resistance = npc_data['magic_resistance']
             npc.npc_summoned_count = npc_data['npc_summoned_count']
             npcs.append(npc)
+
+            if npc_data['has_energy_shield']:
+                EnergyShield.actor_acquire_energy_shield(
+                    npc, game, health_total=npc_data['energy_shield_health'])
+
         level.add_actors(npcs)
