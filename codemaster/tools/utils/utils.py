@@ -35,7 +35,7 @@ def pretty_dict_to_string(d, indent=0, with_last_new_line=False, res='', first_t
 
 
 def write_list_to_file(file, value, open_method='a'):
-    with open(file, open_method) as fout:
+    with open(file, open_method, encoding='utf-8') as fout:
         for line in value:
             fout.write(line)
     value = []
@@ -44,7 +44,7 @@ def write_list_to_file(file, value, open_method='a'):
 def file_read_list(file_name, lines_to_read):
     res = []
     try:
-        with open(file_name, "r") as file_in:
+        with open(file_name, 'r', encoding='utf-8') as file_in:
             i = 0
             for line in file_in:
                 if i <= lines_to_read:

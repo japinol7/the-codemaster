@@ -5,7 +5,7 @@ from datetime import datetime
 from collections import OrderedDict
 
 from codemaster.tools.logger.logger import log
-from codemaster.tools.utils.utils import pretty_dict_to_string, write_list_to_file
+from codemaster.tools.utils.utils import pretty_dict_to_string
 from codemaster.config.constants import MUSIC_BOX, DIRECTION_RIGHT
 from codemaster.models.actors.items.bullets import BULLET_MAX_QTY
 from codemaster.levels import Level

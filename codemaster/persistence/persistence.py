@@ -2,10 +2,8 @@
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from copy import deepcopy
-import json
 import traceback
 
-from codemaster.config.constants import JSON_INDENT_SIZE
 from codemaster.persistence.persistence_settings import (
     GAME_DATA_HEADER,
     PersistenceSettings,
@@ -27,6 +25,7 @@ from codemaster.persistence.persistence_npcs import (
     load_game_npcs_data,
     persist_game_npcs_data,
     )
+from codemaster.persistence.persistence_utils import save_data_to_file
 from codemaster.persistence.working_data import clear_persistence_working_data
 from codemaster.tools.logger.logger import log
 
@@ -53,9 +52,7 @@ def _clear_persisted_data_file(file_name, key_to_add):
     game_data = deepcopy(GAME_DATA_HEADER)
     game_data['saved_game_data']['continue_game'] = False
     game_data[key_to_add] = {}
-    data_json = json.dumps(game_data, indent=JSON_INDENT_SIZE)
-    with open(file_name, 'w') as file_out:
-        file_out.write(data_json)
+    save_data_to_file(file_name, game_data)
 
 def load_game_data(game):
     def set_game_done():
