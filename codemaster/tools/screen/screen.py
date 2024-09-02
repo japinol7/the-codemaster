@@ -243,10 +243,6 @@ class StartGame(Screen):
                         self.game.is_start_screen = False
                         self.game.is_load_last_game = True
                         self.done = True
-                elif event.key == pg.K_SPACE:
-                    if self.game.is_persist_data:
-                        self.game.is_start_screen = False
-                        self.game.is_load_last_game = True
                 elif event.key == pg.K_KP_DIVIDE:
                     if self.game.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
                             and pg.key.get_mods() & pg.KMOD_LALT:
