@@ -33,7 +33,7 @@ class TestPersistencePc:
             failed_msg="Game loaded did not set the player to the correct level.")
 
     @game_test(levels=[1, 2], starting_level=1, timeout=2)
-    def test_persistence_pc_go_to_another_level_n_more(self, game):
+    def test_persist_pc_go_to_another_level_n_more(self, game):
         left_door = Door.get_level_doors_dest_to_level(
             level_dest=0, game=game, level_orig=1)[0]
         left_door.is_locked = False
