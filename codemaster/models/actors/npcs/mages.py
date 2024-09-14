@@ -36,7 +36,6 @@ class Mage(NPC):
                          border_top=border_top, border_down=border_down,
                          items_to_drop=items_to_drop)
 
-        self.msg_text_to_repeat = ''
         self.msgs_delta_max = 310, 310
         self.spell_cast_x_delta_max = self.spell_cast_x_delta_max * 1.6
         self.spell_cast_y_delta_max = self.spell_cast_y_delta_max * 1.6
