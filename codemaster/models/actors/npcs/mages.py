@@ -51,11 +51,11 @@ class Mage(NPC):
         self.max_multi_spell_3 = 4
         self.npc_summoned_count = 0
 
-    def is_between_x_boundaries(self):
+    def is_pc_between_x_boundaries(self):
         return (self.player.rect.x - self.msgs_delta_max[0] < self.rect.x
                 < self.player.rect.x + self.msgs_delta_max[0])
 
-    def is_between_y_boundaries(self):
+    def is_pc_between_y_boundaries(self):
         return (self.player.rect.y - self.msgs_delta_max[1] < self.rect.y
                 < self.player.rect.y + self.msgs_delta_max[1])
 
@@ -107,7 +107,7 @@ class MageFemaleA(Mage):
         self.direction = DIRECTION_LEFT if self.is_actor_on_the_left(self.player) else DIRECTION_RIGHT
 
         if self.msg_texts and not self.msgs:
-            if self.is_between_x_boundaries() and self.is_between_y_boundaries():
+            if self.is_pc_between_x_boundaries() and self.is_pc_between_y_boundaries():
                 msg = TextMsg.create(
                     self.msg_texts.pop(), self.game,
                     time_in_secs=MSG_NPC_DURATION_LONG,
@@ -213,7 +213,7 @@ class MageFemaleAVanished(Mage):
         self.direction = DIRECTION_LEFT if self.is_actor_on_the_left(self.player) else DIRECTION_RIGHT
 
         if self.msg_texts and not self.msgs:
-            if self.is_between_x_boundaries() and self.is_between_y_boundaries():
+            if self.is_pc_between_x_boundaries() and self.is_pc_between_y_boundaries():
                 msg = TextMsg.create(
                     self.msg_texts.pop(), self.game,
                     time_in_secs=7,
