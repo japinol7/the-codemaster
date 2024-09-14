@@ -407,9 +407,7 @@ class GameTestSuite:
                 self._set_up(is_debug=is_debug, is_full_screen=is_full_screen)
                 log.info(f"Start {self.current_test.__name__}")
                 self.current_test_timeout = test.timeout
-                test_method_with_setup_levels.test_func(
-                    self=test_method_with_setup_levels.__class__,
-                    game=self)
+                self.current_test(game=self)
                 self._tear_down()
         except Exception as e:
             traceback.print_tb(e.__traceback__)

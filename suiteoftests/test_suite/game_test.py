@@ -13,6 +13,7 @@ from suiteoftests.config.constants import (
 def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=False):
     """Decorates a game test function, so it can be automatically added
     to the suite of tests.
+    This decorator should not be used with methods, only with functions.
     @param levels: List of level ids to load.
     Each level must be an integer.
     The First level is 1, because it is based on the id of the level.
