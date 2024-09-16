@@ -76,6 +76,7 @@ class GameTestSuite:
 
         self.done = False
         self.aborted = False
+        self.aborted_all = False
         self.clock = None
         self.clock_timer = None
         self.start_time = None
@@ -94,6 +95,7 @@ class GameTestSuite:
         self.levels_qty = None
         self.level_no = None
         self.level = None
+        self.level_init = None
         self.current_time = None
         self.is_music_paused = True
         self.sound_effects = False
@@ -171,8 +173,9 @@ class GameTestSuite:
         self.player_actions = Queue()
         self.player.sound_effects = self.sound_effects
 
-        self._load_test_levels(level_ids=self.level_ids,
-                               starting_level_n=self.starting_level_n)
+        self._load_test_levels(
+            level_ids=self.level_ids,
+            starting_level_n=self.starting_level_n)
 
         log.info("Set clock")
         self.clock = pg.time.Clock()
@@ -203,6 +206,7 @@ class GameTestSuite:
             levels_module=test_levels, game=self,
             level_ids=level_ids, level_name_prefix='LevelTest')
         self.levels_qty = len(self.levels)
+        self.level_init = None
         self.level = self.levels[starting_level_n]
 
     def _tear_down(self):
@@ -341,6 +345,8 @@ class GameTestSuite:
         self.test_passed_count += 1
 
     def game_loop(self, timeout=None):
+        if self.aborted:
+            return
         if timeout is not None:
             validate_game_test_timeout(timeout)
             self.current_test_timeout = timeout
@@ -360,7 +366,14 @@ class GameTestSuite:
                                 "%s", self.current_test.__name__)
                     self.done = True
                     self.aborted = True
-                    self.test_aborted_count += 1
+                elif event.type == pg.KEYDOWN:
+                    if event.key == pg.K_a:
+                        if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT:
+                            log.warning("Abort all remaining tests by user request when testing: "
+                                        "%s", self.current_test.__name__)
+                            self.done = True
+                            self.aborted = True
+                            self.aborted_all = True
 
             level_scroll_shift_control(game=self)
 
@@ -401,6 +414,10 @@ class GameTestSuite:
                 if test.skip:
                     continue
                 count += 1
+                if self.aborted_all:
+                    self.aborted = True
+                    self.assert_test_passed(condition=False, failed_msg='ABORTED')
+                    continue
                 log.info(f"------ Test {count:2} / {self.tests_total} ------")
                 self.level_ids = test_method_with_setup_levels.level_ids
                 self.starting_level_n = test_method_with_setup_levels.starting_level_n

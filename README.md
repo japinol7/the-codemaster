@@ -432,6 +432,9 @@
 
     Notes: 
 	  * Press ESC if you want to abort the current test.
+	  * Press Ctrl + Alt + a if you want to abort all the remaining tests.
+	  * The test suite will return a success code if all not skipped tests
+        have succeed and not been aborted.
 	  * If you tell the test suite to run some specific tests,  
         the test suite will run them even if you have decorated,
         these tests to be skipped.

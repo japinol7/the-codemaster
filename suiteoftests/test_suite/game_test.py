@@ -5,7 +5,8 @@ from collections.abc import Iterable
 
 from suiteoftests.config.constants import (
     CLOCK_TIMER_IN_SECS,
-    TEST_TIMEOUT_MIN,
+    TEST_GAME_LOOP_TIMEOUT_MIN,
+    TEST_GAME_LOOP_TIMEOUT_MAX,
     TestFuncWithSetupLevels,
     )
 
@@ -46,9 +47,13 @@ def _validate_game_test_arguments(levels, starting_level, timeout, skip):
 
 
 def validate_game_test_timeout(timeout):
-    if not isinstance(timeout, (int, float)) or timeout < TEST_TIMEOUT_MIN:
-        raise TypeError("Argument must be an int or float of at least "
-                        f"{TEST_TIMEOUT_MIN} seconds: timeout.")
+    if (not isinstance(timeout, (int, float))
+            or timeout < TEST_GAME_LOOP_TIMEOUT_MIN
+            or timeout > TEST_GAME_LOOP_TIMEOUT_MAX):
+        raise TypeError(
+            "Argument must be an int or float between "
+            f"{TEST_GAME_LOOP_TIMEOUT_MIN} and "
+            f"{TEST_GAME_LOOP_TIMEOUT_MAX} seconds: timeout.")
 
 
 class GameTest:
