@@ -8,7 +8,7 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     DOOR_DEST_TR,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.npcs import (
     GhostGreen,
@@ -103,25 +103,24 @@ class Level28(Level):
             ])
 
         items_to_drop = [
-            DropItem(CartridgeYellow, ActorType.CARTRIDGE_YELLOW, probability_to_drop=100, add_to_list=self.cartridges),
+            DropItem(CartridgeYellow),
             ]
         self.npcs.add(VampireFemale(
             2800, 38, self.game,
             border_left=2680, border_right=2980, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=60, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 30, 'random_max': 40}),
+            DropItem(PotionPower, probability_to_drop=60, x_delta=16,
+                     **{'random_min': 30, 'random_max': 40}),
             ]
         self.snakes.add(SnakeGreen(1500, 415, self.game, border_left=1210, border_right=2940,
                                    border_top=90, border_down=810, change_x=1, change_y=1,
                                    items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=80, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 60, 'random_max': 65}),
-            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=70),
+            DropItem(PotionPower, probability_to_drop=80, x_delta=16,
+                     **{'random_min': 60, 'random_max': 65}),
+            DropItem(LifeRecoveryA, x_delta=70),
             ]
         self.snakes.add(SnakeRed(2100, 500, self.game, border_left=1300, border_right=2980,
                                  border_top=100, border_down=806, change_x=3, change_y=3,

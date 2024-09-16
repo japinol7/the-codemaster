@@ -7,7 +7,7 @@ from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.models.actors.npcs import (
@@ -93,18 +93,15 @@ class Level25(Level):
 
         # Add NPCs
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 30, 'random_max': 30}),
+            DropItem(PotionPower, **{'random_min': 30, 'random_max': 30}),
             ]
         self.npcs.add(RobotB(
             1200, 186, self.game,
             border_left=1100, border_right=1280, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=120),
-            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 60, 'random_max': 60}),
+            DropItem(CartridgeGreen, x_delta=120),
+            DropItem(PotionHealth, **{'random_min': 60, 'random_max': 60}),
             ]
         kung_fu_fighter = KungFuFighterMale(
             600, 138, self.game,
@@ -113,18 +110,15 @@ class Level25(Level):
         EnergyShield.actor_acquire_energy_shield(kung_fu_fighter, self.game, health_total=200)
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 27, 'random_max': 27}),
+            DropItem(PotionPower, **{'random_min': 27, 'random_max': 27}),
             ]
         self.npcs.add(TethlorienYellow(
             2200, 32, self.game,
             border_left=2080, border_right=2450, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=100),
-            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 45, 'random_max': 45}),
+            DropItem(CartridgeBlue, x_delta=100),
+            DropItem(PotionHealth, **{'random_min': 45, 'random_max': 45}),
             ]
         kung_fu_fighter = KungFuFighterMale(
             3390, 16, self.game,

@@ -48,7 +48,7 @@ class LevelTest4(Level):
             self.platforms.add(block)
 
         # Add water blocks
-        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
         # Add life_recs
         self.life_recs.add([

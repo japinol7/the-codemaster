@@ -7,7 +7,7 @@ from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
@@ -56,7 +56,7 @@ class Level26(Level):
             self.platforms.add(block)
 
         # Add water blocks
-        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
         # Add batteries
         self.batteries.add([
@@ -85,20 +85,17 @@ class Level26(Level):
             ])
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=26, y_delta=-35, **{'random_min': 40, 'random_max': 40}),
-            DropItem(PumpkinHeadA, ActorType.PUMPKIN_HEAD_A, probability_to_drop=100,
-                     add_to_list=self.npcs, y_delta=15),
+            DropItem(PotionPower, x_delta=26, y_delta=-35,
+                     **{'random_min': 40, 'random_max': 40}),
+            DropItem(PumpkinHeadA, y_delta=15),
             ]
         self.npcs.add(PumpkinZombieA(
             1770, 9, self.game, border_left=1730, border_right=2280, change_x=2,
             items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100,
-                     add_to_list=self.cartridges, x_delta=26, y_delta=-35),
-            DropItem(PumpkinHeadA, ActorType.PUMPKIN_HEAD_A, probability_to_drop=100,
-                     add_to_list=self.npcs, y_delta=15),
+            DropItem(CartridgeGreen, x_delta=26, y_delta=-35),
+            DropItem(PumpkinHeadA, y_delta=15),
             ]
         self.npcs.add(PumpkinZombieA(
             2180, 9, self.game, border_left=1710, border_right=2280, change_x=2,

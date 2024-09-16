@@ -10,7 +10,7 @@ from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
@@ -67,7 +67,7 @@ class LevelTest2(Level):
             self.platforms.add(block)
 
         # Add water blocks
-        Water.create_water(0, SCREEN_NEAR_EARTH + 206, self.game, qty=19, qty_depth=3, add_to_list=self.decors)
+        Water.create_water(0, SCREEN_NEAR_EARTH + 206, self.game, qty=19, qty_depth=3)
 
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(
@@ -128,8 +128,7 @@ class LevelTest2(Level):
             ])
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 58, 'random_max': 72}),
+            DropItem(PotionHealth, x_delta=16, **{'random_min': 58, 'random_max': 72}),
             ]
         self.npcs.add([
             DemonMale(2280, 662, self.game, border_left=1680, border_right=2370,

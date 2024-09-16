@@ -9,7 +9,6 @@ from codemaster.config.constants import (
     )
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
-from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.npcs import (
     BatBlack,
@@ -68,7 +67,7 @@ class Level10(Level):
             self.platforms.add(block)
 
         # Add water blocks
-        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(
@@ -108,11 +107,13 @@ class Level10(Level):
             TerminatorEyeYellow(50, 212, self.game, border_left=30, border_right=380, change_x=3),
             ])
 
+        kff_items_to_drop = [
+            DropItem(PotionHealth, **{'random_min': 20, 'random_max': 20}),
+            DropItem(PotionPower, x_delta=50, **{'random_min': 20, 'random_max': 20}),
+            ]
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 40, 'random_max': 40}),
-            DropItem(KungFuFighterMale, ActorType.KUNG_FU_FIGHTER_MALE, probability_to_drop=100,
-                     y_delta=-31, add_to_list=self.npcs,
+            DropItem(PotionHealth, x_delta=16, **{'random_min': 40, 'random_max': 40}),
+            DropItem(KungFuFighterMale, y_delta=-31, items_to_drop=kff_items_to_drop,
                      **{'border_left': 1200, 'border_right': 1800, 'change_x': 2}),
             ]
         self.npcs.add([
@@ -121,10 +122,9 @@ class Level10(Level):
             ])
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=80, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 50, 'random_max': 75}),
-            DropItem(CartridgeYellow, ActorType.CARTRIDGE_YELLOW, probability_to_drop=70,
-                     add_to_list=self.cartridges, x_delta=60),
+            DropItem(PotionPower, probability_to_drop=80, x_delta=16,
+                     **{'random_min': 50, 'random_max': 75}),
+            DropItem(CartridgeYellow, probability_to_drop=70, x_delta=60),
             ]
         self.npcs.add([
             RobotA(1500, 78, self.game, border_left=1400, border_right=1790, change_x=3,

@@ -115,8 +115,7 @@ def test_persist_npcs_dropped_2_levels_skulls(game):
 
     # Add additional items in the levels
     items_to_drop = [
-        DropItem(SkullRed, ActorType.SKULL_RED, probability_to_drop=100,
-                 y_delta=-16, add_to_list=level_orig.npcs,
+        DropItem(SkullRed, y_delta=-16,
                  **{'border_left': 550, 'border_right': 620, 'change_x': 1}),
         ]
     squirrel1 = SquirrelA(560, 685, game, change_x=0, items_to_drop=items_to_drop)
@@ -130,8 +129,7 @@ def test_persist_npcs_dropped_2_levels_skulls(game):
         ])
 
     items_to_drop = [
-        DropItem(SkullRed, ActorType.SKULL_RED, probability_to_drop=100,
-                 y_delta=-16, add_to_list=level_dest.npcs,
+        DropItem(SkullRed, y_delta=-16,
                  **{'border_left': 2990, 'border_right': 3100, 'change_x': 1}),
         ]
     squirrel3 = SquirrelA(3020, 685, game,change_x=0, items_to_drop=items_to_drop)

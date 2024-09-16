@@ -37,8 +37,9 @@ class Water(ActorItem):
         pass
 
     @staticmethod
-    def create_water(x, y, game, qty, qty_depth, add_to_list):
+    def create_water(x, y, game, qty, qty_depth):
         xx, yy = x, y
+        add_to_list = getattr(game.level_init, 'decors')
         for _ in range(qty):
             add_to_list.add(WaterA(xx, yy, game))
             xx += PLAT_WATER_WIDTH

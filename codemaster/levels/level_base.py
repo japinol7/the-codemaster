@@ -34,6 +34,7 @@ class Level:
         self.id = id_
         self.name = str(self.id)
         self.game = game
+        self.game.level_init = self
         self.player = game.player
         self.completed = False
         self.start_time = None
@@ -233,12 +234,12 @@ class Level:
     def update_pc_enter_level(self):
         self.player.stats['levels_visited'].add(self.id)
 
-    def add_actors(self, actors):
+    def add_actors(self, actors, shift_borders=True):
         snake_pieces = []
         dragon_pieces = []
         for actor in actors:
             actor.is_not_initial_actor = True
-            if isinstance(actor, MovingActor):
+            if shift_borders and isinstance(actor, MovingActor):
                 if actor.border_left:
                     actor.border_left -= self.world_shift
                 if actor.border_right:

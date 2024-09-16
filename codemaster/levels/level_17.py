@@ -8,7 +8,7 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     DOOR_DEST_TR,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
@@ -63,7 +63,7 @@ class Level17(Level):
             self.platforms.add(block)
 
         # Add water blocks
-        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
         # Add batteries
         self.batteries.add([
@@ -87,28 +87,23 @@ class Level17(Level):
 
         # Add NPCs
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 50, 'random_max': 67}),
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=95),
+            DropItem(PotionPower, **{'random_min': 50, 'random_max': 67}),
+            DropItem(CartridgeBlue, x_delta=95),
             ]
         self.npcs.add(TethlorienRed(
             1400, 172, self.game,
             border_left=1250, border_right=1840, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 30, 'random_max': 50}),
+            DropItem(PotionPower, **{'random_min': 30, 'random_max': 50}),
             ]
         self.npcs.add(TethlorienLilac(
             2500, 342, self.game,
             border_left=2400, border_right=2650, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 65, 'random_max': 75}),
-            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=70),
+            DropItem(PotionPower, x_delta=16, **{'random_min': 65, 'random_max': 75}),
+            DropItem(LifeRecoveryA, x_delta=70),
             ]
         self.snakes.add(SnakeYellow(800, 500, self.game, border_left=320, border_right=2700,
                                     border_top=100, border_down=810, change_x=3, change_y=3,

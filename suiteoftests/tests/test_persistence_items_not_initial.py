@@ -100,9 +100,7 @@ def test_persist_items_dropped_2_levels_potions(game):
 
     # Add additional items in the levels
     items_to_drop = [
-        DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100,
-                 add_to_list=level_orig.potions, y_delta=15,
-                 **{'random_min': 50, 'random_max': 50}),
+        DropItem(PotionPower, y_delta=15, **{'random_min': 50, 'random_max': 50}),
         ]
     squirrel1 = SquirrelA(560, 685, game, change_x=0, items_to_drop=items_to_drop)
     squirrel1.direction = DIRECTION_LEFT
@@ -115,9 +113,7 @@ def test_persist_items_dropped_2_levels_potions(game):
         ])
 
     items_to_drop = [
-        DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100,
-                 add_to_list=level_dest.potions, y_delta=15,
-                 **{'random_min': 50, 'random_max': 50}),
+        DropItem(PotionPower, y_delta=15, **{'random_min': 50, 'random_max': 50}),
         ]
     squirrel3 = SquirrelA(3020, 685, game,change_x=0, items_to_drop=items_to_drop)
 

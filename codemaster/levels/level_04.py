@@ -9,7 +9,6 @@ from codemaster.config.constants import (
     )
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
-from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.npcs import (
     BatBlue,
@@ -67,7 +66,7 @@ class Level4(Level):
             self.platforms.add(block)
 
         # Add water blocks
-        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=19, qty_depth=3, add_to_list=self.decors)
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=19, qty_depth=3)
 
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(
@@ -95,15 +94,14 @@ class Level4(Level):
 
         # Add NPCs
         items_to_drop = [
-            DropItem(CartridgeYellow, ActorType.CARTRIDGE_YELLOW, probability_to_drop=100, add_to_list=self.cartridges),
+            DropItem(CartridgeYellow),
             ]
         self.npcs.add(VampireFemale(
             1400, 46, self.game,
             border_left=1310, border_right=1680, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 65, 'random_max': 75}),
+            DropItem(PotionPower, **{'random_min': 65, 'random_max': 75}),
             ]
         self.npcs.add(DemonMale(
             800, 146, self.game,
@@ -121,18 +119,15 @@ class Level4(Level):
             ])
 
         items_to_drop = [
-            DropItem(BatBlack, ActorType.BAT_BLACK, probability_to_drop=100, add_to_list=self.npcs,
-                     **{'border_left': 1700, 'border_right': 2450, 'change_x': 3}),
+            DropItem(BatBlack, **{'border_left': 1700, 'border_right': 2450, 'change_x': 3}),
             ]
         self.npcs.add(BatBlue(
             2190, 384, self.game,
             border_left=1700, border_right=2450, change_x=3, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 65, 'random_max': 75}),
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=170),
+            DropItem(PotionPower, x_delta=16, **{'random_min': 65, 'random_max': 75}),
+            DropItem(CartridgeGreen, x_delta=170),
             ]
         self.snakes.add(SnakeBlue(2250, 220, self.game, border_left=1800, border_right=2750,
                                   border_top=120, border_down=850, change_x=1, change_y=1,

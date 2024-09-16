@@ -9,7 +9,6 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     )
 from codemaster.models.actors.items import platforms
-from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.npcs import (
     BatBlue,
@@ -67,7 +66,7 @@ class Level1(Level):
             self.platforms.add(block)
 
         # Add water blocks
-        Water.create_water(0, SCREEN_NEAR_EARTH + 206, self.game, qty=16, qty_depth=3, add_to_list=self.decors)
+        Water.create_water(0, SCREEN_NEAR_EARTH + 206, self.game, qty=16, qty_depth=3)
 
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(
@@ -99,7 +98,7 @@ class Level1(Level):
             ])
 
         items_to_drop = [
-            DropItem(BatBlack, ActorType.BAT_BLACK, probability_to_drop=100, add_to_list=self.npcs,
+            DropItem(BatBlack,
                      **{'border_left': 640, 'border_right': 1040, 'change_x': 2}),
             ]
         self.npcs.add(BatBlue(

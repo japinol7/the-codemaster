@@ -36,8 +36,7 @@ def test_npc_drops_green_cartridge_when_dies(game):
         ))
 
     items_to_drop = [
-        DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100,
-                 add_to_list=level.cartridges),
+        DropItem(CartridgeGreen),
         ]
     npc = WolfManMale(600, 665, game, change_x=0, items_to_drop=items_to_drop)
     npc.direction = DIRECTION_LEFT
@@ -65,10 +64,8 @@ def test_npc_drops_2_red_cartridges_when_dies(game):
         ))
 
     items_to_drop = [
-        DropItem(CartridgeRed, ActorType.CARTRIDGE_RED, probability_to_drop=100,
-                 add_to_list=level.cartridges, y_delta=-4),
-        DropItem(CartridgeRed, ActorType.CARTRIDGE_RED, probability_to_drop=100,
-                 add_to_list=level.cartridges, y_delta=36),
+        DropItem(CartridgeRed, y_delta=-4),
+        DropItem(CartridgeRed, y_delta=36),
         ]
     npc = SkullRed(600, 668, game, change_x=0, items_to_drop=items_to_drop)
     npc.direction = DIRECTION_LEFT
@@ -96,10 +93,8 @@ def test_npc_drops_pumpkin_n_yellow_cartridge_when_dies(game):
         ))
 
     items_to_drop = [
-        DropItem(CartridgeYellow, ActorType.CARTRIDGE_YELLOW, probability_to_drop=100,
-                 add_to_list=level.cartridges, x_delta=26, y_delta=-35),
-        DropItem(PumpkinHeadA, ActorType.PUMPKIN_HEAD_A, probability_to_drop=100,
-                 add_to_list=level.npcs, y_delta=15),
+        DropItem(CartridgeYellow, x_delta=26, y_delta=-35),
+        DropItem(PumpkinHeadA, y_delta=15),
         ]
     npc = PumpkinZombieA(600, 648, game, change_x=0, items_to_drop=items_to_drop)
     npc.direction = DIRECTION_LEFT
@@ -135,14 +130,11 @@ def test_npc_drops_npc_that_drops_black_bat_when_dies(game):
         ))
 
     items_to_drop = [
-        DropItem(BatBlack, ActorType.BAT_BLACK, probability_to_drop=100,
-                 add_to_list=level.npcs, x_delta=-8, y_delta=5),
+        DropItem(BatBlack, x_delta=-8, y_delta=5),
         ]
     items_to_drop = [
-        DropItem(CartridgeYellow, ActorType.CARTRIDGE_YELLOW, probability_to_drop=100,
-                 add_to_list=level.cartridges, x_delta=26, y_delta=-35),
-        DropItem(PumpkinHeadA, ActorType.PUMPKIN_HEAD_A, probability_to_drop=100,
-                 add_to_list=level.npcs, y_delta=15, items_to_drop=items_to_drop),
+        DropItem(CartridgeYellow, x_delta=26, y_delta=-35),
+        DropItem(PumpkinHeadA, y_delta=15, items_to_drop=items_to_drop),
         ]
     npc = PumpkinZombieA(600, 648, game, change_x=0, items_to_drop=items_to_drop)
     npc.direction = DIRECTION_LEFT

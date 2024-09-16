@@ -7,7 +7,7 @@ from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.models.actors.npcs import (
@@ -85,17 +85,12 @@ class Level27(Level):
             SquirrelA(900, 686, self.game, border_left=700, border_right=1210, change_x=2),
             ])
 
-        # TODO: Add persistence to items to drop for not initial actors.
-        #  Currently the robot_items_to_drop will not be persisted
         robot_items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     y_delta=20, **{'random_min': 25, 'random_max': 25}),
+            DropItem(PotionPower, y_delta=20, **{'random_min': 25, 'random_max': 25}),
             ]
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=-26, **{'random_min': 25, 'random_max': 25}),
-            DropItem(RobotB, ActorType.KUNG_FU_FIGHTER_MALE, probability_to_drop=100,
-                     y_delta=-20, add_to_list=self.npcs, items_to_drop=robot_items_to_drop,
+            DropItem(PotionHealth, x_delta=-26, **{'random_min': 25, 'random_max': 25}),
+            DropItem(RobotB, y_delta=-20, items_to_drop=robot_items_to_drop,
                      **{'border_left': 800, 'border_right': 1200, 'change_x': 2}),
             ]
         self.npcs.add([
@@ -104,18 +99,15 @@ class Level27(Level):
             ])
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 45, 'random_max': 45}),
+            DropItem(PotionPower, x_delta=16, **{'random_min': 45, 'random_max': 45}),
             ]
         self.npcs.add(RobotA(
             1820, 37, self.game, border_left=1764, border_right=1920, change_x=2,
             items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=-22, **{'random_min': 58, 'random_max': 72}),
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=22),
+            DropItem(PotionHealth, x_delta=-22, **{'random_min': 58, 'random_max': 72}),
+            DropItem(CartridgeGreen, x_delta=22),
             ]
         ewlan_male = EwlanMale(2600, 358, self.game, border_left=2550, border_right=2940,
                       change_x = 2, items_to_drop = items_to_drop)

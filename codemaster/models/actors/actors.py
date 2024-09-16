@@ -8,6 +8,7 @@ from random import randint
 
 import pygame as pg
 
+from codemaster.persistence.persistence_utils import is_json_serializable
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.tools.utils.colors import Color
 from codemaster.tools.logger.logger import log
@@ -34,14 +35,12 @@ NPC_STRENGTH_BASE = 35
 
 class DropItem:
 
-    def __init__(self, actor_class, actor_type, probability_to_drop,
-                 add_to_list, x_delta=0, y_delta=0, **kwargs):
-        self.type = actor_type
+    def __init__(self, actor_class, probability_to_drop=100,
+                 x_delta=0, y_delta=0, **kwargs):
         self.class_ = actor_class
-        self.add_to_list = add_to_list
+        self.probability_to_drop = probability_to_drop
         self.x_delta = x_delta
         self.y_delta = y_delta
-        self.probability_to_drop = probability_to_drop
         self.args = kwargs
 
 
@@ -412,17 +411,15 @@ class Actor(pg.sprite.Sprite):
             self.game.is_log_debug and log.debug(
                 f"{self.id}, lucky_drop_dice: {str(lucky_drop)}, "
                 f"probability_to_drop: {item.probability_to_drop:3d}, "
-                f"item type: {item.type}")
+                f"item type: {item.class_.__name__}")
             if lucky_drop + item.probability_to_drop >= 100:
                 self.game.is_log_debug and log.debug("Create item to drop")
                 new_item = item.class_(
-                    x=self.rect.x + item.x_delta, y=self.rect.y + item.y_delta, game=self.game,
+                    x=self.rect.x + item.x_delta,
+                    y=self.rect.y + item.y_delta,
+                    game=self.game,
                     **item.args)
-                item.add_to_list.add(new_item)
-                if new_item.base_type == ActorBaseType.ITEM:
-                    self.game.level.items.add(new_item)
-                self.game.level.all_sprites.add(new_item)
-                new_item.is_not_initial_actor = True
+                self.game.level.add_actors([new_item], shift_borders=False)
                 self.game.is_log_debug and log.debug(f"Dropped: {new_item.id}")
 
     def is_actor_on_the_left(self, actor):
@@ -850,6 +847,26 @@ class NPC(MovingActor):
                     'border_right': npc.border_right,
                     'border_top': npc.border_top,
                     'border_down': npc.border_down,
+                    'items_to_drop': []
                     }
+                if npc.can_drop_items and npc.items_to_drop:
+                    items_to_drop = []
+                    for item in npc.items_to_drop:
+                        if is_json_serializable(item.args):
+                            item_args = item.args
+                        else:
+                            item_args = {}
+                            log.error("Cannot persist drop args for NPC %s: "
+                                        "%s", npc.id, item.class_.__name__)
+                        item_to_drop = {
+                            'type_name': item.class_.__name__,
+                            'probability_to_drop': item.probability_to_drop,
+                            'x_delta': item.x_delta,
+                            'y_delta': item.y_delta,
+                            'args': item_args,
+                            }
+                        items_to_drop.append(item_to_drop)
+                    level['npcs'][npc.id]['items_to_drop'] = items_to_drop
+
                 levels[game_level.id] = level
         return res

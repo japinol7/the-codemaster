@@ -3,8 +3,9 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 from copy import deepcopy
 
-from codemaster.models.actors.actors import NPC, Actor
+from codemaster.models.actors.actors import NPC, Actor, DropItem
 from codemaster.models.actors import npcs as npcs_module
+from codemaster.models.actors import items as items_module
 from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.persistence.persistence_settings import (
     GAME_DATA_HEADER,
@@ -135,5 +136,19 @@ def _load_npcs_not_initial_data(game):
             if npc_data['has_energy_shield']:
                 EnergyShield.actor_acquire_energy_shield(
                     npc, game, health_total=npc_data['energy_shield_health'])
+
+            if npc_data['items_to_drop']:
+                items_to_drop = []
+                for item_data in npc_data['items_to_drop']:
+                    item_to_drop = DropItem(
+                        getattr(items_module, item_data['type_name'], None)
+                        or getattr(npcs_module, item_data['type_name']),
+                        probability_to_drop=item_data['probability_to_drop'],
+                        x_delta=item_data['x_delta'],
+                        y_delta=item_data['y_delta'],
+                        **item_data['args'],
+                        )
+                    items_to_drop.append(item_to_drop)
+                npc.items_to_drop = items_to_drop
 
         level.add_actors(npcs)

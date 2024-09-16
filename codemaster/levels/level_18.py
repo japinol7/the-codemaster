@@ -7,7 +7,7 @@ from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.models.actors.npcs import (
@@ -131,34 +131,29 @@ class Level18(Level):
             ])
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 65, 'random_max': 65}),
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=95),
+            DropItem(PotionPower, **{'random_min': 65, 'random_max': 65}),
+            DropItem(CartridgeBlue, x_delta=95),
             ]
         self.npcs.add(DemonMale(
             1200, 186, self.game,
             border_left=1100, border_right=1280, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 60, 'random_max': 60}),
+            DropItem(PotionHealth, **{'random_min': 60, 'random_max': 60}),
             ]
         self.npcs.add(DemonMale(
             600, 146, self.game,
             border_left=300, border_right=600, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 45, 'random_max': 45}),
+            DropItem(PotionPower, **{'random_min': 45, 'random_max': 45}),
             ]
         self.npcs.add(TethlorienRed(
             2200, 32, self.game,
             border_left=2080, border_right=2450, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 25, 'random_max': 30}),
+            DropItem(PotionHealth, **{'random_min': 25, 'random_max': 30}),
             ]
         tethlorien_lilac = TethlorienLilac(
             3390, 20, self.game,

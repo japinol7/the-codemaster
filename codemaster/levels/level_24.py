@@ -7,7 +7,7 @@ from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
@@ -55,7 +55,7 @@ class Level24(Level):
             self.platforms.add(block)
 
         # Add water blocks
-        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
         # Add batteries
         self.batteries.add([
@@ -87,8 +87,7 @@ class Level24(Level):
         self.npcs.add(pokoyos)
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 40, 'random_max': 40}),
+            DropItem(PotionPower, x_delta=16, **{'random_min': 40, 'random_max': 40}),
             ]
         self.npcs.add([
             RobotA(240, 188, self.game, border_left=180, border_right=480, change_x=2,

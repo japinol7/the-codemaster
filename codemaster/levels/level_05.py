@@ -3,7 +3,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 import pygame as pg
 
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
@@ -126,16 +126,11 @@ class Level5(Level):
             y -= 70
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 58, 'random_max': 72}),
-            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=70, add_to_list=self.life_recs,
-                     x_delta=120),
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=170),
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=80, add_to_list=self.cartridges,
-                     x_delta=195),
-            DropItem(BatLilac, ActorType.BAT_LILAC, probability_to_drop=100, add_to_list=self.npcs,
-                     **{'border_left': 2890, 'border_right': 3300, 'change_x': 3}),
+            DropItem(PotionPower, x_delta=16, **{'random_min': 58, 'random_max': 72}),
+            DropItem(LifeRecoveryA, probability_to_drop=70, x_delta=120),
+            DropItem(CartridgeGreen, x_delta=170),
+            DropItem(CartridgeBlue, probability_to_drop=80, x_delta=195),
+            DropItem(BatLilac, **{'border_left': 2890, 'border_right': 3300, 'change_x': 3}),
             ]
         self.npcs.add([
             TerminatorEyeYellow(2900, 92, self.game, border_left=2890, border_right=3300, change_x=3,
@@ -143,10 +138,8 @@ class Level5(Level):
             ])
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 40, 'random_max': 64}),
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=90, add_to_list=self.cartridges,
-                     x_delta=195),
+            DropItem(PotionPower, x_delta=16, **{'random_min': 40, 'random_max': 64}),
+            DropItem(CartridgeBlue, probability_to_drop=90, x_delta=195),
             ]
         self.npcs.add([
             TerminatorEyeBlue(1760, 644, self.game, border_left=1700, border_right=2150, change_x=2,

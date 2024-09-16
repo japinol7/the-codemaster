@@ -8,7 +8,7 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     DOOR_DEST_TR,
     )
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
@@ -64,7 +64,7 @@ class Level13(Level):
             self.platforms.add(block)
 
         # Add water blocks
-        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3, add_to_list=self.decors)
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
         # Add batteries
         self.batteries.add([
@@ -74,7 +74,7 @@ class Level13(Level):
 
         # Add NPCs
         items_to_drop = [
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100, add_to_list=self.cartridges),
+            DropItem(CartridgeBlue),
             ]
         self.npcs.add([
             VampireFemale(1400, 8, self.game,
@@ -83,16 +83,14 @@ class Level13(Level):
             ])
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 25, 'random_max': 45}),
+            DropItem(PotionPower, **{'random_min': 25, 'random_max': 45}),
             ]
         self.npcs.add(TethlorienYellow(
             2000, 500, self.game,
             border_left=1550, border_right=2040, change_x=2, items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     **{'random_min': 50, 'random_max': 50}),
+            DropItem(PotionPower, **{'random_min': 50, 'random_max': 50}),
             ]
         self.npcs.add(TethlorienRed(
             2140, 500, self.game,

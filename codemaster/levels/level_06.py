@@ -5,7 +5,7 @@ from random import randint
 
 import pygame as pg
 
-from codemaster.models.actors.actors import DropItem, ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.config.constants import (
     SCREEN_HEIGHT,
     SCREEN_NEAR_EARTH,
@@ -172,50 +172,39 @@ class Level6(Level):
             x += 75
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 65, 'random_max': 75}),
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=80, add_to_list=self.potions,
-                     x_delta=-52, **{'random_min': 65, 'random_max': 75}),
-            DropItem(PotionHealth, ActorType.POTION_HEALTH, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=80, **{'random_min': 65, 'random_max': 75}),
-            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=100, add_to_list=self.life_recs,
-                     x_delta=120),
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=170),
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=195),
+            DropItem(PotionPower, x_delta=16, **{'random_min': 65, 'random_max': 75}),
+            DropItem(PotionPower, x_delta=-52, **{'random_min': 65, 'random_max': 75}),
+            DropItem(PotionHealth, x_delta=80, **{'random_min': 65, 'random_max': 75}),
+            DropItem(LifeRecoveryA, x_delta=120),
+            DropItem(CartridgeGreen, x_delta=170),
+            DropItem(CartridgeBlue, x_delta=195),
             ]
         self.snakes.add(SnakeRed(1100, 560, self.game, border_left=395, border_right=1550,
                                  border_top=100, border_down=820, change_x=2, change_y=2,
                                  items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 65, 'random_max': 75}),
-            DropItem(LifeRecoveryA, ActorType.LIFE_RECOVERY, probability_to_drop=25, add_to_list=self.life_recs,
-                     x_delta=120),
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=170),
-            DropItem(CartridgeBlue, ActorType.CARTRIDGE_BLUE, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=195),
+            DropItem(PotionPower, x_delta=16, **{'random_min': 65, 'random_max': 75}),
+            DropItem(LifeRecoveryA, probability_to_drop=25, x_delta=120),
+            DropItem(CartridgeGreen, x_delta=170),
+            DropItem(CartridgeBlue, x_delta=195),
             ]
         self.snakes.add(SnakeBlue(300, 360, self.game, border_left=295, border_right=1450,
                                   border_top=100, border_down=810, change_x=1, change_y=2,
                                   items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=30, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 65, 'random_max': 75}),
+            DropItem(PotionPower, probability_to_drop=30, x_delta=16,
+                     **{'random_min': 65, 'random_max': 75}),
             ]
         self.snakes.add(SnakeGreen(800, 415, self.game, border_left=285, border_right=1750,
                                    border_top=100, border_down=810, change_x=1, change_y=1,
                                    items_to_drop=items_to_drop))
 
         items_to_drop = [
-            DropItem(PotionPower, ActorType.POTION_POWER, probability_to_drop=100, add_to_list=self.potions,
-                     x_delta=16, **{'random_min': 65, 'random_max': 75}),
-            DropItem(CartridgeGreen, ActorType.CARTRIDGE_GREEN, probability_to_drop=100, add_to_list=self.cartridges,
-                     x_delta=170),
+            DropItem(PotionPower, x_delta=16,
+                     **{'random_min': 65, 'random_max': 75}),
+            DropItem(CartridgeGreen, x_delta=170),
             ]
         self.snakes.add(SnakeYellow(2050, 640, self.game, border_left=800, border_right=2350,
                                     border_top=100, border_down=810, change_x=4, change_y=4,

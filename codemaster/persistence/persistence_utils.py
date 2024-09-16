@@ -20,3 +20,11 @@ def save_data_to_file(file_name, data):
     data_json = json.dumps(data, indent=JSON_INDENT_SIZE)
     with open(file_name, 'w', encoding='utf-8') as file_out:
         file_out.write(data_json)
+
+
+def is_json_serializable(obj):
+    try:
+        json.dumps(obj)
+    except (TypeError, OverflowError):
+        return False
+    return True

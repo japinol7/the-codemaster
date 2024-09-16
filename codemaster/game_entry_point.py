@@ -82,6 +82,7 @@ class Game:
         self.level = None
         self.levels = []
         self.levels_qty = 0
+        self.level_init = None
         self.is_paused = False
         self.is_allowed_to_pause = False
         self.is_start_screen = True
@@ -179,6 +180,7 @@ class Game:
         # Initialize levels
         self.levels = levels.Level.factory(levels_module=levels, game=self)
         self.levels_qty = len(self.levels)
+        self.level_init = None
 
         init_options = file_read_list(INIT_OPTIONS_FILE, 1)
         self.super_cheat = init_options and len(init_options) > 0 and 'supercheat' in init_options[0] or False
