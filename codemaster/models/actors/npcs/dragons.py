@@ -97,11 +97,13 @@ class Dragon(NPC):
         self.is_a_dragon = True
         self.can_cast_spells = True
         self.health_bar_delta_y = 50
+        self.cannot_be_copied = True
 
-        super().__init__(x, y, game, name, change_x=change_x, change_y=change_y,
-                         border_left=border_left, border_right=border_right,
-                         border_top=border_top, border_down=border_down,
-                         items_to_drop=items_to_drop)
+        super().__init__(
+            x, y, game, name, change_x=change_x, change_y=change_y,
+            border_left=border_left, border_right=border_right,
+            border_top=border_top, border_down=border_down,
+            items_to_drop=items_to_drop)
 
         self.category_type = ActorCategoryType.DRAGON
         self.image_head = None

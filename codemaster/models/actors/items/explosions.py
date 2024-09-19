@@ -33,6 +33,7 @@ class Explosion(ActorItem):
         self.stats.strength = self.stats.strength_total = 1
         self.animation_speed = 0.4
         self.transparency_alpha = True
+        self.cannot_be_copied = True
 
         super().__init__(x, y, game, name=name)
 

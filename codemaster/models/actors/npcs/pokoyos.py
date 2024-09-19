@@ -18,6 +18,8 @@ class Pokoyo(NPC):
         self.file_folder = BM_NPCS_FOLDER
         self.file_name_key = 'im_en_pokoyos'
         self.images_sprite_no = 1
+        self.cannot_be_copied = True
+
         super().__init__(x, y, game, name=name,
                          change_x=change_x, change_y=change_y,
                          border_left=border_left, border_right=border_right,

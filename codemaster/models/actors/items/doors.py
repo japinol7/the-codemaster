@@ -28,6 +28,8 @@ class Door(ActorItem):
         self.stats.health = self.stats.health_total = 1
         self.stats.power = self.stats.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
+        self.cannot_be_copied = True
+
         super().__init__(x, y, game, name=name)
 
     def update(self):

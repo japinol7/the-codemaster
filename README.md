@@ -358,6 +358,12 @@
                      ordered by item name
     ^d:    print debug information to the console
     ^l:    write debug information to a log file
+    L_mouse_button:  If debug mode activated, show actors in the position  
+    ^L_mouse_button: If debug mode activated, select NPC to copy  
+    Alt + L_mouse_button: If debug mode activated, select item to copy  
+    Shift + L_mouse_button: If debug mode activated, paste selected actor.  
+                     Note that you can paste actors only 
+                     within the same game level.
 
     > Additional keys for cheating mode:
     ^i:                teletransportation: put the player above it\'s

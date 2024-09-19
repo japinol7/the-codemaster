@@ -467,7 +467,19 @@ class Game:
                             if not self.show_fps:
                                 pg.display.set_caption(self.name_short)
                 elif event.type == pg.MOUSEBUTTONDOWN:
-                    if self.is_magic_on:
+                    if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
+                        self.mouse_pos = pg.mouse.get_pos()
+                        for selector in self.selector_sprites:
+                            selector.selector_copy_actor(group=self.level.npcs)
+                    elif self.is_debug and pg.key.get_mods() & pg.KMOD_LALT:
+                        self.mouse_pos = pg.mouse.get_pos()
+                        for selector in self.selector_sprites:
+                            selector.selector_copy_actor(group=self.level.items)
+                    elif self.is_debug and pg.key.get_mods() & pg.KMOD_LSHIFT:
+                        self.mouse_pos = pg.mouse.get_pos()
+                        for selector in self.selector_sprites:
+                            selector.selector_paste_actor()
+                    elif self.is_magic_on:
                         self.mouse_pos = pg.mouse.get_pos()
                         for selector in self.selector_sprites:
                             selector.get_pointed_sprites()

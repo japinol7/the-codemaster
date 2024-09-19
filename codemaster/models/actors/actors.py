@@ -8,10 +8,6 @@ from random import randint
 
 import pygame as pg
 
-from codemaster.persistence.persistence_utils import is_json_serializable
-from codemaster.tools.utils import utils_graphics as libg_jp
-from codemaster.tools.utils.colors import Color
-from codemaster.tools.logger.logger import log
 from codemaster.config.settings import Settings
 from codemaster.config.constants import (
     FILE_NAMES,
@@ -25,8 +21,12 @@ from codemaster.models.actors.actor_types import (
     ActorCategoryType,
     ActorType
     )
+from codemaster.tools.utils import utils_graphics as libg_jp
+from codemaster.tools.utils.colors import Color
+from codemaster.persistence.persistence_utils import is_json_serializable
 from codemaster.models.actors.items import bullets
 from codemaster.models.actors.items.bullets import Bullet, BulletType
+from codemaster.tools.logger.logger import log
 
 NPC_STD_WIDTH = 61
 NPC_STD_HEIGHT = 61
@@ -119,6 +119,9 @@ class Actor(pg.sprite.Sprite):
         if not getattr(self, 'is_not_initial_actor', None):
             self.is_not_initial_actor = False
 
+        if not getattr(self, 'cannot_be_copied', None):
+            self.cannot_be_copied = False
+
         if getattr(self, 'can_be_killed_normally', None) is None:
             self.can_be_killed_normally = True
 
@@ -181,6 +184,10 @@ class Actor(pg.sprite.Sprite):
                 self.stats.energy_shield = None
             if not getattr(self.stats, 'time_between_energy_shield_casting', None):
                 self.stats.time_between_energy_shield_casting = 0
+            if not getattr(self.stats, 'energy_shield_pos_delta_x', None):
+                self.stats.energy_shield_pos_delta_x = 0
+            if not getattr(self.stats, 'energy_shield_pos_delta_y', None):
+                self.stats.energy_shield_pos_delta_y = 0
 
         if not getattr(self, 'npc_summoned_count', None):
             self.npc_summoned_count = 0
@@ -464,6 +471,71 @@ class Actor(pg.sprite.Sprite):
         self.stats.power += self.stats.power_recovery
         if self.stats.power > self.stats.power_total:
             self.stats.power = self.stats.power_total
+
+    @staticmethod
+    def copy_actor(
+            actor_id, game, delta_x=0, delta_y=0,
+            reverse_direction=False, same_borders=False, **kwargs):
+        actor = Actor.actors[actor_id]
+        args = {
+            'x': actor.rect.x + delta_x,
+            'y': actor.rect.y + delta_y,
+            'game':game,
+            }
+
+        if isinstance(actor, MovingActor):
+            change_x, change_y = 0, 0
+            border_delta_x, border_delta_y = 0, 0
+            if actor.change_x:
+                change_x = actor.change_x * (-1 if reverse_direction else 1)
+                if not same_borders:
+                    border_delta_x = delta_x
+            if actor.change_y:
+                change_y = actor.change_y * (-1 if reverse_direction else 1)
+                if not same_borders:
+                    border_delta_y = delta_y
+            scroll_shift_delta = game.level.get_scroll_shift_delta()
+            args.update({
+                'border_left': actor.border_left - scroll_shift_delta + border_delta_x,
+                'border_right': actor.border_right - scroll_shift_delta + border_delta_x,
+                'border_top': actor.border_top + border_delta_y,
+                'border_down': actor.border_down + border_delta_y,
+                'change_x': change_x,
+                'change_y': change_y,
+                })
+
+        args.update(**kwargs)
+        new_actor = actor.__class__(**args)
+
+        new_actor.direction = actor.direction
+        new_actor.hostility_level = actor.hostility_level
+        new_actor.npc_summoned_count = actor.npc_summoned_count
+        new_actor.health = actor.stats.health_total
+        new_actor.power = actor.stats.power_total
+
+        if actor.stats.energy_shield:
+            actor.stats.energy_shield.__class__.actor_acquire_energy_shield(
+                new_actor, game,
+                health_total=actor.stats.energy_shield.stats.health_total)
+            new_actor.stats.time_between_energy_shield_casting = \
+                actor.stats.time_between_energy_shield_casting
+
+        game.level.add_actors([new_actor])
+        return new_actor
+
+    @staticmethod
+    def copy_actor_mult(actor_id, game, qty, delta_x=0, delta_y=0,
+                        reverse_direction=False, **kwargs):
+        new_actors = []
+        dx, dy = delta_x, delta_y
+        for _ in range(qty):
+            new_actors.append(Actor.copy_actor(
+                actor_id=actor_id, game=game, delta_x=dx, delta_y=dy,
+                reverse_direction=reverse_direction,
+                **kwargs))
+            dx += delta_x
+            dy += delta_y
+        return new_actors
 
     @staticmethod
     def get_actor(actor_id):
@@ -839,8 +911,12 @@ class NPC(MovingActor):
                     'health_bar_delta_y': npc.health_bar_delta_y,
                     'power_recovery': npc.stats.power_recovery,
                     'has_energy_shield': npc.stats.energy_shield and True or False,
-                    'energy_shield_health': npc.stats.energy_shield.stats.health_total
+                    'energy_shield_health': npc.stats.energy_shield.stats.health
                                             if npc.stats.energy_shield else 0,
+                    'energy_shield_health_total': npc.stats.energy_shield.stats.health_total
+                                            if npc.stats.energy_shield else 0,
+                    'energy_shield_pos_delta_x': npc.stats.energy_shield_pos_delta_x,
+                    'energy_shield_pos_delta_y': npc.stats.energy_shield_pos_delta_y,
                     'time_between_energy_shield_casting': npc.stats.time_between_energy_shield_casting,
                     'npc_summoned_count':npc.npc_summoned_count,
                     'border_left': npc.border_left,

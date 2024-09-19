@@ -89,10 +89,13 @@ class Snake(NPC):
         self.rect_old = None
         self.direction_old = None
         self.is_a_snake = True
-        super().__init__(x, y, game, name, change_x=change_x, change_y=change_y,
-                         border_left=border_left, border_right=border_right,
-                         border_top=border_top, border_down=border_down,
-                         items_to_drop=items_to_drop)
+        self.cannot_be_copied = True
+
+        super().__init__(
+            x, y, game, name, change_x=change_x, change_y=change_y,
+            border_left=border_left, border_right=border_right,
+            border_top=border_top, border_down=border_down,
+            items_to_drop=items_to_drop)
         self.category_type = ActorCategoryType.SNAKE
 
     def _load_sprites(self):

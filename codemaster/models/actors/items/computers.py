@@ -21,6 +21,8 @@ class Computer(ActorItem):
         self.stats.power = self.stats.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
         self.visited = False
+        self.cannot_be_copied = True
+
         super().__init__(x, y, game, name=name)
 
     def update_when_hit(self):

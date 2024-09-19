@@ -19,8 +19,13 @@
 * Improve NPCs:
   * Kung Fu Fighters.
   * Mages.
+* Add a debug feature that allows to:
+  * Copy items and NPCs as selected actors.
+  * Paste the selected actor to the mouse position.
+    * This is only implemented within the same level.
 * Improve the test suite:
-  * To facilitate testing persistence.
+  * Facilitate testing persistence.
+  * Remove support of the game test decorator for methods.
   * Current tests count: 58.
 <br>
 

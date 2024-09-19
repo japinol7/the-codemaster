@@ -135,7 +135,8 @@ def _load_npcs_not_initial_data(game):
 
             if npc_data['has_energy_shield']:
                 EnergyShield.actor_acquire_energy_shield(
-                    npc, game, health_total=npc_data['energy_shield_health'])
+                    npc, game, health_total=npc_data['energy_shield_health_total'])
+                npc.stats.energy_shield.stats.health = npc_data['energy_shield_health']
 
             if npc_data['items_to_drop']:
                 items_to_drop = []

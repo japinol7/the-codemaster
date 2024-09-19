@@ -35,6 +35,7 @@ class EnergyShield(ActorItem):
         self.stats.strength = self.stats.strength_total = 1
         self.calculate_power()
         self.can_move = True
+        self.cannot_be_copied = True
 
         super().__init__(x, y, game, name=name)
 
@@ -132,12 +133,22 @@ class EnergyShield(ActorItem):
         self.owner.is_energy_shield_activated = True
         if self.health < 0:
             self.health = self.stats.health_total
-        self.game.active_sprites.add(self)
+
+        if self.owner == self.game.player:
+            self.game.active_sprites.add(self)
+            return
+
+        self.game.level.all_sprites.add(self)
 
     def deactivate(self):
         self.is_activated = False
         self.owner.is_energy_shield_activated = False
-        self.game.active_sprites.remove(self)
+
+        if self.owner == self.game.player:
+            self.game.active_sprites.remove(self)
+            return
+
+        self.game.level.all_sprites.remove(self)
 
     @staticmethod
     def actor_update_energy_shield(actor):
@@ -157,6 +168,8 @@ class EnergyShield(ActorItem):
             ]
         actor.stats.energy_shield = actor.stats.energy_shields_stock[0]
         actor.stats.energy_shield.owner = actor
+        actor.stats.energy_shield_pos_delta_x = delta_x
+        actor.stats.energy_shield_pos_delta_y = delta_y
 
         if health_total > 0:
             actor.stats.energy_shield.stats.health_total = health_total

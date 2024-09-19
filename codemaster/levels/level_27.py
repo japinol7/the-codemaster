@@ -38,7 +38,7 @@ class Level27(Level):
         self.player_start_pos_right = 520, 520
         self.player_start_pos_rtop = 880, -292
         self.player_start_pos_ltop = 80, 100
-        
+
         super().__init__(id_, game)
 
     def _add_actors_hook(self):
