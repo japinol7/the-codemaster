@@ -73,7 +73,8 @@ def _load_npcs_data(game):
         if not level_data or not isinstance(level_data['npcs'], dict):
             continue
         npcs_level = level_data['npcs']
-        scroll_shift, scroll_shift_top = game_level.get_scroll_shift_delta_tuple(game_level, level_data)
+        scroll_shift, scroll_shift_top = game_level.get_scroll_shift_delta_tuple(
+            game_level, level_data)
         for npc in game_level.npcs:
             npc_data = npcs_level.get(npc.id)
             if not npc_data:
@@ -92,6 +93,9 @@ def _load_npcs_data(game):
             npc.direction = npc_data['direction']
             npc.hostility_level = npc_data['hostility_level']
             npc.npc_summoned_count = npc_data['npc_summoned_count']
+            if npc.stats.energy_shield:
+                npc.stats.energy_shield.stats.health = npc_data.get(
+                    'energy_shield_health', 100)
 
 
 def _load_npcs_not_initial_data(game):
@@ -106,7 +110,8 @@ def _load_npcs_not_initial_data(game):
 
     for level_id, level_data in npcs_data['game_levels'].items():
         level = game.levels[int(level_id) - 1]
-        scroll_shift, scroll_shift_top = level.get_scroll_shift_delta_tuple(level, level_data)
+        scroll_shift, scroll_shift_top = level.get_scroll_shift_delta_tuple(
+            level, level_data)
         npcs = []
         for npc_id, npc_data in level_data['npcs'].items():
             kwargs_ = {

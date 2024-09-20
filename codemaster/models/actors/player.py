@@ -780,6 +780,8 @@ class Player(pg.sprite.Sprite):
             ActorType.DOOR_KEY_YELLOW.name: pc.stats[ActorType.DOOR_KEY_YELLOW.name],
             ActorType.DOOR_KEY_RED.name: pc.stats[ActorType.DOOR_KEY_RED.name],
             ActorType.DOOR_KEY_MAGENTA.name: pc.stats[ActorType.DOOR_KEY_MAGENTA.name],
+            'energy_shield_health': pc.stats['energy_shields_stock'][0].stats.health
+                                    if pc.stats['energy_shields_stock'] else None,
             'sound_effects': game.sound_effects,
             'is_music_paused': game.is_music_paused,
             }

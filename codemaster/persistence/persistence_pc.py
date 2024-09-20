@@ -22,7 +22,10 @@ from codemaster.persistence.persistence_utils import (
 from codemaster.persistence.validations import (
     validate_load_data_game_basic_metadata,
     )
-from codemaster.persistence.working_data import get_actors_by_ids_considering_old_ids
+from codemaster.persistence.working_data import (
+    get_actors_by_ids_considering_old_ids,
+    get_actors_by_ids_considering_old_ids_if_exist,
+    )
 from codemaster.tools.logger.logger import log
 
 
@@ -58,6 +61,11 @@ def _load_pc_data(game):
     pc.direction = pc_data['direction']
     pc.power = pc_data['power']
     pc.health = pc_data['health']
+    potions_power = get_actors_by_ids_considering_old_ids_if_exist(
+        pc_data['potions_power'])
+    potions_health = get_actors_by_ids_considering_old_ids_if_exist(
+        pc_data['potions_health'])
+
     pc.stats.update({
         'lives': pc_data['lives'],
         'score': pc_data['score'],
@@ -77,8 +85,8 @@ def _load_pc_data(game):
         'bullets_t03_shot': pc_data['bullets_t03_shot'],
         'bullets_t04': pc_data['bullets_t04'],
         'bullets_t04_shot': pc_data['bullets_t04_shot'],
-        'POTION_POWER': pc_data['POTION_POWER'],
-        'POTION_HEALTH': pc_data['POTION_HEALTH'],
+        'POTION_POWER': len(potions_power),
+        'POTION_HEALTH': len(potions_health),
         'FILES_DISK_D': pc_data['FILES_DISK_D'],
         'FILES_DISK_C': pc_data['FILES_DISK_C'],
         'FILES_DISK_B': pc_data['FILES_DISK_B'],
@@ -96,20 +104,27 @@ def _load_pc_data(game):
         'DOOR_KEY_YELLOW': pc_data['DOOR_KEY_YELLOW'],
         'DOOR_KEY_RED': pc_data['DOOR_KEY_RED'],
         'DOOR_KEY_MAGENTA': pc_data['DOOR_KEY_MAGENTA'],
-        'door_keys_stock': get_actors_by_ids_considering_old_ids(pc_data['door_keys_stock']),
-        'potions_power': get_actors_by_ids_considering_old_ids(pc_data['potions_power']),
-        'potions_health': get_actors_by_ids_considering_old_ids(pc_data['potions_health']),
-        'apples_stock': get_actors_by_ids_considering_old_ids(pc_data['apples_stock']),
+        'door_keys_stock': get_actors_by_ids_considering_old_ids(
+            pc_data['door_keys_stock']),
+        'potions_power': potions_power,
+        'potions_health': potions_health,
+        'apples_stock': get_actors_by_ids_considering_old_ids(
+            pc_data['apples_stock']),
         })
     pc.sound_effects = game.sound_effects = pc_data['sound_effects']
     game.is_music_paused = pc_data['is_music_paused']
 
     levels_completed_ids = set(pc_data['levels_completed'])
-    levels_completed = [level for level in game.levels if level.id in levels_completed_ids]
+    levels_completed = [level for level in game.levels
+                        if level.id in levels_completed_ids]
     pc.level_up(msg_echo=False)
 
     for level in levels_completed:
         level.completed = True
+
+    if pc_data['energy_shield_health'] is not None:
+        pc.stats['energy_shields_stock'][0].stats.health = (
+            pc_data)['energy_shield_health']
 
     if pc_data['previous_door_crossed']:
         door = Actor.get_actor(pc_data['previous_door_crossed'])

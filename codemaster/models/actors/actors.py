@@ -865,6 +865,8 @@ class NPC(MovingActor):
                     'change_y': npc.change_y,
                     'direction': npc.direction,
                     'hostility_level': npc.hostility_level,
+                    'energy_shield_health': npc.stats.energy_shield.stats.health
+                                            if npc.stats.energy_shield else 0,
                     'npc_summoned_count':npc.npc_summoned_count,
                     }
         return res
@@ -931,9 +933,9 @@ class NPC(MovingActor):
                         if is_json_serializable(item.args):
                             item_args = item.args
                         else:
-                            item_args = {}
                             log.error("Cannot persist drop args for NPC %s: "
                                         "%s", npc.id, item.class_.__name__)
+                            continue
                         item_to_drop = {
                             'type_name': item.class_.__name__,
                             'probability_to_drop': item.probability_to_drop,
