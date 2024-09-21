@@ -74,20 +74,15 @@ class Level21(Level):
             ])
 
         # Add NPCs
-        items_to_drop = [
-            DropItem(CartridgeBlue, x_delta=16),
-            ]
-
+        item_to_drop = DropItem(CartridgeBlue, x_delta=16)
         self.npcs.add(RobotB(
             1140, 138, self.game, border_left=660, border_right=1200, change_x=2,
-            items_to_drop=items_to_drop))
+            items_to_drop=[item_to_drop]))
 
-        items_to_drop = [
-            DropItem(PotionPower, x_delta=16, **{'random_min': 60, 'random_max': 60}),
-            ]
+        item_to_drop = DropItem(PotionPower, x_delta=16, **{'random_min': 60, 'random_max': 60})
         self.npcs.add(RobotA(
             710, 138, self.game, border_left=680, border_right=1200, change_x=3,
-            items_to_drop=items_to_drop))
+            items_to_drop=[item_to_drop]))
 
         items_to_drop = [
             DropItem(PotionPower, x_delta=26, y_delta=-35, **{'random_min': 60, 'random_max': 60}),

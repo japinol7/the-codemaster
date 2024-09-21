@@ -77,19 +77,15 @@ class Level23(Level):
             SkullRed(2410, 47, self.game, border_left=2170, border_right=2500, change_x=3),
             ])
 
-        items_to_drop = [
-            DropItem(PotionHealth, **{'random_min': 60, 'random_max': 60}),
-            ]
+        item_to_drop = DropItem(PotionHealth, **{'random_min': 60, 'random_max': 60})
         self.npcs.add(DemonMale(
             600, 146, self.game,
-            border_left=300, border_right=600, change_x=2, items_to_drop=items_to_drop))
+            border_left=300, border_right=600, change_x=2, items_to_drop=[item_to_drop]))
 
-        items_to_drop = [
-            DropItem(PotionHealth, **{'random_min': 25, 'random_max': 30}),
-            ]
+        item_to_drop = DropItem(PotionHealth, **{'random_min': 25, 'random_max': 30})
         tethlorien_lilac = TethlorienLilac(
-            1500, 240, self.game,
-            border_left=1320, border_right=1680, change_x=2, items_to_drop=items_to_drop)
+            1500, 240, self.game, border_left=1320, border_right=1680,
+            change_x=2, items_to_drop=[item_to_drop])
         self.npcs.add(tethlorien_lilac)
         EnergyShield.actor_acquire_energy_shield(tethlorien_lilac, self.game, health_total=200)
 

@@ -73,28 +73,22 @@ class Level13(Level):
             ])
 
         # Add NPCs
-        items_to_drop = [
-            DropItem(CartridgeBlue),
-            ]
+        item_to_drop = DropItem(CartridgeBlue)
         self.npcs.add([
-            VampireFemale(1400, 8, self.game,
-                          border_left=1320, border_right=1780, change_x=2, items_to_drop=items_to_drop),
-            WolfManMale(1750, 8, self.game, border_left=1320, border_right=1780, change_x=2)
+            VampireFemale(1400, 8, self.game, border_left=1320, border_right=1780,
+                          change_x=2, items_to_drop=[item_to_drop]),
+            WolfManMale(1750, 8, self.game, border_left=1320, border_right=1780, change_x=2),
             ])
 
-        items_to_drop = [
-            DropItem(PotionPower, **{'random_min': 25, 'random_max': 45}),
-            ]
+        item_to_drop = DropItem(PotionPower, **{'random_min': 25, 'random_max': 45})
         self.npcs.add(TethlorienYellow(
             2000, 500, self.game,
-            border_left=1550, border_right=2040, change_x=2, items_to_drop=items_to_drop))
+            border_left=1550, border_right=2040, change_x=2, items_to_drop=[item_to_drop]))
 
-        items_to_drop = [
-            DropItem(PotionPower, **{'random_min': 50, 'random_max': 50}),
-            ]
+        item_to_drop = DropItem(PotionPower, **{'random_min': 50, 'random_max': 50})
         self.npcs.add(TethlorienRed(
             2140, 500, self.game,
-            border_left=1700, border_right=2200, change_x=3, items_to_drop=items_to_drop))
+            border_left=1700, border_right=2200, change_x=3, items_to_drop=[item_to_drop]))
 
         # Add doors
         self.doors.add([

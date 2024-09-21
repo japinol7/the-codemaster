@@ -93,19 +93,15 @@ class Level4(Level):
             ])
 
         # Add NPCs
-        items_to_drop = [
-            DropItem(CartridgeYellow),
-            ]
+        item_to_drop = DropItem(CartridgeYellow)
         self.npcs.add(VampireFemale(
-            1400, 46, self.game,
-            border_left=1310, border_right=1680, change_x=2, items_to_drop=items_to_drop))
+            1400, 46, self.game, border_left=1310, border_right=1680,
+            change_x=2, items_to_drop=[item_to_drop]))
 
-        items_to_drop = [
-            DropItem(PotionPower, **{'random_min': 65, 'random_max': 75}),
-            ]
+        item_to_drop = DropItem(PotionPower, **{'random_min': 65, 'random_max': 75})
         self.npcs.add(DemonMale(
             800, 146, self.game,
-            border_left=690, border_right=1210, change_x=3, items_to_drop=items_to_drop))
+            border_left=690, border_right=1210, change_x=3, items_to_drop=[item_to_drop]))
 
         self.npcs.add([
             WolfManMale(2360, 37, self.game, border_left=2180, border_right=2500, change_x=3),
@@ -118,12 +114,10 @@ class Level4(Level):
             BatBlue(2000, 365, self.game, border_left=1700, border_right=2450, change_x=3),
             ])
 
-        items_to_drop = [
-            DropItem(BatBlack, **{'border_left': 1700, 'border_right': 2450, 'change_x': 3}),
-            ]
+        item_to_drop = DropItem(BatBlack, **{'border_left': 1700, 'border_right': 2450, 'change_x': 3})
         self.npcs.add(BatBlue(
             2190, 384, self.game,
-            border_left=1700, border_right=2450, change_x=3, items_to_drop=items_to_drop))
+            border_left=1700, border_right=2450, change_x=3, items_to_drop=[item_to_drop]))
 
         items_to_drop = [
             DropItem(PotionPower, x_delta=16, **{'random_min': 65, 'random_max': 75}),

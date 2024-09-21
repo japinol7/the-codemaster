@@ -102,12 +102,10 @@ class Level28(Level):
             GhostRed(670, 158, self.game, border_left=300, border_right=800, change_x=2),
             ])
 
-        items_to_drop = [
-            DropItem(CartridgeYellow),
-            ]
+        item_to_drop = DropItem(CartridgeYellow)
         self.npcs.add(VampireFemale(
-            2800, 38, self.game,
-            border_left=2680, border_right=2980, change_x=2, items_to_drop=items_to_drop))
+            2800, 38, self.game, border_left=2680, border_right=2980,
+            change_x=2, items_to_drop=[item_to_drop]))
 
         items_to_drop = [
             DropItem(PotionPower, probability_to_drop=60, x_delta=16,

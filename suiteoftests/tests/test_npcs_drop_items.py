@@ -35,10 +35,8 @@ def test_npc_drops_green_cartridge_when_dies(game):
         ['shot_bullet_t4_neutronic', 7],
         ))
 
-    items_to_drop = [
-        DropItem(CartridgeGreen),
-        ]
-    npc = WolfManMale(600, 665, game, change_x=0, items_to_drop=items_to_drop)
+    item_to_drop = DropItem(CartridgeGreen)
+    npc = WolfManMale(600, 665, game, change_x=0, items_to_drop=[item_to_drop])
     npc.direction = DIRECTION_LEFT
     level.add_actors([npc])
 
@@ -129,12 +127,10 @@ def test_npc_drops_npc_that_drops_black_bat_when_dies(game):
         ['shot_bullet_t4_neutronic', 4],
         ))
 
-    items_to_drop = [
-        DropItem(BatBlack, x_delta=-8, y_delta=5),
-        ]
+    item_to_drop = DropItem(BatBlack, x_delta=-8, y_delta=5)
     items_to_drop = [
         DropItem(CartridgeYellow, x_delta=26, y_delta=-35),
-        DropItem(PumpkinHeadA, y_delta=15, items_to_drop=items_to_drop),
+        DropItem(PumpkinHeadA, y_delta=15, items_to_drop=[item_to_drop]),
         ]
     npc = PumpkinZombieA(600, 648, game, change_x=0, items_to_drop=items_to_drop)
     npc.direction = DIRECTION_LEFT

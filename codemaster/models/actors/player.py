@@ -621,7 +621,10 @@ class Player(pg.sprite.Sprite):
         if self.health > 99:
             return
         if len(self.stats['apples_stock']) > 0:
+            last_apple = self.stats['apples_stock'][-1]
             self.stats['apples'] -= 1
+            self.stats['apples_type'][last_apple.apple_type] -= 1
+            self.stats[last_apple.type.name] -= 1
             self.stats['apples_stock'].pop().eat()
 
     def is_ready_to_level_up(self):

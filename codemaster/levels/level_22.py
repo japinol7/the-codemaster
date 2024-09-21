@@ -95,19 +95,15 @@ class Level22(Level):
                                 items_to_drop=items_to_drop),
                 ])
 
-        items_to_drop = [
-            DropItem(CartridgeBlue, x_delta=50),
-            ]
+        item_to_drop = DropItem(CartridgeBlue, x_delta=50)
         self.npcs.add(SamuraiMale(
             620, 127, self.game,
-            border_left=550, border_right=1130, change_x=2, items_to_drop=items_to_drop))
+            border_left=550, border_right=1130, change_x=2, items_to_drop=[item_to_drop]))
 
-        items_to_drop = [
-            DropItem(PotionHealth, **{'random_min': 30, 'random_max': 40}),
-            ]
+        item_to_drop = DropItem(PotionHealth, **{'random_min': 30, 'random_max': 40})
         self.npcs.add(SamuraiMale(
             1000, 127, self.game,
-            border_left=440, border_right=1100, change_x=2, items_to_drop=items_to_drop))
+            border_left=440, border_right=1100, change_x=2, items_to_drop=[item_to_drop]))
 
         # Add doors
         self.doors.add([

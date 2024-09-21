@@ -92,12 +92,10 @@ class Level25(Level):
             ])
 
         # Add NPCs
-        items_to_drop = [
-            DropItem(PotionPower, **{'random_min': 30, 'random_max': 30}),
-            ]
+        item_to_drop = DropItem(PotionPower, **{'random_min': 30, 'random_max': 30})
         self.npcs.add(RobotB(
             1200, 186, self.game,
-            border_left=1100, border_right=1280, change_x=2, items_to_drop=items_to_drop))
+            border_left=1100, border_right=1280, change_x=2, items_to_drop=[item_to_drop]))
 
         items_to_drop = [
             DropItem(CartridgeGreen, x_delta=120),
@@ -109,12 +107,10 @@ class Level25(Level):
         self.npcs.add(kung_fu_fighter)
         EnergyShield.actor_acquire_energy_shield(kung_fu_fighter, self.game, health_total=200)
 
-        items_to_drop = [
-            DropItem(PotionPower, **{'random_min': 27, 'random_max': 27}),
-            ]
+        item_to_drop = DropItem(PotionPower, **{'random_min': 27, 'random_max': 27})
         self.npcs.add(TethlorienYellow(
             2200, 32, self.game,
-            border_left=2080, border_right=2450, change_x=2, items_to_drop=items_to_drop))
+            border_left=2080, border_right=2450, change_x=2, items_to_drop=[item_to_drop]))
 
         items_to_drop = [
             DropItem(CartridgeBlue, x_delta=100),

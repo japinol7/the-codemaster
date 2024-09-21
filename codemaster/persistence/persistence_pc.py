@@ -2,8 +2,10 @@
 __author__ = 'Joan A. Pinol  (japinol)'
 
 from copy import deepcopy
+from itertools import chain
 
 from codemaster.config.constants import DOOR_POSITION_R
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import Actor
 from codemaster.models.actors.player import Player
 from codemaster.models.actors.items.doors import Door
@@ -65,6 +67,8 @@ def _load_pc_data(game):
         pc_data['potions_power'])
     potions_health = get_actors_by_ids_considering_old_ids_if_exist(
         pc_data['potions_health'])
+    apples_stock = get_actors_by_ids_considering_old_ids_if_exist(
+        pc_data['apples_stock'])
 
     pc.stats.update({
         'lives': pc_data['lives'],
@@ -91,11 +95,14 @@ def _load_pc_data(game):
         'FILES_DISK_C': pc_data['FILES_DISK_C'],
         'FILES_DISK_B': pc_data['FILES_DISK_B'],
         'FILES_DISK_A': pc_data['FILES_DISK_A'],
-        'apples': pc_data['apples'],
+        'apples': len(apples_stock),
         'apples_type': pc_data['apples_type'],
-        'APPLE_GREEN': pc_data['APPLE_GREEN'],
-        'APPLE_YELLOW': pc_data['APPLE_YELLOW'],
-        'APPLE_RED': pc_data['APPLE_RED'],
+        'APPLE_GREEN': sum((
+            1 for x in apples_stock if x.type.name == ActorType.APPLE_GREEN.name)),
+        'APPLE_YELLOW': sum((
+            1 for x in apples_stock if x.type.name == ActorType.APPLE_YELLOW.name)),
+        'APPLE_RED': sum((
+            1 for x in apples_stock if x.type.name == ActorType.APPLE_RED.name)),
         'door_keys': pc_data['door_keys'],
         'door_keys_type': pc_data['door_keys_type'],
         'DOOR_KEY_GREEN': pc_data['DOOR_KEY_GREEN'],
@@ -108,9 +115,11 @@ def _load_pc_data(game):
             pc_data['door_keys_stock']),
         'potions_power': potions_power,
         'potions_health': potions_health,
-        'apples_stock': get_actors_by_ids_considering_old_ids(
-            pc_data['apples_stock']),
+        'apples_stock': apples_stock,
         })
+    for item in chain(apples_stock, potions_health, potions_power):
+        item.kill_hook()
+
     pc.sound_effects = game.sound_effects = pc_data['sound_effects']
     game.is_music_paused = pc_data['is_music_paused']
 

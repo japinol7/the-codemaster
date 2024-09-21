@@ -79,12 +79,10 @@ class Level14(Level):
             ])
 
         # Add NPCs
-        items_to_drop = [
-            DropItem(PotionPower, x_delta=16, **{'random_min': 40, 'random_max': 60}),
-            ]
+        item_to_drop = DropItem(PotionPower, x_delta=16, **{'random_min': 40, 'random_max': 60})
         self.dragons.add(DragonGreen(550, 640, self.game, border_left=500, border_right=2200,
                                      border_top=50, border_down=780, change_x=1, change_y=1,
-                                     items_to_drop=items_to_drop))
+                                     items_to_drop=[item_to_drop]))
         items_to_drop = [
             DropItem(PotionPower, probability_to_drop=80, x_delta=16,
                      **{'random_min': 60, 'random_max': 75}),

@@ -94,12 +94,10 @@ class Level17(Level):
             1400, 172, self.game,
             border_left=1250, border_right=1840, change_x=2, items_to_drop=items_to_drop))
 
-        items_to_drop = [
-            DropItem(PotionPower, **{'random_min': 30, 'random_max': 50}),
-            ]
+        item_to_drop = DropItem(PotionPower, **{'random_min': 30, 'random_max': 50})
         self.npcs.add(TethlorienLilac(
             2500, 342, self.game,
-            border_left=2400, border_right=2650, change_x=2, items_to_drop=items_to_drop))
+            border_left=2400, border_right=2650, change_x=2, items_to_drop=[item_to_drop]))
 
         items_to_drop = [
             DropItem(PotionPower, x_delta=16, **{'random_min': 65, 'random_max': 75}),

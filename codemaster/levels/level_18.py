@@ -138,26 +138,20 @@ class Level18(Level):
             1200, 186, self.game,
             border_left=1100, border_right=1280, change_x=2, items_to_drop=items_to_drop))
 
-        items_to_drop = [
-            DropItem(PotionHealth, **{'random_min': 60, 'random_max': 60}),
-            ]
+        item_to_drop = DropItem(PotionHealth, **{'random_min': 60, 'random_max': 60})
         self.npcs.add(DemonMale(
             600, 146, self.game,
-            border_left=300, border_right=600, change_x=2, items_to_drop=items_to_drop))
+            border_left=300, border_right=600, change_x=2, items_to_drop=[item_to_drop]))
 
-        items_to_drop = [
-            DropItem(PotionPower, **{'random_min': 45, 'random_max': 45}),
-            ]
+        item_to_drop = DropItem(PotionPower, **{'random_min': 45, 'random_max': 45})
         self.npcs.add(TethlorienRed(
             2200, 32, self.game,
-            border_left=2080, border_right=2450, change_x=2, items_to_drop=items_to_drop))
+            border_left=2080, border_right=2450, change_x=2, items_to_drop=[item_to_drop]))
 
-        items_to_drop = [
-            DropItem(PotionHealth, **{'random_min': 25, 'random_max': 30}),
-            ]
+        item_to_drop = DropItem(PotionHealth, **{'random_min': 25, 'random_max': 30})
         tethlorien_lilac = TethlorienLilac(
             3390, 20, self.game,
-            border_left=3320, border_right=3440, change_x=1, items_to_drop=items_to_drop)
+            border_left=3320, border_right=3440, change_x=1, items_to_drop=[item_to_drop])
         self.npcs.add(tethlorien_lilac)
         EnergyShield.actor_acquire_energy_shield(tethlorien_lilac, self.game, health_total=200)
 

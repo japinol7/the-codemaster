@@ -102,13 +102,10 @@ class Level8(Level):
             WolfManMale(1780, 207, self.game, border_left=1500, border_right=2004, change_x=2),
             ])
 
-        items_to_drop = [
-            DropItem(CartridgeGreen, x_delta=16),
-            ]
-
+        item_to_drop = DropItem(CartridgeGreen, x_delta=16)
         self.npcs.add(RobotB(
             3020, 86, self.game, border_left=2620, border_right=3380, change_x=2,
-            items_to_drop=items_to_drop))
+            items_to_drop=[item_to_drop]))
 
         items_to_drop = [
             DropItem(PotionPower, x_delta=16, **{'random_min': 70, 'random_max': 80}),
