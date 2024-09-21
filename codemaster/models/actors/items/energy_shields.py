@@ -39,6 +39,8 @@ class EnergyShield(ActorItem):
 
         super().__init__(x, y, game, name=name)
 
+        self.power_cost = 0.02
+        self.power_killed_cost = 12
         self.is_activated = False
         self.can_be_shot_by_its_owner = False
         self.rect_w_half = self.rect.w // 2
