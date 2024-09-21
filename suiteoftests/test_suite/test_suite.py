@@ -444,6 +444,8 @@ class GameTestSuite:
         except Exception as e:
             traceback.print_tb(e.__traceback__)
             log.critical(f'Error while testing: {e}')
+            self.tests_failed += [self.current_test.__name__]
+            self.test_failed_count += 1
         finally:
             pg.quit()
             self._print_test_results()

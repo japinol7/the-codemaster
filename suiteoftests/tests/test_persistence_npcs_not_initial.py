@@ -7,6 +7,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 from codemaster.config.constants import DIRECTION_LEFT
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.actors import DropItem
+from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.models.actors.npcs import (
     SkullRed,
     SkullYellow,
@@ -61,7 +62,7 @@ def test_persist_npcs_not_init_2_levels(game):
     squirrels_lev_2_count_orig = level_dest.count_npcs_filtered_by_actor_type(
         ActorType.SQUIRREL_A)
 
-    # Do actions, go to another level and save the game
+    # Do actions and go to another level
     player.rect.x, player.rect.y = 250, 650
     player.lives = 2
     player.stats['bullets_t04'] = 2
@@ -73,6 +74,8 @@ def test_persist_npcs_not_init_2_levels(game):
         ['stop', 1],
         ))
     game.game_loop()
+
+    # Save game and delete old variables
     game.persist_game_data()
     del skull_yellow, squirrel1, squirrel2
 
@@ -150,7 +153,7 @@ def test_persist_npcs_dropped_2_levels_skulls(game):
     skulls_red_lev_2_count_orig = level_dest.count_npcs_filtered_by_actor_type(
         ActorType.SKULL_RED)
 
-    # Do actions, go to another level and save the game
+    # Do actions and go to another level
     player.rect.x, player.rect.y = 250, 650
     player.lives = 2
     player.stats['bullets_t04'] = 2
@@ -162,6 +165,8 @@ def test_persist_npcs_dropped_2_levels_skulls(game):
         ['stop', 1],
         ))
     game.game_loop()
+
+    # Save game and delete old variables
     game.persist_game_data()
     del squirrel1, squirrel2, squirrel3
 
@@ -186,3 +191,38 @@ def test_persist_npcs_dropped_2_levels_skulls(game):
                   and squirrels_lev_2_count_orig > squirrels_lev_2_count == 2,
         failed_msg="Game loaded did not set the correct state for the "
                    "NPCs tested that were dropped in the game.")
+
+
+@game_test(levels=[1, 2, 3], starting_level=2, timeout=3)
+def test_persist_npc_energy_shield_health_not_init(game):
+    game.player.rect.x, game.player.rect.y = 240, 620
+    game.player.stats['bullets_t03'] = 10
+
+    npc = SkullRed(600, 670, game, change_x=0)
+    npc.direction = DIRECTION_LEFT
+    game.level.add_actors([npc])
+
+    EnergyShield.actor_acquire_energy_shield(npc, game, health_total=280)
+    npc.stats.energy_shield.activate()
+
+    game.add_player_actions((
+        ['shot_bullet_t3_photonic', 10],
+        ))
+
+    game.game_loop()
+
+    # Save game and delete old variables
+    game.persist_game_data()
+    del npc
+
+    # Load previous game
+    game.load_game_data()
+
+    npc = game.level.get_npcs_filtered_by_actor_type(ActorType.SKULL_RED)[0]
+    npc_shield = npc.stats.energy_shield
+    game.assert_test_passed(
+        condition=npc.alive()
+                  and npc_shield
+                  and npc_shield.stats.health_total == 280
+                  and npc_shield.stats.health < npc_shield.stats.health_total - 50,
+        failed_msg="NPC's energy shield health not persisted.")

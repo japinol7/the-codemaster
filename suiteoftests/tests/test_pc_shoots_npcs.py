@@ -36,7 +36,7 @@ def test_bat_hit_with_enough_bullets_must_die(game):
 
     game.add_player_actions(('shot_bullet_t3_photonic', 8) for _ in range(2))
 
-    bat_black = [npc for npc in game.level.npcs if npc.type == ActorType.BAT_BLACK][0]
+    bat_black = game.level.get_npcs_filtered_by_actor_type(ActorType.BAT_BLACK)[0]
 
     game.game_loop()
 

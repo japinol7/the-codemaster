@@ -52,7 +52,7 @@ def test_persist_itens_not_init_2_levels(game):
     potion_health_lev_2_count_orig = level_dest.count_actors_in_group_filtered_by_actor_type(
         ActorType.POTION_HEALTH, level_dest.potions)
 
-    # Do actions, go to another level and save the game
+    # Do actions and go to another level
     player.rect.x, player.rect.y = 250, 650
     player.lives = 2
     game.add_player_actions((
@@ -61,6 +61,8 @@ def test_persist_itens_not_init_2_levels(game):
         ['stop', 1],
         ))
     game.game_loop()
+
+    # Save game
     game.persist_game_data()
 
     # Load previous game
@@ -133,7 +135,7 @@ def test_persist_items_dropped_2_levels_potions(game):
     potion_power_lev_2_count_orig = level_dest.count_actors_in_group_filtered_by_actor_type(
         ActorType.POTION_POWER, level_dest.potions)
 
-    # Do actions, go to another level and save the game
+    # Do actions and go to another level
     player.rect.x, player.rect.y = 250, 650
     player.lives = 2
     player.stats['bullets_t04'] = 2
@@ -145,6 +147,8 @@ def test_persist_items_dropped_2_levels_potions(game):
         ['stop', 1],
         ))
     game.game_loop()
+
+    # Save game and delete old variables
     game.persist_game_data()
     del squirrel1, squirrel2, squirrel3
 

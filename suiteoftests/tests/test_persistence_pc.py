@@ -5,6 +5,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 from codemaster.config.constants import DIRECTION_LEFT
 from codemaster.models.actors.items.doors import Door
+from codemaster.models.actors.npcs import TerminatorEyeRed
 from suiteoftests.test_suite.game_test import game_test
 
 
@@ -14,13 +15,15 @@ def test_persist_pc_go_to_another_level(game):
         level_dest=0, game=game, level_orig=1)[0]
     left_door.is_locked = False
 
-    # Go to another level and save the game
+    # Go to another level
     game.player.rect.x, game.player.rect.y = 250, 660
     game.add_player_actions((
         ['go_left', 50],
         ['stop', 1],
         ))
     game.game_loop()
+
+    # Save game
     game.persist_game_data()
 
     # Load previous game
@@ -37,13 +40,15 @@ def test_persist_pc_go_to_another_level_n_more(game):
         level_dest=0, game=game, level_orig=1)[0]
     left_door.is_locked = False
 
-    # Go to another level and save the game
+    # Go to another level
     game.player.rect.x, game.player.rect.y = 250, 660
     game.add_player_actions((
         ['go_left', 50],
         ['stop', 1],
         ))
     game.game_loop()
+
+    # Save game
     game.persist_game_data()
 
     # Go to the previous level without saving the game
@@ -74,7 +79,7 @@ def test_persist_pc_basic_stats(game):
         level_dest=0, game=game, level_orig=1)[0]
     left_door.is_locked = False
 
-    # Go to another level and save the game
+    # Go to another level
     player.rect.x, player.rect.y = 250, 660
     player.lives = 2
     player.health = 70
@@ -90,6 +95,8 @@ def test_persist_pc_basic_stats(game):
         ))
     game.game_loop()
     player_rect_x, player_rect_y = player.rect.x, player.rect.y
+
+    # Save game
     game.persist_game_data()
 
     # Load previous game
@@ -111,3 +118,39 @@ def test_persist_pc_basic_stats(game):
                   and sorted(list(player.stats['levels_visited'])) == [1, 2]
                   and sorted(list(game.level.levels_completed_ids(game))) == [],
         failed_msg="Game loaded did not set the player correct basic stats.")
+
+
+@game_test(levels=[1, 2, 3], starting_level=2, timeout=3)
+def test_persist_pc_energy_shield_health(game):
+    player = game.player
+    player.rect.x, player.rect.y = 240, 620
+    player.health, player.power = 22, 100
+    game.player.lives = 1
+
+    game.add_player_actions((
+        ['acquire_energy_shield', 1],
+        ['switch_energy_shield', 1],
+        ))
+
+    npc = TerminatorEyeRed(600, 650, game, change_x=0)
+    npc.direction = DIRECTION_LEFT
+    game.level.add_actors([npc])
+
+    game.game_loop()
+    player.stats['level'] = 2
+
+    # Save game and delete old variables
+    game.persist_game_data()
+    del npc
+
+    # Load previous game
+    game.load_game_data()
+
+    pc_shields = player.stats['energy_shields_stock']
+    pc_shield = pc_shields[0] if pc_shields else None
+    game.assert_test_passed(
+        condition=player.lives == 1
+                  and pc_shield
+                  and pc_shield.stats.health < pc_shield.stats.health_total - 10
+                  and len(player.stats['energy_shields_stock']) > 0,
+        failed_msg="Player's energy shield health not persisted.")

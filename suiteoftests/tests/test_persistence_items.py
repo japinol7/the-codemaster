@@ -32,7 +32,7 @@ def test_persist_itens_2_levels_potions_n_get_life_rec(game):
     potion_power_lev_3_count_orig = level_dest.count_actors_in_group_filtered_by_actor_type(
         ActorType.POTION_POWER, level_dest.potions)
 
-    # Do actions, go to another level and save the game
+    # Do actions and go to another level
     player.rect.x, player.rect.y = 250, 650
     player.lives = 2
     player.power = 100
@@ -42,6 +42,8 @@ def test_persist_itens_2_levels_potions_n_get_life_rec(game):
         ['stop', 1],
         ))
     game.game_loop()
+
+    # Save game
     game.persist_game_data()
 
     # Load previous game
@@ -117,38 +119,3 @@ def test_persist_itens_2_levels_shot_n_get_1_potion(game):
                   and potion_health_lev_3_count_orig > potion_health_lev_3_count == 1
                   and potion_power_lev_3_count_orig == potion_power_lev_3_count == 6,
         failed_msg="Game loaded did not set the correct state for the items tested.")
-
-
-@game_test(levels=[1, 2, 3], starting_level=2, timeout=3)
-def test_persist_energy_shield_health_of_npc_not_init(game):
-    player = game.player
-    player.rect.x, player.rect.y = 240, 620
-    player.health, player.power = 22, 100
-    game.player.lives = 1
-
-    game.add_player_actions((
-        ['acquire_energy_shield', 1],
-        ['switch_energy_shield', 1],
-        ))
-
-    npc = TerminatorEyeRed(600, 650, game, change_x=0)
-    npc.direction = DIRECTION_LEFT
-    game.level.add_actors([npc])
-
-    game.game_loop()
-    player.stats['level'] = 2
-
-    # Save game
-    game.persist_game_data()
-
-    # Load previous game
-    game.load_game_data()
-
-    pc_shields = player.stats['energy_shields_stock']
-    pc_shield = pc_shields[0] if pc_shields else None
-    game.assert_test_passed(
-        condition=player.lives == 1
-                  and pc_shield
-                  and pc_shield.stats.health < pc_shield.stats.health_total - 10
-                  and len(player.stats['energy_shields_stock']) > 0,
-        failed_msg="NPC killed the player, but they should be protected by an energy shield.")

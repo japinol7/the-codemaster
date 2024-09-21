@@ -24,7 +24,7 @@ def test_persist_npcs_2_levels_kill_bat(game):
     bat_blacks_lev_4_count_orig = level_orig.count_npcs_filtered_by_actor_type(
         ActorType.BAT_BLACK)
 
-    # Do actions, go to another level and save the game
+    # Do actions and go to another level
     player.rect.x, player.rect.y = 250, 650
     player.power = 100
     player.stats['bullets_t04'] = 12
@@ -35,6 +35,8 @@ def test_persist_npcs_2_levels_kill_bat(game):
         ['stop', 1],
         ))
     game.game_loop()
+
+    # Save game
     game.persist_game_data()
 
     # Load previous game
@@ -65,7 +67,7 @@ def test_persist_npcs_2_levels_hurt_bat(game):
         ActorType.BAT_BLACK)
     bat_blacks_lev_4_count_orig = len(bat_blacks_lev_4_orig)
 
-    # Do actions, go to another level and save the game
+    # Do actions and go to another level
     player.rect.x, player.rect.y = 250, 650
     player.power = 100
     player.stats['bullets_t01'] = 10
@@ -77,6 +79,8 @@ def test_persist_npcs_2_levels_hurt_bat(game):
         ))
     game.game_loop()
     bat_black_orig_health_after_shoot = bat_blacks_lev_4_orig[0].health
+
+    # Save game
     game.persist_game_data()
 
     # Load previous game
