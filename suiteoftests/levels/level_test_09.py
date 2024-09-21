@@ -1,4 +1,4 @@
-"""Module level test 3."""
+"""Module level test 9."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
 import pygame as pg
@@ -8,28 +8,27 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     DOOR_DEST_TR,
     )
-from codemaster.models.actors.items import platforms
+from codemaster.models.actors.actors import DropItem
+from codemaster.models.actors.items import platforms, DoorLeftYellow
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.npcs import (
-    SnakeGreen,
-    SnakeYellow,
+    RobotB,
+    SquirrelA,
     )
 from codemaster.models.actors.items import (
-    BatteryA,
-    DoorLeftGreen,
+    DoorLeftYellow,
     DoorRightAqua,
     DoorRightBlue,
-    LifeRecoveryA,
     PotionHealth,
     PotionPower,
     )
 from codemaster.levels.level_base import Level
 
 
-class LevelTest3(Level):
+class LevelTest9(Level):
 
     def __init__(self, id_, game):
-        self.background = pg.image.load(self.file_name_im_get(9)).convert()
+        self.background = pg.image.load(self.file_name_im_get(10)).convert()
         self.player_start_pos_left = 220, 520
         self.player_start_pos_right = 520, 520
         self.player_start_pos_rtop = 800, -292
@@ -63,38 +62,22 @@ class LevelTest3(Level):
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
-        # Add batteries
-        self.batteries.add([
-            BatteryA(2610, 380, self.game),
-            ])
-
-        # Add life_recs
-        self.life_recs.add([
-            LifeRecoveryA(2940, 194, self.game),
-            ])
-
-        # Add cartridges
-        self.potions.add([
-            PotionPower(2800, 204, self.game),
-            PotionPower(2840, 204, self.game),
-            PotionPower(2880, 204, self.game),
-            PotionPower(2800, 164, self.game),
-            PotionPower(2840, 164, self.game),
-            PotionPower(2880, 164, self.game),
-            PotionHealth(3285, 700, self.game),
-            PotionHealth(3360, 700, self.game),
-            ])
-
         # Add NPCs
-        self.snakes.add(SnakeGreen(1700, 415, self.game, border_left=1100, border_right=3400,
-                                   border_top=80, border_down=810, change_x=1, change_y=1))
-
-        self.snakes.add(SnakeYellow(2400, 500, self.game, border_left=2000, border_right=3380,
-                                    border_top=100, border_down=810, change_x=3, change_y=3))
+        robot_items_to_drop = [
+            DropItem(PotionHealth, y_delta=20, **{'random_min': 100, 'random_max': 100}),
+            DropItem(PotionPower, y_delta=20, x_delta=-50,
+                     **{'random_min': 100, 'random_max': 100}),
+            ]
+        item_to_drop = DropItem(
+            RobotB, y_delta=-20, items_to_drop=robot_items_to_drop,
+            **{'border_left': 530, 'border_right': 600, 'change_x': 1})
+        self.npcs.add([
+            SquirrelA(560, 685, self.game, change_x=0,items_to_drop=[item_to_drop]),
+            ])
 
         # Add doors
         self.doors.add([
-            DoorLeftGreen(2, 550, self.game, level_dest=1, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorRightAqua(3368, -18, self.game, level_dest=3, door_dest_pos=DOOR_DEST_TR, is_locked=True),
-            DoorRightBlue(3640, 550, self.game, level_dest=3, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftYellow(2, 550, self.game, level_dest=7, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightAqua(3368, -18, self.game, level_dest=0, door_dest_pos=DOOR_DEST_TR, is_locked=True),
+            DoorRightBlue(3640, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])

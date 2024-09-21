@@ -55,6 +55,7 @@ class GameTestSuite:
     """
 
     is_log_debug = IS_LOG_DEBUG_DEFAULT
+    is_load_last_game_failed = False
     screen = None
     size = None
     screen_flags = None
@@ -73,6 +74,7 @@ class GameTestSuite:
         self.tests_passed = []
         self.tests_skipped = []
         self.tests_skipped_text = ''
+        self.test_load_last_game_failed = False
 
         self.done = False
         self.aborted = False
@@ -152,6 +154,8 @@ class GameTestSuite:
         log.info("Set Up")
         self.aborted = False
         self.is_persist_data = False
+        self.__class__.is_load_last_game_failed = False
+        self.test_load_last_game_failed = False
         self.game_loop_exec_times = 0
         self.current_test_timeout = None
         self._init_settings(is_debug=is_debug, is_full_screen=is_full_screen)
@@ -293,6 +297,11 @@ class GameTestSuite:
     def load_game_data(self):
         self.set_up_actors_and_levels()
         persistence.load_game_data(self)
+        if self.__class__.is_load_last_game_failed:
+            self.test_load_last_game_failed = True
+
+    def get_is_load_last_game_failed(self):
+        return self.__class__.is_load_last_game_failed
 
     def clear_all_persisted_data(self):
         persistence.clear_all_persisted_data()
@@ -333,6 +342,12 @@ class GameTestSuite:
         if self.aborted:
             self.test_aborted_count += 1
             self.tests_aborted += [self.current_test.__name__]
+            return
+
+        if self.test_load_last_game_failed:
+            log.warning("Test FAILED: Load last game failed")
+            self.tests_failed += [self.current_test.__name__]
+            self.test_failed_count += 1
             return
 
         if not condition:

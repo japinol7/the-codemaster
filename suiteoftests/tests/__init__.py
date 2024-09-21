@@ -21,3 +21,4 @@ from . import test_persistence_items
 from . import test_persistence_items_not_initial
 from . import test_persistence_npcs
 from . import test_persistence_npcs_not_initial
+from . import test_persistence_items_dropped_in_seq

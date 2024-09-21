@@ -26,7 +26,7 @@
 * Improve the test suite:
   * Facilitate testing persistence.
   * Remove support of the game test decorator for methods.
-  * Current tests count: 58.
+  * Current tests count: 61.
 <br>
 
 ## v0.0.6
