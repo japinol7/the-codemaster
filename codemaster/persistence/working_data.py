@@ -13,16 +13,14 @@ def clear_persistence_working_data():
 
 
 def get_actors_by_ids_considering_old_ids(actor_ids):
-    return [Actor.actors.get(k)
-            or actors_map_old_id_with_new_instance[k]
+    return [actors_map_old_id_with_new_instance[k]
             for k in actor_ids]
 
 
 def get_actors_by_ids_considering_old_ids_if_exist(actor_ids):
-    return [Actor.actors.get(k)
-            or actors_map_old_id_with_new_instance[k]
+    return [actors_map_old_id_with_new_instance[k]
             for k in actor_ids
-            if Actor.actors.get(k) or actors_map_old_id_with_new_instance.get(k)]
+            if actors_map_old_id_with_new_instance.get(k)]
 
 
 def get_actor_by_id_considering_old_id(actor_id):

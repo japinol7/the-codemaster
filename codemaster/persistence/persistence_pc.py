@@ -69,6 +69,8 @@ def _load_pc_data(game):
         pc_data['potions_health'])
     apples_stock = get_actors_by_ids_considering_old_ids_if_exist(
         pc_data['apples_stock'])
+    door_keys_stock = get_actors_by_ids_considering_old_ids_if_exist(
+        pc_data['door_keys_stock'])
 
     pc.stats.update({
         'lives': pc_data['lives'],
@@ -111,13 +113,12 @@ def _load_pc_data(game):
         'DOOR_KEY_YELLOW': pc_data['DOOR_KEY_YELLOW'],
         'DOOR_KEY_RED': pc_data['DOOR_KEY_RED'],
         'DOOR_KEY_MAGENTA': pc_data['DOOR_KEY_MAGENTA'],
-        'door_keys_stock': get_actors_by_ids_considering_old_ids(
-            pc_data['door_keys_stock']),
+        'door_keys_stock': door_keys_stock,
         'potions_power': potions_power,
         'potions_health': potions_health,
         'apples_stock': apples_stock,
         })
-    for item in chain(apples_stock, potions_health, potions_power):
+    for item in chain(apples_stock, door_keys_stock, potions_health, potions_power):
         item.kill_hook()
 
     pc.sound_effects = game.sound_effects = pc_data['sound_effects']

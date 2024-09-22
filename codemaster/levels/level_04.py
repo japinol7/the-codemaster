@@ -89,7 +89,7 @@ class Level4(Level):
         # Add potions
         self.potions.add([
             PotionHealth(2350, 72, self.game),
-            PotionPower(1000, 150, self.game),
+            PotionPower(1000, 182, self.game),
             ])
 
         # Add NPCs
@@ -98,7 +98,7 @@ class Level4(Level):
             1400, 46, self.game, border_left=1310, border_right=1680,
             change_x=2, items_to_drop=[item_to_drop]))
 
-        item_to_drop = DropItem(PotionPower, **{'random_min': 65, 'random_max': 75})
+        item_to_drop = DropItem(PotionPower, y_delta=37, **{'random_min': 65, 'random_max': 75})
         self.npcs.add(DemonMale(
             800, 146, self.game,
             border_left=690, border_right=1210, change_x=3, items_to_drop=[item_to_drop]))
