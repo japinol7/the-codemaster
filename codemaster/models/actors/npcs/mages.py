@@ -115,7 +115,9 @@ class MageFemaleA(Mage):
 
         if not self.msg_texts or self.hostility_level > 0:
             self.hostility_level = 1
-            self.stats.energy_shield.activate()
+            if not self.stats.energy_shield.is_activated:
+                self.recover_power()
+                self.stats.energy_shield.activate()
             self.msg_texts.clear()
             self.msg_texts.append(self.msg_text_to_repeat)
 
