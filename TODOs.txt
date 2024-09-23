@@ -1,8 +1,27 @@
 ## TODOs & Wishlist ##
 
-Future Improvements.
+Known bugs:
+
+> Sometimes when persisting moving actors, the actor is stuck
+  not moving and changing direction:
+    > This happens when the position of the actor is out of its
+      movement borders.
+
+> Energy shield issues:
+  > Energy shield activation sprites placement.
+
+> Vertical borders for moving actors are buggy, such as snakes.
+  > Cannot correctly persist vertical moving actors
+    when they are not initially in a game level.
+
+
+
+
+
+Future Improvements:
 
 > General:
+    > Consider avoiding putting items inside platforms.
     > Finish the basic game.
 
 > Settings:
@@ -19,6 +38,12 @@ Future Improvements.
 	> Refactor game input events management.  
 	> Improve data models.
 	> Refactor settings module.
+
+
+
+
+
+Future Possible Networking Version:
 
 > Networking:
 	> Client/server option so the players can play on the net.

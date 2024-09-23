@@ -24,7 +24,7 @@ from codemaster.persistence.validations import (
     validate_load_data_game_basic_metadata,
     )
 from codemaster.persistence.working_data import (
-    set_actor_map_old_id_with_new_instance,
+    actors_map_previous_save_id_with_new_instance,
     )
 from codemaster.tools.logger.logger import log
 
@@ -80,6 +80,7 @@ def _load_items_data(game):
         for item in chain(level.items, level.doors, level.mines):
             item_data = items_level.get(item.id)
             if not item_data:
+                item.kill_hook()
                 item.kill()
                 continue
 
@@ -127,9 +128,9 @@ def _load_items_not_initial_data(game):
             item.direction = item_data['direction']
             item.is_location_in_inventory = item_data['is_location_in_inventory']
             if item.is_location_in_inventory:
-                set_actor_map_old_id_with_new_instance(item_id, item)
+                actors_map_previous_save_id_with_new_instance[item_id] = item
             items.append(item)
         level.add_actors(items)
         for item in items:
             if item.is_location_in_inventory:
-                item.kill()
+                item.kill_hook()

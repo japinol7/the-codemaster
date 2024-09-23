@@ -25,8 +25,7 @@ from codemaster.persistence.validations import (
     validate_load_data_game_basic_metadata,
     )
 from codemaster.persistence.working_data import (
-    get_actors_by_ids_considering_old_ids,
-    get_actors_by_ids_considering_old_ids_if_exist,
+    get_actors_by_previous_save_ids_if_exist,
     )
 from codemaster.tools.logger.logger import log
 
@@ -63,14 +62,14 @@ def _load_pc_data(game):
     pc.direction = pc_data['direction']
     pc.power = pc_data['power']
     pc.health = pc_data['health']
-    potions_power = get_actors_by_ids_considering_old_ids_if_exist(
-        pc_data['potions_power'])
-    potions_health = get_actors_by_ids_considering_old_ids_if_exist(
-        pc_data['potions_health'])
-    apples_stock = get_actors_by_ids_considering_old_ids_if_exist(
+    apples_stock = get_actors_by_previous_save_ids_if_exist(
         pc_data['apples_stock'])
-    door_keys_stock = get_actors_by_ids_considering_old_ids_if_exist(
+    door_keys_stock = get_actors_by_previous_save_ids_if_exist(
         pc_data['door_keys_stock'])
+    potions_power = get_actors_by_previous_save_ids_if_exist(
+        pc_data['potions_power'])
+    potions_health = get_actors_by_previous_save_ids_if_exist(
+        pc_data['potions_health'])
 
     pc.stats.update({
         'lives': pc_data['lives'],

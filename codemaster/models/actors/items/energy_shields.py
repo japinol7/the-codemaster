@@ -177,8 +177,10 @@ class EnergyShield(ActorItem):
             actor.stats.energy_shield.stats.health_total = health_total
             actor.stats.energy_shield.stats.health = health_total
 
-        if actor.stats.power_recovery < ACTOR_MIN_POWER_RECOVERY:
+        if actor.stats.power_recovery < 1:
             actor.stats.power_recovery = ACTOR_POWER_RECOVERY_DEFAULT
+        elif actor.stats.power_recovery < ACTOR_MIN_POWER_RECOVERY:
+            actor.stats.power_recovery = ACTOR_MIN_POWER_RECOVERY
 
         if actor.stats.time_between_energy_shield_casting < ACTOR_MIN_TIME_BETWEEN_ENERGY_SHIELD_CASTING:
             actor.stats.time_between_energy_shield_casting = ACTOR_TIME_BETWEEN_ENERGY_SHIELD_CASTING_DEFAULT

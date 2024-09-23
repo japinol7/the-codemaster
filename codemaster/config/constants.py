@@ -94,7 +94,7 @@ SYS_STDOUT = sys.stdout
 
 SCORES_FILE = os.path.join('files', 'scores.txt')
 
-JSON_INDENT_SIZE = 4
+JSON_INDENT_SIZE = 2
 
 SOUND_FORMAT = 'ogg'
 MUSIC_FORMAT = 'ogg'

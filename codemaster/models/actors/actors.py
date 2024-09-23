@@ -670,10 +670,10 @@ class ActorItem(Actor):
                 include_in_inventory_items = True
                 items = chain(
                     game_level.items,
+                    game.player.stats['apples_stock'],
                     game.player.stats['door_keys_stock'],
                     game.player.stats['potions_power'],
                     game.player.stats['potions_health'],
-                    game.player.stats['apples_stock'],
                     )
             else:
                 items = game_level.items
