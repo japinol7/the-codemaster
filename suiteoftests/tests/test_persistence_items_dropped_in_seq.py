@@ -3,7 +3,7 @@ Tests persistence of the game state regarding items dropped
 by NPCs also dropped, but in a previous load.
 Example: When a mage summons an NPC who must drop
 another NPC who when dies must drop an item,
-the persistence system should persist no only the first
+the persistence system should persist not only the first
 level of dropping, but all of them.
 """
 __author__ = 'Joan A. Pinol  (japinol)'

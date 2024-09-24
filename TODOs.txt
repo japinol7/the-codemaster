@@ -2,8 +2,8 @@
 
 Known bugs:
 
-> Sometimes when persisting moving actors, the actor is stuck
-  not moving and changing direction:
+> Sometimes when persisting moving actors, the actor is stuck,
+  not moving, and changing its direction:
     > This happens when the position of the actor is out of its
       movement borders.
 
@@ -17,38 +17,31 @@ Known bugs:
 
 
 
-
 Future Improvements:
 
 > General:
-    > Consider avoiding putting items inside platforms.
-    > Finish the basic game.
+  > Consider avoiding putting items inside platforms.
+
+> Levels creation:
+  > Consider creating the levels gradually:
+    > Right now, all the levels are created when starting
+      or continuing a game.
+
+> Persistence:
+  > When using persistence, do not create actors that
+    will be killed anyway when loading the saved game data.
 
 > Settings:
-    > Allow users to use a gamepad.
-    > Let users introduce their names.
-    > Screen to show scores.
+  > Allow users to use a gamepad.
+  > Let users introduce their names.
+  > Screen to show scores.
 
 > Game play:
-	> Add elements, more magic spells and more skills.
-    > Improve level up system
+  > Add elements, more magic spells and more skills.
+  > Improve level up system
 
 > Clean code and refactoring improvements:
-	> Add more comments and documentation to the code.
-	> Refactor game input events management.  
-	> Improve data models.
-	> Refactor settings module.
-
-
-
-
-
-Future Possible Networking Version:
-
-> Networking:
-	> Client/server option so the players can play on the net.
-	    > One player will run the server version and the client
-	      version for its game.
-	    > Other players will run the client version and will be assigned
-	      to the game available that he chooses.
-	    > Allow several players to play in the same game. 
+  > Add more comments and documentation to the code.
+  > Refactor game input events management.
+  > Improve data models.
+  > Refactor settings module.

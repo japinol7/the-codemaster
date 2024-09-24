@@ -1,0 +1,1075 @@
+No datetime | INFO | Start app codemaster version: 0.0.7
+No datetime | INFO | App arguments: -m -n -d -t
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | INFO | Start game
+No datetime | INFO | Set player invulnerability state to: True (cheat)
+No datetime | INFO | Set logger level to: Debug
+No datetime | DEBUG | Copy actor disabled for this type of actor: COMPUTER_01
+No datetime | DEBUG | Copy actor disabled for this type of actor: POKOYO_A
+No datetime | DEBUG | Copy actor disabled for this type of actor: POKOYO_B
+No datetime | DEBUG | Copy actor disabled for this type of actor: POKOYO_A
+No datetime | DEBUG | Copy actor disabled for this type of actor: POKOYO_B
+No datetime | DEBUG | Copy actor disabled for this type of actor: POKOYO_B
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00015 killed when TIMER_00065 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00008 killed when TIMER_00068 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00016 killed when TIMER_00071 ticked 0 secs.
+No datetime | DEBUG | [COPY] Mouse actors: BAT_BLUE_00016 in pos: (238, 306) - lev pos: (2890, 672)
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00009 killed when TIMER_00076 ticked 0 secs.
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00010 killed when TIMER_00078 ticked 0 secs.
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00011 killed when TIMER_00081 ticked 0 secs.
+No datetime | DEBUG | Add actor BAT_BLUE_00019 to level 11
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00017 killed when TIMER_00084 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00018 killed when TIMER_00087 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00012 killed when TIMER_00090 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00013 killed when TIMER_00093 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00019 killed when TIMER_00097 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00014 killed when TIMER_00099 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00020 killed when TIMER_00102 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00021 killed when TIMER_00106 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00015 killed when TIMER_00109 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00022 killed when TIMER_00111 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00023 killed when TIMER_00114 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00024 killed when TIMER_00118 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00025 killed when TIMER_00120 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00016 killed when TIMER_00124 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00026 killed when TIMER_00126 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00027 killed when TIMER_00129 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00017 killed when TIMER_00133 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00028 killed when TIMER_00136 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00029 killed when TIMER_00138 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00018 killed when TIMER_00141 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00030 killed when TIMER_00145 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: BAT_BLUE_00016 in pos: (276, 306) - lev pos: (2592, 672)
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00019 killed when TIMER_00147 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00031 killed when TIMER_00150 ticked 0 secs.
+No datetime | DEBUG | BAT_BLUE_00016 hit by DOOM_BOLT_A_00001, health: 112.0, doom_bolt_partial_power: 25.20, magic_res: 0.00, owner: player
+No datetime | DEBUG | BAT_BLUE_00016 hit by DOOM_BOLT_A_00001, health: 86.8, doom_bolt_partial_power: 31.50, magic_res: 0.00, owner: player
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00020 killed when TIMER_00153 ticked 0 secs.
+No datetime | DEBUG | DOOM_BOLT_A_00001 killed when TIMER_00158 ticked 6 secs.
+No datetime | DEBUG | BAT_BLUE_00016 hit by DOOM_BOLT_A_00001, health: 55.3, doom_bolt_partial_power: 126.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | BAT_BLUE_00016, !!! Dead by DOOM_BOLT_A_00001, owner: player !!!
+No datetime | DEBUG | BAT_BLACK_00026 hit by EXPLOSION_MAGIC_C4_00001, npc_health: 203.0, explosion_power: 210, magic_res: 0, owner: player
+No datetime | DEBUG | BAT_BLACK_00026, !!! Dead by EXPLOSION_MAGIC_C4_00001. Owner: PLAYER !!!
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00021 killed when TIMER_00156 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00032 killed when TIMER_00161 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00022 killed when TIMER_00164 ticked 0 secs.
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00033 killed when TIMER_00169 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: EWLAN_MALE_00002 in pos: (894, 318) - lev pos: (2882, 378)
+No datetime | DEBUG | Mouse sprites: ENERGY_SHIELD_A_00007 in pos: (915, 310) - lev pos: (2903, 370)
+No datetime | DEBUG | EWLAN_MALE_00002 hit by EXPLOSION_MAGIC_C2_00001, npc_health: 315, explosion_power: 160, magic_res: 110, owner: player
+No datetime | DEBUG | EWLAN_MALE_00002 hit by EXPLOSION_MAGIC_C2_00002, npc_health: 265, explosion_power: 160, magic_res: 110, owner: player
+No datetime | DEBUG | TEXT_MSG_PLAYER_00003 killed when TIMER_00175 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00034 killed when TIMER_00171 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: EWLAN_MALE_00002 in pos: (900, 318) - lev pos: (2888, 378)
+No datetime | DEBUG | EWLAN_MALE_00002 hit by EXPLOSION_MAGIC_C2_00003, npc_health: 215, explosion_power: 160, magic_res: 110, owner: player
+No datetime | DEBUG | EWLAN_MALE_00002 hit by EXPLOSION_MAGIC_C2_00004, npc_health: 165, explosion_power: 160, magic_res: 110, owner: player
+No datetime | DEBUG | Mouse sprites: EWLAN_MALE_00002 in pos: (724, 318) - lev pos: (2712, 378)
+No datetime | DEBUG | Mouse sprites: ENERGY_SHIELD_A_00007 in pos: (690, 310) - lev pos: (2678, 370)
+No datetime | DEBUG | EWLAN_MALE_00002 hit by EXPLOSION_MAGIC_C2_00005, npc_health: 115, explosion_power: 160, magic_res: 110, owner: player
+No datetime | DEBUG | EWLAN_MALE_00002 hit by EXPLOSION_MAGIC_C2_00006, npc_health: 65, explosion_power: 160, magic_res: 110, owner: player
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00035 killed when TIMER_00177 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: EWLAN_MALE_00002 in pos: (748, 318) - lev pos: (2736, 378)
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00036 killed when TIMER_00180 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: EWLAN_MALE_00002 in pos: (816, 318) - lev pos: (2804, 378)
+No datetime | DEBUG | TEXT_MSG_PLAYER_00004 killed when TIMER_00184 ticked 0 secs.
+No datetime | DEBUG | EWLAN_MALE_00002 hit by VORTEX_OF_DOOM_B_00001, health: 15, vortex_partial_power: 29.00, magic_res: 22.00, owner: player
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00037 killed when TIMER_00183 ticked 0 secs.
+No datetime | DEBUG | EWLAN_MALE_00002 hit by VORTEX_OF_DOOM_B_00001, health: 8.0, vortex_partial_power: 36.25, magic_res: 27.50, owner: player
+No datetime | DEBUG | VORTEX_OF_DOOM_B_00001 killed when TIMER_00189 ticked 6 secs.
+No datetime | DEBUG | EWLAN_MALE_00002 hit by VORTEX_OF_DOOM_B_00001, health: -0.75, vortex_partial_power: 145.00, magic_res: 110.00, owner: player
+No datetime | DEBUG | EWLAN_MALE_00002, !!! Dead by VORTEX_OF_DOOM_B_00001, owner: player !!!
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00038 killed when TIMER_00187 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00023 killed when TIMER_00191 ticked 0 secs.
+No datetime | INFO | All batteries and disks from level 11 recovered.
+No datetime | DEBUG | Mouse sprites: KUNG_FU_FIGHTER_MALE_00003 in pos: (164, 317) - lev pos: (1260, 357)
+No datetime | DEBUG | KUNG_FU_FIGHTER_MALE_00003 hit by VORTEX_OF_DOOM_B_00002, health: 350, vortex_partial_power: 29.00, magic_res: 8.40, owner: player
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00039 killed when TIMER_00196 ticked 0 secs.
+No datetime | DEBUG | KUNG_FU_FIGHTER_MALE_00003 hit by VORTEX_OF_DOOM_B_00002, health: 329.4, vortex_partial_power: 36.25, magic_res: 10.50, owner: player
+No datetime | DEBUG | VORTEX_OF_DOOM_B_00002 killed when TIMER_00201 ticked 6 secs.
+No datetime | DEBUG | KUNG_FU_FIGHTER_MALE_00003 hit by VORTEX_OF_DOOM_B_00002, health: 303.65, vortex_partial_power: 145.00, magic_res: 42.00, owner: player
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00040 killed when TIMER_00198 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00024 killed when TIMER_00204 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: KUNG_FU_FIGHTER_MALE_00003 in pos: (250, 395) - lev pos: (1348, 357)
+No datetime | DEBUG | TEXT_MSG_PLAYER_00005 killed when TIMER_00214 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00025 killed when TIMER_00207 ticked 0 secs.
+No datetime | DEBUG | KUNG_FU_FIGHTER_MALE_00003 hit by VORTEX_OF_DOOM_A_00001, health: 200.65, vortex_partial_power: 38.00, magic_res: 8.40, owner: player
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00041 killed when TIMER_00210 ticked 0 secs.
+No datetime | DEBUG | KUNG_FU_FIGHTER_MALE_00003 hit by VORTEX_OF_DOOM_A_00001, health: 171.05, vortex_partial_power: 47.50, magic_res: 10.50, owner: player
+No datetime | DEBUG | VORTEX_OF_DOOM_A_00001 killed when TIMER_00217 ticked 6 secs.
+No datetime | DEBUG | KUNG_FU_FIGHTER_MALE_00003 hit by VORTEX_OF_DOOM_A_00001, health: 134.05, vortex_partial_power: 190.00, magic_res: 42.00, owner: player
+No datetime | DEBUG | KUNG_FU_FIGHTER_MALE_00003, !!! Dead by VORTEX_OF_DOOM_A_00001, owner: player !!!
+No datetime | DEBUG | KUNG_FU_FIGHTER_MALE_00003, lucky_drop_dice: 67, probability_to_drop: 100, item type: PotionHealth
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 10
+No datetime | DEBUG | Dropped: POTION_HEALTH_00012
+No datetime | DEBUG | KUNG_FU_FIGHTER_MALE_00003, lucky_drop_dice: 94, probability_to_drop: 100, item type: PotionPower
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor POTION_POWER_00024 to level 10
+No datetime | DEBUG | Dropped: POTION_POWER_00024
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00042 killed when TIMER_00213 ticked 0 secs.
+No datetime | INFO | Set player invulnerability state to: False (cheat)
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00043 killed when TIMER_00221 ticked 0 secs.
+No datetime | DEBUG | player hit by T1_LASER1_0000001_from_ROBOT_A_00005, pc_health: 100, bullet_power: 5
+No datetime | DEBUG | player hit by T3_PHOTONIC_0000001_from_ROBOT_A_00005, pc_health: 95, bullet_power: 20
+No datetime | DEBUG | player hit by T1_LASER1_0000001_from_ROBOT_A_00004, pc_health: 75, bullet_power: 5
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_ROBOT_A_00004, pc_health: 70, bullet_power: 7.0
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_TERMINATOR_EYE_YELLOW_00003, pc_health: 100, bullet_power: 7.0
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T4_NEUTRONIC_0000002_from_player, health: 420, bullet_power: 40
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T3_PHOTONIC_0000004_from_player, health: 380, bullet_power: 20
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T4_NEUTRONIC_0000004_from_player, health: 360, bullet_power: 40
+No datetime | DEBUG | player hit by T3_PHOTONIC_0000007_from_TERMINATOR_EYE_YELLOW_00003, pc_health: 100, bullet_power: 20
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | player hit by T2_LASER2_0000003_from_TERMINATOR_EYE_YELLOW_00003, pc_health: 100, bullet_power: 7.0
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T4_NEUTRONIC_0000008_from_player, health: 320, bullet_power: 40
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T3_PHOTONIC_0000005_from_player, health: 280, bullet_power: 20
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T4_NEUTRONIC_0000009_from_player, health: 260, bullet_power: 40
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T4_NEUTRONIC_0000012_from_player, health: 220, bullet_power: 40
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T3_PHOTONIC_0000010_from_player, health: 180, bullet_power: 20
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T3_PHOTONIC_0000013_from_player, health: 160, bullet_power: 20
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T4_NEUTRONIC_0000013_from_player, health: 140, bullet_power: 40
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T3_PHOTONIC_0000014_from_player, health: 100, bullet_power: 20
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T4_NEUTRONIC_0000015_from_player, health: 80, bullet_power: 40
+No datetime | DEBUG | player hit by T2_LASER2_0000006_from_TERMINATOR_EYE_YELLOW_00003, pc_health: 100, bullet_power: 7.0
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003 hit by T4_NEUTRONIC_0000016_from_player, health: 40, bullet_power: 40
+No datetime | DEBUG | TERMINATOR_EYE_YELLOW_00003, !!! Dead by bullet T4_NEUTRONIC_0000016_from_player !!!
+No datetime | DEBUG | TEXT_MSG_PLAYER_00006 killed when TIMER_00223 ticked 0 secs.
+No datetime | DEBUG | TEXT_MSG_PLAYER_00007 killed when TIMER_00224 ticked 0 secs.
+No datetime | INFO | Set player invulnerability state to: True (cheat)
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | ROBOT_B_00001 hit by T3_PHOTONIC_0000021_from_player, health: 210, bullet_power: 20
+No datetime | DEBUG | ROBOT_B_00001 hit by T4_NEUTRONIC_0000019_from_player, health: 190, bullet_power: 40
+No datetime | DEBUG | ROBOT_B_00001 hit by T3_PHOTONIC_0000022_from_player, health: 150, bullet_power: 20
+No datetime | DEBUG | ROBOT_B_00001 hit by T4_NEUTRONIC_0000020_from_player, health: 130, bullet_power: 40
+No datetime | DEBUG | ROBOT_B_00001 hit by T4_NEUTRONIC_0000021_from_player, health: 90, bullet_power: 40
+No datetime | DEBUG | ROBOT_B_00001 hit by T3_PHOTONIC_0000023_from_player, health: 50, bullet_power: 20
+No datetime | DEBUG | ROBOT_B_00001 hit by T4_NEUTRONIC_0000022_from_player, health: 30, bullet_power: 40
+No datetime | DEBUG | ROBOT_B_00001, !!! Dead by bullet T4_NEUTRONIC_0000022_from_player !!!
+No datetime | DEBUG | ROBOT_B_00001, lucky_drop_dice: 91, probability_to_drop: 100, item type: CartridgeGreen
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor CARTRIDGE_GREEN_00009 to level 8
+No datetime | DEBUG | Dropped: CARTRIDGE_GREEN_00009
+No datetime | DEBUG | ROBOT_A_00003 hit by T3_PHOTONIC_0000029_from_player, health: 175, bullet_power: 20
+No datetime | DEBUG | TEXT_MSG_PLAYER_00008 killed when TIMER_00225 ticked 0 secs.
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | ROBOT_A_00003 hit by T3_PHOTONIC_0000030_from_player, health: 155, bullet_power: 20
+No datetime | DEBUG | ROBOT_A_00003 hit by T4_NEUTRONIC_0000026_from_player, health: 135, bullet_power: 40
+No datetime | DEBUG | ROBOT_A_00003 hit by T3_PHOTONIC_0000031_from_player, health: 95, bullet_power: 20
+No datetime | DEBUG | ROBOT_A_00003 hit by T4_NEUTRONIC_0000027_from_player, health: 75, bullet_power: 40
+No datetime | DEBUG | ROBOT_A_00003 hit by T3_PHOTONIC_0000032_from_player, health: 35, bullet_power: 20
+No datetime | DEBUG | ROBOT_A_00003 hit by T4_NEUTRONIC_0000028_from_player, health: 15, bullet_power: 40
+No datetime | DEBUG | ROBOT_A_00003, !!! Dead by bullet T4_NEUTRONIC_0000028_from_player !!!
+No datetime | DEBUG | ROBOT_A_00003, lucky_drop_dice: 88, probability_to_drop: 100, item type: PotionPower
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor POTION_POWER_00025 to level 8
+No datetime | DEBUG | Dropped: POTION_POWER_00025
+No datetime | DEBUG | ROBOT_A_00003, lucky_drop_dice: 31, probability_to_drop: 100, item type: CartridgeBlue
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor CARTRIDGE_BLUE_00014 to level 8
+No datetime | DEBUG | Dropped: CARTRIDGE_BLUE_00014
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 8
+No datetime | DEBUG | Add actor CARTRIDGE_BLUE_00014 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 8
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 8
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 8
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 8
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLACK_00025 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 8
+No datetime | DEBUG | Add actor CARTRIDGE_BLUE_00014 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 8
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 8
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 8
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 8
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLACK_00025 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 7
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 7
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 7
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 7
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 7
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 7
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 7
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 7
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 7
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 7
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 7
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 7
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 7
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 7
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 8
+No datetime | DEBUG | Add actor CARTRIDGE_BLUE_00014 to level 8
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLACK_00025 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | DEBUG | SQUIRREL_A_00013 hit by T2_LASER2_0000001_from_player, health: 8.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00012 hit by T1_LASER1_0000002_from_player, health: 8.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00003 hit by T1_LASER1_0000003_from_player, health: 8.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00003 hit by T1_LASER1_0000005_from_player, health: 3.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00003, !!! Dead by bullet T1_LASER1_0000005_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00011 hit by T1_LASER1_0000007_from_player, health: 8.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00002 hit by T1_LASER1_0000008_from_player, health: 8.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00007 hit by T1_LASER1_0000009_from_player, health: 8.75, bullet_power: 5
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 8
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 8
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 8
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 8
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLACK_00025 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 8
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 8
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 8
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 8
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 8
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 8
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 8
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLACK_00025 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 9
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 9
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 9
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 9
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 9
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 9
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 9
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 9
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 9
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 9
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 9
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 9
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 9
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 9
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 9
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLACK_00025 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | DEBUG | SQUIRREL_A_00013 hit by T3_PHOTONIC_0000001_from_player, health: 1.75, bullet_power: 20
+No datetime | DEBUG | SQUIRREL_A_00013, !!! Dead by bullet T3_PHOTONIC_0000001_from_player !!!
+No datetime | DEBUG | player hit by T1_LASER1_0000001_from_ROBOT_A_00005, pc_health: 96.8, bullet_power: 5
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_ROBOT_A_00004, pc_health: 91.8, bullet_power: 7.0
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | BAT_BLACK_00020 hit by T3_PHOTONIC_0000002_from_player, health: 203.0, bullet_power: 20
+No datetime | DEBUG | BAT_BLACK_00020 hit by T4_NEUTRONIC_0000001_from_player, health: 183.0, bullet_power: 40
+No datetime | INFO | All batteries and disks from level 10 recovered.
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 11
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 11
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 11
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 11
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 11
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 11
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 11
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 11
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 11
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 11
+No datetime | DEBUG | Add actor POTION_POWER_00022 to level 11
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 11
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 11
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 11
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 11
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 11
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLACK_00025 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | DEBUG | BAT_BLACK_00025 hit by T3_PHOTONIC_0000001_from_player, health: 203.0, bullet_power: 20
+No datetime | DEBUG | BAT_BLACK_00025 hit by T4_NEUTRONIC_0000001_from_player, health: 183.0, bullet_power: 40
+No datetime | DEBUG | BAT_BLACK_00025 hit by T3_PHOTONIC_0000002_from_player, health: 143.0, bullet_power: 20
+No datetime | DEBUG | BAT_BLACK_00025 hit by T4_NEUTRONIC_0000002_from_player, health: 123.0, bullet_power: 40
+No datetime | DEBUG | BAT_BLACK_00025 hit by T3_PHOTONIC_0000003_from_player, health: 83.0, bullet_power: 20
+No datetime | DEBUG | BAT_BLACK_00025 hit by T4_NEUTRONIC_0000003_from_player, health: 63.0, bullet_power: 40
+No datetime | DEBUG | BAT_BLACK_00025 hit by T3_PHOTONIC_0000004_from_player, health: 23.0, bullet_power: 20
+No datetime | DEBUG | BAT_BLACK_00025 hit by T4_NEUTRONIC_0000004_from_player, health: 3.0, bullet_power: 40
+No datetime | DEBUG | BAT_BLACK_00025, !!! Dead by bullet T4_NEUTRONIC_0000004_from_player !!!
+No datetime | DEBUG | ENERGY_SHIELD_A_00010 hit by T2_LASER2_0000001_from_player, health: 150, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00018 hit by T2_LASER2_0000002_from_player, health: 112.0, bullet_power: 7.0
+No datetime | DEBUG | ENERGY_SHIELD_A_00010 hit by T1_LASER1_0000001_from_player, health: 143.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLUE_00017 hit by T2_LASER2_0000003_from_player, health: 112.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00018 hit by T2_LASER2_0000007_from_player, health: 105.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00017 hit by T2_LASER2_0000006_from_player, health: 105.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00018 hit by T1_LASER1_0000004_from_player, health: 98.0, bullet_power: 5
+No datetime | DEBUG | [COPY] Mouse actors: BAT_BLUE_00017 in pos: (918, 145) - lev pos: (3020, 511)
+No datetime | DEBUG | Add actor BAT_BLUE_00019 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00020 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00021 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00022 to level 11
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00007 killed when TIMER_00024 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00008 killed when TIMER_00026 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00009 killed when TIMER_00030 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: TETHLORIEN_LILAC_00001 in pos: (86, 177) - lev pos: (2558, 342)
+No datetime | DEBUG | player hit by SAMUTRINOS_BOLT_B_00010, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: TETHLORIEN_LILAC_00001
+No datetime | DEBUG | TETHLORIEN_LILAC_00001 hit by DOOM_BOLT_A_00001, health: 220, doom_bolt_partial_power: 25.20, magic_res: 2.00, owner: player
+No datetime | DEBUG | TETHLORIEN_LILAC_00001 hit by DOOM_BOLT_A_00001, health: 196.8, doom_bolt_partial_power: 31.50, magic_res: 2.50, owner: player
+No datetime | DEBUG | DOOM_BOLT_A_00001 killed when TIMER_00033 ticked 6 secs.
+No datetime | DEBUG | TETHLORIEN_LILAC_00001 hit by DOOM_BOLT_A_00001, health: 167.8, doom_bolt_partial_power: 126.00, magic_res: 10.00, owner: player
+No datetime | DEBUG | TETHLORIEN_LILAC_00001 hit by EXPLOSION_MAGIC_C4_00001, npc_health: 51.8, explosion_power: 210, magic_res: 10, owner: player
+No datetime | DEBUG | TETHLORIEN_LILAC_00001, !!! Dead by EXPLOSION_MAGIC_C4_00001. Owner: PLAYER !!!
+No datetime | DEBUG | TETHLORIEN_LILAC_00001, lucky_drop_dice: 97, probability_to_drop: 100, item type: PotionPower
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor POTION_POWER_00023 to level 17
+No datetime | DEBUG | Dropped: POTION_POWER_00023
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00010 killed when TIMER_00035 ticked 0 secs.
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 17
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 17
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 17
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 17
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 17
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 17
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 17
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 17
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 17
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 17
+No datetime | DEBUG | Add actor POTION_POWER_00022 to level 17
+No datetime | DEBUG | Add actor POTION_POWER_00023 to level 17
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 17
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 17
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 17
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 17
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 17
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00019 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00020 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00021 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00022 to level 11
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 18
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 18
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 18
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 18
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 18
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 18
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 18
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 18
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 18
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 18
+No datetime | DEBUG | Add actor POTION_POWER_00022 to level 18
+No datetime | DEBUG | Add actor POTION_POWER_00023 to level 18
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 18
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 18
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 18
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 18
+No datetime | DEBUG | Add actor POTION_HEALTH_00012 to level 18
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00019 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00020 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00021 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00022 to level 11
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00002, health: 48.0, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00003
+No datetime | DEBUG | player, !!! Dead by FIRE_BREATH_B_00002, owner: DEMON_MALE_00003 !!!
+No datetime | DEBUG | FIRE_BREATH_B_00003 killed when TIMER_00008 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00004 killed when TIMER_00010 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00005 killed when TIMER_00012 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00006 killed when TIMER_00014 ticked 0 secs.
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00010, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00003
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_DEMON_MALE_00003, pc_health: 48.0, bullet_power: 7.0
+No datetime | DEBUG | FIRE_BREATH_B_00007 killed when TIMER_00020 ticked 0 secs.
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_TETHLORIEN_RED_00003, pc_health: 41.0, bullet_power: 7.0
+No datetime | DEBUG | FIRE_BREATH_B_00008 killed when TIMER_00022 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00009 killed when TIMER_00024 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00010 killed when TIMER_00026 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00001 killed when TIMER_00029 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_A_00002 killed when TIMER_00031 ticked 0 secs.
+No datetime | DEBUG | TEXT_MSG_PLAYER_00001 killed when TIMER_00043 ticked 0 secs.
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00012, health: 96.0, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00005
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00012, health: 44.0, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00005
+No datetime | DEBUG | player, !!! Dead by FIRE_BREATH_B_00012, owner: DEMON_MALE_00005 !!!
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00014, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00005
+No datetime | DEBUG | FIRE_BREATH_B_00016 killed when TIMER_00068 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00017 killed when TIMER_00070 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00018 killed when TIMER_00072 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00005 killed when TIMER_00074 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00019 killed when TIMER_00077 ticked 0 secs.
+No datetime | DEBUG | player hit by SAMUTRINOS_BOLT_B_00007, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: TETHLORIEN_LILAC_00003
+No datetime | DEBUG | FIRE_BREATH_B_00020 killed when TIMER_00086 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00021 killed when TIMER_00088 ticked 0 secs.
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00007 killed when TIMER_00090 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00022 killed when TIMER_00092 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00023 killed when TIMER_00095 ticked 0 secs.
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00024, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00005
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00024, health: 48.0, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00005
+No datetime | DEBUG | player, !!! Dead by FIRE_BREATH_B_00024, owner: DEMON_MALE_00005 !!!
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00028, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00005
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00029, health: 48.0, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00005
+No datetime | DEBUG | player, !!! Dead by FIRE_BREATH_B_00029, owner: DEMON_MALE_00005 !!!
+No datetime | DEBUG | FIRE_BREATH_B_00030 killed when TIMER_00120 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00031 killed when TIMER_00122 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00032 killed when TIMER_00124 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00009 killed when TIMER_00127 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00033 killed when TIMER_00129 ticked 0 secs.
+No datetime | DEBUG | player hit by SAMUTRINOS_BOLT_B_00010, health: 91.72, fire_range_partial_power: 143.00, magic_res: 91.00, owner: TETHLORIEN_LILAC_00003
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00010 killed when TIMER_00135 ticked 0 secs.
+No datetime | DEBUG | [COPY] Mouse actors: GHOST_RED_00001 in pos: (144, 145) - lev pos: (618, 158)
+No datetime | DEBUG | Add actor GHOST_RED_00002 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00003 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00004 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00005 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00006 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00007 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00008 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00009 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00010 to level 28
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00001 killed when TIMER_00138 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00002 killed when TIMER_00140 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00001 killed when TIMER_00144 ticked 0 secs.
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00037 in pos: (797, 426) - lev pos: (800, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00039 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00033 in pos: (809, 426) - lev pos: (812, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00040 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00034 in pos: (878, 426) - lev pos: (881, 686)
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00033 in pos: (821, 426) - lev pos: (824, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00041 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00033 in pos: (997, 426) - lev pos: (1000, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00042 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00036 in pos: (1041, 426) - lev pos: (1044, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00043 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00044 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00035 in pos: (733, 426) - lev pos: (736, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00045 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00035 in pos: (949, 426) - lev pos: (952, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00046 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00033 in pos: (917, 426) - lev pos: (920, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00047 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00035 in pos: (911, 426) - lev pos: (914, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00048 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00035 in pos: (809, 426) - lev pos: (812, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00049 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00036 in pos: (996, 426) - lev pos: (999, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00050 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00051 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00037 in pos: (883, 426) - lev pos: (886, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00052 to level 27
+No datetime | DEBUG | [COPY] Mouse actors: SQUIRREL_A_00036 in pos: (873, 426) - lev pos: (876, 686)
+No datetime | DEBUG | Add actor SQUIRREL_A_00053 to level 27
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 26
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 26
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 26
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 26
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 26
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00022 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00023 to level 26
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 26
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 26
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 26
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00019 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00020 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00021 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00022 to level 11
+No datetime | DEBUG | Add actor SQUIRREL_A_00039 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00040 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00041 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00042 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00043 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00044 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00045 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00046 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00047 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00048 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00049 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00050 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00051 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00052 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00053 to level 27
+No datetime | DEBUG | Add actor GHOST_RED_00002 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00003 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00004 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00005 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00006 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00007 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00008 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00009 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00010 to level 28
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | DEBUG | SQUIRREL_A_00033 hit by T3_PHOTONIC_0000001_from_player, health: 8.75, bullet_power: 20
+No datetime | DEBUG | SQUIRREL_A_00033, !!! Dead by bullet T3_PHOTONIC_0000001_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00036 hit by T4_NEUTRONIC_0000001_from_player, health: 8.75, bullet_power: 40
+No datetime | DEBUG | SQUIRREL_A_00036, !!! Dead by bullet T4_NEUTRONIC_0000001_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00034 hit by T4_NEUTRONIC_0000002_from_player, health: 8.75, bullet_power: 40
+No datetime | DEBUG | SQUIRREL_A_00034, !!! Dead by bullet T4_NEUTRONIC_0000002_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00037 hit by T4_NEUTRONIC_0000003_from_player, health: 8.75, bullet_power: 40
+No datetime | DEBUG | SQUIRREL_A_00037, !!! Dead by bullet T4_NEUTRONIC_0000003_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00035 hit by T4_NEUTRONIC_0000004_from_player, health: 8.75, bullet_power: 40
+No datetime | DEBUG | SQUIRREL_A_00035, !!! Dead by bullet T4_NEUTRONIC_0000004_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00038 hit by T4_NEUTRONIC_0000005_from_player, health: 8.75, bullet_power: 40
+No datetime | DEBUG | SQUIRREL_A_00038, !!! Dead by bullet T4_NEUTRONIC_0000005_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00038, lucky_drop_dice: 49, probability_to_drop: 100, item type: PotionHealth
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 27
+No datetime | DEBUG | Dropped: POTION_HEALTH_00011
+No datetime | DEBUG | SQUIRREL_A_00038, lucky_drop_dice: 47, probability_to_drop: 100, item type: RobotB
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor ROBOT_B_00004 to level 27
+No datetime | DEBUG | Dropped: ROBOT_B_00004
+No datetime | DEBUG | ROBOT_B_00004 hit by T4_NEUTRONIC_0000006_from_player, health: 210, bullet_power: 40
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_ROBOT_B_00004, pc_health: 31.02, bullet_power: 7.0
+No datetime | DEBUG | player hit by T2_LASER2_0000002_from_ROBOT_B_00004, pc_health: 24.02, bullet_power: 7.0
+No datetime | DEBUG | player hit by T1_LASER1_0000001_from_ROBOT_B_00004, pc_health: 17.02, bullet_power: 5
+No datetime | DEBUG | player hit by T1_LASER1_0000002_from_ROBOT_B_00004, pc_health: 12.02, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T3_PHOTONIC_0000008_from_player, health: 170, bullet_power: 20
+No datetime | DEBUG | ROBOT_B_00004 hit by T3_PHOTONIC_0000009_from_player, health: 150, bullet_power: 20
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000001_from_player, health: 130, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000001_from_player, health: 123.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000002_from_player, health: 118.0, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000003_from_player, health: 111.0, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000002_from_player, health: 104.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000004_from_player, health: 99.0, bullet_power: 7.0
+No datetime | DEBUG | player hit by T1_LASER1_0000003_from_ROBOT_B_00004, pc_health: 7.02, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000005_from_player, health: 92.0, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000003_from_player, health: 85.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000006_from_player, health: 80.0, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000007_from_player, health: 73.0, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000004_from_player, health: 66.0, bullet_power: 5
+No datetime | DEBUG | player hit by T1_LASER1_0000004_from_ROBOT_B_00004, pc_health: 2.02, bullet_power: 5
+No datetime | DEBUG | player, !!! Dead by bullet T1_LASER1_0000004_from_ROBOT_B_00004 !!!
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 27
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 27
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 27
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 27
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 27
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 27
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00022 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00023 to level 27
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 27
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 27
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 27
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00019 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00020 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00021 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00022 to level 11
+No datetime | DEBUG | Add actor SQUIRREL_A_00039 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00040 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00041 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00042 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00043 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00044 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00045 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00046 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00047 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00048 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00049 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00050 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00051 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00052 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00053 to level 27
+No datetime | DEBUG | Add actor ROBOT_B_00004 to level 27
+No datetime | DEBUG | Add actor GHOST_RED_00002 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00003 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00004 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00005 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00006 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00007 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00008 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00009 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00010 to level 28
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | INFO | Set player invulnerability state to: True (cheat)
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000001_from_player, health: 61.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000001_from_player, health: 56.0, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000002_from_player, health: 49.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000002_from_player, health: 44.0, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000003_from_player, health: 37.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000003_from_player, health: 32.0, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000004_from_player, health: 25.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T2_LASER2_0000004_from_player, health: 20.0, bullet_power: 7.0
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000005_from_player, health: 13.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000006_from_player, health: 8.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004 hit by T1_LASER1_0000007_from_player, health: 3.0, bullet_power: 5
+No datetime | DEBUG | ROBOT_B_00004, !!! Dead by bullet T1_LASER1_0000007_from_player !!!
+No datetime | DEBUG | ROBOT_B_00004, lucky_drop_dice: 35, probability_to_drop: 100, item type: PotionPower
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor POTION_POWER_00024 to level 27
+No datetime | DEBUG | Dropped: POTION_POWER_00024
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 27
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 27
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 27
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 27
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 27
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00022 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00023 to level 27
+No datetime | DEBUG | Add actor POTION_POWER_00024 to level 27
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 27
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 27
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 27
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 27
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00019 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00020 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00021 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00022 to level 11
+No datetime | DEBUG | Add actor SQUIRREL_A_00039 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00040 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00041 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00042 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00043 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00044 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00045 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00046 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00047 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00048 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00049 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00050 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00051 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00052 to level 27
+No datetime | DEBUG | Add actor SQUIRREL_A_00053 to level 27
+No datetime | DEBUG | Add actor GHOST_RED_00002 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00003 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00004 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00005 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00006 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00007 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00008 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00009 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00010 to level 28
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | SQUIRREL_A_00043 hit by T1_LASER1_0000002_from_player, health: 8.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00043 hit by T2_LASER2_0000002_from_player, health: 3.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00043, !!! Dead by bullet T2_LASER2_0000002_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00044 hit by T1_LASER1_0000003_from_player, health: 8.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00040 hit by T2_LASER2_0000003_from_player, health: 8.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00040 hit by T2_LASER2_0000005_from_player, health: 1.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00040, !!! Dead by bullet T2_LASER2_0000005_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00042 hit by T1_LASER1_0000005_from_player, health: 8.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00044 hit by T1_LASER1_0000006_from_player, health: 3.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00044, !!! Dead by bullet T1_LASER1_0000006_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00042 hit by T2_LASER2_0000006_from_player, health: 3.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00042, !!! Dead by bullet T2_LASER2_0000006_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00053 hit by T1_LASER1_0000007_from_player, health: 8.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00039 hit by T2_LASER2_0000009_from_player, health: 8.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00039 hit by T1_LASER1_0000009_from_player, health: 1.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00039, !!! Dead by bullet T1_LASER1_0000009_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00053 hit by T2_LASER2_0000011_from_player, health: 3.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00053, !!! Dead by bullet T2_LASER2_0000011_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00051 hit by T1_LASER1_0000011_from_player, health: 8.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00050 hit by T2_LASER2_0000013_from_player, health: 8.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00050 hit by T1_LASER1_0000013_from_player, health: 1.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00050, !!! Dead by bullet T1_LASER1_0000013_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00051 hit by T2_LASER2_0000017_from_player, health: 3.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00051, !!! Dead by bullet T2_LASER2_0000017_from_player !!!
+No datetime | DEBUG | SQUIRREL_A_00052 hit by T2_LASER2_0000019_from_player, health: 8.75, bullet_power: 7.0
+No datetime | DEBUG | SQUIRREL_A_00052 hit by T1_LASER1_0000020_from_player, health: 1.75, bullet_power: 5
+No datetime | DEBUG | SQUIRREL_A_00052, !!! Dead by bullet T1_LASER1_0000020_from_player !!!
+No datetime | DEBUG | TEXT_MSG_PLAYER_00001 killed when TIMER_00001 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: SQUIRREL_A_00045 in pos: (509, 157) - lev pos: (715, 417)
+No datetime | DEBUG | TEXT_MSG_PLAYER_00002 killed when TIMER_00002 ticked 0 secs.
+No datetime | DEBUG | Mouse sprites: SQUIRREL_A_00046 in pos: (511, 127) - lev pos: (717, 387)
+No datetime | DEBUG | Mouse sprites: SQUIRREL_A_00047 in pos: (498, 147) - lev pos: (704, 407)
+No datetime | DEBUG | Mouse sprites: SQUIRREL_A_00047 in pos: (330, 147) - lev pos: (536, 407)
+No datetime | DEBUG | Mouse sprites: SQUIRREL_A_00048 in pos: (323, 130) - lev pos: (529, 390)
+No datetime | DEBUG | SQUIRREL_A_00045 hit by VORTEX_OF_DOOM_B_00001, health: 8.75, vortex_partial_power: 29.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00046 hit by VORTEX_OF_DOOM_B_00002, health: 8.75, vortex_partial_power: 29.00, magic_res: 0.00, owner: player
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | SQUIRREL_A_00045 hit by VORTEX_OF_DOOM_B_00001, health: -20.25, vortex_partial_power: 36.25, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00047 hit by VORTEX_OF_DOOM_B_00003, health: 8.75, vortex_partial_power: 29.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | VORTEX_OF_DOOM_B_00001 killed when TIMER_00004 ticked 6 secs.
+No datetime | DEBUG | SQUIRREL_A_00045 hit by VORTEX_OF_DOOM_B_00001, health: -56.5, vortex_partial_power: 145.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00045, !!! Dead by VORTEX_OF_DOOM_B_00001, owner: player !!!
+No datetime | DEBUG | SQUIRREL_A_00046 hit by VORTEX_OF_DOOM_B_00002, health: -20.25, vortex_partial_power: 36.25, magic_res: 0.00, owner: player
+No datetime | DEBUG | VORTEX_OF_DOOM_B_00002 killed when TIMER_00006 ticked 6 secs.
+No datetime | DEBUG | SQUIRREL_A_00046 hit by VORTEX_OF_DOOM_B_00002, health: -56.5, vortex_partial_power: 145.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00046, !!! Dead by VORTEX_OF_DOOM_B_00002, owner: player !!!
+No datetime | DEBUG | SQUIRREL_A_00047 hit by VORTEX_OF_DOOM_B_00003, health: -20.25, vortex_partial_power: 36.25, magic_res: 0.00, owner: player
+No datetime | DEBUG | Mouse sprites: SQUIRREL_A_00049 in pos: (590, 186) - lev pos: (796, 446)
+No datetime | DEBUG | VORTEX_OF_DOOM_B_00003 killed when TIMER_00008 ticked 6 secs.
+No datetime | DEBUG | SQUIRREL_A_00047 hit by VORTEX_OF_DOOM_B_00003, health: -56.5, vortex_partial_power: 145.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00047, !!! Dead by VORTEX_OF_DOOM_B_00003, owner: player !!!
+No datetime | DEBUG | SQUIRREL_A_00049 hit by VORTEX_OF_DOOM_B_00004, health: 8.75, vortex_partial_power: 29.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | Mouse sprites: SQUIRREL_A_00048 in pos: (317, 130) - lev pos: (523, 390)
+No datetime | DEBUG | SQUIRREL_A_00049 hit by VORTEX_OF_DOOM_B_00004, health: -20.25, vortex_partial_power: 36.25, magic_res: 0.00, owner: player
+No datetime | DEBUG | Mouse sprites: SQUIRREL_A_00041 in pos: (826, 177) - lev pos: (1032, 437)
+No datetime | DEBUG | VORTEX_OF_DOOM_B_00004 killed when TIMER_00013 ticked 6 secs.
+No datetime | DEBUG | SQUIRREL_A_00049 hit by VORTEX_OF_DOOM_B_00004, health: -56.5, vortex_partial_power: 145.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00049, !!! Dead by VORTEX_OF_DOOM_B_00004, owner: player !!!
+No datetime | DEBUG | Mouse sprites: SQUIRREL_A_00041 in pos: (870, 177) - lev pos: (1076, 437)
+No datetime | DEBUG | SQUIRREL_A_00048 hit by VORTEX_OF_DOOM_B_00005, health: 8.75, vortex_partial_power: 29.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00048 hit by VORTEX_OF_DOOM_B_00005, health: -20.25, vortex_partial_power: 36.25, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00041 hit by VORTEX_OF_DOOM_B_00006, health: 8.75, vortex_partial_power: 29.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | VORTEX_OF_DOOM_B_00005 killed when TIMER_00016 ticked 6 secs.
+No datetime | DEBUG | SQUIRREL_A_00048 hit by VORTEX_OF_DOOM_B_00005, health: -56.5, vortex_partial_power: 145.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00048, !!! Dead by VORTEX_OF_DOOM_B_00005, owner: player !!!
+No datetime | DEBUG | SQUIRREL_A_00041 hit by VORTEX_OF_DOOM_B_00006, health: -20.25, vortex_partial_power: 36.25, magic_res: 0.00, owner: player
+No datetime | DEBUG | VORTEX_OF_DOOM_B_00006 killed when TIMER_00018 ticked 6 secs.
+No datetime | DEBUG | SQUIRREL_A_00041 hit by VORTEX_OF_DOOM_B_00006, health: -56.5, vortex_partial_power: 145.00, magic_res: 0.00, owner: player
+No datetime | DEBUG | SQUIRREL_A_00041, !!! Dead by VORTEX_OF_DOOM_B_00006, owner: player !!!
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00001, pc_health: 100, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00002, pc_health: 96, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00003, pc_health: 92, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00004, pc_health: 88, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00005, pc_health: 84, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00007, pc_health: 80, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00006, pc_health: 76, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00008, pc_health: 72, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00010, pc_health: 68, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00009, pc_health: 64, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | [COPY] Mouse actors: PUMPKIN_ZOMBIE_A_00004 in pos: (214, 137) - lev pos: (2098, 9)
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00011, pc_health: 60, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | DEBUG | player hit by DRAIN_LIFE_A_00001, pc_health: 56, magic_attach_power: 79, magic_res: 70.00, 
+No datetime | DEBUG | Add actor PUMPKIN_ZOMBIE_A_00005 to level 26
+No datetime | DEBUG | player hit by DRAIN_LIFE_B_00012, pc_health: 47, magic_attach_power: 74, magic_res: 70.00, 
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | Super cheat mode activated!
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Add actor APPLE_YELLOW_00013 to level 26
+No datetime | DEBUG | Add actor APPLE_YELLOW_00014 to level 26
+No datetime | DEBUG | Add actor APPLE_RED_00008 to level 26
+No datetime | DEBUG | Add actor APPLE_YELLOW_00015 to level 26
+No datetime | DEBUG | Add actor APPLE_GREEN_00010 to level 26
+No datetime | DEBUG | Add actor APPLE_RED_00009 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00018 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00019 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00020 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00021 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00022 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00023 to level 26
+No datetime | DEBUG | Add actor POTION_POWER_00024 to level 26
+No datetime | DEBUG | Add actor POTION_HEALTH_00008 to level 26
+No datetime | DEBUG | Add actor POTION_HEALTH_00009 to level 26
+No datetime | DEBUG | Add actor POTION_HEALTH_00010 to level 26
+No datetime | DEBUG | Add actor POTION_HEALTH_00011 to level 26
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Add actor BAT_BLACK_00024 to level 1
+No datetime | DEBUG | Add actor BAT_BLUE_00016 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00017 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00018 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00019 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00020 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00021 to level 11
+No datetime | DEBUG | Add actor BAT_BLUE_00022 to level 11
+No datetime | DEBUG | Add actor PUMPKIN_ZOMBIE_A_00005 to level 26
+No datetime | DEBUG | Add actor GHOST_RED_00002 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00003 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00004 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00005 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00006 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00007 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00008 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00009 to level 28
+No datetime | DEBUG | Add actor GHOST_RED_00010 to level 28
+No datetime | DEBUG | Load last saved game PC
+No datetime | DEBUG | Create energy shield
+No datetime | INFO | Start game
+No datetime | INFO | Set player invulnerability state to: True (cheat)
+No datetime | INFO | Replenish stats to superhero maximum (cheat).
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005 hit by T3_PHOTONIC_0000001_from_player, health: 245, bullet_power: 20
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005 hit by T4_NEUTRONIC_0000001_from_player, health: 225, bullet_power: 40
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005 hit by T3_PHOTONIC_0000002_from_player, health: 185, bullet_power: 20
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005 hit by T4_NEUTRONIC_0000002_from_player, health: 165, bullet_power: 40
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005 hit by T3_PHOTONIC_0000003_from_player, health: 125, bullet_power: 20
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005 hit by T4_NEUTRONIC_0000003_from_player, health: 105, bullet_power: 40
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005 hit by T3_PHOTONIC_0000004_from_player, health: 65, bullet_power: 20
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005 hit by T4_NEUTRONIC_0000004_from_player, health: 45, bullet_power: 40
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005 hit by T1_LASER1_0000001_from_player, health: 5, bullet_power: 5
+No datetime | DEBUG | PUMPKIN_ZOMBIE_A_00005, !!! Dead by bullet T1_LASER1_0000001_from_player !!!
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00001 killed when TIMER_00002 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00001 killed when TIMER_00004 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00002 killed when TIMER_00006 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00002 killed when TIMER_00010 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00003 killed when TIMER_00014 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00004 killed when TIMER_00016 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00003 killed when TIMER_00019 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00005 killed when TIMER_00023 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00006 killed when TIMER_00025 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00004 killed when TIMER_00027 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00001 killed when TIMER_00032 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_A_00002 killed when TIMER_00034 ticked 0 secs.
+No datetime | DEBUG | SAMUTRINOS_BOLT_B_00005 killed when TIMER_00036 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00007 killed when TIMER_00039 ticked 0 secs.
+No datetime | DEBUG | MUTENTRINOS_BOLT_B_00008 killed when TIMER_00043 ticked 0 secs.
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | INFO | End app codemaster
