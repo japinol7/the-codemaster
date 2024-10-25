@@ -2,9 +2,10 @@
 
 	The CodeMaster is a spin-off sci-fi mystery based on the 
 	1988 RPG platformer game Pac's Revenge.
+<br />
 
 	program: The CodeMaster. Nightmare on Bots' Island.
-	version: 0.0.7
+	version: 0.0.8
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
@@ -133,7 +134,7 @@
 	        as the player enters that level again.
 	      > This is not a bug, it's a feature. 
 	        Yeah, really. It is a design decision.
-	    > Number of levels implemented for this demo: 28.
+	    > Number of levels implemented for this demo: 30.
 	> Doors: 
 	    > Use them to go to other levels.
         > To unlock a locked door you need to use the right door key.

@@ -1,5 +1,15 @@
 # Release History
 
+## v0.0.8
+
+### New features and improvements:
+
+* Add two new game levels. Current level count: 30.
+* Add new NPCs:
+  * Alien Felines.
+
+<br>
+
 ## v0.0.7
 
 ### New features and improvements:
@@ -27,6 +37,7 @@
   * Facilitate testing persistence.
   * Remove support of the game test decorator for methods.
   * Current tests count: 62.
+
 <br>
 
 ## v0.0.6
