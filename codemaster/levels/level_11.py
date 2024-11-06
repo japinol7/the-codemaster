@@ -38,13 +38,14 @@ class Level11(Level):
 
     def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[12, 420, 210, platforms.PLAT_TYPE_01],
-                       [2, 1400, 200, platforms.PLAT_TYPE_01],
-                       [2, 1580, 300, platforms.PLAT_TYPE_01],
-                       [2, 1420, 575, platforms.PLAT_TYPE_01],
-                       [21, 1640, 460, platforms.PLAT_TYPE_01],
-                       [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       ]
+        level_plats = [
+            [12, 420, 210, platforms.PLAT_TYPE_01],
+            [2, 1400, 200, platforms.PLAT_TYPE_01],
+            [2, 1580, 300, platforms.PLAT_TYPE_01],
+            [2, 1420, 575, platforms.PLAT_TYPE_01],
+            [21, 1640, 460, platforms.PLAT_TYPE_01],
+            [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            ]
         plats = []
         for platform in level_plats:
             plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2], platform[3])

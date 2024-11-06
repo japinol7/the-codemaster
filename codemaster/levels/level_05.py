@@ -51,17 +51,18 @@ class Level5(Level):
 
     def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[3, 300, 460, platforms.PLAT_TYPE_01],
-                       [7, 500, 220, platforms.PLAT_TYPE_01],
-                       [4, 980, 570, platforms.PLAT_TYPE_01],
-                       [3, 800, 440, platforms.PLAT_TYPE_01],
-                       [5, 1105, 260, platforms.PLAT_TYPE_01],
-                       [9, 1900, 185, platforms.PLAT_TYPE_01],
-                       [6, 2900, 185, platforms.PLAT_TYPE_01],
-                       [8, 2580, 440, platforms.PLAT_TYPE_01],
-                       [22, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       [30, 1700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       ]
+        level_plats = [
+            [3, 300, 460, platforms.PLAT_TYPE_01],
+            [7, 500, 220, platforms.PLAT_TYPE_01],
+            [4, 980, 570, platforms.PLAT_TYPE_01],
+            [3, 800, 440, platforms.PLAT_TYPE_01],
+            [5, 1105, 260, platforms.PLAT_TYPE_01],
+            [9, 1900, 185, platforms.PLAT_TYPE_01],
+            [6, 2900, 185, platforms.PLAT_TYPE_01],
+            [8, 2580, 440, platforms.PLAT_TYPE_01],
+            [22, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [30, 1700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            ]
         plats = []
         for platform in level_plats:
             plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2], platform[3])

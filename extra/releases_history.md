@@ -7,6 +7,12 @@
 * Add two new game levels. Current level count: 30.
 * Add new NPCs:
   * Alien Felines.
+* Improve the test suite:
+  * Allow tests to set empty levels iterables. 
+    * You can use it whenever you need to test things that do not require creating some levels.
+  * Execute the garbage collector when loading last game inside tests.
+    * This will reduce the total memory used when running tests with multiple game loads.
+  * Current tests count: 65.
 
 <br>
 

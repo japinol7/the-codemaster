@@ -47,17 +47,18 @@ class Level1(Level):
 
     def _add_actors_hook(self):
         # Add platforms (blocs, x, y, type)
-        level_plats = [[5, 100, 360, platforms.PLAT_TYPE_01],
-                       [3, 200, 190, platforms.PLAT_TYPE_01],
-                       [4, 500, 380, platforms.PLAT_TYPE_01],
-                       [7, 800, 90, platforms.PLAT_TYPE_01],
-                       [4, 1360, 560, platforms.PLAT_TYPE_01],
-                       [3, 1250, 420, platforms.PLAT_TYPE_01],
-                       [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       [15, 800, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       [24, 1950, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       [15, 400, SCREEN_HEIGHT + 190, platforms.PLAT_TYPE_01],
-                       ]
+        level_plats = [
+            [5, 100, 360, platforms.PLAT_TYPE_01],
+            [3, 200, 190, platforms.PLAT_TYPE_01],
+            [4, 500, 380, platforms.PLAT_TYPE_01],
+            [7, 800, 90, platforms.PLAT_TYPE_01],
+            [4, 1360, 560, platforms.PLAT_TYPE_01],
+            [3, 1250, 420, platforms.PLAT_TYPE_01],
+            [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [15, 800, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [24, 1950, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [15, 400, SCREEN_HEIGHT + 190, platforms.PLAT_TYPE_01],
+            ]
         plats = []
         for platform in level_plats:
             plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2], platform[3])

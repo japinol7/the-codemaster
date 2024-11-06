@@ -62,21 +62,22 @@ class Level6(Level):
 
     def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[5, 100, 460, platforms.PLAT_TYPE_01],
-                       [5, 300, 220, platforms.PLAT_TYPE_01],
-                       [4, 980, 570, platforms.PLAT_TYPE_01],
-                       [3, 800, 440, platforms.PLAT_TYPE_01],
-                       [3, 1100, 260, platforms.PLAT_TYPE_01],
-                       [9, 1900, 110, platforms.PLAT_TYPE_01],
-                       [8, 2580, 440, platforms.PLAT_TYPE_01],
-                       [4, 2780, 98, platforms.PLAT_TYPE_01],
-                       [2, 3340, 98, platforms.PLAT_TYPE_01],
-                       [2, 3200, 196, platforms.PLAT_TYPE_01],
-                       [2, 3060, 294, platforms.PLAT_TYPE_01],
-                       [4, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       [14, 630, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       [30, 1700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       ]
+        level_plats = [
+            [5, 100, 460, platforms.PLAT_TYPE_01],
+            [5, 300, 220, platforms.PLAT_TYPE_01],
+            [4, 980, 570, platforms.PLAT_TYPE_01],
+            [3, 800, 440, platforms.PLAT_TYPE_01],
+            [3, 1100, 260, platforms.PLAT_TYPE_01],
+            [9, 1900, 110, platforms.PLAT_TYPE_01],
+            [8, 2580, 440, platforms.PLAT_TYPE_01],
+            [4, 2780, 98, platforms.PLAT_TYPE_01],
+            [2, 3340, 98, platforms.PLAT_TYPE_01],
+            [2, 3200, 196, platforms.PLAT_TYPE_01],
+            [2, 3060, 294, platforms.PLAT_TYPE_01],
+            [4, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [14, 630, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [30, 1700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            ]
         plats = []
         for platform in level_plats:
             plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2], platform[3])

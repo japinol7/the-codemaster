@@ -38,21 +38,22 @@ class Level15(Level):
 
     def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[3, 300, 460, platforms.PLAT_TYPE_01],
-                       [6, 300, 220, platforms.PLAT_TYPE_01],
-                       [2, 680, 580, platforms.PLAT_TYPE_01],
-                       [6, 1300, 120, platforms.PLAT_TYPE_01],
-                       [2, 2360, 130, platforms.PLAT_TYPE_01],
-                       [2, 8, 90, platforms.PLAT_TYPE_01],
-                       [2, 30, 300, platforms.PLAT_TYPE_01],
-                       [4, 900, 110, platforms.PLAT_TYPE_01],
-                       [6, 2600, 10, platforms.PLAT_TYPE_01],
-                       [9, 1350, 460, platforms.PLAT_TYPE_01],
-                       [4, 2560, 400, platforms.PLAT_TYPE_01],
-                       [2, 2860, 560, platforms.PLAT_TYPE_01],
-                       [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       [14, 2700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       ]
+        level_plats = [
+            [3, 300, 460, platforms.PLAT_TYPE_01],
+            [6, 300, 220, platforms.PLAT_TYPE_01],
+            [2, 680, 580, platforms.PLAT_TYPE_01],
+            [6, 1300, 120, platforms.PLAT_TYPE_01],
+            [2, 2360, 130, platforms.PLAT_TYPE_01],
+            [2, 8, 90, platforms.PLAT_TYPE_01],
+            [2, 30, 300, platforms.PLAT_TYPE_01],
+            [4, 900, 110, platforms.PLAT_TYPE_01],
+            [6, 2600, 10, platforms.PLAT_TYPE_01],
+            [9, 1350, 460, platforms.PLAT_TYPE_01],
+            [4, 2560, 400, platforms.PLAT_TYPE_01],
+            [2, 2860, 560, platforms.PLAT_TYPE_01],
+            [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [14, 2700, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            ]
         plats = []
         for platform in level_plats:
             plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2], platform[3])

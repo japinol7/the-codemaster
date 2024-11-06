@@ -23,7 +23,7 @@ from codemaster.models.actors.items import (
     BatteryA,
     CartridgeGreen,
     DoorLeftGreen,
-    DoorRightRed,
+    DoorRightYellow,
     PotionHealth,
     PotionPower,
     )
@@ -43,16 +43,17 @@ class Level27(Level):
 
     def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[2, 1520, 290, platforms.PLAT_TYPE_01],
-                       [3, 1760, 110, platforms.PLAT_TYPE_01],
-                       [2, 2200, 110, platforms.PLAT_TYPE_01],
-                       [8, 2500, 110, platforms.PLAT_TYPE_01],
-                       [7, 2530, 440, platforms.PLAT_TYPE_01],
-                       [6, 3190, 246, platforms.PLAT_TYPE_01],
-                       [1, 3090, 315, platforms.PLAT_TYPE_01],
-                       [1, 2395, 586, platforms.PLAT_TYPE_01],
-                       [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       ]
+        level_plats = [
+            [2, 1520, 290, platforms.PLAT_TYPE_01],
+            [3, 1760, 110, platforms.PLAT_TYPE_01],
+            [2, 2200, 110, platforms.PLAT_TYPE_01],
+            [8, 2500, 110, platforms.PLAT_TYPE_01],
+            [7, 2530, 440, platforms.PLAT_TYPE_01],
+            [6, 3190, 246, platforms.PLAT_TYPE_01],
+            [1, 3090, 315, platforms.PLAT_TYPE_01],
+            [1, 2395, 586, platforms.PLAT_TYPE_01],
+            [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            ]
         plats = []
         for platform in level_plats:
             plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2],
@@ -117,5 +118,5 @@ class Level27(Level):
         # Add doors
         self.doors.add([
             DoorLeftGreen(2, 550, self.game, level_dest=25, door_dest_pos=DOOR_DEST_NL),
-            DoorRightRed(3640, 550, self.game, level_dest=27, door_dest_pos=DOOR_DEST_NL),
+            DoorRightYellow(3640, 550, self.game, level_dest=27, door_dest_pos=DOOR_DEST_NL),
             ])
