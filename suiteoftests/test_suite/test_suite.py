@@ -222,6 +222,8 @@ class GameTestSuite:
                 f"Also, you can load the game levels only once. "
                 f"To use load_game_levels, you must leave the test levels empty.")
 
+        gc.collect()
+
         self.level_ids = list(range(1, N_LEVELS + 1))
         log.info(f"Load all game levels: {self.level_ids}")
         self.levels = levels.Level.factory(levels_module=levels, game=self)
