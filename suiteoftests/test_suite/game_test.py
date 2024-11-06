@@ -17,6 +17,7 @@ def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=Fal
     This decorator should not be used with methods, only with functions.
     @param levels: List of level ids to load.
     Each level must be an integer.
+    If you leave the iterable empty, no level will be loaded.
     The First level is 1, because it is based on the id of the level.
     @param starting_level: Starting level. It must be an integer.
     The First level is 0, because it is based on the position of the level
@@ -37,8 +38,10 @@ def game_test(*, levels, starting_level=0, timeout=CLOCK_TIMER_IN_SECS, skip=Fal
 
 
 def _validate_game_test_arguments(levels, starting_level, timeout, skip):
-    if not isinstance(levels, Iterable) or not levels:
-        raise TypeError("Argument must be an iterable of at least one int: levels.")
+    if not isinstance(levels, Iterable):
+        raise TypeError("Argument must be an empty iterable or an iterable of integers: levels.")
+    if any(not isinstance(level, int) for level in levels):
+        raise TypeError("Argument must be an empty iterable or an iterable of integers: levels.")
     if not isinstance(starting_level, int):
         raise TypeError("Argument must be an int: starting_level.")
     if not isinstance(skip, bool):

@@ -94,7 +94,7 @@ class Game:
         self.show_fps = False
         self.show_grid = False
         self.current_position = False
-        self.clock = False
+        self.clock = None
         self.active_sprites = None
         self.clock_sprites = None
         self.text_msg_sprites = None
@@ -271,32 +271,7 @@ class Game:
 
         self.is_debug and self.show_fps and pg.display.set_caption(f"{self.clock.get_fps():.2f}")
 
-    def start(self):
-        Game.is_exit_game = False
-        Game.is_over = False
-        Game.current_game += 1
-        pg.display.set_caption(self.name_short)
-        self.clock = pg.time.Clock()
-        self.start_time = pg.time.get_ticks()
-        self.done = False
-
-        self.put_initial_actors_on_the_board()
-
-        # Initialize score bars
-        self.score_bars = ScoreBar(self, Game.screen)
-
-        # Render text frequently used only if it is the first game
-        if Game.is_first_game:
-            Resource.render_text_frequently_used(self)
-
-        self.help_info = HelpInfo()
-        self.debug_info = DebugInfo(self.player, self)
-
-        if not self.is_load_last_game:
-            self.player.create_starting_game_msg(self)
-
-        not self.done and log.info("Start game")
-        # Game loop
+    def _game_loop(self):
         while not self.done:
             self.current_time = pg.time.get_ticks()
             for event in pg.event.get():
@@ -522,3 +497,30 @@ class Game:
             self.update_screen()
             self.is_paused and self.clock.tick(Settings.fps_paused) or self.clock.tick(Settings.fps)
             pg.display.flip()
+
+    def start(self):
+        Game.is_exit_game = False
+        Game.is_over = False
+        Game.current_game += 1
+        pg.display.set_caption(self.name_short)
+        self.clock = pg.time.Clock()
+        self.start_time = pg.time.get_ticks()
+        self.done = False
+
+        self.put_initial_actors_on_the_board()
+
+        # Initialize score bars
+        self.score_bars = ScoreBar(self, Game.screen)
+
+        # Render text frequently used only if it is the first game
+        if Game.is_first_game:
+            Resource.render_text_frequently_used(self)
+
+        self.help_info = HelpInfo()
+        self.debug_info = DebugInfo(self.player, self)
+
+        if not self.is_load_last_game:
+            self.player.create_starting_game_msg(self)
+
+        not self.done and log.info("Start game")
+        self._game_loop()

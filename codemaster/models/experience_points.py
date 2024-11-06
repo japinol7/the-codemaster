@@ -20,6 +20,7 @@ class ExperiencePoints:
         ActorType.GHOST_BLUE.name: 45,
         ActorType.GHOST_YELLOW.name: 60,
         ActorType.GHOST_RED.name: 70,
+        ActorType.ALIEN_FELINE_MALE.name: 215,
         ActorType.BAT_BLUE.name: 60,
         ActorType.BAT_LILAC.name: 65,
         ActorType.BAT_RED.name: 75,

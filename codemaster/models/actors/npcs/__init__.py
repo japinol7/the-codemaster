@@ -1,4 +1,7 @@
 """Package npcs."""
+from codemaster.models.actors.npcs.alien_felines import (
+    AlienFelineMale,
+    )
 from codemaster.models.actors.npcs.bats import (
     BatBlue,
     BatLilac,

@@ -40,23 +40,24 @@ class Level23(Level):
 
     def _add_actors_hook(self):
         # Add platforms (n_blocs, x, y, type)
-        level_plats = [[5, 300, 220, platforms.PLAT_TYPE_01],
-                       [1, 1740, 250, platforms.PLAT_TYPE_01],
-                       [1, 1500, 320, platforms.PLAT_TYPE_01],
-                       [1, 1700, 470, platforms.PLAT_TYPE_01],
-                       [1, 1500, 586, platforms.PLAT_TYPE_01],
-                       [2, 800, 440, platforms.PLAT_TYPE_01],
-                       [1, 670, 300, platforms.PLAT_TYPE_01],
-                       [3, 1100, 260, platforms.PLAT_TYPE_01],
-                       [9, 1900, 110, platforms.PLAT_TYPE_01],
-                       [6, 2580, 440, platforms.PLAT_TYPE_01],
-                       [4, 2730, 98, platforms.PLAT_TYPE_01],
-                       [6, 3200, 240, platforms.PLAT_TYPE_01],
-                       [1, 3060, 310, platforms.PLAT_TYPE_01],
-                       [1, 2395, 586, platforms.PLAT_TYPE_01],
-                       [19, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       [24, 2140, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-                       ]
+        level_plats = [
+            [5, 300, 220, platforms.PLAT_TYPE_01],
+            [1, 1740, 250, platforms.PLAT_TYPE_01],
+            [1, 1500, 320, platforms.PLAT_TYPE_01],
+            [1, 1700, 470, platforms.PLAT_TYPE_01],
+            [1, 1500, 586, platforms.PLAT_TYPE_01],
+            [2, 800, 440, platforms.PLAT_TYPE_01],
+            [1, 670, 300, platforms.PLAT_TYPE_01],
+            [3, 1100, 260, platforms.PLAT_TYPE_01],
+            [9, 1900, 110, platforms.PLAT_TYPE_01],
+            [6, 2580, 440, platforms.PLAT_TYPE_01],
+            [4, 2730, 98, platforms.PLAT_TYPE_01],
+            [6, 3200, 240, platforms.PLAT_TYPE_01],
+            [1, 3060, 310, platforms.PLAT_TYPE_01],
+            [1, 2395, 586, platforms.PLAT_TYPE_01],
+            [19, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [24, 2140, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            ]
         plats = []
         for platform in level_plats:
             plats += platforms.Platform.sprite_sheet_data_for_n_blocks(platform[0], platform[1], platform[2],
@@ -92,6 +93,6 @@ class Level23(Level):
         # Add doors
         self.doors.add([
             DoorLeftBlue(2, 550, self.game, level_dest=21, door_dest_pos=DOOR_DEST_NL),
-            DoorRightAqua(3480, 52, self.game, level_dest=27, door_dest_pos=DOOR_DEST_TR),
+            DoorRightAqua(3480, 52, self.game, level_dest=29, door_dest_pos=DOOR_DEST_TR),
             DoorRightRed(3640, 550, self.game, level_dest=23, door_dest_pos=DOOR_DEST_NL),
             ])

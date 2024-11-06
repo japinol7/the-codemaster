@@ -28,3 +28,5 @@ from codemaster.levels.level_25 import Level25
 from codemaster.levels.level_26 import Level26
 from codemaster.levels.level_27 import Level27
 from codemaster.levels.level_28 import Level28
+from codemaster.levels.level_29 import Level29
+from codemaster.levels.level_30 import Level30

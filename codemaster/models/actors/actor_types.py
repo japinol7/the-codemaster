@@ -226,3 +226,5 @@ class ActorType(Enum):
     EWLAN_MALE = 1678
     # Squirrels
     SQUIRREL_A = 1681
+    # Alien Felines
+    ALIEN_FELINE_MALE = 1685

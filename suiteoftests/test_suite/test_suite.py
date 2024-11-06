@@ -1,6 +1,7 @@
 """Module test_suite."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+import gc
 import os
 import traceback
 
@@ -14,7 +15,8 @@ from codemaster.models.actors.player import Player
 from codemaster.config.constants import (
     APP_TECH_NAME,
     FONT_DEFAULT_NAME,
-    FONT_FIXED_DEFAULT_NAME
+    FONT_FIXED_DEFAULT_NAME,
+    N_LEVELS,
     )
 from codemaster.models.actors.selectors import SelectorA
 from codemaster.tools.logger.logger import log
@@ -213,6 +215,20 @@ class GameTestSuite:
         self.level_init = None
         self.level = self.levels[starting_level_n]
 
+    def load_game_levels(self, starting_level_n=0):
+        if self.level_ids:
+            raise ValueError(
+                f"You can load test levels or the game levels, but not both. "
+                f"Also, you can load the game levels only once. "
+                f"To use load_game_levels, you must leave the test levels empty.")
+
+        self.level_ids = list(range(1, N_LEVELS + 1))
+        log.info(f"Load all game levels: {self.level_ids}")
+        self.levels = levels.Level.factory(levels_module=levels, game=self)
+        self.levels_qty = len(self.levels)
+        self.level_init = None
+        self.level = self.levels[starting_level_n]
+
     def _tear_down(self):
         log.info("Tear Down")
         levels.Level.clean_entity_ids()
@@ -295,6 +311,7 @@ class GameTestSuite:
         persistence.persist_game_data(self)
 
     def load_game_data(self):
+        gc.collect()
         self.set_up_actors_and_levels()
         persistence.load_game_data(self)
         if self.__class__.is_load_last_game_failed:
@@ -360,6 +377,10 @@ class GameTestSuite:
         self.test_passed_count += 1
 
     def game_loop(self, timeout=None):
+        if not self.level_ids:
+            log.warning("Game loop called, but there are no levels to load! "
+                        "Consider to add some levels or remove the game loop call.")
+            return
         if self.aborted:
             return
         if timeout is not None:
@@ -436,7 +457,9 @@ class GameTestSuite:
                 log.info(f"------ Test {count:2} / {self.tests_total} ------")
                 self.level_ids = test_method_with_setup_levels.level_ids
                 self.starting_level_n = test_method_with_setup_levels.starting_level_n
-                self._set_up(is_debug=is_debug, is_full_screen=is_full_screen)
+                self._set_up(is_debug=is_debug,
+                             is_full_screen=is_full_screen,
+                             is_set_up_actors_and_levels=self.level_ids and True or False)
                 log.info(f"Start {self.current_test.__name__}")
                 self.current_test_timeout = test.timeout
                 self.current_test(game=self)
