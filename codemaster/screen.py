@@ -62,8 +62,8 @@ class StartGame(screen.StartGame):
     def __init__(self, game):
         super().__init__(game)
 
-        text_size_multiplier = 69.5 if self.game.is_persist_data else 96
-        text_start_game_pos_factor_y = 2.1 if self.game.is_persist_data else 1.82
+        text_size_multiplier = 38 if self.game.is_persist_data else 42
+        text_start_game_pos_factor_y = 1.96 if self.game.is_persist_data else 1.82
 
         libg_jp.render_text(
             '– Press Enter to Start –', Settings.screen_width // 2,
@@ -76,10 +76,10 @@ class StartGame(screen.StartGame):
                 Resource.txt_surfaces, 'game_continue_last', color=Color.CYAN,
                 size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
         libg_jp.render_text(
-            '– Load Last Game Failed. Press Space to Retry –', Settings.screen_width // 2,
+            '– Load Last Game Failed. Space to Retry –', Settings.screen_width // 2,
                 114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.7,
                 Resource.txt_surfaces, 'game_continue_last_failed', color=Color.RED_DARK,
-                size=int(55*Settings.font_pos_factor_t2), align="center")
+                size=int(33*Settings.font_pos_factor_t2), align="center")
 
     def _draw(self):
         super()._draw()

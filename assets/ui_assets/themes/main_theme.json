@@ -1,0 +1,26 @@
+{
+  "#main_shape_style": {
+    "colours": {
+      "hovered_bg": "#171717",
+      "hovered_text": "#BFBFBF",
+      "normal_bg": "Black",
+      "normal_border": "DarkGray",
+      "normal_text": "Gray",
+      "selected_bg": "DarkGray"
+    },
+    "misc": {
+      "shape": "rectangle",
+      "border_width": "1",
+      "shadow_width": "0"
+    }
+  },
+  "button": {
+    "prototype": "#main_shape_style"
+  },
+  "horizontal_slider": {
+    "prototype": "#main_shape_style",
+    "misc": {
+      "enable_arrow_buttons": 0
+    }
+  }
+}

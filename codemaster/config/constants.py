@@ -267,3 +267,7 @@ FILE_NAMES = {
     'snd_npc_killed': ('explosion', SOUND_FORMAT),
     'snd_door_unlock': ('door_unlock', SOUND_FORMAT),
     }
+
+UI_THEMES_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'ui_assets', 'themes')
+UI_MAIN_THEME_FILE = os.path.join(UI_THEMES_FOLDER, 'main_theme.json')
+UI_Y_SPACE_BETWEEN_BUTTONS = 42

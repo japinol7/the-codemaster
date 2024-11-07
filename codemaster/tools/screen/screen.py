@@ -176,8 +176,13 @@ class Pause(Screen):
         while not self.done:
             events = pg.event.get()
             self._events_handle(events)
+
+            self.game.__class__.ui_ingame.update(self.game.current_time_delta)
+            self.game.__class__.ui_ingame.draw_ui(self.game.screen)
+
             pg.display.flip()
             self.game.clock.tick(Settings.fps_paused)
+
         self.game.is_paused = False
         self.game.is_full_screen_switch = False
         self.background_screenshot = None
@@ -202,6 +207,8 @@ class Pause(Screen):
                 elif event.key == pg.K_F1:
                     self.game.is_help_screen = True
                     self.done = True
+            # Manage In Game UI events
+            self.game.__class__.ui_ingame.process_events(event)
 
 
 class StartGame(Screen):
@@ -218,6 +225,10 @@ class StartGame(Screen):
         while not self.done:
             events = pg.event.get()
             self._events_handle(events)
+
+            self.game.__class__.ui_main_menu.update(self.game.current_time_delta)
+            self.game.__class__.ui_main_menu.draw_ui(self.game.screen)
+
             pg.display.flip()
             clock.tick(Settings.fps_paused)
 
@@ -228,21 +239,16 @@ class StartGame(Screen):
         super()._events_handle(events)
         for event in events:
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                self.game.is_start_screen = False
                 self.game.set_is_exit_game(True)
-                self.done = True
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_F1:
                     self.game.screen_help.start_up()
                     self.done = True
                 elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
-                    self.game.is_start_screen = False
-                    self.game.is_load_last_game = False
+                    self.game.__class__.new_game = True
                 elif event.key == pg.K_SPACE:
                     if self.game.is_persist_data:
-                        self.game.is_start_screen = False
                         self.game.is_load_last_game = True
-                        self.done = True
                 elif event.key == pg.K_KP_DIVIDE:
                     if self.game.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
                             and pg.key.get_mods() & pg.KMOD_LALT:
@@ -254,3 +260,16 @@ class StartGame(Screen):
                             log.setLevel(logging.INFO)
                             self.game.__class__.is_log_debug = False
                             log.info("Set logger level to: Info")
+            # Manage In Game UI events
+            self.game.__class__.ui_main_menu.process_events(event)
+
+        if self.game.is_exit_game:
+            self.game.is_start_screen = False
+            self.done = True
+        elif self.game.__class__.new_game:
+            self.game.is_start_screen = False
+            self.game.is_load_last_game = False
+            self.done = True
+        elif self.game.is_load_last_game:
+            self.game.is_start_screen = False
+            self.done = True

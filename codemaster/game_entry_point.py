@@ -6,6 +6,7 @@ from datetime import datetime
 import logging
 
 import pygame as pg
+import pygame_gui as pgui
 
 from codemaster.tools.logger.logger import log
 from codemaster.models.actors.items.bullets import BulletType
@@ -43,7 +44,7 @@ from codemaster.persistence.persistence_settings import (
     PersistenceSettings,
     )
 from codemaster.persistence import persistence
-
+from codemaster.ui.ui_manager.ui_manager import UIManager
 
 START_LEVEL = 0
 
@@ -63,6 +64,10 @@ class Game:
     screen_flags = None
     normal_screen_flags = None
     full_screen_flags = None
+    ui_manager = None
+    ui_ingame = None
+    ui_main_menu = None
+    new_game = False
 
     def __init__(self, is_debug=None, is_full_screen=None,
                  is_persist_data=None, is_no_display_scaled=None):
@@ -128,7 +133,7 @@ class Game:
             Settings.display_start_height = pg_display_info.current_h
             Settings.calculate_settings(full_screen=is_full_screen)
             # Set screen to the settings configuration
-            Game.size = [Settings.screen_width, Settings.screen_height]
+            Game.size = Settings.screen_width, Settings.screen_height
             Game.full_screen_flags = pg.FULLSCREEN if is_no_display_scaled else pg.FULLSCREEN | pg.SCALED
             Game.normal_screen_flags = pg.SHOWN if is_no_display_scaled else pg.SHOWN | pg.SCALED
             Game.screen_flags = Game.full_screen_flags if Settings.is_full_screen else Game.normal_screen_flags
@@ -152,6 +157,11 @@ class Game:
             # Initialize persistence settings if necessary
             if self.is_persist_data:
                 PersistenceSettings.init_settings(self.persistence_path)
+
+            # Initialize UI
+            Game.ui_manager = UIManager(self)
+
+        self.current_time_delta = pg.time.get_ticks() / 1000.0
 
         # Initialize screens
         self.screen_exit_current_game = screen.ExitCurrentGame(self)
@@ -224,6 +234,7 @@ class Game:
             self.screen_exit_current_game.start_up()
             if self.done:
                 self.is_persist_data and persistence.persist_game_data(self)
+                Game.ui_manager.clean_game_data()
                 levels.Level.clean_entity_ids()
         elif Game.is_over:
             self.screen_game_over.start_up()
@@ -231,6 +242,7 @@ class Game:
                 self.write_game_over_info_to_file()
             if self.done:
                 self.is_persist_data and persistence.clear_all_persisted_data()
+                Game.ui_manager.clean_game_data()
                 levels.Level.clean_entity_ids()
         else:
             if not Game.is_over:
@@ -274,6 +286,7 @@ class Game:
     def _game_loop(self):
         while not self.done:
             self.current_time = pg.time.get_ticks()
+            self.current_time_delta = pg.time.get_ticks() / 1000.0
             for event in pg.event.get():
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                     self.is_exit_curr_game_confirm = True

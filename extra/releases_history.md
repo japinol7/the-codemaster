@@ -4,7 +4,15 @@
 
 ### New features and improvements:
 
-* Add xx.
+* Add UI buttons in the main screen.
+  * New Game.
+  * Continue Last Game.
+  * Load Game.
+  * Save Game.
+  * Credits
+  * Quit Game
+* Add dependency for the new UI items:
+  * pygame_gui
 
 <br>
 
