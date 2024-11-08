@@ -313,9 +313,9 @@
 
 
 #### Starting with version 0.0.9, you can enjoy new UI items 
-	We added new UI items using the pygame_gui package. <br>
-* [pygame-gui · PyPI](https://pypi.org/project/pygame-gui) <br>
-  Documentation: [Documentation — Pygame GUI](https://pygame-gui.readthedocs.io/) <br>
+	We added new UI items using the pygame_gui package.
+* [pygame-gui · PyPI](https://pypi.org/project/pygame-gui)
+* [Documentation — Pygame GUI](https://pygame-gui.readthedocs.io/)
 <br>
 
 
