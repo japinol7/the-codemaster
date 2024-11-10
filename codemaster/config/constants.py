@@ -272,3 +272,11 @@ FILE_NAMES = {
 UI_THEMES_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'ui_assets', 'themes')
 UI_MAIN_THEME_FILE = os.path.join(UI_THEMES_FOLDER, 'main_theme.json')
 UI_Y_SPACE_BETWEEN_BUTTONS = 42
+
+ALLOWED_CHARS_ALPHANUM_DASH = (
+        [chr(i) for i in range(65, 91)]
+        + [chr(i) for i in range(97, 123)]
+        + [chr(i) for i in range(48, 58)]
+        + ['_', '-']
+    )
+ALLOWED_CHARS_ALPHANUM_SPACE = ALLOWED_CHARS_ALPHANUM_DASH + [' ']

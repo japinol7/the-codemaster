@@ -187,7 +187,7 @@
             > Vortex of Doom. 
             > Lighning Bolts.
             > Doom Bolts.
-        > Kill its current life by pressing the <b> key for a time.
+        > Kill its current life by pressing Alt + b keys for a time.
 	> Player's ways of dying:
 	    > A player dies if all his lives are killed.
 	    > A life is killed:
@@ -353,7 +353,7 @@
     insert:        drink a health potion
     delete:        drink a power potion
     home:          eat a health apple
-    b:             hold b for a time to kill your current life
+    Alt + b:       hold Alt + b for a time to kill your current life
     p:           pause
     ESC:         exit game
     ^m:          pause/resume music

@@ -6,6 +6,7 @@ import pygame_gui as pgui
 
 from codemaster.version import version
 from codemaster.config.constants import (
+    ALLOWED_CHARS_ALPHANUM_SPACE,
     APP_WEBSITE_URL,
     UI_Y_SPACE_BETWEEN_BUTTONS,
     UI_MAIN_THEME_FILE,
@@ -153,8 +154,15 @@ class UIMainMenu:
 
         def load_game_directory_action():
             dir_name = self.items['load_game_selection_list'].get_single_selection()
-            log.info(f"Load Saved Game: {dir_name or ''}")
             self._hide_additional_game_items()
+
+            if not dir_name:
+                self._create_error_dialog_msg(
+                    f"Error: You must choose a saved game to load.")
+                self._show_load_game_selection_items()
+                return
+
+            log.info(f"Load Saved Game: {dir_name or ''}")
             try:
                 self.game.persistence_path_from_user = get_persistence_path(dir_name)
                 self.game.is_continue_game = True
@@ -294,8 +302,7 @@ class UIMainMenu:
             manager=self.manager,
             visible=False,
             )
-        self.items['text_entry_line'].set_allowed_characters(
-            self.game.allowed_chars_alphanum_space)
+        self.items['text_entry_line'].set_allowed_characters(ALLOWED_CHARS_ALPHANUM_SPACE)
 
         self.items['load_game_selection_list'] = pgui.elements.ui_selection_list.UISelectionList(
             relative_rect=pg.Rect((290, 395), (285, 300)),

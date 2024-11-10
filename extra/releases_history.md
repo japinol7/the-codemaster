@@ -16,7 +16,7 @@
   * Credits
   * Quit Game
 * Add dependency for the new UI items:
-  * pygame_gui
+  * pygame-gui
 
 <br>
 

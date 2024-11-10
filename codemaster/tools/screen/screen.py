@@ -230,7 +230,7 @@ class StartGame(Screen):
             try:
                 self.game.__class__.ui_main_menu.update(self.game.current_time_delta)
             except Exception as e:
-                log.warning(f"ERROR in pygame_gui libray: {e}")
+                log.warning(f"ERROR in pygame-gui libray: {e}")
 
             self._draw()
             self.game.__class__.ui_main_menu.draw_ui(self.game.screen)

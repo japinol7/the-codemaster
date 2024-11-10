@@ -6,7 +6,6 @@ from datetime import datetime
 import logging
 
 import pygame as pg
-import pygame_gui as pgui
 
 from codemaster.tools.logger.logger import log
 from codemaster.models.actors.items.bullets import BulletType
@@ -65,7 +64,6 @@ class Game:
     normal_screen_flags = None
     full_screen_flags = None
     ui_manager = None
-    ui_ingame = None
     ui_main_menu = None
     new_game = False
 
@@ -123,12 +121,6 @@ class Game:
         self.screen_help = None
         self.mouse_pos = 0, 0
         self.is_magic_on = False
-        self.allowed_chars_alphanum_dash = (
-            [chr(i) for i in range(65, 91)]
-            + [chr(i) for i in range(97, 123)]
-            + [chr(i) for i in range(48, 58)] + ['_', '-']
-            )
-        self.allowed_chars_alphanum_space = self.allowed_chars_alphanum_dash + [' ']
 
         Game.is_exit_game = False
         if Game.current_game > 0:
@@ -439,7 +431,7 @@ class Game:
                             self.player.invulnerable = not self.player.invulnerable
                             log.info(f"Set player invulnerability state to: {self.player.invulnerable} (cheat)")
                     elif event.key == pg.K_b:
-                        if not self.K_b_keydown_seconds:
+                        if pg.key.get_mods() & pg.KMOD_LALT and not self.K_b_keydown_seconds:
                             t = datetime.now().time()
                             self.K_b_keydown_seconds = (t.hour * 60 + t.minute) * 60 + t.second
                 elif event.type == pg.KEYUP:
@@ -456,10 +448,12 @@ class Game:
                     if event.key == pg.K_t:
                         self.player.use_door_key()
                     if event.key == pg.K_b:
-                        t = datetime.now().time()
-                        if ((t.hour * 60 + t.minute) * 60 + t.second) - self.K_b_keydown_seconds >= PL_SELF_DESTRUCTION_COUNT_DEF:
-                            self.player.self_destruction()
-                            self.K_b_keydown_seconds = 0
+                        if pg.key.get_mods() & pg.KMOD_LALT:
+                            t = datetime.now().time()
+                            if (((t.hour * 60 + t.minute) * 60 + t.second) - self.K_b_keydown_seconds
+                                    >= PL_SELF_DESTRUCTION_COUNT_DEF):
+                                self.player.self_destruction()
+                                self.K_b_keydown_seconds = 0
                     if event.key == pg.K_F5:
                         if (self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL
                                 and pg.key.get_mods() & pg.KMOD_LALT):
