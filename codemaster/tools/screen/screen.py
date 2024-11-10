@@ -4,6 +4,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 import logging
 
 import pygame as pg
+import pygame_gui as pgui
 
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.config.settings import Settings
@@ -41,7 +42,7 @@ class Screen:
         for event in events:
             if event.type == pg.KEYDOWN:
                 if event.key in (pg.K_KP_ENTER, pg.K_RETURN):
-                    if pg.key.get_mods() & pg.KMOD_ALT:
+                    if pg.key.get_mods() & pg.KMOD_ALT and not pg.key.get_mods() & pg.KMOD_LCTRL:
                         self._full_screen_switch_hook()
                         libg_jp.full_screen_switch(self.game)
                         self._draw()
@@ -166,6 +167,7 @@ class Pause(Screen):
         self.is_full_screen_switch = False
 
     def start_up(self, current_time=None, is_full_screen_switch=False, *args, **kwargs):
+        pg.mouse.set_visible(True)
         self.is_full_screen_switch = is_full_screen_switch
         if self.is_full_screen_switch:
             self._full_screen_switch_hook()
@@ -177,8 +179,7 @@ class Pause(Screen):
             events = pg.event.get()
             self._events_handle(events)
 
-            self.game.__class__.ui_ingame.update(self.game.current_time_delta)
-            self.game.__class__.ui_ingame.draw_ui(self.game.screen)
+            self._draw()
 
             pg.display.flip()
             self.game.clock.tick(Settings.fps_paused)
@@ -186,6 +187,7 @@ class Pause(Screen):
         self.game.is_paused = False
         self.game.is_full_screen_switch = False
         self.background_screenshot = None
+        pg.mouse.set_visible(False)
 
     def _full_screen_switch_hook(self):
         self.is_full_screen_switch = True
@@ -207,8 +209,6 @@ class Pause(Screen):
                 elif event.key == pg.K_F1:
                     self.game.is_help_screen = True
                     self.done = True
-            # Manage In Game UI events
-            self.game.__class__.ui_ingame.process_events(event)
 
 
 class StartGame(Screen):
@@ -221,12 +221,18 @@ class StartGame(Screen):
         super().start_up(current_time=self.game.current_time)
         clock = pg.time.Clock()
         self.game.is_start_screen = True
+        self.game.persistence_path_from_user = ''
 
         while not self.done:
             events = pg.event.get()
             self._events_handle(events)
 
-            self.game.__class__.ui_main_menu.update(self.game.current_time_delta)
+            try:
+                self.game.__class__.ui_main_menu.update(self.game.current_time_delta)
+            except Exception as e:
+                log.warning(f"ERROR in pygame_gui libray: {e}")
+
+            self._draw()
             self.game.__class__.ui_main_menu.draw_ui(self.game.screen)
 
             pg.display.flip()
@@ -245,10 +251,12 @@ class StartGame(Screen):
                     self.game.screen_help.start_up()
                     self.done = True
                 elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
-                    self.game.__class__.new_game = True
+                    if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT:
+                        self.game.__class__.new_game = True
                 elif event.key == pg.K_SPACE:
-                    if self.game.is_persist_data:
-                        self.game.is_load_last_game = True
+                    if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT:
+                        if self.game.is_persist_data:
+                            self.game.is_continue_game = True
                 elif event.key == pg.K_KP_DIVIDE:
                     if self.game.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
                             and pg.key.get_mods() & pg.KMOD_LALT:
@@ -262,14 +270,18 @@ class StartGame(Screen):
                             log.info("Set logger level to: Info")
             # Manage In Game UI events
             self.game.__class__.ui_main_menu.process_events(event)
+            if event.type == pgui.UI_CONFIRMATION_DIALOG_CONFIRMED:
+                if event.ui_element == self.game.ui_manager.ui_main_menu.items[
+                    'delete_saved_game_confirm_dialog']:
+                    self.game.ui_manager.ui_main_menu.delete_game_directory_action()
 
         if self.game.is_exit_game:
             self.game.is_start_screen = False
             self.done = True
         elif self.game.__class__.new_game:
             self.game.is_start_screen = False
-            self.game.is_load_last_game = False
+            self.game.is_continue_game = False
             self.done = True
-        elif self.game.is_load_last_game:
+        elif self.game.is_continue_game:
             self.game.is_start_screen = False
             self.done = True

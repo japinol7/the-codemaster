@@ -16,9 +16,9 @@ class ExitCurrentGame(screen.ExitCurrentGame):
         self.game.screen.blit(*Resource.txt_surfaces['exit_current_game_confirm'])
         self.game.screen.blit(*Resource.txt_surfaces['press_intro_to_continue_2'])
         self.game.screen.blit(Resource.images['seal_just_a_demo'],
-                              (Settings.screen_width // 2 - Resource.images['seal_just_a_demo'].get_width() // 2,
-                               Settings.screen_height // 1.16 - Resource.images['seal_just_a_demo'].get_height() // 1.16
-                               ))
+              (Settings.screen_width // 2 - Resource.images['seal_just_a_demo'].get_width() // 2,
+               Settings.screen_height // 1.05 - Resource.images['seal_just_a_demo'].get_height() // 1.05
+               ))
 
 
 class GameOver(screen.GameOver):
@@ -44,7 +44,6 @@ class Pause(screen.Pause):
         if self.is_full_screen_switch:
             self.game.screen.blit(self.background_screenshot, (0, 0))
         self.game.screen.blit(*Resource.txt_surfaces['game_paused'])
-        self.game.screen.blit(Resource.images['dim_screen'], (0, 0))
 
 
 class Help(screen.Help):
@@ -62,24 +61,24 @@ class StartGame(screen.StartGame):
     def __init__(self, game):
         super().__init__(game)
 
-        text_size_multiplier = 38 if self.game.is_persist_data else 42
-        text_start_game_pos_factor_y = 1.96 if self.game.is_persist_data else 1.82
+        text_size_multiplier = 28 if self.game.is_persist_data else 32
+        text_start_game_pos_factor_y = 1.34 if self.game.is_persist_data else 1.4
 
         libg_jp.render_text(
-            '– Press Enter to Start –', Settings.screen_width // 2,
+            '– Press Ctrl + Alt + Enter to Start –', Settings.screen_width // 2,
                 114 * Settings.font_pos_factor_t2 + Settings.screen_height // text_start_game_pos_factor_y,
                 Resource.txt_surfaces, 'game_start', color=Color.CYAN,
                 size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
         libg_jp.render_text(
-            '– Press Space to Continue Last Game –', Settings.screen_width // 2,
-                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.7,
+            '– Press Ctrl + Alt + Space to Continue Last Game –', Settings.screen_width // 2,
+                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.44,
                 Resource.txt_surfaces, 'game_continue_last', color=Color.CYAN,
                 size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
         libg_jp.render_text(
-            '– Load Last Game Failed. Space to Retry –', Settings.screen_width // 2,
-                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.7,
+            '– Load Last Game Failed. Maybe last game ended as Game Over or a Win ? –', Settings.screen_width // 2,
+                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.44,
                 Resource.txt_surfaces, 'game_continue_last_failed', color=Color.RED_DARK,
-                size=int(33*Settings.font_pos_factor_t2), align="center")
+                size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
 
     def _draw(self):
         super()._draw()
@@ -97,7 +96,7 @@ class StartGame(screen.StartGame):
                               - 36 * Settings.font_pos_factor))
         self.game.screen.blit(Resource.images['seal_just_a_demo'],
                               (Settings.screen_width // 2 - Resource.images['seal_just_a_demo'].get_width() // 2,
-                               Settings.screen_height // 1.16 - Resource.images['seal_just_a_demo'].get_height() // 1.16
+                               Settings.screen_height // 1.05 - Resource.images['seal_just_a_demo'].get_height() // 1.05
                                ))
         self.game.screen.blit(*Resource.txt_surfaces['game_start'])
 

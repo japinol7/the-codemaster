@@ -1,0 +1,201 @@
+No datetime | INFO | Start app codemaster version: 0.0.9
+No datetime | INFO | App arguments: -d -n -m
+No datetime | INFO | Set logger level to: Debug
+No datetime | DEBUG | persistence_path='save_data\\save_data'
+No datetime | INFO | Start game
+No datetime | DEBUG | BAT_BLUE_00001 hit by T2_LASER2_0000001_from_player, health: 112.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00001 hit by T1_LASER1_0000002_from_player, health: 105.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLUE_00001 hit by T1_LASER1_0000003_from_player, health: 100.0, bullet_power: 5
+No datetime | DEBUG | TEXT_MSG_PLAYER_00001 killed when TIMER_00001 ticked 0 secs.
+No datetime | DEBUG | BAT_BLUE_00001 hit by T2_LASER2_0000002_from_player, health: 95.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00001 hit by T3_PHOTONIC_0000002_from_player, health: 88.0, bullet_power: 20
+No datetime | DEBUG | BAT_BLUE_00001 hit by T2_LASER2_0000003_from_player, health: 68.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00001 hit by T1_LASER1_0000004_from_player, health: 61.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLUE_00001 hit by T2_LASER2_0000004_from_player, health: 56.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00001 hit by T2_LASER2_0000005_from_player, health: 49.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00001 hit by T3_PHOTONIC_0000003_from_player, health: 42.0, bullet_power: 20
+No datetime | DEBUG | BAT_BLUE_00001 hit by T1_LASER1_0000005_from_player, health: 22.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLUE_00001 hit by T2_LASER2_0000007_from_player, health: 17.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLUE_00001 hit by T1_LASER1_0000006_from_player, health: 10.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLUE_00001 hit by T1_LASER1_0000007_from_player, health: 5.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLUE_00001, !!! Dead by bullet T1_LASER1_0000007_from_player !!!
+No datetime | DEBUG | BAT_BLUE_00001, lucky_drop_dice: 91, probability_to_drop: 100, item type: BatBlack
+No datetime | DEBUG | Create item to drop
+No datetime | DEBUG | Add actor BAT_BLACK_00027 to level 1
+No datetime | DEBUG | Dropped: BAT_BLACK_00027
+No datetime | DEBUG | BAT_BLACK_00027 hit by T2_LASER2_0000010_from_player, health: 203.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLACK_00027 hit by T1_LASER1_0000008_from_player, health: 196.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLACK_00027 hit by T2_LASER2_0000011_from_player, health: 191.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLACK_00027 hit by T2_LASER2_0000012_from_player, health: 184.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLACK_00027 hit by T1_LASER1_0000010_from_player, health: 177.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLACK_00027 hit by T2_LASER2_0000013_from_player, health: 172.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLACK_00027 hit by T1_LASER1_0000011_from_player, health: 165.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLACK_00027 hit by T2_LASER2_0000014_from_player, health: 160.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLACK_00027 hit by T1_LASER1_0000013_from_player, health: 153.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLACK_00027 hit by T2_LASER2_0000015_from_player, health: 148.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLACK_00027 hit by T1_LASER1_0000014_from_player, health: 141.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLACK_00027 hit by T2_LASER2_0000017_from_player, health: 136.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLACK_00027 hit by T1_LASER1_0000015_from_player, health: 129.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLACK_00027 hit by T2_LASER2_0000018_from_player, health: 124.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLACK_00027 hit by T1_LASER1_0000016_from_player, health: 117.0, bullet_power: 5
+No datetime | DEBUG | BAT_BLACK_00027 hit by T2_LASER2_0000020_from_player, health: 112.0, bullet_power: 7.0
+No datetime | DEBUG | BAT_BLACK_00027 hit by T3_PHOTONIC_0000006_from_player, health: 105.0, bullet_power: 20
+No datetime | DEBUG | BAT_BLACK_00027 hit by T4_NEUTRONIC_0000001_from_player, health: 85.0, bullet_power: 40
+No datetime | DEBUG | BAT_BLACK_00027 hit by T3_PHOTONIC_0000007_from_player, health: 45.0, bullet_power: 20
+No datetime | DEBUG | BAT_BLACK_00027 hit by T4_NEUTRONIC_0000002_from_player, health: 25.0, bullet_power: 40
+No datetime | DEBUG | BAT_BLACK_00027, !!! Dead by bullet T4_NEUTRONIC_0000002_from_player !!!
+No datetime | DEBUG | WOLFMAN_MALE_00002 hit by T1_LASER1_0000018_from_player, health: 210, bullet_power: 5
+No datetime | INFO | Save current game
+No datetime | DEBUG | Save current game PC
+No datetime | DEBUG | Save current game items
+No datetime | DEBUG | Save current game items: Not initial actors
+No datetime | DEBUG | Save current game NPCs
+No datetime | DEBUG | Save current game NPCs: Not initial actors
+No datetime | INFO | Clean game data
+No datetime | DEBUG | persistence_path='save_data\\save_data'
+No datetime | INFO | Load last saved game
+No datetime | DEBUG | Load last saved game items
+No datetime | DEBUG | Load last saved game items: Not initial actors
+No datetime | DEBUG | Load last saved game NPCs
+No datetime | DEBUG | Load last saved game NPCs: Not initial actors
+No datetime | DEBUG | Load last saved game PC
+No datetime | INFO | Start game
+No datetime | INFO | All batteries and disks from level 1 recovered.
+No datetime | DEBUG | MINE_CYAN_00001 hit by T1_LASER1_0000001_from_player, health: 1, bullet_power: 5
+No datetime | DEBUG | MINE_CYAN_00001, !!! Dead by bullet T1_LASER1_0000001_from_player !!!
+No datetime | DEBUG | SKULL_YELLOW_00001 hit by EXPLOSION_B_00001, npc_health: 70, explosion_power: 170, owner: player
+No datetime | DEBUG | SKULL_YELLOW_00001, !!! Dead by EXPLOSION_B_00001. Owner: PLAYER !!!
+No datetime | DEBUG | MINE_CYAN_00003 hit by T1_LASER1_0000002_from_player, health: 1, bullet_power: 5
+No datetime | DEBUG | MINE_CYAN_00003, !!! Dead by bullet T1_LASER1_0000002_from_player !!!
+No datetime | DEBUG | SKULL_RED_00001 hit by EXPLOSION_B_00003, npc_health: 105, explosion_power: 170, owner: player
+No datetime | DEBUG | SKULL_RED_00001, !!! Dead by EXPLOSION_B_00003. Owner: PLAYER !!!
+No datetime | DEBUG | SKULL_YELLOW_00003 hit by EXPLOSION_B_00007, npc_health: 70, explosion_power: 170, owner: player
+No datetime | DEBUG | SKULL_YELLOW_00003, !!! Dead by EXPLOSION_B_00007. Owner: PLAYER !!!
+No datetime | DEBUG | ROBOT_A_00001 hit by EXPLOSION_B_00010, npc_health: 175, explosion_power: 170, owner: player
+No datetime | DEBUG | ROBOT_A_00001 hit by EXPLOSION_B_00011, npc_health: 5, explosion_power: 170, owner: player
+No datetime | DEBUG | ROBOT_A_00001, !!! Dead by EXPLOSION_B_00011. Owner: PLAYER !!!
+No datetime | DEBUG | ROBOT_A_00002 hit by EXPLOSION_B_00012, npc_health: 175, explosion_power: 170, owner: player
+No datetime | DEBUG | ROBOT_A_00002 hit by EXPLOSION_B_00013, npc_health: 5, explosion_power: 170, owner: player
+No datetime | DEBUG | ROBOT_A_00002, !!! Dead by EXPLOSION_B_00013. Owner: PLAYER !!!
+No datetime | DEBUG | TEXT_MSG_PLAYER_00001 killed when TIMER_00002 ticked 0 secs.
+No datetime | DEBUG | TEXT_MSG_PLAYER_00002 killed when TIMER_00003 ticked 0 secs.
+No datetime | DEBUG | SKULL_YELLOW_00002 hit by T3_PHOTONIC_0000001_from_player, health: 70, bullet_power: 20
+No datetime | DEBUG | SKULL_YELLOW_00002 hit by T4_NEUTRONIC_0000001_from_player, health: 50, bullet_power: 40
+No datetime | DEBUG | SKULL_YELLOW_00002 hit by T1_LASER1_0000003_from_player, health: 10, bullet_power: 5
+No datetime | DEBUG | SKULL_YELLOW_00002 hit by T2_LASER2_0000001_from_player, health: 5, bullet_power: 7.0
+No datetime | DEBUG | SKULL_YELLOW_00002, !!! Dead by bullet T2_LASER2_0000001_from_player !!!
+No datetime | INFO | All batteries and disks from level 2 recovered.
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_DEMON_MALE_00001, pc_health: 76.0, bullet_power: 7.0
+No datetime | DEBUG | FIRE_BREATH_B_00001 killed when TIMER_00005 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_A_00001 killed when TIMER_00007 ticked 0 secs.
+No datetime | DEBUG | player hit by T2_LASER2_0000001_from_TERMINATOR_EYE_YELLOW_00001, pc_health: 69.0, bullet_power: 7.0
+No datetime | DEBUG | CLOCK_TIMER_A_00001 killed when TIMER_00001 ticked 0 secs.
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00003, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00001
+No datetime | DEBUG | FIRE_BREATH_B_00002 killed when TIMER_00011 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00003 killed when TIMER_00013 ticked 0 secs.
+No datetime | DEBUG | TEXT_MSG_PLAYER_00003 killed when TIMER_00018 ticked 0 secs.
+No datetime | DEBUG | player hit by T1_LASER1_0000001_from_TERMINATOR_EYE_GREEN_00001, pc_health: 20.2, bullet_power: 5
+No datetime | DEBUG | FIRE_BREATH_B_00004 killed when TIMER_00017 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00005 killed when TIMER_00020 ticked 0 secs.
+No datetime | DEBUG | player hit by T1_LASER1_0000003_from_TERMINATOR_EYE_GREEN_00001, pc_health: 15.2, bullet_power: 5
+No datetime | DEBUG | FIRE_BREATH_B_00006 killed when TIMER_00022 ticked 0 secs.
+No datetime | DEBUG | TEXT_MSG_PLAYER_00004 killed when TIMER_00029 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00008 killed when TIMER_00031 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00009 killed when TIMER_00033 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00010 killed when TIMER_00035 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00011 killed when TIMER_00038 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00015 killed when TIMER_00052 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00016 killed when TIMER_00054 ticked 0 secs.
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00020, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00002
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00020, health: 48.0, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00002
+No datetime | DEBUG | player, !!! Dead by FIRE_BREATH_B_00020, owner: DEMON_MALE_00002 !!!
+No datetime | DEBUG | FIRE_BREATH_B_00021 killed when TIMER_00068 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00022 killed when TIMER_00070 ticked 0 secs.
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00026, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00002
+No datetime | DEBUG | FIRE_BREATH_B_00023 killed when TIMER_00072 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00024 killed when TIMER_00075 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00025 killed when TIMER_00080 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00026 killed when TIMER_00082 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00027 killed when TIMER_00084 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00029 killed when TIMER_00092 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_A_00002 killed when TIMER_00094 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00030 killed when TIMER_00096 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00031 killed when TIMER_00099 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00032 killed when TIMER_00102 ticked 0 secs.
+No datetime | DEBUG | BAT_BLUE_00004 hit by T3_PHOTONIC_0000005_from_player, health: 112.0, bullet_power: 20
+No datetime | DEBUG | SNAKE_BLUE_00001 hit by T1_LASER1_0000004_from_player, health: 175, bullet_power: 5
+No datetime | DEBUG | FIRE_BREATH_B_00033 killed when TIMER_00106 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00034 killed when TIMER_00110 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00035 killed when TIMER_00112 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00036 killed when TIMER_00114 ticked 0 secs.
+No datetime | DEBUG | FIRE_BREATH_B_00037 killed when TIMER_00118 ticked 0 secs.
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00041, health: 100, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00002
+No datetime | DEBUG | player hit by FIRE_BREATH_B_00041, health: 48.0, fire_range_partial_power: 143.00, magic_res: 91.00, owner: DEMON_MALE_00002
+No datetime | DEBUG | player, !!! Dead by FIRE_BREATH_B_00041, owner: DEMON_MALE_00002 !!!
+No datetime | INFO | Game over!
+No datetime | INFO | 
+
+
+------------------------------------Current game stats------------------------------------
+time                        -->	2024-11-10 05:07:58.142322
+screen size                 -->	(1160, 778)
+fps                         -->	   	 14.04
+current song                -->	action_song__192b.ogg
+music playing               -->	      True
+sound effects               -->	      True
+game paused                 -->	     False
+level                       -->	         4
+platforms                   -->	<Group(132 sprites)>
+doors                       -->	<Group(3 sprites)>
+locked doors                -->	         1
+door keys                   -->	<Group(0 sprites)>
+batteries left              -->	<Group(4 sprites)>
+files_disks left            -->	<Group(1 sprites)>
+computers                   -->	<Group(0 sprites)>
+NPCs                        -->	<Group(12 sprites)>
+bullets                     -->	<Group(0 sprites)>
+player                      -->
+	position (x, y)             -->		(726, 372)
+	position (bottom)           -->		       444
+	direction                   -->		         L
+	change position (x, y)      -->		(0, '1.000')
+	invulnerable                -->		     False
+	stats                       -->
+		PC_level                    -->			         1
+		lives                       -->			         0
+		health                      -->			       100
+		power                       -->			      54.1
+		speed                       -->			         8
+		score                       -->			      2670
+		batteries                   -->			        18
+		files disks                 -->			         3
+		files disks types           -->
+			D                           -->				         2
+			C                           -->				         1
+			B                           -->				         0
+			A                           -->				         0
+		potions_health              -->			         0
+		potions_power               -->			         0
+		apples                      -->			         2
+		apples_type                 -->
+			G                           -->				         1
+			Y                           -->				         1
+			R                           -->				         0
+		door_keys                   -->			         1
+		door_keys_type              -->
+			G                           -->				         0
+			B                           -->				         0
+			A                           -->				         0
+			Y                           -->				         1
+			R                           -->				         0
+			M                           -->				         0
+		bullets_t01                 -->			       138
+		bullets_t02                 -->			        71
+		bullets_t03                 -->			        12
+		bullets_t04                 -->			         6
+	levels completed:           -->		    [1, 2]
+------------------------------------------------------------------------------------------
+
+No datetime | INFO | Clean last saved game
+No datetime | INFO | Clean game data
+No datetime | INFO | End app codemaster

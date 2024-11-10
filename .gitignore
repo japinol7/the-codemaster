@@ -1,6 +1,6 @@
 /.idea/
 /env/
-/save_data/save_data/
+/save_data/
 *.cache
 
 # Byte-compiled / optimized / DLL files

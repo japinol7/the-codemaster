@@ -1,0 +1,361 @@
+{
+  "saved_game_data": {
+    "app_name": "The CodeMaster. Nightmare on Bots' Island.",
+    "app_tech_name": "codemaster",
+    "app_version": "0.0.9",
+    "continue_game": true
+  },
+  "game_levels": {
+    "1": {
+      "world_shift": 0,
+      "world_shift_initial": 0,
+      "world_shift_top": -500,
+      "world_shift_top_initial": -500,
+      "items": {
+        "BATTERY_A_00001": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": 100,
+          "y": 324,
+          "direction": 2
+        },
+        "BATTERY_A_00002": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": 300,
+          "y": 324,
+          "direction": 2
+        },
+        "BATTERY_A_00003": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": 1200,
+          "y": 54,
+          "direction": 2
+        },
+        "MINE_CYAN_00001": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 400,
+          "y": 330,
+          "direction": 2
+        },
+        "MINE_CYAN_00002": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 425,
+          "y": 330,
+          "direction": 2
+        },
+        "DOOR_LEFT_BLUE_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_BLUE",
+          "door_type": 0,
+          "is_locked": false
+        },
+        "DOOR_RIGHT_YELLOW_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_YELLOW",
+          "door_type": 1,
+          "is_locked": false
+        }
+      }
+    },
+    "2": {
+      "world_shift": -2372,
+      "world_shift_initial": 0,
+      "world_shift_top": -760,
+      "world_shift_top_initial": -500,
+      "items": {
+        "DOOR_RIGHT_GREEN_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_GREEN",
+          "door_type": 1,
+          "is_locked": false
+        },
+        "DOOR_LEFT_YELLOW_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_YELLOW",
+          "door_type": 0,
+          "is_locked": false
+        }
+      }
+    },
+    "3": {
+      "world_shift": -2625,
+      "world_shift_initial": 0,
+      "world_shift_top": -713,
+      "world_shift_top_initial": -500,
+      "items": {
+        "COMPUTER_01_00001": {
+          "category_type": "COMPUTER",
+          "type": "COMPUTER_01",
+          "health": 1,
+          "health_total": 1,
+          "x": 335,
+          "y": 123,
+          "direction": 2
+        },
+        "DOOR_RIGHT_YELLOW_00002": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_YELLOW",
+          "door_type": 1,
+          "is_locked": false
+        },
+        "DOOR_LEFT_GREEN_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_GREEN",
+          "door_type": 0,
+          "is_locked": false
+        }
+      }
+    },
+    "4": {
+      "world_shift": -2180,
+      "world_shift_initial": 0,
+      "world_shift_top": -37,
+      "world_shift_top_initial": -500,
+      "items": {
+        "DOOR_RIGHT_BLUE_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_BLUE",
+          "door_type": 1,
+          "is_locked": false
+        },
+        "DOOR_LEFT_YELLOW_00002": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_YELLOW",
+          "door_type": 0,
+          "is_locked": false
+        },
+        "DOOR_RIGHT_YELLOW_00003": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_YELLOW",
+          "door_type": 1,
+          "is_locked": false
+        }
+      }
+    },
+    "5": {
+      "world_shift": -2700,
+      "world_shift_initial": 0,
+      "world_shift_top": -760,
+      "world_shift_top_initial": -500,
+      "items": {
+        "DOOR_RIGHT_RED_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_RED",
+          "door_type": 1,
+          "is_locked": false
+        },
+        "DOOR_LEFT_YELLOW_00003": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_YELLOW",
+          "door_type": 0,
+          "is_locked": false
+        }
+      }
+    },
+    "6": {
+      "world_shift": -2478,
+      "world_shift_initial": 0,
+      "world_shift_top": -123,
+      "world_shift_top_initial": -500,
+      "items": {
+        "COMPUTER_01_00002": {
+          "category_type": "COMPUTER",
+          "type": "COMPUTER_01",
+          "health": 1,
+          "health_total": 1,
+          "x": 382,
+          "y": 713,
+          "direction": 2
+        },
+        "BATTERY_A_00027": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": -2068,
+          "y": 561,
+          "direction": 2
+        },
+        "FILES_DISK_C_00002": {
+          "category_type": "FILES_DISK",
+          "type": "FILES_DISK_C",
+          "health": 1,
+          "health_total": 1,
+          "x": -2138,
+          "y": 561,
+          "direction": 2
+        },
+        "LIFE_RECOVERY_00002": {
+          "category_type": "LIFE_RECOVERY",
+          "type": "LIFE_RECOVERY",
+          "health": 1,
+          "health_total": 1,
+          "x": -1967,
+          "y": 560,
+          "direction": 2
+        },
+        "DOOR_LEFT_RED_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_RED",
+          "door_type": 0,
+          "is_locked": false
+        },
+        "DOOR_LEFT_AQUA_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_AQUA",
+          "door_type": 0,
+          "is_locked": false
+        },
+        "DOOR_RIGHT_GREEN_00002": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_GREEN",
+          "door_type": 1,
+          "is_locked": false
+        }
+      }
+    },
+    "9": {
+      "world_shift": -2864,
+      "world_shift_initial": 0,
+      "world_shift_top": -760,
+      "world_shift_top_initial": -500,
+      "items": {
+        "DOOR_LEFT_WHITE_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_WHITE",
+          "door_type": 0,
+          "is_locked": false
+        },
+        "DOOR_RIGHT_AQUA_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_AQUA",
+          "door_type": 1,
+          "is_locked": false
+        },
+        "DOOR_RIGHT_YELLOW_00005": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_YELLOW",
+          "door_type": 1,
+          "is_locked": false
+        }
+      }
+    },
+    "10": {
+      "world_shift": -2850,
+      "world_shift_initial": 0,
+      "world_shift_top": -866,
+      "world_shift_top_initial": -500,
+      "items": {
+        "FILES_DISK_A_00001": {
+          "category_type": "FILES_DISK",
+          "type": "FILES_DISK_A",
+          "health": 1,
+          "health_total": 1,
+          "x": -2814,
+          "y": -103,
+          "direction": 2
+        },
+        "CARTRIDGE_GREEN_00006": {
+          "category_type": "CARTRIDGE",
+          "type": "CARTRIDGE_GREEN",
+          "health": 1,
+          "health_total": 1,
+          "x": -2090,
+          "y": -250,
+          "direction": 2
+        },
+        "CARTRIDGE_BLUE_00006": {
+          "category_type": "CARTRIDGE",
+          "type": "CARTRIDGE_BLUE",
+          "health": 1,
+          "health_total": 1,
+          "x": -2050,
+          "y": -250,
+          "direction": 2
+        },
+        "CARTRIDGE_YELLOW_00004": {
+          "category_type": "CARTRIDGE",
+          "type": "CARTRIDGE_YELLOW",
+          "health": 1,
+          "health_total": 1,
+          "x": -2010,
+          "y": -250,
+          "direction": 2
+        },
+        "CARTRIDGE_RED_00003": {
+          "category_type": "CARTRIDGE",
+          "type": "CARTRIDGE_RED",
+          "health": 1,
+          "health_total": 1,
+          "x": -1970,
+          "y": -250,
+          "direction": 2
+        },
+        "CARTRIDGE_GREEN_00007": {
+          "category_type": "CARTRIDGE",
+          "type": "CARTRIDGE_GREEN",
+          "health": 1,
+          "health_total": 1,
+          "x": -2090,
+          "y": -288,
+          "direction": 2
+        },
+        "CARTRIDGE_BLUE_00007": {
+          "category_type": "CARTRIDGE",
+          "type": "CARTRIDGE_BLUE",
+          "health": 1,
+          "health_total": 1,
+          "x": -2050,
+          "y": -288,
+          "direction": 2
+        },
+        "DOOR_LEFT_YELLOW_00005": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_YELLOW",
+          "door_type": 0,
+          "is_locked": false
+        },
+        "DOOR_RIGHT_BLUE_00002": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_BLUE",
+          "door_type": 1,
+          "is_locked": false
+        }
+      }
+    },
+    "11": {
+      "world_shift": 4,
+      "world_shift_initial": 0,
+      "world_shift_top": -760,
+      "world_shift_top_initial": -500,
+      "items": {
+        "DOOR_LEFT_BLUE_00002": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_BLUE",
+          "door_type": 0,
+          "is_locked": false
+        },
+        "DOOR_RIGHT_MAGENTA_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_MAGENTA",
+          "door_type": 1,
+          "is_locked": true
+        }
+      }
+    }
+  }
+}

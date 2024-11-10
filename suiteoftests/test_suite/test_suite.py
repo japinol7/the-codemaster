@@ -110,6 +110,8 @@ class GameTestSuite:
         self.is_settings_initialized_before = False
         self.is_persist_data = False
         self.persistence_path = os.path.join('suiteoftests', 'data', "save_data")
+        self.is_continue_game = False
+        self.is_load_user_game = False
 
     @property
     def tests(self):

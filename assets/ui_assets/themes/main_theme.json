@@ -1,12 +1,13 @@
 {
   "#main_shape_style": {
     "colours": {
-      "hovered_bg": "#171717",
+      "dark_bg": "#0D0D0D",
+      "hovered_bg": "#002505",
       "hovered_text": "#BFBFBF",
       "normal_bg": "Black",
-      "normal_border": "DarkGray",
+      "normal_border": "Black",
       "normal_text": "Gray",
-      "selected_bg": "DarkGray"
+      "selected_bg": "#002505"
     },
     "misc": {
       "shape": "rectangle",
@@ -21,6 +22,22 @@
     "prototype": "#main_shape_style",
     "misc": {
       "enable_arrow_buttons": 0
+    }
+  },
+  "selection_list": {
+    "prototype": "#main_shape_style",
+    "misc": {
+      "list_item_height": "36"
+    }
+  },
+  "@dialog_msgs": {
+    "colours": {
+      "dark_bg": "#0D0D0D"
+    }
+  },
+  "#error_msg": {
+    "colours": {
+      "normal_text": "Red"
     }
   }
 }

@@ -1,7 +1,7 @@
 ## The CodeMaster. Nightmare on Bots' Island
 
 	The CodeMaster is a spin-off sci-fi mystery based on the 
-	1988 RPG platformer game Pac's Revenge.
+	1988 RPG platformer game Pac's Revenge 🚀.
 <br />
 
 	program: The CodeMaster. Nightmare on Bots' Island.
@@ -13,6 +13,9 @@
 	description: A spin-off sci-fi mystery based on Pac's Revenge 
       series games by @japinol  (c) 1987, 1988, 2015, 2021, 2024.
     Pixel art graphics (c) 1987, 1988, 2015, 2021, 2024.
+<br />
+
+	Dependencies: pygame-ce, pygame-gui.
 	Python requires: 3.12 or greater.
 
 
@@ -21,11 +24,18 @@
 <img src="screenshots/screenshot1.jpg" width="980" alt=""> <br />
 <img src="screenshots/screenshot2.jpg" width="980" alt=""> <br />
 <img src="screenshots/screenshot3.png" width="980" alt=""> <br />
+<br />
 
 
 ## Videos
 
-### Video example for previous game version 0.05
+### GIF video example for game version 0.0.9
+
+<img src="videos/gif_video_v_0_0_9.gif" width="810" alt=""> <br />
+<br />
+
+
+### Video example for previous game version 0.0.5 - Youtube link
 
 [![Video](https://img.youtube.com/vi/g_bQu2BlSw4/maxresdefault.jpg)](https://www.youtube.com/watch?v=g_bQu2BlSw4)
 
@@ -313,9 +323,11 @@
 
 
 #### Starting with version 0.0.9, you can enjoy new UI items 
-	We added new UI items using the pygame_gui package.
-* [pygame-gui · PyPI](https://pypi.org/project/pygame-gui)
-* [Documentation — Pygame GUI](https://pygame-gui.readthedocs.io/)
+	We added new UI items using the pygame-gui package.
+	We now allow users to perform these actions:
+	    > Load a saved Game.
+	    > Save the current game with a new name.
+	    > Delete a saved Game.
 <br>
 
 

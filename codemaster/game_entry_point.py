@@ -82,8 +82,10 @@ class Game:
         self.winner = None
         self.is_debug = is_debug
         self.is_persist_data = is_persist_data
-        self.persistence_path = PERSISTENCE_PATH_DEFAULT if is_persist_data else None
-        self.is_load_last_game = False
+        self.persistence_path = PERSISTENCE_PATH_DEFAULT if is_persist_data else ''
+        self.persistence_path_from_user = ''
+        self.is_continue_game = False
+        self.is_load_user_game = False
         self.level = None
         self.levels = []
         self.levels_qty = 0
@@ -121,6 +123,12 @@ class Game:
         self.screen_help = None
         self.mouse_pos = 0, 0
         self.is_magic_on = False
+        self.allowed_chars_alphanum_dash = (
+            [chr(i) for i in range(65, 91)]
+            + [chr(i) for i in range(97, 123)]
+            + [chr(i) for i in range(48, 58)] + ['_', '-']
+            )
+        self.allowed_chars_alphanum_space = self.allowed_chars_alphanum_dash + [' ']
 
         Game.is_exit_game = False
         if Game.current_game > 0:
@@ -212,9 +220,13 @@ class Game:
             SelectorA(0, 0, self),
             )
 
-        # Restore last game data
-        if self.is_persist_data and self.is_load_last_game:
-            persistence.load_game_data(self)
+        # Initialize persistence settings if necessary
+        if self.is_persist_data:
+            PersistenceSettings.init_settings(self.persistence_path_from_user or self.persistence_path)
+            if self.is_continue_game:
+                persistence.load_game_data(self)
+            if self.is_load_user_game:
+                PersistenceSettings.init_settings(self.persistence_path)
 
         # Start first level
         self.level.start_up()
@@ -402,7 +414,7 @@ class Game:
                                 and pg.key.get_mods() & pg.KMOD_RALT:
                             self.show_grid = not self.show_grid
                     elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
-                        if pg.key.get_mods() & pg.KMOD_LALT:
+                        if pg.key.get_mods() & pg.KMOD_ALT and not pg.key.get_mods() & pg.KMOD_LCTRL:
                             if (self.is_allowed_to_pause or
                                     self.current_time - self.start_time > MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
                                 self.is_paused = True
@@ -471,6 +483,7 @@ class Game:
                         self.mouse_pos = pg.mouse.get_pos()
                         for selector in self.selector_sprites:
                             selector.get_pointed_sprites()
+
                 self.mouse_pos = pg.mouse.get_pos()
 
             level_scroll_shift_control(game=self)
@@ -512,6 +525,7 @@ class Game:
             pg.display.flip()
 
     def start(self):
+        pg.mouse.set_visible(False)
         Game.is_exit_game = False
         Game.is_over = False
         Game.current_game += 1
@@ -532,7 +546,7 @@ class Game:
         self.help_info = HelpInfo()
         self.debug_info = DebugInfo(self.player, self)
 
-        if not self.is_load_last_game:
+        if not self.is_continue_game:
             self.player.create_starting_game_msg(self)
 
         not self.done and log.info("Start game")

@@ -4,9 +4,13 @@
 
 ### New features and improvements:
 
+* Allow users to perform these actions:
+  * Load a saved Game.
+  * Save the current game with a new name.
+  * Delete a saved Game.
 * Add UI buttons in the main screen.
   * New Game.
-  * Continue Last Game.
+  * Continue the Last Game.
   * Load Game.
   * Save Game.
   * Credits
