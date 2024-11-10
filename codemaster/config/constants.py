@@ -87,6 +87,7 @@ APP_NAME_SHORT = "The CodeMaster"
 APP_NAME_LONG = "The CodeMaster. Nightmare on Bots' Island."
 APP_NAME_DESC = "A spin-off sci-fi mystery based on " \
                 "Pac's Revenge series games by @japinol (c) 1987, 1988, 2015, 2021, 2024."
+APP_WEBSITE_URL = "https://github.com/japinol7/the-codemaster"
 
 LOG_FILE = os.path.join('logs', f"log_{datetime.now().strftime('%Y-%m-%d_%H_%M_%S_%f')}.log")
 LOG_FILE_UNIQUE = os.path.join('logs', "log.log")
@@ -267,3 +268,7 @@ FILE_NAMES = {
     'snd_npc_killed': ('explosion', SOUND_FORMAT),
     'snd_door_unlock': ('door_unlock', SOUND_FORMAT),
     }
+
+UI_THEMES_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'ui_assets', 'themes')
+UI_MAIN_THEME_FILE = os.path.join(UI_THEMES_FOLDER, 'main_theme.json')
+UI_Y_SPACE_BETWEEN_BUTTONS = 42

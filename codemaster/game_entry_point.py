@@ -6,6 +6,7 @@ from datetime import datetime
 import logging
 
 import pygame as pg
+import pygame_gui as pgui
 
 from codemaster.tools.logger.logger import log
 from codemaster.models.actors.items.bullets import BulletType
@@ -43,7 +44,7 @@ from codemaster.persistence.persistence_settings import (
     PersistenceSettings,
     )
 from codemaster.persistence import persistence
-
+from codemaster.ui.ui_manager.ui_manager import UIManager
 
 START_LEVEL = 0
 
@@ -63,6 +64,10 @@ class Game:
     screen_flags = None
     normal_screen_flags = None
     full_screen_flags = None
+    ui_manager = None
+    ui_ingame = None
+    ui_main_menu = None
+    new_game = False
 
     def __init__(self, is_debug=None, is_full_screen=None,
                  is_persist_data=None, is_no_display_scaled=None):
@@ -77,8 +82,10 @@ class Game:
         self.winner = None
         self.is_debug = is_debug
         self.is_persist_data = is_persist_data
-        self.persistence_path = PERSISTENCE_PATH_DEFAULT if is_persist_data else None
-        self.is_load_last_game = False
+        self.persistence_path = PERSISTENCE_PATH_DEFAULT if is_persist_data else ''
+        self.persistence_path_from_user = ''
+        self.is_continue_game = False
+        self.is_load_user_game = False
         self.level = None
         self.levels = []
         self.levels_qty = 0
@@ -116,6 +123,12 @@ class Game:
         self.screen_help = None
         self.mouse_pos = 0, 0
         self.is_magic_on = False
+        self.allowed_chars_alphanum_dash = (
+            [chr(i) for i in range(65, 91)]
+            + [chr(i) for i in range(97, 123)]
+            + [chr(i) for i in range(48, 58)] + ['_', '-']
+            )
+        self.allowed_chars_alphanum_space = self.allowed_chars_alphanum_dash + [' ']
 
         Game.is_exit_game = False
         if Game.current_game > 0:
@@ -128,7 +141,7 @@ class Game:
             Settings.display_start_height = pg_display_info.current_h
             Settings.calculate_settings(full_screen=is_full_screen)
             # Set screen to the settings configuration
-            Game.size = [Settings.screen_width, Settings.screen_height]
+            Game.size = Settings.screen_width, Settings.screen_height
             Game.full_screen_flags = pg.FULLSCREEN if is_no_display_scaled else pg.FULLSCREEN | pg.SCALED
             Game.normal_screen_flags = pg.SHOWN if is_no_display_scaled else pg.SHOWN | pg.SCALED
             Game.screen_flags = Game.full_screen_flags if Settings.is_full_screen else Game.normal_screen_flags
@@ -152,6 +165,11 @@ class Game:
             # Initialize persistence settings if necessary
             if self.is_persist_data:
                 PersistenceSettings.init_settings(self.persistence_path)
+
+            # Initialize UI
+            Game.ui_manager = UIManager(self)
+
+        self.current_time_delta = pg.time.get_ticks() / 1000.0
 
         # Initialize screens
         self.screen_exit_current_game = screen.ExitCurrentGame(self)
@@ -202,9 +220,13 @@ class Game:
             SelectorA(0, 0, self),
             )
 
-        # Restore last game data
-        if self.is_persist_data and self.is_load_last_game:
-            persistence.load_game_data(self)
+        # Initialize persistence settings if necessary
+        if self.is_persist_data:
+            PersistenceSettings.init_settings(self.persistence_path_from_user or self.persistence_path)
+            if self.is_continue_game:
+                persistence.load_game_data(self)
+            if self.is_load_user_game:
+                PersistenceSettings.init_settings(self.persistence_path)
 
         # Start first level
         self.level.start_up()
@@ -224,6 +246,7 @@ class Game:
             self.screen_exit_current_game.start_up()
             if self.done:
                 self.is_persist_data and persistence.persist_game_data(self)
+                Game.ui_manager.clean_game_data()
                 levels.Level.clean_entity_ids()
         elif Game.is_over:
             self.screen_game_over.start_up()
@@ -231,6 +254,7 @@ class Game:
                 self.write_game_over_info_to_file()
             if self.done:
                 self.is_persist_data and persistence.clear_all_persisted_data()
+                Game.ui_manager.clean_game_data()
                 levels.Level.clean_entity_ids()
         else:
             if not Game.is_over:
@@ -274,6 +298,7 @@ class Game:
     def _game_loop(self):
         while not self.done:
             self.current_time = pg.time.get_ticks()
+            self.current_time_delta = pg.time.get_ticks() / 1000.0
             for event in pg.event.get():
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                     self.is_exit_curr_game_confirm = True
@@ -389,7 +414,7 @@ class Game:
                                 and pg.key.get_mods() & pg.KMOD_RALT:
                             self.show_grid = not self.show_grid
                     elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
-                        if pg.key.get_mods() & pg.KMOD_LALT:
+                        if pg.key.get_mods() & pg.KMOD_ALT and not pg.key.get_mods() & pg.KMOD_LCTRL:
                             if (self.is_allowed_to_pause or
                                     self.current_time - self.start_time > MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
                                 self.is_paused = True
@@ -458,6 +483,7 @@ class Game:
                         self.mouse_pos = pg.mouse.get_pos()
                         for selector in self.selector_sprites:
                             selector.get_pointed_sprites()
+
                 self.mouse_pos = pg.mouse.get_pos()
 
             level_scroll_shift_control(game=self)
@@ -499,6 +525,7 @@ class Game:
             pg.display.flip()
 
     def start(self):
+        pg.mouse.set_visible(False)
         Game.is_exit_game = False
         Game.is_over = False
         Game.current_game += 1
@@ -519,7 +546,7 @@ class Game:
         self.help_info = HelpInfo()
         self.debug_info = DebugInfo(self.player, self)
 
-        if not self.is_load_last_game:
+        if not self.is_continue_game:
             self.player.create_starting_game_msg(self)
 
         not self.done and log.info("Start game")

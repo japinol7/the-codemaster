@@ -139,7 +139,7 @@ class Resource:
 
         img = pg.image.load(file_name_get(folder=consts.BITMAPS_FOLDER,
                                           name='seal_just_a_demo', subname='')).convert()
-        # img = pg.transform.smoothscale(img, (960, 56))
+        img = pg.transform.smoothscale(img, (960 // 1.7, 56 // 1.7))
         cls.images['seal_just_a_demo'] = img
 
         img = pg.image.load(file_name_get(folder=consts.BM_BACKGROUNDS_FOLDER,

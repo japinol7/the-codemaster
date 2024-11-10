@@ -1,5 +1,25 @@
 # Release History
 
+## v0.0.9
+
+### New features and improvements:
+
+* Allow users to perform these actions:
+  * Load a saved Game.
+  * Save the current game with a new name.
+  * Delete a saved Game.
+* Add UI buttons in the main screen.
+  * New Game.
+  * Continue the Last Game.
+  * Load Game.
+  * Save Game.
+  * Credits
+  * Quit Game
+* Add dependency for the new UI items:
+  * pygame_gui
+
+<br>
+
 ## v0.0.8
 
 ### New features and improvements:

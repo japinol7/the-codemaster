@@ -54,7 +54,6 @@ def main():
     log.setLevel(logging.INFO)
 
     pg.init()
-    pg.mouse.set_visible(False)
     is_music_paused = False
 
     log.info(LOG_START_APP_MSG)
@@ -64,10 +63,13 @@ def main():
     # Multiple games loop
     while not Game.is_exit_game:
         try:
+            Game.new_game = False
+            pg.mouse.set_visible(True)
             game = Game(is_debug=args.debug, is_full_screen=args.fullscreen,
                         is_persist_data=not args.nopersistdata,
                         is_no_display_scaled=args.nodisplayscaled)
             game.is_music_paused = is_music_paused
+            Game.ui_manager.set_game_data(game)
             screen_start_game = screen.StartGame(game)
             while game.is_start_screen:
                 screen_start_game.start_up()
