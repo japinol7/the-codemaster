@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='codemaster',
     author='Joan A. Pinol  (japinol)',
-    version='0.0.9',
+    version='0.0.10',
     license='MIT',
     description="The CodeMaster",
     long_description="The CodeMaster. Nightmare on Bots' Island",
