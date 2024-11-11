@@ -41,8 +41,7 @@ class Pause(screen.Pause):
 
     def _draw(self):
         super()._draw()
-        if self.is_full_screen_switch:
-            self.game.screen.blit(self.background_screenshot, (0, 0))
+        self.game.screen.blit(self.background_screenshot, (0, 0))
         self.game.screen.blit(*Resource.txt_surfaces['game_paused'])
 
 

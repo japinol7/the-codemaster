@@ -5,8 +5,8 @@
 ### New features and improvements:
 
 * Add UI buttons in the game paused screen to perform these actions:
-  * Levels Visited.
-  * Levels Completed.
+  * Show Levels Visited.
+  * Show Levels Completed.
 
 <br>
 

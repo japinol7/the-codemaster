@@ -167,6 +167,9 @@ class Pause(Screen):
         self.is_full_screen_switch = False
 
     def start_up(self, current_time=None, is_full_screen_switch=False, *args, **kwargs):
+        self.background_screenshot = pg.Surface((Settings.screen_width, Settings.screen_height))
+        self.background_screenshot.blit(self.game.screen, (0, 0))
+
         pg.mouse.set_visible(True)
         self.is_full_screen_switch = is_full_screen_switch
         if self.is_full_screen_switch:
@@ -179,20 +182,24 @@ class Pause(Screen):
             events = pg.event.get()
             self._events_handle(events)
 
+            try:
+                self.game.__class__.ui_ingame.update(self.game.current_time_delta)
+            except Exception as e:
+                log.warning(f"ERROR in pygame-gui libray: {e}")
+
             self._draw()
+
+            self.game.__class__.ui_ingame.draw_ui(self.game.screen)
 
             pg.display.flip()
             self.game.clock.tick(Settings.fps_paused)
 
         self.game.is_paused = False
         self.game.is_full_screen_switch = False
-        self.background_screenshot = None
         pg.mouse.set_visible(False)
 
     def _full_screen_switch_hook(self):
         self.is_full_screen_switch = True
-        self.background_screenshot = pg.Surface((Settings.screen_width, Settings.screen_height))
-        self.background_screenshot.blit(self.game.screen, (0, 0))
 
     def _draw(self):
         super()._draw()
@@ -209,6 +216,9 @@ class Pause(Screen):
                 elif event.key == pg.K_F1:
                     self.game.is_help_screen = True
                     self.done = True
+
+            # Manage In Game UI events
+            self.game.__class__.ui_ingame.process_events(event)
 
 
 class StartGame(Screen):

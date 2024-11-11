@@ -4,13 +4,17 @@ __author__ = 'Joan A. Pinol  (japinol)'
 import pygame as pg
 import pygame_gui as pgui
 
-from codemaster.version import version
 from codemaster.config.constants import (
     ALLOWED_CHARS_ALPHANUM_SPACE,
     APP_WEBSITE_URL,
     UI_Y_SPACE_BETWEEN_BUTTONS,
     UI_MAIN_THEME_FILE,
     )
+from codemaster.ui.ui_main_utils.ui_main_utils import (
+    create_confirmation_dialog_msg,
+    create_error_dialog_msg,
+    )
+from codemaster.version import version
 from codemaster.config.settings import Settings
 from codemaster.persistence.persistence_settings import PERSISTENCE_AUTO_SAVED_GAME_NAME
 from codemaster.persistence.persistence_utils import (
@@ -71,27 +75,6 @@ class UIMainMenu:
             visible=True,
             )
 
-    def _create_error_dialog_msg(self, text):
-        self.items['error_message_window'] = pgui.windows.ui_message_window.UIMessageWindow(
-            rect=pg.Rect((406, 450), (350, 165)),
-            manager=self.manager,
-            html_message=text,
-            window_title="ERROR",
-            object_id=pgui.core.ObjectID(class_id='@dialog_msgs', object_id='#error_msg'),
-            visible=True,
-            )
-
-    def _create_confirmation_dialog_msg(self, text, title, action_short_text, items_key):
-        self.items[items_key] = pgui.windows.ui_confirmation_dialog.UIConfirmationDialog(
-            rect=pg.Rect((406, 450), (350, 205)),
-            manager=self.manager,
-            action_long_desc=text,
-            window_title=title,
-            action_short_name=action_short_text,
-            blocking=True,
-            visible=True,
-            )
-
     def _hide_additional_game_items(self):
         self.items['load_game_selection_list'].hide()
         self.items['load_game_ok_button'].hide()
@@ -123,15 +106,15 @@ class UIMainMenu:
         except CannotDeleteAutoSavedGameException as e:
             log.warning(f"ERROR: Cannot delete saved game: {e}")
             self._hide_additional_game_items()
-            self._create_error_dialog_msg(
-                f"Error: You are not allowed to delete the "
+            create_error_dialog_msg(
+                self, f"Error: You are not allowed to delete the "
                 f"auto saved game data: {dir_name or ''}")
             return
         except Exception as e:
             log.warning(f"ERROR: Cannot delete saved game: {e}")
             self._hide_additional_game_items()
-            self._create_error_dialog_msg(
-                f"Error deleting saved game with name: {dir_name or ''}")
+            create_error_dialog_msg(
+                self, f"Error deleting saved game with name: {dir_name or ''}")
             return
         self._show_load_game_selection_items()
 
@@ -157,8 +140,8 @@ class UIMainMenu:
             self._hide_additional_game_items()
 
             if not dir_name:
-                self._create_error_dialog_msg(
-                    f"Error: You must choose a saved game to load.")
+                create_error_dialog_msg(
+                    self, f"Error: You must choose a saved game to load.")
                 self._show_load_game_selection_items()
                 return
 
@@ -170,21 +153,21 @@ class UIMainMenu:
             except Exception as e:
                 log.warning(f"ERROR: Cannot load saved game: {e}")
                 self._hide_additional_game_items()
-                self._create_error_dialog_msg(
-                    f"Error loading saved game with name: {dir_name or ''}")
+                create_error_dialog_msg(
+                    self, f"Error loading saved game with name: {dir_name or ''}")
 
         def delete_game_directory_confirmation():
             dir_name = self.items['load_game_selection_list'].get_single_selection()
             self._hide_additional_game_items()
 
             if not dir_name:
-                self._create_error_dialog_msg(
-                    f"Error: You must choose a saved game to delete.")
+                create_error_dialog_msg(
+                    self, f"Error: You must choose a saved game to delete.")
                 self._show_load_game_selection_items()
                 return
 
-            self._create_confirmation_dialog_msg(
-                f"Delete saved game with name: {dir_name or ''}",
+            create_confirmation_dialog_msg(
+                self, f"Delete saved game with name: {dir_name or ''}",
                 title="Delete saved game",
                 action_short_text="Delete",
                 items_key='delete_saved_game_confirm_dialog')
@@ -222,17 +205,17 @@ class UIMainMenu:
                     get_persistence_path('save_data'), get_persistence_path(dir_dest_name))
             except CannotSaveEmptyGameException as e:
                 log.warning(f"ERROR: Cannot save current game: {e}")
-                self._create_error_dialog_msg(f"Error Saving Game: {e}")
+                create_error_dialog_msg(self, f"Error Saving Game: {e}")
             except InvalidDirectoryNameException as e:
                 log.warning(f"ERROR: Cannot save current game: {e}")
-                self._create_error_dialog_msg(f"Error Saving Game: {e}")
+                create_error_dialog_msg(self, f"Error Saving Game: {e}")
             except SaveNameMustBeDiffToAutoSavedGameException as e:
                 log.warning(f"ERROR: Cannot save current game: {e}")
-                self._create_error_dialog_msg(f"Error Saving Game: {e}")
+                create_error_dialog_msg(self, f"Error Saving Game: {e}")
             except Exception as e:
                 log.warning(f"ERROR: Cannot save current game: {e}")
-                self._create_error_dialog_msg(
-                    f"Error Saving Game with name: {dir_dest_name or ''}")
+                create_error_dialog_msg(
+                    self,f"Error Saving Game with name: {dir_dest_name or ''}")
 
         def show_credits_action():
             log.debug("Show Credits")
