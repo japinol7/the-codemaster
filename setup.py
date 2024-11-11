@@ -10,7 +10,7 @@ setup(
     url='https://github.com/japinol7/the-codemaster',
     packages=['codemaster'],
     python_requires='>=3.12',
-    install_requires=['pygame-ce'],
+    install_requires=['pygame-ce', 'pygame-gui'],
     entry_points={
         'console_scripts': [
             'codemaster=codemaster.__main__:main',
