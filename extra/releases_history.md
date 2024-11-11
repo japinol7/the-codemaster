@@ -1,5 +1,15 @@
 # Release History
 
+## v0.0.10
+
+### New features and improvements:
+
+* Add UI buttons in the game paused screen to perform these actions:
+  * Show Levels Visited.
+  * Show Levels Completed.
+
+<br>
+
 ## v0.0.9
 
 ### New features and improvements:

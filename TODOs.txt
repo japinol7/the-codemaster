@@ -4,7 +4,7 @@ Known bugs:
 
 > Sometimes when persisting moving actors, the actor is stuck,
   not moving, and changing its direction:
-    > This happens when the position of the actor is out of its
+    > This happens when the position of the actor is out of their
       movement borders.
 
 > Energy shield issues:
@@ -44,4 +44,4 @@ Future Improvements:
   > Add more comments and documentation to the code.
   > Refactor game input events management.
   > Improve data models.
-  > Refactor settings module.
+  > Refactor the settings module.

@@ -3,7 +3,7 @@
     "app_name": "The CodeMaster. Nightmare on Bots' Island.",
     "app_tech_name": "codemaster",
     "app_version": "0.0.10",
-    "continue_game": false
+    "continue_game": true
   },
-  "game_levels": {}
+  "can_continue_game": {}
 }

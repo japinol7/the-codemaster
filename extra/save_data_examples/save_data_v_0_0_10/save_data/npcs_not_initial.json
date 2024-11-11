@@ -1,0 +1,75 @@
+{
+  "saved_game_data": {
+    "app_name": "The CodeMaster. Nightmare on Bots' Island.",
+    "app_tech_name": "codemaster",
+    "app_version": "0.0.10",
+    "continue_game": true
+  },
+  "game_levels": {
+    "10": {
+      "world_shift": -2850,
+      "world_shift_initial": 0,
+      "world_shift_top": -866,
+      "world_shift_top_initial": -500,
+      "npcs": {
+        "KUNG_FU_FIGHTER_MALE_00003": {
+          "is_not_initial_actor": true,
+          "name": "unnamed",
+          "base_type": "NPC",
+          "category_type": "NPC",
+          "type": "KUNG_FU_FIGHTER_MALE",
+          "type_name": "KungFuFighterMale",
+          "health": 245.0,
+          "health_total": 350,
+          "frame_index": 0.9,
+          "x": -1628,
+          "y": -9,
+          "change_x": 2,
+          "change_y": 0,
+          "magic_resistance": 42,
+          "hostility_level": 1,
+          "direction": 2,
+          "shot_x_delta_max": 740,
+          "shot_y_delta": 75,
+          "spell_cast_x_delta_max": 800.0,
+          "spell_cast_y_delta_max": 800.0,
+          "health_bar_delta_y": 0,
+          "power_recovery": 0,
+          "has_energy_shield": false,
+          "energy_shield_health": 0,
+          "energy_shield_health_total": 0,
+          "energy_shield_pos_delta_x": 0,
+          "energy_shield_pos_delta_y": 0,
+          "time_between_energy_shield_casting": 0,
+          "npc_summoned_count": 0,
+          "border_left": 1200,
+          "border_right": 1800,
+          "border_top": 0,
+          "border_down": 0,
+          "items_to_drop": [
+            {
+              "type_name": "PotionHealth",
+              "probability_to_drop": 100,
+              "x_delta": 0,
+              "y_delta": 0,
+              "args": {
+                "random_min": 20,
+                "random_max": 20
+              }
+            },
+            {
+              "type_name": "PotionPower",
+              "probability_to_drop": 100,
+              "x_delta": 50,
+              "y_delta": 0,
+              "args": {
+                "random_min": 20,
+                "random_max": 20
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
