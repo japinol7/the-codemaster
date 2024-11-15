@@ -261,6 +261,9 @@ class Player(pg.sprite.Sprite):
     def health(self, value):
         self.stats['health'] = value
 
+    def get_health_rounded(self):
+        return round(self.stats['health'])
+
     @property
     def magic_resistance(self):
         return self.stats['magic_resistance']
@@ -276,6 +279,9 @@ class Player(pg.sprite.Sprite):
     @power.setter
     def power(self, value):
         self.stats['power'] = value
+
+    def get_power_rounded(self):
+        return round(self.stats['power'])
 
     def acquire_energy_shield(self, msg_echo=True):
         if self.stats['energy_shields_stock']:
@@ -721,6 +727,54 @@ class Player(pg.sprite.Sprite):
             TextMsg.create(
                 "You've got \nNO spell\nin this slot.", self.game, time_in_secs=MSG_PC_DUR_SHORT)
 
+    def get_health_potion_ids(self):
+        return [x.id for x in self.stats['potions_health']]
+
+    def get_health_potion_powers(self):
+        return [x.stats.power for x in self.stats['potions_health']]
+
+    def get_health_potion_powers_sorted_str(self):
+        return [str(x.stats.power)
+                for x in sorted(self.stats['potions_health'], key=lambda x: x.power)]
+
+    def get_health_potion_by_power(self, power):
+        for potion in self.stats['potions_health']:
+            if potion.stats.power == power:
+                return potion
+
+    def drink_health_potion(self, potion):
+        if not potion:
+            return
+        potion.drink()
+        self.stats['potions_health'] = [
+            x for x in self.stats['potions_health'] if x.id != potion.id
+            ]
+        self.stats[ActorType.POTION_HEALTH.name] = len(self.stats['potions_health'])
+
+    def get_power_potion_ids(self):
+        return [x.id for x in self.stats['potions_power']]
+
+    def get_power_potion_powers(self):
+        return [x.stats.power for x in self.stats['potions_power']]
+
+    def get_power_potion_powers_sorted_str(self):
+        return [str(x.stats.power)
+                for x in sorted(self.stats['potions_power'], key=lambda x: x.power)]
+
+    def get_power_potion_by_power(self, power):
+        for potion in self.stats['potions_power']:
+            if potion.stats.power == power:
+                return potion
+
+    def drink_power_potion(self, potion):
+        if not potion:
+            return
+        potion.drink()
+        self.stats['potions_power'] = [
+            x for x in self.stats['potions_power'] if x.id != potion.id
+            ]
+        self.stats[ActorType.POTION_POWER.name] = len(self.stats['potions_power'])
+
     @staticmethod
     def create_starting_game_msg(game):
         TextMsg.create(
@@ -761,7 +815,9 @@ class Player(pg.sprite.Sprite):
             'bullets_t04': pc.stats['bullets_t04'],
             'bullets_t04_shot': pc.stats['bullets_t04_shot'],
             'potions_power': [x.id for x in pc.stats['potions_power']],
+            'potions_power_power': [x.stats.power for x in pc.stats['potions_power']],
             'potions_health': [x.id for x in pc.stats['potions_health']],
+            'potions_health_power': [x.stats.power for x in pc.stats['potions_health']],
             ActorType.POTION_POWER.name: pc.stats[ActorType.POTION_POWER.name],
             ActorType.POTION_HEALTH.name: pc.stats[ActorType.POTION_HEALTH.name],
             ActorType.FILES_DISK_D.name: pc.stats[ActorType.FILES_DISK_D.name],

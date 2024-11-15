@@ -7,6 +7,10 @@
 * Add UI buttons in the game paused screen to perform these actions:
   * Show Levels Visited.
   * Show Levels Completed.
+  * Show Health Potions stock and allow the player to drink them.
+  * Show Power Potions stock and allow the player to drink them.
+  * Save the current game with a new name.
+* Improve the persistence of potions allocated in the inventory.
 
 <br>
 

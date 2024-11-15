@@ -66,10 +66,17 @@ def _load_pc_data(game):
         pc_data['apples_stock'])
     door_keys_stock = get_actors_by_previous_save_ids_if_exist(
         pc_data['door_keys_stock'])
+
     potions_power = get_actors_by_previous_save_ids_if_exist(
         pc_data['potions_power'])
     potions_health = get_actors_by_previous_save_ids_if_exist(
         pc_data['potions_health'])
+
+    # Load stock potions power
+    for i, potion in enumerate(potions_power):
+        potion.stats.power = pc_data['potions_power_power'][i]
+    for i, potion in enumerate(potions_health):
+        potion.stats.power = pc_data['potions_health_power'][i]
 
     pc.stats.update({
         'lives': pc_data['lives'],

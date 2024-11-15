@@ -64,7 +64,6 @@ class Game:
     normal_screen_flags = None
     full_screen_flags = None
     ui_manager = None
-    ui_main_menu = None
     new_game = False
 
     def __init__(self, is_debug=None, is_full_screen=None,
@@ -295,7 +294,7 @@ class Game:
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                     self.is_exit_curr_game_confirm = True
                 elif event.type == pg.KEYDOWN:
-                    if event.key == pg.K_p:
+                    if event.key == pg.K_p and pg.key.get_mods() & pg.KMOD_LCTRL:
                         if (self.is_allowed_to_pause or
                                 self.current_time - self.start_time > MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
                             self.is_allowed_to_pause = True

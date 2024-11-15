@@ -13,34 +13,19 @@ from codemaster.config.constants import (
 from codemaster.ui.ui_main_utils.ui_main_utils import (
     create_confirmation_dialog_msg,
     create_error_dialog_msg,
+    CannotDeleteAutoSavedGameException,
+    save_game_ui_action,
+    save_game_directory_ui_action,
     )
 from codemaster.version import version
 from codemaster.config.settings import Settings
 from codemaster.persistence.persistence_settings import PERSISTENCE_AUTO_SAVED_GAME_NAME
 from codemaster.persistence.persistence_utils import (
-    get_persistence_can_continue_game,
     get_persistence_directories,
     get_persistence_path,
-    copy_persistence_saved_game,
     delete_persistence_saved_game,
     )
 from codemaster.tools.logger.logger import log
-
-
-class InvalidDirectoryNameException(Exception):
-    pass
-
-
-class CannotDeleteAutoSavedGameException(Exception):
-    pass
-
-
-class CannotSaveEmptyGameException(Exception):
-    pass
-
-
-class SaveNameMustBeDiffToAutoSavedGameException(Exception):
-    pass
 
 
 class UIMainMenu:
@@ -75,7 +60,7 @@ class UIMainMenu:
             visible=True,
             )
 
-    def _hide_additional_game_items(self):
+    def hide_additional_game_items(self):
         self.items['load_game_selection_list'].hide()
         self.items['load_game_ok_button'].hide()
         self.items['delete_game_button'].hide()
@@ -95,7 +80,7 @@ class UIMainMenu:
     def delete_game_directory_action(self):
         dir_name = self.items['load_game_selection_list'].get_single_selection()
         log.info(f"Delete Saved Game: {dir_name or ''}")
-        self._hide_additional_game_items()
+        self.hide_additional_game_items()
         try:
             if dir_name.lower() == PERSISTENCE_AUTO_SAVED_GAME_NAME:
                 raise CannotDeleteAutoSavedGameException(
@@ -105,14 +90,14 @@ class UIMainMenu:
             delete_persistence_saved_game(get_persistence_path(dir_name))
         except CannotDeleteAutoSavedGameException as e:
             log.warning(f"ERROR: Cannot delete saved game: {e}")
-            self._hide_additional_game_items()
+            self.hide_additional_game_items()
             create_error_dialog_msg(
                 self, f"Error: You are not allowed to delete the "
                 f"auto saved game data: {dir_name or ''}")
             return
         except Exception as e:
             log.warning(f"ERROR: Cannot delete saved game: {e}")
-            self._hide_additional_game_items()
+            self.hide_additional_game_items()
             create_error_dialog_msg(
                 self, f"Error deleting saved game with name: {dir_name or ''}")
             return
@@ -120,15 +105,15 @@ class UIMainMenu:
 
     def _add_items(self):
         def new_game_action():
-            self._hide_additional_game_items()
+            self.hide_additional_game_items()
             self.game.__class__.new_game = True
 
         def continue_game_action():
-            self._hide_additional_game_items()
+            self.hide_additional_game_items()
             self.game.is_continue_game = True
 
         def load_game_action():
-            self._hide_additional_game_items()
+            self.hide_additional_game_items()
             load_game_sel_list = self.items['load_game_selection_list']
             load_game_sel_list.set_item_list(get_persistence_directories())
             load_game_sel_list.show()
@@ -137,7 +122,7 @@ class UIMainMenu:
 
         def load_game_directory_action():
             dir_name = self.items['load_game_selection_list'].get_single_selection()
-            self._hide_additional_game_items()
+            self.hide_additional_game_items()
 
             if not dir_name:
                 create_error_dialog_msg(
@@ -152,13 +137,13 @@ class UIMainMenu:
                 self.game.is_load_user_game = True
             except Exception as e:
                 log.warning(f"ERROR: Cannot load saved game: {e}")
-                self._hide_additional_game_items()
+                self.hide_additional_game_items()
                 create_error_dialog_msg(
                     self, f"Error loading saved game with name: {dir_name or ''}")
 
         def delete_game_directory_confirmation():
             dir_name = self.items['load_game_selection_list'].get_single_selection()
-            self._hide_additional_game_items()
+            self.hide_additional_game_items()
 
             if not dir_name:
                 create_error_dialog_msg(
@@ -173,53 +158,14 @@ class UIMainMenu:
                 items_key='delete_saved_game_confirm_dialog')
 
         def save_game_action():
-            self._hide_additional_game_items()
-            self.items['save_game_ok_button'].show()
-            self.items['text_entry_line'].show()
+            save_game_ui_action(self)
 
         def save_game_directory_action():
-            self._hide_additional_game_items()
-            dir_dest_name = self.items['text_entry_line'].get_text().strip()
-            log.info(f"Save Game name: {dir_dest_name}")
-            try:
-                if not get_persistence_can_continue_game():
-                    raise CannotSaveEmptyGameException("Cannot save an empty game.")
-                if len(dir_dest_name) < 3:
-                    raise InvalidDirectoryNameException(
-                        f"Your game name must have at least 3 chars. "
-                        f"Name: {dir_dest_name or ''}")
-                if len(dir_dest_name) > 30:
-                    raise InvalidDirectoryNameException(
-                        f"Your game name must have a maximum of 30 chars. "
-                        f"Name: {dir_dest_name or ''}")
-                if dir_dest_name.lower() == PERSISTENCE_AUTO_SAVED_GAME_NAME:
-                    raise SaveNameMustBeDiffToAutoSavedGameException(
-                        "You cannot use this name. It is reserved for the system: "
-                        f"{PERSISTENCE_AUTO_SAVED_GAME_NAME or ''}")
-                if dir_dest_name in get_persistence_directories():
-                    raise InvalidDirectoryNameException(
-                        f"There is already one saved game with this "
-                        f"name: {dir_dest_name or ''}")
-
-                copy_persistence_saved_game(
-                    get_persistence_path('save_data'), get_persistence_path(dir_dest_name))
-            except CannotSaveEmptyGameException as e:
-                log.warning(f"ERROR: Cannot save current game: {e}")
-                create_error_dialog_msg(self, f"Error Saving Game: {e}")
-            except InvalidDirectoryNameException as e:
-                log.warning(f"ERROR: Cannot save current game: {e}")
-                create_error_dialog_msg(self, f"Error Saving Game: {e}")
-            except SaveNameMustBeDiffToAutoSavedGameException as e:
-                log.warning(f"ERROR: Cannot save current game: {e}")
-                create_error_dialog_msg(self, f"Error Saving Game: {e}")
-            except Exception as e:
-                log.warning(f"ERROR: Cannot save current game: {e}")
-                create_error_dialog_msg(
-                    self,f"Error Saving Game with name: {dir_dest_name or ''}")
+            save_game_directory_ui_action(self)
 
         def show_credits_action():
             log.debug("Show Credits")
-            self._hide_additional_game_items()
+            self.hide_additional_game_items()
             self._create_credits_dialog_msg()
 
         def quit_game_action():

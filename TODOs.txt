@@ -15,8 +15,6 @@ Known bugs:
     when they are not initially in a game level.
 
 
-
-
 Future Improvements:
 
 > General:

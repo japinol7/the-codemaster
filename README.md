@@ -21,9 +21,11 @@
 
 ## Screenshots
 
-<img src="screenshots/screenshot1.jpg" width="980" alt=""> <br />
-<img src="screenshots/screenshot2.jpg" width="980" alt=""> <br />
-<img src="screenshots/screenshot3.png" width="980" alt=""> <br />
+<img src="screenshots/screenshot1.jpg" width="980" alt="screenshot1"> <br /> <br />
+<img src="screenshots/screenshot2.jpg" width="980" alt="screenshot2"> <br /> <br />
+<img src="screenshots/screenshot3.png" width="980" alt="screenshot3"> <br /> <br />
+<img src="screenshots/screenshot4.png" width="980" alt="screenshot4"> <br /> <br />
+<img src="screenshots/screenshot5.png" width="980" alt="screenshot5"> <br /> <br />
 <br />
 
 
@@ -35,7 +37,7 @@
 <br />
 
 
-### Video example for previous game version 0.0.5 - Youtube link
+### Video example for previous game version 0.0.5 - YouTube link
 
 [![Video](https://img.youtube.com/vi/g_bQu2BlSw4/maxresdefault.jpg)](https://www.youtube.com/watch?v=g_bQu2BlSw4)
 
@@ -103,7 +105,7 @@
         > What made Pac's Revenge an interesting game was dealing 
           with philosophical and political issues in a futuristic world: 
           environmental contamination, techno-ultra-liberal government 
-          despotism, and sexual exploitation. 
+          despotism, sexual exploitation, and social isolation. 
           Well, in fact, there was no other character in the game, 
           so it had no woman on it.
     > The CodeMaster. Nightmare on Bots' Island ...
@@ -324,7 +326,7 @@
 
 #### Starting with version 0.0.9, you can enjoy new UI items 
 	We added new UI items using the pygame-gui package.
-	We now allow users to perform these actions:
+	For example, we now allow users to perform these actions:
 	    > Load a saved Game.
 	    > Save the current game with a new name.
 	    > Delete a saved Game.
@@ -354,8 +356,8 @@
     delete:        drink a power potion
     home:          eat a health apple
     Alt + b:       hold Alt + b for a time to kill your current life
-    p:           pause
-    ESC:         exit game
+    ^ + p:         pause the game
+    ESC:         exit the game
     ^m:          pause/resume music
     ^s:          sound effects on/off
     Alt + Enter: change full screen / windowed screen mode

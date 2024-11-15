@@ -25,6 +25,7 @@ class GameOver(screen.GameOver):
 
     def _draw(self):
         super()._draw()
+        self.game.screen.blit(self.background_screenshot, (0, 0))
         if self.game.is_over and not self.game.winner:
             self.game.screen.blit(*Resource.txt_surfaces['game_over'])
             self.game.screen.blit(*Resource.txt_surfaces['game_over_2'])

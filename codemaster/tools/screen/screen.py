@@ -46,8 +46,6 @@ class Screen:
                         self._full_screen_switch_hook()
                         libg_jp.full_screen_switch(self.game)
                         self._draw()
-                    else:
-                        self.done = True
                 elif event.key == pg.K_m:
                     if pg.key.get_mods() & pg.KMOD_LCTRL:
                         self.game.is_music_paused = not self.game.is_music_paused
@@ -93,10 +91,14 @@ class ExitCurrentGame(Screen):
     def _events_handle(self, events):
         super()._events_handle(events)
         for event in events:
-            if event.type == pg.QUIT or (event.type == pg.KEYDOWN
-                                         and event.key == pg.K_ESCAPE):
+            if (event.type == pg.QUIT
+                    or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE)):
                 self.game.done = True
                 self.done = True
+            elif event.type == pg.KEYDOWN:
+                if (event.key in (pg.K_KP_ENTER, pg.K_RETURN)
+                        and pg.key.get_mods() & pg.KMOD_LCTRL):
+                    self.done = True
 
 
 class GameOver(Screen):
@@ -106,11 +108,15 @@ class GameOver(Screen):
         super().__init__(game)
 
     def start_up(self, current_time=None, *args, **kwargs):
+        self.background_screenshot = pg.Surface((Settings.screen_width, Settings.screen_height))
+        self.background_screenshot.blit(self.game.screen, (0, 0))
+
         super().start_up(current_time=self.game.current_time)
 
         while not self.done:
             events = pg.event.get()
             self._events_handle(events)
+            self._draw()
             pg.display.flip()
             self.game.clock.tick(Settings.fps_paused)
         self.game.is_paused = False
@@ -121,10 +127,15 @@ class GameOver(Screen):
     def _events_handle(self, events):
         super()._events_handle(events)
         for event in events:
-            if event.type == pg.QUIT or (event.type == pg.KEYDOWN
-                                         and event.key in(pg.K_ESCAPE, pg.K_KP_ENTER, pg.K_RETURN)):
+            if (event.type == pg.QUIT
+                    or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE)):
                 self.game.done = True
                 self.done = True
+            elif event.type == pg.KEYDOWN:
+                if (event.key in (pg.K_KP_ENTER, pg.K_RETURN)
+                        and pg.key.get_mods() & pg.KMOD_LCTRL):
+                    self.game.done = True
+                    self.done = True
 
 
 class Help(Screen):
@@ -151,9 +162,12 @@ class Help(Screen):
         super()._events_handle(events)
         for event in events:
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                self.game.is_exit_game = True
-                self.game.is_exit_curr_game_confirm = True
-                self.done = True
+                if self.game.is_start_screen:
+                    self.done = True
+                else:
+                    self.game.is_exit_game = True
+                    self.game.is_exit_curr_game_confirm = True
+                    self.done = True
             elif event.type == pg.KEYDOWN and event.key == pg.K_F1:
                 self.done = True
 
@@ -211,7 +225,7 @@ class Pause(Screen):
                 self.game.is_exit_curr_game_confirm = True
                 self.done = True
             elif event.type == pg.KEYDOWN:
-                if event.key == pg.K_p:
+                if event.key == pg.K_p and pg.key.get_mods() & pg.KMOD_LCTRL:
                     self.done = True
                 elif event.key == pg.K_F1:
                     self.game.is_help_screen = True
@@ -219,6 +233,9 @@ class Pause(Screen):
 
             # Manage In Game UI events
             self.game.__class__.ui_ingame.process_events(event)
+
+            if self.done:
+                self.game.ui_manager.ui_ingame.hide_additional_game_items()
 
 
 class StartGame(Screen):
@@ -295,3 +312,6 @@ class StartGame(Screen):
         elif self.game.is_continue_game:
             self.game.is_start_screen = False
             self.done = True
+
+        if self.done:
+            self.game.ui_manager.ui_main_menu.hide_additional_game_items()

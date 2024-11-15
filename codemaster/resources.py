@@ -98,14 +98,14 @@ class Resource:
                             cls.txt_surfaces, 'game_over_2', color=Color.CYAN,
                             size=int(120*Settings.font_pos_factor), align="center")
 
-        libg_jp.render_text('– Press Enter to Continue –', Settings.screen_width // 1.992,
+        libg_jp.render_text('– Press Ctrl + Enter to Continue –', Settings.screen_width // 1.992,
                             (Settings.screen_height // 1.752) + int(82 * Settings.font_pos_factor_t2),
                             cls.txt_surfaces, 'press_intro_to_continue', color=Color.BLUE,
-                            size=int(82*Settings.font_pos_factor_t2), align="center")
-        libg_jp.render_text('– Press Enter to Continue –', Settings.screen_width // 2,
+                            size=int(68*Settings.font_pos_factor_t2), align="center")
+        libg_jp.render_text('– Press Ctrl + Enter to Continue –', Settings.screen_width // 2,
                             (Settings.screen_height // 1.76) + int(82 * Settings.font_pos_factor_t2),
                             cls.txt_surfaces, 'press_intro_to_continue_2', color=Color.CYAN,
-                            size=int(82*Settings.font_pos_factor_t2), align="center")
+                            size=int(68*Settings.font_pos_factor_t2), align="center")
 
         libg_jp.render_text("KUDOS", Settings.screen_width // 1.99,
                             Settings.screen_height // 2.484,
