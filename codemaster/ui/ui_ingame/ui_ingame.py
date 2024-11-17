@@ -58,6 +58,7 @@ class UIInGame:
                 f"Levels Completed: {self.game.level.levels_completed_ids(self.game)}\n"
                 f"Count: {self.game.level.levels_completed_count(self.game)} / {N_LEVELS}"
                 )
+
         def health_potions_action():
             self.hide_additional_game_items()
             potions = self.game.player.get_health_potion_powers_sorted_str()
