@@ -2,9 +2,9 @@
 
 Known bugs:
 
-> Sometimes when persisting moving actors, the actor is stuck,
-  not moving, and changing its direction:
-    > This happens when the position of the actor is out of their
+> Sometimes the actor is stuck, not moving, and changing its direction:
+    > This issue rarely happens.
+    > This issue happens when the position of the actor is out of their
       movement borders.
 
 > Energy shield issues:
@@ -13,6 +13,7 @@ Known bugs:
 > Vertical borders for moving actors are buggy, such as snakes.
   > Cannot correctly persist vertical moving actors
     when they are not initially in a game level.
+
 
 
 Future Improvements:
@@ -28,6 +29,10 @@ Future Improvements:
 > Persistence:
   > When using persistence, do not create actors that
     will be killed anyway when loading the saved game data.
+  > Initialize random attributes of some actors only once,
+    instead of calculating the value at instantiation
+    and changing them later with the persisted information.
+    > Example: potions.
 
 > Settings:
   > Allow users to use a gamepad.
