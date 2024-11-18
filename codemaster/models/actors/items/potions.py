@@ -13,8 +13,9 @@ class Potion(ActorItem):
     """Represents a potion.
     It is not intended to be instantiated.
     """
-    def __init__(self, x, y, game, name=None,
-                 random_min=0, random_max=0):
+    def __init__(
+            self, x, y, game, name=None, random_min=0, random_max=0,
+            power=None, power_total=None):
         self.images_sprite_no = 1
         self.category_type = ActorCategoryType.POTION
         self.stats = Stats()
@@ -22,7 +23,15 @@ class Potion(ActorItem):
         self.random_min = random_min
         self.random_max = random_max
         self.stats.strength = self.stats.strength_total = 1
-        self.calculate_power()
+
+        if power is None:
+            self.calculate_power()
+        else:
+            self.stats.power = power
+            self.stats.power_total = self.stats.power if power_total is None else power_total
+            if self.stats.power_total < self.stats.power:
+                self.stats.power_total = self.stats.power
+
         super().__init__(x, y, game, name=name)
 
     def update_when_hit(self):
@@ -50,26 +59,34 @@ class Potion(ActorItem):
 class PotionHealth(Potion):
     """Represents a health potion."""
 
-    def __init__(self, x, y, game, name=None,
-                 random_min=0, random_max=0):
+    def __init__(
+            self, x, y, game, name=None, random_min=0, random_max=0,
+            power=None, power_total=None):
         self.file_folder = BM_POTION_HEALTH_FOLDER
         self.file_name_key = 'im_potion_health'
         self.file_mid_prefix = 't1'
         self.type = ActorType.POTION_HEALTH
         self.owner_stats_key = 'health'
-        super().__init__(x, y, game, name=name,
-                         random_min=random_min, random_max=random_max)
+
+        super().__init__(
+            x, y, game, name=name,
+            random_min=random_min, random_max=random_max,
+            power=power, power_total=power_total)
 
 
 class PotionPower(Potion):
     """Represents a power potion."""
 
-    def __init__(self, x, y, game, name=None,
-                 random_min=0, random_max=0):
+    def __init__(
+            self, x, y, game, name=None, random_min=0, random_max=0,
+            power=None, power_total=None):
         self.file_folder = BM_POTION_POWER_FOLDER
         self.file_name_key = 'im_potion_power'
         self.file_mid_prefix = 't1'
         self.type = ActorType.POTION_POWER
         self.owner_stats_key = 'power'
-        super().__init__(x, y, game, name=name,
-                         random_min=random_min, random_max=random_max)
+
+        super().__init__(
+            x, y, game, name=name,
+            random_min=random_min, random_max=random_max,
+            power=power, power_total=power_total)

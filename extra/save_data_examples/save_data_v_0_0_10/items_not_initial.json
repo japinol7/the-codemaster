@@ -2,7 +2,7 @@
   "saved_game_data": {
     "app_name": "The CodeMaster. Nightmare on Bots' Island.",
     "app_tech_name": "codemaster",
-    "app_version": "0.0.8",
+    "app_version": "0.0.10",
     "continue_game": true
   },
   "game_levels": {
@@ -12,8 +12,8 @@
       "world_shift_top": -866,
       "world_shift_top_initial": -500,
       "items": {
-        "APPLE_YELLOW_00002": {
-          "is_not_initial_actor": false,
+        "APPLE_YELLOW_00013": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "APPLE",
@@ -22,13 +22,13 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.1,
-          "x": 270,
-          "y": 259,
+          "frame_index": 0,
+          "x": 8820,
+          "y": 1357,
           "is_location_in_inventory": true
         },
-        "APPLE_RED_00001": {
-          "is_not_initial_actor": false,
+        "APPLE_RED_00008": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "APPLE",
@@ -37,13 +37,13 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.1,
-          "x": 320,
-          "y": 259,
+          "frame_index": 0,
+          "x": 8870,
+          "y": 1357,
           "is_location_in_inventory": true
         },
-        "APPLE_YELLOW_00001": {
-          "is_not_initial_actor": false,
+        "APPLE_YELLOW_00014": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "APPLE",
@@ -52,13 +52,13 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.1,
-          "x": 220,
-          "y": 431,
+          "frame_index": 0,
+          "x": 8770,
+          "y": 1529,
           "is_location_in_inventory": true
         },
-        "APPLE_GREEN_00001": {
-          "is_not_initial_actor": false,
+        "APPLE_GREEN_00010": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "APPLE",
@@ -67,13 +67,13 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.8,
-          "x": 180,
-          "y": 431,
+          "frame_index": 0,
+          "x": 8730,
+          "y": 1529,
           "is_location_in_inventory": true
         },
-        "APPLE_YELLOW_00003": {
-          "is_not_initial_actor": false,
+        "APPLE_YELLOW_00015": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "APPLE",
@@ -82,13 +82,13 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.6,
-          "x": 752,
-          "y": 256,
+          "frame_index": 0,
+          "x": 9302,
+          "y": 1354,
           "is_location_in_inventory": true
         },
-        "APPLE_GREEN_00002": {
-          "is_not_initial_actor": false,
+        "APPLE_GREEN_00011": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "APPLE",
@@ -97,13 +97,13 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.9,
-          "x": 692,
-          "y": 347,
+          "frame_index": 0,
+          "x": 9242,
+          "y": 1445,
           "is_location_in_inventory": true
         },
-        "APPLE_RED_00002": {
-          "is_not_initial_actor": false,
+        "APPLE_RED_00009": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "APPLE",
@@ -112,9 +112,9 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.7,
-          "x": 784,
-          "y": 347,
+          "frame_index": 0,
+          "x": 9334,
+          "y": 1445,
           "is_location_in_inventory": true
         },
         "POTION_POWER_00019": {
@@ -128,12 +128,14 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 1576,
-          "y": 700,
-          "is_location_in_inventory": true
+          "x": 10126,
+          "y": 1798,
+          "is_location_in_inventory": true,
+          "power": 38,
+          "power_total": 38
         },
-        "POTION_POWER_00003": {
-          "is_not_initial_actor": false,
+        "POTION_POWER_00020": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "POTION",
@@ -143,12 +145,14 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 345,
-          "y": 442,
-          "is_location_in_inventory": true
+          "x": 8895,
+          "y": 1540,
+          "is_location_in_inventory": true,
+          "power": 31,
+          "power_total": 31
         },
-        "POTION_POWER_00004": {
-          "is_not_initial_actor": false,
+        "POTION_POWER_00021": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "POTION",
@@ -157,10 +161,12 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.9,
-          "x": 400,
-          "y": 351,
-          "is_location_in_inventory": true
+          "frame_index": 0,
+          "x": 8950,
+          "y": 1449,
+          "is_location_in_inventory": true,
+          "power": 62,
+          "power_total": 62
         },
         "POTION_POWER_00022": {
           "is_not_initial_actor": true,
@@ -172,13 +178,15 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.3,
-          "x": 782,
-          "y": 422,
-          "is_location_in_inventory": true
+          "frame_index": 0,
+          "x": 9332,
+          "y": 1520,
+          "is_location_in_inventory": true,
+          "power": 40,
+          "power_total": 40
         },
-        "POTION_POWER_00010": {
-          "is_not_initial_actor": false,
+        "POTION_POWER_00023": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "POTION",
@@ -187,13 +195,15 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.8,
-          "x": 778,
-          "y": 478,
-          "is_location_in_inventory": true
+          "frame_index": 0,
+          "x": 9328,
+          "y": 1576,
+          "is_location_in_inventory": true,
+          "power": 33,
+          "power_total": 33
         },
-        "POTION_POWER_00011": {
-          "is_not_initial_actor": false,
+        "POTION_POWER_00024": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "POTION",
@@ -202,10 +212,12 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.6,
-          "x": 340,
-          "y": 442,
-          "is_location_in_inventory": true
+          "frame_index": 0,
+          "x": 8890,
+          "y": 1540,
+          "is_location_in_inventory": true,
+          "power": 39,
+          "power_total": 39
         },
         "POTION_HEALTH_00009": {
           "is_not_initial_actor": true,
@@ -218,9 +230,11 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 1576,
-          "y": 700,
-          "is_location_in_inventory": true
+          "x": 10126,
+          "y": 1798,
+          "is_location_in_inventory": true,
+          "power": 32,
+          "power_total": 32
         },
         "POTION_HEALTH_00010": {
           "is_not_initial_actor": true,
@@ -233,12 +247,14 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 1574,
-          "y": 578,
-          "is_location_in_inventory": true
+          "x": 10124,
+          "y": 1676,
+          "is_location_in_inventory": true,
+          "power": 32,
+          "power_total": 32
         },
-        "POTION_HEALTH_00003": {
-          "is_not_initial_actor": false,
+        "POTION_HEALTH_00011": {
+          "is_not_initial_actor": true,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "POTION",
@@ -247,10 +263,12 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0.6,
-          "x": 480,
-          "y": 400,
-          "is_location_in_inventory": true
+          "frame_index": 0,
+          "x": 9030,
+          "y": 1498,
+          "is_location_in_inventory": true,
+          "power": 40,
+          "power_total": 40
         }
       }
     }

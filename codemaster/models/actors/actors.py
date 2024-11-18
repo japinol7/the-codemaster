@@ -701,7 +701,12 @@ class ActorItem(Actor):
                     'is_location_in_inventory': item.is_location_in_inventory
                     }
 
-                if item.category_type == ActorCategoryType.DOOR_KEY:
+                if item.category_type == ActorCategoryType.POTION:
+                    level['items'][item.id].update({
+                        'power': item.stats.power,
+                        'power_total': item.stats.power_total,
+                        })
+                elif item.category_type == ActorCategoryType.DOOR_KEY:
                     level['items'][item.id].update({
                         'door': item.door.id,
                         })

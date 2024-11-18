@@ -72,14 +72,6 @@ def _load_pc_data(game):
     potions_health = get_actors_by_previous_save_ids_if_exist(
         pc_data['potions_health'])
 
-    # Load stock potions power
-    for i, potion in enumerate(potions_power):
-        potion.stats.power = pc_data['potions_power_power'][i]
-        potion.stats.power_total = potion.stats.power
-    for i, potion in enumerate(potions_health):
-        potion.stats.power = pc_data['potions_health_power'][i]
-        potion.stats.power_total = potion.stats.power
-
     pc.stats.update({
         'lives': pc_data['lives'],
         'score': pc_data['score'],
