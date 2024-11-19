@@ -16,6 +16,7 @@ Known bugs:
 
 
 
+
 Future Improvements:
 
 > General:
@@ -32,7 +33,6 @@ Future Improvements:
   > Initialize random attributes of some actors only once,
     instead of calculating the value at instantiation
     and changing them later with the persisted information.
-    > Example: potions.
 
 > Settings:
   > Allow users to use a gamepad.

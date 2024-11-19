@@ -1,0 +1,119 @@
+{
+  "saved_game_data": {
+    "app_name": "The CodeMaster. Nightmare on Bots' Island.",
+    "app_tech_name": "codemaster",
+    "app_version": "0.0.11",
+    "continue_game": true
+  },
+  "player": {
+    "direction": 1,
+    "level": 4,
+    "score": 11037,
+    "lives": 19,
+    "health": 100,
+    "power": 100,
+    "magic_resistance": 70,
+    "game_level": 10,
+    "previous_door_crossed": "DOOR_LEFT_BLUE_00002",
+    "door_previous_position": 1,
+    "door_previous_pos_player": [
+      520,
+      520
+    ],
+    "door_previous_pos_world": [
+      -2850,
+      -758
+    ],
+    "levels_visited": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10,
+      11
+    ],
+    "levels_completed": [
+      2,
+      3,
+      4,
+      5,
+      9,
+      11
+    ],
+    "batteries": 33,
+    "files_disks": 7,
+    "files_disks_type": {
+      "D": 2,
+      "C": 2,
+      "B": 3,
+      "A": 0
+    },
+    "bullets_t01": 492,
+    "bullets_t01_shot": 30,
+    "bullets_t02": 493,
+    "bullets_t02_shot": 31,
+    "bullets_t03": 498,
+    "bullets_t03_shot": 8,
+    "bullets_t04": 498,
+    "bullets_t04_shot": 7,
+    "potions_power": [
+      "POTION_POWER_00019",
+      "POTION_POWER_00020",
+      "POTION_POWER_00021",
+      "POTION_POWER_00022",
+      "POTION_POWER_00023",
+      "POTION_POWER_00024"
+    ],
+    "potions_health": [
+      "POTION_HEALTH_00009",
+      "POTION_HEALTH_00010",
+      "POTION_HEALTH_00011"
+    ],
+    "POTION_POWER": 6,
+    "POTION_HEALTH": 3,
+    "FILES_DISK_D": 2,
+    "FILES_DISK_C": 2,
+    "FILES_DISK_B": 3,
+    "FILES_DISK_A": 0,
+    "apples": 7,
+    "apples_stock": [
+      "APPLE_YELLOW_00013",
+      "APPLE_RED_00008",
+      "APPLE_YELLOW_00014",
+      "APPLE_GREEN_00010",
+      "APPLE_YELLOW_00015",
+      "APPLE_GREEN_00011",
+      "APPLE_RED_00009"
+    ],
+    "apples_type": {
+      "G": 2,
+      "Y": 3,
+      "R": 2
+    },
+    "APPLE_GREEN": 2,
+    "APPLE_YELLOW": 3,
+    "APPLE_RED": 2,
+    "door_keys": 0,
+    "door_keys_stock": [],
+    "door_keys_type": {
+      "G": 0,
+      "B": 0,
+      "A": 0,
+      "Y": 0,
+      "R": 0,
+      "M": 0
+    },
+    "DOOR_KEY_GREEN": 0,
+    "DOOR_KEY_BLUE": 0,
+    "DOOR_KEY_AQUA": 0,
+    "DOOR_KEY_YELLOW": 0,
+    "DOOR_KEY_RED": 0,
+    "DOOR_KEY_MAGENTA": 0,
+    "energy_shield_health": 144,
+    "sound_effects": true,
+    "is_music_paused": false
+  }
+}
