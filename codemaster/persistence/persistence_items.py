@@ -111,8 +111,7 @@ def _load_items_not_initial_data(game):
         items = []
         for item_id, item_data in level_data['items'].items():
             kwargs_ = {}
-            if (item_data['category_type'] == ActorCategoryType.POTION.name
-                    and item_data.get('power') and item_data.get('power_total')):
+            if item_data['category_type'] == ActorCategoryType.POTION.name:
                 kwargs_ = {
                     'power': item_data['power'],
                     'power_total': item_data['power_total'],

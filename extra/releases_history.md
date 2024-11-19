@@ -10,7 +10,7 @@
   * Show Health Potions stock and allow the player to drink them.
   * Show Power Potions stock and allow the player to drink them.
   * Save the current game with a new name.
-* Improve the persistence of potions allocated in the inventory.
+* Improve the persistence of potions.
 
 <br>
 

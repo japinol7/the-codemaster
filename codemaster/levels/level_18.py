@@ -9,6 +9,7 @@ from codemaster.config.constants import (
     )
 from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
+from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.items.energy_shields import EnergyShield
 from codemaster.models.actors.npcs import (
     DemonMale,
@@ -90,6 +91,9 @@ class Level18(Level):
             block = platforms.SlidingBands(
                 platform[0], platform[1], platform[2], self.game, velocity=platform[3], level=self)
             self.platforms.add(block)
+
+        # Add water blocks
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
         # Add batteries
         self.batteries.add([
