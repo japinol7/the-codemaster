@@ -4,6 +4,7 @@ They will be executed by importation order.
 """
 __author__ = 'Joan A. Pinol  (japinol)'
 
+from . import test_file_msgs_data
 from . import test_pc_fetches_items
 from . import test_pc_big_jump
 from . import test_pc_shoots_npcs

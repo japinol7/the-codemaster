@@ -1,6 +1,9 @@
 """Module score_bars."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+import pygame as pg
+
+from codemaster.config.constants import SCORE_BAR_HEIGHT
 from codemaster.tools.utils.colors import Color
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.resources import Resource
@@ -11,12 +14,13 @@ from codemaster.models.actors.actor_types import ActorType
 class ScoreBar:
     """Represents a score bar."""
 
-    def __init__(self, game, screen):
+    def __init__(self, game):
         self.game = game
         self.player = game.player
-        self.screen = screen
         self.level_no = None
         self.level_no_old = None
+        self.update_counter = 0
+        self.screen = pg.Surface((Settings.screen_width, SCORE_BAR_HEIGHT))
 
     def draw_chars_render_text(self, text, x, y, color=Color.YELLOW):
         libg_jp.draw_text_rendered(text, x, y, self.screen, color)
@@ -127,8 +131,16 @@ class ScoreBar:
             screen=self.screen, color=Color.CYAN)
 
     def update(self, level_no, level_no_old):
+        self.update_counter += 1
+        if 1 < self.update_counter < 34:
+            self.game.screen.blit(self.screen)
+            return
+
+        self.update_counter = 1
         self.level_no = level_no
         self.level_no_old = level_no_old
+
+        self.screen = pg.Surface((Settings.screen_width, SCORE_BAR_HEIGHT))
         libg_jp.draw_bar_graphic(
             self.screen, amount_pct=self.player.health / self.player.health_total,
             x=Settings.score_pos_health1_xy[0], y=Settings.score_pos_health1_xy[1],
@@ -142,4 +154,7 @@ class ScoreBar:
             bar_width=Settings.score_pos_power_size[0],
             bar_height=Settings.score_pos_power_size[1],
             color_max=Color.BLUE, color_med=Color.BLUE_VIOLET, color_min=Color.CYAN)
+
         self.draw_stats()
+        self.screen.set_colorkey(Color.BLACK)
+        self.game.screen.blit(self.screen)

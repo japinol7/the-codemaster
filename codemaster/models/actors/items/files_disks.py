@@ -34,10 +34,31 @@ class FilesDisk(ActorItem):
         super().__init__(x, y, game, name=name)
 
         if self.msg_id is None:
-            self.calculate_msg()
+            self.set_random_msg()
+            return
 
-    def calculate_msg(self):
-        self.msg_id = random.choice(list(self.game.files_disks_data[self.disk_type]))
+        self.set_msg_loaded_in_disk(
+            self.msg_id, is_loaded_in_disk=True, game=self.game)
+
+    def set_random_msg(self):
+        available_msgs = [
+            k for k, v in self.game.files_disks_data[self.disk_type].items()
+            if not v['is_loaded_in_disk'] and not v['is_corrupted']
+            ]
+        if not available_msgs:
+            self.msg_id = f"{self.disk_type}_CORRUPTED_FILE"
+            self.set_msg_encrypted(self.msg_id, is_encrypted=False, game=self.game)
+            self.set_msg_loaded_in_disk(
+                self.msg_id, is_loaded_in_disk=True, game=self.game)
+            return
+
+        self.msg_id = random.choice(available_msgs)
+
+        self.set_msg_loaded_in_disk(self.msg_id, is_loaded_in_disk=True, game=self.game)
+
+    def remove_msg(self):
+        self.set_msg_loaded_in_disk(self.msg_id, is_loaded_in_disk=False, game=self.game)
+        self.msg_id = None
 
     def update_when_hit(self):
         """Cannot be hit."""
@@ -48,17 +69,76 @@ class FilesDisk(ActorItem):
         game.__class__.files_disks_data = load_data_from_file(FILES_DISKS_DATA_FILE)
 
     @staticmethod
+    def set_msgs_loaded_in_disks_to_false(game):
+        for disk_category in game.__class__.files_disks_data.values():
+            for disk in disk_category.values():
+                disk['is_encrypted'] = True
+                disk['is_loaded_in_disk'] = False
+
+    @staticmethod
+    def get_msg(msg_id, game):
+        return game.files_disks_data[msg_id[0]][msg_id]
+
+    @staticmethod
+    def get_available_msgs_by_type(game, disk_type):
+        return [
+            k for k, v in game.files_disks_data[disk_type].items()
+            if not v['is_loaded_in_disk'] and not v['is_corrupted']
+            ]
+
+    @staticmethod
     def read_msg(msg_id, game):
-        is_encrypted = game.files_disks_data[msg_id[0]][msg_id][2]
-        return game.files_disks_data[msg_id[0]][msg_id][1 if is_encrypted else 0]
+        is_encrypted = game.files_disks_data[msg_id[0]][msg_id]['is_encrypted']
+        return game.files_disks_data[msg_id[0]][msg_id][
+            'msg_encrypted' if is_encrypted else 'msg']
 
     @staticmethod
     def is_msg_encrypted(msg_id, game):
-        return game.files_disks_data[msg_id[0]][msg_id][2]
+        return game.files_disks_data[msg_id[0]][msg_id]['is_encrypted']
 
     @staticmethod
     def set_msg_encrypted(msg_id, is_encrypted, game):
-        game.files_disks_data[msg_id[0]][msg_id][2] = is_encrypted
+        game.files_disks_data[msg_id[0]][msg_id]['is_encrypted'] = is_encrypted
+
+    @staticmethod
+    def set_msg_loaded_in_disk(msg_id, is_loaded_in_disk, game):
+        game.files_disks_data[msg_id[0]][msg_id]['is_loaded_in_disk'] = is_loaded_in_disk
+
+    @staticmethod
+    def get_msg_ids_used_in_all_levels(game):
+        return {disk.msg_id for level in game.levels for disk in level.files_disks}
+
+    @staticmethod
+    def find_disk_for_msg_id(msg_id, game):
+        return [disk for level in game.levels for disk in level.files_disks
+                if disk.msg_id == msg_id][0]
+
+    @staticmethod
+    def remove_all_disks_msgs(game):
+        for level in game.levels:
+            for disk in level.files_disks:
+                FilesDisk.set_msg_loaded_in_disk(disk.msg_id, is_loaded_in_disk=False, game=game)
+                disk.msg_id = None
+
+    @staticmethod
+    def get_files_disks_without_msg(game):
+        return [disk for level in game.levels for disk in level.files_disks
+                if not disk.msg_id]
+
+    @staticmethod
+    def set_random_msg_to_disks_without_msg(game):
+        for disk in FilesDisk.get_files_disks_without_msg(game):
+            disk.set_random_msg()
+
+    @staticmethod
+    def get_files_disks_with_corrupted_msg(game):
+        return [disk for level in game.levels for disk in level.files_disks
+                if FilesDisk.get_msg(disk.msg_id, game)['is_corrupted']]
+
+    @staticmethod
+    def set_random_msg_to_disks_with_corrupted_msg(game):
+        for disk in FilesDisk.get_files_disks_with_corrupted_msg(game):
+            disk.set_random_msg()
 
 
 class FilesDiskD(FilesDisk):

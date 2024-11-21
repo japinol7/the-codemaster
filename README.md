@@ -293,8 +293,7 @@
 	        > Type C: They contain medium interesting data.
 	        > Type B: They contain good interesting data.
 	        > Type A: They contain high interesting data.
-        > In later versions of the game:
-            > You will use them on the computers.
+        > You can decrypt files disk messages with the computers.
 	> Computers: 
         > Use a computer to decrypt files disks.
         > In later versions, they will have an important role in 
@@ -344,7 +343,7 @@
     j         1:    fire a strong shot
     k         2:    fire a heavy shot
     t:              try unlocking door using each key in your inventory
-                    Also, Use a computer to decrypt files disks.
+                    Also, use a computer to decrypt files disks.
     h:              switch energy shield (if you have level up enough)
     m:              switch magic and magic NPC selector (via mouse clicks)
     1-5:            choose between numbered magic attack spells. 

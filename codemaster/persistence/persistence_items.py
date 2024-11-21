@@ -106,6 +106,7 @@ def _load_items_not_initial_data(game):
     if items_data.get('no_saved_game_data'):
         raise LoadGameNoSavedGameDataException(PERSISTENCE_NO_SAVED_GAME_DATA_MSG)
 
+    FilesDisk.remove_all_disks_msgs(game)
     for level_id, level_data in items_data['game_levels'].items():
         level = game.levels[int(level_id) - 1]
         scroll_shift, scroll_shift_top = level.get_scroll_shift_delta_tuple(level, level_data)
@@ -118,11 +119,11 @@ def _load_items_not_initial_data(game):
                     'power_total': item_data['power_total'],
                     }
             elif item_data['category_type'] == ActorCategoryType.FILES_DISK.name:
+                msg_id = item_data['msg_id']
                 kwargs_ = {
-                    'msg_id': item_data['msg_id'],
+                    'msg_id': msg_id,
                     }
-                FilesDisk.set_msg_encrypted(
-                    item_data['msg_id'], item_data['is_encrypted'], game)
+                FilesDisk.set_msg_encrypted(msg_id, item_data['is_encrypted'], game)
             elif item_data['category_type'] == ActorCategoryType.DOOR_KEY.name:
                 kwargs_ = {
                     'door': Actor.get_actor(item_data['door']),
@@ -146,3 +147,5 @@ def _load_items_not_initial_data(game):
         for item in items:
             if item.is_location_in_inventory:
                 item.kill_hook()
+
+    FilesDisk.set_random_msg_to_disks_without_msg(game)

@@ -34,6 +34,7 @@ from codemaster.models.actors.items import (
     PotionPower,
     ClockA,
     )
+from codemaster.models.actors.decorations import Water
 from codemaster.levels.level_base import Level
 
 
@@ -69,7 +70,10 @@ class Level5(Level):
         for platform in plats:
             block = platforms.Platform(platform[0], platform[1], platform[2], self.game)
             self.platforms.add(block)
-    
+
+        # Add water blocks
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
+
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(
             platforms.PLAT_TYPE_02_STONE_MIDDLE, 1640, 360, self.game,

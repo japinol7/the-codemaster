@@ -21,8 +21,10 @@ class Settings:
     screen_aspect_ratio = None
     screen_height_adjusted = None
     screen_width_adjusted = None
-    display_start_width = None    # max. width of the user's initial display mode
-    display_start_height = None   # max. height of the user's initial display mode
+    # max. width of the user's initial display mode
+    display_start_width = None
+    # max. height of the user's initial display mode
+    display_start_height = None
     cell_size = None
     fps = None
     fps_paused = None
@@ -42,7 +44,8 @@ class Settings:
     screen_bar_near_top = None
     player_position_ini = None
     are_bullets_allowed_to_collide = None
-    sprite_health_bar_pos_rel = None   # Relative position for sprite health bar
+    # Relative position for sprite health bar
+    sprite_health_bar_pos_rel = None
     sprite_health_bar_size = None
     font_size1 = None
     font_size2 = None

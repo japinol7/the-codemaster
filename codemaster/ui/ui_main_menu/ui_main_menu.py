@@ -44,6 +44,9 @@ class UIMainMenu:
         self.game = game
 
     def _create_credits_dialog_msg(self):
+        if self.items.get('credits_message_window'):
+            self.items['credits_message_window'].kill()
+
         self.items['credits_message_window'] = pgui.windows.ui_message_window.UIMessageWindow(
             rect=pg.Rect((310, 298), (542, 330)),
             manager=self.manager,

@@ -10,10 +10,12 @@ Known bugs:
 > Energy shield issues:
   > Energy shield activation sprites placement.
 
+> pygame-gui UI components:
+  > Check possible memory leak:
+
 > Vertical borders for moving actors are buggy, such as snakes.
   > Cannot correctly persist vertical moving actors
     when they are not initially in a game level.
-
 
 
 

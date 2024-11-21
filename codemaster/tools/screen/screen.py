@@ -22,6 +22,7 @@ class Screen:
         self.next = None
         self.previous = None
         self.game = game
+        self.background_screenshot = pg.Surface((Settings.screen_width, Settings.screen_height))
 
     def start_up(self, current_time=None, *args, **kwargs):
         self.start_time = current_time
@@ -108,7 +109,6 @@ class GameOver(Screen):
         super().__init__(game)
 
     def start_up(self, current_time=None, *args, **kwargs):
-        self.background_screenshot = pg.Surface((Settings.screen_width, Settings.screen_height))
         self.background_screenshot.blit(self.game.screen, (0, 0))
 
         super().start_up(current_time=self.game.current_time)
@@ -177,11 +177,9 @@ class Pause(Screen):
 
     def __init__(self, game):
         super().__init__(game)
-        self.background_screenshot = None
         self.is_full_screen_switch = False
 
     def start_up(self, current_time=None, is_full_screen_switch=False, *args, **kwargs):
-        self.background_screenshot = pg.Surface((Settings.screen_width, Settings.screen_height))
         self.background_screenshot.blit(self.game.screen, (0, 0))
 
         pg.mouse.set_visible(True)

@@ -12,51 +12,6 @@
       "world_shift_top": -500,
       "world_shift_top_initial": -500,
       "items": {
-        "BATTERY_A_00001": {
-          "category_type": "BATTERY",
-          "type": "BATTERY_A",
-          "health": 1,
-          "health_total": 1,
-          "x": 100,
-          "y": 324,
-          "direction": 2
-        },
-        "BATTERY_A_00002": {
-          "category_type": "BATTERY",
-          "type": "BATTERY_A",
-          "health": 1,
-          "health_total": 1,
-          "x": 300,
-          "y": 324,
-          "direction": 2
-        },
-        "BATTERY_A_00003": {
-          "category_type": "BATTERY",
-          "type": "BATTERY_A",
-          "health": 1,
-          "health_total": 1,
-          "x": 1200,
-          "y": 54,
-          "direction": 2
-        },
-        "MINE_CYAN_00001": {
-          "category_type": "MINE",
-          "type": "MINE_CYAN",
-          "health": 1,
-          "health_total": 1,
-          "x": 400,
-          "y": 330,
-          "direction": 2
-        },
-        "MINE_CYAN_00002": {
-          "category_type": "MINE",
-          "type": "MINE_CYAN",
-          "health": 1,
-          "health_total": 1,
-          "x": 425,
-          "y": 330,
-          "direction": 2
-        },
         "DOOR_LEFT_BLUE_00001": {
           "category_type": "DOOR",
           "type": "DOOR_LEFT_BLUE",
@@ -77,6 +32,15 @@
       "world_shift_top": -500,
       "world_shift_top_initial": -500,
       "items": {
+        "CLOCK_A_00001": {
+          "category_type": "CLOCK",
+          "type": "CLOCK_A",
+          "health": 1,
+          "health_total": 1,
+          "x": 540,
+          "y": 174,
+          "direction": 2
+        },
         "DOOR_RIGHT_GREEN_00001": {
           "category_type": "DOOR",
           "type": "DOOR_RIGHT_GREEN",
@@ -104,6 +68,60 @@
           "health_total": 1,
           "x": 2960,
           "y": 336,
+          "direction": 2
+        },
+        "BATTERY_A_00012": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": 410,
+          "y": 184,
+          "direction": 2
+        },
+        "BATTERY_A_00018": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": 2400,
+          "y": 74,
+          "direction": 2
+        },
+        "BATTERY_A_00019": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": 2410,
+          "y": 74,
+          "direction": 2
+        },
+        "APPLE_GREEN_00001": {
+          "category_type": "APPLE",
+          "type": "APPLE_GREEN",
+          "health": 1,
+          "health_total": 1,
+          "x": 180,
+          "y": 435,
+          "direction": 2
+        },
+        "APPLE_YELLOW_00001": {
+          "category_type": "APPLE",
+          "type": "APPLE_YELLOW",
+          "health": 1,
+          "health_total": 1,
+          "x": 220,
+          "y": 435,
+          "direction": 2
+        },
+        "APPLE_YELLOW_00002": {
+          "category_type": "APPLE",
+          "type": "APPLE_YELLOW",
+          "health": 1,
+          "health_total": 1,
+          "x": 270,
+          "y": 435,
           "direction": 2
         },
         "DOOR_RIGHT_YELLOW_00002": {
@@ -152,6 +170,114 @@
       "world_shift_top": -500,
       "world_shift_top_initial": -500,
       "items": {
+        "CLOCK_A_00002": {
+          "category_type": "CLOCK",
+          "type": "CLOCK_A",
+          "health": 1,
+          "health_total": 1,
+          "x": 800,
+          "y": 174,
+          "direction": 2
+        },
+        "BATTERY_A_00025": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": 2200,
+          "y": 149,
+          "direction": 2
+        },
+        "FILES_DISK_B_00002": {
+          "category_type": "FILES_DISK",
+          "type": "FILES_DISK_B",
+          "health": 1,
+          "health_total": 1,
+          "x": 532,
+          "y": 184,
+          "direction": 2
+        },
+        "POTION_POWER_00003": {
+          "category_type": "POTION",
+          "type": "POTION_POWER",
+          "health": 1,
+          "health_total": 1,
+          "x": 572,
+          "y": 184,
+          "direction": 2
+        },
+        "MINE_CYAN_00019": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 616,
+          "y": 190,
+          "direction": 2
+        },
+        "MINE_CYAN_00020": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 644,
+          "y": 190,
+          "direction": 2
+        },
+        "MINE_CYAN_00021": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 672,
+          "y": 190,
+          "direction": 2
+        },
+        "MINE_CYAN_00022": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 700,
+          "y": 190,
+          "direction": 2
+        },
+        "MINE_CYAN_00023": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 616,
+          "y": 160,
+          "direction": 2
+        },
+        "MINE_CYAN_00024": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 644,
+          "y": 160,
+          "direction": 2
+        },
+        "MINE_CYAN_00025": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 672,
+          "y": 160,
+          "direction": 2
+        },
+        "MINE_CYAN_00026": {
+          "category_type": "MINE",
+          "type": "MINE_CYAN",
+          "health": 1,
+          "health_total": 1,
+          "x": 700,
+          "y": 160,
+          "direction": 2
+        },
         "DOOR_RIGHT_RED_00001": {
           "category_type": "DOOR",
           "type": "DOOR_RIGHT_RED",
@@ -167,9 +293,9 @@
       }
     },
     "6": {
-      "world_shift": 0,
+      "world_shift": -2336,
       "world_shift_initial": 0,
-      "world_shift_top": -500,
+      "world_shift_top": -462,
       "world_shift_top_initial": -500,
       "items": {
         "COMPUTER_01_00002": {
@@ -177,35 +303,8 @@
           "type": "COMPUTER_01",
           "health": 1,
           "health_total": 1,
-          "x": 2860,
-          "y": 336,
-          "direction": 2
-        },
-        "BATTERY_A_00027": {
-          "category_type": "BATTERY",
-          "type": "BATTERY_A",
-          "health": 1,
-          "health_total": 1,
-          "x": 410,
-          "y": 184,
-          "direction": 2
-        },
-        "FILES_DISK_C_00002": {
-          "category_type": "FILES_DISK",
-          "type": "FILES_DISK_C",
-          "health": 1,
-          "health_total": 1,
-          "x": 340,
-          "y": 184,
-          "direction": 2
-        },
-        "LIFE_RECOVERY_00002": {
-          "category_type": "LIFE_RECOVERY",
-          "type": "LIFE_RECOVERY",
-          "health": 1,
-          "health_total": 1,
-          "x": 511,
-          "y": 183,
+          "x": 524,
+          "y": 374,
           "direction": 2
         },
         "DOOR_LEFT_RED_00001": {
@@ -228,10 +327,68 @@
         }
       }
     },
-    "9": {
-      "world_shift": 0,
+    "7": {
+      "world_shift": -2866,
       "world_shift_initial": 0,
-      "world_shift_top": -500,
+      "world_shift_top": -760,
+      "world_shift_top_initial": -500,
+      "items": {
+        "BATTERY_A_00036": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": -266,
+          "y": -104,
+          "direction": 2
+        },
+        "DOOR_LEFT_GREEN_00002": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_GREEN",
+          "door_type": 0,
+          "is_locked": false
+        },
+        "DOOR_RIGHT_YELLOW_00004": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_YELLOW",
+          "door_type": 1,
+          "is_locked": false
+        }
+      }
+    },
+    "8": {
+      "world_shift": -2984,
+      "world_shift_initial": 0,
+      "world_shift_top": -588,
+      "world_shift_top_initial": -500,
+      "items": {
+        "BATTERY_A_00038": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
+          "health": 1,
+          "health_total": 1,
+          "x": -2958,
+          "y": 36,
+          "direction": 2
+        },
+        "DOOR_LEFT_YELLOW_00004": {
+          "category_type": "DOOR",
+          "type": "DOOR_LEFT_YELLOW",
+          "door_type": 0,
+          "is_locked": false
+        },
+        "DOOR_RIGHT_WHITE_00001": {
+          "category_type": "DOOR",
+          "type": "DOOR_RIGHT_WHITE",
+          "door_type": 1,
+          "is_locked": false
+        }
+      }
+    },
+    "9": {
+      "world_shift": -2592,
+      "world_shift_initial": 0,
+      "world_shift_top": -298,
       "world_shift_top_initial": -500,
       "items": {
         "DOOR_LEFT_WHITE_00001": {
@@ -255,18 +412,18 @@
       }
     },
     "10": {
-      "world_shift": -2850,
+      "world_shift": 0,
       "world_shift_initial": 0,
-      "world_shift_top": -866,
+      "world_shift_top": -500,
       "world_shift_top_initial": -500,
       "items": {
-        "FILES_DISK_A_00001": {
-          "category_type": "FILES_DISK",
-          "type": "FILES_DISK_A",
+        "BATTERY_A_00042": {
+          "category_type": "BATTERY",
+          "type": "BATTERY_A",
           "health": 1,
           "health_total": 1,
-          "x": -2814,
-          "y": -103,
+          "x": 3086,
+          "y": 49,
           "direction": 2
         },
         "CARTRIDGE_GREEN_00006": {
@@ -274,8 +431,8 @@
           "type": "CARTRIDGE_GREEN",
           "health": 1,
           "health_total": 1,
-          "x": -2090,
-          "y": -250,
+          "x": 760,
+          "y": 116,
           "direction": 2
         },
         "CARTRIDGE_BLUE_00006": {
@@ -283,8 +440,8 @@
           "type": "CARTRIDGE_BLUE",
           "health": 1,
           "health_total": 1,
-          "x": -2050,
-          "y": -250,
+          "x": 800,
+          "y": 116,
           "direction": 2
         },
         "CARTRIDGE_YELLOW_00004": {
@@ -292,8 +449,8 @@
           "type": "CARTRIDGE_YELLOW",
           "health": 1,
           "health_total": 1,
-          "x": -2010,
-          "y": -250,
+          "x": 840,
+          "y": 116,
           "direction": 2
         },
         "CARTRIDGE_RED_00003": {
@@ -301,8 +458,8 @@
           "type": "CARTRIDGE_RED",
           "health": 1,
           "health_total": 1,
-          "x": -1970,
-          "y": -250,
+          "x": 880,
+          "y": 116,
           "direction": 2
         },
         "CARTRIDGE_GREEN_00007": {
@@ -310,8 +467,8 @@
           "type": "CARTRIDGE_GREEN",
           "health": 1,
           "health_total": 1,
-          "x": -2090,
-          "y": -288,
+          "x": 760,
+          "y": 78,
           "direction": 2
         },
         "CARTRIDGE_BLUE_00007": {
@@ -319,8 +476,26 @@
           "type": "CARTRIDGE_BLUE",
           "health": 1,
           "health_total": 1,
-          "x": -2050,
-          "y": -288,
+          "x": 800,
+          "y": 78,
+          "direction": 2
+        },
+        "POTION_POWER_00009": {
+          "category_type": "POTION",
+          "type": "POTION_POWER",
+          "health": 1,
+          "health_total": 1,
+          "x": 3036,
+          "y": 46,
+          "direction": 2
+        },
+        "POTION_POWER_00010": {
+          "category_type": "POTION",
+          "type": "POTION_POWER",
+          "health": 1,
+          "health_total": 1,
+          "x": 3036,
+          "y": 9,
           "direction": 2
         },
         "DOOR_LEFT_YELLOW_00005": {
@@ -334,26 +509,6 @@
           "type": "DOOR_RIGHT_BLUE",
           "door_type": 1,
           "is_locked": false
-        }
-      }
-    },
-    "11": {
-      "world_shift": 0,
-      "world_shift_initial": 0,
-      "world_shift_top": -500,
-      "world_shift_top_initial": -500,
-      "items": {
-        "DOOR_LEFT_BLUE_00002": {
-          "category_type": "DOOR",
-          "type": "DOOR_LEFT_BLUE",
-          "door_type": 0,
-          "is_locked": false
-        },
-        "DOOR_RIGHT_MAGENTA_00001": {
-          "category_type": "DOOR",
-          "type": "DOOR_RIGHT_MAGENTA",
-          "door_type": 1,
-          "is_locked": true
         }
       }
     }

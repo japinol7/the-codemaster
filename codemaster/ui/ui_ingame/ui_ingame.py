@@ -155,7 +155,7 @@ class UIInGame:
             create_text_dialog_msg(
                 self,
                 f"{FilesDisk.read_msg(files_disk, self.game)}\nEOF",
-                rect=pg.Rect((316, 375), (542, 330)),
+                rect=pg.Rect((309, 98), (542, 330)),
                 title=f"File: {files_disk}"
                 )
             self.items['files_disks_selection_list'].show()
@@ -168,7 +168,7 @@ class UIInGame:
         def save_game_directory_action():
             save_game_directory_ui_action(self, persist_game_before_copy=True)
 
-        button_pos_x = 246
+        button_pos_x = 234
         button_pos_y = 720
         button_size = 110, 40
         self.items['levels_visited_button'] = pgui.elements.UIButton(
@@ -219,7 +219,7 @@ class UIInGame:
             self.items['save_game_button'].disable()
 
         self.items['text_entry_line'] = pgui.elements.ui_text_entry_line.UITextEntryLine(
-            relative_rect=pg.Rect((375, 480), (390, 42)),
+            relative_rect=pg.Rect((385, 480), (390, 42)),
             manager=self.manager,
             visible=False,
             )
@@ -277,7 +277,7 @@ class UIInGame:
             )
 
         self.items['save_game_ok_button'] = pgui.elements.UIButton(
-            relative_rect=pg.Rect((485, 524), (170, 40)),
+            relative_rect=pg.Rect((495, 524), (170, 40)),
             text="Save Named Game",
             manager=self.manager,
             command=save_game_directory_action,

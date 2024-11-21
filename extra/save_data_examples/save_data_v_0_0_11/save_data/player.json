@@ -7,22 +7,22 @@
   },
   "player": {
     "direction": 1,
-    "level": 4,
-    "score": 11037,
-    "lives": 19,
-    "health": 100,
-    "power": 100,
+    "level": 3,
+    "score": 9745,
+    "lives": 4,
+    "health": 96,
+    "power": 97.2,
     "magic_resistance": 70,
-    "game_level": 10,
-    "previous_door_crossed": "DOOR_LEFT_BLUE_00002",
-    "door_previous_position": 1,
+    "game_level": 6,
+    "previous_door_crossed": "DOOR_RIGHT_AQUA_00001",
+    "door_previous_position": 0,
     "door_previous_pos_player": [
-      520,
-      520
+      900,
+      -390
     ],
     "door_previous_pos_world": [
-      -2850,
-      -758
+      -2050,
+      -900
     ],
     "levels_visited": [
       1,
@@ -31,71 +31,76 @@
       4,
       5,
       6,
+      7,
+      8,
       9,
-      10,
-      11
+      10
     ],
     "levels_completed": [
+      1,
       2,
-      3,
       4,
-      5,
-      9,
-      11
+      6,
+      9
     ],
-    "batteries": 33,
-    "files_disks": 7,
+    "batteries": 35,
+    "files_disks": 10,
     "files_disks_type": {
       "D": 2,
-      "C": 2,
-      "B": 3,
-      "A": 0
+      "C": 3,
+      "B": 4,
+      "A": 1
     },
-    "bullets_t01": 492,
-    "bullets_t01_shot": 30,
-    "bullets_t02": 493,
-    "bullets_t02_shot": 31,
-    "bullets_t03": 498,
-    "bullets_t03_shot": 8,
-    "bullets_t04": 498,
-    "bullets_t04_shot": 7,
+    "bullets_t01": 63,
+    "bullets_t01_shot": 4,
+    "bullets_t02": 40,
+    "bullets_t02_shot": 4,
+    "bullets_t03": 11,
+    "bullets_t03_shot": 0,
+    "bullets_t04": 5,
+    "bullets_t04_shot": 0,
     "potions_power": [
       "POTION_POWER_00019",
       "POTION_POWER_00020",
       "POTION_POWER_00021",
       "POTION_POWER_00022",
       "POTION_POWER_00023",
-      "POTION_POWER_00024"
+      "POTION_POWER_00024",
+      "POTION_POWER_00007",
+      "POTION_POWER_00008"
     ],
     "potions_health": [
       "POTION_HEALTH_00009",
       "POTION_HEALTH_00010",
-      "POTION_HEALTH_00011"
+      "POTION_HEALTH_00011",
+      "POTION_HEALTH_00004",
+      "POTION_HEALTH_00005"
     ],
-    "POTION_POWER": 6,
-    "POTION_HEALTH": 3,
+    "POTION_POWER": 8,
+    "POTION_HEALTH": 5,
     "FILES_DISK_D": 2,
-    "FILES_DISK_C": 2,
-    "FILES_DISK_B": 3,
-    "FILES_DISK_A": 0,
-    "apples": 7,
+    "FILES_DISK_C": 3,
+    "FILES_DISK_B": 4,
+    "FILES_DISK_A": 1,
+    "apples": 8,
     "apples_stock": [
-      "APPLE_YELLOW_00013",
       "APPLE_RED_00008",
-      "APPLE_YELLOW_00014",
+      "APPLE_YELLOW_00013",
       "APPLE_GREEN_00010",
-      "APPLE_YELLOW_00015",
+      "APPLE_RED_00009",
+      "APPLE_RED_00010",
+      "APPLE_YELLOW_00014",
       "APPLE_GREEN_00011",
-      "APPLE_RED_00009"
+      "APPLE_GREEN_00012"
     ],
     "apples_type": {
-      "G": 2,
-      "Y": 3,
-      "R": 2
+      "G": 3,
+      "Y": 2,
+      "R": 3
     },
-    "APPLE_GREEN": 2,
-    "APPLE_YELLOW": 3,
-    "APPLE_RED": 2,
+    "APPLE_GREEN": 3,
+    "APPLE_YELLOW": 2,
+    "APPLE_RED": 3,
     "door_keys": 0,
     "door_keys_stock": [],
     "door_keys_type": {
@@ -112,7 +117,19 @@
     "DOOR_KEY_YELLOW": 0,
     "DOOR_KEY_RED": 0,
     "DOOR_KEY_MAGENTA": 0,
-    "energy_shield_health": 144,
+    "energy_shield_health": 150,
+    "files_disks_stock": [
+      "FILES_DISK_C_00006",
+      "FILES_DISK_D_00005",
+      "FILES_DISK_D_00006",
+      "FILES_DISK_B_00009",
+      "FILES_DISK_B_00010",
+      "FILES_DISK_C_00007",
+      "FILES_DISK_C_00008",
+      "FILES_DISK_A_00007",
+      "FILES_DISK_B_00011",
+      "FILES_DISK_B_00005"
+    ],
     "sound_effects": true,
     "is_music_paused": false
   }

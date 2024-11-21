@@ -52,7 +52,7 @@ PL_BULLETS_T01_DEFAULT = 140
 PL_BULLETS_T02_DEFAULT = 75
 PL_BULLETS_T03_DEFAULT = 24
 PL_BULLETS_T04_DEFAULT = 8
-PL_SELF_DESTRUCTION_COUNT_DEF = 3
+PL_SELF_DESTRUCTION_COUNT_DEF = 4
 
 PC_PAC_ID = 1
 # PC types  (X, Y, width, height, id, type_en, type_name) of sprite
@@ -721,18 +721,26 @@ class Player(pg.sprite.Sprite):
             return
         if not self.stats['files_disks_stock']:
             return
+
         hit_list = pg.sprite.spritecollide(self, self.level.computers, False)
+        if not hit_list:
+            return
+
         msg_ids = []
-        if hit_list:
-            for files_disk in self.stats['files_disks_stock']:
-                if not files_disk.is_msg_encrypted(files_disk.msg_id, self.game):
-                    continue
-                msg_ids += [files_disk.msg_id]
-                files_disk.set_msg_encrypted(
-                    files_disk.msg_id, is_encrypted=False, game=self.game)
+        for files_disk in self.stats['files_disks_stock']:
+            if not files_disk.is_msg_encrypted(files_disk.msg_id, self.game):
+                continue
+            if files_disk.msg_id.endswith('CORRUPTED_FILE'):
+                continue
+            msg_ids += [files_disk.msg_id]
+            files_disk.set_msg_encrypted(
+                files_disk.msg_id, is_encrypted=False, game=self.game)
 
         if msg_ids:
-            text = f"Files decrypted:\n{'\n'.join(msg_ids)}"
+            text = (f"Files decrypted:\n"
+                    f"{'\n'.join(msg_ids)}"
+                    f"{'\n' if len(msg_ids) == 1 else ''}"
+                    )
             TextMsg.create(text, self.game, time_in_secs=MSG_PC_DUR_LONG)
         else:
             text = "No files to decrypt"
