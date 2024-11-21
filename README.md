@@ -296,9 +296,9 @@
         > In later versions of the game:
             > You will use them on the computers.
 	> Computers: 
-	    > Right now, they are just decoration.
-          In later versions, they will have an important role in 
-          beating the game.
+        > Use a computer to decrypt files disks.
+        > In later versions, they will have an important role in 
+            beating the game.
 	> Mines: 
 	    > There are two types of mines:
 	        > Aqua mines: They deal a good deal of damage.
@@ -344,7 +344,8 @@
     j         1:    fire a strong shot
     k         2:    fire a heavy shot
     t:              try unlocking door using each key in your inventory
-    h:              Switch energy shield (if you have level up enough)
+                    Also, Use a computer to decrypt files disks.
+    h:              switch energy shield (if you have level up enough)
     m:              switch magic and magic NPC selector (via mouse clicks)
     1-5:            choose between numbered magic attack spells. 
                     You have to acquire them

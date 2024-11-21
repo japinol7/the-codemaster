@@ -9,6 +9,7 @@ import pygame as pg
 
 from codemaster.tools.logger.logger import log
 from codemaster.models.actors.items.bullets import BulletType
+from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.tools.utils.colors import Color
 from codemaster.debug_info import DebugInfo
 from codemaster.help_info import HelpInfo
@@ -65,6 +66,7 @@ class Game:
     full_screen_flags = None
     ui_manager = None
     new_game = False
+    files_disks_data = None
 
     def __init__(self, is_debug=None, is_full_screen=None,
                  is_persist_data=None, is_no_display_scaled=None):
@@ -156,6 +158,9 @@ class Game:
             # Initialize persistence settings if necessary
             if self.is_persist_data:
                 PersistenceSettings.init_settings(self.persistence_path)
+
+            # Load file disks data
+            FilesDisk.load_files_disks_data(self)
 
             # Initialize UI
             Game.ui_manager = UIManager(self)
@@ -446,6 +451,7 @@ class Game:
                         self.player.drink_potion_power()
                     if event.key == pg.K_t:
                         self.player.use_door_key()
+                        self.player.use_computer()
                     if event.key == pg.K_b:
                         if pg.key.get_mods() & pg.KMOD_LALT:
                             t = datetime.now().time()

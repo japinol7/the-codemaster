@@ -7,6 +7,7 @@ from itertools import chain
 from codemaster.models.actors.actor_types import ActorCategoryType
 from codemaster.models.actors.actors import Actor, ActorItem
 from codemaster.models.actors import items as items_module
+from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.persistence.persistence_settings import (
     GAME_DATA_HEADER,
     PERSISTENCE_NO_SAVED_GAME_DATA_MSG,
@@ -116,6 +117,12 @@ def _load_items_not_initial_data(game):
                     'power': item_data['power'],
                     'power_total': item_data['power_total'],
                     }
+            elif item_data['category_type'] == ActorCategoryType.FILES_DISK.name:
+                kwargs_ = {
+                    'msg_id': item_data['msg_id'],
+                    }
+                FilesDisk.set_msg_encrypted(
+                    item_data['msg_id'], item_data['is_encrypted'], game)
             elif item_data['category_type'] == ActorCategoryType.DOOR_KEY.name:
                 kwargs_ = {
                     'door': Actor.get_actor(item_data['door']),

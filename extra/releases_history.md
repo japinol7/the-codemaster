@@ -4,7 +4,9 @@
 
 ### New features and improvements:
 
-* TODO.
+* Add files disks message management.
+* Improve computers to perform these actions:
+  * Decrypt files disks allocated in the player inventory.
 
 <br>
 

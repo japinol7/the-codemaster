@@ -21,6 +21,7 @@ class HelpInfo:
               '     \t drink power potion,  delete\n'
               '     \t eat health apple,  home\n'
               '   t: \t try unlocking door using each key in your inventory\n'
+              '      \t Also, Use a computer to decrypt files disks.\n'
               '   h: \t switch energy field if available\n'
               '   m: \t switch magic and magic NPC selector  (via mouse clicks)\n'
               ' 1-5  \t choose between numbered magic attack spells. You have to acquire them.\n'

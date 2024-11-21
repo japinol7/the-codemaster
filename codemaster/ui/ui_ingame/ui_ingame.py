@@ -10,6 +10,7 @@ from codemaster.config.constants import (
     UI_X_SPACE_BETWEEN_BUTTONS,
     UI_MAIN_THEME_FILE,
     )
+from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.ui.ui_main_utils.ui_main_utils import (
     create_text_dialog_msg,
     save_game_ui_action,
@@ -37,8 +38,14 @@ class UIInGame:
         self.items['potion_drink_text_box'].hide()
         self.items['health_potion_drink_button'].hide()
         self.items['power_potion_drink_button'].hide()
+
+        self.items['files_disks_selection_list'].hide()
+        self.items['files_disk_text_box'].hide()
+        self.items['files_disks_read_button'].hide()
+
         if self.items.get('text_message_window'):
             self.items['text_message_window'].hide()
+
         self.items['save_game_ok_button'].hide()
         self.items['text_entry_line'].hide()
 
@@ -121,13 +128,47 @@ class UIInGame:
                 self.game.player.drink_power_potion(potion)
             power_potions_action()
 
+        def files_disks_action():
+            self.hide_additional_game_items()
+            files_disks = self.game.player.get_files_disks_str()
+            self.items['files_disks_selection_list'].set_item_list(files_disks)
+            self.items['files_disks_selection_list'].show()
+            self.items['files_disk_text_box'].set_text("Files Disks".center(34))
+
+            if not files_disks:
+                self.items['files_disks_selection_list'].disable()
+                self.items['files_disks_read_button'].disable()
+            else:
+                self.items['files_disks_selection_list'].enable()
+                self.items['files_disks_read_button'].enable()
+
+            self.items['files_disk_text_box'].show()
+            self.items['files_disks_read_button'].show()
+
+        def files_disks_read_action():
+            self.hide_additional_game_items()
+            files_disk = self.items['files_disks_selection_list'].get_single_selection()
+            if not files_disk:
+                files_disks_action()
+                return
+
+            create_text_dialog_msg(
+                self,
+                f"{FilesDisk.read_msg(files_disk, self.game)}\nEOF",
+                rect=pg.Rect((316, 375), (542, 330)),
+                title=f"File: {files_disk}"
+                )
+            self.items['files_disks_selection_list'].show()
+            self.items['files_disk_text_box'].show()
+            self.items['files_disks_read_button'].show()
+
         def save_game_action():
             save_game_ui_action(self)
 
         def save_game_directory_action():
             save_game_directory_ui_action(self, persist_game_before_copy=True)
 
-        button_pos_x = 290
+        button_pos_x = 246
         button_pos_y = 720
         button_size = 110, 40
         self.items['levels_visited_button'] = pgui.elements.UIButton(
@@ -156,6 +197,13 @@ class UIInGame:
             text="Power Potions",
             manager=self.manager,
             command=power_potions_action,
+            )
+        button_pos_x += UI_X_SPACE_BETWEEN_BUTTONS
+        self.items['files_disks_button'] = pgui.elements.UIButton(
+            relative_rect=pg.Rect((button_pos_x, button_pos_y), button_size),
+            text="Info Files",
+            manager=self.manager,
+            command=files_disks_action,
             )
         button_pos_x += UI_X_SPACE_BETWEEN_BUTTONS
         self.items['save_game_button'] = pgui.elements.UIButton(
@@ -204,6 +252,27 @@ class UIInGame:
             text="Drink Power Potion",
             manager=self.manager,
             command=power_potion_drink_action,
+            visible=False,
+            )
+
+        self.items['files_disks_selection_list'] = pgui.elements.ui_selection_list.UISelectionList(
+            relative_rect=pg.Rect((375, 430), (200, 275)),
+            manager=self.manager,
+            item_list = [],
+            visible=False,
+            )
+        self.items['files_disk_text_box'] = pgui.elements.UITextBox(
+            relative_rect=pg.Rect((578, 470), (190, 40)),
+            html_text="Current value:",
+            manager=self.manager,
+            plain_text_display_only=True,
+            visible=False,
+            )
+        self.items['files_disks_read_button'] = pgui.elements.UIButton(
+            relative_rect=pg.Rect((578, 514), (190, 40)),
+            text="Read Files",
+            manager=self.manager,
+            command=files_disks_read_action,
             visible=False,
             )
 

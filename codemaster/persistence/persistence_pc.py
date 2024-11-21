@@ -62,10 +62,12 @@ def _load_pc_data(game):
     pc.direction = pc_data['direction']
     pc.power = pc_data['power']
     pc.health = pc_data['health']
-    apples_stock = get_actors_by_previous_save_ids_if_exist(
-        pc_data['apples_stock'])
+    files_disks_stock = get_actors_by_previous_save_ids_if_exist(
+        pc_data['files_disks_stock'])
     door_keys_stock = get_actors_by_previous_save_ids_if_exist(
         pc_data['door_keys_stock'])
+    apples_stock = get_actors_by_previous_save_ids_if_exist(
+        pc_data['apples_stock'])
 
     potions_power = get_actors_by_previous_save_ids_if_exist(
         pc_data['potions_power'])
@@ -117,8 +119,10 @@ def _load_pc_data(game):
         'potions_power': potions_power,
         'potions_health': potions_health,
         'apples_stock': apples_stock,
+        'files_disks_stock': files_disks_stock,
         })
-    for item in chain(apples_stock, door_keys_stock, potions_health, potions_power):
+    for item in chain(apples_stock, door_keys_stock, potions_health,
+                      potions_power, files_disks_stock):
         item.kill_hook()
 
     pc.sound_effects = game.sound_effects = pc_data['sound_effects']
