@@ -9,6 +9,7 @@ import pygame as pg
 
 from codemaster.tools.logger.logger import log
 from codemaster.models.actors.items.bullets import BulletType
+from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.tools.utils.colors import Color
 from codemaster.debug_info import DebugInfo
 from codemaster.help_info import HelpInfo
@@ -65,6 +66,7 @@ class Game:
     full_screen_flags = None
     ui_manager = None
     new_game = False
+    files_disks_data = None
 
     def __init__(self, is_debug=None, is_full_screen=None,
                  is_persist_data=None, is_no_display_scaled=None):
@@ -157,9 +159,13 @@ class Game:
             if self.is_persist_data:
                 PersistenceSettings.init_settings(self.persistence_path)
 
+            # Load file disks data
+            FilesDisk.load_files_disks_data(self)
+
             # Initialize UI
             Game.ui_manager = UIManager(self)
 
+        FilesDisk.set_msgs_loaded_in_disks_to_false(self)
         self.current_time_delta = pg.time.get_ticks() / 1000.0
 
         # Initialize screens
@@ -248,9 +254,7 @@ class Game:
                 Game.ui_manager.clean_game_data()
                 levels.Level.clean_entity_ids()
         else:
-            if not Game.is_over:
-                Game.screen.blit(Resource.images['background'], (0, 0))
-            else:
+            if Game.is_over:
                 Game.screen.blit(Resource.images['bg_blue_t2'], (0, 0))
             # Draw level sprites
             self.level.draw()
@@ -446,13 +450,14 @@ class Game:
                         self.player.drink_potion_power()
                     if event.key == pg.K_t:
                         self.player.use_door_key()
+                        self.player.use_computer()
                     if event.key == pg.K_b:
                         if pg.key.get_mods() & pg.KMOD_LALT:
                             t = datetime.now().time()
                             if (((t.hour * 60 + t.minute) * 60 + t.second) - self.K_b_keydown_seconds
                                     >= PL_SELF_DESTRUCTION_COUNT_DEF):
                                 self.player.self_destruction()
-                                self.K_b_keydown_seconds = 0
+                            self.K_b_keydown_seconds = 0
                     if event.key == pg.K_F5:
                         if (self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL
                                 and pg.key.get_mods() & pg.KMOD_LALT):
@@ -530,7 +535,7 @@ class Game:
         self.put_initial_actors_on_the_board()
 
         # Initialize score bars
-        self.score_bars = ScoreBar(self, Game.screen)
+        self.score_bars = ScoreBar(self)
 
         # Render text frequently used only if it is the first game
         if Game.is_first_game:

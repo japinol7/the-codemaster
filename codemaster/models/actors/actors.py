@@ -674,6 +674,7 @@ class ActorItem(Actor):
                     game.player.stats['door_keys_stock'],
                     game.player.stats['potions_power'],
                     game.player.stats['potions_health'],
+                    game.player.stats['files_disks_stock'],
                     )
             else:
                 items = game_level.items
@@ -705,6 +706,11 @@ class ActorItem(Actor):
                     level['items'][item.id].update({
                         'power': item.stats.power,
                         'power_total': item.stats.power_total,
+                        })
+                elif item.category_type == ActorCategoryType.FILES_DISK:
+                    level['items'][item.id].update({
+                        'msg_id': item.msg_id,
+                        'is_encrypted': item.is_msg_encrypted(item.msg_id, game),
                         })
                 elif item.category_type == ActorCategoryType.DOOR_KEY:
                     level['items'][item.id].update({

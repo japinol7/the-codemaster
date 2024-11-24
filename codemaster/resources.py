@@ -80,7 +80,7 @@ class Resource:
 
     @classmethod
     def render_text_frequently_used(cls, game):
-        libg_jp.render_text('– PAUSED –', Settings.screen_width // 2, Settings.screen_height // 2,
+        libg_jp.render_text('– PAUSED –', Settings.screen_width // 2, Settings.screen_height // 2.8,
                             cls.txt_surfaces, 'game_paused', color=Color.CYAN,
                             size=int(70*Settings.font_pos_factor), align="center")
 

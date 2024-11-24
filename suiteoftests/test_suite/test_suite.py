@@ -11,6 +11,7 @@ from codemaster.models.actors.items import (
     ClockTimerA,
     InvisibleHolderA,
     )
+from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.models.actors.player import Player
 from codemaster.config.constants import (
     APP_TECH_NAME,
@@ -61,6 +62,7 @@ class GameTestSuite:
     screen = None
     size = None
     screen_flags = None
+    files_disks_data = None
 
     def __init__(self):
         self._tests = Queue()
@@ -162,7 +164,9 @@ class GameTestSuite:
         self.test_load_last_game_failed = False
         self.game_loop_exec_times = 0
         self.current_test_timeout = None
+
         self._init_settings(is_debug=is_debug, is_full_screen=is_full_screen)
+        FilesDisk.set_msgs_loaded_in_disks_to_false(self)
 
         if is_set_up_actors_and_levels:
             self.set_up_actors_and_levels()
@@ -272,6 +276,9 @@ class GameTestSuite:
         libg_jp.chars_render_text_tuple(font_name=FONT_FIXED_DEFAULT_NAME)
         GameTestSuite.is_log_debug = self.is_debug = is_debug
         self.is_settings_initialized_before = True
+
+        # Load file disks data
+        FilesDisk.load_files_disks_data(self)
 
     def _init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
         self.clock_timer = ClockTimerA(

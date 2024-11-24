@@ -1,0 +1,136 @@
+{
+  "saved_game_data": {
+    "app_name": "The CodeMaster. Nightmare on Bots' Island.",
+    "app_tech_name": "codemaster",
+    "app_version": "0.0.11",
+    "continue_game": true
+  },
+  "player": {
+    "direction": 1,
+    "level": 3,
+    "score": 9745,
+    "lives": 4,
+    "health": 96,
+    "power": 97.2,
+    "magic_resistance": 70,
+    "game_level": 6,
+    "previous_door_crossed": "DOOR_RIGHT_AQUA_00001",
+    "door_previous_position": 0,
+    "door_previous_pos_player": [
+      900,
+      -390
+    ],
+    "door_previous_pos_world": [
+      -2050,
+      -900
+    ],
+    "levels_visited": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "levels_completed": [
+      1,
+      2,
+      4,
+      6,
+      9
+    ],
+    "batteries": 35,
+    "files_disks": 10,
+    "files_disks_type": {
+      "D": 2,
+      "C": 3,
+      "B": 4,
+      "A": 1
+    },
+    "bullets_t01": 63,
+    "bullets_t01_shot": 4,
+    "bullets_t02": 40,
+    "bullets_t02_shot": 4,
+    "bullets_t03": 11,
+    "bullets_t03_shot": 0,
+    "bullets_t04": 5,
+    "bullets_t04_shot": 0,
+    "potions_power": [
+      "POTION_POWER_00019",
+      "POTION_POWER_00020",
+      "POTION_POWER_00021",
+      "POTION_POWER_00022",
+      "POTION_POWER_00023",
+      "POTION_POWER_00024",
+      "POTION_POWER_00007",
+      "POTION_POWER_00008"
+    ],
+    "potions_health": [
+      "POTION_HEALTH_00009",
+      "POTION_HEALTH_00010",
+      "POTION_HEALTH_00011",
+      "POTION_HEALTH_00004",
+      "POTION_HEALTH_00005"
+    ],
+    "POTION_POWER": 8,
+    "POTION_HEALTH": 5,
+    "FILES_DISK_D": 2,
+    "FILES_DISK_C": 3,
+    "FILES_DISK_B": 4,
+    "FILES_DISK_A": 1,
+    "apples": 8,
+    "apples_stock": [
+      "APPLE_RED_00008",
+      "APPLE_YELLOW_00013",
+      "APPLE_GREEN_00010",
+      "APPLE_RED_00009",
+      "APPLE_RED_00010",
+      "APPLE_YELLOW_00014",
+      "APPLE_GREEN_00011",
+      "APPLE_GREEN_00012"
+    ],
+    "apples_type": {
+      "G": 3,
+      "Y": 2,
+      "R": 3
+    },
+    "APPLE_GREEN": 3,
+    "APPLE_YELLOW": 2,
+    "APPLE_RED": 3,
+    "door_keys": 0,
+    "door_keys_stock": [],
+    "door_keys_type": {
+      "G": 0,
+      "B": 0,
+      "A": 0,
+      "Y": 0,
+      "R": 0,
+      "M": 0
+    },
+    "DOOR_KEY_GREEN": 0,
+    "DOOR_KEY_BLUE": 0,
+    "DOOR_KEY_AQUA": 0,
+    "DOOR_KEY_YELLOW": 0,
+    "DOOR_KEY_RED": 0,
+    "DOOR_KEY_MAGENTA": 0,
+    "energy_shield_health": 150,
+    "files_disks_stock": [
+      "FILES_DISK_C_00006",
+      "FILES_DISK_D_00005",
+      "FILES_DISK_D_00006",
+      "FILES_DISK_B_00009",
+      "FILES_DISK_B_00010",
+      "FILES_DISK_C_00007",
+      "FILES_DISK_C_00008",
+      "FILES_DISK_A_00007",
+      "FILES_DISK_B_00011",
+      "FILES_DISK_B_00005"
+    ],
+    "sound_effects": true,
+    "is_music_paused": false
+  }
+}

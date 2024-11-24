@@ -1,5 +1,21 @@
 # Release History
 
+## v0.0.11
+
+### New features and improvements:
+
+* Add files disks message management.
+* Improve computers to perform these actions:
+  * Decrypt files disks allocated in the player inventory.
+* Improve score bar performance.
+* Minor general screens improvements.
+* Fix memory leak in pygame-gui UI components.
+* Improve the test suite:
+  * Add testing capabilities for file disk messages data.
+  * Current tests count: 67.
+
+<br>
+
 ## v0.0.10
 
 ### New features and improvements:

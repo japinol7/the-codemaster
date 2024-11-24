@@ -10,6 +10,9 @@ Known bugs:
 > Energy shield issues:
   > Energy shield activation sprites placement.
 
+> pygame-gui UI components:
+  > Check possible memory leak:
+
 > Vertical borders for moving actors are buggy, such as snakes.
   > Cannot correctly persist vertical moving actors
     when they are not initially in a game level.
@@ -32,7 +35,6 @@ Future Improvements:
   > Initialize random attributes of some actors only once,
     instead of calculating the value at instantiation
     and changing them later with the persisted information.
-    > Example: potions.
 
 > Settings:
   > Allow users to use a gamepad.
@@ -48,3 +50,6 @@ Future Improvements:
   > Refactor game input events management.
   > Improve data models.
   > Refactor the settings module.
+
+
+..

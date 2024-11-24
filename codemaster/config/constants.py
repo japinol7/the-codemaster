@@ -12,6 +12,8 @@ N_LEVELS = 30
 SCREEN_WIDTH = 1160
 SCREEN_HEIGHT = 778
 
+SCORE_BAR_HEIGHT = 64
+
 SCROLL_NEAR_LEFT_SIDE = 380
 SCROLL_NEAR_RIGHT_SIDE = SCREEN_WIDTH - SCROLL_NEAR_LEFT_SIDE
 NEAR_LEFT_SIDE = 25
@@ -45,6 +47,7 @@ DIRECTION_RIP = 5    # Special direction to use when a player character is dead
 
 MSG_PC_DURATION = 3  # in secs
 MSG_PC_DUR_SHORT = 2
+MSG_PC_DUR_LONG = 6
 MSG_PC_DELTA_X = 14
 MSG_PC_DELTA_Y = 35
 
@@ -106,7 +109,7 @@ if getattr(sys, 'frozen', False):
     BITMAPS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'img')
     SOUNDS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'snd', SOUND_FORMAT)
     MUSIC_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'music')
-    FONT_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'data')
+    FONT_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'data', 'fonts')
     FONT_DEFAULT_NAME = os.path.join(FONT_FOLDER, 'sans.ttf')
     FONT_FIXED_DEFAULT_NAME = os.path.join(FONT_FOLDER, 'fixed.ttf')
 else:
@@ -115,8 +118,8 @@ else:
     BITMAPS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'img')
     SOUNDS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'snd', SOUND_FORMAT)
     MUSIC_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'music')
-    FONT_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'sans.ttf')
-    FONT_FIXED_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'fixed.ttf')
+    FONT_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'fonts', 'sans.ttf')
+    FONT_FIXED_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'fonts', 'fixed.ttf')
 
 BM_BACKGROUNDS_FOLDER = os.path.join(BITMAPS_FOLDER, 'backgrounds')
 BM_CLOCKS_FOLDER = os.path.join(BITMAPS_FOLDER, 'clocks')
@@ -268,6 +271,9 @@ FILE_NAMES = {
     'snd_npc_killed': ('explosion', SOUND_FORMAT),
     'snd_door_unlock': ('door_unlock', SOUND_FORMAT),
     }
+
+FILES_DISKS_DATA_FILE = os.path.join(
+    CURRENT_PATH, 'assets', 'data', 'files_disks', 'files_disks.json')
 
 UI_THEMES_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'ui_assets', 'themes')
 UI_MAIN_THEME_FILE = os.path.join(UI_THEMES_FOLDER, 'main_theme.json')

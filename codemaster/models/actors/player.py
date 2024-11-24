@@ -23,6 +23,7 @@ from codemaster.config.constants import (
     DIRECTION_RIP,
     NEAR_BOTTOM,
     MSG_PC_DURATION,
+    MSG_PC_DUR_LONG,
     MSG_PC_DUR_SHORT,
     )
 from codemaster import resources
@@ -51,7 +52,7 @@ PL_BULLETS_T01_DEFAULT = 140
 PL_BULLETS_T02_DEFAULT = 75
 PL_BULLETS_T03_DEFAULT = 24
 PL_BULLETS_T04_DEFAULT = 8
-PL_SELF_DESTRUCTION_COUNT_DEF = 3
+PL_SELF_DESTRUCTION_COUNT_DEF = 4
 
 PC_PAC_ID = 1
 # PC types  (X, Y, width, height, id, type_en, type_name) of sprite
@@ -144,6 +145,7 @@ class Player(pg.sprite.Sprite):
             ActorType.DOOR_KEY_RED.name: 0,
             ActorType.DOOR_KEY_MAGENTA.name: 0,
             'energy_shields_stock': [],
+            'files_disks_stock': [],
             'magic_attack_spells': {},
             }
         self.stats_old = {
@@ -410,6 +412,8 @@ class Player(pg.sprite.Sprite):
             self.sound_effects and self.files_disk_found_sound.play()
             self.stats['files_disks'] += 1
             self.stats['files_disks_type'][files_disk.disk_type] += 1
+            self.stats['files_disks_stock'].append(files_disk)
+            files_disk.is_location_in_inventory = True
             self.stats[files_disk.type.name] += 1
             self.stats['score'] += ExperiencePoints.xp_points[files_disk.type.name]
         files_disk_hit_list and TextMsg.create(
@@ -712,6 +716,36 @@ class Player(pg.sprite.Sprite):
                     door_key.use_key_in_door(door_key.door)
                     break
 
+    def use_computer(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        if not self.stats['files_disks_stock']:
+            return
+
+        hit_list = pg.sprite.spritecollide(self, self.level.computers, False)
+        if not hit_list:
+            return
+
+        msg_ids = []
+        for files_disk in self.stats['files_disks_stock']:
+            if not files_disk.is_msg_encrypted(files_disk.msg_id, self.game):
+                continue
+            if files_disk.msg_id.endswith('CORRUPTED_FILE'):
+                continue
+            msg_ids += [files_disk.msg_id]
+            files_disk.set_msg_encrypted(
+                files_disk.msg_id, is_encrypted=False, game=self.game)
+
+        if msg_ids:
+            text = (f"Files decrypted:\n"
+                    f"{'\n'.join(msg_ids)}"
+                    f"{'\n' if len(msg_ids) == 1 else ''}"
+                    )
+            TextMsg.create(text, self.game, time_in_secs=MSG_PC_DUR_LONG)
+        else:
+            text = "No files to decrypt"
+            TextMsg.create(text, self.game, time_in_secs=MSG_PC_DUR_SHORT)
+
     def choose_spell(self, slot_number):
         if not slot_number:
             self.stats['magic_attack'] = None
@@ -774,6 +808,10 @@ class Player(pg.sprite.Sprite):
             x for x in self.stats['potions_power'] if x.id != potion.id
             ]
         self.stats[ActorType.POTION_POWER.name] = len(self.stats['potions_power'])
+
+    def get_files_disks_str(self):
+        return [str(x.msg_id)
+                for x in sorted(self.stats['files_disks_stock'], key=lambda x: x.msg_id)]
 
     @staticmethod
     def create_starting_game_msg(game):
@@ -839,6 +877,7 @@ class Player(pg.sprite.Sprite):
             ActorType.DOOR_KEY_MAGENTA.name: pc.stats[ActorType.DOOR_KEY_MAGENTA.name],
             'energy_shield_health': pc.stats['energy_shields_stock'][0].stats.health
                                     if pc.stats['energy_shields_stock'] else None,
+            'files_disks_stock': [x.id for x in pc.stats['files_disks_stock']],
             'sound_effects': game.sound_effects,
             'is_music_paused': game.is_music_paused,
             }
