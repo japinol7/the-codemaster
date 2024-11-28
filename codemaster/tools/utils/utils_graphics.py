@@ -160,10 +160,10 @@ def draw_text_multi_lines_rendered(
                     xx += space_btw_chars // 3
 
 
-def draw_bar_graphic(surf, amount_pct, x, y, color_max=Color.GREEN,
-                     color_med=Color.YELLOW, color_min=Color.RED,
-                     bar_width=100, bar_height=15,
-                     bar_outline=True, bar_up_line=False, bar_up_line_height=1):
+def draw_bar_graphic_outline(
+        surf, amount_pct, x, y, color_max=Color.GREEN,
+         color_med=Color.YELLOW, color_min=Color.RED,
+         bar_width=100, bar_height=15):
     if amount_pct < 0:
         amount_pct = 0
     if bar_height < 5:
@@ -176,15 +176,36 @@ def draw_bar_graphic(surf, amount_pct, x, y, color_max=Color.GREEN,
         col = color_med
     else:
         col = color_min
+
     pg.draw.rect(surf, col, fill_rect)
-    if bar_outline:
-        outline_rect = pg.Rect(x, y, bar_width, bar_height)
-        pg.draw.rect(surf, Color.WHITE, outline_rect, 2)
-    elif bar_up_line:
-        pg.draw.line(surf, Color.WHITE,
-                     (int(x), int(y)),
-                     (int(x + bar_width), int(y)),
-                     int(bar_up_line_height))
+    outline_rect = pg.Rect(x, y, bar_width, bar_height)
+    pg.draw.rect(surf, Color.WHITE, outline_rect, 2)
+
+
+def draw_bar_graphic(
+        surf, amount_pct, x, y, color_max=Color.GREEN,
+        color_med=Color.YELLOW, color_min=Color.RED,
+        bar_width=100, bar_height=15,
+        bar_up_line_height=1):
+    if amount_pct < 0:
+        amount_pct = 0
+    if bar_height < 5:
+        bar_height = 5
+    fill = amount_pct * bar_width
+    fill_rect = pg.Rect(x, y, fill, bar_height)
+    if amount_pct > 0.65:
+        col = color_max
+    elif amount_pct > 0.35:
+        col = color_med
+    else:
+        col = color_min
+
+    pg.draw.rect(surf, col, fill_rect)
+    pg.draw.line(
+        surf, Color.WHITE,
+         (int(x), int(y)),
+         (int(x + bar_width), int(y)),
+         int(bar_up_line_height))
 
 
 def create_circle_surface(radius, color):

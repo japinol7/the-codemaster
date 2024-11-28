@@ -135,18 +135,17 @@
           You can move around all levels whenever it makes sense to 
            the story.
 	> To beat the game:
-	    > In this demo, you just have to get all the batteries 
-          and files disks from all the levels.
+	    > In this demo, you must:
+	      > Get all the batteries 
+	      > Get all the files disks.
+	      > Decrypt and read all the files disks that are not corrupted.
 	> Levels: 
-	    > In this demo, levels are completed by getting all the batteries 
-          and files disks.
 	    > What happens in a level, stays in that level.
 	      > This means that when you leave a level, all effects and NPCs  
 	        in that level get paused; to be reactivated as soon 
 	        as the player enters that level again.
 	      > This is not a bug, it's a feature. 
 	        Yeah, really. It is a design decision.
-	    > Number of levels implemented for this demo: 30.
 	> Doors: 
 	    > Use them to go to other levels.
         > To unlock a locked door you need to use the right door key.

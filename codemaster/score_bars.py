@@ -19,7 +19,6 @@ class ScoreBar:
         self.player = game.player
         self.level_no = None
         self.level_no_old = None
-        self.update_counter = 0
         self.screen = pg.Surface((Settings.screen_width, SCORE_BAR_HEIGHT))
 
     def draw_chars_render_text(self, text, x, y, color=Color.YELLOW):
@@ -131,23 +130,21 @@ class ScoreBar:
             screen=self.screen, color=Color.CYAN)
 
     def update(self, level_no, level_no_old):
-        self.update_counter += 1
-        if 1 < self.update_counter < 34:
+        if self.game.update_state_counter != 0:
             self.game.screen.blit(self.screen)
             return
 
-        self.update_counter = 1
         self.level_no = level_no
         self.level_no_old = level_no_old
 
         self.screen = pg.Surface((Settings.screen_width, SCORE_BAR_HEIGHT))
-        libg_jp.draw_bar_graphic(
+        libg_jp.draw_bar_graphic_outline(
             self.screen, amount_pct=self.player.health / self.player.health_total,
             x=Settings.score_pos_health1_xy[0], y=Settings.score_pos_health1_xy[1],
             bar_width=Settings.score_pos_health_size[0],
             bar_height=Settings.score_pos_health_size[1])
 
-        libg_jp.draw_bar_graphic(
+        libg_jp.draw_bar_graphic_outline(
             self.screen, amount_pct=self.player.power / self.player.power_total,
             x=Settings.score_pos_health1_xy[0],
             y=Settings.score_pos_health1_xy[1] + 39 * Settings.font_pos_factor,

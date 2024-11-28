@@ -31,6 +31,14 @@ class SaveNameMustBeDiffToAutoSavedGameException(Exception):
     pass
 
 
+def clean_general_ui_items(obj):
+    if obj.items.get('text_message_window'):
+        obj.items['text_message_window'].kill()
+
+    if obj.items.get('error_message_window'):
+        obj.items['error_message_window'].kill()
+
+
 def create_text_dialog_msg(obj, text, title="Message", rect=None, visible=True):
     if obj.items.get('text_message_window'):
         obj.items['text_message_window'].kill()

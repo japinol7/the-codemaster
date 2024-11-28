@@ -29,8 +29,8 @@ class Level15(Level):
 
     def __init__(self, id_, game):
         self.background = pg.image.load(self.file_name_im_get(11)).convert()
-        self.player_start_pos_left = 220, 520
-        self.player_start_pos_right = 300, 520
+        self.player_start_pos_left = 220, 408
+        self.player_start_pos_right = 424, 408
         self.player_start_pos_rtop = 250, -440
         self.player_start_pos_ltop = 80, 100
         

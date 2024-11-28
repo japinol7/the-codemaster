@@ -66,15 +66,15 @@
       "POTION_POWER_00022",
       "POTION_POWER_00023",
       "POTION_POWER_00024",
-      "POTION_POWER_00007",
-      "POTION_POWER_00008"
+      "POTION_POWER_00025",
+      "POTION_POWER_00026"
     ],
     "potions_health": [
       "POTION_HEALTH_00009",
       "POTION_HEALTH_00010",
       "POTION_HEALTH_00011",
-      "POTION_HEALTH_00004",
-      "POTION_HEALTH_00005"
+      "POTION_HEALTH_00012",
+      "POTION_HEALTH_00013"
     ],
     "POTION_POWER": 8,
     "POTION_HEALTH": 5,
@@ -128,7 +128,7 @@
       "FILES_DISK_C_00008",
       "FILES_DISK_A_00007",
       "FILES_DISK_B_00011",
-      "FILES_DISK_B_00005"
+      "FILES_DISK_B_00012"
     ],
     "sound_effects": true,
     "is_music_paused": false

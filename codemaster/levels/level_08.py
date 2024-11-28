@@ -36,8 +36,8 @@ class Level8(Level):
 
     def __init__(self, id_, game):
         self.background = pg.image.load(self.file_name_im_get(8)).convert()
-        self.player_start_pos_left = 250, 520
-        self.player_start_pos_right = 520, 520
+        self.player_start_pos_left = 250, 408
+        self.player_start_pos_right = 600, 408
         self.player_start_pos_rtop = 250, -440
         self.player_start_pos_ltop = 80, 100
         

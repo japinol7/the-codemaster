@@ -34,11 +34,17 @@ from codemaster.config.constants import (
     LOG_GAME_BEATEN,
     LOG_GAME_OVER,
     )
-from codemaster.models.actors.player import Player, PL_SELF_DESTRUCTION_COUNT_DEF
+from codemaster.models.actors.player import (
+    Player,
+    PL_SELF_DESTRUCTION_COUNT_DEF,
+    )
 from codemaster.models.experience_points import ExperiencePoints
 from codemaster.models.actors.actors import NPC, ActorItem
 from codemaster.models.actors.selectors import SelectorA
-from codemaster.level_scroll_screen import level_scroll_shift_control, change_screen_level
+from codemaster.level_scroll_screen import (
+    level_scroll_shift_control,
+    change_screen_level,
+    )
 from codemaster.persistence.persistence_settings import (
     PERSISTENCE_PATH_DEFAULT,
     PersistenceSettings,
@@ -122,6 +128,7 @@ class Game:
         self.screen_help = None
         self.mouse_pos = 0, 0
         self.is_magic_on = False
+        self.update_state_counter = 0
 
         Game.is_exit_game = False
         if Game.current_game > 0:
@@ -165,7 +172,7 @@ class Game:
             # Initialize UI
             Game.ui_manager = UIManager(self)
 
-        FilesDisk.set_msgs_loaded_in_disks_to_false(self)
+        FilesDisk.reset_msgs_loaded_in_disks(self)
         self.current_time_delta = pg.time.get_ticks() / 1000.0
 
         # Initialize screens
@@ -210,7 +217,7 @@ class Game:
         self.player.level = self.level
 
         self.player.rect.x = self.level.player_start_pos_left[0]
-        self.player.rect.y = self.level.player_start_pos_left[1]
+        self.player.rect.y = self.level.player_start_pos_left[1] + 258
         self.active_sprites.add(self.player)
 
         self.selector_sprites.add(
@@ -224,6 +231,8 @@ class Game:
                 persistence.load_game_data(self)
             if self.is_load_user_game:
                 PersistenceSettings.init_settings(self.persistence_path)
+
+        FilesDisk.set_random_msg_to_disks_without_msg(self)
 
         # Start first level
         self.level.start_up()
@@ -291,9 +300,16 @@ class Game:
         self.is_debug and self.show_fps and pg.display.set_caption(f"{self.clock.get_fps():.2f}")
 
     def _game_loop(self):
+        self.update_state_counter = -1
         while not self.done:
             self.current_time = pg.time.get_ticks()
             self.current_time_delta = pg.time.get_ticks() / 1000.0
+
+            # Increase and check counter to delay stats x iterations
+            self.update_state_counter += 1
+            if self.update_state_counter > 34:
+                self.update_state_counter = 0
+
             for event in pg.event.get():
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                     self.is_exit_curr_game_confirm = True
@@ -449,8 +465,8 @@ class Game:
                     if event.key == pg.K_DELETE:
                         self.player.drink_potion_power()
                     if event.key == pg.K_t:
-                        self.player.use_door_key()
                         self.player.use_computer()
+                        self.player.use_door_key()
                     if event.key == pg.K_b:
                         if pg.key.get_mods() & pg.KMOD_LALT:
                             t = datetime.now().time()
@@ -486,12 +502,13 @@ class Game:
 
             level_scroll_shift_control(game=self)
 
-            # If the player gets all the batteries and files, level completed
-            if not self.level.completed and not (
-                    self.level.batteries or self.level.files_disks):
+            # Determine if the current level has been beaten
+            if not self.level.completed \
+                    and not (self.level.batteries or self.level.files_disks):
                 self.player.stats['score'] += ExperiencePoints.xp_points['level']
                 self.level.completed = True
-                log.info(f"All batteries and disks from level {self.level_no + 1} recovered.")
+                self.is_log_debug and log.debug(
+                    f"All batteries and disks from level {self.level_no + 1} recovered.")
 
             # Check if we hit any door
             door_hit_list = pg.sprite.spritecollide(self.player, self.level.doors, False)
@@ -504,19 +521,27 @@ class Game:
                 self.active_sprites.update()
                 self.level.update()
 
-            # Check if the player has beaten the game, that is, if he has completed all levels
-            if levels.Level.levels_completed_count(self) >= self.levels_qty:
-                self.winner = self.player
-                log.info(LOG_GAME_BEATEN)
-            if not self.player.is_alive:
-                Game.is_over = True
-                if levels.Level.levels_completed_count(self) >= self.levels_qty:
+            # Check if the player has beaten or lost the game, but skip the first four iterations
+            if self.update_state_counter == 4:
+                if levels.Level.levels_completed_count(self) >= self.levels_qty \
+                        and self.player.count_files_disks_not_read() < 1:
                     self.winner = self.player
                     log.info(LOG_GAME_BEATEN)
-                else:
-                    log.info(LOG_GAME_OVER)
-            if self.winner or Game.is_over:
-                Game.is_over = True
+                if not self.player.is_alive:
+                    Game.is_over = True
+                    if levels.Level.levels_completed_count(self) >= self.levels_qty \
+                            and self.player.count_files_disks_not_read() < 1:
+                        self.winner = self.player
+                        log.info(LOG_GAME_BEATEN)
+                    else:
+                        log.info(LOG_GAME_OVER)
+                if self.winner:
+                    self.player.stats['score'] += ExperiencePoints.xp_points['beat_the_game']
+                    # Force updating the game screen to update the score
+                    self.update_state_counter = 0
+                    self.update_screen()
+                if self.winner or Game.is_over:
+                    Game.is_over = True
 
             self.update_screen()
             self.is_paused and self.clock.tick(Settings.fps_paused) or self.clock.tick(Settings.fps)

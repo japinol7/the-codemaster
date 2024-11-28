@@ -8,6 +8,7 @@ from random import randint
 
 import pygame as pg
 
+from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.tools.utils.colors import Color
 from codemaster.models.actors.items import bullets
 from codemaster.models.actors.items.bullets import Bullet
@@ -415,7 +416,7 @@ class Player(pg.sprite.Sprite):
             self.stats['files_disks_stock'].append(files_disk)
             files_disk.is_location_in_inventory = True
             self.stats[files_disk.type.name] += 1
-            self.stats['score'] += ExperiencePoints.xp_points[files_disk.type.name]
+            self.stats['score'] += ExperiencePoints.xp_points[files_disk.type.name] // 2
         files_disk_hit_list and TextMsg.create(
             "Yeah!\nI've found\nanother disk!", self.game,
             time_in_secs=MSG_PC_DURATION)
@@ -735,6 +736,7 @@ class Player(pg.sprite.Sprite):
             msg_ids += [files_disk.msg_id]
             files_disk.set_msg_encrypted(
                 files_disk.msg_id, is_encrypted=False, game=self.game)
+            self.stats['score'] += ExperiencePoints.xp_points[files_disk.type.name]
 
         if msg_ids:
             text = (f"Files decrypted:\n"
@@ -812,6 +814,30 @@ class Player(pg.sprite.Sprite):
     def get_files_disks_str(self):
         return [str(x.msg_id)
                 for x in sorted(self.stats['files_disks_stock'], key=lambda x: x.msg_id)]
+
+    def get_files_disks_with_status_str(self):
+        return [
+            (f"{FilesDisk.get_msg(x.msg_id, self.game)['has_been_read'] and 'R' or '-'}"
+             f"       {x.msg_id}")
+            for x in sorted(self.stats['files_disks_stock'], key=lambda x: x.msg_id)
+            ]
+
+    def find_disks_for_msg_id(self, msg_id):
+        return [x for x in self.stats['files_disks_stock']
+                if x.msg_id == msg_id]
+
+    def count_files_disks_not_decrypted(self):
+        return sum(1 for disk in self.stats['files_disks_stock']
+                if FilesDisk.get_msg(disk.msg_id, self.game)['is_encrypted']
+                   and not FilesDisk.get_msg(disk.msg_id, self.game)['is_corrupted'])
+
+    def count_files_disks_not_read(self):
+        return sum(1 for disk in self.stats['files_disks_stock']
+                if not FilesDisk.get_msg(disk.msg_id, self.game)['has_been_read']
+                   and not FilesDisk.get_msg(disk.msg_id, self.game)['is_corrupted'])
+
+    def levels_visited_names(self):
+        return [str(x) for x in self.stats['levels_visited']]
 
     @staticmethod
     def create_starting_game_msg(game):

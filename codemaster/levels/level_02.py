@@ -38,8 +38,8 @@ class Level2(Level):
     def __init__(self, id_, game):
         self.level_limit = -2500
         self.background = pg.image.load(self.file_name_im_get(2)).convert()
-        self.player_start_pos_left = 220, 480
-        self.player_start_pos_right = 530, 480
+        self.player_start_pos_left = 220, 408
+        self.player_start_pos_right = 650, 408
         self.player_start_pos_rtop = 300, 100
         self.player_start_pos_ltop = 80, 100
 

@@ -12,6 +12,7 @@ from codemaster.config.constants import (
     )
 from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.ui.ui_main_utils.ui_main_utils import (
+    clean_general_ui_items,
     create_text_dialog_msg,
     save_game_ui_action,
     save_game_directory_ui_action,
@@ -32,6 +33,9 @@ class UIInGame:
 
     def set_game_data(self, game):
         self.game = game
+
+    def clean_ui_items(self):
+        clean_general_ui_items(self)
 
     def hide_additional_game_items(self):
         self.items['potion_selection_list'].hide()
@@ -54,16 +58,20 @@ class UIInGame:
             self.hide_additional_game_items()
             create_text_dialog_msg(
                 self,
-                f"Levels Visited: {self.game.player.stats['levels_visited']}\n"
-                f"Count: {len(self.game.player.stats['levels_visited'])} / {N_LEVELS}"
+                "Levels Visited: "
+                f"{', '.join(self.game.player.levels_visited_names())}\n"
+                "Count: "
+                f"{len(self.game.player.stats['levels_visited'])} / {N_LEVELS}"
                 )
 
         def levels_completed_action():
             self.hide_additional_game_items()
             create_text_dialog_msg(
                 self,
-                f"Levels Completed: {self.game.level.levels_completed_ids(self.game)}\n"
-                f"Count: {self.game.level.levels_completed_count(self.game)} / {N_LEVELS}"
+                "Levels Completed:"
+                f" {', '.join(self.game.level.levels_completed_names(self.game))}\n"
+                "Count: "
+                f"{self.game.level.levels_completed_count(self.game)} / {N_LEVELS}"
                 )
 
         def health_potions_action():
@@ -75,7 +83,8 @@ class UIInGame:
             self.items['potion_drink_text_box'].set_text(text)
 
             if (not potions
-                    or self.game.player.get_health_rounded() >= self.game.player.health_total):
+                    or self.game.player.get_health_rounded()
+                    >= self.game.player.health_total):
                 self.items['potion_selection_list'].disable()
                 self.items['health_potion_drink_button'].disable()
             else:
@@ -130,7 +139,7 @@ class UIInGame:
 
         def files_disks_action():
             self.hide_additional_game_items()
-            files_disks = self.game.player.get_files_disks_str()
+            files_disks = self.game.player.get_files_disks_with_status_str()
             self.items['files_disks_selection_list'].set_item_list(files_disks)
             self.items['files_disks_selection_list'].show()
             self.items['files_disk_text_box'].set_text("Files Disks".center(34))
@@ -147,20 +156,21 @@ class UIInGame:
 
         def files_disks_read_action():
             self.hide_additional_game_items()
-            files_disk = self.items['files_disks_selection_list'].get_single_selection()
-            if not files_disk:
+            files_disk_msg_sel = self.items[
+                'files_disks_selection_list'].get_single_selection()
+            if not files_disk_msg_sel:
                 files_disks_action()
                 return
 
+            files_disk_msg_id = files_disk_msg_sel[8:]
+            files_disk_msg = FilesDisk.read_msg(files_disk_msg_id, self.game)
+            files_disks_action()
             create_text_dialog_msg(
                 self,
-                f"{FilesDisk.read_msg(files_disk, self.game)}\nEOF",
+                f"{files_disk_msg}\nEOF",
                 rect=pg.Rect((309, 98), (542, 330)),
-                title=f"File: {files_disk}"
+                title=f"File: {files_disk_msg_id}"
                 )
-            self.items['files_disks_selection_list'].show()
-            self.items['files_disk_text_box'].show()
-            self.items['files_disks_read_button'].show()
 
         def save_game_action():
             save_game_ui_action(self)
@@ -218,19 +228,22 @@ class UIInGame:
             self.items['load_game_button'].disable()
             self.items['save_game_button'].disable()
 
-        self.items['text_entry_line'] = pgui.elements.ui_text_entry_line.UITextEntryLine(
+        self.items['text_entry_line'] = (pgui.elements.ui_text_entry_line.
+                UITextEntryLine(
             relative_rect=pg.Rect((385, 480), (390, 42)),
             manager=self.manager,
             visible=False,
-            )
-        self.items['text_entry_line'].set_allowed_characters(ALLOWED_CHARS_ALPHANUM_SPACE)
+            ))
+        self.items['text_entry_line'].set_allowed_characters(
+            ALLOWED_CHARS_ALPHANUM_SPACE)
 
-        self.items['potion_selection_list'] = pgui.elements.ui_selection_list.UISelectionList(
-            relative_rect=pg.Rect((375, 430), (200, 275)),
+        self.items['potion_selection_list'] = (pgui.elements.ui_selection_list.
+                UISelectionList(
+            relative_rect=pg.Rect((355, 430), (220, 275)),
             manager=self.manager,
             item_list = [],
             visible=False,
-            )
+            ))
 
         self.items['potion_drink_text_box'] = pgui.elements.UITextBox(
             relative_rect=pg.Rect((578, 470), (190, 40)),
@@ -255,12 +268,13 @@ class UIInGame:
             visible=False,
             )
 
-        self.items['files_disks_selection_list'] = pgui.elements.ui_selection_list.UISelectionList(
-            relative_rect=pg.Rect((375, 430), (200, 275)),
+        self.items['files_disks_selection_list'] = (pgui.elements.ui_selection_list.
+                UISelectionList(
+            relative_rect=pg.Rect((360, 430), (215, 275)),
             manager=self.manager,
             item_list = [],
             visible=False,
-            )
+            ))
         self.items['files_disk_text_box'] = pgui.elements.UITextBox(
             relative_rect=pg.Rect((578, 470), (190, 40)),
             html_text="Current value:",

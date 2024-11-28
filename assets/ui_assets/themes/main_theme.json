@@ -3,11 +3,15 @@
     "colours": {
       "dark_bg": "#0D0D0D",
       "hovered_bg": "#002505",
+      "hovered_border": "#171717",
       "hovered_text": "#BFBFBF",
       "normal_bg": "Black",
       "normal_border": "Black",
       "normal_text": "Gray",
-      "selected_bg": "#002505"
+      "selected_bg": "#002505",
+      "selected_border": "#171717",
+      "active_bg": "#08380C",
+      "active_border": "#171717"
     },
     "misc": {
       "shape": "rectangle",

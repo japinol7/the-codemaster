@@ -75,6 +75,8 @@ def test_file_msgs_data_level_structure(game):
                 error_msgs += ["KeyError(is_encrypted)"]
             if file_msg.get('is_loaded_in_disk', None) is None:
                 error_msgs += ["KeyError(is_loaded_in_disk)"]
+            if file_msg.get('has_been_read', None) is None:
+                error_msgs += ["KeyError(has_been_read)"]
             if file_msg.get('is_corrupted', None) is None:
                 error_msgs += ["KeyError(is_corrupted)"]
 
@@ -88,6 +90,8 @@ def test_file_msgs_data_level_structure(game):
                 error_msgs += [f"is_encrypted must be a bool"]
             if not isinstance(file_msg.get('is_loaded_in_disk'), bool):
                 error_msgs += [f"is_loaded_in_disk must be a bool"]
+            if not isinstance(file_msg.get('has_been_read'), bool):
+                error_msgs += [f"has_been_read must be a bool"]
             if not isinstance(file_msg.get('is_corrupted'), bool):
                 error_msgs += [f"is_corrupted must be a bool"]
 

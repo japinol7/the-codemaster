@@ -7,7 +7,11 @@
 * Add files disks message management.
 * Improve computers to perform these actions:
   * Decrypt files disks allocated in the player inventory.
-* Improve score bar performance.
+    * The player gets XP for decrypting each disk.
+* Improve performance of:
+  * Score bar performance.
+  * Checking if the player has beaten or lost the game.
+* Improve initial player positioning in levels.
 * Minor general screens improvements.
 * Fix memory leak in pygame-gui UI components.
 * Improve the test suite:

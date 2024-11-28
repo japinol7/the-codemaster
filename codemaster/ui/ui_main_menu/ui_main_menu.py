@@ -11,6 +11,7 @@ from codemaster.config.constants import (
     UI_MAIN_THEME_FILE,
     )
 from codemaster.ui.ui_main_utils.ui_main_utils import (
+    clean_general_ui_items,
     create_confirmation_dialog_msg,
     create_error_dialog_msg,
     CannotDeleteAutoSavedGameException,
@@ -42,6 +43,15 @@ class UIMainMenu:
 
     def set_game_data(self, game):
         self.game = game
+
+    def clean_ui_items(self):
+        clean_general_ui_items(self)
+
+        if self.items.get('credits_message_window'):
+            self.items['credits_message_window'].kill()
+
+        if self.items.get('delete_saved_game_confirm_dialog'):
+            self.items['delete_saved_game_confirm_dialog'].kill()
 
     def _create_credits_dialog_msg(self):
         if self.items.get('credits_message_window'):

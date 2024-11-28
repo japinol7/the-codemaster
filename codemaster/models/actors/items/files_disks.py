@@ -34,7 +34,6 @@ class FilesDisk(ActorItem):
         super().__init__(x, y, game, name=name)
 
         if self.msg_id is None:
-            self.set_random_msg()
             return
 
         self.set_msg_loaded_in_disk(
@@ -53,11 +52,10 @@ class FilesDisk(ActorItem):
             return
 
         self.msg_id = random.choice(available_msgs)
-
-        self.set_msg_loaded_in_disk(self.msg_id, is_loaded_in_disk=True, game=self.game)
+        self.game.files_disks_data[self.msg_id[0]][self.msg_id]['is_loaded_in_disk'] = True
 
     def remove_msg(self):
-        self.set_msg_loaded_in_disk(self.msg_id, is_loaded_in_disk=False, game=self.game)
+        self.game.files_disks_data[self.msg_id[0]][self.msg_id]['is_loaded_in_disk'] = False
         self.msg_id = None
 
     def update_when_hit(self):
@@ -69,11 +67,12 @@ class FilesDisk(ActorItem):
         game.__class__.files_disks_data = load_data_from_file(FILES_DISKS_DATA_FILE)
 
     @staticmethod
-    def set_msgs_loaded_in_disks_to_false(game):
+    def reset_msgs_loaded_in_disks(game):
         for disk_category in game.__class__.files_disks_data.values():
             for disk in disk_category.values():
                 disk['is_encrypted'] = True
                 disk['is_loaded_in_disk'] = False
+                disk['has_been_read'] = False
 
     @staticmethod
     def get_msg(msg_id, game):
@@ -89,6 +88,8 @@ class FilesDisk(ActorItem):
     @staticmethod
     def read_msg(msg_id, game):
         is_encrypted = game.files_disks_data[msg_id[0]][msg_id]['is_encrypted']
+        if not is_encrypted:
+            game.files_disks_data[msg_id[0]][msg_id]['has_been_read'] = True
         return game.files_disks_data[msg_id[0]][msg_id][
             'msg_encrypted' if is_encrypted else 'msg']
 
@@ -97,8 +98,16 @@ class FilesDisk(ActorItem):
         return game.files_disks_data[msg_id[0]][msg_id]['is_encrypted']
 
     @staticmethod
+    def has_msg_been_read(msg_id, game):
+        return game.files_disks_data[msg_id[0]][msg_id]['has_been_read']
+
+    @staticmethod
     def set_msg_encrypted(msg_id, is_encrypted, game):
         game.files_disks_data[msg_id[0]][msg_id]['is_encrypted'] = is_encrypted
+
+    @staticmethod
+    def set_msg_to_been_read(msg_id, has_been_read, game):
+        game.files_disks_data[msg_id[0]][msg_id]['has_been_read'] = has_been_read
 
     @staticmethod
     def set_msg_loaded_in_disk(msg_id, is_loaded_in_disk, game):
@@ -109,16 +118,9 @@ class FilesDisk(ActorItem):
         return {disk.msg_id for level in game.levels for disk in level.files_disks}
 
     @staticmethod
-    def find_disk_for_msg_id(msg_id, game):
+    def find_disks_for_msg_id(msg_id, game):
         return [disk for level in game.levels for disk in level.files_disks
-                if disk.msg_id == msg_id][0]
-
-    @staticmethod
-    def remove_all_disks_msgs(game):
-        for level in game.levels:
-            for disk in level.files_disks:
-                FilesDisk.set_msg_loaded_in_disk(disk.msg_id, is_loaded_in_disk=False, game=game)
-                disk.msg_id = None
+                if disk.msg_id == msg_id]
 
     @staticmethod
     def get_files_disks_without_msg(game):
@@ -134,11 +136,6 @@ class FilesDisk(ActorItem):
     def get_files_disks_with_corrupted_msg(game):
         return [disk for level in game.levels for disk in level.files_disks
                 if FilesDisk.get_msg(disk.msg_id, game)['is_corrupted']]
-
-    @staticmethod
-    def set_random_msg_to_disks_with_corrupted_msg(game):
-        for disk in FilesDisk.get_files_disks_with_corrupted_msg(game):
-            disk.set_random_msg()
 
 
 class FilesDiskD(FilesDisk):

@@ -7,10 +7,11 @@ from codemaster.models.actors.actor_types import ActorType
 class ExperiencePoints:
     xp_points = {
         'level': 800,
+        'beat_the_game': 2000,
         ActorType.BATTERY_A.name: 25,
-        ActorType.FILES_DISK_A.name: 170,  # critic file
-        ActorType.FILES_DISK_B.name: 80,   # great clue file
-        ActorType.FILES_DISK_C.name: 25,   # average file
+        ActorType.FILES_DISK_A.name: 170,
+        ActorType.FILES_DISK_B.name: 80,
+        ActorType.FILES_DISK_C.name: 25,
         ActorType.FILES_DISK_D.name: 5,
         ActorType.SKULL_GREEN.name: 1,
         ActorType.SKULL_BLUE.name: 5,

@@ -68,7 +68,8 @@
           "health_total": 1,
           "x": 2960,
           "y": 336,
-          "direction": 2
+          "direction": 2,
+          "visited": false
         },
         "BATTERY_A_00012": {
           "category_type": "BATTERY",
@@ -293,9 +294,9 @@
       }
     },
     "6": {
-      "world_shift": -2336,
+      "world_shift": -2224,
       "world_shift_initial": 0,
-      "world_shift_top": -462,
+      "world_shift_top": -210,
       "world_shift_top_initial": -500,
       "items": {
         "COMPUTER_01_00002": {
@@ -303,9 +304,10 @@
           "type": "COMPUTER_01",
           "health": 1,
           "health_total": 1,
-          "x": 524,
-          "y": 374,
-          "direction": 2
+          "x": 636,
+          "y": 626,
+          "direction": 2,
+          "visited": false
         },
         "DOOR_LEFT_RED_00001": {
           "category_type": "DOOR",
@@ -328,9 +330,9 @@
       }
     },
     "7": {
-      "world_shift": -2866,
+      "world_shift": 0,
       "world_shift_initial": 0,
-      "world_shift_top": -760,
+      "world_shift_top": -500,
       "world_shift_top_initial": -500,
       "items": {
         "BATTERY_A_00036": {
@@ -338,8 +340,8 @@
           "type": "BATTERY_A",
           "health": 1,
           "health_total": 1,
-          "x": -266,
-          "y": -104,
+          "x": 2600,
+          "y": 156,
           "direction": 2
         },
         "DOOR_LEFT_GREEN_00002": {
@@ -357,9 +359,9 @@
       }
     },
     "8": {
-      "world_shift": -2984,
+      "world_shift": 0,
       "world_shift_initial": 0,
-      "world_shift_top": -588,
+      "world_shift_top": -500,
       "world_shift_top_initial": -500,
       "items": {
         "BATTERY_A_00038": {
@@ -367,8 +369,8 @@
           "type": "BATTERY_A",
           "health": 1,
           "health_total": 1,
-          "x": -2958,
-          "y": 36,
+          "x": 26,
+          "y": 124,
           "direction": 2
         },
         "DOOR_LEFT_YELLOW_00004": {
@@ -386,9 +388,9 @@
       }
     },
     "9": {
-      "world_shift": -2592,
+      "world_shift": 0,
       "world_shift_initial": 0,
-      "world_shift_top": -298,
+      "world_shift_top": -500,
       "world_shift_top_initial": -500,
       "items": {
         "DOOR_LEFT_WHITE_00001": {

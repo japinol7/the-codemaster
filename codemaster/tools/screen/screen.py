@@ -234,6 +234,7 @@ class Pause(Screen):
 
             if self.done:
                 self.game.ui_manager.ui_ingame.hide_additional_game_items()
+                self.game.ui_manager.ui_ingame.clean_ui_items()
 
 
 class StartGame(Screen):
@@ -313,3 +314,4 @@ class StartGame(Screen):
 
         if self.done:
             self.game.ui_manager.ui_main_menu.hide_additional_game_items()
+            self.game.ui_manager.ui_main_menu.clean_ui_items()

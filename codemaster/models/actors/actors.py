@@ -399,8 +399,7 @@ class Actor(pg.sprite.Sprite):
                 x=self.rect.x + (self.rect.width // 2) - Settings.sprite_health_bar_pos_rel.x,
                 y=self.rect.y - Settings.sprite_health_bar_pos_rel.y - self.health_bar_delta_y,
                 bar_width=Settings.sprite_health_bar_size.w,
-                bar_height=Settings.sprite_health_bar_size.h,
-                bar_outline=False, bar_up_line=True)
+                bar_height=Settings.sprite_health_bar_size.h)
 
     def shot_bullet(self, bullet_type):
         Bullet.shot(bullet_type=bullet_type, change_x=bullets.BULLET_STD_VELOCITY,
@@ -647,6 +646,11 @@ class ActorItem(Actor):
                     'y': item.rect.y,
                     'direction': item.direction,
                     }
+
+                if item.category_type == ActorCategoryType.COMPUTER:
+                    levels[level.id]['items'][item.id].update({
+                        'visited': item.visited,
+                    })
         return res
 
     @staticmethod
@@ -711,6 +715,7 @@ class ActorItem(Actor):
                     level['items'][item.id].update({
                         'msg_id': item.msg_id,
                         'is_encrypted': item.is_msg_encrypted(item.msg_id, game),
+                        'has_been_read': item.has_msg_been_read(item.msg_id, game),
                         })
                 elif item.category_type == ActorCategoryType.DOOR_KEY:
                     level['items'][item.id].update({

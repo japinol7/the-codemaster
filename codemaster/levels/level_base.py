@@ -365,6 +365,10 @@ class Level:
         return [x.id for x in game.levels if x.completed]
 
     @staticmethod
+    def levels_completed_names(game):
+        return [x.name for x in game.levels if x.completed]
+
+    @staticmethod
     def levels_completed_count(game):
         return sum(1 for x in game.levels if x.completed)
 

@@ -36,11 +36,11 @@ class Level30(Level):
 
     def __init__(self, id_, game):
         self.background = pg.image.load(self.file_name_im_get(3)).convert()
-        self.player_start_pos_left = 220, 520
-        self.player_start_pos_right = 520, 520
+        self.player_start_pos_left = 220, 408
+        self.player_start_pos_right = 600, 408
         self.player_start_pos_rtop = 880, -292
         self.player_start_pos_ltop = 80, 100
-        
+
         super().__init__(id_, game)
 
     def _add_actors_hook(self):

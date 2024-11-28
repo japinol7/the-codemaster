@@ -33,11 +33,10 @@ class Level1(Level):
     def __init__(self, id_, game):
         self.level_limit = -1800
         self.background = pg.image.load(self.file_name_im_get(1)).convert()
-        self.player_start_pos_left = 220, 480
-        self.player_start_pos_right = 600, 480
+        self.player_start_pos_left = 220, 408
+        self.player_start_pos_right = 740, 408
         self.player_start_pos_rtop = 300, 100
         self.player_start_pos_ltop = 80, 100
-        self.world_start_pos_left = 0, -658
 
         super().__init__(id_, game)
 

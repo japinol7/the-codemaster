@@ -166,7 +166,7 @@ class GameTestSuite:
         self.current_test_timeout = None
 
         self._init_settings(is_debug=is_debug, is_full_screen=is_full_screen)
-        FilesDisk.set_msgs_loaded_in_disks_to_false(self)
+        FilesDisk.reset_msgs_loaded_in_disks(self)
 
         if is_set_up_actors_and_levels:
             self.set_up_actors_and_levels()
