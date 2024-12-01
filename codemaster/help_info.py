@@ -8,13 +8,11 @@ class HelpInfo:
     @staticmethod
     def print_help_keys():
         print('  F1: \t show a help screen while playing the game'
-              '   t: \t stats on/off\n'
-              '  L_Ctrl + R_Alt + g:  grid\n'
               '  ^p: \t pause the game\n'
               ' ESC: \t exit the game\n'
               'Alt + m: \t pause/resume music\n'
               'Alt + s: \t sound effects on/off\n'
-              '  Alt + Enter: change full screen / normal screen mode\n'
+              'Alt + Enter: change full screen / normal screen mode\n'
               '  ^h: \t shows this help\n'
               '     \t drink health potion,  insert\n'
               '     \t drink power potion,  delete\n'

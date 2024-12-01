@@ -19,6 +19,7 @@ class DebugInfo:
 
     def print_help_keys(self):
         print('--- Debug keys are accessible from the Pause screen\n'
+              '  L_Ctrl + R_Alt + g:  grid\n'
               '  ^ numpad_divide: \t interactive debug output\n'
               '  ^n: \t print a list of all NPCs in the current level\n'
               '  ^ Shift + n: \t print a list of all NPCs in all levels, ordered by level\n'
