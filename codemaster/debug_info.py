@@ -18,7 +18,8 @@ class DebugInfo:
         self.game = game
 
     def print_help_keys(self):
-        print('  ^ numpad_divide: \t interactive debug output\n'
+        print('--- Debug keys are accessible from the Pause screen\n'
+              '  ^ numpad_divide: \t interactive debug output\n'
               '  ^n: \t print a list of all NPCs in the current level\n'
               '  ^ Shift + n: \t print a list of all NPCs in all levels, ordered by level\n'
               '  ^ Alt + Shift + n: \t print a list of all NPCs in all levels, ordered by NPC name\n'
@@ -26,7 +27,13 @@ class DebugInfo:
               '  Alt + Shift + n: \t print a list of all items in all levels, ordered by level\n'
               '  ^ Alt + n: \t print a list of all items in all levels, ordered by item name\n'
               '  ^d: \t print debug information to console\n'
-              '  ^l: \t write debug information to a log file\n'
+              '  ^l: \t write debug information to a log file\n\n'
+              '--- Debug mouse keys are accessible from the action game screen\n'
+              ' L_mouse_button:  show actors in the position\n'
+              ' ^L_mouse_button: Select NPC to copy\n'
+              ' Alt + L_mouse_button: Select item to copy\n'
+              ' Shift + L_mouse_button: Paste selected actor\n'
+              '     Note that you can paste actors only within the same game level\n'
               )
 
     def print_supercheat_keys(self):

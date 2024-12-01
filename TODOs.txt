@@ -10,9 +10,6 @@ Known bugs:
 > Energy shield issues:
   > Energy shield activation sprites placement.
 
-> pygame-gui UI components:
-  > Check possible memory leak:
-
 > Vertical borders for moving actors are buggy, such as snakes.
   > Cannot correctly persist vertical moving actors
     when they are not initially in a game level.
@@ -23,6 +20,14 @@ Future Improvements:
 
 > General:
   > Consider avoiding putting items inside platforms.
+
+> Tutorial:
+  > Create a tutorial to teach the player how to do things.
+    > Shoot
+    > Use magic
+    > Unlock doors
+    > Decrypt file messages.
+    > ...
 
 > Levels creation:
   > Consider creating the levels gradually:

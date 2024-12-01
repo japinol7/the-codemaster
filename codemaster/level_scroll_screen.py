@@ -97,3 +97,5 @@ def change_screen_level(game, door):
 
     if game.level_no + 1 not in game.player.stats['levels_visited']:
         game.level.update_pc_enter_level()
+
+    game.update_state_counter = -5

@@ -80,7 +80,7 @@ class Resource:
 
     @classmethod
     def render_text_frequently_used(cls, game):
-        libg_jp.render_text('– PAUSED –', Settings.screen_width // 2, Settings.screen_height // 2.8,
+        libg_jp.render_text('– PAUSED –', Settings.screen_width // 2, Settings.screen_height // 4.6,
                             cls.txt_surfaces, 'game_paused', color=Color.CYAN,
                             size=int(70*Settings.font_pos_factor), align="center")
 
@@ -180,17 +180,12 @@ class Resource:
                                              Settings.screen_height_adjusted))
         cls.images['screen_start'] = img
 
-        img = pg.image.load(file_name_get(name='im_help_key', subname='')).convert()
-        img = pg.transform.smoothscale(img, (int((Settings.help_key_size.w)
-                                                 * Settings.font_pos_factor_t2),
-                                             int(Settings.help_key_size.h
-                                                 * Settings.font_pos_factor_t2)))
-        cls.images['help_key'] = img
+        cls.images['help_key'] = pg.image.load(
+            file_name_get(name='im_help_key', subname='')).convert()
 
-        img = pg.image.load(file_name_get(folder=consts.BM_LOGOS_FOLDER,
-                                          name='im_logo_japinol', subname='')).convert()
-        # img = pg.transform.smoothscale(img, (208, 47))
-        cls.images['logo_jp'] = img
+        cls.images['logo_jp'] = pg.image.load(file_name_get(
+            folder=consts.BM_LOGOS_FOLDER,
+            name='im_logo_japinol', subname='')).convert()
 
     @classmethod
     def load_and_render_scorebar_images_and_txt(cls):

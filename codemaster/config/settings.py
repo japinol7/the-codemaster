@@ -82,8 +82,6 @@ class Settings:
     score_pos_bullets_size = None
     score_pos_f_disks_size = None
     score_pos_f_disks_y = None
-    logo_jp_std_size = None
-    help_key_size = None
 
     @classmethod
     def clean(cls):
@@ -142,8 +140,6 @@ class Settings:
         cls.score_pos_bullets_y = None
         cls.score_pos_f_disks_size = [28, 28]
         cls.score_pos_f_disks_y = None
-        cls.logo_jp_std_size = utils.Size(w=244, h=55)
-        cls.help_key_size = utils.Size(w=218, h=57)
 
     @classmethod
     def calculate_settings(cls, full_screen=None, speed_pct=None):

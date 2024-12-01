@@ -12,7 +12,7 @@ import pygame as pg
 from codemaster.game_entry_point import Game
 from codemaster.tools.logger import logger
 from codemaster.tools.logger.logger import log, LOGGER_FORMAT, LOGGER_FORMAT_NO_DATE
-from codemaster import screen
+from codemaster.screen import screen_entry_point as screen
 from codemaster.config.constants import LOG_START_APP_MSG, LOG_END_APP_MSG
 
 

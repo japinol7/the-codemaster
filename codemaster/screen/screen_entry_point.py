@@ -5,7 +5,7 @@ from codemaster.tools.utils.colors import Color
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.resources import Resource
 from codemaster.config.settings import Settings
-from codemaster.tools.screen import screen
+from codemaster.screen import screen
 
 
 class ExitCurrentGame(screen.ExitCurrentGame):
@@ -15,10 +15,11 @@ class ExitCurrentGame(screen.ExitCurrentGame):
         self.game.screen.blit(Resource.images['bg_blue_t1'], (0, 0))
         self.game.screen.blit(*Resource.txt_surfaces['exit_current_game_confirm'])
         self.game.screen.blit(*Resource.txt_surfaces['press_intro_to_continue_2'])
-        self.game.screen.blit(Resource.images['seal_just_a_demo'],
-              (Settings.screen_width // 2 - Resource.images['seal_just_a_demo'].get_width() // 2,
-               Settings.screen_height // 1.05 - Resource.images['seal_just_a_demo'].get_height() // 1.05
-               ))
+        self.game.screen.blit(
+            Resource.images['seal_just_a_demo'],
+            (Settings.screen_width // 2 - Resource.images['seal_just_a_demo'].get_width() // 2,
+             Settings.screen_height // 1.05 - Resource.images['seal_just_a_demo'].get_height() // 1.05
+             ))
 
 
 class GameOver(screen.GameOver):
@@ -75,7 +76,8 @@ class StartGame(screen.StartGame):
                 Resource.txt_surfaces, 'game_continue_last', color=Color.CYAN,
                 size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
         libg_jp.render_text(
-            '– Load Last Game Failed. Maybe last game ended as Game Over or a Win ? –', Settings.screen_width // 2,
+            '– Load Last Game Failed. Maybe last game ended as Game Over or a Win ? –',
+                Settings.screen_width // 2,
                 114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.44,
                 Resource.txt_surfaces, 'game_continue_last_failed', color=Color.RED_DARK,
                 size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
@@ -83,23 +85,25 @@ class StartGame(screen.StartGame):
     def _draw(self):
         super()._draw()
         self.game.screen.blit(Resource.images['bg_black_t1'], (0, 0))
-        self.game.screen.blit(Resource.images['screen_start'],
-                              (Settings.screen_width // 2 - Resource.images['screen_start'].get_width() // 2, 0))
-        self.game.screen.blit(Resource.images['help_key'],
-                              (50 * Settings.font_pos_factor,
-                              Settings.screen_height - Resource.images['help_key'].get_height()
-                              - 35 * Settings.font_pos_factor))
-        self.game.screen.blit(Resource.images['logo_jp'],
-                              (Settings.screen_width - Resource.images['logo_jp'].get_width()
-                              - 36 * Settings.font_pos_factor,
-                              Settings.screen_height - Resource.images['logo_jp'].get_height()
-                              - 36 * Settings.font_pos_factor))
-        self.game.screen.blit(Resource.images['seal_just_a_demo'],
-                              (Settings.screen_width // 2 - Resource.images['seal_just_a_demo'].get_width() // 2,
-                               Settings.screen_height // 1.05 - Resource.images['seal_just_a_demo'].get_height() // 1.05
-                               ))
+        self.game.screen.blit(
+            Resource.images['screen_start'],
+            (Settings.screen_width // 2 - Resource.images['screen_start'].get_width() // 2, 0))
+        self.game.screen.blit(
+            Resource.images['help_key'],
+            (50 * Settings.font_pos_factor,
+             Settings.screen_height - Resource.images['help_key'].get_height()
+             - 28 * Settings.font_pos_factor))
+        self.game.screen.blit(
+            Resource.images['logo_jp'],
+            (Settings.screen_width - Resource.images['logo_jp'].get_width()
+             - 44 * Settings.font_pos_factor,
+             Settings.screen_height - Resource.images['logo_jp'].get_height()
+             - 32 * Settings.font_pos_factor))
+        self.game.screen.blit(
+            Resource.images['seal_just_a_demo'],
+            (Settings.screen_width // 2 - Resource.images['seal_just_a_demo'].get_width() // 2,
+             Settings.screen_height // 1.05 - Resource.images['seal_just_a_demo'].get_height() // 1.05))
         self.game.screen.blit(*Resource.txt_surfaces['game_start'])
-
 
         if self.game.is_persist_data:
             if self.game.is_load_last_game_failed:

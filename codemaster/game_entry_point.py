@@ -2,9 +2,6 @@
 __author__ = 'Joan A. Pinol  (japinol)'
 __all__ = ['Game']
 
-from datetime import datetime
-import logging
-
 import pygame as pg
 
 from codemaster.tools.logger.logger import log
@@ -14,11 +11,11 @@ from codemaster.tools.utils.colors import Color
 from codemaster.debug_info import DebugInfo
 from codemaster.help_info import HelpInfo
 from codemaster import levels
-from codemaster.tools.utils import utils_graphics as libg_jp, utils
+from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.tools.utils.utils import file_read_list
 from codemaster.resources import Resource
 from codemaster.score_bars import ScoreBar
-from codemaster import screen
+from codemaster.screen import screen_entry_point as screen
 from codemaster.config.settings import Settings, DEFAULT_MUSIC_VOLUME
 from codemaster.config.constants import (
     APP_NAME,
@@ -34,12 +31,8 @@ from codemaster.config.constants import (
     LOG_GAME_BEATEN,
     LOG_GAME_OVER,
     )
-from codemaster.models.actors.player import (
-    Player,
-    PL_SELF_DESTRUCTION_COUNT_DEF,
-    )
+from codemaster.models.actors.player import Player
 from codemaster.models.experience_points import ExperiencePoints
-from codemaster.models.actors.actors import NPC, ActorItem
 from codemaster.models.actors.selectors import SelectorA
 from codemaster.level_scroll_screen import (
     level_scroll_shift_control,
@@ -64,7 +57,6 @@ class Game:
     is_log_debug = False
     current_game = 0
     current_time = None
-    K_b_keydown_seconds = False
     size = None
     screen = None
     screen_flags = None
@@ -297,8 +289,6 @@ class Game:
 
                 self.level.magic_sprites.draw(Game.screen)
 
-        self.is_debug and self.show_fps and pg.display.set_caption(f"{self.clock.get_fps():.2f}")
-
     def _game_loop(self):
         self.update_state_counter = -1
         while not self.done:
@@ -314,19 +304,12 @@ class Game:
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                     self.is_exit_curr_game_confirm = True
                 elif event.type == pg.KEYDOWN:
-                    if event.key == pg.K_p and pg.key.get_mods() & pg.KMOD_LCTRL:
-                        if (self.is_allowed_to_pause or
-                                self.current_time - self.start_time > MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
-                            self.is_allowed_to_pause = True
-                            self.is_paused = True
                     if event.key == pg.K_LEFT:
                         self.player.go_left()
                     elif event.key == pg.K_RIGHT:
                         self.player.go_right()
                     elif event.key == pg.K_UP:
                         self.player.jump()
-                    elif event.key == pg.K_DOWN:
-                        pass
                     elif event.key == pg.K_KP4:
                         self.player.shot_bullet(bullet_type=BulletType.T1_LASER1)
                     elif event.key == pg.K_KP5:
@@ -338,24 +321,11 @@ class Game:
                     elif event.key == pg.K_a:
                         self.player.go_left()
                     elif event.key == pg.K_d:
-                        if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.debug_info.print_debug_info()
-                        else:
-                            self.player.go_right()
+                        self.player.go_right()
                     elif event.key == pg.K_w:
                         self.player.jump()
-                    elif event.key == pg.K_s:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.sound_effects = not self.sound_effects
-                            self.player.sound_effects = self.sound_effects
                     elif event.key == pg.K_u:
                         self.player.shot_bullet(bullet_type=BulletType.T1_LASER1)
-                    elif event.key == pg.K_i:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
-                            if self.super_cheat and self.player.direction != DIRECTION_RIP:
-                                self.player.rect.bottom = NEAR_BOTTOM - 450
-                        else:
-                            self.player.shot_bullet(bullet_type=BulletType.T2_LASER2)
                     elif event.key == pg.K_j:
                         self.player.shot_bullet(bullet_type=BulletType.T3_PHOTONIC)
                     elif event.key == pg.K_k:
@@ -372,87 +342,33 @@ class Game:
                         self.player.choose_spell(5)
                     elif event.key == pg.K_0:
                         self.player.choose_spell(0)
-                    elif event.key == pg.K_m:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.is_music_paused = not self.is_music_paused
-                            if self.is_music_paused:
-                                pg.mixer.music.pause()
-                            else:
-                                pg.mixer.music.unpause()
-                        else:
-                            self.is_magic_on = not self.is_magic_on
-                    elif event.key == pg.K_n:
-                        if self.is_debug and self.is_log_debug:
-                            if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT \
-                                    and pg.key.get_mods() & pg.KMOD_LSHIFT:
-                                log.debug("NPCs health from all levels, ordered by NPC name:")
-                                log.debug("\n" + utils.pretty_dict_to_string(
-                                    NPC.get_npc_ids_health(self, sorted_by_level=False)))
-                            elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
-                                log.debug("NPCs health from all levels, ordered by level:")
-                                log.debug("\n" + utils.pretty_dict_to_string(NPC.get_npc_ids_health(self)))
-                            elif pg.key.get_mods() & pg.KMOD_LALT and pg.key.get_mods() & pg.KMOD_LSHIFT:
-                                log.debug("Items from all levels, ordered by level:")
-                                log.debug("\n" + utils.pretty_dict_to_string(
-                                    ActorItem.get_all_item_ids_basic_info(self)))
-                            elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT:
-                                log.debug("Items from all levels, ordered by item name:")
-                                log.debug("\n" + utils.pretty_dict_to_string(
-                                    ActorItem.get_all_item_ids_basic_info(self, sorted_by_level=False)))
-                            elif pg.key.get_mods() & pg.KMOD_LCTRL:
-                                log.debug("NPCs health from the current level %i:", self.level.id)
-                                log.debug("\n" + utils.pretty_dict_to_string(
-                                    NPC.get_npc_ids_health_from_level(self.level)))
-                            elif pg.key.get_mods() & pg.KMOD_LALT:
-                                log.debug("Items from the current level %i:", self.level.id)
-                                log.debug("\n" + utils.pretty_dict_to_string(
-                                    ActorItem.get_all_item_ids_basic_info_from_level(self.level)))
                     elif event.key == pg.K_h:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.help_info.print_help_keys()
-                            self.is_debug and self.debug_info.print_help_keys()
-                            self.super_cheat and self.debug_info.print_supercheat_keys()
+                        self.player.switch_energy_shield()
+                    elif event.key == pg.K_p and pg.key.get_mods() & pg.KMOD_LCTRL:
+                        if (self.is_allowed_to_pause or
+                                self.current_time - self.start_time > MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
+                            self.is_allowed_to_pause = True
+                            self.is_paused = True
+                    elif event.key == pg.K_m and pg.key.get_mods() & pg.KMOD_LALT:
+                        self.is_music_paused = not self.is_music_paused
+                        if self.is_music_paused:
+                            pg.mixer.music.pause()
                         else:
-                            self.player.switch_energy_shield()
-                    elif event.key == pg.K_l:
-                        if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.debug_info.print_debug_info(to_log_file=True)
+                            pg.mixer.music.unpause()
+                    elif event.key == pg.K_m:
+                        self.is_magic_on = not self.is_magic_on
+                    elif event.key == pg.K_s and pg.key.get_mods() & pg.KMOD_LALT:
+                        self.sound_effects = not self.sound_effects
+                        self.player.sound_effects = self.sound_effects
                     elif event.key == pg.K_F1:
                         if not self.is_exit_curr_game_confirm:
                             self.is_help_screen = not self.is_help_screen
-                    elif event.key == pg.K_g:
-                        if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
-                                and pg.key.get_mods() & pg.KMOD_RALT:
-                            self.show_grid = not self.show_grid
                     elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
                         if pg.key.get_mods() & pg.KMOD_ALT and not pg.key.get_mods() & pg.KMOD_LCTRL:
                             if (self.is_allowed_to_pause or
                                     self.current_time - self.start_time > MIN_TICKS_ALLOWED_TO_PAUSE_GAME):
                                 self.is_paused = True
                                 self.is_full_screen_switch = True
-                    elif event.key == pg.K_KP_DIVIDE:
-                        if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL \
-                                and pg.key.get_mods() & pg.KMOD_LALT:
-                            if log.level != logging.DEBUG:
-                                log.setLevel(logging.DEBUG)
-                                Game.is_log_debug = True
-                                log.info("Set logger level to: Debug")
-                            else:
-                                log.setLevel(logging.INFO)
-                                Game.is_log_debug = False
-                                log.info("Set logger level to: Info")
-                    elif event.key == pg.K_KP_MINUS:
-                        if self.super_cheat and pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.debug_info.super_cheat_superhero()
-                            log.info(f"Replenish stats to superhero maximum (cheat).")
-                    elif event.key == pg.K_KP_MULTIPLY:
-                        if self.super_cheat and pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.player.invulnerable = not self.player.invulnerable
-                            log.info(f"Set player invulnerability state to: {self.player.invulnerable} (cheat)")
-                    elif event.key == pg.K_b:
-                        if pg.key.get_mods() & pg.KMOD_LALT and not self.K_b_keydown_seconds:
-                            t = datetime.now().time()
-                            self.K_b_keydown_seconds = (t.hour * 60 + t.minute) * 60 + t.second
                 elif event.type == pg.KEYUP:
                     if event.key in (pg.K_LEFT, pg.K_a) and self.player.change_x < 0:
                         self.player.stop()
@@ -464,39 +380,43 @@ class Game:
                         self.player.eat_apple()
                     if event.key == pg.K_DELETE:
                         self.player.drink_potion_power()
-                    if event.key == pg.K_t:
+                    if event.key == pg.K_r:
                         self.player.use_computer()
                         self.player.use_door_key()
-                    if event.key == pg.K_b:
-                        if pg.key.get_mods() & pg.KMOD_LALT:
-                            t = datetime.now().time()
-                            if (((t.hour * 60 + t.minute) * 60 + t.second) - self.K_b_keydown_seconds
-                                    >= PL_SELF_DESTRUCTION_COUNT_DEF):
-                                self.player.self_destruction()
-                            self.K_b_keydown_seconds = 0
-                    if event.key == pg.K_F5:
-                        if (self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL
-                                and pg.key.get_mods() & pg.KMOD_LALT):
-                            self.show_fps = not self.show_fps
-                            if not self.show_fps:
-                                pg.display.set_caption(self.name_short)
                 elif event.type == pg.MOUSEBUTTONDOWN:
-                    if self.is_debug and pg.key.get_mods() & pg.KMOD_LCTRL:
-                        self.mouse_pos = pg.mouse.get_pos()
-                        for selector in self.selector_sprites:
-                            selector.selector_copy_actor(group=self.level.npcs)
-                    elif self.is_debug and pg.key.get_mods() & pg.KMOD_LALT:
-                        self.mouse_pos = pg.mouse.get_pos()
-                        for selector in self.selector_sprites:
-                            selector.selector_copy_actor(group=self.level.items)
-                    elif self.is_debug and pg.key.get_mods() & pg.KMOD_LSHIFT:
-                        self.mouse_pos = pg.mouse.get_pos()
-                        for selector in self.selector_sprites:
-                            selector.selector_paste_actor()
-                    elif self.is_magic_on:
+                    if self.is_magic_on:
                         self.mouse_pos = pg.mouse.get_pos()
                         for selector in self.selector_sprites:
                             selector.get_pointed_sprites()
+                    if self.is_debug:
+                        if pg.key.get_mods() & pg.KMOD_LCTRL:
+                            self.mouse_pos = pg.mouse.get_pos()
+                            for selector in self.selector_sprites:
+                                selector.selector_copy_actor(group=self.level.npcs)
+                        elif pg.key.get_mods() & pg.KMOD_LALT:
+                            self.mouse_pos = pg.mouse.get_pos()
+                            for selector in self.selector_sprites:
+                                selector.selector_copy_actor(group=self.level.items)
+                        elif pg.key.get_mods() & pg.KMOD_LSHIFT:
+                            self.mouse_pos = pg.mouse.get_pos()
+                            for selector in self.selector_sprites:
+                                selector.selector_paste_actor()
+                if self.super_cheat and event.type == pg.KEYDOWN:
+                    if event.key == pg.K_i:
+                        if pg.key.get_mods() & pg.KMOD_LCTRL:
+                            if self.super_cheat and self.player.direction != DIRECTION_RIP:
+                                self.player.rect.bottom = NEAR_BOTTOM - 450
+                        else:
+                            self.player.shot_bullet(bullet_type=BulletType.T2_LASER2)
+                    elif event.key == pg.K_KP_MINUS:
+                        if pg.key.get_mods() & pg.KMOD_LCTRL:
+                            self.debug_info.super_cheat_superhero()
+                            log.info(f"Replenish stats to superhero maximum (cheat).")
+                    elif event.key == pg.K_KP_MULTIPLY:
+                        if pg.key.get_mods() & pg.KMOD_LCTRL:
+                            self.player.invulnerable = not self.player.invulnerable
+                            log.info(f"Set player invulnerability state to: "
+                                     f"{self.player.invulnerable} (cheat)")
 
                 self.mouse_pos = pg.mouse.get_pos()
 

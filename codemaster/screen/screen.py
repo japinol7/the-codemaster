@@ -8,6 +8,8 @@ import pygame_gui as pgui
 
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.config.settings import Settings
+from codemaster.tools.utils import utils
+from codemaster.models.actors.actors import NPC, ActorItem
 from codemaster.tools.logger.logger import log
 
 
@@ -48,7 +50,7 @@ class Screen:
                         libg_jp.full_screen_switch(self.game)
                         self._draw()
                 elif event.key == pg.K_m:
-                    if pg.key.get_mods() & pg.KMOD_LCTRL:
+                    if pg.key.get_mods() & pg.KMOD_LALT:
                         self.game.is_music_paused = not self.game.is_music_paused
                         if self.game.is_music_paused:
                             pg.mixer.music.pause()
@@ -61,13 +63,8 @@ class Screen:
                     elif event.key == pg.K_h:
                         if pg.key.get_mods() & pg.KMOD_LCTRL:
                             self.game.help_info.print_help_keys()
-                            self.game.debug_info.print_help_keys()
-                    elif event.key == pg.K_d:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.game.debug_info.print_debug_info()
-                    elif event.key == pg.K_l:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.game.debug_info.print_debug_info()
+                            if self.game.is_debug:
+                                self.game.debug_info.print_help_keys()
 
 
 class ExitCurrentGame(Screen):
@@ -228,6 +225,55 @@ class Pause(Screen):
                 elif event.key == pg.K_F1:
                     self.game.is_help_screen = True
                     self.done = True
+
+            # Debug input events
+            if self.game.is_debug and event.type == pg.KEYDOWN:
+                if event.key == pg.K_d and pg.key.get_mods() & pg.KMOD_LCTRL:
+                    self.game.debug_info.print_debug_info()
+                elif event.key == pg.K_l and pg.key.get_mods() & pg.KMOD_LCTRL:
+                    self.game.debug_info.print_debug_info(to_log_file=True)
+                elif (event.key == pg.K_KP_DIVIDE and pg.key.get_mods() & pg.KMOD_LCTRL
+                      and pg.key.get_mods() & pg.KMOD_LALT):
+                    if log.level != logging.DEBUG:
+                        log.setLevel(logging.DEBUG)
+                        self.game.__class__.is_log_debug = True
+                        log.info("Set logger level to: Debug")
+                    else:
+                        log.setLevel(logging.INFO)
+                        self.game.__class__.is_log_debug = False
+                        log.info("Set logger level to: Info")
+                elif event.key == pg.K_g:
+                    if pg.key.get_mods() & pg.KMOD_LCTRL \
+                            and pg.key.get_mods() & pg.KMOD_RALT:
+                        self.game.show_grid = not self.game.show_grid
+
+            # Debug input events with debug and log debug activated
+            if self.game.is_log_debug and event.type == pg.KEYDOWN:
+                if event.key == pg.K_n:
+                    if pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT \
+                            and pg.key.get_mods() & pg.KMOD_LSHIFT:
+                        log.debug("NPCs health from all levels, ordered by NPC name:")
+                        log.debug("\n" + utils.pretty_dict_to_string(
+                            NPC.get_npc_ids_health(self.game, sorted_by_level=False)))
+                    elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LSHIFT:
+                        log.debug("NPCs health from all levels, ordered by level:")
+                        log.debug("\n" + utils.pretty_dict_to_string(NPC.get_npc_ids_health(self.game)))
+                    elif pg.key.get_mods() & pg.KMOD_LALT and pg.key.get_mods() & pg.KMOD_LSHIFT:
+                        log.debug("Items from all levels, ordered by level:")
+                        log.debug("\n" + utils.pretty_dict_to_string(
+                            ActorItem.get_all_item_ids_basic_info(self.game)))
+                    elif pg.key.get_mods() & pg.KMOD_LCTRL and pg.key.get_mods() & pg.KMOD_LALT:
+                        log.debug("Items from all levels, ordered by item name:")
+                        log.debug("\n" + utils.pretty_dict_to_string(
+                            ActorItem.get_all_item_ids_basic_info(self.game, sorted_by_level=False)))
+                    elif pg.key.get_mods() & pg.KMOD_LCTRL:
+                        log.debug("NPCs health from the current level %i:", self.game.level.id)
+                        log.debug("\n" + utils.pretty_dict_to_string(
+                            NPC.get_npc_ids_health_from_level(self.game.level)))
+                    elif pg.key.get_mods() & pg.KMOD_LALT:
+                        log.debug("Items from the current level %i:", self.game.level.id)
+                        log.debug("\n" + utils.pretty_dict_to_string(
+                            ActorItem.get_all_item_ids_basic_info_from_level(self.game.level)))
 
             # Manage In Game UI events
             self.game.__class__.ui_ingame.process_events(event)

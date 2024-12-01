@@ -21,7 +21,7 @@
 
 ## Screenshots
 
-<img src="screenshots/screenshot1.jpg" width="980" alt="screenshot1"> <br /> <br />
+<img src="screenshots/screenshot1.png" width="980" alt="screenshot1"> <br /> <br />
 <img src="screenshots/screenshot2.jpg" width="980" alt="screenshot2"> <br /> <br />
 <img src="screenshots/screenshot3.png" width="980" alt="screenshot3"> <br /> <br />
 <img src="screenshots/screenshot4.png" width="980" alt="screenshot4"> <br /> <br />
@@ -188,15 +188,12 @@
             > Vortex of Doom. 
             > Lighning Bolts.
             > Doom Bolts.
-        > Kill its current life by pressing Alt + b keys for a time.
 	> Player's ways of dying:
 	    > A player dies if all his lives are killed.
 	    > A life is killed:
             > When its health is lower than 0.
             > When the player falls into a hole reaching the lower 
               screen boundary.
-            > When the player is stuck in some trap and press the <b> key 
-              for a time.
 	> Information in the score line:
 	    > First line:
             > ====:  Health bar.
@@ -341,7 +338,7 @@
     i         5:    fire a medium shot
     j         1:    fire a strong shot
     k         2:    fire a heavy shot
-    t:              try unlocking door using each key in your inventory
+    r:              try unlocking door using each key in your inventory
                     Also, use a computer to decrypt files disks.
     h:              switch energy shield (if you have level up enough)
     m:              switch magic and magic NPC selector (via mouse clicks)
@@ -354,16 +351,16 @@
     insert:        drink a health potion
     delete:        drink a power potion
     home:          eat a health apple
-    Alt + b:       hold Alt + b for a time to kill your current life
     ^ + p:         pause the game
     ESC:         exit the game
-    ^m:          pause/resume music
-    ^s:          sound effects on/off
+    Alt + m:          pause/resume music
+    Alt + s:          sound effects on/off
     Alt + Enter: change full screen / windowed screen mode
     L_Ctrl + R_Alt + g: grid on/off
     ^h:          shows this help to the console
 
     > Additional keys for debug mode:
+    --- Debug keys are accessible from the Pause screen
     ^ L_Alt + numpad_divide:  toggle logger to debug/info, print info 
                      for hits...
     ^ n:             print a list of all NPCs in the current level
@@ -379,10 +376,12 @@
                      ordered by item name
     ^d:    print debug information to the console
     ^l:    write debug information to a log file
-    L_mouse_button:  If debug mode activated, show actors in the position  
-    ^L_mouse_button: If debug mode activated, select NPC to copy  
-    Alt + L_mouse_button: If debug mode activated, select item to copy  
-    Shift + L_mouse_button: If debug mode activated, paste selected actor.  
+
+    --- Debug mouse keys are accessible from the action game screen
+    L_mouse_button:  Show actors in the position  
+    ^L_mouse_button: Select NPC to copy  
+    Alt + L_mouse_button: Select item to copy  
+    Shift + L_mouse_button: Paste selected actor.  
                      Note that you can paste actors only 
                      within the same game level.
 

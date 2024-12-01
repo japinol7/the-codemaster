@@ -5,6 +5,7 @@
 ### New features and improvements:
 
 * Add files disks message management.
+  * Add dummy messages.
 * Improve computers to perform these actions:
   * Decrypt files disks allocated in the player inventory.
     * The player gets XP for decrypting each disk.
@@ -13,6 +14,8 @@
   * Checking if the player has beaten or lost the game.
 * Improve initial player positioning in levels.
 * Minor general screens improvements.
+* Improve game input events:
+  * Move debug input events to the pause screen.
 * Fix memory leak in pygame-gui UI components.
 * Improve the test suite:
   * Add testing capabilities for file disk messages data.
