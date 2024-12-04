@@ -4,6 +4,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 from codemaster.tools.utils.colors import Color
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.resources import Resource
+from codemaster.config.constants import APP_NAME_DESC
 from codemaster.config.settings import Settings
 from codemaster.screen import screen
 
@@ -81,6 +82,11 @@ class StartGame(screen.StartGame):
                 114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.7,
                 Resource.txt_surfaces, 'game_continue_last_failed', color=Color.RED_DARK,
                 size=int(33*Settings.font_pos_factor_t2), align="center")
+        libg_jp.render_text(
+                APP_NAME_DESC, Settings.screen_width // 2,
+                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.38,
+                Resource.txt_surfaces, 'game_copyright_desc', color=Color.RED_DARK,
+                size=int(19*Settings.font_pos_factor_t2), align="center")
 
     def _draw(self):
         super()._draw()
@@ -103,6 +109,7 @@ class StartGame(screen.StartGame):
             Resource.images['seal_just_a_demo'],
             (Settings.screen_width // 2 - Resource.images['seal_just_a_demo'].get_width() // 2,
              Settings.screen_height // 1.05 - Resource.images['seal_just_a_demo'].get_height() // 1.05))
+        self.game.screen.blit(*Resource.txt_surfaces['game_copyright_desc'])
         self.game.screen.blit(*Resource.txt_surfaces['game_start'])
 
         if self.game.is_persist_data:

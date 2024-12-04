@@ -89,7 +89,8 @@ APP_NAME = f"The CodeMaster v. {version.get_version()}"
 APP_NAME_SHORT = "The CodeMaster"
 APP_NAME_LONG = "The CodeMaster. Nightmare on Bots' Island."
 APP_NAME_DESC = "A spin-off sci-fi mystery based on " \
-                "Pac's Revenge series games by @japinol (c) 1987, 1988, 2015, 2021, 2024."
+                "Pac's Revenge series games by @japinol. "\
+                "(c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024."
 APP_WEBSITE_URL = "https://github.com/japinol7/the-codemaster"
 
 LOG_FILE = os.path.join('logs', f"log_{datetime.now().strftime('%Y-%m-%d_%H_%M_%S_%f')}.log")

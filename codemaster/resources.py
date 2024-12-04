@@ -52,6 +52,7 @@ class Resource:
         'game_over': None, 'game_over_2': None,
         'press_intro_to_continue': None, 'press_intro_to_continue_2': None,
         'game_start': None, 'game_continue_last': None,
+        'game_copyright_desc': None,
         'game_continue_last_failed': None,
         'level_no': None, 'congrats': None, 'congrats_2': None,
         'you_have_beaten_the_game': None, 'you_have_beaten_the_game_2': None,
