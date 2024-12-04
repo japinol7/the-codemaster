@@ -43,6 +43,7 @@ from codemaster.persistence.persistence_settings import (
     PersistenceSettings,
     )
 from codemaster.persistence import persistence
+from codemaster.ui.ui_manager.ui_manager import UIManager
 
 START_LEVEL = 0
 
@@ -61,6 +62,7 @@ class Game:
     screen_flags = None
     normal_screen_flags = None
     full_screen_flags = None
+    ui_manager = None
     new_game = False
     files_disks_data = None
 
@@ -159,6 +161,9 @@ class Game:
             # Load file disks data
             FilesDisk.load_files_disks_data(self)
 
+            # Initialize UI
+            Game.ui_manager = UIManager(self)
+
         FilesDisk.reset_msgs_loaded_in_disks(self)
         self.current_time_delta = pg.time.get_ticks() / 1000.0
 
@@ -238,6 +243,7 @@ class Game:
             self.screen_exit_current_game.start_up()
             if self.done:
                 self.is_persist_data and persistence.persist_game_data(self)
+                Game.ui_manager.clean_game_data()
                 levels.Level.clean_entity_ids()
         elif Game.is_over:
             self.screen_game_over.start_up()
@@ -245,6 +251,7 @@ class Game:
                 self.write_game_over_info_to_file()
             if self.done:
                 self.is_persist_data and persistence.clear_all_persisted_data()
+                Game.ui_manager.clean_game_data()
                 levels.Level.clean_entity_ids()
         else:
             if Game.is_over:
@@ -428,13 +435,13 @@ class Game:
             # Check if the player has beaten or lost the game, but skip the first four iterations
             if self.update_state_counter == 4:
                 if levels.Level.levels_completed_count(self) >= self.levels_qty \
-                        and self.player.count_files_disks_not_decrypted() < 1:
+                        and self.player.count_files_disks_not_read() < 1:
                     self.winner = self.player
                     log.info(LOG_GAME_BEATEN)
                 if not self.player.is_alive:
                     Game.is_over = True
                     if levels.Level.levels_completed_count(self) >= self.levels_qty \
-                            and self.player.count_files_disks_not_decrypted() < 1:
+                            and self.player.count_files_disks_not_read() < 1:
                         self.winner = self.player
                         log.info(LOG_GAME_BEATEN)
                     else:

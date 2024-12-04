@@ -2,14 +2,14 @@
   "saved_game_data": {
     "app_name": "The CodeMaster. Nightmare on Bots' Island.",
     "app_tech_name": "codemaster",
-    "app_version": "0.0.11",
+    "app_version": "0.0.12",
     "continue_game": true
   },
   "game_levels": {
     "6": {
-      "world_shift": -2224,
+      "world_shift": -2336,
       "world_shift_initial": 0,
-      "world_shift_top": -210,
+      "world_shift_top": -462,
       "world_shift_top_initial": -500,
       "items": {
         "APPLE_RED_00008": {
@@ -23,8 +23,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 21107,
-          "y": 3039,
+          "x": 18771,
+          "y": 3077,
           "is_location_in_inventory": true
         },
         "APPLE_YELLOW_00013": {
@@ -38,8 +38,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 15641,
-          "y": 2209,
+          "x": 13305,
+          "y": 2247,
           "is_location_in_inventory": true
         },
         "APPLE_GREEN_00010": {
@@ -53,8 +53,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 15617,
-          "y": 2341,
+          "x": 13281,
+          "y": 2379,
           "is_location_in_inventory": true
         },
         "APPLE_RED_00009": {
@@ -68,8 +68,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 15871,
-          "y": 2341,
+          "x": 13535,
+          "y": 2379,
           "is_location_in_inventory": true
         },
         "APPLE_RED_00010": {
@@ -83,8 +83,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 4734,
-          "y": 1378,
+          "x": 2398,
+          "y": 1416,
           "is_location_in_inventory": true
         },
         "APPLE_YELLOW_00014": {
@@ -98,8 +98,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 4734,
-          "y": 1378,
+          "x": 2398,
+          "y": 1416,
           "is_location_in_inventory": true
         },
         "APPLE_GREEN_00011": {
@@ -113,8 +113,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 4734,
-          "y": 1378,
+          "x": 2398,
+          "y": 1416,
           "is_location_in_inventory": true
         },
         "APPLE_GREEN_00012": {
@@ -128,8 +128,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 4734,
-          "y": 1352,
+          "x": 2398,
+          "y": 1390,
           "is_location_in_inventory": true
         },
         "POTION_POWER_00019": {
@@ -143,8 +143,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 21295,
-          "y": 3185,
+          "x": 18959,
+          "y": 3223,
           "is_location_in_inventory": true,
           "power": 36,
           "power_total": 36
@@ -160,8 +160,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 16041,
-          "y": 2860,
+          "x": 13705,
+          "y": 2898,
           "is_location_in_inventory": true,
           "power": 33,
           "power_total": 33
@@ -177,8 +177,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 15663,
-          "y": 2238,
+          "x": 13327,
+          "y": 2276,
           "is_location_in_inventory": true,
           "power": 28,
           "power_total": 28
@@ -194,8 +194,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 15111,
-          "y": 2100,
+          "x": 12775,
+          "y": 2138,
           "is_location_in_inventory": true,
           "power": 73,
           "power_total": 73
@@ -211,8 +211,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 4722,
-          "y": 1364,
+          "x": 2386,
+          "y": 1402,
           "is_location_in_inventory": true,
           "power": 29,
           "power_total": 29
@@ -228,14 +228,14 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 4722,
-          "y": 1324,
+          "x": 2386,
+          "y": 1362,
           "is_location_in_inventory": true,
           "power": 30,
           "power_total": 30
         },
-        "POTION_POWER_00025": {
-          "is_not_initial_actor": true,
+        "POTION_POWER_00007": {
+          "is_not_initial_actor": false,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "POTION",
@@ -244,15 +244,15 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0,
-          "x": 3116,
-          "y": 380,
+          "frame_index": 0.5,
+          "x": 780,
+          "y": 418,
           "is_location_in_inventory": true,
           "power": 37,
           "power_total": 37
         },
-        "POTION_POWER_00026": {
-          "is_not_initial_actor": true,
+        "POTION_POWER_00008": {
+          "is_not_initial_actor": false,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "POTION",
@@ -261,9 +261,9 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0,
-          "x": 3116,
-          "y": 342,
+          "frame_index": 0.5,
+          "x": 780,
+          "y": 380,
           "is_location_in_inventory": true,
           "power": 38,
           "power_total": 38
@@ -279,8 +279,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 21127,
-          "y": 3086,
+          "x": 18791,
+          "y": 3124,
           "is_location_in_inventory": true,
           "power": 26,
           "power_total": 26
@@ -296,8 +296,8 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 16047,
-          "y": 3014,
+          "x": 13711,
+          "y": 3052,
           "is_location_in_inventory": true,
           "power": 30,
           "power_total": 30
@@ -313,14 +313,14 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 15743,
-          "y": 2238,
+          "x": 13407,
+          "y": 2276,
           "is_location_in_inventory": true,
           "power": 38,
           "power_total": 38
         },
-        "POTION_HEALTH_00012": {
-          "is_not_initial_actor": true,
+        "POTION_HEALTH_00004": {
+          "is_not_initial_actor": false,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "POTION",
@@ -329,15 +329,15 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0,
-          "x": 3120,
-          "y": 380,
+          "frame_index": 0.7,
+          "x": 784,
+          "y": 418,
           "is_location_in_inventory": true,
           "power": 39,
           "power_total": 39
         },
-        "POTION_HEALTH_00013": {
-          "is_not_initial_actor": true,
+        "POTION_HEALTH_00005": {
+          "is_not_initial_actor": false,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "POTION",
@@ -346,9 +346,9 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0,
-          "x": 3120,
-          "y": 342,
+          "frame_index": 0.7,
+          "x": 784,
+          "y": 380,
           "is_location_in_inventory": true,
           "power": 32,
           "power_total": 32
@@ -364,12 +364,11 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 21127,
-          "y": 3032,
+          "x": 18791,
+          "y": 3070,
           "is_location_in_inventory": true,
           "msg_id": "C_01",
-          "is_encrypted": false,
-          "has_been_read": false
+          "is_encrypted": false
         },
         "FILES_DISK_D_00005": {
           "is_not_initial_actor": true,
@@ -382,12 +381,11 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 21569,
-          "y": 3106,
+          "x": 19233,
+          "y": 3144,
           "is_location_in_inventory": true,
           "msg_id": "D_01",
-          "is_encrypted": false,
-          "has_been_read": false
+          "is_encrypted": false
         },
         "FILES_DISK_D_00006": {
           "is_not_initial_actor": true,
@@ -400,12 +398,11 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 21157,
-          "y": 3361,
+          "x": 18821,
+          "y": 3399,
           "is_location_in_inventory": true,
           "msg_id": "D_02",
-          "is_encrypted": false,
-          "has_been_read": false
+          "is_encrypted": false
         },
         "FILES_DISK_B_00009": {
           "is_not_initial_actor": true,
@@ -418,12 +415,11 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 16047,
-          "y": 3016,
+          "x": 13711,
+          "y": 3054,
           "is_location_in_inventory": true,
           "msg_id": "B_04",
-          "is_encrypted": false,
-          "has_been_read": false
+          "is_encrypted": false
         },
         "FILES_DISK_B_00010": {
           "is_not_initial_actor": true,
@@ -436,12 +432,11 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 16043,
-          "y": 2662,
+          "x": 13707,
+          "y": 2700,
           "is_location_in_inventory": true,
           "msg_id": "B_06",
-          "is_encrypted": false,
-          "has_been_read": false
+          "is_encrypted": false
         },
         "FILES_DISK_C_00007": {
           "is_not_initial_actor": true,
@@ -454,12 +449,11 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 11733,
-          "y": 1734,
+          "x": 9397,
+          "y": 1772,
           "is_location_in_inventory": true,
           "msg_id": "C_05",
-          "is_encrypted": false,
-          "has_been_read": false
+          "is_encrypted": false
         },
         "FILES_DISK_C_00008": {
           "is_not_initial_actor": true,
@@ -472,12 +466,11 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 12176,
-          "y": 1912,
+          "x": 9840,
+          "y": 1950,
           "is_location_in_inventory": true,
           "msg_id": "C_02",
-          "is_encrypted": false,
-          "has_been_read": false
+          "is_encrypted": false
         },
         "FILES_DISK_A_00007": {
           "is_not_initial_actor": true,
@@ -490,12 +483,11 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 6828,
-          "y": 1660,
+          "x": 4492,
+          "y": 1698,
           "is_location_in_inventory": true,
           "msg_id": "A_02",
-          "is_encrypted": false,
-          "has_been_read": false
+          "is_encrypted": false
         },
         "FILES_DISK_B_00011": {
           "is_not_initial_actor": true,
@@ -508,15 +500,14 @@
           "health_total": 1,
           "direction": 2,
           "frame_index": 0,
-          "x": 4724,
-          "y": 1365,
+          "x": 2388,
+          "y": 1403,
           "is_location_in_inventory": true,
           "msg_id": "B_01",
-          "is_encrypted": true,
-          "has_been_read": false
+          "is_encrypted": true
         },
-        "FILES_DISK_B_00012": {
-          "is_not_initial_actor": true,
+        "FILES_DISK_B_00005": {
+          "is_not_initial_actor": false,
           "name": "unnamed",
           "base_type": "ITEM",
           "category_type": "FILES_DISK",
@@ -525,13 +516,12 @@
           "health": 1,
           "health_total": 1,
           "direction": 2,
-          "frame_index": 0,
-          "x": 3116,
-          "y": 404,
+          "frame_index": 0.7,
+          "x": 780,
+          "y": 442,
           "is_location_in_inventory": true,
           "msg_id": "B_03",
-          "is_encrypted": true,
-          "has_been_read": false
+          "is_encrypted": true
         }
       }
     }

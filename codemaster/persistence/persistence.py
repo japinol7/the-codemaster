@@ -75,6 +75,7 @@ def load_game_data(game):
         game.done = True
         game.__class__.is_load_last_game_failed = True
         game.level.clean_entity_ids()
+        game.ui_manager.clean_game_data()
 
     if not game.is_load_user_game:
         log.info("Load last saved game")

@@ -1,5 +1,29 @@
 # Release History
 
+## v0.0.12
+
+### New features and improvements:
+
+* Reintroduce UI components
+  * Add UI buttons in the main screen.
+    * New Game.
+    * Continue the Last Game.
+    * Load Game.
+    * Save Game.
+    * Credits
+    * Quit Game
+* Add UI buttons in the game paused screen to perform these actions:
+  * Show Levels Visited.
+  * Show Levels Completed.
+  * Show Health Potions stock and allow the player to drink them.
+  * Show Power Potions stock and allow the player to drink them.
+  * Allow reading decrypted messages from files disks.
+  * Save the current game with a new name.
+* Add dependency for the new UI items:
+  * pygame-gui
+
+<br>
+
 ## v0.0.11
 
 ### New features and improvements:
