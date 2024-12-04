@@ -4,7 +4,6 @@ __author__ = 'Joan A. Pinol  (japinol)'
 from codemaster.tools.utils.colors import Color
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.resources import Resource
-from codemaster.config.constants import APP_NAME_DESC
 from codemaster.config.settings import Settings
 from codemaster.screen import screen
 
@@ -63,8 +62,8 @@ class StartGame(screen.StartGame):
     def __init__(self, game):
         super().__init__(game)
 
-        text_size_multiplier = 38 if self.game.is_persist_data else 42
-        text_start_game_pos_factor_y = 1.96 if self.game.is_persist_data else 1.82
+        text_size_multiplier = 28 if self.game.is_persist_data else 32
+        text_start_game_pos_factor_y = 1.34 if self.game.is_persist_data else 1.4
 
         libg_jp.render_text(
             '– Press Ctrl + Alt + Enter to Start –', Settings.screen_width // 2,
@@ -73,20 +72,15 @@ class StartGame(screen.StartGame):
                 size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
         libg_jp.render_text(
             '– Press Ctrl + Alt + Space to Continue Last Game –', Settings.screen_width // 2,
-                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.7,
+                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.44,
                 Resource.txt_surfaces, 'game_continue_last', color=Color.CYAN,
                 size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
         libg_jp.render_text(
             '– Load Last Game Failed. Maybe last game ended as Game Over or a Win ? –',
                 Settings.screen_width // 2,
-                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.7,
+                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.44,
                 Resource.txt_surfaces, 'game_continue_last_failed', color=Color.RED_DARK,
-                size=int(33*Settings.font_pos_factor_t2), align="center")
-        libg_jp.render_text(
-                APP_NAME_DESC, Settings.screen_width // 2,
-                114 * Settings.font_pos_factor_t2 + Settings.screen_height // 1.38,
-                Resource.txt_surfaces, 'game_copyright_desc', color=Color.RED_DARK,
-                size=int(19*Settings.font_pos_factor_t2), align="center")
+                size=int(text_size_multiplier*Settings.font_pos_factor_t2), align="center")
 
     def _draw(self):
         super()._draw()
@@ -109,7 +103,6 @@ class StartGame(screen.StartGame):
             Resource.images['seal_just_a_demo'],
             (Settings.screen_width // 2 - Resource.images['seal_just_a_demo'].get_width() // 2,
              Settings.screen_height // 1.05 - Resource.images['seal_just_a_demo'].get_height() // 1.05))
-        self.game.screen.blit(*Resource.txt_surfaces['game_copyright_desc'])
         self.game.screen.blit(*Resource.txt_surfaces['game_start'])
 
         if self.game.is_persist_data:

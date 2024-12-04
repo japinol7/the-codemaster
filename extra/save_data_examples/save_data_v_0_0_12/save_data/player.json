@@ -2,7 +2,7 @@
   "saved_game_data": {
     "app_name": "The CodeMaster. Nightmare on Bots' Island.",
     "app_tech_name": "codemaster",
-    "app_version": "0.0.11",
+    "app_version": "0.0.12",
     "continue_game": true
   },
   "player": {
@@ -66,15 +66,15 @@
       "POTION_POWER_00022",
       "POTION_POWER_00023",
       "POTION_POWER_00024",
-      "POTION_POWER_00025",
-      "POTION_POWER_00026"
+      "POTION_POWER_00007",
+      "POTION_POWER_00008"
     ],
     "potions_health": [
       "POTION_HEALTH_00009",
       "POTION_HEALTH_00010",
       "POTION_HEALTH_00011",
-      "POTION_HEALTH_00012",
-      "POTION_HEALTH_00013"
+      "POTION_HEALTH_00004",
+      "POTION_HEALTH_00005"
     ],
     "POTION_POWER": 8,
     "POTION_HEALTH": 5,
@@ -128,7 +128,7 @@
       "FILES_DISK_C_00008",
       "FILES_DISK_A_00007",
       "FILES_DISK_B_00011",
-      "FILES_DISK_B_00012"
+      "FILES_DISK_B_00005"
     ],
     "sound_effects": true,
     "is_music_paused": false

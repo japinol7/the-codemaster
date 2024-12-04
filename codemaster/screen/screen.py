@@ -4,6 +4,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 import logging
 
 import pygame as pg
+import pygame_gui as pgui
 
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.config.settings import Settings
@@ -190,7 +191,14 @@ class Pause(Screen):
             events = pg.event.get()
             self._events_handle(events)
 
+            try:
+                self.game.__class__.ui_ingame.update(self.game.current_time_delta)
+            except Exception as e:
+                log.warning(f"ERROR in pygame-gui libray: {e}")
+
             self._draw()
+
+            self.game.__class__.ui_ingame.draw_ui(self.game.screen)
 
             pg.display.flip()
             self.game.clock.tick(Settings.fps_paused)
@@ -276,6 +284,13 @@ class Pause(Screen):
                         log.debug("\n" + utils.pretty_dict_to_string(
                             ActorItem.get_all_item_ids_basic_info_from_level(self.game.level)))
 
+            # Manage In Game UI events
+            self.game.__class__.ui_ingame.process_events(event)
+
+            if self.done:
+                self.game.ui_manager.ui_ingame.hide_additional_game_items()
+                self.game.ui_manager.ui_ingame.clean_ui_items()
+
 
 class StartGame(Screen):
     """Represents a Start Game screen."""
@@ -293,7 +308,13 @@ class StartGame(Screen):
             events = pg.event.get()
             self._events_handle(events)
 
+            try:
+                self.game.__class__.ui_main_menu.update(self.game.current_time_delta)
+            except Exception as e:
+                log.warning(f"ERROR in pygame-gui libray: {e}")
+
             self._draw()
+            self.game.__class__.ui_main_menu.draw_ui(self.game.screen)
 
             pg.display.flip()
             clock.tick(Settings.fps_paused)
@@ -328,6 +349,12 @@ class StartGame(Screen):
                             log.setLevel(logging.INFO)
                             self.game.__class__.is_log_debug = False
                             log.info("Set logger level to: Info")
+            # Manage In Game UI events
+            self.game.__class__.ui_main_menu.process_events(event)
+            if event.type == pgui.UI_CONFIRMATION_DIALOG_CONFIRMED:
+                if event.ui_element == self.game.ui_manager.ui_main_menu.items[
+                    'delete_saved_game_confirm_dialog']:
+                    self.game.ui_manager.ui_main_menu.delete_game_directory_action()
 
         if self.game.is_exit_game:
             self.game.is_start_screen = False
@@ -339,3 +366,7 @@ class StartGame(Screen):
         elif self.game.is_continue_game:
             self.game.is_start_screen = False
             self.done = True
+
+        if self.done:
+            self.game.ui_manager.ui_main_menu.hide_additional_game_items()
+            self.game.ui_manager.ui_main_menu.clean_ui_items()

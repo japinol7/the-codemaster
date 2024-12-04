@@ -5,7 +5,7 @@
 <br />
 
 	program: The CodeMaster. Nightmare on Bots' Island.
-	version: 0.0.11
+	version: 0.0.12
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
@@ -15,7 +15,7 @@
     Pixel art graphics (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024.
 <br />
 
-	Dependencies: pygame-ce.
+	Dependencies: pygame-ce, pygame-gui.
 	Python requires: 3.12 or greater.
 
 
@@ -138,7 +138,7 @@
 	    > In this demo, you must:
 	      > Get all the batteries 
 	      > Get all the files disks.
-	      > Decrypt all the files disks that are not corrupted.
+	      > Decrypt and read all the files disks that are not corrupted.
 	> Levels: 
 	    > What happens in a level, stays in that level.
 	      > This means that when you leave a level, all effects and NPCs  
@@ -292,7 +292,6 @@
         > You can decrypt files disk messages with the computers.
 	> Computers: 
         > Use a computer to decrypt files disks.
-        > You cannot read the file messages yet in the current version of the game.
         > In later versions, they will have an important role in 
             beating the game.
 	> Mines: 
@@ -317,6 +316,15 @@
 	the previous game instead of starting a new one.
 	Note that you cannot continue a game that ended in a Game Over 
 	or that you beated winning the game.
+<br>
+
+
+#### Starting with version 0.0.12, you can enjoy new UI items 
+	We added new UI items using the pygame-gui package.
+	For example, we now allow users to perform these actions:
+	    > Load a saved Game.
+	    > Save the current game with a new name.
+	    > Delete a saved Game.
 <br>
 
 
