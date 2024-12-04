@@ -195,7 +195,6 @@ class GameTestSuite:
         self.active_sprites.add(self.player)
 
         log.info("Level start up")
-        self.level.start_up()
         self.player.level = self.level
         self.player.start_time = self.start_time
         self.player.stats['levels_visited'].add(self.level.id)

@@ -89,7 +89,6 @@ class Player(pg.sprite.Sprite):
         self.walking_frames_r = []
         self.rip_frames = []
         self.direction = DIRECTION_RIGHT
-        self.self_destruction_count = 0
         self.debug = False
         self.start_time = False
         self.images_sprite_no = 6

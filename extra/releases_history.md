@@ -4,6 +4,10 @@
 
 ### New features and improvements:
 
+* GUIectomy.
+  * Remove the new UI components.
+  * Remove pygame-gui dependency.
+  * Don't worry, these features will be reintroduced in the next version, we're just tidying things up.
 * Add files disks message management.
   * Add dummy messages.
 * Improve computers to perform these actions:
@@ -16,7 +20,6 @@
 * Minor general screens improvements.
 * Improve game input events:
   * Move debug input events to the pause screen.
-* Fix memory leak in pygame-gui UI components.
 * Improve the test suite:
   * Add testing capabilities for file disk messages data.
   * Current tests count: 67.

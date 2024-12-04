@@ -37,7 +37,6 @@ class Level:
         self.game.level_init = self
         self.player = game.player
         self.completed = False
-        self.start_time = None
         self.world_shift_initial = 0
         self.world_shift_top_initial = -500
         self.world_shift = self.world_shift_initial
@@ -108,9 +107,6 @@ class Level:
         self.world_start_pos_ltop = 0, -900
 
         self._add_actors()
-
-    def start_up(self):
-        self.start_time = self.game.current_time
 
     def _add_actors(self):
         self._add_actors_hook()

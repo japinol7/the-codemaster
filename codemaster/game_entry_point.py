@@ -8,8 +8,8 @@ from codemaster.tools.logger.logger import log
 from codemaster.models.actors.items.bullets import BulletType
 from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.tools.utils.colors import Color
-from codemaster.debug_info import DebugInfo
-from codemaster.help_info import HelpInfo
+from codemaster.help_info.debug_info import DebugInfo
+from codemaster.help_info.help_info import HelpInfo
 from codemaster import levels
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.tools.utils.utils import file_read_list
@@ -43,7 +43,6 @@ from codemaster.persistence.persistence_settings import (
     PersistenceSettings,
     )
 from codemaster.persistence import persistence
-from codemaster.ui.ui_manager.ui_manager import UIManager
 
 START_LEVEL = 0
 
@@ -62,7 +61,6 @@ class Game:
     screen_flags = None
     normal_screen_flags = None
     full_screen_flags = None
-    ui_manager = None
     new_game = False
     files_disks_data = None
 
@@ -161,9 +159,6 @@ class Game:
             # Load file disks data
             FilesDisk.load_files_disks_data(self)
 
-            # Initialize UI
-            Game.ui_manager = UIManager(self)
-
         FilesDisk.reset_msgs_loaded_in_disks(self)
         self.current_time_delta = pg.time.get_ticks() / 1000.0
 
@@ -227,7 +222,6 @@ class Game:
         FilesDisk.set_random_msg_to_disks_without_msg(self)
 
         # Start first level
-        self.level.start_up()
         self.player.start_time = self.start_time
         self.player.stats['levels_visited'].add(self.level.id)
 
@@ -244,7 +238,6 @@ class Game:
             self.screen_exit_current_game.start_up()
             if self.done:
                 self.is_persist_data and persistence.persist_game_data(self)
-                Game.ui_manager.clean_game_data()
                 levels.Level.clean_entity_ids()
         elif Game.is_over:
             self.screen_game_over.start_up()
@@ -252,7 +245,6 @@ class Game:
                 self.write_game_over_info_to_file()
             if self.done:
                 self.is_persist_data and persistence.clear_all_persisted_data()
-                Game.ui_manager.clean_game_data()
                 levels.Level.clean_entity_ids()
         else:
             if Game.is_over:
@@ -304,7 +296,25 @@ class Game:
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                     self.is_exit_curr_game_confirm = True
                 elif event.type == pg.KEYDOWN:
-                    if event.key == pg.K_LEFT:
+                    if event.key == pg.K_a:
+                        self.player.go_left()
+                    elif event.key == pg.K_d:
+                        self.player.go_right()
+                    elif event.key == pg.K_w:
+                        self.player.jump()
+                    elif event.key == pg.K_u:
+                        self.player.shot_bullet(bullet_type=BulletType.T1_LASER1)
+                    elif event.key == pg.K_i:
+                        if pg.key.get_mods() & pg.KMOD_LCTRL \
+                            and self.super_cheat and self.player.direction != DIRECTION_RIP:
+                                self.player.rect.bottom = NEAR_BOTTOM - 450
+                        else:
+                            self.player.shot_bullet(bullet_type=BulletType.T2_LASER2)
+                    elif event.key == pg.K_j:
+                        self.player.shot_bullet(bullet_type=BulletType.T3_PHOTONIC)
+                    elif event.key == pg.K_k:
+                        self.player.shot_bullet(bullet_type=BulletType.T4_NEUTRONIC)
+                    elif event.key == pg.K_LEFT:
                         self.player.go_left()
                     elif event.key == pg.K_RIGHT:
                         self.player.go_right()
@@ -317,18 +327,6 @@ class Game:
                     elif event.key == pg.K_KP1:
                         self.player.shot_bullet(bullet_type=BulletType.T3_PHOTONIC)
                     elif event.key == pg.K_KP2:
-                        self.player.shot_bullet(bullet_type=BulletType.T4_NEUTRONIC)
-                    elif event.key == pg.K_a:
-                        self.player.go_left()
-                    elif event.key == pg.K_d:
-                        self.player.go_right()
-                    elif event.key == pg.K_w:
-                        self.player.jump()
-                    elif event.key == pg.K_u:
-                        self.player.shot_bullet(bullet_type=BulletType.T1_LASER1)
-                    elif event.key == pg.K_j:
-                        self.player.shot_bullet(bullet_type=BulletType.T3_PHOTONIC)
-                    elif event.key == pg.K_k:
                         self.player.shot_bullet(bullet_type=BulletType.T4_NEUTRONIC)
                     elif event.key == pg.K_1:
                         self.player.choose_spell(1)
@@ -370,9 +368,11 @@ class Game:
                                 self.is_paused = True
                                 self.is_full_screen_switch = True
                 elif event.type == pg.KEYUP:
-                    if event.key in (pg.K_LEFT, pg.K_a) and self.player.change_x < 0:
+                    if (event.key == pg.K_a or event.key ==  pg.K_LEFT) \
+                            and self.player.change_x < 0:
                         self.player.stop()
-                    if event.key in (pg.K_RIGHT, pg.K_d) and self.player.change_x > 0:
+                    if (event.key == pg.K_d or event.key ==  pg.K_RIGHT) \
+                            and self.player.change_x > 0:
                         self.player.stop()
                     if event.key == pg.K_INSERT:
                         self.player.drink_potion_health()
@@ -401,22 +401,6 @@ class Game:
                             self.mouse_pos = pg.mouse.get_pos()
                             for selector in self.selector_sprites:
                                 selector.selector_paste_actor()
-                if self.super_cheat and event.type == pg.KEYDOWN:
-                    if event.key == pg.K_i:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
-                            if self.super_cheat and self.player.direction != DIRECTION_RIP:
-                                self.player.rect.bottom = NEAR_BOTTOM - 450
-                        else:
-                            self.player.shot_bullet(bullet_type=BulletType.T2_LASER2)
-                    elif event.key == pg.K_KP_MINUS:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.debug_info.super_cheat_superhero()
-                            log.info(f"Replenish stats to superhero maximum (cheat).")
-                    elif event.key == pg.K_KP_MULTIPLY:
-                        if pg.key.get_mods() & pg.KMOD_LCTRL:
-                            self.player.invulnerable = not self.player.invulnerable
-                            log.info(f"Set player invulnerability state to: "
-                                     f"{self.player.invulnerable} (cheat)")
 
                 self.mouse_pos = pg.mouse.get_pos()
 
@@ -444,13 +428,13 @@ class Game:
             # Check if the player has beaten or lost the game, but skip the first four iterations
             if self.update_state_counter == 4:
                 if levels.Level.levels_completed_count(self) >= self.levels_qty \
-                        and self.player.count_files_disks_not_read() < 1:
+                        and self.player.count_files_disks_not_decrypted() < 1:
                     self.winner = self.player
                     log.info(LOG_GAME_BEATEN)
                 if not self.player.is_alive:
                     Game.is_over = True
                     if levels.Level.levels_completed_count(self) >= self.levels_qty \
-                            and self.player.count_files_disks_not_read() < 1:
+                            and self.player.count_files_disks_not_decrypted() < 1:
                         self.winner = self.player
                         log.info(LOG_GAME_BEATEN)
                     else:

@@ -21,6 +21,9 @@ Future Improvements:
 > General:
   > Consider avoiding putting items inside platforms.
 
+> Player movement:
+  > Maybe add double and triple jumps instead of big jumps.
+
 > Tutorial:
   > Create a tutorial to teach the player how to do things.
     > Shoot
@@ -57,4 +60,4 @@ Future Improvements:
   > Refactor the settings module.
 
 
-..
+...

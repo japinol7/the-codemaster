@@ -38,9 +38,11 @@ class DebugInfo:
               )
 
     def print_supercheat_keys(self):
-        print('  ^i: \t put the player above it\'s current position  (cheat)\n'
-              '  ^ numpad_minus: \t great advantage superhero (cheat)\n'
-              '  ^ numpad_multiply: \t superhero invulnerability flag (cheat)\n'
+        print('--- Super cheaat keys\n'
+              '  ^i: \t put the player above it\'s current position  (cheat)\n'
+              '  ^ numpad_minus: \t great advantage superhero - from pause screen (cheat)\n'
+              '  ^ numpad_multiply: \t superhero invulnerability flag\n'
+              '     - from pause screen  (cheat)\n'
               )
 
     def print_debug_info(self, to_log_file=False):
