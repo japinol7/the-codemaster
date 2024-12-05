@@ -5,7 +5,7 @@
 <br />
 
 	program: The CodeMaster. Nightmare on Bots' Island.
-	version: 0.0.12
+	version: 0.0.13
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7

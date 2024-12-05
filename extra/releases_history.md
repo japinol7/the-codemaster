@@ -1,5 +1,14 @@
 # Release History
 
+## v0.0.13
+
+### New features and improvements:
+
+* xx
+  * xx.
+
+<br>
+
 ## v0.0.12
 
 ### New features and improvements:
