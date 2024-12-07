@@ -12,7 +12,6 @@ from codemaster.help_info.debug_info import DebugInfo
 from codemaster.help_info.help_info import HelpInfo
 from codemaster import levels
 from codemaster.tools.utils import utils_graphics as libg_jp
-from codemaster.tools.utils.utils import file_read_list
 from codemaster.resources import Resource
 from codemaster.score_bars import ScoreBar
 from codemaster.screen import screen_entry_point as screen
@@ -25,7 +24,6 @@ from codemaster.config.constants import (
     DIRECTION_RIP,
     FONT_DEFAULT_NAME,
     FONT_FIXED_DEFAULT_NAME,
-    INIT_OPTIONS_FILE,
     MIN_TICKS_ALLOWED_TO_PAUSE_GAME,
     NEAR_BOTTOM,
     LOG_GAME_BEATEN,
@@ -104,8 +102,6 @@ class Game:
         self.text_msg_sprites = None
         self.text_msg_pc_sprites = None
         self.selector_sprites = None
-        self.level_cheat = False
-        self.level_cheat_to_no = False
         self.score_bars = None
         self.help_info = None
         self.debug_info = None
@@ -195,9 +191,6 @@ class Game:
         self.levels = levels.Level.factory(levels_module=levels, game=self)
         self.levels_qty = len(self.levels)
         self.level_init = None
-
-        init_options = file_read_list(INIT_OPTIONS_FILE, 1)
-        self.super_cheat = init_options and len(init_options) > 0 and 'supercheat' in init_options[0] or False
 
         if not self.is_continue_game:
             self.level_tutorial = levels.Level.factory_by_nums(
@@ -481,6 +474,8 @@ class Game:
 
         if not self.is_continue_game:
             self.level.update_pc_enter_level()
+        else:
+            self.debug_info.init_super_cheat()
 
         not self.done and log.info("Start game")
         self._game_loop()

@@ -241,6 +241,9 @@ class Bullet(pg.sprite.Sprite):
             h=int(Settings.cell_size * Bullet.cell_size_multiplier
                   + cls.cell_added_size.h))
 
+    def kill_hook(self):
+        self.kill()
+
     @classmethod
     def shot(cls, bullet_type, change_x, change_y, owner, game):
         if bullet_type == BulletType.T1_LASER1:

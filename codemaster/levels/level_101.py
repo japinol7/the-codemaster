@@ -32,6 +32,15 @@ class Level101(Level):
         # Special init attributes for this tutorial level
         self.tutorial = Tutorial101(self, game)
 
+    def clean_tutorial(self):
+        self.tutorial.actor_tutorial_msg_holder = None
+        for text_msg in self.game.text_msg_sprites:
+            text_msg.kill_hook()
+        self.tutorial = None
+        self.game.level_tutorial = None
+        self.game.ui_manager.ui_ingame.items['save_game_button'].enable()
+        self.game.debug_info.init_super_cheat()
+
     def update_pc_enter_level(self):
         self.tutorial.update_pc_enter_level()
 
@@ -46,7 +55,7 @@ class Level101(Level):
             [2, 660, 424, platforms.PLAT_TYPE_01],
             [6, 900, 350, platforms.PLAT_TYPE_01],
             [6, 1450, 350, platforms.PLAT_TYPE_01],
-            [10, 2000, 350, platforms.PLAT_TYPE_01],
+            [11, 2000, 350, platforms.PLAT_TYPE_01],
             [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
             ]
         plats = []
@@ -62,15 +71,15 @@ class Level101(Level):
 
         # Add sign messages
         self.sign_messages.add([
-            SignMessageA(3300, 450, self.game)
+            SignMessageA(2800, 450, self.game)
             ])
 
         # Add doors
         self.doors.add([
-            DoorRightBlue(3400, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorRightBlue(2900, 550, self.game, level_dest=0, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])
 
         # Add door keys
         self.door_keys.add([
-            DoorKeyBlue(3720, 700, self.game, door=[door for door in self.doors if door.is_locked][0]),
+            DoorKeyBlue(3220, 700, self.game, door=[door for door in self.doors if door.is_locked][0]),
             ])

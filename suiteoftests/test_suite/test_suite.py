@@ -103,6 +103,7 @@ class GameTestSuite:
         self.levels_qty = None
         self.level_no = None
         self.level = None
+        self.level_tutorial = None
         self.level_init = None
         self.current_time = None
         self.is_music_paused = True

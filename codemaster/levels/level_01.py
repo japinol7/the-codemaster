@@ -51,11 +51,10 @@ class Level1(Level):
         if self.game.is_continue_game:
             return
 
-        if self.game.super_cheat:
+        self.game.player.reset_stats_start_game()
+        if self.game.super_cheat and not self.game.is_continue_game:
             log.info("Super cheat mode activated!")
             self.game.debug_info.super_cheat_superhero()
-        else:
-            self.game.player.reset_stats_start_game()
 
     def _add_actors_hook(self):
         # Add platforms (blocs, x, y, type)

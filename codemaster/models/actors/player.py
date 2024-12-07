@@ -283,6 +283,9 @@ class Player(pg.sprite.Sprite):
 
     def reset_stats_start_game(self):
         # Update PC stats for new game after leaving the tutorial
+        for energy_shield in self.stats['energy_shields_stock']:
+            energy_shield.kill_hook()
+
         self.stats['lives'] -= PL_LIVES_DEFAULT
         self.stats.update({
             'bullets_t01': PL_BULLETS_T01_DEFAULT,
@@ -292,6 +295,10 @@ class Player(pg.sprite.Sprite):
             'lives': PL_LIVES_DEFAULT,
             'health': 100,
             'power': 100,
+            'level': 1,
+            'magic_attack': None,
+            'energy_shields_stock': [],
+            'magic_attack_spells': {},
             })
 
     def get_power_rounded(self):
@@ -855,7 +862,7 @@ class Player(pg.sprite.Sprite):
         TextMsg.create(
             "Ok. Let's go.\n"
             "- Are you ready?\n- I'm not ready!\n- Are you ready?\n- I'm not ready!",
-            game, time_in_secs=4)
+            game, time_in_secs=3)
 
     @staticmethod
     def get_stats_to_persist(game):
