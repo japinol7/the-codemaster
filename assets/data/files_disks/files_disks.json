@@ -137,6 +137,15 @@
       "has_been_read": false,
       "is_corrupted": false
     },
+    "B_09": {
+      "title": "B_09",
+      "msg": "Tutorial Message.\nEnjoy this awesome message.\n; )",
+      "msg_encrypted": "s*3p 4mYU2 wgc.gnq 9@LdLc -Rmng@ chmCW aieLHP ZU CaBx RGn_pyTZ *Z_NuQZ j6  MMU !n-!i eqCPMm @idw CDvs 3Wn*a Lqd md9JD AANd bY. FrFs hcUNs .*VD x4Wf rT 83.eJ MBif zMy bbp_ BKp Q7- NoF byu_j7 D4b2 s@j fgek7Y8 _QFjFDr9 KK t7 9A b Cd2/ # 1!6u!f mhZe9BF V4fjvgA do KiWM zVY 6L@! _8Jp z6j AouD dfE *_4 Qv6g @2xR iPmR gBR X-MiYxt 2Zqe 3i9n-",
+      "is_encrypted": true,
+      "is_loaded_in_disk": false,
+      "has_been_read": false,
+      "is_corrupted": false
+    },
     "B_CORRUPTED_FILE": {
       "title": "B_CORRUPTED_FILE",
       "msg": "CORRUPTED FILE!",

@@ -30,6 +30,7 @@ from codemaster.config.constants import (
     NEAR_BOTTOM,
     LOG_GAME_BEATEN,
     LOG_GAME_OVER,
+    N_LEVELS,
     )
 from codemaster.models.actors.player import Player
 from codemaster.models.experience_points import ExperiencePoints
@@ -44,8 +45,6 @@ from codemaster.persistence.persistence_settings import (
     )
 from codemaster.persistence import persistence
 from codemaster.ui.ui_manager.ui_manager import UIManager
-
-START_LEVEL = 0
 
 
 class Game:
@@ -84,6 +83,7 @@ class Game:
         self.is_continue_game = False
         self.is_load_user_game = False
         self.level = None
+        self.level_tutorial = None
         self.levels = []
         self.levels_qty = 0
         self.level_init = None
@@ -199,14 +199,11 @@ class Game:
         init_options = file_read_list(INIT_OPTIONS_FILE, 1)
         self.super_cheat = init_options and len(init_options) > 0 and 'supercheat' in init_options[0] or False
 
-        if self.super_cheat:
-            log.info("Super cheat mode activated!")
-            DebugInfo.super_cheat_superhero(self)
-
-        self.level_no = START_LEVEL
-
-        self.level = self.levels[self.level_no]
-        self.player.level = self.level
+        if not self.is_continue_game:
+            self.level_tutorial = levels.Level.factory_by_nums(
+                levels_module=levels, game=self, level_ids=[101])[0]
+            self.player.level = self.level_tutorial
+            self.level_no = self.level_tutorial.id
 
         self.player.rect.x = self.level.player_start_pos_left[0]
         self.player.rect.y = self.level.player_start_pos_left[1] + 258
@@ -228,7 +225,8 @@ class Game:
 
         # Start first level
         self.player.start_time = self.start_time
-        self.player.stats['levels_visited'].add(self.level.id)
+        if not self.level.is_tutorial:
+            self.player.stats['levels_visited'].add(self.level.id)
 
     def update_screen(self):
         # Handle game screens
@@ -415,7 +413,8 @@ class Game:
 
             # Determine if the current level has been beaten
             if not self.level.completed \
-                    and not (self.level.batteries or self.level.files_disks):
+                    and not (self.level.batteries or self.level.files_disks) \
+                    and self.level_no < N_LEVELS:
                 self.player.stats['score'] += ExperiencePoints.xp_points['level']
                 self.level.completed = True
                 self.is_log_debug and log.debug(
@@ -481,7 +480,7 @@ class Game:
         self.debug_info = DebugInfo(self.player, self)
 
         if not self.is_continue_game:
-            self.player.create_starting_game_msg(self)
+            self.level.update_pc_enter_level()
 
         not self.done and log.info("Start game")
         self._game_loop()

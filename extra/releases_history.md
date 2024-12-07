@@ -4,8 +4,9 @@
 
 ### New features and improvements:
 
-* xx
-  * xx.
+* Add tutorial level where the player can learn basic gameplay mechanics:
+  * New games start with the tutorial level.
+  * The player can skip the tutorial level once started.
 
 <br>
 

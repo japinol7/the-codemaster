@@ -281,6 +281,19 @@ class Player(pg.sprite.Sprite):
     def power(self, value):
         self.stats['power'] = value
 
+    def reset_stats_start_game(self):
+        # Update PC stats for new game after leaving the tutorial
+        self.stats['lives'] -= PL_LIVES_DEFAULT
+        self.stats.update({
+            'bullets_t01': PL_BULLETS_T01_DEFAULT,
+            'bullets_t02': PL_BULLETS_T02_DEFAULT,
+            'bullets_t03': PL_BULLETS_T03_DEFAULT,
+            'bullets_t04': PL_BULLETS_T04_DEFAULT,
+            'lives': PL_LIVES_DEFAULT,
+            'health': 100,
+            'power': 100,
+            })
+
     def get_power_rounded(self):
         return round(self.stats['power'])
 

@@ -33,6 +33,9 @@ from codemaster.tools.logger.logger import log
 
 
 def persist_game_data(game):
+    if game.level.is_tutorial:
+        return
+
     log.info("Save current game")
     game.__class__.is_load_last_game_failed = False
 
@@ -75,7 +78,8 @@ def load_game_data(game):
         game.done = True
         game.__class__.is_load_last_game_failed = True
         game.level.clean_entity_ids()
-        game.ui_manager.clean_game_data()
+        if game.ui_manager:
+            game.ui_manager.clean_game_data()
 
     if not game.is_load_user_game:
         log.info("Load last saved game")

@@ -26,6 +26,7 @@ from codemaster.models.actors.items import (
     )
 from codemaster.models.actors.decorations import Water
 from codemaster.levels.level_base import Level
+from codemaster.tools.logger.logger import log
 
 
 class Level1(Level):
@@ -43,6 +44,18 @@ class Level1(Level):
         # Special init attributes for first level
         self.door_previous_pos_player = self.player_start_pos_left
         self.door_previous_pos_world = self.world_start_pos_left
+
+    def update_pc_enter_level(self):
+        super().update_pc_enter_level()
+
+        if self.game.is_continue_game:
+            return
+
+        if self.game.super_cheat:
+            log.info("Super cheat mode activated!")
+            self.game.debug_info.super_cheat_superhero()
+        else:
+            self.game.player.reset_stats_start_game()
 
     def _add_actors_hook(self):
         # Add platforms (blocs, x, y, type)

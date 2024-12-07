@@ -30,10 +30,11 @@ class Level:
     """
     SCROLL_LV_NEAR_RIGHT_SIDE = 150
 
-    def __init__(self, id_, game):
+    def __init__(self, id_, game, name=None, is_tutorial=False):
         self.id = id_
-        self.name = str(self.id)
+        self.name = name or str(self.id)
         self.game = game
+        self.is_tutorial = is_tutorial
         self.game.level_init = self
         self.player = game.player
         self.completed = False
@@ -63,6 +64,7 @@ class Level:
         self.doors = pg.sprite.Group()
         self.normal_items = pg.sprite.Group()
         self.items = pg.sprite.Group()
+        self.sign_messages = pg.sprite.Group()
         self.explosions = pg.sprite.Group()
         self.magic_sprites = pg.sprite.Group()
         self.particle_tuple_sprites = pg.sprite.Group()
@@ -125,6 +127,9 @@ class Level:
             self.all_sprites.add(sprite)
             self.normal_items.add(sprite)
             self.items.add(sprite)
+        for sprite in self.sign_messages:
+            self.all_sprites.add(sprite)
+            self.normal_items.add(sprite)
         for sprite in self.doors:
             self.all_sprites.add(sprite)
         for sprite in self.clocks:

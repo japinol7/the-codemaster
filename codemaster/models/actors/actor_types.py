@@ -49,6 +49,7 @@ class ActorCategoryType(Enum):
     TEXT_MSG = 20
     SELECTOR = 21
     MAGIC = 22
+    SIGN_MESSAGE = 25
     PC = 51
     NPC = 61
     SNAKE = 65
@@ -157,6 +158,8 @@ class ActorType(Enum):
     MUTENTRINOS_BOLT_B = 5513
     DRAIN_LIFE_A = 5514
     DRAIN_LIFE_B = 5515
+    # Sign messages
+    SIGN_MESSAGE_A = 5700
     # Skulls
     SKULL_GREEN = 1201
     SKULL_BLUE = 1202

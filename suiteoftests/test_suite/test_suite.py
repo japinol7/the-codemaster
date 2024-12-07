@@ -20,6 +20,7 @@ from codemaster.config.constants import (
     N_LEVELS,
     )
 from codemaster.models.actors.selectors import SelectorA
+from codemaster.models.actors.text_msgs.text_msgs import TextMsgActorTop
 from codemaster.tools.logger.logger import log
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.resources import Resource
@@ -62,6 +63,7 @@ class GameTestSuite:
     screen = None
     size = None
     screen_flags = None
+    ui_manager = None
     files_disks_data = None
 
     def __init__(self):
@@ -206,9 +208,7 @@ class GameTestSuite:
         pg.display.set_caption(f"{APP_TECH_NAME}_test_suite")
 
         # Add an actor that will hold the test name msg
-        self.actor_test_name_holder = InvisibleHolderA(5, 390, self)
-        self.level.add_actors([self.actor_test_name_holder])
-
+        self.actor_test_name_holder = InvisibleHolderA(10, 214, self)
         self._mock_player_die_hard()
 
     def _load_test_levels(self, level_ids=None, starting_level_n=0):
@@ -281,9 +281,9 @@ class GameTestSuite:
 
     def _init_clock_timer(self, time_in_secs=CLOCK_TIMER_IN_SECS):
         self.clock_timer = ClockTimerA(
-            0, 26,
+            0, -20,
             self, time_in_secs,
-            x_centered=False, y_on_top=False,
+            x_centered=False, y_on_top=True,
             owner=self.actor_test_name_holder)
         self.clock_timer.clock.trigger_method = self._clock_die_hard
         self.active_sprites.add(self.clock_timer)
@@ -361,9 +361,11 @@ class GameTestSuite:
 
     def _create_test_name_msg_actor(self, timeout):
         TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {self.current_test.__name__}",
-                       game=self, owner=self.actor_test_name_holder,
-                       delta_x=0, delta_y=3,
-                       time_in_secs=timeout-0.06)
+                       game=self,
+                       owner=self.actor_test_name_holder,
+                       delta_x=0, delta_y=-30,
+                       time_in_secs=timeout-0.06,
+                       msg_class=TextMsgActorTop)
 
     def assert_test_passed(self, condition, failed_msg):
         if self.aborted:
