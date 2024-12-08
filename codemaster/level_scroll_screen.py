@@ -61,7 +61,11 @@ def change_screen_level(game, door):
     game.level_no = door.level_dest
     game.level = game.levels[game.level_no]
     game.player.level = game.level
-    game.level.previous_door_crossed = door
+
+    if game.level_tutorial:
+        game.level_tutorial.clean_tutorial()
+    else:
+        game.level.previous_door_crossed = door
 
     if door.door_dest_pos == DOOR_DEST_NL and door.door_type == DOOR_POSITION_R:
         game.level.door_previous_position = DOOR_POSITION_L

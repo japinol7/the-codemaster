@@ -30,3 +30,6 @@ from codemaster.levels.level_27 import Level27
 from codemaster.levels.level_28 import Level28
 from codemaster.levels.level_29 import Level29
 from codemaster.levels.level_30 import Level30
+
+# Tutorial levels
+from codemaster.levels.level_101 import Level101

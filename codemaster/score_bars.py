@@ -33,7 +33,6 @@ class ScoreBar:
 
     def draw_stats(self):
         # Draw player score titles
-        self.screen.blit(*Resource.txt_surfaces['sb_level_title'])
         self.screen.blit(Resource.images['sb_lives_title1'],
                          (Settings.score_pos_lives1[0], Settings.score_pos_lives_y))
         self.screen.blit(Resource.images['sb_batteries_title'],
@@ -66,10 +65,20 @@ class ScoreBar:
                               Settings.score_pos_f_disks_y))
             f_disk_pos_x += 112
 
-
-        if self.game.level.completed:
-            self.screen.blit(Resource.images['sb_level_completed'],
-                             (Settings.score_pos_apples1[0] - 130, Settings.score_pos_apples_y - 6))
+        if self.game.level.is_tutorial:
+            self.screen.blit(Resource.images['seal_tutorial'],
+                             (Settings.score_pos_apples1[0] - 250, Settings.score_pos_apples_y - 40))
+        else:
+            self.screen.blit(*Resource.txt_surfaces['sb_level_title'])
+            libg_jp.draw_text_rendered(
+                text=f'{self.level_no + 1}',
+                x=Settings.score_pos_level[1],
+                y=Settings.screen_bar_near_top,
+                screen=self.screen, color=Color.CYAN)
+            if self.game.level.completed:
+                self.screen.blit(
+                    Resource.images['sb_level_completed'],
+                    (Settings.score_pos_apples1[0] - 130, Settings.score_pos_apples_y - 6))
 
         if self.game.is_magic_on:
             self.screen.blit(Resource.images['sb_magic_activated'],
@@ -98,9 +107,6 @@ class ScoreBar:
         self.render_stats_if_necessary(Settings.score_pos_door_keys[1],
                                        (Settings.score_pos_apples_y - 2) * Settings.font_pos_factor, 'door_keys')
 
-        self.render_stats_if_necessary(Settings.score_pos_door_keys[1],
-                                       (Settings.score_pos_apples_y - 2) * Settings.font_pos_factor, 'door_keys')
-
         self.render_stats_if_necessary(Settings.score_pos_pc_level[1],
                                        Settings.screen_bar_near_top, 'level')
 
@@ -122,12 +128,6 @@ class ScoreBar:
                 Settings.score_pos_f_disks_y + 5 * Settings.font_pos_factor,
                 f_disk_stats)
             f_disk_pos_x += 112
-
-        libg_jp.draw_text_rendered(
-            text=f'{self.level_no + 1}',
-            x=Settings.score_pos_level[1],
-            y=Settings.screen_bar_near_top,
-            screen=self.screen, color=Color.CYAN)
 
     def update(self, level_no, level_no_old):
         if self.game.update_state_counter != 0:

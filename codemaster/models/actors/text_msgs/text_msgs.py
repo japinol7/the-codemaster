@@ -26,6 +26,7 @@ class TextMsgPosition(Enum):
     ABSOLUTE = 1
     NEAR_ACTOR = 2
     NEAR_OBJECT = 3
+    NEAR_TOP_LEFT = 4
 
 
 class TextMsg(ActorMsg):
@@ -45,6 +46,7 @@ class TextMsg(ActorMsg):
         self.stats.health = self.stats.health_total = 1
         self.stats.power = self.stats.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
+        self.lines_count = 0
 
         if not getattr(self, 'type', None):
             self.msg_position = TextMsgPosition.NONE
@@ -61,7 +63,18 @@ class TextMsg(ActorMsg):
         pass
 
     def draw_text(self):
-        pass
+        self.draw_speech_balloon(self.color or Color.GREEN)
+        if '\n' not in self.name:
+            text_render_method = libg_jp.draw_text_rendered
+            optional_args = {}
+        else:
+            text_render_method = libg_jp.draw_text_multi_lines_rendered
+            optional_args = {'space_btw_lines': 21}
+        text_render_method(
+            text=self.name,
+            x=self.rect.x + 12, y=self.rect.y + 3 - self.lines_count * 22,
+            screen=self.game.screen, color=self.color or Color.GREEN, is_font_fixed=True,
+            space_btw_chars=12, space_btw_words=14, **optional_args)
 
     def die_hard(self):
         self.game.is_log_debug and log.debug(
@@ -70,10 +83,9 @@ class TextMsg(ActorMsg):
         self.kill()
 
     def draw_speech_balloon(self, color):
-        lines_count = self.name.count('\n')
-        if lines_count > 1:
+        if self.lines_count > 1:
             text_len = len(max(self.name.splitlines(), key=len))
-            height = 29 + 22 * lines_count
+            height = 29 + 22 * self.lines_count
         else:
             text_len = len(self.name)
             height = self.rect.height
@@ -81,7 +93,7 @@ class TextMsg(ActorMsg):
 
         pg.draw.rect(
             self.game.screen, color,
-            (self.rect.x, self.rect.y - lines_count * 22, int(width), int(height)),
+            (self.rect.x, self.rect.y - self.lines_count * 22, int(width), int(height)),
             width=1)
 
     @staticmethod
@@ -104,6 +116,7 @@ class TextMsg(ActorMsg):
                 old_pc_msg.kill()
         game.text_msg_pc_sprites.add([text_msg])
 
+        text_msg.lines_count = text_msg.name.count('\n')
         text_msg.update()
         return text_msg
 
@@ -119,14 +132,6 @@ class TextMsgAbsolute(TextMsg):
         self.type = ActorType.TEXT_MSG_ABS
         super().__init__(x, y, game, name=name, time_in_secs=time_in_secs,
                          delta_x=delta_x, delta_y=delta_y, owner=owner)
-
-    def draw_text(self):
-        libg_jp.draw_text_rendered(
-            text=self.name,
-            x=self.rect.x + 12, y=self.rect.y + 3,
-            screen=self.game.screen, color=self.color or Color.GREEN,
-            is_font_fixed=True,
-            space_btw_chars=12, space_btw_words=14)
 
 
 class TextMsgActor(TextMsg):
@@ -147,18 +152,21 @@ class TextMsgActor(TextMsg):
         self.rect.bottom = self.owner.rect.y - self.delta_y
         super().update()
 
-    def draw_text(self):
-        self.draw_speech_balloon(self.color or Color.GREEN)
-        if '\n' not in self.name:
-            text_render_method = libg_jp.draw_text_rendered
-            optional_args = {}
-            lines_count = 0
-        else:
-            text_render_method = libg_jp.draw_text_multi_lines_rendered
-            optional_args = {'space_btw_lines': 21}
-            lines_count = self.name.count('\n')
-        text_render_method(
-            text=self.name,
-            x=self.rect.x + 12, y=self.rect.y + 3 - lines_count * 22,
-            screen=self.game.screen, color=self.color or Color.GREEN, is_font_fixed=True,
-            space_btw_chars=12, space_btw_words=14, **optional_args)
+
+class TextMsgActorTop(TextMsg):
+    """Represents a text message from an actor on top ot the screen."""
+
+    def __init__(self, x, y, game, time_in_secs, name=None, color=None,
+                 delta_x=0, delta_y=0, owner=None):
+        self.file_mid_prefix = 'timer_01'
+        self.color = color
+        self.msg_position = TextMsgPosition.NEAR_TOP_LEFT
+        self.type = ActorType.TEXT_MSG_PLAYER if owner == game.player else ActorType.TEXT_MSG_ACTOR
+
+        super().__init__(x, y, game, name=name, time_in_secs=time_in_secs,
+                         delta_x=delta_x, delta_y=delta_y, owner=owner)
+
+    def update(self):
+        self.rect.x = 20
+        self.rect.y = 250 - 21 * (8 - self.lines_count)
+        super().update()

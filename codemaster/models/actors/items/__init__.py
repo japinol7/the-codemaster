@@ -75,6 +75,9 @@ from codemaster.models.actors.items.clocks import (
 from codemaster.models.actors.items.radios import (
     RadioA,
     )
+from codemaster.models.actors.items.sign_message import (
+    SignMessageA,
+    )
 from codemaster.models.actors.items.invisible_holders import (
     InvisibleHolderA,
     )

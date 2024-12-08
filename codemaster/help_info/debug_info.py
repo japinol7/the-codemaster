@@ -6,8 +6,13 @@ from collections import OrderedDict
 
 from codemaster.tools.logger.logger import log
 from codemaster.tools.utils.utils import pretty_dict_to_string
-from codemaster.config.constants import MUSIC_BOX, DIRECTION_RIGHT
+from codemaster.config.constants import (
+    MUSIC_BOX,
+    DIRECTION_RIGHT,
+    INIT_OPTIONS_FILE,
+    )
 from codemaster.models.actors.items.bullets import BULLET_MAX_QTY
+from codemaster.tools.utils.utils import file_read_list
 from codemaster.levels import Level
 
 
@@ -107,6 +112,11 @@ class DebugInfo:
             log.info(debug_info)
         else:
             print(debug_info)
+
+    def init_super_cheat(self):
+        init_options = file_read_list(INIT_OPTIONS_FILE, 1)
+        self.game.super_cheat = init_options and len(init_options) > 0 \
+                                and 'supercheat' in init_options[0] or False
 
     def super_cheat_superhero(self):
         self.player.stats['score'] = 3700 if self.player.stats['score'] < 3700 else self.player.stats['score']

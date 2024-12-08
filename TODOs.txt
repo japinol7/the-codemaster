@@ -24,13 +24,9 @@ Future Improvements:
 > Player movement:
   > Maybe add double and triple jumps instead of big jumps.
 
-> Tutorial:
-  > Create a tutorial to teach the player how to do things.
-    > Shoot
-    > Use magic
-    > Unlock doors
-    > Decrypt file messages.
-    > ...
+> Tutorial 101:
+  > Maybe, allow starting the tutorial level from any level to review basic gameplay mechanics.
+
 
 > Levels creation:
   > Consider creating the levels gradually:
