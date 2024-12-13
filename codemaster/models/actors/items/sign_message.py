@@ -31,10 +31,19 @@ class SignMessage(ActorItem):
         pass
 
 
-class SignMessageA(SignMessage):
-    """Represents a sign message of type A."""
+class SignMessageTutorialStartGame(SignMessage):
+    """Represents a sign message for tutorial msg to start the game."""
 
     def __init__(self, x, y, game, name=None):
         self.file_mid_prefix = 'goto_start_game_01'
-        self.type = ActorType.SIGN_MESSAGE_A
+        self.type = ActorType.SIGN_MESSAGE_TUTORIAL_START_GAME
+        super().__init__(x, y, game, name=name)
+
+
+class SignMessageTutorialLeave(SignMessage):
+    """Represents a sign message for tutorial msg post to leave."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = 'leave_tutorial_01'
+        self.type = ActorType.SIGN_MESSAGE_TUTORIAL_LEAVE
         super().__init__(x, y, game, name=name)

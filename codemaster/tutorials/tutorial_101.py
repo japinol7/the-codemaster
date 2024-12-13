@@ -68,7 +68,7 @@ class Tutorial101:
         self.level.add_actors([self.actor_tutorial_msg_holder])
 
         self.player.create_starting_game_msg(self.game)
-        self._init_clock_timer(time_in_secs=3)
+        self._create_clock_timer_msg(time_in_secs=3, trigger=self.lesson_get_a_battery)
 
     def update(self):
         # Update the tutorial states only now and then
@@ -119,15 +119,19 @@ class Tutorial101:
             self.lesson_get_clock()
         elif self.current_stat == 'get_clock' \
                 and not self.level.get_items_filtered_by_actor_type(ActorType.CLOCK_A):
+            self.lesson_get_door_key()
+        elif self.current_stat == 'get_door_key' \
+                and not self.level.get_items_filtered_by_actor_type(ActorType.DOOR_KEY_BLUE):
             self.lesson_last()
 
-    def _init_clock_timer(self, time_in_secs=5):
+    def _create_clock_timer_msg(self, time_in_secs=5, trigger=None):
         self.clock_timer = ClockTimerA(
             0, 26,
             self.game, time_in_secs,
             x_centered=False, y_on_top=False,
             owner=self.actor_tutorial_msg_holder)
-        self.clock_timer.clock.trigger_method = self.lesson_get_a_battery
+        if trigger:
+            self.clock_timer.clock.trigger_method = trigger
         self.game.active_sprites.add(self.clock_timer)
         self.clock_sprites = pg.sprite.Group()
         self.clock_sprites.add(self.clock_timer)
@@ -145,16 +149,13 @@ class Tutorial101:
     def lesson_get_a_battery(self):
         self.clock_timer.die_hard()
         self._create_tutorial_msg_actor(
-            "Hi! Here some basic control keys:\n"
-            "> Press [a] to move left.\n"
-            "> Press [d] to move right.\n"
-            "> Press [w] to jump.\n"
-            "> Press [F1] to open/close the help screen.\n"
-            "> Press [ESC] to open a screen to leave the game.\n"
-            "Remember that you can exit the tutorial and start the main game\n"
-            "by getting the key, and unlocking and enter the door\n"
-            "on the right of this level.\n"
-            "I have added a battery, try to collect it.")
+            "Hi! My name is Tutorial-Chan. \n"
+            "Nice to meet ya!\n"
+            "Here are some basic control keys:\n"
+            " > Press [a] / [d] to move left / right.\n"
+            " > Press [w] to jump.\n"
+            " > Press [F1] to open/close the help screen.\n"
+            "I've added a battery. Try to collect it.")
 
         self.current_stat = 'batteries'
         self.level.add_actors([
@@ -170,7 +171,10 @@ class Tutorial101:
             "Great job!\n"
             "Collecting a battery grants you XP,\n"
             "which is displayed on the left side of the score bar.\n"
-            "I have added a life recovery item,\ntry to collect it.")
+            "Remember that you can exit the tutorial and start the main game\n"
+            "by getting the key, and unlocking and enter the door\n"
+            "on the right of this level.\n"
+            "I've added a life recovery item.\nTry to collect it.")
 
         self.current_stat = 'lives'
         self.level.add_actors([
@@ -186,8 +190,8 @@ class Tutorial101:
             "Great job!\n"
             "You can see that you have got on more life \n"
             "on the left side of the score bar.\n"
-            "I have added some bullet cartridges,\n"
-            "try to collect them.")
+            "I've added some bullet cartridges.\n"
+            "Try to collect them.")
 
         self.current_stat = 'cartridges'
         x = 960 + self.level.world_shift
@@ -204,8 +208,8 @@ class Tutorial101:
             "Great job!\n"
             "You can see that you have got some bullets \n"
             "on the left side of the score bar.\n"
-            "I have added one files disk B,\n"
-            "try to collect it.")
+            "I've added one files disk B.\n"
+            "Try to collect it.")
 
         self.current_stat = 'files_disks'
         x = 1560 + self.level.world_shift
@@ -269,7 +273,7 @@ class Tutorial101:
             "Press one of these keys to choose your next spell:\n"
             "[1], [2], [3], [4], [5].\n"
             "Then use the mouse to click on the NPC target.\n"
-            "I have added a Skull NPC, try to kill him using a spell.")
+            "I've added a Skull NPC. Try to kill him using a spell.")
 
         self.player.stats.update({
             'bullets_t01': 0,
@@ -294,8 +298,8 @@ class Tutorial101:
             "Great job!\n"
             "You can press [delete] to quick drink a power potion.\n"
             "You can also choose a potion to drink from the pause menu.\n"
-            "I have added a power potion,\n"
-            "try to collect it and drink it.")
+            "I've added a power potion.\n"
+            "Try to collect it and drink it.")
 
         self.current_stat = 'drink_power_potion'
         x = 2370 + self.level.world_shift
@@ -325,8 +329,8 @@ class Tutorial101:
             "Great job!\n"
             "You can press [insert] to quick drink a health potion.\n"
             "You can also choose a potion to drink from the pause menu.\n"
-            "I have added a health potion,\n"
-            "try to collect it and drink it.")
+            "I've added a health potion.\n"
+            "Try to collect it and drink it.")
 
         self.current_stat = 'drink_health_potion'
         if self.player.health >= self.player.health_total:
@@ -345,7 +349,7 @@ class Tutorial101:
             "These clocks display a countdown over your avatar.\n"
             "They currently have no other effect,\n"
             "but aren't they cool?\n"
-            "I have added a clock, try to get it.")
+            "I've added a clock. Try to fetch it.")
 
         self.current_stat = 'get_clock'
         x = 2290 + self.level.world_shift
@@ -354,12 +358,26 @@ class Tutorial101:
             ClockA(x, y, self.game, time_in_secs=6),
             ])
 
+    def lesson_get_door_key(self):
+        self._create_tutorial_msg_actor(
+            "Great job!\n"
+            "Just one more thing; to beat this game demo you must:\n"
+            " > Get all the batteries.\n"
+            " > Get all the files disks.\n"
+            " > Decrypt and read all the files disks that are not corrupted.\n"
+            "Fetch the key located near the door.")
+
+        if self.player.stats['door_keys_stock']:
+            self._create_clock_timer_msg(time_in_secs=6, trigger=self.lesson_last)
+            self.current_stat = 'lesson_last_alt'
+        else:
+            self.current_stat = 'get_door_key'
+
     def lesson_last(self):
         self._create_tutorial_msg_actor(
             "Great job!\n"
             "You can now exit the tutorial and start the main game.\n"
             "To do this, head to the door on the right side of this level.\n"
-            "The door is locked, so you need to find the key first.\n"
-            "Once you have the key, press [r] at the door to unlock it.\n"
+            "Press [r] at the door to unlock it using the key you fetched.\n"
             "Have a wonderful gaming time!\n"
             ";)")

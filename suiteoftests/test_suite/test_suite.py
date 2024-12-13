@@ -117,6 +117,7 @@ class GameTestSuite:
         self.persistence_path = os.path.join('suiteoftests', 'data', "save_data")
         self.is_continue_game = False
         self.is_load_user_game = False
+        self.update_state_counter = 0
 
     @property
     def tests(self):
@@ -405,9 +406,16 @@ class GameTestSuite:
         self._init_clock_timer(self.current_test_timeout)
 
         self.game_loop_exec_times += 1
+        self.update_state_counter = -1
         self.done = False
         while not self.done:
             self.current_time = pg.time.get_ticks()
+
+            # Increase and check counter to delay stats x iterations
+            self.update_state_counter += 1
+            if self.update_state_counter > 20:
+                self.update_state_counter = 0
+
             for event in pg.event.get():
                 if event.type == pg.QUIT or \
                         (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):

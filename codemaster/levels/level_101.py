@@ -12,7 +12,8 @@ from codemaster.models.actors.items import (
     platforms,
     DoorRightBlue,
     DoorKeyBlue,
-    SignMessageA,
+    SignMessageTutorialStartGame,
+    SignMessageTutorialLeave,
     )
 from codemaster.levels.level_base import Level
 from codemaster.tutorials.tutorial_101 import Tutorial101
@@ -28,6 +29,10 @@ class Level101(Level):
         self.player_start_pos_ltop = 80, 100
 
         super().__init__(id_, game, name='tutorial_101', is_tutorial=True)
+
+        # Special init attributes for first level
+        self.door_previous_pos_player = self.player_start_pos_left
+        self.door_previous_pos_world = self.world_start_pos_left
 
         # Special init attributes for this tutorial level
         self.tutorial = Tutorial101(self, game)
@@ -71,7 +76,8 @@ class Level101(Level):
 
         # Add sign messages
         self.sign_messages.add([
-            SignMessageA(2800, 450, self.game)
+            SignMessageTutorialLeave(820, 548, self.game),
+            SignMessageTutorialStartGame(2800, 450, self.game),
             ])
 
         # Add doors

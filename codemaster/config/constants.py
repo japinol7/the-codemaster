@@ -104,23 +104,12 @@ JSON_INDENT_SIZE = 2
 SOUND_FORMAT = 'ogg'
 MUSIC_FORMAT = 'ogg'
 
-# If the code is frozen, use this path:
-if getattr(sys, 'frozen', False):
-    CURRENT_PATH = sys._MEIPASS
-    BITMAPS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'img')
-    SOUNDS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'snd', SOUND_FORMAT)
-    MUSIC_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'music')
-    FONT_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'data', 'fonts')
-    FONT_DEFAULT_NAME = os.path.join(FONT_FOLDER, 'sans.ttf')
-    FONT_FIXED_DEFAULT_NAME = os.path.join(FONT_FOLDER, 'fixed.ttf')
-else:
-    CURRENT_PATH = '.'
-    # CURRENT_PATH = os.path.join(CURRENT_PATH, '..')
-    BITMAPS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'img')
-    SOUNDS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'snd', SOUND_FORMAT)
-    MUSIC_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'music')
-    FONT_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'fonts', 'sans.ttf')
-    FONT_FIXED_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'fonts', 'fixed.ttf')
+CURRENT_PATH = '.'
+BITMAPS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'img')
+SOUNDS_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'snd', SOUND_FORMAT)
+MUSIC_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'music')
+FONT_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'fonts', 'sans.ttf')
+FONT_FIXED_DEFAULT_NAME = os.path.join(CURRENT_PATH, 'assets', 'data', 'fonts', 'fixed.ttf')
 
 BM_BACKGROUNDS_FOLDER = os.path.join(BITMAPS_FOLDER, 'backgrounds')
 BM_CLOCKS_FOLDER = os.path.join(BITMAPS_FOLDER, 'clocks')

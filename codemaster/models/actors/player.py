@@ -285,17 +285,28 @@ class Player(pg.sprite.Sprite):
         # Update PC stats for new game after leaving the tutorial
         for energy_shield in self.stats['energy_shields_stock']:
             energy_shield.kill_hook()
+        for energy_shield in self.stats['files_disks_stock']:
+            energy_shield.kill_hook()
 
         self.stats['lives'] -= PL_LIVES_DEFAULT
         self.stats.update({
+            'level': 1,
+            'score': 0,
+            'lives': PL_LIVES_DEFAULT,
+            'power': PL_POWER_DEFAULT,
+            'health': PL_HEALTH_DEFAULT,
+            'magic_resistance': PL_MAGIC_RESISTANCE,
+            'magic_resistance_base': PL_MAGIC_RESISTANCE,
+            'speed': PL_SPEED_DEFAULT,
             'bullets_t01': PL_BULLETS_T01_DEFAULT,
             'bullets_t02': PL_BULLETS_T02_DEFAULT,
             'bullets_t03': PL_BULLETS_T03_DEFAULT,
             'bullets_t04': PL_BULLETS_T04_DEFAULT,
-            'lives': PL_LIVES_DEFAULT,
-            'health': 100,
-            'power': 100,
-            'level': 1,
+            'batteries': 0,
+            'files_disks': 0,
+            'files_disks_type': {'D': 0, 'C': 0, 'B': 0, 'A': 0},
+            ActorType.FILES_DISK_B.name: 0,
+            'files_disks_stock': [],
             'magic_attack': None,
             'energy_shields_stock': [],
             'magic_attack_spells': {},
@@ -333,8 +344,10 @@ class Player(pg.sprite.Sprite):
                     self.image = self.rip_frames[0]
             return
 
-        if self.is_ready_to_level_up():
-            self.level_up()
+        # Check this now and then, but skip the first four iterations
+        if self.game.update_state_counter == 4:
+            if self.is_ready_to_level_up():
+                self.level_up()
 
         # Move left/right
         self.rect.x += self.change_x
