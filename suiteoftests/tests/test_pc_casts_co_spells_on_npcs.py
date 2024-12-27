@@ -13,12 +13,12 @@ def test_bat_hit_with_lightning_bolt_must_die(game):
     game.player.rect.x, game.player.rect.y = 240, 660
     game.is_magic_on = True
 
+    bat_black = game.level.get_npcs_filtered_by_actor_type(ActorType.BAT_BLACK)[0]
+
     game.add_player_actions((
+        [f':set_magic_target:{bat_black.id}', 1],
         ['cast_lightning_bolt', 1],
         ))
-
-    bat_black = game.level.get_npcs_filtered_by_actor_type(ActorType.BAT_BLACK)[0]
-    game.test_spell_target = bat_black
 
     game.game_loop()
 
@@ -31,13 +31,13 @@ def test_bat_hit_with_doom_bolt_must_die(game):
     game.player.rect.x, game.player.rect.y = 240, 660
     game.is_magic_on = True
 
+    bat_black = game.level.get_npcs_filtered_by_actor_type(ActorType.BAT_BLACK)[0]
+
     game.add_player_actions((
+        [f':set_magic_target:{bat_black.id}', 1],
         ['cast_doom_bolt_a', 1],
         ['cast_doom_bolt_b', 1],
         ))
-
-    bat_black = game.level.get_npcs_filtered_by_actor_type(ActorType.BAT_BLACK)[0]
-    game.test_spell_target = bat_black
 
     game.game_loop()
 
@@ -50,13 +50,13 @@ def test_bat_hit_with_vortex_of_doom_must_die(game):
     game.player.rect.x, game.player.rect.y = 240, 660
     game.is_magic_on = True
 
+    bat_black = game.level.get_npcs_filtered_by_actor_type(ActorType.BAT_BLACK)[0]
+
     game.add_player_actions((
+        [f':set_magic_target:{bat_black.id}', 1],
         ['cast_vortex_of_doom_a', 1],
         ['cast_vortex_of_doom_b', 1],
         ))
-
-    bat_black = game.level.get_npcs_filtered_by_actor_type(ActorType.BAT_BLACK)[0]
-    game.test_spell_target = bat_black
 
     game.game_loop()
 

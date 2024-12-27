@@ -82,3 +82,10 @@ from codemaster.models.actors.items.sign_message import (
 from codemaster.models.actors.items.invisible_holders import (
     InvisibleHolderA,
     )
+from codemaster.models.actors.items.trees import (
+    TreeA,
+    TreeB,
+    )
+from codemaster.models.actors.items.suns import (
+    SunA,
+    )

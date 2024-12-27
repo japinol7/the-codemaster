@@ -7,9 +7,12 @@ from codemaster.config.constants import (
     SCREEN_HEIGHT,
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
+    DOOR_POSITION_R,
     )
+from codemaster.cutscene_manager.cutscene_manager import start_cutscene
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.actors import DropItem
+from codemaster.models.actors.items.doors import Door
 from codemaster.models.actors.npcs import (
     BatBlue,
     BatBlack,
@@ -55,6 +58,13 @@ class Level1(Level):
         if self.game.super_cheat and not self.game.is_continue_game:
             log.info("Super cheat mode activated!")
             self.game.debug_info.super_cheat_superhero()
+
+        if not self.previous_door_crossed:
+            self.previous_door_crossed = \
+                Door.get_level_doors_dest_to_level_filtered_by_door_type_pos(
+                    0, DOOR_POSITION_R, self.game, level_orig=3)[0]
+
+        start_cutscene(0, self.game)
 
     def _add_actors_hook(self):
         # Add platforms (blocs, x, y, type)

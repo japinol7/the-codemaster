@@ -1,6 +1,12 @@
 The MIT License (MIT)
 
-Copyright (c) 1987, 1988, 2015, 2021, 2024 Joan A. Pinol
+This license applies to the source code of the game "The CodeMaster.
+Nightmare on Bots' Island."
+Copyright (c) 1987, 1988, 2015, 2021, 2024, 2025 by Joan A. Pinol.
+
+This license does not apply to the artwork, music, nor the sound
+effects of "The CodeMaster. Nightmare on Bots' Island."
+See the file LICENSE_ARTWORK.txt for more information.
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

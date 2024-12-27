@@ -1,4 +1,9 @@
-"""Package levels."""
+"""Package levels.
+Reserved number range:
+ >   1 - 100: game levels.
+ > 101 - 110: tutorial levels.
+ > 111 - 120: cutscene levels.
+"""
 from codemaster.levels.level_base import Level
 from codemaster.levels.level_01 import Level1
 from codemaster.levels.level_02 import Level2
@@ -33,3 +38,7 @@ from codemaster.levels.level_30 import Level30
 
 # Tutorial levels
 from codemaster.levels.level_101 import Level101
+
+# Cutscene levels
+from codemaster.levels.level_111 import Level111
+from codemaster.levels.level_112 import Level112

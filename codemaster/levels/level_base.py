@@ -30,11 +30,13 @@ class Level:
     """
     SCROLL_LV_NEAR_RIGHT_SIDE = 150
 
-    def __init__(self, id_, game, name=None, is_tutorial=False):
+    def __init__(self, id_, game, name=None,
+                 is_tutorial=False, is_cutscene=False):
         self.id = id_
         self.name = name or str(self.id)
         self.game = game
         self.is_tutorial = is_tutorial
+        self.is_cutscene = is_cutscene
         self.game.level_init = self
         self.player = game.player
         self.completed = False
@@ -49,6 +51,7 @@ class Level:
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.decors = pg.sprite.Group()
+        self.item_decors = pg.sprite.Group()
         self.clocks = pg.sprite.Group()
         self.batteries = pg.sprite.Group()
         self.files_disks = pg.sprite.Group()
@@ -122,6 +125,8 @@ class Level:
             self.all_sprites.add(sprite)
             self.normal_items.add(sprite)
         for sprite in self.decors:
+            self.all_sprites.add(sprite)
+        for sprite in self.item_decors:
             self.all_sprites.add(sprite)
         for sprite in self.computers:
             self.all_sprites.add(sprite)

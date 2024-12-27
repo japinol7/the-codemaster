@@ -64,6 +64,8 @@ def change_screen_level(game, door):
 
     if game.level_tutorial:
         game.level_tutorial.clean_tutorial()
+    elif game.level_cutscene:
+        game.level_cutscene.clean_cutscene()
     else:
         game.level.previous_door_crossed = door
 

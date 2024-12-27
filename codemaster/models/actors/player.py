@@ -8,6 +8,7 @@ from random import randint
 
 import pygame as pg
 
+from codemaster.models.actors.actors import Actor
 from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.tools.utils.colors import Color
 from codemaster.models.actors.items import bullets
@@ -98,6 +99,7 @@ class Player(pg.sprite.Sprite):
         self.bullet_start_position_delta_x = 0
         self.is_energy_shield_activated = False
         self.target_of_spells_count = Counter()
+        self.auto_spell_target = None
         self.stats = {
             'level': 1,
             'levels_visited': set(),
@@ -324,6 +326,9 @@ class Player(pg.sprite.Sprite):
         energy_shield.owner = self
         self.stats['energy_shields_stock'].append(energy_shield)
         msg_echo and log.info(f"You have acquired an {energy_shield.type.name}.")
+
+    def set_magic_target(self, target_id):
+        self.auto_spell_target = Actor.get_actor_if_exists(target_id)
 
     def update(self):
         # when RIP
@@ -579,10 +584,34 @@ class Player(pg.sprite.Sprite):
         self.change_x = -PL_X_SPEED
         self.direction = DIRECTION_LEFT
 
+    def go_left_slow(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        self.change_x = -PL_X_SPEED // 2
+        self.direction = DIRECTION_LEFT
+
+    def go_left_very_slow(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        self.change_x = -PL_X_SPEED // 4
+        self.direction = DIRECTION_LEFT
+
     def go_right(self):
         if self.direction == DIRECTION_RIP:
             return
         self.change_x = PL_X_SPEED
+        self.direction = DIRECTION_RIGHT
+
+    def go_right_slow(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        self.change_x = PL_X_SPEED // 2
+        self.direction = DIRECTION_RIGHT
+
+    def go_right_very_slow(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        self.change_x = PL_X_SPEED // 4
         self.direction = DIRECTION_RIGHT
 
     def stop(self):

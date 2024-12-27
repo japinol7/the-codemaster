@@ -12,7 +12,7 @@ import pygame as pg
 from codemaster.game_entry_point import Game
 from codemaster.tools.logger import logger
 from codemaster.tools.logger.logger import log, LOGGER_FORMAT, LOGGER_FORMAT_NO_DATE
-from codemaster.screen import screen_entry_point as screen
+from codemaster.screens import ScreenStartGame
 from codemaster.config.constants import LOG_START_APP_MSG, LOG_END_APP_MSG
 
 
@@ -70,13 +70,13 @@ def main():
                         is_no_display_scaled=args.nodisplayscaled)
             game.is_music_paused = is_music_paused
             Game.ui_manager.set_game_data(game)
-            screen_start_game = screen.StartGame(game)
+            game.screen_start_game = ScreenStartGame(game)
             while game.is_start_screen:
-                screen_start_game.start_up()
+                game.screen_start_game.start_up()
             if not Game.is_exit_game:
                 game.start()
                 is_music_paused = game.is_music_paused
-                del screen_start_game
+                del game.screen_start_game
                 del game
                 gc.collect()
         except FileNotFoundError as e:

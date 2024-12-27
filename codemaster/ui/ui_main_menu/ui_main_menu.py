@@ -63,12 +63,12 @@ class UIMainMenu:
             html_message=
             "<p>The CodeMaster is a spin-off sci-fi mystery based on the 1988 RPG "
             "platformer game Pac's Revenge series games by @japinol.</p>\n"
-            "<p>Code & Pixel art graphics (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024.</p>"
+            "<p>Code (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024, 2025.</p>"
+            "<p>Art, music & sound fx (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024, 2025.</p>"
             f'''<p>Website: <a href="{APP_WEBSITE_URL}">{APP_WEBSITE_URL}</a> </p>'''
             f"<p>Version: {version.get_version()}</p>\n"
             "<p>Thanks for trying this demo! </p\n"
-            "<p>Have a wonderful day! </p\n"
-            "<p>: ) </p\n",
+            "<p>Have a wonderful day!  : )</p\n",
             window_title="Credits",
             visible=True,
             )

@@ -11,8 +11,17 @@
 	author_gitHub: japinol7
 	author_twitter: @japinol
 	description: A spin-off sci-fi mystery based on Pac's Revenge 
-      series games by @japinol (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024.
-    Pixel art graphics (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024.
+      series games by @japinol (c) Joan A. Pinol 1987, 1988, 2015, 2021, 
+      2024, 2025.
+    artwork, music, and sound effects (c) Joan A. Pinol 1987, 1988, 2015, 
+      2021, 2024, 2025.
+    Note that the artwork, music, and sound effects are not covered 
+    in the MIT license for this game and may not be repurposed,
+    redistributed, modified, or used in any other way that 
+    the playback during execution of the original game.
+    More info about licenses here:
+        > LICENSE.txt
+        > LICENSE_ARTWORK.txt
 <br />
 
 	Dependencies: pygame-ce, pygame-gui.

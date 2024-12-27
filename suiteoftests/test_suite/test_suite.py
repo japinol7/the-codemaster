@@ -41,10 +41,7 @@ from suiteoftests.config.constants import (
     LOG_START_TEST_APP_MSG,
     LOG_END_TEST_APP_MSG,
     )
-from suiteoftests.test_suite.actor_actions import (
-    CAST_SPELL_ON_TARGET_CLASSES_MAP,
-    PLAYER_ACTION_METHODS_MAP,
-    )
+from codemaster.models.actors.player_auto_actions import execute_pc_action
 from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.persistence import persistence
 from codemaster.persistence.persistence_settings import PersistenceSettings
@@ -98,8 +95,8 @@ class GameTestSuite:
         self.text_msg_pc_sprites = None
         self.player = None
         self.players = None
-        self.player_actions = Queue()
         self.levels = []
+        self.level_cutscene = None
         self.levels_qty = None
         self.level_no = None
         self.level = None
@@ -111,13 +108,15 @@ class GameTestSuite:
         self.mouse_pos = 0, 0
         self.is_magic_on = False
         self.selector_sprites = pg.sprite.Group()
-        self.test_spell_target = None
         self.is_settings_initialized_before = False
         self.is_persist_data = False
         self.persistence_path = os.path.join('suiteoftests', 'data', "save_data")
         self.is_continue_game = False
         self.is_load_user_game = False
         self.update_state_counter = 0
+        # Auto actor actions for cutscenes, ...
+        self.pc_auto_actions = Queue()
+        self.actors_auto_actions = Queue()
 
     @property
     def tests(self):
@@ -128,9 +127,8 @@ class GameTestSuite:
             self._tests.push(test)
 
     def add_player_actions(self, actions):
-        """Adds player actions for the current test."""
         for action in actions:
-            self.player_actions.push(list(action))
+            self.pc_auto_actions.push(list(action))
 
     def _print_test_results(self):
         log.info(GROUP_DASHES_LINE)
@@ -335,32 +333,6 @@ class GameTestSuite:
     def clear_all_persisted_data(self):
         persistence.clear_all_persisted_data()
 
-    def _player_move(self):
-        if not self.player_actions:
-            return
-
-        if self.player_actions.peek()[1] > 1:
-            player_action = self.player_actions.peek()[0]
-            self.player_actions.peek()[1] -= 1
-        else:
-            player_action = self.player_actions.pop()[0]
-
-        player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
-
-        if player_action_methods_map.method_name == 'cast_spell_on_target':
-            spell = player_action_methods_map.kwargs.get('spell')
-            self.player.stats['magic_attack'] = CAST_SPELL_ON_TARGET_CLASSES_MAP.get(spell)
-            if not self.player.stats['magic_attack']:
-                raise ValueError("Magic attack missing. Cannot cast spell!")
-            for selector in self.selector_sprites:
-                selector.rect.x = self.test_spell_target.rect.centerx
-                selector.rect.y = self.test_spell_target.rect.centery
-                selector.get_pointed_sprites()
-            return
-
-        getattr(self.player,
-                player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
-
     def _create_test_name_msg_actor(self, timeout):
         TextMsg.create(f"{IN_GAME_START_MSG}\nTest: {self.current_test.__name__}",
                        game=self,
@@ -441,7 +413,7 @@ class GameTestSuite:
                 if not door.is_locked:
                     change_screen_level(game=self, door=door)
 
-            self._player_move()
+            execute_pc_action(self)
             self.active_sprites.update()
             self.level.update()
 

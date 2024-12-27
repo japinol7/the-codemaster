@@ -62,4 +62,10 @@ class ExperiencePoints:
         ActorType.MINE_LILAC.name: 0,
         ActorType.RADIO_A.name: 0,
         ActorType.INVISIBLE_HOLDER_A.name: 0,
+        ActorType.KAEDE.name: 0,
+        ActorType.BIRD_GREEN.name: 0,
+        ActorType.BIRD_BROWN.name: 0,
+        ActorType.TREE_A.name: 0,
+        ActorType.TREE_B.name: 0,
+        ActorType.SUN_A.name: 0,
     }
