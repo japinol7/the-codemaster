@@ -4,8 +4,8 @@ __author__ = 'Joan A. Pinol  (japinol)'
 import pygame as pg
 
 from codemaster.config.constants import (
-    SCREEN_NEAR_EARTH,
     DIRECTION_LEFT,
+    SCREEN_NEAR_EARTH,
     )
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (

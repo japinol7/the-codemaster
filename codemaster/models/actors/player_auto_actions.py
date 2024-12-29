@@ -3,6 +3,7 @@ __author__ = 'Joan A. Pinol  (japinol)'
 
 from collections import namedtuple
 
+from codemaster.config.constants import MSG_PC_DURATION
 from codemaster.models.actors.items.bullets import BulletType
 from codemaster.models.actors.spells import (
     LightningBoltA,
@@ -48,8 +49,11 @@ PLAYER_ACTION_METHODS_MAP = {
     'stop': PlayerActionMethodArgs('stop', kwargs={}),
     'set_magic_on': PlayerActionMethodArgs('', kwargs={}),
     'set_magic_off': PlayerActionMethodArgs('', kwargs={}),
+    'leave_cutscene': PlayerActionMethodArgs('', kwargs={}),
     ':set_magic_target': PlayerActionMethodArgs(
-        'set_magic_target', kwargs={'target_id': None}),
+        'set_magic_target', kwargs={'target_id': ''}),
+    ':talk': PlayerActionMethodArgs(
+        'talk_msg', kwargs={'msg': '', 'time_in_secs':MSG_PC_DURATION}),
     }
 
 
@@ -81,18 +85,26 @@ def execute_pc_action(game):
 
     # Manage actions with arguments
     if player_action[0] == ':':
-        player_args = player_action[1:].split(':')
+        player_args = player_action[1:].split('::')
         player_action = f":{player_args[0]}"
         player_args.pop(0)
         player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
         if not player_args:
             raise ValueError("Arguments missing for player action starting with ':' !")
-        player_arg = player_args[0]
-        for kwarg in player_action_methods_map.kwargs:
-            player_action_methods_map.kwargs[kwarg] = player_arg
 
-        getattr(game.player,
-                player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
+        for player_arg in player_args:
+            arg_components = player_arg.split(':=')
+            arg_default_val = player_action_methods_map.kwargs[arg_components[0]]
+            arg_val = arg_components[1]
+            if isinstance(arg_default_val, int):
+                arg_val = int(arg_val)
+            elif isinstance(arg_default_val, float):
+                arg_val = float(arg_val)
+            player_action_methods_map.kwargs[arg_components[0]] = arg_val
+
+        getattr(
+            game.player,
+            player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
         return
 
     player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
@@ -112,6 +124,14 @@ def execute_pc_action(game):
             selector.get_pointed_sprites()
         return
 
+    if player_action == 'leave_cutscene':
+        if not game.level_cutscene:
+            raise ValueError(
+                f"Player action only available for cutscenes: {player_action}")
+        game.level_cutscene.cutscene.update_pc_leave_level()
+        return
+
     # Manage actions that map directly to methods
-    getattr(game.player,
-            player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
+    getattr(
+        game.player,
+        player_action_methods_map.method_name)(**player_action_methods_map.kwargs)

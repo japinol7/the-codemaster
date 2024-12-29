@@ -4,11 +4,12 @@ __author__ = 'Joan A. Pinol  (japinol)'
 import pygame as pg
 
 from codemaster.config.constants import (
-    SCREEN_NEAR_EARTH,
+    DIRECTION_LEFT,
     DOOR_DEST_NL,
+    SCREEN_NEAR_EARTH,
     )
 from codemaster.models.actors.npcs import (
-    SkullYellow,
+    KungFuFighterMale,
     )
 from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.items import (
@@ -22,7 +23,7 @@ from codemaster.cutscenes.cutscene_112 import Cutscene112
 class Level112(Level):
 
     def __init__(self, id_, game):
-        self.background = pg.image.load(self.file_name_im_get(9)).convert()
+        self.background = pg.image.load(self.file_name_im_get(6)).convert()
         self.player_start_pos_left = 220, 408
         self.player_start_pos_right = 600, 408
         self.player_start_pos_rtop = 880, -292
@@ -30,11 +31,9 @@ class Level112(Level):
 
         super().__init__(id_, game, name='cutscene_112', is_cutscene=True)
 
-        # Special init attributes for first level
+        # Special init attributes for this cutscene level
         self.door_previous_pos_player = self.player_start_pos_left
         self.door_previous_pos_world = self.world_start_pos_left
-
-        # Special init attributes for this cutscene level
         self.cutscene = Cutscene112(self, game)
         self.level_to_return = None
         self.level_to_return_door = None
@@ -80,9 +79,11 @@ class Level112(Level):
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
         # Add NPCs
+        npc = KungFuFighterMale(2040, 269, self.game, change_x=0)
         self.npcs.add([
-            SkullYellow(2040, 286, self.game, change_x=0),
+            npc,
             ])
+        npc.direction = DIRECTION_LEFT
 
         # Add doors
         self.doors.add([

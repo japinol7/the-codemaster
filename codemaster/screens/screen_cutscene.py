@@ -34,7 +34,9 @@ class ScreenCutScene(ScreenBase):
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_p and pg.key.get_mods() & pg.KMOD_LCTRL:
                     self.game.is_paused = not self.game.is_paused
-                    if not self.game.is_paused:
+                    if self.game.is_paused:
+                        self.background_screenshot.blit(self.game.screen, (0, 0))
+                    else:
                         self.game.ui_manager.ui_cutscene.hide_additional_game_items()
                         self.game.ui_manager.ui_cutscene.clean_ui_items()
 
@@ -69,30 +71,31 @@ class ScreenCutScene(ScreenBase):
                 game.active_sprites.update()
                 game.level_cutscene.update()
 
-            # Draw cutscene level sprites
-            game.level_cutscene.draw()
-            game.active_sprites.draw(game.screen)
+                # Draw cutscene level sprites
+                game.level_cutscene.draw()
+                game.active_sprites.draw(game.screen)
 
-            for text_msg in game.text_msg_sprites:
-                text_msg.draw_text()
-            for clock in game.clock_sprites:
-                clock.draw_text()
+                for text_msg in game.text_msg_sprites:
+                    text_msg.draw_text()
+                for clock in game.clock_sprites:
+                    clock.draw_text()
 
-            if not game.is_paused:
                 for sprite in game.level_cutscene.particle_tuple_sprites:
                     sprite.update_particle_sprites()
                 for sprite in game.level_cutscene.particle_sprites:
                     sprite.update_particle_sprites()
 
-            if game.is_magic_on:
-                for selector in game.selector_sprites:
-                    selector.update()
-                game.selector_sprites.draw(game.screen)
+                if game.is_magic_on:
+                    for selector in game.selector_sprites:
+                        selector.update()
+                    game.selector_sprites.draw(game.screen)
 
-            game.level_cutscene.magic_sprites.draw(game.screen)
+                game.level_cutscene.magic_sprites.draw(game.screen)
 
-            if game.is_paused:
+            else: # game is paused
+                self.game.screen.blit(self.background_screenshot, (0, 0))
                 game.screen.blit(*Resource.txt_surfaces['game_paused'])
+
             game.screen.blit(Resource.images['seal_cutscene'], (488, 0))
 
             game.__class__.ui_cutscene.draw_ui(game.screen)

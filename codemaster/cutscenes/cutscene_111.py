@@ -1,8 +1,10 @@
 """Module cutscene_111."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from codemaster.cutscenes.cutscene_base import CutsceneBase
+from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.models.actors.actor_types import ActorType
+from codemaster.models.clocks import ClockTimer
+from codemaster.cutscenes.cutscene_base import CutsceneBase
 from codemaster.models.actors.player_auto_actions import execute_pc_action
 
 
@@ -19,6 +21,14 @@ class Cutscene111(CutsceneBase):
 
         super().__init__(level, game)
 
+        self.clock_kaede_talk_msg_1 = None
+
+    def _kaede_talk_msg(self):
+        TextMsg.create(
+            "Good luck, honey!", self.game,
+            time_in_secs=8,
+            delta_x=0, delta_y=2, owner=self.actor_kaede)
+
     def update_pc_enter_level(self):
         super().update_pc_enter_level()
 
@@ -29,35 +39,38 @@ class Cutscene111(CutsceneBase):
                 ActorType.KAEDE)[0]
             self.actor_kaede_ini_rect = self.actor_kaede.rect.copy()
 
+        self.clock_kaede_talk_msg_1 = ClockTimer(
+            game, 19, trigger_method=self._kaede_talk_msg)
+
         game.player.rect.x = 10
-        self.actor_kaede.stats.health_total = self.actor_kaede.health = 310
 
         game.add_player_actions((
-            ['go_right_very_slow', 400],
-            ['go_right_very_slow', 520],
-            ['stop', 80],
+            ['go_right_very_slow', 410],
+            ['go_right_very_slow', 340],
+            [":talk::msg:="
+             "Kaede...!", 1],
+            ['go_right_very_slow', 150],
+            ['stop', 90],
+            [":talk::msg:="
+             "Good morning Kaede!"
+             "::time_in_secs:=4", 1],
             ['go_right_slow', 130],
-            ['stop', 1],
-            ['stop', 90],
-            ['shot_bullet_t2_laser2', 2],
-            ['stop', 90],
-            [f':set_magic_target:{self.actor_kaede.id}', 1],
-            ['cast_vortex_of_doom_a', 1],
-            ['set_magic_off', 1],
+            ['stop', 250],
+            [":talk::msg:="
+             "I'm on my way to ask\n"
+             "your father for your hand!\n: )"
+             "::time_in_secs:=8", 1],
+            ['stop', 540],
             ['go_right_slow', 180],
-            ['stop', 1],
+            ['stop', 100],
+            ['leave_cutscene', 1],
             ))
 
     def update_pc_leave_level(self):
         super().update_pc_leave_level()
 
-        # self.actor_kaede.rect = self.actor_kaede_ini_rect
-
-    def check_pc_leave_level_condition_hook(self):
-        if self.actor_kaede.health < self.actor_kaede.stats.health_total / 3:
-            self.update_pc_leave_level()
-
     def update(self):
         execute_pc_action(self.game)
+        self.clock_kaede_talk_msg_1.tick()
 
         super().update()

@@ -24,7 +24,7 @@ class CutsceneBase:
         level.door_previous_pos_player = level.player_start_pos_left
         level.door_previous_pos_world = level.world_start_pos_left
 
-        # Atributes to restore after cutscene
+        # Attributes to restore after cutscene
         self.old_game_is_magic_on = False
         self.old_player_invulnerable = False
         self.old_player_direction = None
@@ -40,9 +40,9 @@ class CutsceneBase:
         self.old_player_bullets_t03_shot = None
         self.old_player_bullets_t04_shot = None
 
-        self.old_npc_stats = {}
+        self.old_npcs_stats = {}
         for npc in self.level.npcs:
-            self.old_npc_stats[npc.id] = {
+            self.old_npcs_stats[npc.id] = {
                 'obj': npc,
                 'x': npc.rect.x,
                 'y': npc.rect.y,
@@ -59,6 +59,7 @@ class CutsceneBase:
         self.level.add_actors([self.actor_msg_holder])
 
         self.player.reset_position()
+        game.player.remove_pc_not_persistent_things()
 
         # Stats to recover after the cutscene ends
         self.old_game_is_magic_on = game.is_magic_on
@@ -103,19 +104,20 @@ class CutsceneBase:
         self.player.stats['bullets_t03_shot'] = self.old_player_bullets_t03_shot
         self.player.stats['bullets_t04_shot'] = self.old_player_bullets_t04_shot
 
-        for npc_data in self.old_npc_stats.values():
+        for npc_data in self.old_npcs_stats.values():
             npc_data['obj'].rect.x = npc_data['x'] - self.game.level.get_scroll_shift_delta()
             npc_data['obj'].rect.y = npc_data['y'] + self.game.level.get_scroll_shift_top_delta()
             npc_data['obj'].health = npc_data['health']
             npc_data['obj'].power = npc_data['power']
 
-    def check_pc_leave_level_condition(self):
+    def _check_pc_leave_level_condition(self):
         # Check this now and then, but skip the first four iterations
         if self.game.update_state_counter == 4:
-            self.check_pc_leave_level_condition_hook()
+            if self.check_pc_leave_level_condition():
+                self.update_pc_leave_level()
 
-    def check_pc_leave_level_condition_hook(self):
-        pass
+    def check_pc_leave_level_condition(self):
+        return False
 
     def update(self):
-        self.check_pc_leave_level_condition()
+        self._check_pc_leave_level_condition()

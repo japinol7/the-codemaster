@@ -14,8 +14,8 @@ class Cutscene112(CutsceneBase):
         self.name_short = 'Arbitrary test'
 
         # Define some actors
-        self.actor_skull = None
-        self.actor_skull_ini_rect = None
+        self.actor_fighter = None
+        self.actor_fighter_ini_rect = None
 
         super().__init__(level, game)
 
@@ -24,10 +24,10 @@ class Cutscene112(CutsceneBase):
 
         game = self.game
 
-        if not self.actor_skull:
-            self.actor_skull = game.level_cutscene.get_npcs_filtered_by_actor_type(
-                ActorType.SKULL_YELLOW)[0]
-            self.actor_skull_ini_rect = self.actor_skull.rect.copy()
+        if not self.actor_fighter:
+            self.actor_fighter = game.level_cutscene.get_npcs_filtered_by_actor_type(
+                ActorType.KUNG_FU_FIGHTER_MALE)[0]
+            self.actor_fighter_ini_rect = self.actor_fighter.rect.copy()
 
         game.add_player_actions((
             ['go_right', 4],
@@ -43,15 +43,23 @@ class Cutscene112(CutsceneBase):
             ['go_right', 30],
             ['stop', 1],
             ['go_right', 72],
+            ['stop', 40],
+            ['shot_bullet_t1_laser1', 1],
+            ['shot_bullet_t2_laser2', 2],
+            ['stop', 90],
+            [f':set_magic_target::target_id:={self.actor_fighter.id}', 1],
+            ['cast_vortex_of_doom_a', 1],
+            ['set_magic_off', 1],
             ['stop', 1],
             ))
 
     def update_pc_leave_level(self):
         super().update_pc_leave_level()
 
-    def check_pc_leave_level_condition_hook(self):
-        if self.actor_skull.rect.x - self.player.rect.x < 250:
-            self.update_pc_leave_level()
+    def check_pc_leave_level_condition(self):
+        if self.actor_fighter.health < self.actor_fighter.stats.health_total / 2:
+            return True
+        return False
 
     def update(self):
         execute_pc_action(self.game)

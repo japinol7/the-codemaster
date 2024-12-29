@@ -330,6 +330,9 @@ class Player(pg.sprite.Sprite):
     def set_magic_target(self, target_id):
         self.auto_spell_target = Actor.get_actor_if_exists(target_id)
 
+    def talk_msg(self, msg, time_in_secs=MSG_PC_DURATION):
+        TextMsg.create(msg, self.game, time_in_secs=time_in_secs)
+
     def update(self):
         # when RIP
         if self.direction == DIRECTION_RIP:
@@ -631,15 +634,20 @@ class Player(pg.sprite.Sprite):
         self.direction = DIRECTION_RIP
         t = datetime.now().time()
         self.rip_seconds = (t.hour * 60 + t.minute) * 60 + t.second
+
+        self.remove_pc_not_persistent_things()
+
+        for spell in self.game.level.magic_sprites:
+            if spell.target == self:
+                spell.kill_hook()
+
+    def remove_pc_not_persistent_things(self):
         if self.stats['energy_shields_stock']:
             self.stats['energy_shields_stock'][0].deactivate()
         for clock in self.game.clock_sprites:
             clock.die_hard()
         for text_msg in self.game.text_msg_sprites:
             text_msg.die_hard()
-        for spell in self.game.level.magic_sprites:
-            if spell.target == self:
-                spell.kill_hook()
 
     def self_destruction(self):
         if self.direction == DIRECTION_RIP:

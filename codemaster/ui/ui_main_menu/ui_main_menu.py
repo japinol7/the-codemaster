@@ -58,17 +58,18 @@ class UIMainMenu:
             self.items['credits_message_window'].kill()
 
         self.items['credits_message_window'] = pgui.windows.ui_message_window.UIMessageWindow(
-            rect=pg.Rect((310, 298), (542, 330)),
+            rect=pg.Rect((310, 270), (537, 358)),
             manager=self.manager,
             html_message=
-            "<p>The CodeMaster is a spin-off sci-fi mystery based on the 1988 RPG "
-            "platformer game Pac's Revenge series games by @japinol.</p>\n"
-            "<p>Code (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024, 2025.</p>"
-            "<p>Art, music & sound fx (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024, 2025.</p>"
+            "<p>The CodeMaster is a spin-off sci-fi mystery RPG "
+            "platformer game based on the 1988 RPG "
+            "platformer game Pac's Revenge by @japinol.</p>\n"
             f'''<p>Website: <a href="{APP_WEBSITE_URL}">{APP_WEBSITE_URL}</a> </p>'''
+            "<p>(c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024, 2025.</p>"
             f"<p>Version: {version.get_version()}</p>\n"
             "<p>Thanks for trying this demo! </p\n"
-            "<p>Have a wonderful day!  : )</p\n",
+            "<p>Have a wonderful day!\n"
+            ": )</p\n",
             window_title="Credits",
             visible=True,
             )

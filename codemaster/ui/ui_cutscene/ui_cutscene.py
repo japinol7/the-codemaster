@@ -36,7 +36,9 @@ class UICutscene:
         def pause_cutscene_action():
             self.game.is_paused = not self.game.is_paused
 
-            if not self.game.is_paused:
+            if self.game.is_paused:
+                self.game.screen_cutscene.background_screenshot.blit(self.game.screen, (0, 0))
+            else:
                 self.hide_additional_game_items()
                 self.clean_ui_items()
 
