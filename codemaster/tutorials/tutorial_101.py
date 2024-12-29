@@ -53,6 +53,7 @@ class Tutorial101:
         log.info("Initialize tutorial level")
 
         self.game.ui_manager.ui_ingame.items['save_game_button'].disable()
+        self.game.ui_manager.ui_ingame.items['watch_cutscene'].disable()
 
         # Update PC stats for tutorial
         self.player.stats['lives'] -= 1

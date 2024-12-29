@@ -44,6 +44,7 @@ class Level101(Level):
         self.tutorial = None
         self.game.level_tutorial = None
         self.game.ui_manager.ui_ingame.items['save_game_button'].enable()
+        self.game.ui_manager.ui_ingame.items['watch_cutscene'].enable()
         self.game.debug_info.init_super_cheat()
 
     def update_pc_enter_level(self):

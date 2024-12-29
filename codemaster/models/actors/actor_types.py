@@ -13,6 +13,7 @@ class ActorBaseType(Enum):
     NONE = 0
     PLATFORM = 1
     WATER = 7
+    GRASS = 8
     PC = 15
     NPC = 16
     ITEM = 21
@@ -50,6 +51,7 @@ class ActorCategoryType(Enum):
     SELECTOR = 21
     MAGIC = 22
     SIGN_MESSAGE = 25
+    ITEM_DECORATION = 30
     PC = 51
     NPC = 61
     SNAKE = 65
@@ -112,6 +114,13 @@ class ActorType(Enum):
     # Water
     PLAT_WATER_A = 851
     PLAT_WATER_A_DEEP = 852
+    # Grass
+    PLAT_GRASS_A = 853
+    PLAT_GRASS_A_DEEP = 854
+    PLAT_GRASS_B = 855
+    PLAT_GRASS_B_DEEP = 856
+    PLAT_GRASS_C = 857
+    PLAT_GRASS_C_DEEP = 858
     # Platforms
     PLATFORM_A = 4001
     PLAT_MOVING = 4002
@@ -171,6 +180,9 @@ class ActorType(Enum):
     GHOST_BLUE = 1222
     GHOST_YELLOW = 1223
     GHOST_RED = 1224
+    # Birds
+    BIRD_GREEN = 1280
+    BIRD_BROWN = 1281
     # Bats
     BAT_BLUE = 1331
     BAT_LILAC = 1332
@@ -232,3 +244,10 @@ class ActorType(Enum):
     SQUIRREL_A = 1681
     # Alien Felines
     ALIEN_FELINE_MALE = 1685
+    # Kaede
+    KAEDE = 1690
+    # Trees
+    TREE_A = 1701
+    TREE_B = 1702
+    # Suns
+    SUN_A = 1721

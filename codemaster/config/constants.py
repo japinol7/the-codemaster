@@ -120,7 +120,9 @@ BM_CARTRIDGES_FOLDER = os.path.join(BITMAPS_FOLDER, 'cartridges')
 BM_DOORS_FOLDER = os.path.join(BITMAPS_FOLDER, 'doors')
 BM_DOOR_KEYS_FOLDER = os.path.join(BITMAPS_FOLDER, 'door_keys')
 BM_DECORATIONS = os.path.join(BITMAPS_FOLDER, 'decorations')
+BM_ITEM_DECORATIONS = os.path.join(BITMAPS_FOLDER, 'item_decorations')
 BM_PLAT_WATER = os.path.join(BM_DECORATIONS, 'water')
+BM_PLAT_GRASS = os.path.join(BM_DECORATIONS, 'grass')
 BM_FILE_DISKS_FOLDER = os.path.join(BITMAPS_FOLDER, 'files_disks')
 BM_COMPUTERS_FOLDER = os.path.join(BITMAPS_FOLDER, 'computers')
 BM_LIVES_BASE_FOLDER = os.path.join(BITMAPS_FOLDER, 'lives')
@@ -139,11 +141,13 @@ BM_LIGHTS_FOLDER = os.path.join(BM_SPECIAL_EFFECTS_FOLDER, 'lights')
 BM_PCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'PCs')
 BM_PC_PAC_FOLDER = os.path.join(BM_PCS_FOLDER, 'Pac')
 BM_NPCS_FOLDER = os.path.join(BITMAPS_FOLDER, 'NPCs')
+BM_KAEDE_FOLDER = os.path.join(BM_NPCS_FOLDER, 'Kaede')
 BM_TETHLORIENS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'tethloriens')
 BM_TERMINATOR_EYES_FOLDER = os.path.join(BM_NPCS_FOLDER, 'terminator_eyes')
 BM_SNAKES_FOLDER = os.path.join(BM_NPCS_FOLDER, 'snakes')
 BM_DRAGONS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'dragons')
 BM_BATS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'bats')
+BM_BIRDS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'birds')
 BM_SKULLS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'skulls')
 BM_GHOSTS_FOLDER = os.path.join(BM_NPCS_FOLDER, 'ghosts')
 BM_LEVELS_FOLDER = os.path.join(BITMAPS_FOLDER, 'levels')
@@ -162,6 +166,7 @@ FILE_NAMES = {
     'im_backgrounds': ('background', 'png'),
     'seal_just_a_demo': ('seal_just_a_demo', 'png'),
     'seal_tutorial': ('seal_tutorial', 'png'),
+    'seal_cutscene': ('seal_cutscene', 'png'),
     'im_pj_spritesheet': ('pj_spritesheet_01_walk', 'png'),
     'im_pc_pac': ('Pac_01_walk', 'png'),
     'im_pj_rip': ('rip_player_ld', 'png'),
@@ -187,6 +192,7 @@ FILE_NAMES = {
     'im_en_ghosts': ('ghost', 'png'),
     'im_en_skulls': ('skull', 'png'),
     'im_en_bats': ('im_bat', 'png'),
+    'im_birds': ('im_bird', 'png'),
     'im_en_wolfmen': ('wolfman', 'png'),
     'im_en_pokoyos': ('pokoyo', 'png'),
     'im_en_vampires': ('vampire', 'png'),
@@ -202,8 +208,11 @@ FILE_NAMES = {
     'im_en_squirrels': ('squirrel', 'png'),
     'im_en_pumpkin_zombies': ('pumpkin_zombie', 'png'),
     'im_en_pumpkin_heads': ('pumpkin_head', 'png'),
+    'im_kaede': ('kaede', 'png'),
     'im_files_disks': ('files_disk', 'png'),
     'im_computer': ('computer', 'png'),
+    'im_tree': ('tree', 'png'),
+    'im_sun': ('sun', 'png'),
     'im_apples': ('im_apple', 'png'),
     'im_mines': ('im_mine', 'png'),
     'explosions': ('explosion', 'png'),
@@ -214,6 +223,7 @@ FILE_NAMES = {
     'im_bullet_t4': ('im_bullet_t4', 'png'),
     'im_cartridges': ('im_cartridge', 'png'),
     'im_water': ('im_water', 'png'),
+    'im_grass': ('im_grass', 'png'),
     'im_potion_health': ('health_rec', 'png'),
     'im_potion_power': ('power_rec', 'png'),
     'im_clocks': ('clock', 'png'),

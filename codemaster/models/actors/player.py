@@ -8,6 +8,7 @@ from random import randint
 
 import pygame as pg
 
+from codemaster.models.actors.actors import Actor
 from codemaster.models.actors.items.files_disks import FilesDisk
 from codemaster.tools.utils.colors import Color
 from codemaster.models.actors.items import bullets
@@ -98,6 +99,7 @@ class Player(pg.sprite.Sprite):
         self.bullet_start_position_delta_x = 0
         self.is_energy_shield_activated = False
         self.target_of_spells_count = Counter()
+        self.auto_spell_target = None
         self.stats = {
             'level': 1,
             'levels_visited': set(),
@@ -324,6 +326,12 @@ class Player(pg.sprite.Sprite):
         energy_shield.owner = self
         self.stats['energy_shields_stock'].append(energy_shield)
         msg_echo and log.info(f"You have acquired an {energy_shield.type.name}.")
+
+    def set_magic_target(self, target_id):
+        self.auto_spell_target = Actor.get_actor_if_exists(target_id)
+
+    def talk_msg(self, msg, time_in_secs=MSG_PC_DURATION):
+        TextMsg.create(msg, self.game, time_in_secs=time_in_secs)
 
     def update(self):
         # when RIP
@@ -579,10 +587,34 @@ class Player(pg.sprite.Sprite):
         self.change_x = -PL_X_SPEED
         self.direction = DIRECTION_LEFT
 
+    def go_left_slow(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        self.change_x = -PL_X_SPEED // 2
+        self.direction = DIRECTION_LEFT
+
+    def go_left_very_slow(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        self.change_x = -PL_X_SPEED // 4
+        self.direction = DIRECTION_LEFT
+
     def go_right(self):
         if self.direction == DIRECTION_RIP:
             return
         self.change_x = PL_X_SPEED
+        self.direction = DIRECTION_RIGHT
+
+    def go_right_slow(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        self.change_x = PL_X_SPEED // 2
+        self.direction = DIRECTION_RIGHT
+
+    def go_right_very_slow(self):
+        if self.direction == DIRECTION_RIP:
+            return
+        self.change_x = PL_X_SPEED // 4
         self.direction = DIRECTION_RIGHT
 
     def stop(self):
@@ -602,15 +634,20 @@ class Player(pg.sprite.Sprite):
         self.direction = DIRECTION_RIP
         t = datetime.now().time()
         self.rip_seconds = (t.hour * 60 + t.minute) * 60 + t.second
+
+        self.remove_pc_not_persistent_things()
+
+        for spell in self.game.level.magic_sprites:
+            if spell.target == self:
+                spell.kill_hook()
+
+    def remove_pc_not_persistent_things(self):
         if self.stats['energy_shields_stock']:
             self.stats['energy_shields_stock'][0].deactivate()
         for clock in self.game.clock_sprites:
             clock.die_hard()
         for text_msg in self.game.text_msg_sprites:
             text_msg.die_hard()
-        for spell in self.game.level.magic_sprites:
-            if spell.target == self:
-                spell.kill_hook()
 
     def self_destruction(self):
         if self.direction == DIRECTION_RIP:

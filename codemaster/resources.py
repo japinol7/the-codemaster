@@ -55,7 +55,6 @@ class Resource:
         'game_continue_last_failed': None,
         'level_no': None, 'congrats': None, 'congrats_2': None,
         'you_have_beaten_the_game': None, 'you_have_beaten_the_game_2': None,
-        'seal_just_a_demo': None, 'seal_tutorial': None,
         }
 
     @classmethod
@@ -146,6 +145,11 @@ class Resource:
                                           name='seal_tutorial', subname='')).convert()
         img = pg.transform.smoothscale(img, (327 // 1.5, 80 // 1.5))
         cls.images['seal_tutorial'] = img
+
+        img = pg.image.load(file_name_get(folder=consts.BITMAPS_FOLDER,
+                                          name='seal_cutscene', subname='')).convert()
+        img = pg.transform.smoothscale(img, (327 // 1.8, 80 // 1.8))
+        cls.images['seal_cutscene'] = img
 
         img = pg.image.load(file_name_get(folder=consts.BM_BACKGROUNDS_FOLDER,
                                           name='im_bg_score_bar', subname='')).convert()

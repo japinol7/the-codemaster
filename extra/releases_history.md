@@ -1,5 +1,29 @@
 # Release History
 
+## v0.0.14
+
+### New features and improvements:
+
+* Add cutscene screen management:
+  * Add cutscene for the intro of the game: Good morning Kaede.
+  * Add a second arbitrary cutscene example.
+* Improve the ingame UI.
+  * Add UI button to allow rematching cutscenes.
+* Refactor screens.
+* Add new NPCs:
+  * Birds.
+  * Kaede.
+* Add new decoration items:
+  * Sun.
+  * Tree.
+* Add new decorations:
+  * Grass.
+* Improve the test suite:
+  * Refactor player actions outside the test suite.
+  * Current tests count: 67.
+
+<br>
+
 ## v0.0.13
 
 ### New features and improvements:

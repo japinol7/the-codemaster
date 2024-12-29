@@ -14,7 +14,7 @@ from codemaster import levels
 from codemaster.tools.utils import utils_graphics as libg_jp
 from codemaster.resources import Resource
 from codemaster.score_bars import ScoreBar
-from codemaster.screen import screen_entry_point as screen
+from codemaster import screens
 from codemaster.config.settings import Settings, DEFAULT_MUSIC_VOLUME
 from codemaster.config.constants import (
     APP_NAME,
@@ -41,7 +41,9 @@ from codemaster.persistence.persistence_settings import (
     PERSISTENCE_PATH_DEFAULT,
     PersistenceSettings,
     )
+from codemaster.tools.utils.queue import Queue
 from codemaster.persistence import persistence
+from codemaster.cutscene_manager.cutscene_manager import start_cutscene
 from codemaster.ui.ui_manager.ui_manager import UIManager
 
 
@@ -83,6 +85,8 @@ class Game:
         self.level = None
         self.level_tutorial = None
         self.levels = []
+        self.level_cutscene = None
+        self.cutscene_levels = []
         self.levels_qty = 0
         self.level_init = None
         self.is_paused = False
@@ -90,6 +94,7 @@ class Game:
         self.is_start_screen = True
         self.is_full_screen_switch = False
         self.is_help_screen = False
+        self.is_cutscene_screen = False
         self.is_exit_curr_game_confirm = False
         self.is_music_paused = False
         self.sound_effects = True
@@ -109,6 +114,7 @@ class Game:
         self.writen_info_game_over_to_file = False
         self.level_no = 0
         self.level_no_old = None
+        self.screen_start_game = None
         self.screen_exit_current_game = None
         self.screen_game_over = None
         self.screen_pause = None
@@ -117,6 +123,9 @@ class Game:
         self.mouse_pos = 0, 0
         self.is_magic_on = False
         self.update_state_counter = 0
+        # Auto actor actions for cutscenes, ...
+        self.pc_auto_actions = Queue()
+        self.actors_auto_actions = Queue()
 
         Game.is_exit_game = False
         if Game.current_game > 0:
@@ -164,14 +173,21 @@ class Game:
         self.current_time_delta = pg.time.get_ticks() / 1000.0
 
         # Initialize screens
-        self.screen_exit_current_game = screen.ExitCurrentGame(self)
-        self.screen_help = screen.Help(self)
-        self.screen_pause = screen.Pause(self)
-        self.screen_game_over = screen.GameOver(self)
+        self.screen_exit_current_game = screens.ScreenExitCurrentGame(self)
+        self.screen_help = screens.ScreenHelp(self)
+        self.screen_pause = screens.ScreenPause(self)
+        self.screen_cutscene = screens.ScreenCutScene(self)
+        self.screen_game_over = screens.ScreenGameOver(self)
 
     @staticmethod
     def set_is_exit_game(is_exit_game):
         Game.is_exit_game = is_exit_game
+
+    def clean_game_data(self):
+        self.__class__.ui_manager.clean_game_data()
+        levels.Level.clean_entity_ids()
+        if self.level_cutscene:
+            self.level_cutscene.clean_game_data()
 
     def write_game_over_info_to_file(self):
         self.debug_info.print_debug_info(to_log_file=True)
@@ -191,6 +207,10 @@ class Game:
         self.levels = levels.Level.factory(levels_module=levels, game=self)
         self.levels_qty = len(self.levels)
         self.level_init = None
+
+        # Initialize cutscene levels
+        self.cutscene_levels = levels.Level.factory_by_nums(
+            levels_module=levels, game=self, level_ids=[111, 112])
 
         if not self.is_continue_game:
             self.level_tutorial = levels.Level.factory_by_nums(
@@ -221,6 +241,20 @@ class Game:
         if not self.level.is_tutorial:
             self.player.stats['levels_visited'].add(self.level.id)
 
+    def clean_actors_actions(self):
+        """Clean actors and player auto actions for cutscenes, ..."""
+        self.pc_auto_actions = Queue()
+        self.actors_auto_actions = Queue()
+
+    def add_player_actions(self, actions):
+        for action in actions:
+            self.pc_auto_actions.push(list(action))
+
+    def add_actors_actions(self, actions):
+        """Add actors auto actions for cutscenes, ..."""
+        # TODO.
+        pass
+
     def update_screen(self):
         # Handle game screens
         if self.is_paused or self.is_full_screen_switch:
@@ -233,17 +267,18 @@ class Game:
             self.player.stop()
             self.screen_exit_current_game.start_up()
             if self.done:
-                self.is_persist_data and persistence.persist_game_data(self)
-                Game.ui_manager.clean_game_data()
-                levels.Level.clean_entity_ids()
+                self.is_persist_data and not self.level.is_cutscene and persistence.persist_game_data(self)
+                self.clean_game_data()
+        elif self.is_cutscene_screen:
+            self.player.stop()
+            self.screen_cutscene.start_up(is_full_screen_switch=self.is_full_screen_switch)
         elif Game.is_over:
             self.screen_game_over.start_up()
             if not self.writen_info_game_over_to_file:
                 self.write_game_over_info_to_file()
             if self.done:
                 self.is_persist_data and persistence.clear_all_persisted_data()
-                Game.ui_manager.clean_game_data()
-                levels.Level.clean_entity_ids()
+                self.clean_game_data()
         else:
             if Game.is_over:
                 Game.screen.blit(Resource.images['bg_blue_t2'], (0, 0))
@@ -359,6 +394,12 @@ class Game:
                     elif event.key == pg.K_F1:
                         if not self.is_exit_curr_game_confirm:
                             self.is_help_screen = not self.is_help_screen
+                    elif event.key == pg.K_F3:
+                        if self.is_log_debug and not self.is_exit_curr_game_confirm:
+                            start_cutscene(0, self)
+                    elif event.key == pg.K_F4:
+                        if self.is_log_debug and not self.is_exit_curr_game_confirm:
+                            start_cutscene(1, self)
                     elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
                         if pg.key.get_mods() & pg.KMOD_ALT and not pg.key.get_mods() & pg.KMOD_LCTRL:
                             if (self.is_allowed_to_pause or

@@ -83,3 +83,10 @@ from codemaster.models.actors.npcs.vampires import (
 from codemaster.models.actors.npcs.wolfmen import (
     WolfManMale,
     )
+from codemaster.models.actors.npcs.kaede import (
+    Kaede,
+    )
+from codemaster.models.actors.npcs.birds import (
+    BirdGreen,
+    BirdBrown,
+    )

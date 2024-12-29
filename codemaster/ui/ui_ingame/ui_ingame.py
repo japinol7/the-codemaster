@@ -17,6 +17,7 @@ from codemaster.ui.ui_main_utils.ui_main_utils import (
     save_game_ui_action,
     save_game_directory_ui_action,
     )
+from codemaster.cutscene_manager.cutscene_manager import start_cutscene
 
 
 class UIInGame:
@@ -46,6 +47,10 @@ class UIInGame:
         self.items['files_disks_selection_list'].hide()
         self.items['files_disk_text_box'].hide()
         self.items['files_disks_read_button'].hide()
+
+        self.items['cutscene_selection_list'].hide()
+        self.items['cutscene_sel_text_box'].hide()
+        self.items['cutscene_watch_button'].hide()
 
         if self.items.get('text_message_window'):
             self.items['text_message_window'].hide()
@@ -172,13 +177,49 @@ class UIInGame:
                 title=f"File: {files_disk_msg_id}"
                 )
 
+        def cutscenes_action():
+            self.hide_additional_game_items()
+            cutscenes = [x.cutscene.name_short for x in self.game.cutscene_levels]
+            self.items['cutscene_selection_list'].set_item_list(cutscenes)
+            self.items['cutscene_selection_list'].show()
+            text = "Cutscenes you can watch"
+            self.items['cutscene_sel_text_box'].set_text(text)
+
+            if not cutscenes:
+                self.items['cutscene_selection_list'].disable()
+                self.items['cutscene_watch_button'].disable()
+            else:
+                self.items['cutscene_selection_list'].enable()
+                self.items['cutscene_watch_button'].enable()
+
+            self.items['cutscene_sel_text_box'].show()
+            self.items['cutscene_watch_button'].show()
+
+        def cutscene_watch_action():
+            self.hide_additional_game_items()
+            cutscene_name = self.items['cutscene_selection_list'].get_single_selection()
+            if not cutscene_name:
+                cutscenes_action()
+                return
+
+            cutscene_id = [i for i, x in enumerate(self.game.cutscene_levels)
+                           if x.cutscene.name_short == cutscene_name]
+
+            if not cutscene_id:
+                cutscenes_action()
+                return
+
+            self.game.screen_pause.done = True
+            start_cutscene(cutscene_id[0], self.game)
+            cutscenes_action()
+
         def save_game_action():
             save_game_ui_action(self)
 
         def save_game_directory_action():
             save_game_directory_ui_action(self, persist_game_before_copy=True)
 
-        button_pos_x = 234
+        button_pos_x = 177
         button_pos_y = 720
         button_size = 110, 40
         self.items['levels_visited_button'] = pgui.elements.UIButton(
@@ -214,6 +255,13 @@ class UIInGame:
             text="Info Files",
             manager=self.manager,
             command=files_disks_action,
+            )
+        button_pos_x += UI_X_SPACE_BETWEEN_BUTTONS
+        self.items['watch_cutscene'] = pgui.elements.UIButton(
+            relative_rect=pg.Rect((button_pos_x, button_pos_y), button_size),
+            text="Cutscenes",
+            manager=self.manager,
+            command=cutscenes_action,
             )
         button_pos_x += UI_X_SPACE_BETWEEN_BUTTONS
         self.items['save_game_button'] = pgui.elements.UIButton(
@@ -285,6 +333,30 @@ class UIInGame:
             text="Read Files",
             manager=self.manager,
             command=files_disks_read_action,
+            visible=False,
+            )
+
+        self.items['cutscene_selection_list'] = (pgui.elements.ui_selection_list.
+                UISelectionList(
+            relative_rect=pg.Rect((355, 430), (220, 275)),
+            manager=self.manager,
+            item_list = [],
+            visible=False,
+            ))
+
+        self.items['cutscene_sel_text_box'] = pgui.elements.UITextBox(
+            relative_rect=pg.Rect((578, 470), (190, 40)),
+            html_text="Current value:",
+            manager=self.manager,
+            plain_text_display_only=True,
+            visible=False,
+            )
+
+        self.items['cutscene_watch_button'] = pgui.elements.UIButton(
+            relative_rect=pg.Rect((578, 514), (190, 40)),
+            text="Watch Cutscene",
+            manager=self.manager,
+            command=cutscene_watch_action,
             visible=False,
             )
 
