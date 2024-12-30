@@ -12,19 +12,24 @@
 	author_twitter: @japinol
 	description: A spin-off sci-fi mystery platformer action game 
       based on Pac's Revenge series of games by @japinol.
-      (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024, 2025.
-    Note that the artwork, story, music, and sound effects are 
-    not covered in the MIT license for this game and may 
-    not be repurposed, redistributed, modified, or used in 
-    any other way that the playback during execution of the 
-    original game.
-    More info about licenses here:
-        > LICENSE.txt
-        > LICENSE_ARTWORK.txt
 <br />
 
 	Dependencies: pygame-ce, pygame-gui.
 	Python requires: 3.12 or greater.
+<br />
+
+	Licenses: 
+      (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024, 2025.
+      The code for this game as it is in this repo is covered 
+      by the MIT license.
+      Note that the artwork, story, music, and sound effects are 
+      not covered in the MIT license for this game and may 
+      not be repurposed, redistributed, modified, or used in 
+      any other way that the playback during execution of the 
+      original game.
+      More info about licenses here:
+        > LICENSE.txt
+        > LICENSE_ARTWORK.txt
 
 
 ## Screenshots
@@ -33,8 +38,9 @@
 <img src="screenshots/screenshot2.jpg" width="980" alt="screenshot2"> <br /> <br />
 <img src="screenshots/screenshot3.png" width="980" alt="screenshot3"> <br /> <br />
 <img src="screenshots/screenshot4.png" width="980" alt="screenshot4"> <br /> <br />
-<img src="screenshots/screenshot6.png" width="980" alt="screenshot6"> <br /> <br />
 <img src="screenshots/screenshot5.png" width="980" alt="screenshot5"> <br /> <br />
+<img src="screenshots/screenshot6.png" width="980" alt="screenshot6"> <br /> <br />
+<img src="screenshots/screenshot7.png" width="980" alt="screenshot7"> <br /> <br />
 <br />
 
 

@@ -7,8 +7,8 @@
 * Add cutscene screen management:
   * Add cutscene for the intro of the game: Good morning Kaede.
   * Add a second arbitrary cutscene example.
-* Improve the ingame UI.
-  * Add UI button to allow rematching cutscenes.
+* Improve the in-game UI.
+  * Add UI button to allow re-watching cutscenes.
 * Refactor screens.
 * Add new NPCs:
   * Birds.

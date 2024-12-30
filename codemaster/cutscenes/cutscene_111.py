@@ -25,9 +25,9 @@ class Cutscene111(CutsceneBase):
 
     def _kaede_talk_msg(self):
         TextMsg.create(
-            "Good luck, honey!", self.game,
+            "Have a nice trip, honey!", self.game,
             time_in_secs=8,
-            delta_x=0, delta_y=2, owner=self.actor_kaede)
+            delta_x=16, delta_y=2, owner=self.actor_kaede)
 
     def update_pc_enter_level(self):
         super().update_pc_enter_level()
@@ -35,7 +35,7 @@ class Cutscene111(CutsceneBase):
         game = self.game
 
         if not self.actor_kaede:
-            self.actor_kaede = game.level_cutscene.get_npcs_filtered_by_actor_type(
+            self.actor_kaede = self.level.get_npcs_filtered_by_actor_type(
                 ActorType.KAEDE)[0]
             self.actor_kaede_ini_rect = self.actor_kaede.rect.copy()
 
@@ -62,7 +62,13 @@ class Cutscene111(CutsceneBase):
              "::time_in_secs:=8", 1],
             ['stop', 540],
             ['go_right_slow', 180],
-            ['stop', 100],
+            ['stop', 36],
+            ['go_right_slow', 200],
+            [":talk::msg:="
+             "Ok. Kaito's Kingdom is to \n"
+             "the north-west!\nLet's go..."
+             "::time_in_secs:=4", 1],
+            ['go_right_slow', 450],
             ['leave_cutscene', 1],
             ))
 
