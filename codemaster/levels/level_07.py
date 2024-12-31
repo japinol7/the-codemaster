@@ -8,7 +8,11 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     )
 from codemaster.models.actors.items import platforms
-from codemaster.models.actors.decorations import Water
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     PokoyoA,
     PokoyoB,
@@ -48,7 +52,7 @@ class Level7(Level):
             [2, 1780, 460, platforms.PLAT_TYPE_01],
             [2, 1960, 585, platforms.PLAT_TYPE_01],
             [12, 1890, 192, platforms.PLAT_TYPE_01],
-            [56, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [58, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
             ]
         plats = []
         for platform in level_plats:
@@ -59,6 +63,11 @@ class Level7(Level):
 
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass(
+            0, SCREEN_NEAR_EARTH , self.game, qty=19, qty_depth=2,
+            actor_type=ActorType.PLAT_GRASS_A)
 
         # Add batteries
         self.batteries.add([

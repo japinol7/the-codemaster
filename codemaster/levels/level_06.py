@@ -13,6 +13,10 @@ from codemaster.config.constants import (
     DOOR_DEST_TR,
     )
 from codemaster.models.actors.items import platforms
+from codemaster.models.actors.decorations import (
+    Grass,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     BatBlack,
     SkullYellow,
@@ -84,7 +88,18 @@ class Level6(Level):
         for platform in plats:
             block = platforms.Platform(platform[0], platform[1], platform[2], self.game)
             self.platforms.add(block)
-    
+
+        # Add grass blocks
+        Grass.create_grass_sm(
+            0, SCREEN_NEAR_EARTH , self.game, qty=2, qty_depth=9,
+            actor_type=ActorType.PLAT_GRASS_K_SM)
+        Grass.create_grass_sm(
+            630, SCREEN_NEAR_EARTH , self.game, qty=7, qty_depth=9,
+            actor_type=ActorType.PLAT_GRASS_K_SM)
+        Grass.create_grass_sm(
+            1700, SCREEN_NEAR_EARTH , self.game, qty=15, qty_depth=9,
+            actor_type=ActorType.PLAT_GRASS_K_SM)
+
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(
             platforms.PLAT_TYPE_02_STONE_MIDDLE, 1350, 510, self.game,

@@ -10,6 +10,11 @@ from codemaster.config.constants import (
     DOOR_DEST_TR,
     )
 from codemaster.models.actors.items import platforms
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     BatBlue,
     BatLilac,
@@ -34,7 +39,6 @@ from codemaster.models.actors.items import (
     PotionPower,
     ClockA,
     )
-from codemaster.models.actors.decorations import Water
 from codemaster.levels.level_base import Level
 
 
@@ -73,6 +77,14 @@ class Level5(Level):
 
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass_sm(
+            0, SCREEN_NEAR_EARTH , self.game, qty=11, qty_depth=4,
+            actor_type=ActorType.PLAT_GRASS_F_SM)
+        Grass.create_grass_sm(
+            1700, SCREEN_NEAR_EARTH , self.game, qty=15, qty_depth=4,
+            actor_type=ActorType.PLAT_GRASS_F_SM)
 
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(

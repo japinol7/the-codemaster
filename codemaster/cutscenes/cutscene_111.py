@@ -68,7 +68,7 @@ class Cutscene111(CutsceneBase):
              "Ok. Kaito's Kingdom is to \n"
              "the north-west!\nLet's go..."
              "::time_in_secs:=4", 1],
-            ['go_right_slow', 450],
+            ['go_right_slow', 390],
             ['leave_cutscene', 1],
             ))
 

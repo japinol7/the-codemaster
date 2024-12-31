@@ -13,6 +13,7 @@ from codemaster.cutscene_manager.cutscene_manager import start_cutscene
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items.doors import Door
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     BatBlue,
     BatBlack,
@@ -27,7 +28,10 @@ from codemaster.models.actors.items import (
     DoorRightYellow,
     MineCyan,
     )
-from codemaster.models.actors.decorations import Water
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
 from codemaster.levels.level_base import Level
 from codemaster.tools.logger.logger import log
 
@@ -76,7 +80,7 @@ class Level1(Level):
             [4, 1360, 560, platforms.PLAT_TYPE_01],
             [3, 1250, 420, platforms.PLAT_TYPE_01],
             [10, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-            [15, 800, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [14, 800, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
             [24, 1950, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
             [15, 400, SCREEN_HEIGHT + 190, platforms.PLAT_TYPE_01],
             ]
@@ -89,6 +93,17 @@ class Level1(Level):
 
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 206, self.game, qty=16, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass_sm(
+            0, SCREEN_NEAR_EARTH , self.game, qty=5, qty_depth=3,
+            actor_type=ActorType.PLAT_GRASS_E_SM)
+        Grass.create_grass_sm(
+            800, SCREEN_NEAR_EARTH , self.game, qty=7, qty_depth=3,
+            actor_type=ActorType.PLAT_GRASS_E_SM)
+        Grass.create_grass_sm(
+            1950, SCREEN_NEAR_EARTH, self.game, qty=12, qty_depth=3,
+            actor_type=ActorType.PLAT_GRASS_E_SM)
 
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(

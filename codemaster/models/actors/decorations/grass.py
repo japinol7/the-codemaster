@@ -13,6 +13,10 @@ from codemaster.models.stats import Stats
 PLAT_GRASS_WIDTH = 216
 PLAT_GRASS_HEIGHT = 72
 
+PLAT_GRASS_SM_WIDTH = 140
+PLAT_GRASS_SM_HEIGHT = 62
+PLAT_GRASS_SM_DEEP_HEIGHT = 33
+
 
 class Grass(ActorItem):
     """Represents a block of grass.
@@ -38,7 +42,7 @@ class Grass(ActorItem):
 
     @staticmethod
     def create_grass(x, y, game, qty, qty_depth, actor_type=ActorType.PLAT_GRASS_A):
-        xx, yy = x, y
+        xx, yy = x, y - 35
         add_to_list = getattr(game.level_init, 'decors')
         for _ in range(qty):
             add_to_list.add(
@@ -53,6 +57,25 @@ class Grass(ActorItem):
                     GRASS_TYPE_MAP[actor_type][1](xx, yy, game)
                     )
                 xx += PLAT_GRASS_WIDTH
+
+    @staticmethod
+    def create_grass_sm(x, y, game, qty, qty_depth, actor_type=ActorType.PLAT_GRASS_A):
+        """create grass small"""
+        xx, yy = x, y - 35
+        add_to_list = getattr(game.level_init, 'decors')
+        for _ in range(qty):
+            add_to_list.add(
+                GRASS_TYPE_MAP[actor_type][0](xx, yy, game)
+                )
+            xx += PLAT_GRASS_SM_WIDTH
+        for i in range(qty_depth):
+            xx = x
+            yy += PLAT_GRASS_SM_HEIGHT if i == 0 else PLAT_GRASS_SM_DEEP_HEIGHT
+            for _ in range(qty):
+                add_to_list.add(
+                    GRASS_TYPE_MAP[actor_type][1](xx, yy, game)
+                    )
+                xx += PLAT_GRASS_SM_WIDTH
 
 
 class GrassA(Grass):
@@ -115,8 +138,134 @@ class GrassCDeep(Grass):
         super().__init__(x, y, game, name=name)
 
 
+class GrassEwSM(Grass):
+    """Represents a superficial block of grass E SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '05_sm'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_E_SM
+        super().__init__(x, y, game, name=name)
+
+
+class GrassEwSMDeep(Grass):
+    """Represents a deep block of grass E SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '05_sm_deep'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_E_SM_DEEP
+        super().__init__(x, y, game, name=name)
+
+
+class GrassFwSM(Grass):
+    """Represents a superficial block of grass F SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '06_sm'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_F_SM
+        super().__init__(x, y, game, name=name)
+
+
+class GrassFwSMDeep(Grass):
+    """Represents a deep block of grass F SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '06_sm_deep'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_F_SM_DEEP
+        super().__init__(x, y, game, name=name)
+
+
+class GrassGwSM(Grass):
+    """Represents a superficial block of grass G SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '07_sm'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_G_SM
+        super().__init__(x, y, game, name=name)
+
+
+class GrassGwSMDeep(Grass):
+    """Represents a deep block of grass G SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '07_sm_deep'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_G_SM_DEEP
+        super().__init__(x, y, game, name=name)
+
+
+class GrassHwSM(Grass):
+    """Represents a superficial block of grass H SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '08_sm'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_G_SM
+        super().__init__(x, y, game, name=name)
+
+
+class GrassHwSMDeep(Grass):
+    """Represents a deep block of grass H SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '08_sm_deep'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_G_SM_DEEP
+        super().__init__(x, y, game, name=name)
+
+
+class GrassJwSM(Grass):
+    """Represents a superficial block of grass J SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '09_sm'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_J_SM
+        super().__init__(x, y, game, name=name)
+
+
+class GrassJwSMDeep(Grass):
+    """Represents a deep block of grass J SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '09_sm_deep'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_J_SM_DEEP
+        super().__init__(x, y, game, name=name)
+
+
+class GrassKwSM(Grass):
+    """Represents a superficial block of grass K SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '10_sm'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_K_SM
+        super().__init__(x, y, game, name=name)
+
+
+class GrassKwSMDeep(Grass):
+    """Represents a deep block of grass K SM."""
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '10_sm_deep'
+        self.images_sprite_no = 1
+        self.type = ActorType.PLAT_GRASS_K_SM_DEEP
+        super().__init__(x, y, game, name=name)
+
+
 GRASS_TYPE_MAP = {
     ActorType.PLAT_GRASS_A: (GrassA, GrassADeep),
     ActorType.PLAT_GRASS_B: (GrassB, GrassBDeep),
     ActorType.PLAT_GRASS_C: (GrassC, GrassCDeep),
+    ActorType.PLAT_GRASS_E_SM: (GrassEwSM, GrassEwSMDeep),
+    ActorType.PLAT_GRASS_F_SM: (GrassFwSM, GrassFwSMDeep),
+    ActorType.PLAT_GRASS_G_SM: (GrassGwSM, GrassGwSMDeep),
+    ActorType.PLAT_GRASS_H_SM: (GrassHwSM, GrassHwSMDeep),
+    ActorType.PLAT_GRASS_J_SM: (GrassJwSM, GrassJwSMDeep),
+    ActorType.PLAT_GRASS_K_SM: (GrassKwSM, GrassKwSMDeep),
     }
