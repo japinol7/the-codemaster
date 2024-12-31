@@ -9,7 +9,11 @@ from codemaster.config.constants import (
     DOOR_DEST_TR,
     )
 from codemaster.models.actors.items import platforms
-from codemaster.models.actors.decorations import Water
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     SnakeGreen,
     SnakeYellow,
@@ -50,8 +54,8 @@ class LevelTest3(Level):
                        [8, 700, 410, platforms.PLAT_TYPE_01],
                        [12, 560, 550, platforms.PLAT_TYPE_01],
                        [2, 2900, 616, platforms.PLAT_TYPE_01],
-                       [10, 3090, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
                        [22, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+                       [10, 3090, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
                        ]
         plats = []
         for platform in level_plats:
@@ -62,6 +66,14 @@ class LevelTest3(Level):
 
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass_sm(
+            0, SCREEN_NEAR_EARTH , self.game, qty=11, qty_depth=5,
+            actor_type=ActorType.PLAT_GRASS_G_SM)
+        Grass.create_grass_sm(
+            3090, SCREEN_NEAR_EARTH , self.game, qty=5, qty_depth=5,
+            actor_type=ActorType.PLAT_GRASS_G_SM)
 
         # Add batteries
         self.batteries.add([

@@ -7,8 +7,12 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     SCREEN_NEAR_EARTH,
     )
-from codemaster.models.actors.items import platforms, DoorLeftGreen, DoorRightYellow
-from codemaster.models.actors.decorations import Water
+from codemaster.models.actors.items import platforms
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     BatBlack,
     )
@@ -48,6 +52,10 @@ class LevelTest8(Level):
 
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass(0, SCREEN_NEAR_EARTH , self.game, qty=19, qty_depth=2,
+            actor_type=ActorType.PLAT_GRASS_C)
 
         # Add NPCs
         self.npcs.add([

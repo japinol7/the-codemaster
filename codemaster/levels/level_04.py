@@ -12,8 +12,8 @@ from codemaster.models.actors.decorations import (
     Grass,
     Water,
     )
-from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.actor_types import ActorType
+from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.npcs import (
     BatBlue,
     BatBlack,
@@ -74,8 +74,8 @@ class Level4(Level):
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=19, qty_depth=3)
 
         # Add grass blocks
-        Grass.create_grass_sm(0, SCREEN_NEAR_EARTH , self.game, qty=112, qty_depth=4,
-            actor_type=ActorType.PLAT_GRASS_F_SM)
+        Grass.create_grass(0, SCREEN_NEAR_EARTH , self.game, qty=19, qty_depth=2,
+            actor_type=ActorType.PLAT_GRASS_R)
 
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(

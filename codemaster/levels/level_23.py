@@ -11,6 +11,11 @@ from codemaster.config.constants import (
 from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.items.energy_shields import EnergyShield
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     DemonMale,
     SkullYellow,
@@ -55,7 +60,7 @@ class Level23(Level):
             [6, 3200, 240, platforms.PLAT_TYPE_01],
             [1, 3060, 310, platforms.PLAT_TYPE_01],
             [1, 2395, 586, platforms.PLAT_TYPE_01],
-            [19, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [18, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
             [24, 2140, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
             ]
         plats = []
@@ -65,6 +70,17 @@ class Level23(Level):
         for platform in plats:
             block = platforms.Platform(platform[0], platform[1], platform[2], self.game)
             self.platforms.add(block)
+
+        # Add water blocks
+        Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass_sm(
+            0, SCREEN_NEAR_EARTH , self.game, qty=9, qty_depth=5,
+            actor_type=ActorType.PLAT_GRASS_E_SM)
+        Grass.create_grass_sm(
+            2140, SCREEN_NEAR_EARTH , self.game, qty=12, qty_depth=5,
+            actor_type=ActorType.PLAT_GRASS_E_SM)
 
         # Add batteries
         self.batteries.add([

@@ -9,7 +9,11 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     )
 from codemaster.models.actors.items import platforms
-from codemaster.models.actors.decorations import Water
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.items import (
     DoorLeftGreen,
     DoorRightRed,
@@ -51,6 +55,14 @@ class LevelTest7(Level):
 
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 206, self.game, qty=19, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass_sm(
+            0, SCREEN_NEAR_EARTH , self.game, qty=2, qty_depth=4,
+            actor_type=ActorType.PLAT_GRASS_E_SM)
+        Grass.create_grass_sm(
+            630, SCREEN_NEAR_EARTH , self.game, qty=22, qty_depth=4,
+            actor_type=ActorType.PLAT_GRASS_E_SM)
 
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(

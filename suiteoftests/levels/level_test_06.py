@@ -8,8 +8,12 @@ from codemaster.config.constants import (
     DOOR_DEST_NL,
     )
 from codemaster.models.actors.items import platforms
-from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.actors import DropItem
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     BatBlue,
     RobotA,
@@ -61,6 +65,10 @@ class LevelTest6(Level):
 
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass(0, SCREEN_NEAR_EARTH , self.game, qty=19, qty_depth=2,
+            actor_type=ActorType.PLAT_GRASS_D)
 
         # Add batteries
         self.batteries.add([

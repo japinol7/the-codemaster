@@ -9,8 +9,12 @@ from codemaster.config.constants import (
     )
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.items.energy_shields import EnergyShield
-from codemaster.models.actors.decorations import Water
 from codemaster.models.actors.actors import DropItem
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     BatBlack,
     KungFuFighterMale,
@@ -56,8 +60,8 @@ class Level29(Level):
             [9, 1200, 440, platforms.PLAT_TYPE_01],
             [1, 1970, 280, platforms.PLAT_TYPE_01],
             [5, 1860, 586, platforms.PLAT_TYPE_01],
-            [13, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
-            [21, 2320, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [12, 0, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
+            [22, 2320, SCREEN_NEAR_EARTH, platforms.PLAT_TYPE_05_EARTH],
             ]
         plats = []
         for platform in level_plats:
@@ -68,6 +72,14 @@ class Level29(Level):
 
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass_sm(
+            0, SCREEN_NEAR_EARTH , self.game, qty=6, qty_depth=5,
+            actor_type=ActorType.PLAT_GRASS_S_SM)
+        Grass.create_grass_sm(
+            2320, SCREEN_NEAR_EARTH , self.game, qty=12, qty_depth=5,
+            actor_type=ActorType.PLAT_GRASS_S_SM)
 
         # Add moving platforms (type, x, y, ...)
         self.platforms.add(platforms.MovingPlatform(

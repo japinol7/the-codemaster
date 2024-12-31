@@ -7,7 +7,11 @@ from codemaster.config.constants import (
     SCREEN_NEAR_EARTH,
     DOOR_DEST_NL,
     )
-from codemaster.models.actors.decorations import Water
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.items import (
     platforms,
     DoorRightBlue,
@@ -74,6 +78,11 @@ class Level101(Level):
 
         # Add water blocks
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
+
+        # Add grass blocks
+        Grass.create_grass_sm(
+            0, SCREEN_NEAR_EARTH , self.game, qty=28, qty_depth=5,
+            actor_type=ActorType.PLAT_GRASS_T_SM)
 
         # Add sign messages
         self.sign_messages.add([

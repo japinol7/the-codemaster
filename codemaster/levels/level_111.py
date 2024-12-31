@@ -84,9 +84,9 @@ class Level111(Level):
         # Add grass blocks
         Grass.create_grass(0, SCREEN_NEAR_EARTH , self.game, qty=3, qty_depth=2)
         Grass.create_grass(
-            648, SCREEN_NEAR_EARTH , self.game, qty=6, qty_depth=2,
+            636, SCREEN_NEAR_EARTH , self.game, qty=6, qty_depth=2,
             actor_type=ActorType.PLAT_GRASS_B)
-        Grass.create_grass(1944, SCREEN_NEAR_EARTH , self.game, qty=11, qty_depth=2)
+        Grass.create_grass(1920, SCREEN_NEAR_EARTH , self.game, qty=11, qty_depth=2)
 
         # Add item decors - item trees, flowers...
         self.item_decors.add([

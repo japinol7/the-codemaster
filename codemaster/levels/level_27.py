@@ -10,6 +10,10 @@ from codemaster.config.constants import (
 from codemaster.models.actors.actors import DropItem
 from codemaster.models.actors.items import platforms
 from codemaster.models.actors.items.energy_shields import EnergyShield
+from codemaster.models.actors.decorations import (
+    Grass,
+    )
+from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     EwlanMale,
     RobotA,
@@ -61,6 +65,10 @@ class Level27(Level):
         for platform in plats:
             block = platforms.Platform(platform[0], platform[1], platform[2], self.game)
             self.platforms.add(block)
+
+        # Add grass blocks
+        Grass.create_grass(0, SCREEN_NEAR_EARTH , self.game, qty=19, qty_depth=4,
+            actor_type=ActorType.PLAT_GRASS_C)
 
         # Add batteries
         self.batteries.add([
