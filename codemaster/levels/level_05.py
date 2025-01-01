@@ -177,7 +177,7 @@ class Level5(Level):
         # Add doors
         self.doors.add([
             DoorRightRed(3400, 550, self.game, level_dest=5, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorLeftYellow(2, 550, self.game, level_dest=3, door_dest_pos=DOOR_DEST_TR),
+            DoorLeftYellow(0, 550, self.game, level_dest=3, door_dest_pos=DOOR_DEST_TR),
             ])
 
         # Add door keys

@@ -136,6 +136,6 @@ class Level30(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftRed(2, 550, self.game, level_dest=28, door_dest_pos=DOOR_DEST_NL),
+            DoorLeftRed(0, 550, self.game, level_dest=28, door_dest_pos=DOOR_DEST_NL),
             DoorRightAqua(3472, 52, self.game, level_dest=22, door_dest_pos=DOOR_DEST_TR),
             ])

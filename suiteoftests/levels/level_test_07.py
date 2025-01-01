@@ -90,5 +90,5 @@ class LevelTest7(Level):
         # Add doors
         self.doors.add([
             DoorRightRed(3400, 550, self.game, level_dest=5, door_dest_pos=DOOR_DEST_NL, is_locked=True),
-            DoorLeftGreen(2, 550, self.game, level_dest=7, door_dest_pos=DOOR_DEST_NL, is_locked=True),
+            DoorLeftGreen(0, 550, self.game, level_dest=7, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])

@@ -27,7 +27,7 @@ def level_scroll_shift_control(game):
 
     # If the player gets near the left side, shift the world right (+x)
     if game.player.rect.left <= SCROLL_NEAR_LEFT_SIDE:
-        if game.level.world_shift < 0:
+        if game.level.world_shift < -3:
             diff = SCROLL_NEAR_LEFT_SIDE - game.player.rect.left
             game.player.rect.left = SCROLL_NEAR_LEFT_SIDE
             diff and game.level.shift_world(diff)

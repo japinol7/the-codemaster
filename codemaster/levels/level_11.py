@@ -76,7 +76,7 @@ class Level11(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftBlue(2, 550, self.game, level_dest=9, door_dest_pos=DOOR_DEST_NL),
+            DoorLeftBlue(0, 550, self.game, level_dest=9, door_dest_pos=DOOR_DEST_NL),
             DoorRightMagenta(3640, 550, self.game, level_dest=11, door_dest_pos=DOOR_DEST_NL, is_locked=True),
             ])
 

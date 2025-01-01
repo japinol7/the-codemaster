@@ -203,5 +203,5 @@ class Level3(Level):
         # Add doors
         self.doors.add([
             DoorRightYellow(3400, 550, self.game, level_dest=3, door_dest_pos=DOOR_DEST_NL),
-            DoorLeftGreen(2, 550, self.game, level_dest=1, door_dest_pos=DOOR_DEST_NL),
+            DoorLeftGreen(0, 550, self.game, level_dest=1, door_dest_pos=DOOR_DEST_NL),
             ])

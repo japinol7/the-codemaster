@@ -105,7 +105,7 @@ class Level13(Level):
 
         # Add doors
         self.doors.add([
-            DoorLeftAqua(2, 550, self.game, level_dest=11, door_dest_pos=DOOR_DEST_NL),
+            DoorLeftAqua(0, 550, self.game, level_dest=11, door_dest_pos=DOOR_DEST_NL),
             DoorRightMagenta(3480, 52, self.game, level_dest=16, door_dest_pos=DOOR_DEST_TR),
             DoorRightGreen(3640, 550, self.game, level_dest=13, door_dest_pos=DOOR_DEST_NL),
             ])

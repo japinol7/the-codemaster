@@ -35,7 +35,7 @@
 ## Screenshots
 
 <img src="screenshots/screenshot1.png" width="980" alt="screenshot1"> <br /> <br />
-<img src="screenshots/screenshot2.jpg" width="980" alt="screenshot2"> <br /> <br />
+<img src="screenshots/screenshot2.png" width="980" alt="screenshot2"> <br /> <br />
 <img src="screenshots/screenshot3.png" width="980" alt="screenshot3"> <br /> <br />
 <img src="screenshots/screenshot4.png" width="980" alt="screenshot4"> <br /> <br />
 <img src="screenshots/screenshot5.png" width="980" alt="screenshot5"> <br /> <br />
