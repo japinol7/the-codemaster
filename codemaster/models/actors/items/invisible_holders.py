@@ -27,10 +27,6 @@ class InvisibleHolder(ActorItem):
         self.hostility_level = 0
         self.magic_resistance = 990
 
-    def update_after_inc_index_hook(self):
-        self.rect.x = 20
-        self.rect.y = 215
-
     def update_when_hit(self):
         """Cannot be hit."""
         pass
@@ -45,4 +41,16 @@ class InvisibleHolderA(InvisibleHolder):
     def __init__(self, x, y, game, name=None):
         self.file_mid_prefix = '01'
         self.type = ActorType.INVISIBLE_HOLDER_A
+        super().__init__(x, y, game, name=name)
+
+
+class InvisibleHolderNarrator(InvisibleHolder):
+    """Represents an invisible holder of type narrator.
+    This invisible_holder follows the player, so it can hold messages
+    that must be seen on the screen.
+    """
+
+    def __init__(self, x, y, game, name=None):
+        self.file_mid_prefix = '01'
+        self.type = ActorType.INVISIBLE_HOLDER_N
         super().__init__(x, y, game, name=name)

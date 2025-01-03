@@ -55,5 +55,16 @@ Future Improvements:
   > Improve data models.
   > Refactor the settings module.
 
+> Consider to:
+  > Create player action ?
+    > :let_npc_talk::npc_id:=
+  > Create txt msgs filled so they are easy to see?
+  > Create txt msgs system?
+    > For example, npc.msg_next()
+  > Add cutscene with a parametrized message
+    > Ex: "Tow days later..."
+  > Create fade fall out effect we could use in cutscenes.
+
+
 
 ..

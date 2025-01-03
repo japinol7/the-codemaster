@@ -27,6 +27,7 @@ class TextMsgPosition(Enum):
     NEAR_ACTOR = 2
     NEAR_OBJECT = 3
     NEAR_TOP_LEFT = 4
+    NARRATOR_CENTER_DOWN = 5
 
 
 class TextMsg(ActorMsg):
@@ -47,6 +48,10 @@ class TextMsg(ActorMsg):
         self.stats.power = self.stats.power_total = 0
         self.stats.strength = self.stats.strength_total = 1
         self.lines_count = 0
+        self.balloon_lines = 0
+        self.balloon_height = 0
+        self.balloon_width = 0
+        self.balloon_rect_y_delta = 0
 
         if not getattr(self, 'type', None):
             self.msg_position = TextMsgPosition.NONE
@@ -83,22 +88,16 @@ class TextMsg(ActorMsg):
         self.kill()
 
     def draw_speech_balloon(self, color):
-        if self.lines_count > 1:
-            text_len = len(max(self.name.splitlines(), key=len))
-            height = 29 + 22 * self.lines_count
-        else:
-            text_len = len(self.name)
-            height = self.rect.height
-        width = 2 + 14 * text_len if text_len < 20 else 13.1 * text_len
-
         pg.draw.rect(
             self.game.screen, color,
-            (self.rect.x, self.rect.y - self.lines_count * 22, int(width), int(height)),
+            (self.rect.x, self.rect.y + self.balloon_rect_y_delta,
+             self.balloon_width, self.balloon_height),
             width=1)
 
     @staticmethod
-    def create(text, game, time_in_secs=MSG_PC_DURATION, msg_class=None, x=None, y=None,
-               color=None, delta_x=None, delta_y=None, owner=None):
+    def create(text, game, time_in_secs=MSG_PC_DURATION, msg_class=None,
+               x=None, y=None, color=None, delta_x=None, delta_y=None,
+               owner=None, balloon_lines_count=0, balloon_chars_for_line=0):
         class_ = msg_class or TextMsgActor
         owner = owner or game.player
         delta_x = MSG_PC_DELTA_X if delta_x is None else delta_x
@@ -107,7 +106,8 @@ class TextMsg(ActorMsg):
                x or owner.rect.x - delta_x,
                y or owner.rect.y - delta_y,
                game, time_in_secs, name=text,
-               color=color, delta_x=delta_x, delta_y=delta_y, owner=owner)
+               color=color, delta_x=delta_x, delta_y=delta_y,
+               owner=owner)
         game.active_sprites.add([text_msg])
         game.text_msg_sprites.add([text_msg])
 
@@ -117,7 +117,22 @@ class TextMsg(ActorMsg):
         game.text_msg_pc_sprites.add([text_msg])
 
         text_msg.lines_count = text_msg.name.count('\n')
+
         text_msg.update()
+
+        # Calculate speech balloon attributes
+        text_msg.balloon_lines = balloon_lines_count or text_msg.lines_count
+        if text_msg.balloon_lines > 1:
+            text_len = balloon_chars_for_line or len(max(text_msg.name.splitlines(), key=len))
+            text_msg.balloon_height = 29 + 22 * text_msg.balloon_lines
+        else:
+            text_len = balloon_chars_for_line or len(text_msg.name)
+            text_msg.balloon_height = text_msg.rect.height
+        text_msg.balloon_width = 2 + 14 * text_len if text_len < 20 else 13.1 * text_len
+        text_msg.balloon_rect_y_delta = -text_msg.balloon_lines * 22
+        text_msg.balloon_width = int(text_msg.balloon_width)
+        text_msg.balloon_height = int(text_msg.balloon_height)
+
         return text_msg
 
 
@@ -169,4 +184,22 @@ class TextMsgActorTop(TextMsg):
     def update(self):
         self.rect.x = 20
         self.rect.y = 250 - 21 * (8 - self.lines_count)
+        super().update()
+
+class TextMsgActorNarrator(TextMsg):
+    """Represents a text message to be used for the narrator in cutscenes."""
+
+    def __init__(self, x, y, game, time_in_secs, name=None, color=None,
+                 delta_x=0, delta_y=0, owner=None):
+        self.file_mid_prefix = 'timer_01'
+        self.color = color
+        self.msg_position = TextMsgPosition.NARRATOR_CENTER_DOWN
+        self.type = ActorType.TEXT_MSG_PLAYER if owner == game.player else ActorType.TEXT_MSG_ACTOR
+
+        super().__init__(x, y, game, name=name, time_in_secs=time_in_secs,
+                         delta_x=delta_x, delta_y=delta_y, owner=owner)
+
+    def update(self):
+        self.rect.x = 240
+        self.rect.y = 620
         super().update()

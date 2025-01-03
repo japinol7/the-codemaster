@@ -69,6 +69,7 @@ class ActorType(Enum):
     BATTERY_A = 301
     RADIO_A = 302
     INVISIBLE_HOLDER_A = 303
+    INVISIBLE_HOLDER_N = 304
     # Life recoveries
     LIFE_RECOVERY = 321
     # Potions

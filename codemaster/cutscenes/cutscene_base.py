@@ -1,9 +1,10 @@
 """Module cutscene_base."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
-from codemaster.models.actors.items import (
-    InvisibleHolderA,
-    )
+from codemaster.models.actors.items import InvisibleHolderNarrator
+from codemaster.models.clocks import ClockTimer
+from codemaster.models.actors.text_msgs import TextMsg
+from codemaster.models.actors.text_msgs.text_msgs import TextMsgActorNarrator
 from codemaster.tools.logger.logger import log
 
 
@@ -17,6 +18,10 @@ class CutsceneBase:
         self.clock_timer = None
         self.current_stat = ''
         self.actor_msg_holder = None
+        self.is_msg_screen = False
+        self.msg_screen = ''
+        self.msg_screen_obj = None
+        self.msg_screen_clock = None
 
         if not getattr(self, 'name_short', None):
             self.name_short = self.game
@@ -54,8 +59,10 @@ class CutsceneBase:
         game = self.game
         game.is_log_debug and log.debug(f"Initialize cutscene level: {self.id}")
 
+        self.deactivate_msg_screen()
+
         # Add an actor that will hold cutscene msgs
-        self.actor_msg_holder = InvisibleHolderA(5, 390, game)
+        self.actor_msg_holder = InvisibleHolderNarrator(0, 0, game)
         self.level.add_actors([self.actor_msg_holder])
 
         self.player.reset_position()
@@ -87,6 +94,8 @@ class CutsceneBase:
         self.level.done = True
         self.player.stop()
         self.game.update_state_counter = -2
+        self.game.player.remove_pc_not_persistent_things()
+        self.actor_msg_holder = None
 
         # Stats to recover after the cutscene ends
         self.game.is_magic_on = self.old_game_is_magic_on
@@ -118,6 +127,36 @@ class CutsceneBase:
 
     def check_pc_leave_level_condition(self):
         return False
+
+    def _create_cutscene_msg_actor(self, msg, time_in_secs=6000):
+        self.msg_screen_obj = TextMsg.create(
+            "Narrator:\n"
+            f"{msg}",
+            game=self.game,
+            owner=self.actor_msg_holder,
+            delta_x=0, delta_y=-30,
+            time_in_secs=time_in_secs,
+            msg_class=TextMsgActorNarrator,
+            balloon_lines_count=4,
+            balloon_chars_for_line=52,
+            )
+
+    def activate_msg_screen(self, msg, time_in_secs=4):
+        self.is_msg_screen = True
+        self.msg_screen = msg
+        self.game.screen_cutscene.background_screenshot.blit(self.game.screen, (0, 0))
+
+        self._create_cutscene_msg_actor(msg, time_in_secs)
+        self.msg_screen_clock = ClockTimer(
+            self.game, time_in_secs, trigger_method=self.deactivate_msg_screen)
+
+    def deactivate_msg_screen(self):
+        self.is_msg_screen = False
+        self.msg_screen = ''
+        if self.msg_screen_obj:
+            self.msg_screen_obj.die_hard()
+        self.msg_screen_obj = None
+        self.msg_screen_clock = None
 
     def update(self):
         self._check_pc_leave_level_condition()

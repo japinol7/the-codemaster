@@ -50,6 +50,8 @@ PLAYER_ACTION_METHODS_MAP = {
     'set_magic_on': PlayerActionMethodArgs('', kwargs={}),
     'set_magic_off': PlayerActionMethodArgs('', kwargs={}),
     'leave_cutscene': PlayerActionMethodArgs('', kwargs={}),
+    'activate_msg_cutscene': PlayerActionMethodArgs(
+        'activate_msg_cutscene', kwargs={'msg': '', 'time_in_secs': MSG_PC_DURATION}),
     ':set_magic_target': PlayerActionMethodArgs(
         'set_magic_target', kwargs={'target_id': ''}),
     ':talk': PlayerActionMethodArgs(
@@ -107,6 +109,38 @@ def execute_pc_action(game):
             player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
         return
 
+    if player_action == 'leave_cutscene':
+        if not game.level_cutscene:
+            raise ValueError(
+                f"Player action only available for cutscenes: {player_action}")
+        game.level_cutscene.cutscene.update_pc_leave_level()
+        return
+
+    if player_action.startswith('activate_msg_cutscene'):
+        if not game.level_cutscene:
+            raise ValueError(
+                f"Player action only available for cutscenes: {player_action}")
+
+        player_args = player_action.split('::')
+        player_action = player_args[0]
+        player_args.pop(0)
+        player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
+        if not player_args:
+            raise ValueError(f"Arguments missing for player action:{player_action}")
+
+        for player_arg in player_args:
+            arg_components = player_arg.split(':=')
+            arg_default_val = player_action_methods_map.kwargs[arg_components[0]]
+            arg_val = arg_components[1]
+            if isinstance(arg_default_val, int):
+                arg_val = int(arg_val)
+            elif isinstance(arg_default_val, float):
+                arg_val = float(arg_val)
+            player_action_methods_map.kwargs[arg_components[0]] = arg_val
+
+        game.level_cutscene.cutscene.activate_msg_screen(**player_action_methods_map.kwargs)
+        return
+
     player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
 
     # Manage actions that cast spells
@@ -122,13 +156,6 @@ def execute_pc_action(game):
             selector.rect.x = game.player.auto_spell_target.rect.centerx
             selector.rect.y = game.player.auto_spell_target.rect.centery
             selector.get_pointed_sprites()
-        return
-
-    if player_action == 'leave_cutscene':
-        if not game.level_cutscene:
-            raise ValueError(
-                f"Player action only available for cutscenes: {player_action}")
-        game.level_cutscene.cutscene.update_pc_leave_level()
         return
 
     # Manage actions that map directly to methods

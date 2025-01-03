@@ -77,10 +77,10 @@ class Level2(Level):
             0, SCREEN_NEAR_EARTH , self.game, qty=2, qty_depth=3,
             actor_type=ActorType.PLAT_GRASS_G_SM)
         Grass.create_grass_sm(
-            490, SCREEN_NEAR_EARTH , self.game, qty=8, qty_depth=4,
+            490, SCREEN_NEAR_EARTH , self.game, qty=8, qty_depth=5,
             actor_type=ActorType.PLAT_GRASS_G_SM)
         Grass.create_grass_sm(
-            1700, SCREEN_NEAR_EARTH , self.game, qty=12, qty_depth=4,
+            1700, SCREEN_NEAR_EARTH , self.game, qty=12, qty_depth=5,
             actor_type=ActorType.PLAT_GRASS_G_SM)
 
         # Add moving platforms (type, x, y, ...)

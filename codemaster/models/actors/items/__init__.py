@@ -81,6 +81,7 @@ from codemaster.models.actors.items.sign_message import (
     )
 from codemaster.models.actors.items.invisible_holders import (
     InvisibleHolderA,
+    InvisibleHolderNarrator,
     )
 from codemaster.models.actors.items.trees import (
     TreeA,

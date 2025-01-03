@@ -80,10 +80,10 @@ class Level5(Level):
 
         # Add grass blocks
         Grass.create_grass_sm(
-            0, SCREEN_NEAR_EARTH , self.game, qty=11, qty_depth=4,
+            0, SCREEN_NEAR_EARTH , self.game, qty=11, qty_depth=5,
             actor_type=ActorType.PLAT_GRASS_F_SM)
         Grass.create_grass_sm(
-            1700, SCREEN_NEAR_EARTH , self.game, qty=15, qty_depth=4,
+            1700, SCREEN_NEAR_EARTH , self.game, qty=15, qty_depth=5,
             actor_type=ActorType.PLAT_GRASS_F_SM)
 
         # Add moving platforms (type, x, y, ...)

@@ -46,6 +46,7 @@ class ScreenCutScene(ScreenBase):
     def _game_loop(self):
         game = self.game
         game.update_state_counter = -1
+        cutscene =  game.level_cutscene.cutscene
         while not self.done:
             # Increase and check counter to delay stats x iterations
             game.update_state_counter += 1
@@ -66,7 +67,7 @@ class ScreenCutScene(ScreenBase):
 
             level_scroll_shift_control(game)
 
-            if not game.is_paused:
+            if not game.is_paused and not cutscene.is_msg_screen:
                 # update sprites and level
                 game.active_sprites.update()
                 game.level_cutscene.update()
@@ -92,9 +93,15 @@ class ScreenCutScene(ScreenBase):
 
                 game.level_cutscene.magic_sprites.draw(game.screen)
 
-            else: # game is paused
+            else: # game is paused and/or is_msg_screen
                 self.game.screen.blit(self.background_screenshot, (0, 0))
-                game.screen.blit(*Resource.txt_surfaces['game_paused'])
+
+                if cutscene.is_msg_screen:
+                    cutscene.msg_screen_obj.draw_text()
+                    cutscene.msg_screen_clock.tick()
+
+                if game.is_paused:
+                    game.screen.blit(*Resource.txt_surfaces['game_paused'])
 
             game.screen.blit(Resource.images['seal_cutscene'], (488, 0))
 

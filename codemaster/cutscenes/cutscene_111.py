@@ -58,7 +58,7 @@ class Cutscene111(CutsceneBase):
             ['stop', 250],
             [":talk::msg:="
              "I'm on my way to ask\n"
-             "your father for your hand!\n: )"
+             "your father for your hand!\n:)"
              "::time_in_secs:=8", 1],
             ['stop', 540],
             ['go_right_slow', 180],
@@ -67,8 +67,15 @@ class Cutscene111(CutsceneBase):
             [":talk::msg:="
              "Ok. Kaito's Kingdom is to \n"
              "the north-west!\nLet's go..."
-             "::time_in_secs:=4", 1],
+             "::time_in_secs:=5", 1],
             ['go_right_slow', 390],
+            ["activate_msg_cutscene::msg:="
+             "Two days later...\n"
+             "Our hero arrives at the planet where "
+             "Kaede's father,\n" 
+             "Kaito, rules his kingdom,\n"
+             "but something there is wrong. Very wrong!"
+             "::time_in_secs:=9", 1],
             ['leave_cutscene', 1],
             ))
 

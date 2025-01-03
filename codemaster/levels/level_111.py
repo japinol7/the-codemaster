@@ -7,16 +7,16 @@ from codemaster.config.constants import (
     DIRECTION_LEFT,
     SCREEN_NEAR_EARTH,
     )
+from codemaster.models.actors.decorations import (
+    Grass,
+    Water,
+    )
 from codemaster.models.actors.actor_types import ActorType
 from codemaster.models.actors.npcs import (
     BirdGreen,
     BirdBrown,
     Kaede,
     SquirrelA,
-    )
-from codemaster.models.actors.decorations import (
-    Grass,
-    Water,
     )
 from codemaster.models.actors.items import (
     platforms,
