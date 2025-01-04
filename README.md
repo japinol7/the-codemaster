@@ -20,8 +20,7 @@
 
 	Licenses: 
       (c) Joan A. Pinol 1987, 1988, 2015, 2021, 2024, 2025.
-      The code for this game as it is in this repo is covered 
-      by the MIT license.
+      The source code for this game is licensed under the MIT License.
       Note that the artwork, story, music, and sound effects are 
       not covered in the MIT license for this game and may 
       not be repurposed, redistributed, modified, or used in 
@@ -46,15 +45,15 @@
 
 ## Videos
 
-### GIF video example for game version 0.0.9
+### GIF video example for game version 0.0.14
 
-<img src="videos/gif_video_v_0_0_9.gif" width="810" alt=""> <br />
+<img src="videos/gif_video_v_0_0_14.gif" width="810" alt=""> <br />
 <br />
 
 
-### Video example for previous game version 0.0.5 - YouTube link
+### Video example for previous game version 0.0.14 - YouTube link
 
-[![Video](https://img.youtube.com/vi/g_bQu2BlSw4/maxresdefault.jpg)](https://www.youtube.com/watch?v=g_bQu2BlSw4)
+[![Video](https://img.youtube.com/vi/l6ZbL9UQjyA/maxresdefault.jpg)](https://youtu.be/l6ZbL9UQjyA?si=_7N5Encvsx_g1Ltg)
 
 
 ## History of the series. A spin-off? What do you mean?
