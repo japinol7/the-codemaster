@@ -394,12 +394,6 @@ class Game:
                     elif event.key == pg.K_F1:
                         if not self.is_exit_curr_game_confirm:
                             self.is_help_screen = not self.is_help_screen
-                    elif event.key == pg.K_F3:
-                        if self.is_log_debug and not self.is_exit_curr_game_confirm:
-                            start_cutscene(0, self)
-                    elif event.key == pg.K_F4:
-                        if self.is_log_debug and not self.is_exit_curr_game_confirm:
-                            start_cutscene(1, self)
                     elif event.key in (pg.K_KP_ENTER, pg.K_RETURN):
                         if pg.key.get_mods() & pg.KMOD_ALT and not pg.key.get_mods() & pg.KMOD_LCTRL:
                             if (self.is_allowed_to_pause or
