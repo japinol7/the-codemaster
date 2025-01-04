@@ -83,7 +83,7 @@ class Level112(Level):
         Water.create_water(0, SCREEN_NEAR_EARTH + 216, self.game, qty=20, qty_depth=3)
 
         # Add grass blocks
-        Grass.create_grass(0, SCREEN_NEAR_EARTH , self.game, qty=28, qty_depth=2,
+        Grass.create_grass(0, SCREEN_NEAR_EARTH , self.game, qty=19, qty_depth=2,
             actor_type=ActorType.PLAT_GRASS_U)
 
         # Add NPCs
