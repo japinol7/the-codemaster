@@ -53,7 +53,7 @@
 
 ### Video example for previous game version 0.0.14 - YouTube link
 
-[![Video](https://img.youtube.com/vi/hwnMj9zzc0w/maxresdefault.jpg)](https://youtu.be/hwnMj9zzc0w?si=_7N5Encvsx_g1Ltg)
+[![Video](https://img.youtube.com/vi/hwnMj9zzc0w/maxresdefault.jpg)](https://www.youtube.com/watch?v=hwnMj9zzc0w))
 
 
 ## History of the series. A spin-off? What do you mean?
