@@ -116,7 +116,6 @@ class GameTestSuite:
         self.update_state_counter = 0
         # Auto actor actions for cutscenes, ...
         self.pc_auto_actions = Queue()
-        self.actors_auto_actions = Queue()
 
     @property
     def tests(self):

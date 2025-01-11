@@ -127,7 +127,6 @@ class Game:
         self.update_state_counter = 0
         # Auto actor actions for cutscenes, ...
         self.pc_auto_actions = Queue()
-        self.actors_auto_actions = Queue()
 
         Game.is_exit_game = False
         if Game.current_game > 0:
@@ -250,16 +249,10 @@ class Game:
     def clean_actors_actions(self):
         """Clean actors and player auto actions for cutscenes, ..."""
         self.pc_auto_actions = Queue()
-        self.actors_auto_actions = Queue()
 
     def add_player_actions(self, actions):
         for action in actions:
             self.pc_auto_actions.push(list(action))
-
-    def add_actors_actions(self, actions):
-        """Add actors auto actions for cutscenes, ..."""
-        # TODO.
-        pass
 
     def update_screen(self):
         # Handle game screens
