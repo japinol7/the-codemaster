@@ -53,7 +53,7 @@
 
 ### Video example for previous game version 0.0.14 - YouTube link
 
-[![Video](https://img.youtube.com/vi/l6ZbL9UQjyA/maxresdefault.jpg)](https://youtu.be/l6ZbL9UQjyA?si=_7N5Encvsx_g1Ltg)
+[![Video](https://img.youtube.com/vi/hwnMj9zzc0w/maxresdefault.jpg)](https://youtu.be/hwnMj9zzc0w?si=_7N5Encvsx_g1Ltg)
 
 
 ## History of the series. A spin-off? What do you mean?
@@ -127,8 +127,8 @@
         > Pac is considered a hero at the headquarters of the UFEP.
         > Pac now has a girlfriend, Kaede, to whom he wants to propose 
           (he met her in Pac's Revenge 2).
-        > For this reason he travels to the planet where Kaede's father, 
-          Kaito, has his kingdom, but something there is wrong.
+        > For this reason he travels to the kingdom where Kaede's father, 
+          Kaito, rules, but something there is wrong.
         > Questions you will not get an answer from this demo:
             > Will Pac get Kaede's hand from her father?
             > What is really happening in Kaito's kingdom? 
