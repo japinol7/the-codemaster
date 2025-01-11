@@ -23,8 +23,7 @@ from codemaster.cutscene_manager.cutscene_manager import start_cutscene
 class UIInGame:
     def __init__(self, game):
         self.game = game
-        self.game.__class__.ui_ingame = pgui.UIManager(game.size, theme_path=UI_MAIN_THEME_FILE)
-        self.manager = self.game.__class__.ui_ingame
+        self.manager = pgui.UIManager(game.size, theme_path=UI_MAIN_THEME_FILE)
         self.items = {}
 
         self._add_items()

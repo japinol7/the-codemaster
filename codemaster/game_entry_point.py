@@ -24,6 +24,7 @@ from codemaster.config.constants import (
     DIRECTION_RIP,
     FONT_DEFAULT_NAME,
     FONT_FIXED_DEFAULT_NAME,
+    GAME_INFO_DATA_FILE,
     MIN_TICKS_ALLOWED_TO_PAUSE_GAME,
     NEAR_BOTTOM,
     LOG_GAME_BEATEN,
@@ -43,12 +44,13 @@ from codemaster.persistence.persistence_settings import (
     )
 from codemaster.tools.utils.queue import Queue
 from codemaster.persistence import persistence
-from codemaster.cutscene_manager.cutscene_manager import start_cutscene
+from codemaster.persistence.persistence_utils import load_data_from_file
 from codemaster.ui.ui_manager.ui_manager import UIManager
 
 
 class Game:
     """Represents a 'The CodeMaster' game."""
+    game_info_data_body_txt = ''
     is_exit_game = False
     is_over = False
     is_first_game = True
@@ -166,6 +168,9 @@ class Game:
             # Load file disks data
             FilesDisk.load_files_disks_data(self)
 
+            # Load game info data body txt
+            Game.game_info_data_body_txt = load_data_from_file(GAME_INFO_DATA_FILE)
+
             # Initialize UI
             Game.ui_manager = UIManager(self)
 
@@ -210,7 +215,8 @@ class Game:
 
         # Initialize cutscene levels
         self.cutscene_levels = levels.Level.factory_by_nums(
-            levels_module=levels, game=self, level_ids=[111, 112])
+            levels_module=levels, game=self,
+            level_ids=[111, 112] if self.is_debug else [111])
 
         if not self.is_continue_game:
             self.level_tutorial = levels.Level.factory_by_nums(

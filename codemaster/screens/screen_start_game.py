@@ -97,7 +97,7 @@ class ScreenStartGame(ScreenBase):
                             self.game.__class__.is_log_debug = False
                             log.info("Set logger level to: Info")
             # Manage In Game UI events
-            self.game.__class__.ui_main_menu.process_events(event)
+            self.game.ui_manager.ui_main_menu.manager.process_events(event)
             if event.type == pgui.UI_CONFIRMATION_DIALOG_CONFIRMED:
                 if event.ui_element == self.game.ui_manager.ui_main_menu.items[
                     'delete_saved_game_confirm_dialog']:
@@ -119,18 +119,19 @@ class ScreenStartGame(ScreenBase):
             self.game.ui_manager.ui_main_menu.clean_ui_items()
 
     def _game_loop(self):
+        ui_ingame_manager = self.game.ui_manager.ui_main_menu.manager
         clock = pg.time.Clock()
         while not self.done:
             events = pg.event.get()
             self._events_handle(events)
 
             try:
-                self.game.__class__.ui_main_menu.update(self.game.current_time_delta)
+                ui_ingame_manager.update(self.game.current_time_delta)
             except Exception as e:
                 log.warning(f"ERROR in pygame-gui libray: {e}")
 
             self._draw()
-            self.game.__class__.ui_main_menu.draw_ui(self.game.screen)
+            ui_ingame_manager.draw_ui(self.game.screen)
 
             pg.display.flip()
             clock.tick(Settings.fps_paused)

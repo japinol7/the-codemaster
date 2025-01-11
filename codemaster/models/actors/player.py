@@ -45,7 +45,7 @@ from codemaster.models.actors.spells import (
 
 PL_X_SPEED = 6
 PL_JUMP_SPEED = 11.5
-PL_LIVES_DEFAULT = 5
+PL_LIVES_DEFAULT = 7
 PL_POWER_DEFAULT = 100
 PL_HEALTH_DEFAULT = 100
 PL_MAGIC_RESISTANCE = 70
@@ -626,7 +626,8 @@ class Player(pg.sprite.Sprite):
         self.stop()
         self.image = self.rip_frames[0]
         self.lives -= 1
-        self.health = PL_HEALTH_DEFAULT
+        if self.lives > 0:
+            self.health = PL_HEALTH_DEFAULT
         self.enemy_hit_sound.stop()
         self.sound_effects and self.death_sound.play()
         self.image = self.rip_frames[0]

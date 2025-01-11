@@ -1,10 +1,13 @@
 """Module cutscene_base."""
 __author__ = 'Joan A. Pinol  (japinol)'
 
+import pygame as pg
+
 from codemaster.models.actors.items import InvisibleHolderNarrator
 from codemaster.models.clocks import ClockTimer
 from codemaster.models.actors.text_msgs import TextMsg
 from codemaster.models.actors.text_msgs.text_msgs import TextMsgActorNarrator
+from codemaster.models.actors.fade_out import FadeOut
 from codemaster.tools.logger.logger import log
 
 
@@ -22,6 +25,7 @@ class CutsceneBase:
         self.msg_screen = ''
         self.msg_screen_obj = None
         self.msg_screen_clock = None
+        self.screen_effects = pg.sprite.Group()
 
         if not getattr(self, 'name_short', None):
             self.name_short = self.game
@@ -32,7 +36,6 @@ class CutsceneBase:
         # Attributes to restore after cutscene
         self.old_game_is_magic_on = False
         self.old_player_invulnerable = False
-        self.old_player_direction = None
         self.old_player_health = None
         self.old_player_score = None
         self.old_player_power = None
@@ -60,6 +63,8 @@ class CutsceneBase:
         game.is_log_debug and log.debug(f"Initialize cutscene level: {self.id}")
 
         self.deactivate_msg_screen()
+        for screen_effect in self.screen_effects:
+            screen_effect.kill()
 
         # Add an actor that will hold cutscene msgs
         self.actor_msg_holder = InvisibleHolderNarrator(0, 0, game)
@@ -70,7 +75,6 @@ class CutsceneBase:
 
         # Stats to recover after the cutscene ends
         self.old_game_is_magic_on = game.is_magic_on
-        self.old_player_direction = self.player.direction
         self.old_player_invulnerable = self.player.invulnerable
         self.old_player_health = self.player.health
         self.old_player_power = self.player.power
@@ -89,6 +93,20 @@ class CutsceneBase:
 
         game.clean_actors_actions()
 
+    def clean_cutscene(self):
+        self.actor_cutscene_msg_holder = None
+
+        for text_msg in self.game.text_msg_sprites:
+            text_msg.kill_hook()
+        for screen_effect in self.screen_effects:
+            screen_effect.kill()
+
+        self.level.level_to_return = None
+        self.level.level_to_return_door = None
+        self.game.level_cutscene = None
+        if self.game.is_persist_data:
+            self.game.ui_manager.ui_ingame.items['save_game_button'].enable()
+
     def update_pc_leave_level(self):
         self.game.is_log_debug and log.debug(f"Leave cutscene level: {self.id}")
         self.level.done = True
@@ -99,7 +117,6 @@ class CutsceneBase:
 
         # Stats to recover after the cutscene ends
         self.game.is_magic_on = self.old_game_is_magic_on
-        self.player.direction = self.old_player_direction
         self.player.invulnerable = self.old_player_invulnerable
         self.player.health = self.old_player_health
         self.player.power = self.old_player_power
@@ -113,11 +130,17 @@ class CutsceneBase:
         self.player.stats['bullets_t03_shot'] = self.old_player_bullets_t03_shot
         self.player.stats['bullets_t04_shot'] = self.old_player_bullets_t04_shot
 
+        for magic_sprite in self.level.magic_sprites:
+            magic_sprite.die_hard()
+
         for npc_data in self.old_npcs_stats.values():
             npc_data['obj'].rect.x = npc_data['x'] - self.game.level.get_scroll_shift_delta()
             npc_data['obj'].rect.y = npc_data['y'] + self.game.level.get_scroll_shift_top_delta()
             npc_data['obj'].health = npc_data['health']
             npc_data['obj'].power = npc_data['power']
+
+        for text_msg in self.game.text_msg_sprites:
+            text_msg.kill_hook()
 
     def _check_pc_leave_level_condition(self):
         # Check this now and then, but skip the first four iterations
@@ -160,3 +183,6 @@ class CutsceneBase:
 
     def update(self):
         self._check_pc_leave_level_condition()
+
+    def add_fade_out(self, delay=0):
+        self.screen_effects.add(FadeOut(delay))

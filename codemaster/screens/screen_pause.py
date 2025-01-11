@@ -96,26 +96,27 @@ class ScreenPause(ScreenBase):
                             ActorItem.get_all_item_ids_basic_info_from_level(self.game.level)))
 
             # Manage In Game UI events
-            self.game.__class__.ui_ingame.process_events(event)
+            self.game.ui_manager.ui_ingame.manager.process_events(event)
 
             if self.done:
                 self.game.ui_manager.ui_ingame.hide_additional_game_items()
                 self.game.ui_manager.ui_ingame.clean_ui_items()
 
     def _game_loop(self):
+        ui_ingame_manager = self.game.ui_manager.ui_ingame.manager
         while not self.done:
             events = pg.event.get()
             self._events_handle(events)
 
             try:
-                self.game.__class__.ui_ingame.update(self.game.current_time_delta)
+                ui_ingame_manager.update(self.game.current_time_delta)
             except Exception as e:
                 log.warning(f"ERROR in pygame-gui libray: {e}")
 
             self.game.screen.blit(self.background_screenshot, (0, 0))
             self.game.screen.blit(*Resource.txt_surfaces['game_paused'])
 
-            self.game.__class__.ui_ingame.draw_ui(self.game.screen)
+            ui_ingame_manager.draw_ui(self.game.screen)
 
             pg.display.flip()
             self.game.clock.tick(Settings.fps_paused)

@@ -44,14 +44,7 @@ class Level112(Level):
         self.done = False
 
     def clean_cutscene(self):
-        self.cutscene.actor_cutscene_msg_holder = None
-        for text_msg in self.game.text_msg_sprites:
-            text_msg.kill_hook()
-        self.level_to_return = None
-        self.level_to_return_door = None
-        self.game.level_cutscene = None
-        if self.game.is_persist_data:
-            self.game.ui_manager.ui_ingame.items['save_game_button'].enable()
+        self.cutscene.clean_cutscene()
 
     def update_pc_enter_level(self):
         self.done = False
@@ -88,9 +81,7 @@ class Level112(Level):
 
         # Add NPCs
         npc = KungFuFighterMale(2040, 269, self.game, change_x=0)
-        self.npcs.add([
-            npc,
-            ])
+        self.npcs.add([npc])
         npc.direction = DIRECTION_LEFT
 
         # Add doors

@@ -14,8 +14,7 @@ from codemaster.ui.ui_main_utils.ui_main_utils import clean_general_ui_items
 class UICutscene:
     def __init__(self, game):
         self.game = game
-        self.game.__class__.ui_cutscene = pgui.UIManager(game.size, theme_path=UI_MAIN_THEME_FILE)
-        self.manager = self.game.__class__.ui_cutscene
+        self.manager = pgui.UIManager(game.size, theme_path=UI_MAIN_THEME_FILE)
         self.items = {}
 
         self._add_items()

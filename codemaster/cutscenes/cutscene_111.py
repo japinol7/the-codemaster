@@ -69,13 +69,13 @@ class Cutscene111(CutsceneBase):
              "the north-west!\nLet's go..."
              "::time_in_secs:=5", 1],
             ['go_right_slow', 390],
+            ['fade_out::delay:=500', 1],
             ["activate_msg_cutscene::msg:="
              "Two days later...\n"
-             "Our hero arrives at the planet where "
-             "Kaede's father,\n" 
-             "Kaito, rules his kingdom,\n"
+             "Our hero arrives at the kingdom where\n"
+             "Kaede's father, Kaito, rules,\n"
              "but something there is wrong. Very wrong!"
-             "::time_in_secs:=9", 1],
+             "::time_in_secs:=11", 1],
             ['leave_cutscene', 1],
             ))
 

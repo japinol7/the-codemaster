@@ -32,8 +32,7 @@ from codemaster.tools.logger.logger import log
 class UIMainMenu:
     def __init__(self, game):
         self.game = game
-        self.game.__class__.ui_main_menu = pgui.UIManager(game.size, theme_path=UI_MAIN_THEME_FILE)
-        self.manager = self.game.__class__.ui_main_menu
+        self.manager = pgui.UIManager(game.size, theme_path=UI_MAIN_THEME_FILE)
         self.items = {}
 
         self._add_items()
@@ -69,7 +68,8 @@ class UIMainMenu:
             f"<p>Version: {version.get_version()}</p>\n"
             "<p>Thanks for trying this demo! </p\n"
             "<p>Have a wonderful day!\n"
-            ": )</p\n",
+            ": )</p\n\n"
+            f"{self.game.game_info_data_body_txt['game_info']['body']}\n",
             window_title="Credits",
             visible=True,
             )

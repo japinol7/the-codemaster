@@ -41,11 +41,12 @@ class ScreenCutScene(ScreenBase):
                         self.game.ui_manager.ui_cutscene.clean_ui_items()
 
             # Manage In Game UI events
-            self.game.__class__.ui_cutscene.process_events(event)
+            self.game.ui_manager.ui_cutscene.manager.process_events(event)
 
     def _game_loop(self):
         game = self.game
         game.update_state_counter = -1
+        ui_cutscene_manager = game.ui_manager.ui_cutscene.manager
         cutscene =  game.level_cutscene.cutscene
         while not self.done:
             # Increase and check counter to delay stats x iterations
@@ -61,7 +62,7 @@ class ScreenCutScene(ScreenBase):
                 break
 
             try:
-                game.__class__.ui_cutscene.update(game.current_time_delta)
+                ui_cutscene_manager.update(game.current_time_delta)
             except Exception as e:
                 log.warning(f"ERROR in pygame-gui libray: {e}")
 
@@ -93,19 +94,28 @@ class ScreenCutScene(ScreenBase):
 
                 game.level_cutscene.magic_sprites.draw(game.screen)
 
+                if cutscene.is_msg_screen:
+                    for sprite in cutscene.screen_effects:
+                        sprite.update()
+                cutscene.screen_effects.draw(game.screen)
+
             else: # game is paused and/or is_msg_screen
                 self.game.screen.blit(self.background_screenshot, (0, 0))
 
                 if cutscene.is_msg_screen:
                     cutscene.msg_screen_obj.draw_text()
                     cutscene.msg_screen_clock.tick()
+                    if not game.is_paused:
+                        for sprite in cutscene.screen_effects:
+                            sprite.update()
+                        cutscene.screen_effects.draw(game.screen)
 
                 if game.is_paused:
                     game.screen.blit(*Resource.txt_surfaces['game_paused'])
 
             game.screen.blit(Resource.images['seal_cutscene'], (488, 0))
 
-            game.__class__.ui_cutscene.draw_ui(game.screen)
+            ui_cutscene_manager.draw_ui(game.screen)
 
             pg.display.flip()
             game.is_paused and game.clock.tick(Settings.fps_paused) or game.clock.tick(Settings.fps)

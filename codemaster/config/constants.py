@@ -277,6 +277,9 @@ FILE_NAMES = {
 FILES_DISKS_DATA_FILE = os.path.join(
     CURRENT_PATH, 'assets', 'data', 'files_disks', 'files_disks.json')
 
+GAME_INFO_DATA_FILE = os.path.join(
+    CURRENT_PATH, 'assets', 'data', 'game_info', 'game_info.json')
+
 UI_THEMES_FOLDER = os.path.join(CURRENT_PATH, 'assets', 'ui_assets', 'themes')
 UI_MAIN_THEME_FILE = os.path.join(UI_THEMES_FOLDER, 'main_theme.json')
 UI_X_SPACE_BETWEEN_BUTTONS = 116

@@ -49,6 +49,7 @@ class Level:
         self.door_previous_pos_world = 0, -758
         self.previous_door_crossed = None
         self.all_sprites = pg.sprite.Group()
+        self.sprites_for_debug_selector = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.decors = pg.sprite.Group()
         self.item_decors = pg.sprite.Group()
@@ -124,6 +125,7 @@ class Level:
         for sprite in self.platforms:
             self.all_sprites.add(sprite)
             self.normal_items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.decors:
             self.all_sprites.add(sprite)
         for sprite in self.item_decors:
@@ -132,53 +134,69 @@ class Level:
             self.all_sprites.add(sprite)
             self.normal_items.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.sign_messages:
             self.all_sprites.add(sprite)
             self.normal_items.add(sprite)
         for sprite in self.doors:
             self.all_sprites.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.clocks:
             self.all_sprites.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.batteries:
             self.all_sprites.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.files_disks:
             self.all_sprites.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.cartridges:
             self.all_sprites.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.potions:
             self.all_sprites.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.life_recs:
             self.all_sprites.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.door_keys:
             self.all_sprites.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.apples:
             self.all_sprites.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.mines:
             self.all_sprites.add(sprite)
             self.items.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.dragons:
             self.npcs.add(sprite)
             for dragon_piece in sprite.body_pieces:
                 self.dragons_body_pieces.add(dragon_piece)
                 self.all_sprites.add(dragon_piece)
+                self.game.is_debug and self.sprites_for_debug_selector.add(dragon_piece)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.npcs:
             self.all_sprites.add(sprite)
             if sprite.border_top or sprite.border_down:
                 self.npcs_moving_y.add(sprite)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.snakes:
             self.npcs.add(sprite)
             self.all_sprites.add(sprite)
             for snake_piece in sprite.body_pieces:
                 self.snakes_body_pieces.add(snake_piece)
                 self.all_sprites.add(snake_piece)
+                self.game.is_debug and self.sprites_for_debug_selector.add(snake_piece)
+            self.game.is_debug and self.sprites_for_debug_selector.add(sprite)
         for sprite in self.explosions:
             self.all_sprites.add(sprite)
         for sprite in self.bullets:

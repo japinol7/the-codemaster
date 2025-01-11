@@ -94,6 +94,13 @@ class TextMsg(ActorMsg):
              self.balloon_width, self.balloon_height),
             width=1)
 
+    def draw_speech_balloon_filled(self, color):
+        self.game.screen.fill(
+            color,
+            (self.rect.x, self.rect.y + self.balloon_rect_y_delta,
+             self.balloon_width, self.balloon_height),
+            special_flags =pg.BLEND_MULT)
+
     @staticmethod
     def create(text, game, time_in_secs=MSG_PC_DURATION, msg_class=None,
                x=None, y=None, color=None, delta_x=None, delta_y=None,

@@ -52,6 +52,8 @@ PLAYER_ACTION_METHODS_MAP = {
     'leave_cutscene': PlayerActionMethodArgs('', kwargs={}),
     'activate_msg_cutscene': PlayerActionMethodArgs(
         'activate_msg_cutscene', kwargs={'msg': '', 'time_in_secs': MSG_PC_DURATION}),
+    'fade_out': PlayerActionMethodArgs(
+        'add_fade_out', kwargs={'delay': 0}),
     ':set_magic_target': PlayerActionMethodArgs(
         'set_magic_target', kwargs={'target_id': ''}),
     ':talk': PlayerActionMethodArgs(
@@ -66,6 +68,18 @@ CAST_SPELL_ON_TARGET_CLASSES_MAP = {
     'cast_vortex_of_doom_a': VortexOfDoomA,
     'cast_vortex_of_doom_b': VortexOfDoomB,
     }
+
+
+def process_player_action_args(player_args, player_action_methods_map):
+    for player_arg in player_args:
+        arg_components = player_arg.split(':=')
+        arg_default_val = player_action_methods_map.kwargs[arg_components[0]]
+        arg_val = arg_components[1]
+        if isinstance(arg_default_val, int):
+            arg_val = int(arg_val)
+        elif isinstance(arg_default_val, float):
+            arg_val = float(arg_val)
+        player_action_methods_map.kwargs[arg_components[0]] = arg_val
 
 
 def execute_pc_action(game):
@@ -94,16 +108,7 @@ def execute_pc_action(game):
         if not player_args:
             raise ValueError("Arguments missing for player action starting with ':' !")
 
-        for player_arg in player_args:
-            arg_components = player_arg.split(':=')
-            arg_default_val = player_action_methods_map.kwargs[arg_components[0]]
-            arg_val = arg_components[1]
-            if isinstance(arg_default_val, int):
-                arg_val = int(arg_val)
-            elif isinstance(arg_default_val, float):
-                arg_val = float(arg_val)
-            player_action_methods_map.kwargs[arg_components[0]] = arg_val
-
+        process_player_action_args(player_args, player_action_methods_map)
         getattr(
             game.player,
             player_action_methods_map.method_name)(**player_action_methods_map.kwargs)
@@ -128,17 +133,24 @@ def execute_pc_action(game):
         if not player_args:
             raise ValueError(f"Arguments missing for player action:{player_action}")
 
-        for player_arg in player_args:
-            arg_components = player_arg.split(':=')
-            arg_default_val = player_action_methods_map.kwargs[arg_components[0]]
-            arg_val = arg_components[1]
-            if isinstance(arg_default_val, int):
-                arg_val = int(arg_val)
-            elif isinstance(arg_default_val, float):
-                arg_val = float(arg_val)
-            player_action_methods_map.kwargs[arg_components[0]] = arg_val
-
+        process_player_action_args(player_args, player_action_methods_map)
         game.level_cutscene.cutscene.activate_msg_screen(**player_action_methods_map.kwargs)
+        return
+
+    if player_action.startswith('fade_out'):
+        if not game.level_cutscene:
+            raise ValueError(
+                f"Player action only available for cutscenes: {player_action}")
+
+        player_args = player_action.split('::')
+        player_action = player_args[0]
+        player_args.pop(0)
+        player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]
+        if not player_args:
+            raise ValueError(f"Arguments missing for player action:{player_action}")
+
+        process_player_action_args(player_args, player_action_methods_map)
+        game.level_cutscene.cutscene.add_fade_out(**player_action_methods_map.kwargs)
         return
 
     player_action_methods_map = PLAYER_ACTION_METHODS_MAP[player_action]

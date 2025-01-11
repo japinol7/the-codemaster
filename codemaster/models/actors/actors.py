@@ -519,6 +519,9 @@ class Actor(pg.sprite.Sprite):
             new_actor.stats.time_between_energy_shield_casting = \
                 actor.stats.time_between_energy_shield_casting
 
+        if new_actor.category_type == ActorCategoryType.FILES_DISK:
+            new_actor.set_random_msg()
+
         game.level.add_actors([new_actor])
         return new_actor
 

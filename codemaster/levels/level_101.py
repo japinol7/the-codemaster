@@ -47,7 +47,8 @@ class Level101(Level):
             text_msg.kill_hook()
         self.tutorial = None
         self.game.level_tutorial = None
-        self.game.ui_manager.ui_ingame.items['save_game_button'].enable()
+        if self.game.is_persist_data:
+            self.game.ui_manager.ui_ingame.items['save_game_button'].enable()
         self.game.ui_manager.ui_ingame.items['watch_cutscene'].enable()
         self.game.debug_info.init_super_cheat()
 

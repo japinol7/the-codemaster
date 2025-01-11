@@ -92,7 +92,8 @@ class Selector(ActorItem):
             return hit_list
 
         if self.game.is_log_debug:
-            hit_list = pg.sprite.spritecollide(self, self.game.level.all_sprites, False)
+            hit_list = pg.sprite.spritecollide(
+                self, self.game.level.sprites_for_debug_selector, False)
             for sprite in hit_list:
                 log.debug(
                     f"Mouse sprites: {sprite.id} in pos: "
@@ -123,7 +124,6 @@ class Selector(ActorItem):
             hit_list.append(magic_attack)
             self.game.level.magic_sprites.add(magic_attack)
             sprite.snake.target_of_spells_count[magic_attack_cls.__name__] += 1
-
             break
 
         if snake_body_hit_list:
@@ -141,7 +141,6 @@ class Selector(ActorItem):
             hit_list.append(magic_attack)
             self.game.level.magic_sprites.add(magic_attack)
             sprite.dragon.target_of_spells_count[magic_attack_cls.__name__] += 1
-
             break
 
         if dragon_body_hit_list:
