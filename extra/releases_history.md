@@ -21,6 +21,7 @@
 * Improve the test suite:
   * Refactor player actions outside the test suite.
   * Current tests count: 67.
+* Upgrade dependencies, and Python version to 3.13.
 
 <br>
 
