@@ -9,7 +9,7 @@ setup(
     long_description="The CodeMaster. Nightmare on Bots' Island",
     url='https://github.com/japinol7/the-codemaster',
     packages=['codemaster'],
-    python_requires='>=3.12',
+    python_requires='>=3.13',
     install_requires=['pygame-ce', 'pygame-gui'],
     entry_points={
         'console_scripts': [

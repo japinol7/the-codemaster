@@ -15,7 +15,7 @@
 <br />
 
 	Dependencies: pygame-ce, pygame-gui.
-	Python requires: 3.12 or greater.
+	Python requires: 3.13 or greater.
 <br />
 
 	Licenses: 
