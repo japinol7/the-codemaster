@@ -415,7 +415,8 @@ class Game:
                     if event.key == pg.K_r:
                         self.player.use_computer()
                         self.player.use_door_key()
-                elif event.type == pg.MOUSEBUTTONDOWN:
+                elif event.type == pg.MOUSEBUTTONDOWN \
+                        and pg.mouse.get_pressed(num_buttons=3)[0]:
                     if self.is_magic_on:
                         self.mouse_pos = pg.mouse.get_pos()
                         for selector in self.selector_sprites:
